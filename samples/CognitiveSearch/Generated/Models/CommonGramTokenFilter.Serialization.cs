@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class CommonGramTokenFilter : IUtf8JsonSerializable, IJsonModel<CommonGramTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CommonGramTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CommonGramTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CommonGramTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CommonGramTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CommonGramTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CommonGramTokenFilter>)} interface");
             }
@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        CommonGramTokenFilter IJsonModel<CommonGramTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CommonGramTokenFilter IJsonModel<CommonGramTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CommonGramTokenFilter)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace CognitiveSearch.Models
 
         internal static CommonGramTokenFilter DeserializeCommonGramTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -132,7 +132,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -141,9 +141,9 @@ namespace CognitiveSearch.Models
             return new CommonGramTokenFilter(odataType, name, serializedAdditionalRawData, commonWords, Optional.ToNullable(ignoreCase), Optional.ToNullable(queryMode));
         }
 
-        BinaryData IModel<CommonGramTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CommonGramTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CommonGramTokenFilter)} does not support '{options.Format}' format.");
@@ -152,9 +152,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CommonGramTokenFilter IModel<CommonGramTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CommonGramTokenFilter IPersistableModel<CommonGramTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CommonGramTokenFilter)} does not support '{options.Format}' format.");
@@ -164,6 +164,6 @@ namespace CognitiveSearch.Models
             return DeserializeCommonGramTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CommonGramTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CommonGramTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

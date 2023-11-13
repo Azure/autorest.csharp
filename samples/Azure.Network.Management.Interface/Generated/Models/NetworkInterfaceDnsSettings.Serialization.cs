@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class NetworkInterfaceDnsSettings : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceDnsSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceDnsSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceDnsSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NetworkInterfaceDnsSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NetworkInterfaceDnsSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NetworkInterfaceDnsSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NetworkInterfaceDnsSettings>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(AppliedDnsServers))
                 {
@@ -54,7 +54,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InternalFqdn))
                 {
@@ -62,7 +62,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(InternalFqdn);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InternalDomainNameSuffix))
                 {
@@ -70,7 +70,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(InternalDomainNameSuffix);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -88,9 +88,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        NetworkInterfaceDnsSettings IJsonModel<NetworkInterfaceDnsSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NetworkInterfaceDnsSettings IJsonModel<NetworkInterfaceDnsSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceDnsSettings)} does not support '{options.Format}' format.");
@@ -102,7 +102,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceDnsSettings DeserializeNetworkInterfaceDnsSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -160,7 +160,7 @@ namespace Azure.Network.Management.Interface.Models
                     internalDomainNameSuffix = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -169,9 +169,9 @@ namespace Azure.Network.Management.Interface.Models
             return new NetworkInterfaceDnsSettings(Optional.ToList(dnsServers), Optional.ToList(appliedDnsServers), internalDnsNameLabel.Value, internalFqdn.Value, internalDomainNameSuffix.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NetworkInterfaceDnsSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NetworkInterfaceDnsSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceDnsSettings)} does not support '{options.Format}' format.");
@@ -180,9 +180,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NetworkInterfaceDnsSettings IModel<NetworkInterfaceDnsSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NetworkInterfaceDnsSettings IPersistableModel<NetworkInterfaceDnsSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceDnsSettings)} does not support '{options.Format}' format.");
@@ -192,6 +192,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceDnsSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NetworkInterfaceDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NetworkInterfaceDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

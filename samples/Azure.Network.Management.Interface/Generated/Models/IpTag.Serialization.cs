@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class IpTag : IUtf8JsonSerializable, IJsonModel<IpTag>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IpTag>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IpTag>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IpTag>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IpTag>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IpTag>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IpTag>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("tag"u8);
                 writer.WriteStringValue(Tag);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        IpTag IJsonModel<IpTag>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IpTag IJsonModel<IpTag>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IpTag)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IpTag DeserializeIpTag(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace Azure.Network.Management.Interface.Models
                     tag = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace Azure.Network.Management.Interface.Models
             return new IpTag(ipTagType.Value, tag.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<IpTag>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IpTag>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IpTag)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        IpTag IModel<IpTag>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IpTag IPersistableModel<IpTag>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IpTag)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeIpTag(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IpTag>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IpTag>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

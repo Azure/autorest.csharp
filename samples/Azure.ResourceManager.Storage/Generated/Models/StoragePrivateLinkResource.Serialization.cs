@@ -17,32 +17,32 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StoragePrivateLinkResource : IUtf8JsonSerializable, IJsonModel<StoragePrivateLinkResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StoragePrivateLinkResource>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StoragePrivateLinkResource>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StoragePrivateLinkResource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StoragePrivateLinkResource>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StoragePrivateLinkResource>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StoragePrivateLinkResource>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(GroupId))
                 {
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(GroupId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(RequiredMembers))
                 {
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -102,9 +102,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        StoragePrivateLinkResource IJsonModel<StoragePrivateLinkResource>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StoragePrivateLinkResource IJsonModel<StoragePrivateLinkResource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StoragePrivateLinkResource)} does not support '{options.Format}' format.");
@@ -116,7 +116,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StoragePrivateLinkResource DeserializeStoragePrivateLinkResource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -202,7 +202,7 @@ namespace Azure.ResourceManager.Storage.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -211,9 +211,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new StoragePrivateLinkResource(id, name, type, systemData.Value, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StoragePrivateLinkResource>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StoragePrivateLinkResource>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StoragePrivateLinkResource)} does not support '{options.Format}' format.");
@@ -222,9 +222,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StoragePrivateLinkResource IModel<StoragePrivateLinkResource>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StoragePrivateLinkResource IPersistableModel<StoragePrivateLinkResource>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StoragePrivateLinkResource)} does not support '{options.Format}' format.");
@@ -234,6 +234,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateLinkResource(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StoragePrivateLinkResource>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StoragePrivateLinkResource>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

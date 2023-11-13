@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StorageAccountInternetEndpoints : IUtf8JsonSerializable, IJsonModel<StorageAccountInternetEndpoints>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountInternetEndpoints>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountInternetEndpoints>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StorageAccountInternetEndpoints>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StorageAccountInternetEndpoints>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StorageAccountInternetEndpoints>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageAccountInternetEndpoints>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Blob))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Blob);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(File))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(File);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Web))
                 {
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Web);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Dfs))
                 {
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Dfs);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -76,9 +76,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        StorageAccountInternetEndpoints IJsonModel<StorageAccountInternetEndpoints>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StorageAccountInternetEndpoints IJsonModel<StorageAccountInternetEndpoints>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountInternetEndpoints)} does not support '{options.Format}' format.");
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StorageAccountInternetEndpoints DeserializeStorageAccountInternetEndpoints(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Storage.Models
                     dfs = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageAccountInternetEndpoints(blob.Value, file.Value, web.Value, dfs.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StorageAccountInternetEndpoints>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageAccountInternetEndpoints>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountInternetEndpoints)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StorageAccountInternetEndpoints IModel<StorageAccountInternetEndpoints>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageAccountInternetEndpoints IPersistableModel<StorageAccountInternetEndpoints>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountInternetEndpoints)} does not support '{options.Format}' format.");
@@ -156,6 +156,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountInternetEndpoints(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StorageAccountInternetEndpoints>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StorageAccountInternetEndpoints>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

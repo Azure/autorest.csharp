@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class Encryption : IUtf8JsonSerializable, IJsonModel<Encryption>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Encryption>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Encryption>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Encryption>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Encryption>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Encryption>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Encryption>)} interface");
             }
@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("identity"u8);
                 writer.WriteObjectValue(EncryptionIdentity);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        Encryption IJsonModel<Encryption>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Encryption IJsonModel<Encryption>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Encryption)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static Encryption DeserializeEncryption(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,7 +136,7 @@ namespace Azure.ResourceManager.Storage.Models
                     identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -145,9 +145,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new Encryption(services.Value, keySource, Optional.ToNullable(requireInfrastructureEncryption), keyvaultproperties.Value, identity.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Encryption>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Encryption>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Encryption)} does not support '{options.Format}' format.");
@@ -156,9 +156,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Encryption IModel<Encryption>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Encryption IPersistableModel<Encryption>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Encryption)} does not support '{options.Format}' format.");
@@ -168,6 +168,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeEncryption(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Encryption>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Encryption>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

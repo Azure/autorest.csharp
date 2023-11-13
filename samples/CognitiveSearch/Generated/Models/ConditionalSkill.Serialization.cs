@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ConditionalSkill : IUtf8JsonSerializable, IJsonModel<ConditionalSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConditionalSkill>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConditionalSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ConditionalSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ConditionalSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ConditionalSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ConditionalSkill>)} interface");
             }
@@ -57,7 +57,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ConditionalSkill IJsonModel<ConditionalSkill>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ConditionalSkill IJsonModel<ConditionalSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConditionalSkill)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace CognitiveSearch.Models
 
         internal static ConditionalSkill DeserializeConditionalSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,7 +145,7 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -154,9 +154,9 @@ namespace CognitiveSearch.Models
             return new ConditionalSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ConditionalSkill>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ConditionalSkill>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConditionalSkill)} does not support '{options.Format}' format.");
@@ -165,9 +165,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ConditionalSkill IModel<ConditionalSkill>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ConditionalSkill IPersistableModel<ConditionalSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConditionalSkill)} does not support '{options.Format}' format.");
@@ -177,6 +177,6 @@ namespace CognitiveSearch.Models
             return DeserializeConditionalSkill(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ConditionalSkill>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ConditionalSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

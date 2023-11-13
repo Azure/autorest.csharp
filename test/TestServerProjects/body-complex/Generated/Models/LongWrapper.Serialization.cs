@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class LongWrapper : IUtf8JsonSerializable, IJsonModel<LongWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LongWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LongWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LongWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LongWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LongWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LongWrapper>)} interface");
             }
@@ -36,7 +36,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("field2"u8);
                 writer.WriteNumberValue(Field2.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        LongWrapper IJsonModel<LongWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LongWrapper IJsonModel<LongWrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LongWrapper)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static LongWrapper DeserializeLongWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace body_complex.Models
                     field2 = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace body_complex.Models
             return new LongWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LongWrapper>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LongWrapper>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LongWrapper)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LongWrapper IModel<LongWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LongWrapper IPersistableModel<LongWrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LongWrapper)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeLongWrapper(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LongWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LongWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

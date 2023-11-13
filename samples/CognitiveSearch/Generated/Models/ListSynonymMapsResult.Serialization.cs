@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
 {
     public partial class ListSynonymMapsResult : IUtf8JsonSerializable, IJsonModel<ListSynonymMapsResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListSynonymMapsResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListSynonymMapsResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ListSynonymMapsResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ListSynonymMapsResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ListSynonymMapsResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListSynonymMapsResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -36,7 +36,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ListSynonymMapsResult IJsonModel<ListSynonymMapsResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ListSynonymMapsResult IJsonModel<ListSynonymMapsResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListSynonymMapsResult)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace CognitiveSearch.Models
 
         internal static ListSynonymMapsResult DeserializeListSynonymMapsResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -89,7 +89,7 @@ namespace CognitiveSearch.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -98,9 +98,9 @@ namespace CognitiveSearch.Models
             return new ListSynonymMapsResult(value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ListSynonymMapsResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ListSynonymMapsResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListSynonymMapsResult)} does not support '{options.Format}' format.");
@@ -109,9 +109,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ListSynonymMapsResult IModel<ListSynonymMapsResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ListSynonymMapsResult IPersistableModel<ListSynonymMapsResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListSynonymMapsResult)} does not support '{options.Format}' format.");
@@ -121,6 +121,6 @@ namespace CognitiveSearch.Models
             return DeserializeListSynonymMapsResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ListSynonymMapsResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ListSynonymMapsResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace custom_baseUrl_paging.Models
 {
     public partial class ProductProperties : IUtf8JsonSerializable, IJsonModel<ProductProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProductProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProductProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ProductProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ProductProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ProductProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProductProperties>)} interface");
             }
@@ -36,7 +36,7 @@ namespace custom_baseUrl_paging.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace custom_baseUrl_paging.Models
             writer.WriteEndObject();
         }
 
-        ProductProperties IJsonModel<ProductProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ProductProperties IJsonModel<ProductProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProductProperties)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace custom_baseUrl_paging.Models
 
         internal static ProductProperties DeserializeProductProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace custom_baseUrl_paging.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace custom_baseUrl_paging.Models
             return new ProductProperties(Optional.ToNullable(id), name.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ProductProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ProductProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProductProperties)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace custom_baseUrl_paging.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ProductProperties IModel<ProductProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ProductProperties IPersistableModel<ProductProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProductProperties)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace custom_baseUrl_paging.Models
             return DeserializeProductProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ProductProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ProductProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

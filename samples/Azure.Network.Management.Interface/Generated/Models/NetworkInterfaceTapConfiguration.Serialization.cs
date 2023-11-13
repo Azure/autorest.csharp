@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class NetworkInterfaceTapConfiguration : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceTapConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceTapConfiguration>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceTapConfiguration>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NetworkInterfaceTapConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NetworkInterfaceTapConfiguration>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NetworkInterfaceTapConfiguration>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NetworkInterfaceTapConfiguration>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -59,7 +59,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("virtualNetworkTap"u8);
                 writer.WriteObjectValue(VirtualNetworkTap);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -86,9 +86,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        NetworkInterfaceTapConfiguration IJsonModel<NetworkInterfaceTapConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NetworkInterfaceTapConfiguration IJsonModel<NetworkInterfaceTapConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{options.Format}' format.");
@@ -100,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceTapConfiguration DeserializeNetworkInterfaceTapConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -166,7 +166,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -175,9 +175,9 @@ namespace Azure.Network.Management.Interface.Models
             return new NetworkInterfaceTapConfiguration(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, virtualNetworkTap.Value, Optional.ToNullable(provisioningState));
         }
 
-        BinaryData IModel<NetworkInterfaceTapConfiguration>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NetworkInterfaceTapConfiguration>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{options.Format}' format.");
@@ -186,9 +186,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NetworkInterfaceTapConfiguration IModel<NetworkInterfaceTapConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NetworkInterfaceTapConfiguration IPersistableModel<NetworkInterfaceTapConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{options.Format}' format.");
@@ -198,6 +198,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceTapConfiguration(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NetworkInterfaceTapConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NetworkInterfaceTapConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

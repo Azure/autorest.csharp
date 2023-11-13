@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StorageAccountCheckNameAvailabilityContent : IUtf8JsonSerializable, IJsonModel<StorageAccountCheckNameAvailabilityContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountCheckNameAvailabilityContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountCheckNameAvailabilityContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StorageAccountCheckNameAvailabilityContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StorageAccountCheckNameAvailabilityContent>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StorageAccountCheckNameAvailabilityContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageAccountCheckNameAvailabilityContent>)} interface");
             }
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("type"u8);
             writer.WriteStringValue(ResourceType.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        StorageAccountCheckNameAvailabilityContent IJsonModel<StorageAccountCheckNameAvailabilityContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StorageAccountCheckNameAvailabilityContent IJsonModel<StorageAccountCheckNameAvailabilityContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountCheckNameAvailabilityContent)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StorageAccountCheckNameAvailabilityContent DeserializeStorageAccountCheckNameAvailabilityContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Storage.Models
                     type = new Type(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageAccountCheckNameAvailabilityContent(name, type, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StorageAccountCheckNameAvailabilityContent>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageAccountCheckNameAvailabilityContent>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountCheckNameAvailabilityContent)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StorageAccountCheckNameAvailabilityContent IModel<StorageAccountCheckNameAvailabilityContent>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageAccountCheckNameAvailabilityContent IPersistableModel<StorageAccountCheckNameAvailabilityContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountCheckNameAvailabilityContent)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountCheckNameAvailabilityContent(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StorageAccountCheckNameAvailabilityContent>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StorageAccountCheckNameAvailabilityContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     internal partial class ManagementPolicySchema : IUtf8JsonSerializable, IJsonModel<ManagementPolicySchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicySchema>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicySchema>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ManagementPolicySchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ManagementPolicySchema>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ManagementPolicySchema>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagementPolicySchema>)} interface");
             }
@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ManagementPolicySchema IJsonModel<ManagementPolicySchema>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ManagementPolicySchema IJsonModel<ManagementPolicySchema>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagementPolicySchema)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ManagementPolicySchema DeserializeManagementPolicySchema(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Storage.Models
                     rules = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,9 +95,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ManagementPolicySchema(rules, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ManagementPolicySchema>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ManagementPolicySchema>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagementPolicySchema)} does not support '{options.Format}' format.");
@@ -106,9 +106,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ManagementPolicySchema IModel<ManagementPolicySchema>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ManagementPolicySchema IPersistableModel<ManagementPolicySchema>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagementPolicySchema)} does not support '{options.Format}' format.");
@@ -118,6 +118,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeManagementPolicySchema(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ManagementPolicySchema>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ManagementPolicySchema>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

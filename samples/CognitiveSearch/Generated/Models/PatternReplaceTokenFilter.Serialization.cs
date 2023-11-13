@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class PatternReplaceTokenFilter : IUtf8JsonSerializable, IJsonModel<PatternReplaceTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternReplaceTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternReplaceTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PatternReplaceTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PatternReplaceTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PatternReplaceTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PatternReplaceTokenFilter>)} interface");
             }
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        PatternReplaceTokenFilter IJsonModel<PatternReplaceTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PatternReplaceTokenFilter IJsonModel<PatternReplaceTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternReplaceTokenFilter)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
 
         internal static PatternReplaceTokenFilter DeserializePatternReplaceTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,7 +100,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -109,9 +109,9 @@ namespace CognitiveSearch.Models
             return new PatternReplaceTokenFilter(odataType, name, serializedAdditionalRawData, pattern, replacement);
         }
 
-        BinaryData IModel<PatternReplaceTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PatternReplaceTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternReplaceTokenFilter)} does not support '{options.Format}' format.");
@@ -120,9 +120,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PatternReplaceTokenFilter IModel<PatternReplaceTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PatternReplaceTokenFilter IPersistableModel<PatternReplaceTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternReplaceTokenFilter)} does not support '{options.Format}' format.");
@@ -132,6 +132,6 @@ namespace CognitiveSearch.Models
             return DeserializePatternReplaceTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PatternReplaceTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PatternReplaceTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

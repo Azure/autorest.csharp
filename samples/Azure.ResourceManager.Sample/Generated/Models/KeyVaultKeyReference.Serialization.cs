@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class KeyVaultKeyReference : IUtf8JsonSerializable, IJsonModel<KeyVaultKeyReference>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyVaultKeyReference>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyVaultKeyReference>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<KeyVaultKeyReference>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<KeyVaultKeyReference>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<KeyVaultKeyReference>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyVaultKeyReference>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(KeyUri.AbsoluteUri);
             writer.WritePropertyName("sourceVault"u8);
             JsonSerializer.Serialize(writer, SourceVault);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        KeyVaultKeyReference IJsonModel<KeyVaultKeyReference>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        KeyVaultKeyReference IJsonModel<KeyVaultKeyReference>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyVaultKeyReference)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static KeyVaultKeyReference DeserializeKeyVaultKeyReference(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample.Models
                     sourceVault = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new KeyVaultKeyReference(keyUrl, sourceVault, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<KeyVaultKeyReference>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<KeyVaultKeyReference>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyVaultKeyReference)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        KeyVaultKeyReference IModel<KeyVaultKeyReference>.Read(BinaryData data, ModelReaderWriterOptions options)
+        KeyVaultKeyReference IPersistableModel<KeyVaultKeyReference>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyVaultKeyReference)} does not support '{options.Format}' format.");
@@ -117,6 +117,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeKeyVaultKeyReference(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<KeyVaultKeyReference>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<KeyVaultKeyReference>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

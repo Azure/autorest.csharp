@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class StemmerTokenFilter : IUtf8JsonSerializable, IJsonModel<StemmerTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StemmerTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StemmerTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StemmerTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StemmerTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StemmerTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StemmerTokenFilter>)} interface");
             }
@@ -32,7 +32,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,9 +50,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        StemmerTokenFilter IJsonModel<StemmerTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StemmerTokenFilter IJsonModel<StemmerTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StemmerTokenFilter)} does not support '{options.Format}' format.");
@@ -64,7 +64,7 @@ namespace CognitiveSearch.Models
 
         internal static StemmerTokenFilter DeserializeStemmerTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace CognitiveSearch.Models
             return new StemmerTokenFilter(odataType, name, serializedAdditionalRawData, language);
         }
 
-        BinaryData IModel<StemmerTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StemmerTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StemmerTokenFilter)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StemmerTokenFilter IModel<StemmerTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StemmerTokenFilter IPersistableModel<StemmerTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StemmerTokenFilter)} does not support '{options.Format}' format.");
@@ -124,6 +124,6 @@ namespace CognitiveSearch.Models
             return DeserializeStemmerTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StemmerTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StemmerTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

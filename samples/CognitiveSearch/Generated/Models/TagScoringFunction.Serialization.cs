@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class TagScoringFunction : IUtf8JsonSerializable, IJsonModel<TagScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TagScoringFunction>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TagScoringFunction>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TagScoringFunction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TagScoringFunction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TagScoringFunction>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TagScoringFunction>)} interface");
             }
@@ -39,7 +39,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("interpolation"u8);
                 writer.WriteStringValue(Interpolation.Value.ToSerialString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        TagScoringFunction IJsonModel<TagScoringFunction>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TagScoringFunction IJsonModel<TagScoringFunction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagScoringFunction)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace CognitiveSearch.Models
 
         internal static TagScoringFunction DeserializeTagScoringFunction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,7 +115,7 @@ namespace CognitiveSearch.Models
                     interpolation = property.Value.GetString().ToScoringFunctionInterpolation();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -124,9 +124,9 @@ namespace CognitiveSearch.Models
             return new TagScoringFunction(type, fieldName, boost, Optional.ToNullable(interpolation), serializedAdditionalRawData, tag);
         }
 
-        BinaryData IModel<TagScoringFunction>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TagScoringFunction>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagScoringFunction)} does not support '{options.Format}' format.");
@@ -135,9 +135,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TagScoringFunction IModel<TagScoringFunction>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TagScoringFunction IPersistableModel<TagScoringFunction>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagScoringFunction)} does not support '{options.Format}' format.");
@@ -147,6 +147,6 @@ namespace CognitiveSearch.Models
             return DeserializeTagScoringFunction(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TagScoringFunction>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TagScoringFunction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

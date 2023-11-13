@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Basic : IUtf8JsonSerializable, IJsonModel<Basic>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Basic>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Basic>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Basic>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Basic>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Basic>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Basic>)} interface");
             }
@@ -48,7 +48,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Basic IJsonModel<Basic>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Basic IJsonModel<Basic>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Basic)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace body_complex.Models
 
         internal static Basic DeserializeBasic(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,7 +117,7 @@ namespace body_complex.Models
                     color = new CMYKColors(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -126,9 +126,9 @@ namespace body_complex.Models
             return new Basic(Optional.ToNullable(id), name.Value, Optional.ToNullable(color), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Basic>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Basic>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Basic)} does not support '{options.Format}' format.");
@@ -137,9 +137,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Basic IModel<Basic>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Basic IPersistableModel<Basic>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Basic)} does not support '{options.Format}' format.");
@@ -149,6 +149,6 @@ namespace body_complex.Models
             return DeserializeBasic(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Basic>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Basic>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

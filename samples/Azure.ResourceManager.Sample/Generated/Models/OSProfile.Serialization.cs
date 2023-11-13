@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class OSProfile : IUtf8JsonSerializable, IJsonModel<OSProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OSProfile>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OSProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OSProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OSProfile>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OSProfile>)} interface");
             }
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("requireGuestProvisionSignal"u8);
                 writer.WriteBooleanValue(RequireGuestProvisionSignal.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -94,9 +94,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        OSProfile IJsonModel<OSProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OSProfile IJsonModel<OSProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OSProfile)} does not support '{options.Format}' format.");
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static OSProfile DeserializeOSProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,7 +197,7 @@ namespace Azure.ResourceManager.Sample.Models
                     requireGuestProvisionSignal = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -206,9 +206,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new OSProfile(computerName.Value, adminUsername.Value, adminPassword.Value, customData.Value, windowsConfiguration.Value, linuxConfiguration.Value, Optional.ToList(secrets), Optional.ToNullable(allowExtensionOperations), Optional.ToNullable(requireGuestProvisionSignal), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<OSProfile>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OSProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OSProfile)} does not support '{options.Format}' format.");
@@ -217,9 +217,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OSProfile IModel<OSProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OSProfile IPersistableModel<OSProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OSProfile)} does not support '{options.Format}' format.");
@@ -229,6 +229,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeOSProfile(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OSProfile>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OSProfile>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

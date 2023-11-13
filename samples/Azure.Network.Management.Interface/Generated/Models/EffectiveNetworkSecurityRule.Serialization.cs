@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class EffectiveNetworkSecurityRule : IUtf8JsonSerializable, IJsonModel<EffectiveNetworkSecurityRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveNetworkSecurityRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveNetworkSecurityRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<EffectiveNetworkSecurityRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<EffectiveNetworkSecurityRule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<EffectiveNetworkSecurityRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EffectiveNetworkSecurityRule>)} interface");
             }
@@ -131,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("direction"u8);
                 writer.WriteStringValue(Direction.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -149,9 +149,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        EffectiveNetworkSecurityRule IJsonModel<EffectiveNetworkSecurityRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        EffectiveNetworkSecurityRule IJsonModel<EffectiveNetworkSecurityRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support '{options.Format}' format.");
@@ -163,7 +163,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -333,7 +333,7 @@ namespace Azure.Network.Management.Interface.Models
                     direction = new SecurityRuleDirection(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -342,9 +342,9 @@ namespace Azure.Network.Management.Interface.Models
             return new EffectiveNetworkSecurityRule(name.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), sourceAddressPrefix.Value, destinationAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(destinationAddressPrefixes), Optional.ToList(expandedSourceAddressPrefix), Optional.ToList(expandedDestinationAddressPrefix), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<EffectiveNetworkSecurityRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<EffectiveNetworkSecurityRule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support '{options.Format}' format.");
@@ -353,9 +353,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        EffectiveNetworkSecurityRule IModel<EffectiveNetworkSecurityRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        EffectiveNetworkSecurityRule IPersistableModel<EffectiveNetworkSecurityRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EffectiveNetworkSecurityRule)} does not support '{options.Format}' format.");
@@ -365,6 +365,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeEffectiveNetworkSecurityRule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<EffectiveNetworkSecurityRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<EffectiveNetworkSecurityRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

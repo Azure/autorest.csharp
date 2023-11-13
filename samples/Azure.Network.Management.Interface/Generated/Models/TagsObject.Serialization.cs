@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class TagsObject : IUtf8JsonSerializable, IJsonModel<TagsObject>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TagsObject>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TagsObject>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TagsObject>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TagsObject>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TagsObject>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TagsObject>)} interface");
             }
@@ -37,7 +37,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        TagsObject IJsonModel<TagsObject>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TagsObject IJsonModel<TagsObject>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagsObject)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static TagsObject DeserializeTagsObject(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace Azure.Network.Management.Interface.Models
                     tags = dictionary;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace Azure.Network.Management.Interface.Models
             return new TagsObject(Optional.ToDictionary(tags), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TagsObject>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TagsObject>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagsObject)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TagsObject IModel<TagsObject>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TagsObject IPersistableModel<TagsObject>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagsObject)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeTagsObject(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TagsObject>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TagsObject>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

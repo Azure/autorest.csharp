@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class AccessPolicy : IXmlSerializable, IModel<AccessPolicy>
+    public partial class AccessPolicy : IXmlSerializable, IPersistableModel<AccessPolicy>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -52,10 +52,10 @@ namespace Azure.Storage.Tables.Models
             return new AccessPolicy(start, expiry, permission, default);
         }
 
-        BinaryData IModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<AccessPolicy>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -75,9 +75,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        AccessPolicy IModel<AccessPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AccessPolicy IPersistableModel<AccessPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
@@ -86,6 +86,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<AccessPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<AccessPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

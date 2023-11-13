@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class LastAccessTimeTrackingPolicy : IUtf8JsonSerializable, IJsonModel<LastAccessTimeTrackingPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LastAccessTimeTrackingPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LastAccessTimeTrackingPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LastAccessTimeTrackingPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LastAccessTimeTrackingPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LastAccessTimeTrackingPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LastAccessTimeTrackingPolicy>)} interface");
             }
@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        LastAccessTimeTrackingPolicy IJsonModel<LastAccessTimeTrackingPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LastAccessTimeTrackingPolicy IJsonModel<LastAccessTimeTrackingPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LastAccessTimeTrackingPolicy)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static LastAccessTimeTrackingPolicy DeserializeLastAccessTimeTrackingPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,7 +131,7 @@ namespace Azure.ResourceManager.Storage.Models
                     blobType = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -140,9 +140,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new LastAccessTimeTrackingPolicy(enable, Optional.ToNullable(name), Optional.ToNullable(trackingGranularityInDays), Optional.ToList(blobType), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LastAccessTimeTrackingPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LastAccessTimeTrackingPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LastAccessTimeTrackingPolicy)} does not support '{options.Format}' format.");
@@ -151,9 +151,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LastAccessTimeTrackingPolicy IModel<LastAccessTimeTrackingPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LastAccessTimeTrackingPolicy IPersistableModel<LastAccessTimeTrackingPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LastAccessTimeTrackingPolicy)} does not support '{options.Format}' format.");
@@ -163,6 +163,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLastAccessTimeTrackingPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LastAccessTimeTrackingPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LastAccessTimeTrackingPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

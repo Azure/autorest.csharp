@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class DeletedShare : IUtf8JsonSerializable, IJsonModel<DeletedShare>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedShare>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedShare>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeletedShare>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeletedShare>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeletedShare>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeletedShare>)} interface");
             }
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(DeletedShareName);
             writer.WritePropertyName("deletedShareVersion"u8);
             writer.WriteStringValue(DeletedShareVersion);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        DeletedShare IJsonModel<DeletedShare>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeletedShare IJsonModel<DeletedShare>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeletedShare)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static DeletedShare DeserializeDeletedShare(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Storage.Models
                     deletedShareVersion = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new DeletedShare(deletedShareName, deletedShareVersion, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeletedShare>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeletedShare>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeletedShare)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeletedShare IModel<DeletedShare>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeletedShare IPersistableModel<DeletedShare>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeletedShare)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDeletedShare(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeletedShare>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeletedShare>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

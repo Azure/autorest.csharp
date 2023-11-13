@@ -24,10 +24,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
             IJsonModelInterface = new CSharpType(typeof(IJsonModel<>), modelType);
-            IModelInterface = new CSharpType(typeof(IModel<>), modelType);
+            IModelInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
             // we only need this interface when the model is a struct
             IJsonModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IJsonModel<object>) : null;
-            IModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IModel<object>) : null;
+            IModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
             IJsonInterface = Configuration.ApiTypes.IUtf8JsonSerializableType;
         }
 

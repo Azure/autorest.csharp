@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class SentenceSentiment : IUtf8JsonSerializable, IJsonModel<SentenceSentiment>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SentenceSentiment>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SentenceSentiment>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SentenceSentiment>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SentenceSentiment>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SentenceSentiment>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SentenceSentiment>)} interface");
             }
@@ -36,7 +36,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Offset);
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        SentenceSentiment IJsonModel<SentenceSentiment>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SentenceSentiment IJsonModel<SentenceSentiment>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SentenceSentiment)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static SentenceSentiment DeserializeSentenceSentiment(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +108,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     length = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -117,9 +117,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new SentenceSentiment(text, sentiment, confidenceScores, offset, length, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SentenceSentiment>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SentenceSentiment>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SentenceSentiment)} does not support '{options.Format}' format.");
@@ -128,9 +128,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SentenceSentiment IModel<SentenceSentiment>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SentenceSentiment IPersistableModel<SentenceSentiment>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SentenceSentiment)} does not support '{options.Format}' format.");
@@ -140,6 +140,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeSentenceSentiment(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SentenceSentiment>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SentenceSentiment>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

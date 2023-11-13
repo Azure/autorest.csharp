@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StorageSkuInformation : IUtf8JsonSerializable, IJsonModel<StorageSkuInformation>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageSkuInformation>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageSkuInformation>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StorageSkuInformation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StorageSkuInformation>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StorageSkuInformation>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageSkuInformation>)} interface");
             }
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Tier))
                 {
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Tier.Value.ToSerialString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ResourceType))
                 {
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(ResourceType.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Kind))
                 {
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Kind.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Locations))
                 {
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Capabilities))
                 {
@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -106,9 +106,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        StorageSkuInformation IJsonModel<StorageSkuInformation>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StorageSkuInformation IJsonModel<StorageSkuInformation>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageSkuInformation)} does not support '{options.Format}' format.");
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StorageSkuInformation DeserializeStorageSkuInformation(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -211,7 +211,7 @@ namespace Azure.ResourceManager.Storage.Models
                     restrictions = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -220,9 +220,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageSkuInformation(name, Optional.ToNullable(tier), Optional.ToNullable(resourceType), Optional.ToNullable(kind), Optional.ToList(locations), Optional.ToList(capabilities), Optional.ToList(restrictions), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StorageSkuInformation>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageSkuInformation>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageSkuInformation)} does not support '{options.Format}' format.");
@@ -231,9 +231,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StorageSkuInformation IModel<StorageSkuInformation>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageSkuInformation IPersistableModel<StorageSkuInformation>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageSkuInformation)} does not support '{options.Format}' format.");
@@ -243,6 +243,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageSkuInformation(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StorageSkuInformation>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StorageSkuInformation>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

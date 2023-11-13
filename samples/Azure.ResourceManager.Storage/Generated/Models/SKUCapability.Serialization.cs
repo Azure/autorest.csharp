@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class SKUCapability : IUtf8JsonSerializable, IJsonModel<SKUCapability>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SKUCapability>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SKUCapability>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SKUCapability>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SKUCapability>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SKUCapability>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SKUCapability>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Value))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        SKUCapability IJsonModel<SKUCapability>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SKUCapability IJsonModel<SKUCapability>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SKUCapability)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static SKUCapability DeserializeSKUCapability(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Storage.Models
                     value = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,9 +105,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new SKUCapability(name.Value, value.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SKUCapability>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SKUCapability>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SKUCapability)} does not support '{options.Format}' format.");
@@ -116,9 +116,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SKUCapability IModel<SKUCapability>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SKUCapability IPersistableModel<SKUCapability>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SKUCapability)} does not support '{options.Format}' format.");
@@ -128,6 +128,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeSKUCapability(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SKUCapability>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SKUCapability>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

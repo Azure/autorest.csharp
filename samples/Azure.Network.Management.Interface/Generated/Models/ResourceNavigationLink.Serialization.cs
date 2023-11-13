@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class ResourceNavigationLink : IUtf8JsonSerializable, IJsonModel<ResourceNavigationLink>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceNavigationLink>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceNavigationLink>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ResourceNavigationLink>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ResourceNavigationLink>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ResourceNavigationLink>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceNavigationLink>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("link"u8);
                 writer.WriteStringValue(Link);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -73,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -91,9 +91,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        ResourceNavigationLink IJsonModel<ResourceNavigationLink>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ResourceNavigationLink IJsonModel<ResourceNavigationLink>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceNavigationLink)} does not support '{options.Format}' format.");
@@ -105,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ResourceNavigationLink DeserializeResourceNavigationLink(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -173,7 +173,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -182,9 +182,9 @@ namespace Azure.Network.Management.Interface.Models
             return new ResourceNavigationLink(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, linkedResourceType.Value, link.Value, Optional.ToNullable(provisioningState));
         }
 
-        BinaryData IModel<ResourceNavigationLink>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ResourceNavigationLink>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceNavigationLink)} does not support '{options.Format}' format.");
@@ -193,9 +193,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ResourceNavigationLink IModel<ResourceNavigationLink>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ResourceNavigationLink IPersistableModel<ResourceNavigationLink>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceNavigationLink)} does not support '{options.Format}' format.");
@@ -205,6 +205,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeResourceNavigationLink(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ResourceNavigationLink>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ResourceNavigationLink>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class FrontendIPConfiguration : IUtf8JsonSerializable, IJsonModel<FrontendIPConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FrontendIPConfiguration>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FrontendIPConfiguration>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FrontendIPConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FrontendIPConfiguration>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FrontendIPConfiguration>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FrontendIPConfiguration>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -64,7 +64,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(InboundNatRules))
                 {
@@ -77,7 +77,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(InboundNatPools))
                 {
@@ -90,7 +90,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(OutboundRules))
                 {
@@ -103,7 +103,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(LoadBalancingRules))
                 {
@@ -146,7 +146,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("publicIPPrefix"u8);
                 writer.WriteObjectValue(PublicIPPrefix);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -155,7 +155,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -173,9 +173,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        FrontendIPConfiguration IJsonModel<FrontendIPConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FrontendIPConfiguration IJsonModel<FrontendIPConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FrontendIPConfiguration)} does not support '{options.Format}' format.");
@@ -187,7 +187,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static FrontendIPConfiguration DeserializeFrontendIPConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -374,7 +374,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -383,9 +383,9 @@ namespace Azure.Network.Management.Interface.Models
             return new FrontendIPConfiguration(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, Optional.ToList(zones), Optional.ToList(inboundNatRules), Optional.ToList(inboundNatPools), Optional.ToList(outboundRules), Optional.ToList(loadBalancingRules), privateIPAddress.Value, Optional.ToNullable(privateIPAllocationMethod), Optional.ToNullable(privateIPAddressVersion), subnet.Value, publicIPAddress.Value, publicIPPrefix.Value, Optional.ToNullable(provisioningState));
         }
 
-        BinaryData IModel<FrontendIPConfiguration>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FrontendIPConfiguration>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FrontendIPConfiguration)} does not support '{options.Format}' format.");
@@ -394,9 +394,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FrontendIPConfiguration IModel<FrontendIPConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FrontendIPConfiguration IPersistableModel<FrontendIPConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FrontendIPConfiguration)} does not support '{options.Format}' format.");
@@ -406,6 +406,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeFrontendIPConfiguration(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FrontendIPConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FrontendIPConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

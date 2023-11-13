@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class BootDiagnostics : IUtf8JsonSerializable, IJsonModel<BootDiagnostics>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BootDiagnostics>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BootDiagnostics>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BootDiagnostics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BootDiagnostics>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BootDiagnostics>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BootDiagnostics>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("storageUri"u8);
                 writer.WriteStringValue(StorageUri.AbsoluteUri);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        BootDiagnostics IJsonModel<BootDiagnostics>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BootDiagnostics IJsonModel<BootDiagnostics>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BootDiagnostics)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static BootDiagnostics DeserializeBootDiagnostics(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
                     storageUri = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new BootDiagnostics(Optional.ToNullable(enabled), storageUri.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BootDiagnostics>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BootDiagnostics>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BootDiagnostics)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BootDiagnostics IModel<BootDiagnostics>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BootDiagnostics IPersistableModel<BootDiagnostics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BootDiagnostics)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeBootDiagnostics(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BootDiagnostics>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BootDiagnostics>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

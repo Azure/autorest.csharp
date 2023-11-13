@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StorageAccountListKeysResult : IUtf8JsonSerializable, IJsonModel<StorageAccountListKeysResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountListKeysResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountListKeysResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StorageAccountListKeysResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StorageAccountListKeysResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StorageAccountListKeysResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageAccountListKeysResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Keys))
                 {
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteEndArray();
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        StorageAccountListKeysResult IJsonModel<StorageAccountListKeysResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StorageAccountListKeysResult IJsonModel<StorageAccountListKeysResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountListKeysResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StorageAccountListKeysResult DeserializeStorageAccountListKeysResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Storage.Models
                     keys = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,9 +105,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageAccountListKeysResult(Optional.ToList(keys), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StorageAccountListKeysResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageAccountListKeysResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountListKeysResult)} does not support '{options.Format}' format.");
@@ -116,9 +116,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StorageAccountListKeysResult IModel<StorageAccountListKeysResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageAccountListKeysResult IPersistableModel<StorageAccountListKeysResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountListKeysResult)} does not support '{options.Format}' format.");
@@ -128,6 +128,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountListKeysResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StorageAccountListKeysResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StorageAccountListKeysResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

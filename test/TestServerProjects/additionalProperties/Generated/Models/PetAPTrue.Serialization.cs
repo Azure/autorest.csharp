@@ -16,11 +16,11 @@ namespace additionalProperties.Models
 {
     public partial class PetAPTrue : IUtf8JsonSerializable, IJsonModel<PetAPTrue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPTrue>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPTrue>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PetAPTrue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PetAPTrue>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PetAPTrue>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetAPTrue>)} interface");
             }
@@ -33,7 +33,7 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -49,9 +49,9 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        PetAPTrue IJsonModel<PetAPTrue>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PetAPTrue IJsonModel<PetAPTrue>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace additionalProperties.Models
 
         internal static PetAPTrue DeserializePetAPTrue(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,9 +101,9 @@ namespace additionalProperties.Models
             return new PetAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties);
         }
 
-        BinaryData IModel<PetAPTrue>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PetAPTrue>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace additionalProperties.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PetAPTrue IModel<PetAPTrue>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PetAPTrue IPersistableModel<PetAPTrue>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetAPTrue)} does not support '{options.Format}' format.");
@@ -124,6 +124,6 @@ namespace additionalProperties.Models
             return DeserializePetAPTrue(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PetAPTrue>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PetAPTrue>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

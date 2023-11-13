@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class SentimentConfidenceScorePerLabel : IUtf8JsonSerializable, IJsonModel<SentimentConfidenceScorePerLabel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SentimentConfidenceScorePerLabel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SentimentConfidenceScorePerLabel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SentimentConfidenceScorePerLabel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SentimentConfidenceScorePerLabel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SentimentConfidenceScorePerLabel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SentimentConfidenceScorePerLabel>)} interface");
             }
@@ -32,7 +32,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Neutral);
             writer.WritePropertyName("negative"u8);
             writer.WriteNumberValue(Negative);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,9 +50,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        SentimentConfidenceScorePerLabel IJsonModel<SentimentConfidenceScorePerLabel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SentimentConfidenceScorePerLabel IJsonModel<SentimentConfidenceScorePerLabel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SentimentConfidenceScorePerLabel)} does not support '{options.Format}' format.");
@@ -64,7 +64,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     negative = property.Value.GetDouble();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new SentimentConfidenceScorePerLabel(positive, neutral, negative, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SentimentConfidenceScorePerLabel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SentimentConfidenceScorePerLabel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SentimentConfidenceScorePerLabel)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SentimentConfidenceScorePerLabel IModel<SentimentConfidenceScorePerLabel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SentimentConfidenceScorePerLabel IPersistableModel<SentimentConfidenceScorePerLabel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SentimentConfidenceScorePerLabel)} does not support '{options.Format}' format.");
@@ -124,6 +124,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeSentimentConfidenceScorePerLabel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SentimentConfidenceScorePerLabel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SentimentConfidenceScorePerLabel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineExtensionUpdate : IUtf8JsonSerializable, IJsonModel<VirtualMachineExtensionUpdate>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineExtensionUpdate>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineExtensionUpdate>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VirtualMachineExtensionUpdate>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VirtualMachineExtensionUpdate>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineExtensionUpdate>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineExtensionUpdate>)} interface");
             }
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample.Models
 #endif
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -112,9 +112,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachineExtensionUpdate IJsonModel<VirtualMachineExtensionUpdate>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VirtualMachineExtensionUpdate IJsonModel<VirtualMachineExtensionUpdate>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineExtensionUpdate)} does not support '{options.Format}' format.");
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineExtensionUpdate DeserializeVirtualMachineExtensionUpdate(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -227,7 +227,7 @@ namespace Azure.ResourceManager.Sample.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -236,9 +236,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineExtensionUpdate(Optional.ToDictionary(tags), serializedAdditionalRawData, forceUpdateTag.Value, publisher.Value, type.Value, typeHandlerVersion.Value, Optional.ToNullable(autoUpgradeMinorVersion), Optional.ToNullable(enableAutomaticUpgrade), settings.Value, protectedSettings.Value);
         }
 
-        BinaryData IModel<VirtualMachineExtensionUpdate>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VirtualMachineExtensionUpdate>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineExtensionUpdate)} does not support '{options.Format}' format.");
@@ -247,9 +247,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VirtualMachineExtensionUpdate IModel<VirtualMachineExtensionUpdate>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VirtualMachineExtensionUpdate IPersistableModel<VirtualMachineExtensionUpdate>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineExtensionUpdate)} does not support '{options.Format}' format.");
@@ -259,6 +259,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineExtensionUpdate(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VirtualMachineExtensionUpdate>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VirtualMachineExtensionUpdate>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class RequestStatistics : IUtf8JsonSerializable, IJsonModel<RequestStatistics>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestStatistics>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestStatistics>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RequestStatistics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RequestStatistics>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RequestStatistics>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RequestStatistics>)} interface");
             }
@@ -34,7 +34,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(ErroneousDocumentsCount);
             writer.WritePropertyName("transactionsCount"u8);
             writer.WriteNumberValue(TransactionsCount);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        RequestStatistics IJsonModel<RequestStatistics>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RequestStatistics IJsonModel<RequestStatistics>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RequestStatistics)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static RequestStatistics DeserializeRequestStatistics(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,7 +100,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     transactionsCount = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -109,9 +109,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RequestStatistics>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RequestStatistics>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RequestStatistics)} does not support '{options.Format}' format.");
@@ -120,9 +120,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RequestStatistics IModel<RequestStatistics>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RequestStatistics IPersistableModel<RequestStatistics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RequestStatistics)} does not support '{options.Format}' format.");
@@ -132,6 +132,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeRequestStatistics(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RequestStatistics>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RequestStatistics>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class StopAnalyzer : IUtf8JsonSerializable, IJsonModel<StopAnalyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StopAnalyzer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StopAnalyzer>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StopAnalyzer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StopAnalyzer>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StopAnalyzer>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StopAnalyzer>)} interface");
             }
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        StopAnalyzer IJsonModel<StopAnalyzer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StopAnalyzer IJsonModel<StopAnalyzer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StopAnalyzer)} does not support '{options.Format}' format.");
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
 
         internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace CognitiveSearch.Models
             return new StopAnalyzer(odataType, name, serializedAdditionalRawData, Optional.ToList(stopwords));
         }
 
-        BinaryData IModel<StopAnalyzer>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StopAnalyzer>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StopAnalyzer)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StopAnalyzer IModel<StopAnalyzer>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StopAnalyzer IPersistableModel<StopAnalyzer>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StopAnalyzer)} does not support '{options.Format}' format.");
@@ -141,6 +141,6 @@ namespace CognitiveSearch.Models
             return DeserializeStopAnalyzer(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StopAnalyzer>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StopAnalyzer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

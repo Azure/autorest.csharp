@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class SshPublicKeyInfo : IUtf8JsonSerializable, IJsonModel<SshPublicKeyInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeyInfo>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeyInfo>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SshPublicKeyInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SshPublicKeyInfo>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SshPublicKeyInfo>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SshPublicKeyInfo>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("keyData"u8);
                 writer.WriteStringValue(KeyData);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        SshPublicKeyInfo IJsonModel<SshPublicKeyInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SshPublicKeyInfo IJsonModel<SshPublicKeyInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SshPublicKeyInfo DeserializeSshPublicKeyInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     keyData = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new SshPublicKeyInfo(path.Value, keyData.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SshPublicKeyInfo>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SshPublicKeyInfo>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SshPublicKeyInfo IModel<SshPublicKeyInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SshPublicKeyInfo IPersistableModel<SshPublicKeyInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SshPublicKeyInfo)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSshPublicKeyInfo(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SshPublicKeyInfo>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SshPublicKeyInfo>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

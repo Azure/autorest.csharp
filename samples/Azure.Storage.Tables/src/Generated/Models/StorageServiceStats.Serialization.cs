@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageServiceStats : IXmlSerializable, IModel<StorageServiceStats>
+    public partial class StorageServiceStats : IXmlSerializable, IPersistableModel<StorageServiceStats>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -37,10 +37,10 @@ namespace Azure.Storage.Tables.Models
             return new StorageServiceStats(geoReplication, default);
         }
 
-        BinaryData IModel<StorageServiceStats>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageServiceStats>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<StorageServiceStats>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -60,9 +60,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        StorageServiceStats IModel<StorageServiceStats>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageServiceStats IPersistableModel<StorageServiceStats>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageServiceStats)} does not support '{options.Format}' format.");
@@ -71,6 +71,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeStorageServiceStats(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<StorageServiceStats>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<StorageServiceStats>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

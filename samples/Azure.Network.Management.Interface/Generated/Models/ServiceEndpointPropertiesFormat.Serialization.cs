@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class ServiceEndpointPropertiesFormat : IUtf8JsonSerializable, IJsonModel<ServiceEndpointPropertiesFormat>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceEndpointPropertiesFormat>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceEndpointPropertiesFormat>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ServiceEndpointPropertiesFormat>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ServiceEndpointPropertiesFormat>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ServiceEndpointPropertiesFormat>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ServiceEndpointPropertiesFormat>)} interface");
             }
@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -49,7 +49,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -67,9 +67,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        ServiceEndpointPropertiesFormat IJsonModel<ServiceEndpointPropertiesFormat>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ServiceEndpointPropertiesFormat IJsonModel<ServiceEndpointPropertiesFormat>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceEndpointPropertiesFormat)} does not support '{options.Format}' format.");
@@ -81,7 +81,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPropertiesFormat DeserializeServiceEndpointPropertiesFormat(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
                     provisioningState = new ProvisioningState(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -131,9 +131,9 @@ namespace Azure.Network.Management.Interface.Models
             return new ServiceEndpointPropertiesFormat(service.Value, Optional.ToList(locations), Optional.ToNullable(provisioningState), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ServiceEndpointPropertiesFormat>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ServiceEndpointPropertiesFormat>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceEndpointPropertiesFormat)} does not support '{options.Format}' format.");
@@ -142,9 +142,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ServiceEndpointPropertiesFormat IModel<ServiceEndpointPropertiesFormat>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ServiceEndpointPropertiesFormat IPersistableModel<ServiceEndpointPropertiesFormat>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceEndpointPropertiesFormat)} does not support '{options.Format}' format.");
@@ -154,6 +154,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeServiceEndpointPropertiesFormat(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ServiceEndpointPropertiesFormat>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ServiceEndpointPropertiesFormat>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

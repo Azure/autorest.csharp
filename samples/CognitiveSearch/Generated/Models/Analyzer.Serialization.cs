@@ -15,11 +15,11 @@ namespace CognitiveSearch.Models
 {
     public partial class Analyzer : IUtf8JsonSerializable, IJsonModel<Analyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Analyzer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Analyzer>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Analyzer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Analyzer>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Analyzer>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Analyzer>)} interface");
             }
@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        Analyzer IJsonModel<Analyzer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Analyzer IJsonModel<Analyzer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Analyzer)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace CognitiveSearch.Models
 
         internal static Analyzer DeserializeAnalyzer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -80,9 +80,9 @@ namespace CognitiveSearch.Models
             return UnknownAnalyzer.DeserializeUnknownAnalyzer(element);
         }
 
-        BinaryData IModel<Analyzer>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Analyzer>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Analyzer)} does not support '{options.Format}' format.");
@@ -91,9 +91,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Analyzer IModel<Analyzer>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Analyzer IPersistableModel<Analyzer>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Analyzer)} does not support '{options.Format}' format.");
@@ -103,6 +103,6 @@ namespace CognitiveSearch.Models
             return DeserializeAnalyzer(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Analyzer>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Analyzer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

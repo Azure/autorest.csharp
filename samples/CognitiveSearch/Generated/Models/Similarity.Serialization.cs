@@ -15,11 +15,11 @@ namespace CognitiveSearch.Models
 {
     public partial class Similarity : IUtf8JsonSerializable, IJsonModel<Similarity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Similarity>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Similarity>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Similarity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Similarity>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Similarity>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Similarity>)} interface");
             }
@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,9 +45,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        Similarity IJsonModel<Similarity>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Similarity IJsonModel<Similarity>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Similarity)} does not support '{options.Format}' format.");
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
 
         internal static Similarity DeserializeSimilarity(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,9 +76,9 @@ namespace CognitiveSearch.Models
             return UnknownSimilarity.DeserializeUnknownSimilarity(element);
         }
 
-        BinaryData IModel<Similarity>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Similarity>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Similarity)} does not support '{options.Format}' format.");
@@ -87,9 +87,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Similarity IModel<Similarity>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Similarity IPersistableModel<Similarity>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Similarity)} does not support '{options.Format}' format.");
@@ -99,6 +99,6 @@ namespace CognitiveSearch.Models
             return DeserializeSimilarity(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Similarity>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Similarity>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

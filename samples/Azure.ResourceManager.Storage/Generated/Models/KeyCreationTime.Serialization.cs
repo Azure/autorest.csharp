@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class KeyCreationTime : IUtf8JsonSerializable, IJsonModel<KeyCreationTime>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyCreationTime>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyCreationTime>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<KeyCreationTime>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<KeyCreationTime>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<KeyCreationTime>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyCreationTime>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("key2"u8);
                 writer.WriteStringValue(Key2.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        KeyCreationTime IJsonModel<KeyCreationTime>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        KeyCreationTime IJsonModel<KeyCreationTime>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyCreationTime)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static KeyCreationTime DeserializeKeyCreationTime(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Storage.Models
                     key2 = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new KeyCreationTime(Optional.ToNullable(key1), Optional.ToNullable(key2), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<KeyCreationTime>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<KeyCreationTime>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyCreationTime)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        KeyCreationTime IModel<KeyCreationTime>.Read(BinaryData data, ModelReaderWriterOptions options)
+        KeyCreationTime IPersistableModel<KeyCreationTime>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyCreationTime)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeKeyCreationTime(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<KeyCreationTime>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<KeyCreationTime>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class IPConfigurationProfile : IUtf8JsonSerializable, IJsonModel<IPConfigurationProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IPConfigurationProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IPConfigurationProfile>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IPConfigurationProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IPConfigurationProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IPConfigurationProfile>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IPConfigurationProfile>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Type);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -59,7 +59,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("subnet"u8);
                 writer.WriteObjectValue(Subnet);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -86,9 +86,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        IPConfigurationProfile IJsonModel<IPConfigurationProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IPConfigurationProfile IJsonModel<IPConfigurationProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
@@ -100,7 +100,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IPConfigurationProfile DeserializeIPConfigurationProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -166,7 +166,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -175,9 +175,9 @@ namespace Azure.Network.Management.Interface.Models
             return new IPConfigurationProfile(id.Value, serializedAdditionalRawData, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState));
         }
 
-        BinaryData IModel<IPConfigurationProfile>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IPConfigurationProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
@@ -186,9 +186,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        IPConfigurationProfile IModel<IPConfigurationProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IPConfigurationProfile IPersistableModel<IPConfigurationProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
@@ -198,6 +198,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeIPConfigurationProfile(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IPConfigurationProfile>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IPConfigurationProfile>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

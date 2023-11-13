@@ -17,17 +17,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ImmutabilityPolicyProperties : IUtf8JsonSerializable, IJsonModel<ImmutabilityPolicyProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutabilityPolicyProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutabilityPolicyProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImmutabilityPolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImmutabilityPolicyProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImmutabilityPolicyProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImmutabilityPolicyProperties>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Etag.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(UpdateHistory))
                 {
@@ -55,7 +55,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(State))
                 {
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -92,9 +92,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ImmutabilityPolicyProperties IJsonModel<ImmutabilityPolicyProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImmutabilityPolicyProperties IJsonModel<ImmutabilityPolicyProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImmutabilityPolicyProperties)} does not support '{options.Format}' format.");
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -193,7 +193,7 @@ namespace Azure.ResourceManager.Storage.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -202,9 +202,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ImmutabilityPolicyProperties(Optional.ToNullable(etag), Optional.ToList(updateHistory), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ImmutabilityPolicyProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImmutabilityPolicyProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImmutabilityPolicyProperties)} does not support '{options.Format}' format.");
@@ -213,9 +213,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImmutabilityPolicyProperties IModel<ImmutabilityPolicyProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImmutabilityPolicyProperties IPersistableModel<ImmutabilityPolicyProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImmutabilityPolicyProperties)} does not support '{options.Format}' format.");
@@ -225,6 +225,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeImmutabilityPolicyProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImmutabilityPolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImmutabilityPolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

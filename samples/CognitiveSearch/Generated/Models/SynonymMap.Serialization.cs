@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class SynonymMap : IUtf8JsonSerializable, IJsonModel<SynonymMap>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SynonymMap>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SynonymMap>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SynonymMap>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SynonymMap>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SynonymMap>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SynonymMap>)} interface");
             }
@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        SynonymMap IJsonModel<SynonymMap>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SynonymMap IJsonModel<SynonymMap>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SynonymMap)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace CognitiveSearch.Models
 
         internal static SynonymMap DeserializeSynonymMap(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,7 +118,7 @@ namespace CognitiveSearch.Models
                     odataEtag = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -127,9 +127,9 @@ namespace CognitiveSearch.Models
             return new SynonymMap(name, format, synonyms, encryptionKey.Value, odataEtag.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SynonymMap>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SynonymMap>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SynonymMap)} does not support '{options.Format}' format.");
@@ -138,9 +138,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SynonymMap IModel<SynonymMap>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SynonymMap IPersistableModel<SynonymMap>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SynonymMap)} does not support '{options.Format}' format.");
@@ -150,6 +150,6 @@ namespace CognitiveSearch.Models
             return DeserializeSynonymMap(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SynonymMap>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SynonymMap>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

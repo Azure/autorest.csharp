@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class SshPublicKeysGroupListResult : IUtf8JsonSerializable, IJsonModel<SshPublicKeysGroupListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeysGroupListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeysGroupListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SshPublicKeysGroupListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SshPublicKeysGroupListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SshPublicKeysGroupListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SshPublicKeysGroupListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        SshPublicKeysGroupListResult IJsonModel<SshPublicKeysGroupListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SshPublicKeysGroupListResult IJsonModel<SshPublicKeysGroupListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SshPublicKeysGroupListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SshPublicKeysGroupListResult DeserializeSshPublicKeysGroupListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new SshPublicKeysGroupListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SshPublicKeysGroupListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SshPublicKeysGroupListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SshPublicKeysGroupListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SshPublicKeysGroupListResult IModel<SshPublicKeysGroupListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SshPublicKeysGroupListResult IPersistableModel<SshPublicKeysGroupListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SshPublicKeysGroupListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSshPublicKeysGroupListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SshPublicKeysGroupListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SshPublicKeysGroupListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

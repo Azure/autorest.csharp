@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ObjectReplicationPolicyRule : IUtf8JsonSerializable, IJsonModel<ObjectReplicationPolicyRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ObjectReplicationPolicyRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ObjectReplicationPolicyRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ObjectReplicationPolicyRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ObjectReplicationPolicyRule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ObjectReplicationPolicyRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ObjectReplicationPolicyRule>)} interface");
             }
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("filters"u8);
                 writer.WriteObjectValue(Filters);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ObjectReplicationPolicyRule IJsonModel<ObjectReplicationPolicyRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ObjectReplicationPolicyRule IJsonModel<ObjectReplicationPolicyRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ObjectReplicationPolicyRule)} does not support '{options.Format}' format.");
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ObjectReplicationPolicyRule DeserializeObjectReplicationPolicyRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Storage.Models
                     filters = ObjectReplicationPolicyFilter.DeserializeObjectReplicationPolicyFilter(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -119,9 +119,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ObjectReplicationPolicyRule(ruleId.Value, sourceContainer, destinationContainer, filters.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ObjectReplicationPolicyRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ObjectReplicationPolicyRule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ObjectReplicationPolicyRule)} does not support '{options.Format}' format.");
@@ -130,9 +130,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ObjectReplicationPolicyRule IModel<ObjectReplicationPolicyRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ObjectReplicationPolicyRule IPersistableModel<ObjectReplicationPolicyRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ObjectReplicationPolicyRule)} does not support '{options.Format}' format.");
@@ -142,6 +142,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeObjectReplicationPolicyRule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ObjectReplicationPolicyRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ObjectReplicationPolicyRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

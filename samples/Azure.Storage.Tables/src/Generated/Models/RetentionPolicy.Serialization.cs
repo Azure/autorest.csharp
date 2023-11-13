@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class RetentionPolicy : IXmlSerializable, IModel<RetentionPolicy>
+    public partial class RetentionPolicy : IXmlSerializable, IPersistableModel<RetentionPolicy>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -47,10 +47,10 @@ namespace Azure.Storage.Tables.Models
             return new RetentionPolicy(enabled, days, default);
         }
 
-        BinaryData IModel<RetentionPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RetentionPolicy>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<RetentionPolicy>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -70,9 +70,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        RetentionPolicy IModel<RetentionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RetentionPolicy IPersistableModel<RetentionPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RetentionPolicy)} does not support '{options.Format}' format.");
@@ -81,6 +81,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeRetentionPolicy(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<RetentionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<RetentionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

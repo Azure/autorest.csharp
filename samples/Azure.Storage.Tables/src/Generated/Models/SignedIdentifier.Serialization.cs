@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class SignedIdentifier : IXmlSerializable, IModel<SignedIdentifier>
+    public partial class SignedIdentifier : IXmlSerializable, IPersistableModel<SignedIdentifier>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -42,10 +42,10 @@ namespace Azure.Storage.Tables.Models
             return new SignedIdentifier(id, accessPolicy, default);
         }
 
-        BinaryData IModel<SignedIdentifier>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SignedIdentifier>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<SignedIdentifier>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -65,9 +65,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        SignedIdentifier IModel<SignedIdentifier>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SignedIdentifier IPersistableModel<SignedIdentifier>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SignedIdentifier)} does not support '{options.Format}' format.");
@@ -76,6 +76,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<SignedIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<SignedIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

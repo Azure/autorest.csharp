@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class MergeSkill : IUtf8JsonSerializable, IJsonModel<MergeSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MergeSkill>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MergeSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MergeSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MergeSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MergeSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MergeSkill>)} interface");
             }
@@ -67,7 +67,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -85,9 +85,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        MergeSkill IJsonModel<MergeSkill>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MergeSkill IJsonModel<MergeSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MergeSkill)} does not support '{options.Format}' format.");
@@ -99,7 +99,7 @@ namespace CognitiveSearch.Models
 
         internal static MergeSkill DeserializeMergeSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -167,7 +167,7 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -176,9 +176,9 @@ namespace CognitiveSearch.Models
             return new MergeSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, serializedAdditionalRawData, insertPreTag.Value, insertPostTag.Value);
         }
 
-        BinaryData IModel<MergeSkill>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MergeSkill>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MergeSkill)} does not support '{options.Format}' format.");
@@ -187,9 +187,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MergeSkill IModel<MergeSkill>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MergeSkill IPersistableModel<MergeSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MergeSkill)} does not support '{options.Format}' format.");
@@ -199,6 +199,6 @@ namespace CognitiveSearch.Models
             return DeserializeMergeSkill(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MergeSkill>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MergeSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

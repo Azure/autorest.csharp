@@ -323,7 +323,7 @@ extends:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""System.Net.ClientModel"" Version=""1.0.0-alpha.20231102.5"" />
+    <PackageReference Include=""System.Net.ClientModel"" Version=""1.0.0-alpha.20231109.3"" />
     <PackageReference Include=""System.Text.Json"" Version=""4.7.2"" />
   </ItemGroup>
 

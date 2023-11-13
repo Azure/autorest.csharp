@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ImageAnalysisSkill : IUtf8JsonSerializable, IJsonModel<ImageAnalysisSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageAnalysisSkill>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageAnalysisSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImageAnalysisSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImageAnalysisSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImageAnalysisSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImageAnalysisSkill>)} interface");
             }
@@ -82,7 +82,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -100,9 +100,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ImageAnalysisSkill IJsonModel<ImageAnalysisSkill>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImageAnalysisSkill IJsonModel<ImageAnalysisSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageAnalysisSkill)} does not support '{options.Format}' format.");
@@ -114,7 +114,7 @@ namespace CognitiveSearch.Models
 
         internal static ImageAnalysisSkill DeserializeImageAnalysisSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -210,7 +210,7 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -219,9 +219,9 @@ namespace CognitiveSearch.Models
             return new ImageAnalysisSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, serializedAdditionalRawData, Optional.ToNullable(defaultLanguageCode), Optional.ToList(visualFeatures), Optional.ToList(details));
         }
 
-        BinaryData IModel<ImageAnalysisSkill>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImageAnalysisSkill>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageAnalysisSkill)} does not support '{options.Format}' format.");
@@ -230,9 +230,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImageAnalysisSkill IModel<ImageAnalysisSkill>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImageAnalysisSkill IPersistableModel<ImageAnalysisSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageAnalysisSkill)} does not support '{options.Format}' format.");
@@ -242,6 +242,6 @@ namespace CognitiveSearch.Models
             return DeserializeImageAnalysisSkill(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImageAnalysisSkill>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImageAnalysisSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

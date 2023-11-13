@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ServiceCounters : IUtf8JsonSerializable, IJsonModel<ServiceCounters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceCounters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceCounters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ServiceCounters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ServiceCounters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ServiceCounters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ServiceCounters>)} interface");
             }
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
             writer.WriteObjectValue(SynonymMapCounter);
             writer.WritePropertyName("skillsetCount"u8);
             writer.WriteObjectValue(SkillsetCounter);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ServiceCounters IJsonModel<ServiceCounters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ServiceCounters IJsonModel<ServiceCounters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceCounters)} does not support '{options.Format}' format.");
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
 
         internal static ServiceCounters DeserializeServiceCounters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace CognitiveSearch.Models
                     skillsetCount = ResourceCounter.DeserializeResourceCounter(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace CognitiveSearch.Models
             return new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps, skillsetCount, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ServiceCounters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ServiceCounters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceCounters)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ServiceCounters IModel<ServiceCounters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ServiceCounters IPersistableModel<ServiceCounters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceCounters)} does not support '{options.Format}' format.");
@@ -156,6 +156,6 @@ namespace CognitiveSearch.Models
             return DeserializeServiceCounters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ServiceCounters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ServiceCounters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

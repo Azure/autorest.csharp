@@ -16,11 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
 {
     public partial class CopyAuthorizationResult : IUtf8JsonSerializable, IJsonModel<CopyAuthorizationResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CopyAuthorizationResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CopyAuthorizationResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CopyAuthorizationResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CopyAuthorizationResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CopyAuthorizationResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CopyAuthorizationResult>)} interface");
             }
@@ -32,7 +32,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(AccessToken);
             writer.WritePropertyName("expirationDateTimeTicks"u8);
             writer.WriteNumberValue(ExpirationDateTimeTicks);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,9 +50,9 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
         }
 
-        CopyAuthorizationResult IJsonModel<CopyAuthorizationResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CopyAuthorizationResult IJsonModel<CopyAuthorizationResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CopyAuthorizationResult)} does not support '{options.Format}' format.");
@@ -64,7 +64,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         internal static CopyAuthorizationResult DeserializeCopyAuthorizationResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace Azure.AI.FormRecognizer.Models
                     expirationDateTimeTicks = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace Azure.AI.FormRecognizer.Models
             return new CopyAuthorizationResult(modelId, accessToken, expirationDateTimeTicks, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CopyAuthorizationResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CopyAuthorizationResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CopyAuthorizationResult)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace Azure.AI.FormRecognizer.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CopyAuthorizationResult IModel<CopyAuthorizationResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CopyAuthorizationResult IPersistableModel<CopyAuthorizationResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CopyAuthorizationResult)} does not support '{options.Format}' format.");
@@ -124,6 +124,6 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeCopyAuthorizationResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CopyAuthorizationResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CopyAuthorizationResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class CorsRule : IXmlSerializable, IModel<CorsRule>
+    public partial class CorsRule : IXmlSerializable, IPersistableModel<CorsRule>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -68,10 +68,10 @@ namespace Azure.Storage.Tables.Models
             return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds, default);
         }
 
-        BinaryData IModel<CorsRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CorsRule>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<CorsRule>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -91,9 +91,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        CorsRule IModel<CorsRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CorsRule IPersistableModel<CorsRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsRule)} does not support '{options.Format}' format.");
@@ -102,6 +102,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeCorsRule(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<CorsRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<CorsRule>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

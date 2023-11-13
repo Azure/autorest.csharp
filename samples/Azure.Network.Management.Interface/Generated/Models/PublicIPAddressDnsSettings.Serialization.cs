@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class PublicIPAddressDnsSettings : IUtf8JsonSerializable, IJsonModel<PublicIPAddressDnsSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicIPAddressDnsSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicIPAddressDnsSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PublicIPAddressDnsSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PublicIPAddressDnsSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PublicIPAddressDnsSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PublicIPAddressDnsSettings>)} interface");
             }
@@ -41,7 +41,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("reverseFqdn"u8);
                 writer.WriteStringValue(ReverseFqdn);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        PublicIPAddressDnsSettings IJsonModel<PublicIPAddressDnsSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PublicIPAddressDnsSettings IJsonModel<PublicIPAddressDnsSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PublicIPAddressDnsSettings)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PublicIPAddressDnsSettings DeserializePublicIPAddressDnsSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace Azure.Network.Management.Interface.Models
                     reverseFqdn = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace Azure.Network.Management.Interface.Models
             return new PublicIPAddressDnsSettings(domainNameLabel.Value, fqdn.Value, reverseFqdn.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PublicIPAddressDnsSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PublicIPAddressDnsSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PublicIPAddressDnsSettings)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PublicIPAddressDnsSettings IModel<PublicIPAddressDnsSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PublicIPAddressDnsSettings IPersistableModel<PublicIPAddressDnsSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PublicIPAddressDnsSettings)} does not support '{options.Format}' format.");
@@ -133,6 +133,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializePublicIPAddressDnsSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PublicIPAddressDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PublicIPAddressDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

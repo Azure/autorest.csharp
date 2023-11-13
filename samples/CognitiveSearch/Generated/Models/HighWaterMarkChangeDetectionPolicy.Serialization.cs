@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class HighWaterMarkChangeDetectionPolicy : IUtf8JsonSerializable, IJsonModel<HighWaterMarkChangeDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HighWaterMarkChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HighWaterMarkChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<HighWaterMarkChangeDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<HighWaterMarkChangeDetectionPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<HighWaterMarkChangeDetectionPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<HighWaterMarkChangeDetectionPolicy>)} interface");
             }
@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(HighWaterMarkColumnName);
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        HighWaterMarkChangeDetectionPolicy IJsonModel<HighWaterMarkChangeDetectionPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        HighWaterMarkChangeDetectionPolicy IJsonModel<HighWaterMarkChangeDetectionPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HighWaterMarkChangeDetectionPolicy)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
 
         internal static HighWaterMarkChangeDetectionPolicy DeserializeHighWaterMarkChangeDetectionPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     odataType = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace CognitiveSearch.Models
             return new HighWaterMarkChangeDetectionPolicy(odataType, serializedAdditionalRawData, highWaterMarkColumnName);
         }
 
-        BinaryData IModel<HighWaterMarkChangeDetectionPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<HighWaterMarkChangeDetectionPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HighWaterMarkChangeDetectionPolicy)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        HighWaterMarkChangeDetectionPolicy IModel<HighWaterMarkChangeDetectionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        HighWaterMarkChangeDetectionPolicy IPersistableModel<HighWaterMarkChangeDetectionPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HighWaterMarkChangeDetectionPolicy)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace CognitiveSearch.Models
             return DeserializeHighWaterMarkChangeDetectionPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<HighWaterMarkChangeDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<HighWaterMarkChangeDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

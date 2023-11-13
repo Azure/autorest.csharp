@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Siamese : IUtf8JsonSerializable, IJsonModel<Siamese>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Siamese>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Siamese>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Siamese>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Siamese>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Siamese>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Siamese>)} interface");
             }
@@ -56,7 +56,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Siamese IJsonModel<Siamese>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Siamese IJsonModel<Siamese>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Siamese)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace body_complex.Models
 
         internal static Siamese DeserializeSiamese(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -141,7 +141,7 @@ namespace body_complex.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -150,9 +150,9 @@ namespace body_complex.Models
             return new Siamese(Optional.ToNullable(id), name.Value, serializedAdditionalRawData, color.Value, Optional.ToList(hates), breed.Value);
         }
 
-        BinaryData IModel<Siamese>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Siamese>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Siamese)} does not support '{options.Format}' format.");
@@ -161,9 +161,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Siamese IModel<Siamese>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Siamese IPersistableModel<Siamese>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Siamese)} does not support '{options.Format}' format.");
@@ -173,6 +173,6 @@ namespace body_complex.Models
             return DeserializeSiamese(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Siamese>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Siamese>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

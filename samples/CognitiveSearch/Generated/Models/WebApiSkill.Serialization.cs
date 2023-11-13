@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class WebApiSkill : IUtf8JsonSerializable, IJsonModel<WebApiSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WebApiSkill>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WebApiSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<WebApiSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<WebApiSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<WebApiSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WebApiSkill>)} interface");
             }
@@ -104,7 +104,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -122,9 +122,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        WebApiSkill IJsonModel<WebApiSkill>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        WebApiSkill IJsonModel<WebApiSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WebApiSkill)} does not support '{options.Format}' format.");
@@ -136,7 +136,7 @@ namespace CognitiveSearch.Models
 
         internal static WebApiSkill DeserializeWebApiSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -251,7 +251,7 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -260,9 +260,9 @@ namespace CognitiveSearch.Models
             return new WebApiSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, serializedAdditionalRawData, uri, Optional.ToDictionary(httpHeaders), httpMethod.Value, Optional.ToNullable(timeout), Optional.ToNullable(batchSize), Optional.ToNullable(degreeOfParallelism));
         }
 
-        BinaryData IModel<WebApiSkill>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<WebApiSkill>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WebApiSkill)} does not support '{options.Format}' format.");
@@ -271,9 +271,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        WebApiSkill IModel<WebApiSkill>.Read(BinaryData data, ModelReaderWriterOptions options)
+        WebApiSkill IPersistableModel<WebApiSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WebApiSkill)} does not support '{options.Format}' format.");
@@ -283,6 +283,6 @@ namespace CognitiveSearch.Models
             return DeserializeWebApiSkill(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<WebApiSkill>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<WebApiSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

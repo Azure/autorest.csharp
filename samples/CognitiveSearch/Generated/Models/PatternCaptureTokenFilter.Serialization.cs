@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class PatternCaptureTokenFilter : IUtf8JsonSerializable, IJsonModel<PatternCaptureTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternCaptureTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternCaptureTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PatternCaptureTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PatternCaptureTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PatternCaptureTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PatternCaptureTokenFilter>)} interface");
             }
@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        PatternCaptureTokenFilter IJsonModel<PatternCaptureTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PatternCaptureTokenFilter IJsonModel<PatternCaptureTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternCaptureTokenFilter)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace CognitiveSearch.Models
 
         internal static PatternCaptureTokenFilter DeserializePatternCaptureTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,7 +117,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -126,9 +126,9 @@ namespace CognitiveSearch.Models
             return new PatternCaptureTokenFilter(odataType, name, serializedAdditionalRawData, patterns, Optional.ToNullable(preserveOriginal));
         }
 
-        BinaryData IModel<PatternCaptureTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PatternCaptureTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternCaptureTokenFilter)} does not support '{options.Format}' format.");
@@ -137,9 +137,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PatternCaptureTokenFilter IModel<PatternCaptureTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PatternCaptureTokenFilter IPersistableModel<PatternCaptureTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternCaptureTokenFilter)} does not support '{options.Format}' format.");
@@ -149,6 +149,6 @@ namespace CognitiveSearch.Models
             return DeserializePatternCaptureTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PatternCaptureTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PatternCaptureTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

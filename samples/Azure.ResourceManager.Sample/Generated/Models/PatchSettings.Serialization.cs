@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class PatchSettings : IUtf8JsonSerializable, IJsonModel<PatchSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatchSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatchSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PatchSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PatchSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PatchSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PatchSettings>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("patchMode"u8);
                 writer.WriteStringValue(PatchMode.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        PatchSettings IJsonModel<PatchSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PatchSettings IJsonModel<PatchSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatchSettings)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static PatchSettings DeserializePatchSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Sample.Models
                     patchMode = new InGuestPatchMode(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new PatchSettings(Optional.ToNullable(patchMode), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PatchSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PatchSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatchSettings)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PatchSettings IModel<PatchSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PatchSettings IPersistableModel<PatchSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatchSettings)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializePatchSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PatchSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PatchSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

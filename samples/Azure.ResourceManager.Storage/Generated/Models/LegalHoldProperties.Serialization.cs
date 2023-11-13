@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class LegalHoldProperties : IUtf8JsonSerializable, IJsonModel<LegalHoldProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LegalHoldProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LegalHoldProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LegalHoldProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LegalHoldProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LegalHoldProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LegalHoldProperties>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(HasLegalHold))
                 {
@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("protectedAppendWritesHistory"u8);
                 writer.WriteObjectValue(ProtectedAppendWritesHistory);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -67,9 +67,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        LegalHoldProperties IJsonModel<LegalHoldProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LegalHoldProperties IJsonModel<LegalHoldProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LegalHoldProperties)} does not support '{options.Format}' format.");
@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static LegalHoldProperties DeserializeLegalHoldProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,7 +126,7 @@ namespace Azure.ResourceManager.Storage.Models
                     protectedAppendWritesHistory = ProtectedAppendWritesHistory.DeserializeProtectedAppendWritesHistory(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -135,9 +135,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new LegalHoldProperties(Optional.ToNullable(hasLegalHold), Optional.ToList(tags), protectedAppendWritesHistory.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LegalHoldProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LegalHoldProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LegalHoldProperties)} does not support '{options.Format}' format.");
@@ -146,9 +146,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LegalHoldProperties IModel<LegalHoldProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LegalHoldProperties IPersistableModel<LegalHoldProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LegalHoldProperties)} does not support '{options.Format}' format.");
@@ -158,6 +158,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLegalHoldProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LegalHoldProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LegalHoldProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

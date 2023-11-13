@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class AzureActiveDirectoryApplicationCredentials : IUtf8JsonSerializable, IJsonModel<AzureActiveDirectoryApplicationCredentials>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureActiveDirectoryApplicationCredentials>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureActiveDirectoryApplicationCredentials>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AzureActiveDirectoryApplicationCredentials>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AzureActiveDirectoryApplicationCredentials>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AzureActiveDirectoryApplicationCredentials>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AzureActiveDirectoryApplicationCredentials>)} interface");
             }
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("applicationSecret"u8);
                 writer.WriteStringValue(ApplicationSecret);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        AzureActiveDirectoryApplicationCredentials IJsonModel<AzureActiveDirectoryApplicationCredentials>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AzureActiveDirectoryApplicationCredentials IJsonModel<AzureActiveDirectoryApplicationCredentials>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AzureActiveDirectoryApplicationCredentials)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
 
         internal static AzureActiveDirectoryApplicationCredentials DeserializeAzureActiveDirectoryApplicationCredentials(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
                     applicationSecret = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -96,9 +96,9 @@ namespace CognitiveSearch.Models
             return new AzureActiveDirectoryApplicationCredentials(applicationId, applicationSecret.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AzureActiveDirectoryApplicationCredentials>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AzureActiveDirectoryApplicationCredentials>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AzureActiveDirectoryApplicationCredentials)} does not support '{options.Format}' format.");
@@ -107,9 +107,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AzureActiveDirectoryApplicationCredentials IModel<AzureActiveDirectoryApplicationCredentials>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AzureActiveDirectoryApplicationCredentials IPersistableModel<AzureActiveDirectoryApplicationCredentials>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AzureActiveDirectoryApplicationCredentials)} does not support '{options.Format}' format.");
@@ -119,6 +119,6 @@ namespace CognitiveSearch.Models
             return DeserializeAzureActiveDirectoryApplicationCredentials(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AzureActiveDirectoryApplicationCredentials>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AzureActiveDirectoryApplicationCredentials>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class DocumentError : IUtf8JsonSerializable, IJsonModel<DocumentError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentError>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentError>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DocumentError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DocumentError>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DocumentError>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DocumentError>)} interface");
             }
@@ -30,7 +30,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Id);
             writer.WritePropertyName("error"u8);
             writer.WriteObjectValue(Error);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        DocumentError IJsonModel<DocumentError>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DocumentError IJsonModel<DocumentError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static DocumentError DeserializeDocumentError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     error = TextAnalyticsError.DeserializeTextAnalyticsError(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentError(id, error, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DocumentError>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DocumentError>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DocumentError IModel<DocumentError>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DocumentError IPersistableModel<DocumentError>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeDocumentError(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DocumentError>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DocumentError>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

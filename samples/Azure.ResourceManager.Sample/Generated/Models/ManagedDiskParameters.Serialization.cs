@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class ManagedDiskParameters : IUtf8JsonSerializable, IJsonModel<ManagedDiskParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedDiskParameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedDiskParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ManagedDiskParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ManagedDiskParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ManagedDiskParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagedDiskParameters>)} interface");
             }
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        ManagedDiskParameters IJsonModel<ManagedDiskParameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ManagedDiskParameters IJsonModel<ManagedDiskParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedDiskParameters)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ManagedDiskParameters DeserializeManagedDiskParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -110,7 +110,7 @@ namespace Azure.ResourceManager.Sample.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -119,9 +119,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new ManagedDiskParameters(id.Value, serializedAdditionalRawData, Optional.ToNullable(storageAccountType), diskEncryptionSet);
         }
 
-        BinaryData IModel<ManagedDiskParameters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ManagedDiskParameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedDiskParameters)} does not support '{options.Format}' format.");
@@ -130,9 +130,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ManagedDiskParameters IModel<ManagedDiskParameters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ManagedDiskParameters IPersistableModel<ManagedDiskParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedDiskParameters)} does not support '{options.Format}' format.");
@@ -142,6 +142,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeManagedDiskParameters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ManagedDiskParameters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ManagedDiskParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -19,17 +19,17 @@ namespace Azure.ResourceManager.Storage
 {
     public partial class FileShareData : IUtf8JsonSerializable, IJsonModel<FileShareData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FileShareData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FileShareData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FileShareData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FileShareData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FileShareData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FileShareData>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -37,22 +37,22 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(Etag.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Version))
                 {
@@ -104,7 +104,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(Version);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Deleted))
                 {
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteBooleanValue(Deleted.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DeletedOn))
                 {
@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(DeletedOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(RemainingRetentionDays))
                 {
@@ -133,7 +133,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(AccessTierChangeOn))
                 {
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(AccessTierChangeOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(AccessTierStatus))
                 {
@@ -149,7 +149,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(AccessTierStatus);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ShareUsageBytes))
                 {
@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteNumberValue(ShareUsageBytes.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LeaseStatus))
                 {
@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LeaseStatus.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LeaseState))
                 {
@@ -173,7 +173,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LeaseState.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LeaseDuration))
                 {
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SnapshotOn))
                 {
@@ -200,7 +200,7 @@ namespace Azure.ResourceManager.Storage
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -218,9 +218,9 @@ namespace Azure.ResourceManager.Storage
             writer.WriteEndObject();
         }
 
-        FileShareData IJsonModel<FileShareData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FileShareData IJsonModel<FileShareData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FileShareData)} does not support '{options.Format}' format.");
@@ -232,7 +232,7 @@ namespace Azure.ResourceManager.Storage
 
         internal static FileShareData DeserializeFileShareData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -474,7 +474,7 @@ namespace Azure.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -483,9 +483,9 @@ namespace Azure.ResourceManager.Storage
             return new FileShareData(id, name, type, systemData.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), Optional.ToList(signedIdentifiers), Optional.ToNullable(snapshotTime), Optional.ToNullable(etag), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FileShareData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FileShareData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FileShareData)} does not support '{options.Format}' format.");
@@ -494,9 +494,9 @@ namespace Azure.ResourceManager.Storage
             return ModelReaderWriter.Write(this, options);
         }
 
-        FileShareData IModel<FileShareData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FileShareData IPersistableModel<FileShareData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FileShareData)} does not support '{options.Format}' format.");
@@ -506,6 +506,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeFileShareData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FileShareData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FileShareData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

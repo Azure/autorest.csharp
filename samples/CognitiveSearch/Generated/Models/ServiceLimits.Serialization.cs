@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ServiceLimits : IUtf8JsonSerializable, IJsonModel<ServiceLimits>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceLimits>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceLimits>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ServiceLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ServiceLimits>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ServiceLimits>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ServiceLimits>)} interface");
             }
@@ -74,7 +74,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNull("maxComplexObjectsInCollectionsPerDocument");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -92,9 +92,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ServiceLimits IJsonModel<ServiceLimits>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ServiceLimits IJsonModel<ServiceLimits>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceLimits)} does not support '{options.Format}' format.");
@@ -106,7 +106,7 @@ namespace CognitiveSearch.Models
 
         internal static ServiceLimits DeserializeServiceLimits(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -160,7 +160,7 @@ namespace CognitiveSearch.Models
                     maxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -169,9 +169,9 @@ namespace CognitiveSearch.Models
             return new ServiceLimits(Optional.ToNullable(maxFieldsPerIndex), Optional.ToNullable(maxFieldNestingDepthPerIndex), Optional.ToNullable(maxComplexCollectionFieldsPerIndex), Optional.ToNullable(maxComplexObjectsInCollectionsPerDocument), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ServiceLimits>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ServiceLimits>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceLimits)} does not support '{options.Format}' format.");
@@ -180,9 +180,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ServiceLimits IModel<ServiceLimits>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ServiceLimits IPersistableModel<ServiceLimits>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceLimits)} does not support '{options.Format}' format.");
@@ -192,6 +192,6 @@ namespace CognitiveSearch.Models
             return DeserializeServiceLimits(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ServiceLimits>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ServiceLimits>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

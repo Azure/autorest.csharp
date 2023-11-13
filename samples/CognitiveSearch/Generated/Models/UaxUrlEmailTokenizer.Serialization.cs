@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class UaxUrlEmailTokenizer : IUtf8JsonSerializable, IJsonModel<UaxUrlEmailTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UaxUrlEmailTokenizer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UaxUrlEmailTokenizer>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UaxUrlEmailTokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UaxUrlEmailTokenizer>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UaxUrlEmailTokenizer>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UaxUrlEmailTokenizer>)} interface");
             }
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -53,9 +53,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        UaxUrlEmailTokenizer IJsonModel<UaxUrlEmailTokenizer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UaxUrlEmailTokenizer IJsonModel<UaxUrlEmailTokenizer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UaxUrlEmailTokenizer)} does not support '{options.Format}' format.");
@@ -67,7 +67,7 @@ namespace CognitiveSearch.Models
 
         internal static UaxUrlEmailTokenizer DeserializeUaxUrlEmailTokenizer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,7 +99,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,9 +108,9 @@ namespace CognitiveSearch.Models
             return new UaxUrlEmailTokenizer(odataType, name, serializedAdditionalRawData, Optional.ToNullable(maxTokenLength));
         }
 
-        BinaryData IModel<UaxUrlEmailTokenizer>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UaxUrlEmailTokenizer>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UaxUrlEmailTokenizer)} does not support '{options.Format}' format.");
@@ -119,9 +119,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UaxUrlEmailTokenizer IModel<UaxUrlEmailTokenizer>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UaxUrlEmailTokenizer IPersistableModel<UaxUrlEmailTokenizer>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UaxUrlEmailTokenizer)} does not support '{options.Format}' format.");
@@ -131,6 +131,6 @@ namespace CognitiveSearch.Models
             return DeserializeUaxUrlEmailTokenizer(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UaxUrlEmailTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UaxUrlEmailTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class EntityLinkingResult : IUtf8JsonSerializable, IJsonModel<EntityLinkingResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EntityLinkingResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EntityLinkingResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<EntityLinkingResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<EntityLinkingResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<EntityLinkingResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EntityLinkingResult>)} interface");
             }
@@ -47,7 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WritePropertyName("modelVersion"u8);
             writer.WriteStringValue(ModelVersion);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        EntityLinkingResult IJsonModel<EntityLinkingResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        EntityLinkingResult IJsonModel<EntityLinkingResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EntityLinkingResult)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static EntityLinkingResult DeserializeEntityLinkingResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -127,7 +127,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     modelVersion = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -136,9 +136,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new EntityLinkingResult(documents, errors, statistics.Value, modelVersion, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<EntityLinkingResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<EntityLinkingResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EntityLinkingResult)} does not support '{options.Format}' format.");
@@ -147,9 +147,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        EntityLinkingResult IModel<EntityLinkingResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        EntityLinkingResult IPersistableModel<EntityLinkingResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EntityLinkingResult)} does not support '{options.Format}' format.");
@@ -159,6 +159,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeEntityLinkingResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<EntityLinkingResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<EntityLinkingResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,17 +16,17 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class ApplicationSecurityGroup : IUtf8JsonSerializable, IJsonModel<ApplicationSecurityGroup>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationSecurityGroup>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationSecurityGroup>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ApplicationSecurityGroup>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ApplicationSecurityGroup>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ApplicationSecurityGroup>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ApplicationSecurityGroup>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -39,7 +39,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -47,7 +47,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -73,7 +73,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ResourceGuid))
                 {
@@ -81,7 +81,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(ResourceGuid);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -90,7 +90,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -108,9 +108,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        ApplicationSecurityGroup IJsonModel<ApplicationSecurityGroup>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ApplicationSecurityGroup IJsonModel<ApplicationSecurityGroup>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ApplicationSecurityGroup)} does not support '{options.Format}' format.");
@@ -122,7 +122,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ApplicationSecurityGroup DeserializeApplicationSecurityGroup(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -205,7 +205,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -214,9 +214,9 @@ namespace Azure.Network.Management.Interface.Models
             return new ApplicationSecurityGroup(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), serializedAdditionalRawData, etag.Value, resourceGuid.Value, Optional.ToNullable(provisioningState));
         }
 
-        BinaryData IModel<ApplicationSecurityGroup>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ApplicationSecurityGroup>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ApplicationSecurityGroup)} does not support '{options.Format}' format.");
@@ -225,9 +225,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ApplicationSecurityGroup IModel<ApplicationSecurityGroup>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ApplicationSecurityGroup IPersistableModel<ApplicationSecurityGroup>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ApplicationSecurityGroup)} does not support '{options.Format}' format.");
@@ -237,6 +237,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeApplicationSecurityGroup(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ApplicationSecurityGroup>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ApplicationSecurityGroup>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

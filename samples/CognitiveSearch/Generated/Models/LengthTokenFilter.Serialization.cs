@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class LengthTokenFilter : IUtf8JsonSerializable, IJsonModel<LengthTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LengthTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LengthTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LengthTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LengthTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LengthTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LengthTokenFilter>)} interface");
             }
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        LengthTokenFilter IJsonModel<LengthTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LengthTokenFilter IJsonModel<LengthTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LengthTokenFilter)} does not support '{options.Format}' format.");
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
 
         internal static LengthTokenFilter DeserializeLengthTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,7 +114,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -123,9 +123,9 @@ namespace CognitiveSearch.Models
             return new LengthTokenFilter(odataType, name, serializedAdditionalRawData, Optional.ToNullable(min), Optional.ToNullable(max));
         }
 
-        BinaryData IModel<LengthTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LengthTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LengthTokenFilter)} does not support '{options.Format}' format.");
@@ -134,9 +134,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LengthTokenFilter IModel<LengthTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LengthTokenFilter IPersistableModel<LengthTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LengthTokenFilter)} does not support '{options.Format}' format.");
@@ -146,6 +146,6 @@ namespace CognitiveSearch.Models
             return DeserializeLengthTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LengthTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LengthTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

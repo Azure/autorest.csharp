@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class LeaseShareResponse : IUtf8JsonSerializable, IJsonModel<LeaseShareResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LeaseShareResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LeaseShareResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LeaseShareResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LeaseShareResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LeaseShareResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LeaseShareResponse>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("leaseTimeSeconds"u8);
                 writer.WriteStringValue(LeaseTimeSeconds);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        LeaseShareResponse IJsonModel<LeaseShareResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LeaseShareResponse IJsonModel<LeaseShareResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LeaseShareResponse)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static LeaseShareResponse DeserializeLeaseShareResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Storage.Models
                     leaseTimeSeconds = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new LeaseShareResponse(leaseId.Value, leaseTimeSeconds.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LeaseShareResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LeaseShareResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LeaseShareResponse)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LeaseShareResponse IModel<LeaseShareResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LeaseShareResponse IPersistableModel<LeaseShareResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LeaseShareResponse)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLeaseShareResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LeaseShareResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LeaseShareResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

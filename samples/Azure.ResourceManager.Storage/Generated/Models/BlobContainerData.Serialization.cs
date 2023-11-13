@@ -19,17 +19,17 @@ namespace Azure.ResourceManager.Storage
 {
     public partial class BlobContainerData : IUtf8JsonSerializable, IJsonModel<BlobContainerData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobContainerData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobContainerData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BlobContainerData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BlobContainerData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BlobContainerData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BlobContainerData>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -37,22 +37,22 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(Etag.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Version))
                 {
@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(Version);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Deleted))
                 {
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteBooleanValue(Deleted.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DeletedOn))
                 {
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(DeletedOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(RemainingRetentionDays))
                 {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -117,7 +117,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LastModifiedOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LeaseStatus))
                 {
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LeaseStatus.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LeaseState))
                 {
@@ -133,7 +133,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LeaseState.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LeaseDuration))
                 {
@@ -152,7 +152,7 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ImmutabilityPolicy))
                 {
@@ -160,7 +160,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(ImmutabilityPolicy);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LegalHold))
                 {
@@ -168,7 +168,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(LegalHold);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(HasLegalHold))
                 {
@@ -176,7 +176,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteBooleanValue(HasLegalHold.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(HasImmutabilityPolicy))
                 {
@@ -200,7 +200,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -218,9 +218,9 @@ namespace Azure.ResourceManager.Storage
             writer.WriteEndObject();
         }
 
-        BlobContainerData IJsonModel<BlobContainerData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BlobContainerData IJsonModel<BlobContainerData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobContainerData)} does not support '{options.Format}' format.");
@@ -232,7 +232,7 @@ namespace Azure.ResourceManager.Storage
 
         internal static BlobContainerData DeserializeBlobContainerData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -479,7 +479,7 @@ namespace Azure.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -488,9 +488,9 @@ namespace Azure.ResourceManager.Storage
             return new BlobContainerData(id, name, type, systemData.Value, version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), defaultEncryptionScope.Value, Optional.ToNullable(denyEncryptionScopeOverride), Optional.ToNullable(publicAccess), Optional.ToNullable(lastModifiedTime), Optional.ToNullable(leaseStatus), Optional.ToNullable(leaseState), Optional.ToNullable(leaseDuration), Optional.ToDictionary(metadata), immutabilityPolicy.Value, legalHold.Value, Optional.ToNullable(hasLegalHold), Optional.ToNullable(hasImmutabilityPolicy), immutableStorageWithVersioning.Value, Optional.ToNullable(enableNfsV3RootSquash), Optional.ToNullable(enableNfsV3AllSquash), Optional.ToNullable(etag), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BlobContainerData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BlobContainerData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobContainerData)} does not support '{options.Format}' format.");
@@ -499,9 +499,9 @@ namespace Azure.ResourceManager.Storage
             return ModelReaderWriter.Write(this, options);
         }
 
-        BlobContainerData IModel<BlobContainerData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BlobContainerData IPersistableModel<BlobContainerData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobContainerData)} does not support '{options.Format}' format.");
@@ -511,6 +511,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeBlobContainerData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BlobContainerData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BlobContainerData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

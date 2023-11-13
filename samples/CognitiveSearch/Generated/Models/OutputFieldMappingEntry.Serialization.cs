@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class OutputFieldMappingEntry : IUtf8JsonSerializable, IJsonModel<OutputFieldMappingEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputFieldMappingEntry>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputFieldMappingEntry>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OutputFieldMappingEntry>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OutputFieldMappingEntry>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OutputFieldMappingEntry>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OutputFieldMappingEntry>)} interface");
             }
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("targetName"u8);
                 writer.WriteStringValue(TargetName);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        OutputFieldMappingEntry IJsonModel<OutputFieldMappingEntry>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OutputFieldMappingEntry IJsonModel<OutputFieldMappingEntry>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OutputFieldMappingEntry)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
 
         internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
                     targetName = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -96,9 +96,9 @@ namespace CognitiveSearch.Models
             return new OutputFieldMappingEntry(name, targetName.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<OutputFieldMappingEntry>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OutputFieldMappingEntry>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OutputFieldMappingEntry)} does not support '{options.Format}' format.");
@@ -107,9 +107,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OutputFieldMappingEntry IModel<OutputFieldMappingEntry>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OutputFieldMappingEntry IPersistableModel<OutputFieldMappingEntry>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OutputFieldMappingEntry)} does not support '{options.Format}' format.");
@@ -119,6 +119,6 @@ namespace CognitiveSearch.Models
             return DeserializeOutputFieldMappingEntry(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OutputFieldMappingEntry>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OutputFieldMappingEntry>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

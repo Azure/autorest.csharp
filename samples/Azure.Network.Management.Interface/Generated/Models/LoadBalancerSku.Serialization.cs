@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class LoadBalancerSku : IUtf8JsonSerializable, IJsonModel<LoadBalancerSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LoadBalancerSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LoadBalancerSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LoadBalancerSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LoadBalancerSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LoadBalancerSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LoadBalancerSku>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        LoadBalancerSku IJsonModel<LoadBalancerSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LoadBalancerSku IJsonModel<LoadBalancerSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LoadBalancerSku)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static LoadBalancerSku DeserializeLoadBalancerSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace Azure.Network.Management.Interface.Models
                     name = new LoadBalancerSkuName(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace Azure.Network.Management.Interface.Models
             return new LoadBalancerSku(Optional.ToNullable(name), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LoadBalancerSku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LoadBalancerSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LoadBalancerSku)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LoadBalancerSku IModel<LoadBalancerSku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LoadBalancerSku IPersistableModel<LoadBalancerSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LoadBalancerSku)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeLoadBalancerSku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LoadBalancerSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LoadBalancerSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

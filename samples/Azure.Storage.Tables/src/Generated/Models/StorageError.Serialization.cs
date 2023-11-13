@@ -17,7 +17,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class StorageError : IUtf8JsonSerializable, IJsonModel<StorageError>, IXmlSerializable, IModel<StorageError>
+    internal partial class StorageError : IUtf8JsonSerializable, IJsonModel<StorageError>, IXmlSerializable, IPersistableModel<StorageError>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -41,11 +41,11 @@ namespace Azure.Storage.Tables.Models
             return new StorageError(message, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageError>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageError>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StorageError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StorageError>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StorageError>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageError>)} interface");
             }
@@ -56,7 +56,7 @@ namespace Azure.Storage.Tables.Models
                 writer.WritePropertyName("Message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndObject();
         }
 
-        StorageError IJsonModel<StorageError>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StorageError IJsonModel<StorageError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace Azure.Storage.Tables.Models
 
         internal static StorageError DeserializeStorageError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace Azure.Storage.Tables.Models
                     message = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,15 +113,15 @@ namespace Azure.Storage.Tables.Models
             return new StorageError(message.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StorageError>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageError>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
             }
 
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 return ModelReaderWriter.Write(this, options);
             }
@@ -142,15 +142,15 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        StorageError IModel<StorageError>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageError IPersistableModel<StorageError>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
             }
 
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 using JsonDocument document = JsonDocument.Parse(data);
                 return DeserializeStorageError(document.RootElement, options);
@@ -161,6 +161,6 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        ModelReaderWriterFormat IModel<StorageError>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<StorageError>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

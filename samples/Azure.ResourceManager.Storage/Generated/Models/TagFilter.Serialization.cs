@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class TagFilter : IUtf8JsonSerializable, IJsonModel<TagFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TagFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TagFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TagFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TagFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TagFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TagFilter>)} interface");
             }
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(Op);
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,9 +50,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        TagFilter IJsonModel<TagFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TagFilter IJsonModel<TagFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagFilter)} does not support '{options.Format}' format.");
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static TagFilter DeserializeTagFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Storage.Models
                     value = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new TagFilter(name, op, value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TagFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TagFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagFilter)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TagFilter IModel<TagFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TagFilter IPersistableModel<TagFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TagFilter)} does not support '{options.Format}' format.");
@@ -124,6 +124,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeTagFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TagFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TagFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

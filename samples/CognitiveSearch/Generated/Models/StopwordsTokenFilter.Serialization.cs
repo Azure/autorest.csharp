@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class StopwordsTokenFilter : IUtf8JsonSerializable, IJsonModel<StopwordsTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StopwordsTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StopwordsTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StopwordsTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StopwordsTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StopwordsTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StopwordsTokenFilter>)} interface");
             }
@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        StopwordsTokenFilter IJsonModel<StopwordsTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StopwordsTokenFilter IJsonModel<StopwordsTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StopwordsTokenFilter)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
 
         internal static StopwordsTokenFilter DeserializeStopwordsTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -154,7 +154,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -163,9 +163,9 @@ namespace CognitiveSearch.Models
             return new StopwordsTokenFilter(odataType, name, serializedAdditionalRawData, Optional.ToList(stopwords), Optional.ToNullable(stopwordsList), Optional.ToNullable(ignoreCase), Optional.ToNullable(removeTrailing));
         }
 
-        BinaryData IModel<StopwordsTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StopwordsTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StopwordsTokenFilter)} does not support '{options.Format}' format.");
@@ -174,9 +174,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StopwordsTokenFilter IModel<StopwordsTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StopwordsTokenFilter IPersistableModel<StopwordsTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StopwordsTokenFilter)} does not support '{options.Format}' format.");
@@ -186,6 +186,6 @@ namespace CognitiveSearch.Models
             return DeserializeStopwordsTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StopwordsTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StopwordsTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

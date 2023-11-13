@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class SqlIntegratedChangeTrackingPolicy : IUtf8JsonSerializable, IJsonModel<SqlIntegratedChangeTrackingPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SqlIntegratedChangeTrackingPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SqlIntegratedChangeTrackingPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SqlIntegratedChangeTrackingPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SqlIntegratedChangeTrackingPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SqlIntegratedChangeTrackingPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SqlIntegratedChangeTrackingPolicy>)} interface");
             }
@@ -28,7 +28,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -46,9 +46,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        SqlIntegratedChangeTrackingPolicy IJsonModel<SqlIntegratedChangeTrackingPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SqlIntegratedChangeTrackingPolicy IJsonModel<SqlIntegratedChangeTrackingPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SqlIntegratedChangeTrackingPolicy)} does not support '{options.Format}' format.");
@@ -60,7 +60,7 @@ namespace CognitiveSearch.Models
 
         internal static SqlIntegratedChangeTrackingPolicy DeserializeSqlIntegratedChangeTrackingPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,7 +76,7 @@ namespace CognitiveSearch.Models
                     odataType = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -85,9 +85,9 @@ namespace CognitiveSearch.Models
             return new SqlIntegratedChangeTrackingPolicy(odataType, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SqlIntegratedChangeTrackingPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SqlIntegratedChangeTrackingPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SqlIntegratedChangeTrackingPolicy)} does not support '{options.Format}' format.");
@@ -96,9 +96,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SqlIntegratedChangeTrackingPolicy IModel<SqlIntegratedChangeTrackingPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SqlIntegratedChangeTrackingPolicy IPersistableModel<SqlIntegratedChangeTrackingPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SqlIntegratedChangeTrackingPolicy)} does not support '{options.Format}' format.");
@@ -108,6 +108,6 @@ namespace CognitiveSearch.Models
             return DeserializeSqlIntegratedChangeTrackingPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SqlIntegratedChangeTrackingPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SqlIntegratedChangeTrackingPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

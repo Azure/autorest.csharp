@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class SmbSetting : IUtf8JsonSerializable, IJsonModel<SmbSetting>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmbSetting>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmbSetting>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SmbSetting>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SmbSetting>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SmbSetting>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SmbSetting>)} interface");
             }
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("channelEncryption"u8);
                 writer.WriteStringValue(ChannelEncryption);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -69,9 +69,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        SmbSetting IJsonModel<SmbSetting>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SmbSetting IJsonModel<SmbSetting>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SmbSetting)} does not support '{options.Format}' format.");
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static SmbSetting DeserializeSmbSetting(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Storage.Models
                     channelEncryption = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -136,9 +136,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new SmbSetting(multichannel.Value, versions.Value, authenticationMethods.Value, kerberosTicketEncryption.Value, channelEncryption.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SmbSetting>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SmbSetting>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SmbSetting)} does not support '{options.Format}' format.");
@@ -147,9 +147,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SmbSetting IModel<SmbSetting>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SmbSetting IPersistableModel<SmbSetting>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SmbSetting)} does not support '{options.Format}' format.");
@@ -159,6 +159,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeSmbSetting(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SmbSetting>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SmbSetting>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

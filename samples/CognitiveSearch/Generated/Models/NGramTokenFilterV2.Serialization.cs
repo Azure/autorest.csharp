@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class NGramTokenFilterV2 : IUtf8JsonSerializable, IJsonModel<NGramTokenFilterV2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NGramTokenFilterV2>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NGramTokenFilterV2>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NGramTokenFilterV2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NGramTokenFilterV2>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NGramTokenFilterV2>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NGramTokenFilterV2>)} interface");
             }
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        NGramTokenFilterV2 IJsonModel<NGramTokenFilterV2>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NGramTokenFilterV2 IJsonModel<NGramTokenFilterV2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NGramTokenFilterV2)} does not support '{options.Format}' format.");
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
 
         internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,7 +114,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -123,9 +123,9 @@ namespace CognitiveSearch.Models
             return new NGramTokenFilterV2(odataType, name, serializedAdditionalRawData, Optional.ToNullable(minGram), Optional.ToNullable(maxGram));
         }
 
-        BinaryData IModel<NGramTokenFilterV2>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NGramTokenFilterV2>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NGramTokenFilterV2)} does not support '{options.Format}' format.");
@@ -134,9 +134,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NGramTokenFilterV2 IModel<NGramTokenFilterV2>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NGramTokenFilterV2 IPersistableModel<NGramTokenFilterV2>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NGramTokenFilterV2)} does not support '{options.Format}' format.");
@@ -146,6 +146,6 @@ namespace CognitiveSearch.Models
             return DeserializeNGramTokenFilterV2(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NGramTokenFilterV2>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NGramTokenFilterV2>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

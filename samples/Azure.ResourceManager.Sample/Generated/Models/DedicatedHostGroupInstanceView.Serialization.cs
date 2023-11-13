@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class DedicatedHostGroupInstanceView : IUtf8JsonSerializable, IJsonModel<DedicatedHostGroupInstanceView>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostGroupInstanceView>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostGroupInstanceView>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DedicatedHostGroupInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DedicatedHostGroupInstanceView>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostGroupInstanceView>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DedicatedHostGroupInstanceView>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        DedicatedHostGroupInstanceView IJsonModel<DedicatedHostGroupInstanceView>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DedicatedHostGroupInstanceView IJsonModel<DedicatedHostGroupInstanceView>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostGroupInstanceView)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DedicatedHostGroupInstanceView DeserializeDedicatedHostGroupInstanceView(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Sample.Models
                     hosts = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostGroupInstanceView(Optional.ToList(hosts), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DedicatedHostGroupInstanceView>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DedicatedHostGroupInstanceView>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostGroupInstanceView)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DedicatedHostGroupInstanceView IModel<DedicatedHostGroupInstanceView>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DedicatedHostGroupInstanceView IPersistableModel<DedicatedHostGroupInstanceView>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostGroupInstanceView)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostGroupInstanceView(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DedicatedHostGroupInstanceView>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DedicatedHostGroupInstanceView>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class CjkBigramTokenFilter : IUtf8JsonSerializable, IJsonModel<CjkBigramTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CjkBigramTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CjkBigramTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CjkBigramTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CjkBigramTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CjkBigramTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CjkBigramTokenFilter>)} interface");
             }
@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        CjkBigramTokenFilter IJsonModel<CjkBigramTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CjkBigramTokenFilter IJsonModel<CjkBigramTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CjkBigramTokenFilter)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
 
         internal static CjkBigramTokenFilter DeserializeCjkBigramTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace CognitiveSearch.Models
             return new CjkBigramTokenFilter(odataType, name, serializedAdditionalRawData, Optional.ToList(ignoreScripts), Optional.ToNullable(outputUnigrams));
         }
 
-        BinaryData IModel<CjkBigramTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CjkBigramTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CjkBigramTokenFilter)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CjkBigramTokenFilter IModel<CjkBigramTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CjkBigramTokenFilter IPersistableModel<CjkBigramTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CjkBigramTokenFilter)} does not support '{options.Format}' format.");
@@ -156,6 +156,6 @@ namespace CognitiveSearch.Models
             return DeserializeCjkBigramTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CjkBigramTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CjkBigramTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

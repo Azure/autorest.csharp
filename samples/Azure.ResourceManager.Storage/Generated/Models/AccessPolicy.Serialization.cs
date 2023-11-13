@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class AccessPolicy : IUtf8JsonSerializable, IJsonModel<AccessPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccessPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccessPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AccessPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AccessPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AccessPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AccessPolicy>)} interface");
             }
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("permission"u8);
                 writer.WriteStringValue(Permission);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        AccessPolicy IJsonModel<AccessPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AccessPolicy IJsonModel<AccessPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Storage.Models
                     permission = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new AccessPolicy(Optional.ToNullable(startTime), Optional.ToNullable(expiryTime), permission.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AccessPolicy IModel<AccessPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AccessPolicy IPersistableModel<AccessPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AccessPolicy)} does not support '{options.Format}' format.");
@@ -141,6 +141,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeAccessPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AccessPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AccessPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

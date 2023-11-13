@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
 {
     public partial class FacetResult : IUtf8JsonSerializable, IJsonModel<FacetResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FacetResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FacetResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FacetResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FacetResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FacetResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FacetResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Count))
                 {
@@ -42,9 +42,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        FacetResult IJsonModel<FacetResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FacetResult IJsonModel<FacetResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FacetResult)} does not support '{options.Format}' format.");
@@ -56,7 +56,7 @@ namespace CognitiveSearch.Models
 
         internal static FacetResult DeserializeFacetResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,9 +82,9 @@ namespace CognitiveSearch.Models
             return new FacetResult(Optional.ToNullable(count), additionalProperties);
         }
 
-        BinaryData IModel<FacetResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FacetResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FacetResult)} does not support '{options.Format}' format.");
@@ -93,9 +93,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FacetResult IModel<FacetResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FacetResult IPersistableModel<FacetResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FacetResult)} does not support '{options.Format}' format.");
@@ -105,6 +105,6 @@ namespace CognitiveSearch.Models
             return DeserializeFacetResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FacetResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FacetResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

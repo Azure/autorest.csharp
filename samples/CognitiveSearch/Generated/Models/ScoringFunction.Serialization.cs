@@ -15,11 +15,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ScoringFunction : IUtf8JsonSerializable, IJsonModel<ScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScoringFunction>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScoringFunction>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ScoringFunction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ScoringFunction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ScoringFunction>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ScoringFunction>)} interface");
             }
@@ -36,7 +36,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("interpolation"u8);
                 writer.WriteStringValue(Interpolation.Value.ToSerialString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ScoringFunction IJsonModel<ScoringFunction>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ScoringFunction IJsonModel<ScoringFunction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ScoringFunction)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace CognitiveSearch.Models
 
         internal static ScoringFunction DeserializeScoringFunction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,9 +87,9 @@ namespace CognitiveSearch.Models
             return UnknownScoringFunction.DeserializeUnknownScoringFunction(element);
         }
 
-        BinaryData IModel<ScoringFunction>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ScoringFunction>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ScoringFunction)} does not support '{options.Format}' format.");
@@ -98,9 +98,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ScoringFunction IModel<ScoringFunction>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ScoringFunction IPersistableModel<ScoringFunction>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ScoringFunction)} does not support '{options.Format}' format.");
@@ -110,6 +110,6 @@ namespace CognitiveSearch.Models
             return DeserializeScoringFunction(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ScoringFunction>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ScoringFunction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class GeoReplicationStats : IUtf8JsonSerializable, IJsonModel<GeoReplicationStats>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GeoReplicationStats>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GeoReplicationStats>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<GeoReplicationStats>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<GeoReplicationStats>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<GeoReplicationStats>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<GeoReplicationStats>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Status.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LastSyncOn))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(LastSyncOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(CanFailover))
                 {
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteBooleanValue(CanFailover.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        GeoReplicationStats IJsonModel<GeoReplicationStats>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        GeoReplicationStats IJsonModel<GeoReplicationStats>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GeoReplicationStats)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Storage.Models
                     canFailover = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -131,9 +131,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new GeoReplicationStats(Optional.ToNullable(status), Optional.ToNullable(lastSyncTime), Optional.ToNullable(canFailover), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<GeoReplicationStats>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<GeoReplicationStats>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GeoReplicationStats)} does not support '{options.Format}' format.");
@@ -142,9 +142,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        GeoReplicationStats IModel<GeoReplicationStats>.Read(BinaryData data, ModelReaderWriterOptions options)
+        GeoReplicationStats IPersistableModel<GeoReplicationStats>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GeoReplicationStats)} does not support '{options.Format}' format.");
@@ -154,6 +154,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeGeoReplicationStats(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<GeoReplicationStats>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<GeoReplicationStats>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

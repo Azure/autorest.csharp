@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class Metrics : IXmlSerializable, IModel<Metrics>
+    public partial class Metrics : IXmlSerializable, IPersistableModel<Metrics>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -67,10 +67,10 @@ namespace Azure.Storage.Tables.Models
             return new Metrics(version, enabled, includeAPIs, retentionPolicy, default);
         }
 
-        BinaryData IModel<Metrics>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Metrics>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Metrics>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -90,9 +90,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        Metrics IModel<Metrics>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Metrics IPersistableModel<Metrics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Metrics)} does not support '{options.Format}' format.");
@@ -101,6 +101,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeMetrics(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Metrics>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Metrics>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

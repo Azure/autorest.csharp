@@ -16,11 +16,11 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class TableResponse : IUtf8JsonSerializable, IJsonModel<TableResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TableResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TableResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TableResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TableResponse>)} interface");
             }
@@ -51,7 +51,7 @@ namespace Azure.Storage.Tables.Models
                 writer.WritePropertyName("odata.editLink"u8);
                 writer.WriteStringValue(OdataEditLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -69,9 +69,9 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndObject();
         }
 
-        TableResponse IJsonModel<TableResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TableResponse IJsonModel<TableResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TableResponse)} does not support '{options.Format}' format.");
@@ -83,7 +83,7 @@ namespace Azure.Storage.Tables.Models
 
         internal static TableResponse DeserializeTableResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -123,7 +123,7 @@ namespace Azure.Storage.Tables.Models
                     odataEditLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -132,9 +132,9 @@ namespace Azure.Storage.Tables.Models
             return new TableResponse(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value, serializedAdditionalRawData, odataMetadata.Value);
         }
 
-        BinaryData IModel<TableResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TableResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TableResponse)} does not support '{options.Format}' format.");
@@ -143,9 +143,9 @@ namespace Azure.Storage.Tables.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TableResponse IModel<TableResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TableResponse IPersistableModel<TableResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TableResponse)} does not support '{options.Format}' format.");
@@ -155,6 +155,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeTableResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TableResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TableResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

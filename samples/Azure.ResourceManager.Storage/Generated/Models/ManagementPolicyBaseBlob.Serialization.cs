@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ManagementPolicyBaseBlob : IUtf8JsonSerializable, IJsonModel<ManagementPolicyBaseBlob>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicyBaseBlob>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicyBaseBlob>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ManagementPolicyBaseBlob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ManagementPolicyBaseBlob>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ManagementPolicyBaseBlob>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagementPolicyBaseBlob>)} interface");
             }
@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("enableAutoTierToHotFromCool"u8);
                 writer.WriteBooleanValue(EnableAutoTierToHotFromCool.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ManagementPolicyBaseBlob IJsonModel<ManagementPolicyBaseBlob>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ManagementPolicyBaseBlob IJsonModel<ManagementPolicyBaseBlob>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagementPolicyBaseBlob)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ManagementPolicyBaseBlob DeserializeManagementPolicyBaseBlob(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,7 +128,7 @@ namespace Azure.ResourceManager.Storage.Models
                     enableAutoTierToHotFromCool = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -137,9 +137,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ManagementPolicyBaseBlob(tierToCool.Value, tierToArchive.Value, delete.Value, Optional.ToNullable(enableAutoTierToHotFromCool), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ManagementPolicyBaseBlob>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ManagementPolicyBaseBlob>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagementPolicyBaseBlob)} does not support '{options.Format}' format.");
@@ -148,9 +148,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ManagementPolicyBaseBlob IModel<ManagementPolicyBaseBlob>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ManagementPolicyBaseBlob IPersistableModel<ManagementPolicyBaseBlob>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagementPolicyBaseBlob)} does not support '{options.Format}' format.");
@@ -160,6 +160,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeManagementPolicyBaseBlob(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ManagementPolicyBaseBlob>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ManagementPolicyBaseBlob>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

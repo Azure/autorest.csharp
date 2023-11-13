@@ -18,17 +18,17 @@ namespace Azure.ResourceManager.Storage
 {
     public partial class BlobServiceData : IUtf8JsonSerializable, IJsonModel<BlobServiceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobServiceData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobServiceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BlobServiceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BlobServiceData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BlobServiceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BlobServiceData>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Sku))
                 {
@@ -36,22 +36,22 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(Sku);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -107,7 +107,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteObjectValue(LastAccessTimeTrackingPolicy);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -125,9 +125,9 @@ namespace Azure.ResourceManager.Storage
             writer.WriteEndObject();
         }
 
-        BlobServiceData IJsonModel<BlobServiceData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BlobServiceData IJsonModel<BlobServiceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobServiceData)} does not support '{options.Format}' format.");
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Storage
 
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -285,7 +285,7 @@ namespace Azure.ResourceManager.Storage
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -294,9 +294,9 @@ namespace Azure.ResourceManager.Storage
             return new BlobServiceData(id, name, type, systemData.Value, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value, lastAccessTimeTrackingPolicy.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BlobServiceData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BlobServiceData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobServiceData)} does not support '{options.Format}' format.");
@@ -305,9 +305,9 @@ namespace Azure.ResourceManager.Storage
             return ModelReaderWriter.Write(this, options);
         }
 
-        BlobServiceData IModel<BlobServiceData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BlobServiceData IPersistableModel<BlobServiceData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobServiceData)} does not support '{options.Format}' format.");
@@ -317,6 +317,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeBlobServiceData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BlobServiceData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BlobServiceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

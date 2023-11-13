@@ -13,7 +13,7 @@ namespace dpg_customization_LowLevel.Models
     {
         internal static Product DeserializeProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             ProductReceived received = default;
             foreach (var property in element.EnumerateObject())

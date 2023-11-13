@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
 {
     public partial class ItemWarning : IUtf8JsonSerializable, IJsonModel<ItemWarning>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ItemWarning>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ItemWarning>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ItemWarning>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ItemWarning>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ItemWarning>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ItemWarning>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Key))
                 {
@@ -34,12 +34,12 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(Key);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Details))
                 {
@@ -55,7 +55,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(Details);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DocumentationLink))
                 {
@@ -63,7 +63,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(DocumentationLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -81,9 +81,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ItemWarning IJsonModel<ItemWarning>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ItemWarning IJsonModel<ItemWarning>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ItemWarning)} does not support '{options.Format}' format.");
@@ -95,7 +95,7 @@ namespace CognitiveSearch.Models
 
         internal static ItemWarning DeserializeItemWarning(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -135,7 +135,7 @@ namespace CognitiveSearch.Models
                     documentationLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -144,9 +144,9 @@ namespace CognitiveSearch.Models
             return new ItemWarning(key.Value, message, name.Value, details.Value, documentationLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ItemWarning>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ItemWarning>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ItemWarning)} does not support '{options.Format}' format.");
@@ -155,9 +155,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ItemWarning IModel<ItemWarning>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ItemWarning IPersistableModel<ItemWarning>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ItemWarning)} does not support '{options.Format}' format.");
@@ -167,6 +167,6 @@ namespace CognitiveSearch.Models
             return DeserializeItemWarning(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ItemWarning>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ItemWarning>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

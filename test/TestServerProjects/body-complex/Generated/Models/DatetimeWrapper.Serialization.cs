@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class DatetimeWrapper : IUtf8JsonSerializable, IJsonModel<DatetimeWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DatetimeWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DatetimeWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DatetimeWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DatetimeWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DatetimeWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DatetimeWrapper>)} interface");
             }
@@ -36,7 +36,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("now"u8);
                 writer.WriteStringValue(Now.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        DatetimeWrapper IJsonModel<DatetimeWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DatetimeWrapper IJsonModel<DatetimeWrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DatetimeWrapper)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace body_complex.Models
                     now = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace body_complex.Models
             return new DatetimeWrapper(Optional.ToNullable(field), Optional.ToNullable(now), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DatetimeWrapper>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DatetimeWrapper>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DatetimeWrapper)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DatetimeWrapper IModel<DatetimeWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DatetimeWrapper IPersistableModel<DatetimeWrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DatetimeWrapper)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeDatetimeWrapper(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DatetimeWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DatetimeWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     internal partial class UsageListResult : IUtf8JsonSerializable, IJsonModel<UsageListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UsageListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UsageListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UsageListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UsageListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UsageListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UsageListResult>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        UsageListResult IJsonModel<UsageListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UsageListResult IJsonModel<UsageListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UsageListResult)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static UsageListResult DeserializeUsageListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Storage.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new UsageListResult(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UsageListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UsageListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UsageListResult)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UsageListResult IModel<UsageListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UsageListResult IPersistableModel<UsageListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UsageListResult)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeUsageListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UsageListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UsageListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

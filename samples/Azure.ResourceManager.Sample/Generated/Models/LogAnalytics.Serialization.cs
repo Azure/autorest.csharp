@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class LogAnalytics : IUtf8JsonSerializable, IJsonModel<LogAnalytics>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LogAnalytics>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LogAnalytics>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LogAnalytics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LogAnalytics>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LogAnalytics>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LogAnalytics>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Properties))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteObjectValue(Properties);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        LogAnalytics IJsonModel<LogAnalytics>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LogAnalytics IJsonModel<LogAnalytics>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Sample.Models
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,9 +95,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new LogAnalytics(properties.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LogAnalytics>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LogAnalytics>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
@@ -106,9 +106,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LogAnalytics IModel<LogAnalytics>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LogAnalytics IPersistableModel<LogAnalytics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
@@ -118,6 +118,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeLogAnalytics(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LogAnalytics>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LogAnalytics>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

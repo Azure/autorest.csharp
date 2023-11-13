@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ResourceCounter : IUtf8JsonSerializable, IJsonModel<ResourceCounter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceCounter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceCounter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ResourceCounter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ResourceCounter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ResourceCounter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceCounter>)} interface");
             }
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNull("quota");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ResourceCounter IJsonModel<ResourceCounter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ResourceCounter IJsonModel<ResourceCounter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceCounter)} does not support '{options.Format}' format.");
@@ -72,7 +72,7 @@ namespace CognitiveSearch.Models
 
         internal static ResourceCounter DeserializeResourceCounter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,7 +99,7 @@ namespace CognitiveSearch.Models
                     quota = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,9 +108,9 @@ namespace CognitiveSearch.Models
             return new ResourceCounter(usage, Optional.ToNullable(quota), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ResourceCounter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ResourceCounter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceCounter)} does not support '{options.Format}' format.");
@@ -119,9 +119,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ResourceCounter IModel<ResourceCounter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ResourceCounter IPersistableModel<ResourceCounter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceCounter)} does not support '{options.Format}' format.");
@@ -131,6 +131,6 @@ namespace CognitiveSearch.Models
             return DeserializeResourceCounter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ResourceCounter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ResourceCounter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

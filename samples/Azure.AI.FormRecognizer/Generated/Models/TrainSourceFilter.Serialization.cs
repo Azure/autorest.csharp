@@ -16,11 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
 {
     public partial class TrainSourceFilter : IUtf8JsonSerializable, IJsonModel<TrainSourceFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrainSourceFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrainSourceFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TrainSourceFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TrainSourceFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TrainSourceFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TrainSourceFilter>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WritePropertyName("includeSubFolders"u8);
                 writer.WriteBooleanValue(IncludeSubFolders.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
         }
 
-        TrainSourceFilter IJsonModel<TrainSourceFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TrainSourceFilter IJsonModel<TrainSourceFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TrainSourceFilter)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         internal static TrainSourceFilter DeserializeTrainSourceFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace Azure.AI.FormRecognizer.Models
                     includeSubFolders = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace Azure.AI.FormRecognizer.Models
             return new TrainSourceFilter(prefix.Value, Optional.ToNullable(includeSubFolders), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TrainSourceFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TrainSourceFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TrainSourceFilter)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace Azure.AI.FormRecognizer.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TrainSourceFilter IModel<TrainSourceFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TrainSourceFilter IPersistableModel<TrainSourceFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TrainSourceFilter)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeTrainSourceFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TrainSourceFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TrainSourceFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

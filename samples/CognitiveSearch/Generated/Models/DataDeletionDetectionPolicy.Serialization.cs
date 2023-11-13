@@ -15,11 +15,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DataDeletionDetectionPolicy : IUtf8JsonSerializable, IJsonModel<DataDeletionDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDeletionDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDeletionDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DataDeletionDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DataDeletionDetectionPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DataDeletionDetectionPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataDeletionDetectionPolicy>)} interface");
             }
@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,9 +45,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        DataDeletionDetectionPolicy IJsonModel<DataDeletionDetectionPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DataDeletionDetectionPolicy IJsonModel<DataDeletionDetectionPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataDeletionDetectionPolicy)} does not support '{options.Format}' format.");
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
 
         internal static DataDeletionDetectionPolicy DeserializeDataDeletionDetectionPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -75,9 +75,9 @@ namespace CognitiveSearch.Models
             return UnknownDataDeletionDetectionPolicy.DeserializeUnknownDataDeletionDetectionPolicy(element);
         }
 
-        BinaryData IModel<DataDeletionDetectionPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DataDeletionDetectionPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataDeletionDetectionPolicy)} does not support '{options.Format}' format.");
@@ -86,9 +86,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DataDeletionDetectionPolicy IModel<DataDeletionDetectionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DataDeletionDetectionPolicy IPersistableModel<DataDeletionDetectionPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataDeletionDetectionPolicy)} does not support '{options.Format}' format.");
@@ -98,6 +98,6 @@ namespace CognitiveSearch.Models
             return DeserializeDataDeletionDetectionPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DataDeletionDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DataDeletionDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

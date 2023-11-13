@@ -16,11 +16,11 @@ namespace AdditionalPropertiesEx.Models
 {
     public partial struct InputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<InputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<InputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<InputAdditionalPropertiesModelStruct>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputAdditionalPropertiesModelStruct>)} interface");
             }
@@ -36,9 +36,9 @@ namespace AdditionalPropertiesEx.Models
             writer.WriteEndObject();
         }
 
-        InputAdditionalPropertiesModelStruct IJsonModel<InputAdditionalPropertiesModelStruct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        InputAdditionalPropertiesModelStruct IJsonModel<InputAdditionalPropertiesModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
@@ -50,11 +50,11 @@ namespace AdditionalPropertiesEx.Models
 
         void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Write(writer, options);
 
-        object IJsonModel<object>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Read(ref reader, options);
+        object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<InputAdditionalPropertiesModelStruct>)this).Create(ref reader, options);
 
         internal static InputAdditionalPropertiesModelStruct DeserializeInputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             int id = default;
             IDictionary<string, object> additionalProperties = default;
@@ -72,9 +72,9 @@ namespace AdditionalPropertiesEx.Models
             return new InputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
 
-        BinaryData IModel<InputAdditionalPropertiesModelStruct>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<InputAdditionalPropertiesModelStruct>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
@@ -83,9 +83,9 @@ namespace AdditionalPropertiesEx.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        InputAdditionalPropertiesModelStruct IModel<InputAdditionalPropertiesModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        InputAdditionalPropertiesModelStruct IPersistableModel<InputAdditionalPropertiesModelStruct>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
@@ -95,12 +95,12 @@ namespace AdditionalPropertiesEx.Models
             return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<InputAdditionalPropertiesModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<InputAdditionalPropertiesModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
-        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IModel<InputAdditionalPropertiesModelStruct>)this).Write(options);
+        BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).Write(options);
 
-        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IModel<InputAdditionalPropertiesModelStruct>)this).Read(data, options);
+        object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).Create(data, options);
 
-        ModelReaderWriterFormat IModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IModel<InputAdditionalPropertiesModelStruct>)this).GetWireFormat(options);
+        string IPersistableModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetWireFormat(options);
     }
 }

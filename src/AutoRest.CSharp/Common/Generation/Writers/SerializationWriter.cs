@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (declaration.IsAbstract && model.Discriminator is { } discriminator)
                 {
                     var unknown = discriminator.DefaultObjectType;
-                    writer.Append($"[{typeof(ModelReaderProxyAttribute)}(typeof({unknown.Type}))]");
+                    writer.Append($"[{typeof(PersistableModelProxyAttribute)}(typeof({unknown.Type}))]");
                 }
 
                 writer.Append($"{declaration.Accessibility} partial {(model.IsStruct ? "struct" : "class")} {declaration.Name} : ");

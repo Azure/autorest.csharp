@@ -16,11 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
 {
     public partial class ModelsSummary : IUtf8JsonSerializable, IJsonModel<ModelsSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelsSummary>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelsSummary>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelsSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelsSummary>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelsSummary>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelsSummary>)} interface");
             }
@@ -32,7 +32,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteNumberValue(Limit);
             writer.WritePropertyName("lastUpdatedDateTime"u8);
             writer.WriteStringValue(LastUpdatedDateTime, "O");
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,9 +50,9 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
         }
 
-        ModelsSummary IJsonModel<ModelsSummary>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelsSummary IJsonModel<ModelsSummary>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
@@ -64,7 +64,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         internal static ModelsSummary DeserializeModelsSummary(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace Azure.AI.FormRecognizer.Models
                     lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace Azure.AI.FormRecognizer.Models
             return new ModelsSummary(count, limit, lastUpdatedDateTime, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelsSummary>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelsSummary>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace Azure.AI.FormRecognizer.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelsSummary IModel<ModelsSummary>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelsSummary IPersistableModel<ModelsSummary>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
@@ -124,6 +124,6 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeModelsSummary(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelsSummary>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelsSummary>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

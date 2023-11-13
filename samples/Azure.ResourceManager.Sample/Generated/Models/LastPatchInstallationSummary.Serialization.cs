@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class LastPatchInstallationSummary : IUtf8JsonSerializable, IJsonModel<LastPatchInstallationSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LastPatchInstallationSummary>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LastPatchInstallationSummary>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LastPatchInstallationSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LastPatchInstallationSummary>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LastPatchInstallationSummary>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LastPatchInstallationSummary>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Status.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InstallationActivityId))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(InstallationActivityId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MaintenanceWindowExceeded))
                 {
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(RebootStatus))
                 {
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(RebootStatus.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NotSelectedPatchCount))
                 {
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(NotSelectedPatchCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ExcludedPatchCount))
                 {
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(ExcludedPatchCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(PendingPatchCount))
                 {
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(PendingPatchCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InstalledPatchCount))
                 {
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(InstalledPatchCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(FailedPatchCount))
                 {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(FailedPatchCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(StartOn))
                 {
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(StartOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(LastModifiedOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(StartedBy))
                 {
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(StartedBy);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Error))
                 {
@@ -130,7 +130,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteObjectValue(Error);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -148,9 +148,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        LastPatchInstallationSummary IJsonModel<LastPatchInstallationSummary>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LastPatchInstallationSummary IJsonModel<LastPatchInstallationSummary>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{options.Format}' format.");
@@ -162,7 +162,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -294,7 +294,7 @@ namespace Azure.ResourceManager.Sample.Models
                     error = ApiError.DeserializeApiError(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -303,9 +303,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LastPatchInstallationSummary>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LastPatchInstallationSummary>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{options.Format}' format.");
@@ -314,9 +314,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LastPatchInstallationSummary IModel<LastPatchInstallationSummary>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LastPatchInstallationSummary IPersistableModel<LastPatchInstallationSummary>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LastPatchInstallationSummary)} does not support '{options.Format}' format.");
@@ -326,6 +326,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeLastPatchInstallationSummary(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LastPatchInstallationSummary>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LastPatchInstallationSummary>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DataSource : IUtf8JsonSerializable, IJsonModel<DataSource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataSource>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataSource>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DataSource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DataSource>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DataSource>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataSource>)} interface");
             }
@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -72,9 +72,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        DataSource IJsonModel<DataSource>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DataSource IJsonModel<DataSource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataSource)} does not support '{options.Format}' format.");
@@ -86,7 +86,7 @@ namespace CognitiveSearch.Models
 
         internal static DataSource DeserializeDataSource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -152,7 +152,7 @@ namespace CognitiveSearch.Models
                     odataEtag = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -161,9 +161,9 @@ namespace CognitiveSearch.Models
             return new DataSource(name, description.Value, type, credentials, container, dataChangeDetectionPolicy.Value, dataDeletionDetectionPolicy.Value, odataEtag.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DataSource>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DataSource>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataSource)} does not support '{options.Format}' format.");
@@ -172,9 +172,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DataSource IModel<DataSource>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DataSource IPersistableModel<DataSource>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataSource)} does not support '{options.Format}' format.");
@@ -184,6 +184,6 @@ namespace CognitiveSearch.Models
             return DeserializeDataSource(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DataSource>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DataSource>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

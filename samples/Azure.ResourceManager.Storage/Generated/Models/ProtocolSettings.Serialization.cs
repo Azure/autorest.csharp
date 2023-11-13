@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     internal partial class ProtocolSettings : IUtf8JsonSerializable, IJsonModel<ProtocolSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProtocolSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProtocolSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ProtocolSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ProtocolSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ProtocolSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProtocolSettings>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("smb"u8);
                 writer.WriteObjectValue(Smb);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ProtocolSettings IJsonModel<ProtocolSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ProtocolSettings IJsonModel<ProtocolSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProtocolSettings)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ProtocolSettings DeserializeProtocolSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Storage.Models
                     smb = SmbSetting.DeserializeSmbSetting(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ProtocolSettings(smb.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ProtocolSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ProtocolSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProtocolSettings)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ProtocolSettings IModel<ProtocolSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ProtocolSettings IPersistableModel<ProtocolSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProtocolSettings)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeProtocolSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ProtocolSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ProtocolSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

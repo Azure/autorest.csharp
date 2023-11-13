@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class RetrieveBootDiagnosticsDataResult : IUtf8JsonSerializable, IJsonModel<RetrieveBootDiagnosticsDataResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RetrieveBootDiagnosticsDataResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RetrieveBootDiagnosticsDataResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RetrieveBootDiagnosticsDataResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RetrieveBootDiagnosticsDataResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RetrieveBootDiagnosticsDataResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RetrieveBootDiagnosticsDataResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ConsoleScreenshotBlobUri))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SerialConsoleLogBlobUri))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        RetrieveBootDiagnosticsDataResult IJsonModel<RetrieveBootDiagnosticsDataResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RetrieveBootDiagnosticsDataResult IJsonModel<RetrieveBootDiagnosticsDataResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static RetrieveBootDiagnosticsDataResult DeserializeRetrieveBootDiagnosticsDataResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace Azure.ResourceManager.Sample.Models
                     serialConsoleLogBlobUri = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,9 +113,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri.Value, serialConsoleLogBlobUri.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RetrieveBootDiagnosticsDataResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RetrieveBootDiagnosticsDataResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support '{options.Format}' format.");
@@ -124,9 +124,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RetrieveBootDiagnosticsDataResult IModel<RetrieveBootDiagnosticsDataResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RetrieveBootDiagnosticsDataResult IPersistableModel<RetrieveBootDiagnosticsDataResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RetrieveBootDiagnosticsDataResult)} does not support '{options.Format}' format.");
@@ -136,6 +136,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeRetrieveBootDiagnosticsDataResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RetrieveBootDiagnosticsDataResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RetrieveBootDiagnosticsDataResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

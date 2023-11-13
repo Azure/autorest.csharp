@@ -19,11 +19,11 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class ImageData : IUtf8JsonSerializable, IJsonModel<ImageData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImageData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImageData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImageData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImageData>)} interface");
             }
@@ -42,22 +42,22 @@ namespace Azure.ResourceManager.Sample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -109,9 +109,9 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        ImageData IJsonModel<ImageData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImageData IJsonModel<ImageData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageData)} does not support '{options.Format}' format.");
@@ -123,7 +123,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static ImageData DeserializeImageData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -230,7 +230,7 @@ namespace Azure.ResourceManager.Sample
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -239,9 +239,9 @@ namespace Azure.ResourceManager.Sample
             return new ImageData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ImageData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImageData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageData)} does not support '{options.Format}' format.");
@@ -250,9 +250,9 @@ namespace Azure.ResourceManager.Sample
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImageData IModel<ImageData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImageData IPersistableModel<ImageData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageData)} does not support '{options.Format}' format.");
@@ -262,6 +262,6 @@ namespace Azure.ResourceManager.Sample
             return DeserializeImageData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImageData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImageData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class FieldMappingFunction : IUtf8JsonSerializable, IJsonModel<FieldMappingFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FieldMappingFunction>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FieldMappingFunction>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FieldMappingFunction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FieldMappingFunction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FieldMappingFunction>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FieldMappingFunction>)} interface");
             }
@@ -44,7 +44,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -62,9 +62,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        FieldMappingFunction IJsonModel<FieldMappingFunction>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FieldMappingFunction IJsonModel<FieldMappingFunction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FieldMappingFunction)} does not support '{options.Format}' format.");
@@ -76,7 +76,7 @@ namespace CognitiveSearch.Models
 
         internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,7 +114,7 @@ namespace CognitiveSearch.Models
                     parameters = dictionary;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -123,9 +123,9 @@ namespace CognitiveSearch.Models
             return new FieldMappingFunction(name, Optional.ToDictionary(parameters), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FieldMappingFunction>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FieldMappingFunction>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FieldMappingFunction)} does not support '{options.Format}' format.");
@@ -134,9 +134,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FieldMappingFunction IModel<FieldMappingFunction>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FieldMappingFunction IPersistableModel<FieldMappingFunction>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FieldMappingFunction)} does not support '{options.Format}' format.");
@@ -146,6 +146,6 @@ namespace CognitiveSearch.Models
             return DeserializeFieldMappingFunction(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FieldMappingFunction>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FieldMappingFunction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

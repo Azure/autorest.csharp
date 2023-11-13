@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     internal partial class NetworkInterfaceListResult : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NetworkInterfaceListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NetworkInterfaceListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NetworkInterfaceListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NetworkInterfaceListResult>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -44,7 +44,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -62,9 +62,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        NetworkInterfaceListResult IJsonModel<NetworkInterfaceListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NetworkInterfaceListResult IJsonModel<NetworkInterfaceListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceListResult)} does not support '{options.Format}' format.");
@@ -76,7 +76,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceListResult DeserializeNetworkInterfaceListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace Azure.Network.Management.Interface.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,9 +116,9 @@ namespace Azure.Network.Management.Interface.Models
             return new NetworkInterfaceListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NetworkInterfaceListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NetworkInterfaceListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceListResult)} does not support '{options.Format}' format.");
@@ -127,9 +127,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NetworkInterfaceListResult IModel<NetworkInterfaceListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NetworkInterfaceListResult IPersistableModel<NetworkInterfaceListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NetworkInterfaceListResult)} does not support '{options.Format}' format.");
@@ -139,6 +139,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkInterfaceListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NetworkInterfaceListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NetworkInterfaceListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

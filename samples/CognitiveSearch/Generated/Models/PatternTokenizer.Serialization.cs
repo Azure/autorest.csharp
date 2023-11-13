@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class PatternTokenizer : IUtf8JsonSerializable, IJsonModel<PatternTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternTokenizer>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternTokenizer>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PatternTokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PatternTokenizer>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PatternTokenizer>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PatternTokenizer>)} interface");
             }
@@ -45,7 +45,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        PatternTokenizer IJsonModel<PatternTokenizer>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PatternTokenizer IJsonModel<PatternTokenizer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternTokenizer)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
 
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -125,7 +125,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -134,9 +134,9 @@ namespace CognitiveSearch.Models
             return new PatternTokenizer(odataType, name, serializedAdditionalRawData, pattern.Value, Optional.ToNullable(flags), Optional.ToNullable(group));
         }
 
-        BinaryData IModel<PatternTokenizer>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PatternTokenizer>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternTokenizer)} does not support '{options.Format}' format.");
@@ -145,9 +145,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PatternTokenizer IModel<PatternTokenizer>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PatternTokenizer IPersistableModel<PatternTokenizer>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PatternTokenizer)} does not support '{options.Format}' format.");
@@ -157,6 +157,6 @@ namespace CognitiveSearch.Models
             return DeserializePatternTokenizer(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PatternTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PatternTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

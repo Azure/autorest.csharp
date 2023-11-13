@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class CorsRule : IUtf8JsonSerializable, IJsonModel<CorsRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CorsRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CorsRule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CorsRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CorsRule>)} interface");
             }
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        CorsRule IJsonModel<CorsRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CorsRule IJsonModel<CorsRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsRule)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static CorsRule DeserializeCorsRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -148,7 +148,7 @@ namespace Azure.ResourceManager.Storage.Models
                     allowedHeaders = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -157,9 +157,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new CorsRule(allowedOrigins, allowedMethods, maxAgeInSeconds, exposedHeaders, allowedHeaders, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CorsRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CorsRule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsRule)} does not support '{options.Format}' format.");
@@ -168,9 +168,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CorsRule IModel<CorsRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CorsRule IPersistableModel<CorsRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsRule)} does not support '{options.Format}' format.");
@@ -180,6 +180,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeCorsRule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CorsRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CorsRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

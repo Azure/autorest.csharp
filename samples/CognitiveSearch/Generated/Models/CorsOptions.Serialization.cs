@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class CorsOptions : IUtf8JsonSerializable, IJsonModel<CorsOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsOptions>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsOptions>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CorsOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CorsOptions>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CorsOptions>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CorsOptions>)} interface");
             }
@@ -38,7 +38,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("maxAgeInSeconds"u8);
                 writer.WriteNumberValue(MaxAgeInSeconds.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        CorsOptions IJsonModel<CorsOptions>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CorsOptions IJsonModel<CorsOptions>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsOptions)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace CognitiveSearch.Models
 
         internal static CorsOptions DeserializeCorsOptions(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace CognitiveSearch.Models
                     maxAgeInSeconds = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace CognitiveSearch.Models
             return new CorsOptions(allowedOrigins, Optional.ToNullable(maxAgeInSeconds), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CorsOptions>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CorsOptions>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsOptions)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CorsOptions IModel<CorsOptions>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CorsOptions IPersistableModel<CorsOptions>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CorsOptions)} does not support '{options.Format}' format.");
@@ -133,6 +133,6 @@ namespace CognitiveSearch.Models
             return DeserializeCorsOptions(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CorsOptions>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CorsOptions>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

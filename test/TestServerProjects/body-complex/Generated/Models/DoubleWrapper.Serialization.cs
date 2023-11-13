@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class DoubleWrapper : IUtf8JsonSerializable, IJsonModel<DoubleWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DoubleWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DoubleWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DoubleWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DoubleWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DoubleWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DoubleWrapper>)} interface");
             }
@@ -36,7 +36,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"u8);
                 writer.WriteNumberValue(Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        DoubleWrapper IJsonModel<DoubleWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DoubleWrapper IJsonModel<DoubleWrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DoubleWrapper)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static DoubleWrapper DeserializeDoubleWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace body_complex.Models
                     field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = property.Value.GetDouble();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace body_complex.Models
             return new DoubleWrapper(Optional.ToNullable(field1), Optional.ToNullable(field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DoubleWrapper>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DoubleWrapper>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DoubleWrapper)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DoubleWrapper IModel<DoubleWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DoubleWrapper IPersistableModel<DoubleWrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DoubleWrapper)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeDoubleWrapper(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DoubleWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DoubleWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

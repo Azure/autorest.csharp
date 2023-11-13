@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class SplitSkill : IUtf8JsonSerializable, IJsonModel<SplitSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SplitSkill>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SplitSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SplitSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SplitSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SplitSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SplitSkill>)} interface");
             }
@@ -79,7 +79,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -97,9 +97,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        SplitSkill IJsonModel<SplitSkill>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SplitSkill IJsonModel<SplitSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SplitSkill)} does not support '{options.Format}' format.");
@@ -111,7 +111,7 @@ namespace CognitiveSearch.Models
 
         internal static SplitSkill DeserializeSplitSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -198,7 +198,7 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -207,9 +207,9 @@ namespace CognitiveSearch.Models
             return new SplitSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, serializedAdditionalRawData, Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(textSplitMode), Optional.ToNullable(maximumPageLength));
         }
 
-        BinaryData IModel<SplitSkill>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SplitSkill>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SplitSkill)} does not support '{options.Format}' format.");
@@ -218,9 +218,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SplitSkill IModel<SplitSkill>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SplitSkill IPersistableModel<SplitSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SplitSkill)} does not support '{options.Format}' format.");
@@ -230,6 +230,6 @@ namespace CognitiveSearch.Models
             return DeserializeSplitSkill(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SplitSkill>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SplitSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

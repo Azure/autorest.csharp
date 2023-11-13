@@ -15,11 +15,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DataChangeDetectionPolicy : IUtf8JsonSerializable, IJsonModel<DataChangeDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DataChangeDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DataChangeDetectionPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DataChangeDetectionPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataChangeDetectionPolicy>)} interface");
             }
@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,9 +45,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        DataChangeDetectionPolicy IJsonModel<DataChangeDetectionPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DataChangeDetectionPolicy IJsonModel<DataChangeDetectionPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataChangeDetectionPolicy)} does not support '{options.Format}' format.");
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
 
         internal static DataChangeDetectionPolicy DeserializeDataChangeDetectionPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,9 +76,9 @@ namespace CognitiveSearch.Models
             return UnknownDataChangeDetectionPolicy.DeserializeUnknownDataChangeDetectionPolicy(element);
         }
 
-        BinaryData IModel<DataChangeDetectionPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DataChangeDetectionPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataChangeDetectionPolicy)} does not support '{options.Format}' format.");
@@ -87,9 +87,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DataChangeDetectionPolicy IModel<DataChangeDetectionPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DataChangeDetectionPolicy IPersistableModel<DataChangeDetectionPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataChangeDetectionPolicy)} does not support '{options.Format}' format.");
@@ -99,6 +99,6 @@ namespace CognitiveSearch.Models
             return DeserializeDataChangeDetectionPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DataChangeDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DataChangeDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

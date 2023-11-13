@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ListServiceSasResponse : IUtf8JsonSerializable, IJsonModel<ListServiceSasResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListServiceSasResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListServiceSasResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ListServiceSasResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ListServiceSasResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ListServiceSasResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListServiceSasResponse>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ServiceSasToken))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(ServiceSasToken);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ListServiceSasResponse IJsonModel<ListServiceSasResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ListServiceSasResponse IJsonModel<ListServiceSasResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListServiceSasResponse)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Storage.Models
                     serviceSasToken = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -91,9 +91,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ListServiceSasResponse(serviceSasToken.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ListServiceSasResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ListServiceSasResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListServiceSasResponse)} does not support '{options.Format}' format.");
@@ -102,9 +102,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ListServiceSasResponse IModel<ListServiceSasResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ListServiceSasResponse IPersistableModel<ListServiceSasResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListServiceSasResponse)} does not support '{options.Format}' format.");
@@ -114,6 +114,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeListServiceSasResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ListServiceSasResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ListServiceSasResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

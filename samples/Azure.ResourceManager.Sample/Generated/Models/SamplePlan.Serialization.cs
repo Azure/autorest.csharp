@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class SamplePlan : IUtf8JsonSerializable, IJsonModel<SamplePlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SamplePlan>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SamplePlan>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SamplePlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SamplePlan>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SamplePlan>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SamplePlan>)} interface");
             }
@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("promotionCode"u8);
                 writer.WriteStringValue(PromotionCode);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        SamplePlan IJsonModel<SamplePlan>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SamplePlan IJsonModel<SamplePlan>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SamplePlan)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SamplePlan DeserializeSamplePlan(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
                     promotionCode = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -121,9 +121,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new SamplePlan(name.Value, publisher.Value, product.Value, promotionCode.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SamplePlan>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SamplePlan>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SamplePlan)} does not support '{options.Format}' format.");
@@ -132,9 +132,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SamplePlan IModel<SamplePlan>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SamplePlan IPersistableModel<SamplePlan>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SamplePlan)} does not support '{options.Format}' format.");
@@ -144,6 +144,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSamplePlan(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SamplePlan>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SamplePlan>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

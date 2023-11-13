@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Salmon : IUtf8JsonSerializable, IJsonModel<Salmon>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Salmon>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Salmon>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Salmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Salmon>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Salmon>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Salmon>)} interface");
             }
@@ -55,7 +55,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Salmon IJsonModel<Salmon>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Salmon IJsonModel<Salmon>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Salmon)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace body_complex.Models
 
         internal static Salmon DeserializeSalmon(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -153,7 +153,7 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -162,9 +162,9 @@ namespace body_complex.Models
             return new Salmon(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, location.Value, Optional.ToNullable(iswild));
         }
 
-        BinaryData IModel<Salmon>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Salmon>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Salmon)} does not support '{options.Format}' format.");
@@ -173,9 +173,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Salmon IModel<Salmon>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Salmon IPersistableModel<Salmon>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Salmon)} does not support '{options.Format}' format.");
@@ -185,6 +185,6 @@ namespace body_complex.Models
             return DeserializeSalmon(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Salmon>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Salmon>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

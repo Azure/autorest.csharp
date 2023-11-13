@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class DedicatedHostPatch : IUtf8JsonSerializable, IJsonModel<DedicatedHostPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DedicatedHostPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DedicatedHostPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DedicatedHostPatch>)} interface");
             }
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(HostId))
                 {
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(HostId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(VirtualMachines))
                 {
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType.Value.ToSerialString());
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningOn))
                 {
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ProvisioningOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ProvisioningState);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InstanceView))
                 {
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -119,9 +119,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        DedicatedHostPatch IJsonModel<DedicatedHostPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DedicatedHostPatch IJsonModel<DedicatedHostPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostPatch)} does not support '{options.Format}' format.");
@@ -133,7 +133,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DedicatedHostPatch DeserializeDedicatedHostPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -247,7 +247,7 @@ namespace Azure.ResourceManager.Sample.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -256,9 +256,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new DedicatedHostPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToList(virtualMachines), Optional.ToNullable(licenseType), Optional.ToNullable(provisioningTime), provisioningState.Value, instanceView.Value);
         }
 
-        BinaryData IModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostPatch)} does not support '{options.Format}' format.");
@@ -267,9 +267,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DedicatedHostPatch IModel<DedicatedHostPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DedicatedHostPatch IPersistableModel<DedicatedHostPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostPatch)} does not support '{options.Format}' format.");
@@ -279,6 +279,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDedicatedHostPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DedicatedHostPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DedicatedHostPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

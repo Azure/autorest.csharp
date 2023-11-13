@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ResourceAccessRule : IUtf8JsonSerializable, IJsonModel<ResourceAccessRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceAccessRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceAccessRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ResourceAccessRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ResourceAccessRule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ResourceAccessRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceAccessRule>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("resourceId"u8);
                 writer.WriteStringValue(ResourceId);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ResourceAccessRule IJsonModel<ResourceAccessRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ResourceAccessRule IJsonModel<ResourceAccessRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ResourceAccessRule DeserializeResourceAccessRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Storage.Models
                     resourceId = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ResourceAccessRule(Optional.ToNullable(tenantId), resourceId.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ResourceAccessRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ResourceAccessRule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ResourceAccessRule IModel<ResourceAccessRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ResourceAccessRule IPersistableModel<ResourceAccessRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceAccessRule)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeResourceAccessRule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ResourceAccessRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ResourceAccessRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DictionaryDecompounderTokenFilter : IUtf8JsonSerializable, IJsonModel<DictionaryDecompounderTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DictionaryDecompounderTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DictionaryDecompounderTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DictionaryDecompounderTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DictionaryDecompounderTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DictionaryDecompounderTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DictionaryDecompounderTokenFilter>)} interface");
             }
@@ -57,7 +57,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        DictionaryDecompounderTokenFilter IJsonModel<DictionaryDecompounderTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DictionaryDecompounderTokenFilter IJsonModel<DictionaryDecompounderTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DictionaryDecompounderTokenFilter)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace CognitiveSearch.Models
 
         internal static DictionaryDecompounderTokenFilter DeserializeDictionaryDecompounderTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -162,7 +162,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -171,9 +171,9 @@ namespace CognitiveSearch.Models
             return new DictionaryDecompounderTokenFilter(odataType, name, serializedAdditionalRawData, wordList, Optional.ToNullable(minWordSize), Optional.ToNullable(minSubwordSize), Optional.ToNullable(maxSubwordSize), Optional.ToNullable(onlyLongestMatch));
         }
 
-        BinaryData IModel<DictionaryDecompounderTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DictionaryDecompounderTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DictionaryDecompounderTokenFilter)} does not support '{options.Format}' format.");
@@ -182,9 +182,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DictionaryDecompounderTokenFilter IModel<DictionaryDecompounderTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DictionaryDecompounderTokenFilter IPersistableModel<DictionaryDecompounderTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DictionaryDecompounderTokenFilter)} does not support '{options.Format}' format.");
@@ -194,6 +194,6 @@ namespace CognitiveSearch.Models
             return DeserializeDictionaryDecompounderTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DictionaryDecompounderTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DictionaryDecompounderTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

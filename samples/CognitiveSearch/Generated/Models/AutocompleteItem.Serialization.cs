@@ -16,27 +16,27 @@ namespace CognitiveSearch.Models
 {
     public partial class AutocompleteItem : IUtf8JsonSerializable, IJsonModel<AutocompleteItem>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutocompleteItem>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutocompleteItem>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AutocompleteItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AutocompleteItem>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AutocompleteItem>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AutocompleteItem>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("text"u8);
                 writer.WriteStringValue(Text);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("queryPlusText"u8);
                 writer.WriteStringValue(QueryPlusText);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        AutocompleteItem IJsonModel<AutocompleteItem>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AutocompleteItem IJsonModel<AutocompleteItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutocompleteItem)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace CognitiveSearch.Models
 
         internal static AutocompleteItem DeserializeAutocompleteItem(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace CognitiveSearch.Models
                     queryPlusText = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace CognitiveSearch.Models
             return new AutocompleteItem(text, queryPlusText, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AutocompleteItem>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AutocompleteItem>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutocompleteItem)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AutocompleteItem IModel<AutocompleteItem>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AutocompleteItem IPersistableModel<AutocompleteItem>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutocompleteItem)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace CognitiveSearch.Models
             return DeserializeAutocompleteItem(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AutocompleteItem>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AutocompleteItem>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

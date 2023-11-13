@@ -18,11 +18,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StorageAccountCreateOrUpdateContent : IUtf8JsonSerializable, IJsonModel<StorageAccountCreateOrUpdateContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountCreateOrUpdateContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountCreateOrUpdateContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StorageAccountCreateOrUpdateContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StorageAccountCreateOrUpdateContent>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StorageAccountCreateOrUpdateContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageAccountCreateOrUpdateContent>)} interface");
             }
@@ -154,7 +154,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -172,9 +172,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        StorageAccountCreateOrUpdateContent IJsonModel<StorageAccountCreateOrUpdateContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StorageAccountCreateOrUpdateContent IJsonModel<StorageAccountCreateOrUpdateContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountCreateOrUpdateContent)} does not support '{options.Format}' format.");
@@ -186,7 +186,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StorageAccountCreateOrUpdateContent DeserializeStorageAccountCreateOrUpdateContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -452,7 +452,7 @@ namespace Azure.ResourceManager.Storage.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -461,9 +461,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, Optional.ToDictionary(tags), identity, Optional.ToNullable(publicNetworkAccess), sasPolicy.Value, keyPolicy.Value, customDomain.Value, encryption.Value, networkAcls.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), Optional.ToNullable(isHnsEnabled), Optional.ToNullable(largeFileSharesState), routingPreference.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), immutableStorageWithVersioning.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StorageAccountCreateOrUpdateContent>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageAccountCreateOrUpdateContent>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountCreateOrUpdateContent)} does not support '{options.Format}' format.");
@@ -472,9 +472,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StorageAccountCreateOrUpdateContent IModel<StorageAccountCreateOrUpdateContent>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageAccountCreateOrUpdateContent IPersistableModel<StorageAccountCreateOrUpdateContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageAccountCreateOrUpdateContent)} does not support '{options.Format}' format.");
@@ -484,6 +484,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountCreateOrUpdateContent(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StorageAccountCreateOrUpdateContent>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StorageAccountCreateOrUpdateContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

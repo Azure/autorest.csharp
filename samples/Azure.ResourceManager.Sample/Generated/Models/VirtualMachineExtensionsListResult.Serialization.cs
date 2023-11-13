@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class VirtualMachineExtensionsListResult : IUtf8JsonSerializable, IJsonModel<VirtualMachineExtensionsListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineExtensionsListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineExtensionsListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VirtualMachineExtensionsListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VirtualMachineExtensionsListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineExtensionsListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineExtensionsListResult>)} interface");
             }
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachineExtensionsListResult IJsonModel<VirtualMachineExtensionsListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VirtualMachineExtensionsListResult IJsonModel<VirtualMachineExtensionsListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineExtensionsListResult)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineExtensionsListResult DeserializeVirtualMachineExtensionsListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new VirtualMachineExtensionsListResult(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VirtualMachineExtensionsListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VirtualMachineExtensionsListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineExtensionsListResult)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VirtualMachineExtensionsListResult IModel<VirtualMachineExtensionsListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VirtualMachineExtensionsListResult IPersistableModel<VirtualMachineExtensionsListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineExtensionsListResult)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineExtensionsListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VirtualMachineExtensionsListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VirtualMachineExtensionsListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

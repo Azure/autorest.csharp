@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ActiveDirectoryProperties : IUtf8JsonSerializable, IJsonModel<ActiveDirectoryProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ActiveDirectoryProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ActiveDirectoryProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ActiveDirectoryProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ActiveDirectoryProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ActiveDirectoryProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ActiveDirectoryProperties>)} interface");
             }
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(DomainSid);
             writer.WritePropertyName("azureStorageSid"u8);
             writer.WriteStringValue(AzureStorageSid);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ActiveDirectoryProperties IJsonModel<ActiveDirectoryProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ActiveDirectoryProperties IJsonModel<ActiveDirectoryProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ActiveDirectoryProperties)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ActiveDirectoryProperties DeserializeActiveDirectoryProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,7 +116,7 @@ namespace Azure.ResourceManager.Storage.Models
                     azureStorageSid = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -125,9 +125,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ActiveDirectoryProperties(domainName, netBiosDomainName, forestName, domainGuid, domainSid, azureStorageSid, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ActiveDirectoryProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ActiveDirectoryProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ActiveDirectoryProperties)} does not support '{options.Format}' format.");
@@ -136,9 +136,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ActiveDirectoryProperties IModel<ActiveDirectoryProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ActiveDirectoryProperties IPersistableModel<ActiveDirectoryProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ActiveDirectoryProperties)} does not support '{options.Format}' format.");
@@ -148,6 +148,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeActiveDirectoryProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ActiveDirectoryProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ActiveDirectoryProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

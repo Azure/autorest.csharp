@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class ServiceEndpointPolicyDefinition : IUtf8JsonSerializable, IJsonModel<ServiceEndpointPolicyDefinition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceEndpointPolicyDefinition>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceEndpointPolicyDefinition>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ServiceEndpointPolicyDefinition>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ServiceEndpointPolicyDefinition>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ServiceEndpointPolicyDefinition>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ServiceEndpointPolicyDefinition>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -66,7 +66,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -75,7 +75,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -93,9 +93,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        ServiceEndpointPolicyDefinition IJsonModel<ServiceEndpointPolicyDefinition>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ServiceEndpointPolicyDefinition IJsonModel<ServiceEndpointPolicyDefinition>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceEndpointPolicyDefinition)} does not support '{options.Format}' format.");
@@ -107,7 +107,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPolicyDefinition DeserializeServiceEndpointPolicyDefinition(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -184,7 +184,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -193,9 +193,9 @@ namespace Azure.Network.Management.Interface.Models
             return new ServiceEndpointPolicyDefinition(id.Value, serializedAdditionalRawData, name.Value, etag.Value, description.Value, service.Value, Optional.ToList(serviceResources), Optional.ToNullable(provisioningState));
         }
 
-        BinaryData IModel<ServiceEndpointPolicyDefinition>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ServiceEndpointPolicyDefinition>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceEndpointPolicyDefinition)} does not support '{options.Format}' format.");
@@ -204,9 +204,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ServiceEndpointPolicyDefinition IModel<ServiceEndpointPolicyDefinition>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ServiceEndpointPolicyDefinition IPersistableModel<ServiceEndpointPolicyDefinition>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ServiceEndpointPolicyDefinition)} does not support '{options.Format}' format.");
@@ -216,6 +216,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeServiceEndpointPolicyDefinition(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ServiceEndpointPolicyDefinition>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ServiceEndpointPolicyDefinition>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

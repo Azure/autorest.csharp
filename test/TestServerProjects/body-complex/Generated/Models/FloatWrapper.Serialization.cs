@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class FloatWrapper : IUtf8JsonSerializable, IJsonModel<FloatWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FloatWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FloatWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FloatWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FloatWrapper>)} interface");
             }
@@ -36,7 +36,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("field2"u8);
                 writer.WriteNumberValue(Field2.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        FloatWrapper IJsonModel<FloatWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FloatWrapper IJsonModel<FloatWrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FloatWrapper)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static FloatWrapper DeserializeFloatWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace body_complex.Models
                     field2 = property.Value.GetSingle();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace body_complex.Models
             return new FloatWrapper(Optional.ToNullable(field1), Optional.ToNullable(field2), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FloatWrapper>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FloatWrapper>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FloatWrapper)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FloatWrapper IModel<FloatWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FloatWrapper IPersistableModel<FloatWrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FloatWrapper)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeFloatWrapper(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FloatWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FloatWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class EffectiveRoute : IUtf8JsonSerializable, IJsonModel<EffectiveRoute>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveRoute>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveRoute>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<EffectiveRoute>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<EffectiveRoute>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<EffectiveRoute>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EffectiveRoute>)} interface");
             }
@@ -71,7 +71,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("nextHopType"u8);
                 writer.WriteStringValue(NextHopType.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -89,9 +89,9 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteEndObject();
         }
 
-        EffectiveRoute IJsonModel<EffectiveRoute>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        EffectiveRoute IJsonModel<EffectiveRoute>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EffectiveRoute)} does not support '{options.Format}' format.");
@@ -103,7 +103,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -189,7 +189,7 @@ namespace Azure.Network.Management.Interface.Models
                     nextHopType = new RouteNextHopType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -198,9 +198,9 @@ namespace Azure.Network.Management.Interface.Models
             return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<EffectiveRoute>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<EffectiveRoute>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EffectiveRoute)} does not support '{options.Format}' format.");
@@ -209,9 +209,9 @@ namespace Azure.Network.Management.Interface.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        EffectiveRoute IModel<EffectiveRoute>.Read(BinaryData data, ModelReaderWriterOptions options)
+        EffectiveRoute IPersistableModel<EffectiveRoute>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EffectiveRoute)} does not support '{options.Format}' format.");
@@ -221,6 +221,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeEffectiveRoute(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<EffectiveRoute>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<EffectiveRoute>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

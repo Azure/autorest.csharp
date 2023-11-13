@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class DotFishMarket : IUtf8JsonSerializable, IJsonModel<DotFishMarket>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFishMarket>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFishMarket>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DotFishMarket>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DotFishMarket>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DotFishMarket>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DotFishMarket>)} interface");
             }
@@ -56,7 +56,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        DotFishMarket IJsonModel<DotFishMarket>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DotFishMarket IJsonModel<DotFishMarket>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace body_complex.Models
 
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -148,7 +148,7 @@ namespace body_complex.Models
                     fishes = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -157,9 +157,9 @@ namespace body_complex.Models
             return new DotFishMarket(sampleSalmon.Value, Optional.ToList(salmons), sampleFish.Value, Optional.ToList(fishes), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DotFishMarket>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DotFishMarket>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{options.Format}' format.");
@@ -168,9 +168,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DotFishMarket IModel<DotFishMarket>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DotFishMarket IPersistableModel<DotFishMarket>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DotFishMarket)} does not support '{options.Format}' format.");
@@ -180,6 +180,6 @@ namespace body_complex.Models
             return DeserializeDotFishMarket(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DotFishMarket>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DotFishMarket>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

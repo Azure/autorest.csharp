@@ -16,11 +16,11 @@ namespace body_dictionary.Models
 {
     public partial class Widget : IUtf8JsonSerializable, IJsonModel<Widget>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Widget>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Widget>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Widget>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Widget>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Widget>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Widget>)} interface");
             }
@@ -36,7 +36,7 @@ namespace body_dictionary.Models
                 writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace body_dictionary.Models
             writer.WriteEndObject();
         }
 
-        Widget IJsonModel<Widget>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Widget IJsonModel<Widget>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Widget)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace body_dictionary.Models
 
         internal static Widget DeserializeWidget(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace body_dictionary.Models
                     @string = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace body_dictionary.Models
             return new Widget(Optional.ToNullable(integer), @string.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Widget>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Widget>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Widget)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace body_dictionary.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Widget IModel<Widget>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Widget IPersistableModel<Widget>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Widget)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace body_dictionary.Models
             return DeserializeWidget(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Widget>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Widget>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

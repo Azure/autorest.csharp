@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Shark : IUtf8JsonSerializable, IJsonModel<Shark>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shark>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shark>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Shark>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Shark>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Shark>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Shark>)} interface");
             }
@@ -52,7 +52,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -70,9 +70,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Shark IJsonModel<Shark>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Shark IJsonModel<Shark>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Shark)} does not support '{options.Format}' format.");
@@ -84,7 +84,7 @@ namespace body_complex.Models
 
         internal static Shark DeserializeShark(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -152,7 +152,7 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -161,9 +161,9 @@ namespace body_complex.Models
             return new Shark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
         }
 
-        BinaryData IModel<Shark>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Shark>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Shark)} does not support '{options.Format}' format.");
@@ -172,9 +172,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Shark IModel<Shark>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Shark IPersistableModel<Shark>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Shark)} does not support '{options.Format}' format.");
@@ -184,6 +184,6 @@ namespace body_complex.Models
             return DeserializeShark(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Shark>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Shark>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

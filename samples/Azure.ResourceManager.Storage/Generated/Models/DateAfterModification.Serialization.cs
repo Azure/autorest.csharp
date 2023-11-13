@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class DateAfterModification : IUtf8JsonSerializable, IJsonModel<DateAfterModification>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DateAfterModification>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DateAfterModification>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DateAfterModification>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DateAfterModification>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DateAfterModification>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DateAfterModification>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("daysAfterLastAccessTimeGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterLastAccessTimeGreaterThan.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        DateAfterModification IJsonModel<DateAfterModification>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DateAfterModification IJsonModel<DateAfterModification>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DateAfterModification)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static DateAfterModification DeserializeDateAfterModification(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace Azure.ResourceManager.Storage.Models
                     daysAfterLastAccessTimeGreaterThan = property.Value.GetSingle();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new DateAfterModification(Optional.ToNullable(daysAfterModificationGreaterThan), Optional.ToNullable(daysAfterLastAccessTimeGreaterThan), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DateAfterModification>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DateAfterModification>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DateAfterModification)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DateAfterModification IModel<DateAfterModification>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DateAfterModification IPersistableModel<DateAfterModification>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DateAfterModification)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDateAfterModification(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DateAfterModification>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DateAfterModification>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class MappingCharFilter : IUtf8JsonSerializable, IJsonModel<MappingCharFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MappingCharFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MappingCharFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MappingCharFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MappingCharFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MappingCharFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MappingCharFilter>)} interface");
             }
@@ -37,7 +37,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        MappingCharFilter IJsonModel<MappingCharFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MappingCharFilter IJsonModel<MappingCharFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MappingCharFilter)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
 
         internal static MappingCharFilter DeserializeMappingCharFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -102,7 +102,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -111,9 +111,9 @@ namespace CognitiveSearch.Models
             return new MappingCharFilter(odataType, name, serializedAdditionalRawData, mappings);
         }
 
-        BinaryData IModel<MappingCharFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MappingCharFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MappingCharFilter)} does not support '{options.Format}' format.");
@@ -122,9 +122,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MappingCharFilter IModel<MappingCharFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MappingCharFilter IPersistableModel<MappingCharFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MappingCharFilter)} does not support '{options.Format}' format.");
@@ -134,6 +134,6 @@ namespace CognitiveSearch.Models
             return DeserializeMappingCharFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MappingCharFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MappingCharFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

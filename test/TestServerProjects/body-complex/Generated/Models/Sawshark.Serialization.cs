@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Sawshark : IUtf8JsonSerializable, IJsonModel<Sawshark>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sawshark>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sawshark>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Sawshark>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Sawshark>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Sawshark>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Sawshark>)} interface");
             }
@@ -57,7 +57,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Sawshark IJsonModel<Sawshark>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Sawshark IJsonModel<Sawshark>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace body_complex.Models
 
         internal static Sawshark DeserializeSawshark(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -158,7 +158,7 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -167,9 +167,9 @@ namespace body_complex.Models
             return new Sawshark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday, picture.Value);
         }
 
-        BinaryData IModel<Sawshark>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Sawshark>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
@@ -178,9 +178,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Sawshark IModel<Sawshark>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Sawshark IPersistableModel<Sawshark>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Sawshark)} does not support '{options.Format}' format.");
@@ -190,6 +190,6 @@ namespace body_complex.Models
             return DeserializeSawshark(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Sawshark>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Sawshark>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

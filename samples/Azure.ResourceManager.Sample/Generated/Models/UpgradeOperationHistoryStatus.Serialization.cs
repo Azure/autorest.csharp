@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class UpgradeOperationHistoryStatus : IUtf8JsonSerializable, IJsonModel<UpgradeOperationHistoryStatus>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradeOperationHistoryStatus>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradeOperationHistoryStatus>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UpgradeOperationHistoryStatus>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UpgradeOperationHistoryStatus>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UpgradeOperationHistoryStatus>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UpgradeOperationHistoryStatus>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Code))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Code.Value.ToSerialString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(StartOn))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(StartOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(EndOn))
                 {
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(EndOn.Value, "O");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        UpgradeOperationHistoryStatus IJsonModel<UpgradeOperationHistoryStatus>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UpgradeOperationHistoryStatus IJsonModel<UpgradeOperationHistoryStatus>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UpgradeOperationHistoryStatus)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static UpgradeOperationHistoryStatus DeserializeUpgradeOperationHistoryStatus(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
                     endTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -131,9 +131,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new UpgradeOperationHistoryStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(endTime), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UpgradeOperationHistoryStatus>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UpgradeOperationHistoryStatus>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UpgradeOperationHistoryStatus)} does not support '{options.Format}' format.");
@@ -142,9 +142,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UpgradeOperationHistoryStatus IModel<UpgradeOperationHistoryStatus>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UpgradeOperationHistoryStatus IPersistableModel<UpgradeOperationHistoryStatus>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UpgradeOperationHistoryStatus)} does not support '{options.Format}' format.");
@@ -154,6 +154,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeUpgradeOperationHistoryStatus(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UpgradeOperationHistoryStatus>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UpgradeOperationHistoryStatus>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

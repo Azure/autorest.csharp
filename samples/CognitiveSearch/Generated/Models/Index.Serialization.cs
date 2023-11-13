@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class Index : IUtf8JsonSerializable, IJsonModel<Index>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Index>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Index>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Index>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Index>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Index>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Index>)} interface");
             }
@@ -120,7 +120,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -138,9 +138,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        Index IJsonModel<Index>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Index IJsonModel<Index>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Index)} does not support '{options.Format}' format.");
@@ -152,7 +152,7 @@ namespace CognitiveSearch.Models
 
         internal static Index DeserializeIndex(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -311,7 +311,7 @@ namespace CognitiveSearch.Models
                     odataEtag = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -320,9 +320,9 @@ namespace CognitiveSearch.Models
             return new Index(name, fields, Optional.ToList(scoringProfiles), defaultScoringProfile.Value, corsOptions.Value, Optional.ToList(suggesters), Optional.ToList(analyzers), Optional.ToList(tokenizers), Optional.ToList(tokenFilters), Optional.ToList(charFilters), encryptionKey.Value, similarity.Value, odataEtag.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Index>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Index>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Index)} does not support '{options.Format}' format.");
@@ -331,9 +331,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Index IModel<Index>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Index IPersistableModel<Index>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Index)} does not support '{options.Format}' format.");
@@ -343,6 +343,6 @@ namespace CognitiveSearch.Models
             return DeserializeIndex(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Index>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Index>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

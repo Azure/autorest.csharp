@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class MyDerivedType : IUtf8JsonSerializable, IJsonModel<MyDerivedType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyDerivedType>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyDerivedType>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MyDerivedType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MyDerivedType>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MyDerivedType>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MyDerivedType>)} interface");
             }
@@ -46,7 +46,7 @@ namespace body_complex.Models
                 writer.WriteStringValue(PropBH1);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        MyDerivedType IJsonModel<MyDerivedType>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MyDerivedType IJsonModel<MyDerivedType>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MyDerivedType)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace body_complex.Models
 
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace body_complex.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace body_complex.Models
             return new MyDerivedType(kind, propB1.Value, propBH1.Value, serializedAdditionalRawData, propD1.Value);
         }
 
-        BinaryData IModel<MyDerivedType>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MyDerivedType>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MyDerivedType)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MyDerivedType IModel<MyDerivedType>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MyDerivedType IPersistableModel<MyDerivedType>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MyDerivedType)} does not support '{options.Format}' format.");
@@ -156,6 +156,6 @@ namespace body_complex.Models
             return DeserializeMyDerivedType(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MyDerivedType>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MyDerivedType>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

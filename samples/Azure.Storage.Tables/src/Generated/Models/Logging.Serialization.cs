@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class Logging : IXmlSerializable, IModel<Logging>
+    public partial class Logging : IXmlSerializable, IPersistableModel<Logging>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -66,10 +66,10 @@ namespace Azure.Storage.Tables.Models
             return new Logging(version, delete, read, write, retentionPolicy, default);
         }
 
-        BinaryData IModel<Logging>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Logging>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Logging>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -89,9 +89,9 @@ namespace Azure.Storage.Tables.Models
             }
         }
 
-        Logging IModel<Logging>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Logging IPersistableModel<Logging>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Logging)} does not support '{options.Format}' format.");
@@ -100,6 +100,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeLogging(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Logging>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Logging>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

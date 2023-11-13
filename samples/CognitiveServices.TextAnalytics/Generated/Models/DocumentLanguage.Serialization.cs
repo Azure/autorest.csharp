@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class DocumentLanguage : IUtf8JsonSerializable, IJsonModel<DocumentLanguage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentLanguage>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentLanguage>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DocumentLanguage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DocumentLanguage>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DocumentLanguage>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DocumentLanguage>)} interface");
             }
@@ -42,7 +42,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WritePropertyName("statistics"u8);
                 writer.WriteObjectValue(Statistics);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        DocumentLanguage IJsonModel<DocumentLanguage>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DocumentLanguage IJsonModel<DocumentLanguage>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DocumentLanguage)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,7 +117,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -126,9 +126,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentLanguage(id, detectedLanguage, warnings, statistics.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DocumentLanguage>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DocumentLanguage>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DocumentLanguage)} does not support '{options.Format}' format.");
@@ -137,9 +137,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DocumentLanguage IModel<DocumentLanguage>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DocumentLanguage IPersistableModel<DocumentLanguage>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DocumentLanguage)} does not support '{options.Format}' format.");
@@ -149,6 +149,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeDocumentLanguage(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DocumentLanguage>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DocumentLanguage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

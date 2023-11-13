@@ -16,11 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
 {
     public partial class ReadResult : IUtf8JsonSerializable, IJsonModel<ReadResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ReadResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ReadResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ReadResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ReadResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ReadResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ReadResult>)} interface");
             }
@@ -51,7 +51,7 @@ namespace Azure.AI.FormRecognizer.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -69,9 +69,9 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
         }
 
-        ReadResult IJsonModel<ReadResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ReadResult IJsonModel<ReadResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ReadResult)} does not support '{options.Format}' format.");
@@ -83,7 +83,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         internal static ReadResult DeserializeReadResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -148,7 +148,7 @@ namespace Azure.AI.FormRecognizer.Models
                     lines = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -157,9 +157,9 @@ namespace Azure.AI.FormRecognizer.Models
             return new ReadResult(page, angle, width, height, unit, Optional.ToNullable(language), Optional.ToList(lines), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ReadResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ReadResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ReadResult)} does not support '{options.Format}' format.");
@@ -168,9 +168,9 @@ namespace Azure.AI.FormRecognizer.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ReadResult IModel<ReadResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ReadResult IPersistableModel<ReadResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ReadResult)} does not support '{options.Format}' format.");
@@ -180,6 +180,6 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeReadResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ReadResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ReadResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

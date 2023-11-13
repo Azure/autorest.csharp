@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class RollingUpgradeProgressInfo : IUtf8JsonSerializable, IJsonModel<RollingUpgradeProgressInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RollingUpgradeProgressInfo>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RollingUpgradeProgressInfo>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RollingUpgradeProgressInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RollingUpgradeProgressInfo>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RollingUpgradeProgressInfo>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RollingUpgradeProgressInfo>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SuccessfulInstanceCount))
                 {
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(SuccessfulInstanceCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(FailedInstanceCount))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(FailedInstanceCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InProgressInstanceCount))
                 {
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(InProgressInstanceCount.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(PendingInstanceCount))
                 {
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(PendingInstanceCount.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -76,9 +76,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        RollingUpgradeProgressInfo IJsonModel<RollingUpgradeProgressInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RollingUpgradeProgressInfo IJsonModel<RollingUpgradeProgressInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static RollingUpgradeProgressInfo DeserializeRollingUpgradeProgressInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -140,7 +140,7 @@ namespace Azure.ResourceManager.Sample.Models
                     pendingInstanceCount = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -149,9 +149,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new RollingUpgradeProgressInfo(Optional.ToNullable(successfulInstanceCount), Optional.ToNullable(failedInstanceCount), Optional.ToNullable(inProgressInstanceCount), Optional.ToNullable(pendingInstanceCount), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RollingUpgradeProgressInfo>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RollingUpgradeProgressInfo>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
@@ -160,9 +160,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RollingUpgradeProgressInfo IModel<RollingUpgradeProgressInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RollingUpgradeProgressInfo IPersistableModel<RollingUpgradeProgressInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
@@ -172,6 +172,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RollingUpgradeProgressInfo>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RollingUpgradeProgressInfo>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

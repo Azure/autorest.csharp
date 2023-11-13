@@ -17,11 +17,11 @@ namespace FirstTestTypeSpec.Models
 {
     public partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IJsonModel<ModelWithRequiredNullableProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredNullableProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredNullableProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithRequiredNullableProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithRequiredNullableProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithRequiredNullableProperties>)} interface");
             }
@@ -54,7 +54,7 @@ namespace FirstTestTypeSpec.Models
             {
                 writer.WriteNull("requiredFixedEnum");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -72,9 +72,9 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        ModelWithRequiredNullableProperties IJsonModel<ModelWithRequiredNullableProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithRequiredNullableProperties IJsonModel<ModelWithRequiredNullableProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
@@ -86,7 +86,7 @@ namespace FirstTestTypeSpec.Models
 
         internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -129,7 +129,7 @@ namespace FirstTestTypeSpec.Models
                     requiredFixedEnum = property.Value.GetString().ToStringFixedEnum();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -138,9 +138,9 @@ namespace FirstTestTypeSpec.Models
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithRequiredNullableProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithRequiredNullableProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
@@ -149,9 +149,9 @@ namespace FirstTestTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithRequiredNullableProperties IModel<ModelWithRequiredNullableProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithRequiredNullableProperties IPersistableModel<ModelWithRequiredNullableProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support '{options.Format}' format.");
@@ -161,14 +161,14 @@ namespace FirstTestTypeSpec.Models
             return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithRequiredNullableProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithRequiredNullableProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithRequiredNullableProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

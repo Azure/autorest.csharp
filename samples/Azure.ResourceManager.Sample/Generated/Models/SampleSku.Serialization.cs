@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class SampleSku : IUtf8JsonSerializable, IJsonModel<SampleSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SampleSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SampleSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SampleSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SampleSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SampleSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SampleSku>)} interface");
             }
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        SampleSku IJsonModel<SampleSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SampleSku IJsonModel<SampleSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SampleSku)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SampleSku DeserializeSampleSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                     capacity = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace Azure.ResourceManager.Sample.Models
             return new SampleSku(name.Value, tier.Value, Optional.ToNullable(capacity), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SampleSku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SampleSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SampleSku)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace Azure.ResourceManager.Sample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SampleSku IModel<SampleSku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SampleSku IPersistableModel<SampleSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SampleSku)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeSampleSku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SampleSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SampleSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

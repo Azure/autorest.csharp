@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ImmutableStorageWithVersioning : IUtf8JsonSerializable, IJsonModel<ImmutableStorageWithVersioning>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutableStorageWithVersioning>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutableStorageWithVersioning>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImmutableStorageWithVersioning>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImmutableStorageWithVersioning>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImmutableStorageWithVersioning>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImmutableStorageWithVersioning>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(TimeStamp))
                 {
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(TimeStamp.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MigrationState))
                 {
@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(MigrationState.Value.ToString());
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ImmutableStorageWithVersioning IJsonModel<ImmutableStorageWithVersioning>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImmutableStorageWithVersioning IJsonModel<ImmutableStorageWithVersioning>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImmutableStorageWithVersioning)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ImmutableStorageWithVersioning DeserializeImmutableStorageWithVersioning(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Storage.Models
                     migrationState = new MigrationState(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -128,9 +128,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ImmutableStorageWithVersioning(Optional.ToNullable(enabled), Optional.ToNullable(timeStamp), Optional.ToNullable(migrationState), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ImmutableStorageWithVersioning>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImmutableStorageWithVersioning>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImmutableStorageWithVersioning)} does not support '{options.Format}' format.");
@@ -139,9 +139,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImmutableStorageWithVersioning IModel<ImmutableStorageWithVersioning>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImmutableStorageWithVersioning IPersistableModel<ImmutableStorageWithVersioning>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImmutableStorageWithVersioning)} does not support '{options.Format}' format.");
@@ -151,6 +151,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeImmutableStorageWithVersioning(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImmutableStorageWithVersioning>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImmutableStorageWithVersioning>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ProtectedAppendWritesHistory : IUtf8JsonSerializable, IJsonModel<ProtectedAppendWritesHistory>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProtectedAppendWritesHistory>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProtectedAppendWritesHistory>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ProtectedAppendWritesHistory>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ProtectedAppendWritesHistory>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ProtectedAppendWritesHistory>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProtectedAppendWritesHistory>)} interface");
             }
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Timestamp))
                 {
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Timestamp.Value, "O");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        ProtectedAppendWritesHistory IJsonModel<ProtectedAppendWritesHistory>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ProtectedAppendWritesHistory IJsonModel<ProtectedAppendWritesHistory>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProtectedAppendWritesHistory)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ProtectedAppendWritesHistory DeserializeProtectedAppendWritesHistory(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Storage.Models
                     timestamp = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new ProtectedAppendWritesHistory(Optional.ToNullable(allowProtectedAppendWritesAll), Optional.ToNullable(timestamp), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ProtectedAppendWritesHistory>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ProtectedAppendWritesHistory>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProtectedAppendWritesHistory)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ProtectedAppendWritesHistory IModel<ProtectedAppendWritesHistory>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ProtectedAppendWritesHistory IPersistableModel<ProtectedAppendWritesHistory>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ProtectedAppendWritesHistory)} does not support '{options.Format}' format.");
@@ -133,6 +133,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeProtectedAppendWritesHistory(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ProtectedAppendWritesHistory>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ProtectedAppendWritesHistory>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

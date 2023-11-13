@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     internal partial class UnknownCognitiveServicesAccount : IUtf8JsonSerializable, IJsonModel<CognitiveServicesAccount>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CognitiveServicesAccount>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CognitiveServicesAccount>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CognitiveServicesAccount>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CognitiveServicesAccount>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CognitiveServicesAccount>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CognitiveServicesAccount>)} interface");
             }
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        CognitiveServicesAccount IJsonModel<CognitiveServicesAccount>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CognitiveServicesAccount IJsonModel<CognitiveServicesAccount>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CognitiveServicesAccount)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownCognitiveServicesAccount DeserializeUnknownCognitiveServicesAccount(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
                     description = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -96,9 +96,9 @@ namespace CognitiveSearch.Models
             return new UnknownCognitiveServicesAccount(odataType, description.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CognitiveServicesAccount>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CognitiveServicesAccount>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CognitiveServicesAccount)} does not support '{options.Format}' format.");
@@ -107,9 +107,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CognitiveServicesAccount IModel<CognitiveServicesAccount>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CognitiveServicesAccount IPersistableModel<CognitiveServicesAccount>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CognitiveServicesAccount)} does not support '{options.Format}' format.");
@@ -119,6 +119,6 @@ namespace CognitiveSearch.Models
             return DeserializeUnknownCognitiveServicesAccount(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CognitiveServicesAccount>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CognitiveServicesAccount>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

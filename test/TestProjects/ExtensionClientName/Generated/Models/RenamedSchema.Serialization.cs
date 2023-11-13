@@ -16,11 +16,11 @@ namespace ExtensionClientName.Models
 {
     public partial class RenamedSchema : IUtf8JsonSerializable, IJsonModel<RenamedSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedSchema>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedSchema>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RenamedSchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RenamedSchema>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RenamedSchema>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RenamedSchema>)} interface");
             }
@@ -42,7 +42,7 @@ namespace ExtensionClientName.Models
                 writer.WritePropertyName("originalPropertyString"u8);
                 writer.WriteStringValue(RenamedPropertyString);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace ExtensionClientName.Models
             writer.WriteEndObject();
         }
 
-        RenamedSchema IJsonModel<RenamedSchema>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RenamedSchema IJsonModel<RenamedSchema>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedSchema)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace ExtensionClientName.Models
 
         internal static RenamedSchema DeserializeRenamedSchema(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace ExtensionClientName.Models
                     originalPropertyString = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace ExtensionClientName.Models
             return new RenamedSchema(Optional.ToDictionary(originalProperty), originalPropertyString.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RenamedSchema>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RenamedSchema>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedSchema)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace ExtensionClientName.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RenamedSchema IModel<RenamedSchema>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RenamedSchema IPersistableModel<RenamedSchema>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedSchema)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace ExtensionClientName.Models
             return DeserializeRenamedSchema(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RenamedSchema>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RenamedSchema>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

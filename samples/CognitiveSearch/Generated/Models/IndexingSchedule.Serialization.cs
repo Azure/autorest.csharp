@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class IndexingSchedule : IUtf8JsonSerializable, IJsonModel<IndexingSchedule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexingSchedule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexingSchedule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IndexingSchedule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IndexingSchedule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IndexingSchedule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IndexingSchedule>)} interface");
             }
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("startTime"u8);
                 writer.WriteStringValue(StartTime.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        IndexingSchedule IJsonModel<IndexingSchedule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IndexingSchedule IJsonModel<IndexingSchedule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndexingSchedule)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
 
         internal static IndexingSchedule DeserializeIndexingSchedule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -91,7 +91,7 @@ namespace CognitiveSearch.Models
                     startTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -100,9 +100,9 @@ namespace CognitiveSearch.Models
             return new IndexingSchedule(interval, Optional.ToNullable(startTime), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<IndexingSchedule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IndexingSchedule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndexingSchedule)} does not support '{options.Format}' format.");
@@ -111,9 +111,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        IndexingSchedule IModel<IndexingSchedule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IndexingSchedule IPersistableModel<IndexingSchedule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndexingSchedule)} does not support '{options.Format}' format.");
@@ -123,6 +123,6 @@ namespace CognitiveSearch.Models
             return DeserializeIndexingSchedule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IndexingSchedule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IndexingSchedule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

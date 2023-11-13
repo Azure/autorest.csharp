@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
 {
     public partial class SearchDocumentsResult : IUtf8JsonSerializable, IJsonModel<SearchDocumentsResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SearchDocumentsResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SearchDocumentsResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SearchDocumentsResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SearchDocumentsResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SearchDocumentsResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SearchDocumentsResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Count))
                 {
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(Count.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Coverage))
                 {
@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(Coverage.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Facets))
                 {
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                     writer.WriteEndObject();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextPageParameters))
                 {
@@ -74,7 +74,7 @@ namespace CognitiveSearch.Models
                     writer.WriteObjectValue(NextPageParameters);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -92,7 +92,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -110,9 +110,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        SearchDocumentsResult IJsonModel<SearchDocumentsResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SearchDocumentsResult IJsonModel<SearchDocumentsResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SearchDocumentsResult)} does not support '{options.Format}' format.");
@@ -124,7 +124,7 @@ namespace CognitiveSearch.Models
 
         internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -208,7 +208,7 @@ namespace CognitiveSearch.Models
                     odataNextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -217,9 +217,9 @@ namespace CognitiveSearch.Models
             return new SearchDocumentsResult(Optional.ToNullable(odataCount), Optional.ToNullable(searchCoverage), Optional.ToDictionary(searchFacets), searchNextPageParameters.Value, value, odataNextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SearchDocumentsResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SearchDocumentsResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SearchDocumentsResult)} does not support '{options.Format}' format.");
@@ -228,9 +228,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SearchDocumentsResult IModel<SearchDocumentsResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SearchDocumentsResult IPersistableModel<SearchDocumentsResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SearchDocumentsResult)} does not support '{options.Format}' format.");
@@ -240,6 +240,6 @@ namespace CognitiveSearch.Models
             return DeserializeSearchDocumentsResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SearchDocumentsResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SearchDocumentsResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

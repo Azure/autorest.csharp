@@ -16,17 +16,17 @@ namespace CognitiveSearch.Models
 {
     public partial class IndexerLimits : IUtf8JsonSerializable, IJsonModel<IndexerLimits>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerLimits>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerLimits>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IndexerLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IndexerLimits>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IndexerLimits>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IndexerLimits>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MaxRunTime))
                 {
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(MaxRunTime.Value, "P");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MaxDocumentExtractionSize))
                 {
@@ -42,7 +42,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MaxDocumentContentCharactersToExtract))
                 {
@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        IndexerLimits IJsonModel<IndexerLimits>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IndexerLimits IJsonModel<IndexerLimits>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndexerLimits)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace CognitiveSearch.Models
 
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,7 +122,7 @@ namespace CognitiveSearch.Models
                     maxDocumentContentCharactersToExtract = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -131,9 +131,9 @@ namespace CognitiveSearch.Models
             return new IndexerLimits(Optional.ToNullable(maxRunTime), Optional.ToNullable(maxDocumentExtractionSize), Optional.ToNullable(maxDocumentContentCharactersToExtract), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<IndexerLimits>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IndexerLimits>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndexerLimits)} does not support '{options.Format}' format.");
@@ -142,9 +142,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        IndexerLimits IModel<IndexerLimits>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IndexerLimits IPersistableModel<IndexerLimits>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndexerLimits)} does not support '{options.Format}' format.");
@@ -154,6 +154,6 @@ namespace CognitiveSearch.Models
             return DeserializeIndexerLimits(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IndexerLimits>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IndexerLimits>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

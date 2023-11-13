@@ -13,14 +13,14 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    [ModelReaderProxy(typeof(UnknownDotFish))]
+    [PersistableModelProxy(typeof(UnknownDotFish))]
     public partial class DotFish : IUtf8JsonSerializable, IJsonModel<DotFish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFish>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DotFish>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DotFish>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DotFish>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DotFish>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DotFish>)} interface");
             }
@@ -33,7 +33,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        DotFish IJsonModel<DotFish>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DotFish IJsonModel<DotFish>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace body_complex.Models
 
         internal static DotFish DeserializeDotFish(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -81,9 +81,9 @@ namespace body_complex.Models
             return UnknownDotFish.DeserializeUnknownDotFish(element);
         }
 
-        BinaryData IModel<DotFish>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DotFish>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
@@ -92,9 +92,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DotFish IModel<DotFish>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DotFish IPersistableModel<DotFish>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DotFish)} does not support '{options.Format}' format.");
@@ -104,6 +104,6 @@ namespace body_complex.Models
             return DeserializeDotFish(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DotFish>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DotFish>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

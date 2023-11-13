@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class BlobInventoryPolicyRule : IUtf8JsonSerializable, IJsonModel<BlobInventoryPolicyRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobInventoryPolicyRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobInventoryPolicyRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BlobInventoryPolicyRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BlobInventoryPolicyRule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BlobInventoryPolicyRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BlobInventoryPolicyRule>)} interface");
             }
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(Destination);
             writer.WritePropertyName("definition"u8);
             writer.WriteObjectValue(Definition);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteEndObject();
         }
 
-        BlobInventoryPolicyRule IJsonModel<BlobInventoryPolicyRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BlobInventoryPolicyRule IJsonModel<BlobInventoryPolicyRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobInventoryPolicyRule)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static BlobInventoryPolicyRule DeserializeBlobInventoryPolicyRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,7 +100,7 @@ namespace Azure.ResourceManager.Storage.Models
                     definition = BlobInventoryPolicyDefinition.DeserializeBlobInventoryPolicyDefinition(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -109,9 +109,9 @@ namespace Azure.ResourceManager.Storage.Models
             return new BlobInventoryPolicyRule(enabled, name, destination, definition, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BlobInventoryPolicyRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BlobInventoryPolicyRule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobInventoryPolicyRule)} does not support '{options.Format}' format.");
@@ -120,9 +120,9 @@ namespace Azure.ResourceManager.Storage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BlobInventoryPolicyRule IModel<BlobInventoryPolicyRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BlobInventoryPolicyRule IPersistableModel<BlobInventoryPolicyRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobInventoryPolicyRule)} does not support '{options.Format}' format.");
@@ -132,6 +132,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobInventoryPolicyRule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BlobInventoryPolicyRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BlobInventoryPolicyRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

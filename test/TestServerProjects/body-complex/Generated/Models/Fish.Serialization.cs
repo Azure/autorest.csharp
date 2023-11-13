@@ -13,14 +13,14 @@ using Azure.Core;
 
 namespace body_complex.Models
 {
-    [ModelReaderProxy(typeof(UnknownFish))]
+    [PersistableModelProxy(typeof(UnknownFish))]
     public partial class Fish : IUtf8JsonSerializable, IJsonModel<Fish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Fish>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Fish>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Fish>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Fish>)} interface");
             }
@@ -45,7 +45,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Fish IJsonModel<Fish>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Fish IJsonModel<Fish>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Fish)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace body_complex.Models
 
         internal static Fish DeserializeFish(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,9 +98,9 @@ namespace body_complex.Models
             return UnknownFish.DeserializeUnknownFish(element);
         }
 
-        BinaryData IModel<Fish>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Fish>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Fish)} does not support '{options.Format}' format.");
@@ -109,9 +109,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Fish IModel<Fish>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Fish IPersistableModel<Fish>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Fish)} does not support '{options.Format}' format.");
@@ -121,6 +121,6 @@ namespace body_complex.Models
             return DeserializeFish(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Fish>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Fish>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

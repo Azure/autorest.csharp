@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ShingleTokenFilter : IUtf8JsonSerializable, IJsonModel<ShingleTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ShingleTokenFilter>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ShingleTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ShingleTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ShingleTokenFilter>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ShingleTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ShingleTokenFilter>)} interface");
             }
@@ -60,7 +60,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -78,9 +78,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        ShingleTokenFilter IJsonModel<ShingleTokenFilter>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ShingleTokenFilter IJsonModel<ShingleTokenFilter>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ShingleTokenFilter)} does not support '{options.Format}' format.");
@@ -92,7 +92,7 @@ namespace CognitiveSearch.Models
 
         internal static ShingleTokenFilter DeserializeShingleTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -166,7 +166,7 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -175,9 +175,9 @@ namespace CognitiveSearch.Models
             return new ShingleTokenFilter(odataType, name, serializedAdditionalRawData, Optional.ToNullable(maxShingleSize), Optional.ToNullable(minShingleSize), Optional.ToNullable(outputUnigrams), Optional.ToNullable(outputUnigramsIfNoShingles), tokenSeparator.Value, filterToken.Value);
         }
 
-        BinaryData IModel<ShingleTokenFilter>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ShingleTokenFilter>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ShingleTokenFilter)} does not support '{options.Format}' format.");
@@ -186,9 +186,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ShingleTokenFilter IModel<ShingleTokenFilter>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ShingleTokenFilter IPersistableModel<ShingleTokenFilter>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ShingleTokenFilter)} does not support '{options.Format}' format.");
@@ -198,6 +198,6 @@ namespace CognitiveSearch.Models
             return DeserializeShingleTokenFilter(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ShingleTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ShingleTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

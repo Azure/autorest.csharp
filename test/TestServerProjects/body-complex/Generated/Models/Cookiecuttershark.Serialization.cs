@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Cookiecuttershark : IUtf8JsonSerializable, IJsonModel<Cookiecuttershark>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cookiecuttershark>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Cookiecuttershark>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Cookiecuttershark>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Cookiecuttershark>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Cookiecuttershark>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Cookiecuttershark>)} interface");
             }
@@ -52,7 +52,7 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -70,9 +70,9 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        Cookiecuttershark IJsonModel<Cookiecuttershark>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Cookiecuttershark IJsonModel<Cookiecuttershark>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{options.Format}' format.");
@@ -84,7 +84,7 @@ namespace body_complex.Models
 
         internal static Cookiecuttershark DeserializeCookiecuttershark(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,7 +143,7 @@ namespace body_complex.Models
                     siblings = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -152,9 +152,9 @@ namespace body_complex.Models
             return new Cookiecuttershark(fishtype, species.Value, length, Optional.ToList(siblings), serializedAdditionalRawData, Optional.ToNullable(age), birthday);
         }
 
-        BinaryData IModel<Cookiecuttershark>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Cookiecuttershark>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{options.Format}' format.");
@@ -163,9 +163,9 @@ namespace body_complex.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Cookiecuttershark IModel<Cookiecuttershark>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Cookiecuttershark IPersistableModel<Cookiecuttershark>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Cookiecuttershark)} does not support '{options.Format}' format.");
@@ -175,6 +175,6 @@ namespace body_complex.Models
             return DeserializeCookiecuttershark(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Cookiecuttershark>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Cookiecuttershark>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class LanguageDetectionSkill : IUtf8JsonSerializable, IJsonModel<LanguageDetectionSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageDetectionSkill>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageDetectionSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LanguageDetectionSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LanguageDetectionSkill>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LanguageDetectionSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LanguageDetectionSkill>)} interface");
             }
@@ -57,7 +57,7 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        LanguageDetectionSkill IJsonModel<LanguageDetectionSkill>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LanguageDetectionSkill IJsonModel<LanguageDetectionSkill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace CognitiveSearch.Models
 
         internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,7 +145,7 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -154,9 +154,9 @@ namespace CognitiveSearch.Models
             return new LanguageDetectionSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LanguageDetectionSkill>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LanguageDetectionSkill>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support '{options.Format}' format.");
@@ -165,9 +165,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LanguageDetectionSkill IModel<LanguageDetectionSkill>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LanguageDetectionSkill IPersistableModel<LanguageDetectionSkill>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LanguageDetectionSkill)} does not support '{options.Format}' format.");
@@ -177,6 +177,6 @@ namespace CognitiveSearch.Models
             return DeserializeLanguageDetectionSkill(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LanguageDetectionSkill>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LanguageDetectionSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

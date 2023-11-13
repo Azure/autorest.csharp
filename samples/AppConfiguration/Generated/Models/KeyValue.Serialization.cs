@@ -16,11 +16,11 @@ namespace AppConfiguration.Models
 {
     public partial class KeyValue : IUtf8JsonSerializable, IJsonModel<KeyValue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyValue>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyValue>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<KeyValue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<KeyValue>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<KeyValue>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyValue>)} interface");
             }
@@ -72,7 +72,7 @@ namespace AppConfiguration.Models
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -90,9 +90,9 @@ namespace AppConfiguration.Models
             writer.WriteEndObject();
         }
 
-        KeyValue IJsonModel<KeyValue>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        KeyValue IJsonModel<KeyValue>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyValue)} does not support '{options.Format}' format.");
@@ -104,7 +104,7 @@ namespace AppConfiguration.Models
 
         internal static KeyValue DeserializeKeyValue(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -179,7 +179,7 @@ namespace AppConfiguration.Models
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -188,9 +188,9 @@ namespace AppConfiguration.Models
             return new KeyValue(key.Value, label.Value, contentType.Value, value.Value, Optional.ToNullable(lastModified), Optional.ToDictionary(tags), Optional.ToNullable(locked), etag.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<KeyValue>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<KeyValue>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyValue)} does not support '{options.Format}' format.");
@@ -199,9 +199,9 @@ namespace AppConfiguration.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        KeyValue IModel<KeyValue>.Read(BinaryData data, ModelReaderWriterOptions options)
+        KeyValue IPersistableModel<KeyValue>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(KeyValue)} does not support '{options.Format}' format.");
@@ -211,6 +211,6 @@ namespace AppConfiguration.Models
             return DeserializeKeyValue(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<KeyValue>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<KeyValue>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

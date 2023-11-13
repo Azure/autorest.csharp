@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DistanceScoringParameters : IUtf8JsonSerializable, IJsonModel<DistanceScoringParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DistanceScoringParameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DistanceScoringParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DistanceScoringParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DistanceScoringParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DistanceScoringParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DistanceScoringParameters>)} interface");
             }
@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(ReferencePointParameter);
             writer.WritePropertyName("boostingDistance"u8);
             writer.WriteNumberValue(BoostingDistance);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        DistanceScoringParameters IJsonModel<DistanceScoringParameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DistanceScoringParameters IJsonModel<DistanceScoringParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DistanceScoringParameters)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
 
         internal static DistanceScoringParameters DeserializeDistanceScoringParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace CognitiveSearch.Models
                     boostingDistance = property.Value.GetDouble();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace CognitiveSearch.Models
             return new DistanceScoringParameters(referencePointParameter, boostingDistance, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DistanceScoringParameters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DistanceScoringParameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DistanceScoringParameters)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace CognitiveSearch.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DistanceScoringParameters IModel<DistanceScoringParameters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DistanceScoringParameters IPersistableModel<DistanceScoringParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DistanceScoringParameters)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace CognitiveSearch.Models
             return DeserializeDistanceScoringParameters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DistanceScoringParameters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DistanceScoringParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

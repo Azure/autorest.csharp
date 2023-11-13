@@ -16,17 +16,17 @@ namespace AppConfiguration.Models
 {
     public partial class Label : IUtf8JsonSerializable, IJsonModel<Label>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Label>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Label>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Label>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Label>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Label>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Label>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -34,7 +34,7 @@ namespace AppConfiguration.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace AppConfiguration.Models
             writer.WriteEndObject();
         }
 
-        Label IJsonModel<Label>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Label IJsonModel<Label>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Label)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace AppConfiguration.Models
 
         internal static Label DeserializeLabel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,7 +82,7 @@ namespace AppConfiguration.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -91,9 +91,9 @@ namespace AppConfiguration.Models
             return new Label(name.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Label>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Label>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Label)} does not support '{options.Format}' format.");
@@ -102,9 +102,9 @@ namespace AppConfiguration.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Label IModel<Label>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Label IPersistableModel<Label>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Label)} does not support '{options.Format}' format.");
@@ -114,6 +114,6 @@ namespace AppConfiguration.Models
             return DeserializeLabel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Label>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Label>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

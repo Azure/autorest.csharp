@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class MultiLanguageInput : IUtf8JsonSerializable, IJsonModel<MultiLanguageInput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultiLanguageInput>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultiLanguageInput>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MultiLanguageInput>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MultiLanguageInput>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MultiLanguageInput>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MultiLanguageInput>)} interface");
             }
@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
                 writer.WritePropertyName("language"u8);
                 writer.WriteStringValue(Language);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -53,9 +53,9 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteEndObject();
         }
 
-        MultiLanguageInput IJsonModel<MultiLanguageInput>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MultiLanguageInput IJsonModel<MultiLanguageInput>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MultiLanguageInput)} does not support '{options.Format}' format.");
@@ -67,7 +67,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static MultiLanguageInput DeserializeMultiLanguageInput(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -95,7 +95,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     language = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -104,9 +104,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return new MultiLanguageInput(id, text, language.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MultiLanguageInput>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MultiLanguageInput>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MultiLanguageInput)} does not support '{options.Format}' format.");
@@ -115,9 +115,9 @@ namespace CognitiveServices.TextAnalytics.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MultiLanguageInput IModel<MultiLanguageInput>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MultiLanguageInput IPersistableModel<MultiLanguageInput>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MultiLanguageInput)} does not support '{options.Format}' format.");
@@ -127,6 +127,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeMultiLanguageInput(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MultiLanguageInput>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MultiLanguageInput>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }
