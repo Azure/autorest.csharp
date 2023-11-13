@@ -57,4 +57,6 @@ internal record InputOperation(
     { }
 
     public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+
+    public string TrimmedPath => Path.Length == 1 ? Path : Path.TrimEnd('/');
 }

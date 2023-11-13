@@ -284,12 +284,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return null;
             }
 
-            if (library is not MgmtOutputLibrary mpgLibrary || !mpgLibrary.TryGetResourceData(operation.Path, out var resourceData))
+            if (library is not MgmtOutputLibrary mpgLibrary || !mpgLibrary.TryGetResourceData(operation.TrimmedPath, out var resourceData))
             {
                 return null;
             }
 
-            var operationSet = mpgLibrary.GetOperationSet(operation.Path);
+            var operationSet = mpgLibrary.GetOperationSet(operation.TrimmedPath);
             return operationSet.IsResource() ? resourceData.Type : null;
         }
 
