@@ -734,7 +734,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private void AddContentTypeRequestParameter(InputParameter inputParameter)
         {
-            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart)
+            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart && Configuration.Generation1ConvenienceClient)
             {
                 // ContentType parameter has been added with body parameter
                 return;
