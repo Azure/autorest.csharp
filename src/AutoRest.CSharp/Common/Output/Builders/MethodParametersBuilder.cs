@@ -702,12 +702,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
+            // [TODO]: Remove Configuration.Generation1ConvenienceClient condition when multipart support design in DPG is finalized
             if (_operation.RequestBodyMediaType is BodyMediaType.Multipart && Configuration.Generation1ConvenienceClient)
             {
                 CreateMultipartConvenienceParameters(sortedInputParameters, protocolBodyParameter);
                 return;
             }
 
+            // [TODO]: Remove Configuration.Generation1ConvenienceClient condition when multipart support design in DPG is finalized
             if (_operation.RequestBodyMediaType is BodyMediaType.Form && Configuration.Generation1ConvenienceClient)
             {
                 CreateFormUrlEncodedConvenienceParameters(sortedInputParameters, protocolBodyParameter);
@@ -734,6 +736,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private void AddContentTypeRequestParameter(InputParameter inputParameter)
         {
+            // [TODO]: Remove Configuration.Generation1ConvenienceClient condition when multipart support design in DPG is finalized
             if (_operation.RequestBodyMediaType is BodyMediaType.Multipart && Configuration.Generation1ConvenienceClient)
             {
                 // ContentType parameter has been added with body parameter
