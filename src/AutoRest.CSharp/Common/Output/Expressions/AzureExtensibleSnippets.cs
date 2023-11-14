@@ -38,8 +38,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                     new MethodSignature(ToRequestContentMethodName, null, $"Convert into a {nameof(Utf8JsonRequestContent)}.", modifiers, typeof(RequestContent), null, Array.Empty<Parameter>()),
                     new[]
                     {
-                        DeclareRequestContent(out var requestContent),
-                        requestContent.JsonWriter.WriteObjectValue(This),
+                        Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var requestContent, out var writer),
+                        writer.WriteObjectValue(This),
                         Return(requestContent)
                     }
                 );
@@ -60,13 +60,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             }
 
             public override TypedValueExpression InvokeToRequestBodyMethod(TypedValueExpression model) => new RequestContentExpression(model.Invoke(ToRequestContentMethodName));
-
-            private static DeclarationStatement DeclareRequestContent(out Utf8JsonRequestContentExpression variable)
-            {
-                var variableRef = new VariableReference(typeof(Utf8JsonRequestContent), "content");
-                variable = new Utf8JsonRequestContentExpression(variableRef);
-                return new DeclareVariableStatement(null, variableRef.Declaration, New.Instance(typeof(Utf8JsonRequestContent)));
-            }
         }
 
         internal class AzureRestOperationsSnippets : RestOperationsSnippets
@@ -100,6 +93,22 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 var messageVar = new VariableReference(typeof(HttpMessage), "message");
                 message = messageVar;
                 return UsingDeclare(messageVar, new InvokeInstanceMethodExpression(null, createRequestMethodSignature.Name, createRequestMethodSignature.Parameters.Select(p => (ValueExpression)p).ToList(), null, false));
+            }
+
+            public override MethodBodyStatement DeclareContentWithUtf8JsonWriter(out TypedValueExpression content, out Utf8JsonWriterExpression writer)
+            {
+                var contentVar = new VariableReference(typeof(Utf8JsonRequestContent), "content");
+                content = contentVar;
+                writer = new Utf8JsonRequestContentExpression(content).JsonWriter;
+                return Var(contentVar, New.Instance(typeof(Utf8JsonRequestContent)));
+            }
+
+            public override MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer)
+            {
+                var contentVar = new VariableReference(typeof(XmlWriterContent), "content");
+                content = contentVar;
+                writer = new XmlWriterContentExpression(content).XmlWriter;
+                return Var(contentVar, New.Instance(typeof(XmlWriterContent)));
             }
 
             public override MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async)

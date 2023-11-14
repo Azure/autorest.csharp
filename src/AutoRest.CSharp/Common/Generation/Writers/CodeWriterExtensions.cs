@@ -473,9 +473,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, ValueExpression? variable, FormattableString response, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, ValueExpression? variable, FormattableString streamFormattable, CSharpType? type)
         {
-            var streamExpression = new StreamExpression(new FormattableStringToExpression(response));
+            var streamExpression = new StreamExpression(new FormattableStringToExpression(streamFormattable));
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:

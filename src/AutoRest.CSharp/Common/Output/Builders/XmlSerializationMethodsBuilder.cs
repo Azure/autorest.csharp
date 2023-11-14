@@ -7,7 +7,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -276,7 +275,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("array", New.List(arraySerialization.Type), out var array),
+                Var("array", New.List(arraySerialization.Type.Arguments[0]), out var array),
                 new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child)
                 {
                     BuildDeserializationForXContainer(arraySerialization.ValueSerialization, new XElementExpression(child), out var deserializedChild),
@@ -323,7 +322,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
+                    return New.Instance(typeof(ResourceIdentifier), value.CastTo(typeof(string)));
                 }
 
                 if (frameworkType == typeof(SystemData))

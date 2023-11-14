@@ -26,7 +26,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract string StatusName { get; }
 
         public abstract string GetRawResponseName { get; }
-        public string FromValueName = nameof(Result.FromValue);
 
         public Type GetResponseOfT<T>() => ResponseOfTType.MakeGenericType(typeof(T));
         public Type GetTaskOfResponse(Type? valueType = default) =>

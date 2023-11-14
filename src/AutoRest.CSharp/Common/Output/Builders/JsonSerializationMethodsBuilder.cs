@@ -10,7 +10,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -634,7 +633,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return new MethodBodyStatement[]
                     {
                         Declare(index, Int(0)),
-                        Declare(readOnlyMemory, New.Array(jsonReadOnlyMemory.ImplementationType, element.GetArrayLength())),
+                        Declare(readOnlyMemory, New.Array(TypeFactory.GetElementType(jsonReadOnlyMemory.ImplementationType), element.GetArrayLength())),
                         new ForeachStatement("item", element.EnumerateArray(), out var readOnlyMemoryItem)
                         {
                             DeserializeArrayItem(jsonReadOnlyMemory, value, new JsonElementExpression(readOnlyMemoryItem), index),

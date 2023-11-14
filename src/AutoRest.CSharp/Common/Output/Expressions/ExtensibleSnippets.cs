@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.Common.Output.Expressions
             public abstract TypedValueExpression GetTypedResponseFromBinaryDate(Type responseType, TypedValueExpression response);
 
             public abstract MethodBodyStatement DeclareHttpMessage(MethodSignatureBase createRequestMethodSignature, out TypedValueExpression message);
+            public abstract MethodBodyStatement DeclareContentWithUtf8JsonWriter(out TypedValueExpression content, out Utf8JsonWriterExpression writer);
+            public abstract MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer);
             public abstract MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async);
         }
 
