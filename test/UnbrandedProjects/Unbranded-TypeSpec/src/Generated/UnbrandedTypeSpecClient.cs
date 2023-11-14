@@ -68,9 +68,9 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="headParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="optionalQuery"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
@@ -104,9 +104,9 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="headParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="optionalQuery"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
@@ -131,8 +131,8 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
@@ -150,8 +150,8 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
@@ -183,8 +183,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -226,8 +226,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -264,8 +264,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -302,8 +302,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -607,7 +607,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Result<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -617,7 +617,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Result<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -641,7 +641,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -676,7 +676,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1643,7 +1643,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1679,7 +1679,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>

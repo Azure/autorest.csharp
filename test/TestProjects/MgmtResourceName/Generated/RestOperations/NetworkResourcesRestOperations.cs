@@ -56,7 +56,7 @@ namespace MgmtResourceName
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -82,7 +82,7 @@ namespace MgmtResourceName
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -132,10 +132,10 @@ namespace MgmtResourceName
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="networkResourceName"> The String to use. </param>
-        /// <param name="data"> The Network to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="resourceGroupName"> The string to use. </param>
+        /// <param name="networkResourceName"> The string to use. </param>
+        /// <param name="data"> The NetworkData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="networkResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -162,10 +162,10 @@ namespace MgmtResourceName
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="networkResourceName"> The String to use. </param>
-        /// <param name="data"> The Network to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="resourceGroupName"> The string to use. </param>
+        /// <param name="networkResourceName"> The string to use. </param>
+        /// <param name="data"> The NetworkData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="networkResourceName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -212,9 +212,9 @@ namespace MgmtResourceName
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="networkResourceName"> The String to use. </param>
+        /// <param name="networkResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -242,9 +242,9 @@ namespace MgmtResourceName
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="networkResourceName"> The String to use. </param>
+        /// <param name="networkResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>

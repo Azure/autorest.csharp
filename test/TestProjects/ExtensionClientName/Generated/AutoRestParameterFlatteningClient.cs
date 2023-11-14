@@ -38,8 +38,8 @@ namespace ExtensionClientName
             _pipeline = pipeline;
         }
 
-        /// <param name="renamedPathParameter"> The String to use. </param>
-        /// <param name="renamedQueryParameter"> The String to use. </param>
+        /// <param name="renamedPathParameter"> The string to use. </param>
+        /// <param name="renamedQueryParameter"> The string to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<RenamedSchema>> RenamedOperationAsync(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)
@@ -57,8 +57,8 @@ namespace ExtensionClientName
             }
         }
 
-        /// <param name="renamedPathParameter"> The String to use. </param>
-        /// <param name="renamedQueryParameter"> The String to use. </param>
+        /// <param name="renamedPathParameter"> The string to use. </param>
+        /// <param name="renamedQueryParameter"> The string to use. </param>
         /// <param name="renamedBodyParameter"> The RenamedSchema to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<RenamedSchema> RenamedOperation(string renamedPathParameter, string renamedQueryParameter, RenamedSchema renamedBodyParameter, CancellationToken cancellationToken = default)

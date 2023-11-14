@@ -1027,7 +1027,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The FixedFloatEnum to use. Allowed values: "1.1" | "2.1" | "4". </param>
+        /// <param name="input"> The float to use. Allowed values: "1.1" | "2.1" | "4". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1063,7 +1063,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The FixedFloatEnum to use. Allowed values: "1.1" | "2.1" | "4". </param>
+        /// <param name="input"> The float to use. Allowed values: "1.1" | "2.1" | "4". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1121,7 +1121,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The ExtensibleIntEnum to use. Allowed values: "1" | "2" | "4". </param>
+        /// <param name="input"> The int to use. Allowed values: "1" | "2" | "4". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1157,7 +1157,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="input"> The ExtensibleIntEnum to use. Allowed values: "1" | "2" | "4". </param>
+        /// <param name="input"> The int to use. Allowed values: "1" | "2" | "4". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

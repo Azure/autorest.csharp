@@ -38,7 +38,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal SharedModelInOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _apiVersion = apiVersion;
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='PublicAsync(string,CancellationToken)']/*" />
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(SharedModel.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/SharedModelInOperation.xml" path="doc/members/member[@name='Public(string,CancellationToken)']/*" />
@@ -88,7 +88,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -127,7 +127,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -151,7 +151,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             }
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<SharedModel>> InternalAsync(string name, CancellationToken cancellationToken = default)
@@ -163,7 +163,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             return Response.FromValue(SharedModel.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<SharedModel> Internal(string name, CancellationToken cancellationToken = default)
@@ -190,7 +190,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -228,7 +228,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

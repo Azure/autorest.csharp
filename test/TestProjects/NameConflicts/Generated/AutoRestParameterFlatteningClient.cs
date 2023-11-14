@@ -39,12 +39,12 @@ namespace NameConflicts
             _pipeline = pipeline;
         }
 
-        /// <param name="request"> The String to use. </param>
-        /// <param name="message"> The String to use. </param>
-        /// <param name="scope"> The String to use. </param>
-        /// <param name="uri"> The String to use. </param>
-        /// <param name="pipeline"> The String to use. </param>
-        /// <param name="clientDiagnostics"> The String to use. </param>
+        /// <param name="request"> The string to use. </param>
+        /// <param name="message"> The string to use. </param>
+        /// <param name="scope"> The string to use. </param>
+        /// <param name="uri"> The string to use. </param>
+        /// <param name="pipeline"> The string to use. </param>
+        /// <param name="clientDiagnostics"> The string to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
@@ -62,12 +62,12 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="request"> The String to use. </param>
-        /// <param name="message"> The String to use. </param>
-        /// <param name="scope"> The String to use. </param>
-        /// <param name="uri"> The String to use. </param>
-        /// <param name="pipeline"> The String to use. </param>
-        /// <param name="clientDiagnostics"> The String to use. </param>
+        /// <param name="request"> The string to use. </param>
+        /// <param name="message"> The string to use. </param>
+        /// <param name="scope"> The string to use. </param>
+        /// <param name="uri"> The string to use. </param>
+        /// <param name="pipeline"> The string to use. </param>
+        /// <param name="clientDiagnostics"> The string to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
@@ -226,7 +226,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="stringBody"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -245,7 +245,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The String to use. </param>
+        /// <param name="stringBody"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {

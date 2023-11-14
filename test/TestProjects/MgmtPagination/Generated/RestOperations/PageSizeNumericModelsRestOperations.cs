@@ -60,7 +60,7 @@ namespace MgmtPagination
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -87,7 +87,7 @@ namespace MgmtPagination
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -138,10 +138,10 @@ namespace MgmtPagination
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="data"> The PageSizeNumericModel to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="resourceGroupName"> The string to use. </param>
+        /// <param name="name"> The string to use. </param>
+        /// <param name="data"> The PageSizeNumericModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -168,10 +168,10 @@ namespace MgmtPagination
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="data"> The PageSizeNumericModel to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="resourceGroupName"> The string to use. </param>
+        /// <param name="name"> The string to use. </param>
+        /// <param name="data"> The PageSizeNumericModelData to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -218,9 +218,9 @@ namespace MgmtPagination
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -248,9 +248,9 @@ namespace MgmtPagination
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -293,7 +293,7 @@ namespace MgmtPagination
         }
 
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -322,7 +322,7 @@ namespace MgmtPagination
         }
 
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The string to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

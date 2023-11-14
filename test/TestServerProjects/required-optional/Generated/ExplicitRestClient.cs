@@ -164,7 +164,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostRequiredIntegerParameterAsync(int bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -180,7 +180,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostRequiredIntegerParameter(int bodyParameter, CancellationToken cancellationToken = default)
         {
@@ -216,7 +216,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put null. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostOptionalIntegerParameterAsync(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -232,7 +232,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put null. </summary>
-        /// <param name="bodyParameter"> The Int32 to use. </param>
+        /// <param name="bodyParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalIntegerParameter(int? bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -375,7 +375,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostRequiredIntegerHeaderAsync(int headerParameter, CancellationToken cancellationToken = default)
         {
@@ -391,7 +391,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostRequiredIntegerHeader(int headerParameter, CancellationToken cancellationToken = default)
         {
@@ -424,7 +424,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostOptionalIntegerHeaderAsync(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -440,7 +440,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The Int32 to use. </param>
+        /// <param name="headerParameter"> The int? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalIntegerHeader(int? headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -473,7 +473,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required string. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public async Task<Response> PostRequiredStringParameterAsync(string bodyParameter, CancellationToken cancellationToken = default)
@@ -495,7 +495,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required string. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public Response PostRequiredStringParameter(string bodyParameter, CancellationToken cancellationToken = default)
@@ -537,7 +537,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional string. Please put null. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostOptionalStringParameterAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -553,7 +553,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional string. Please put null. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalStringParameter(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -696,7 +696,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The String to use. </param>
+        /// <param name="headerParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public async Task<Response> PostRequiredStringHeaderAsync(string headerParameter, CancellationToken cancellationToken = default)
@@ -718,7 +718,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The String to use. </param>
+        /// <param name="headerParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public Response PostRequiredStringHeader(string headerParameter, CancellationToken cancellationToken = default)
@@ -757,7 +757,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional string. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostOptionalStringHeaderAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -773,7 +773,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional string. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalStringHeader(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -1037,7 +1037,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The ArrayOfPostContentSchemaItem to use. </param>
+        /// <param name="bodyParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public async Task<Response> PostRequiredArrayParameterAsync(IEnumerable<string> bodyParameter, CancellationToken cancellationToken = default)
@@ -1059,7 +1059,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put null and the client library should throw before the request is sent. </summary>
-        /// <param name="bodyParameter"> The ArrayOfPostContentSchemaItem to use. </param>
+        /// <param name="bodyParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
         public Response PostRequiredArrayParameter(IEnumerable<string> bodyParameter, CancellationToken cancellationToken = default)
@@ -1106,7 +1106,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional array. Please put null. </summary>
-        /// <param name="bodyParameter"> The ArrayOfString to use. </param>
+        /// <param name="bodyParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostOptionalArrayParameterAsync(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -1122,7 +1122,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional array. Please put null. </summary>
-        /// <param name="bodyParameter"> The ArrayOfString to use. </param>
+        /// <param name="bodyParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalArrayParameter(IEnumerable<string> bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -1265,7 +1265,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
+        /// <param name="headerParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public async Task<Response> PostRequiredArrayHeaderAsync(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
@@ -1287,7 +1287,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent. </summary>
-        /// <param name="headerParameter"> The ArrayOfPost0ItemsItem to use. </param>
+        /// <param name="headerParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headerParameter"/> is null. </exception>
         public Response PostRequiredArrayHeader(IEnumerable<string> headerParameter, CancellationToken cancellationToken = default)
@@ -1326,7 +1326,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The ArrayOfString to use. </param>
+        /// <param name="headerParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostOptionalArrayHeaderAsync(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {
@@ -1342,7 +1342,7 @@ namespace required_optional
         }
 
         /// <summary> Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null. </summary>
-        /// <param name="headerParameter"> The ArrayOfString to use. </param>
+        /// <param name="headerParameter"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostOptionalArrayHeader(IEnumerable<string> headerParameter = null, CancellationToken cancellationToken = default)
         {

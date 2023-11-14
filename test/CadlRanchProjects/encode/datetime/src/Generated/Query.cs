@@ -37,7 +37,7 @@ namespace Encode.Datetime
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal Query(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -57,7 +57,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTime to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -89,7 +89,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTime to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -121,7 +121,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTimeRFC3339 to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -153,7 +153,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTimeRFC3339 to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -185,7 +185,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTimeRFC7231 to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -217,7 +217,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTimeRFC7231 to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -249,7 +249,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTimeUnix to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -281,7 +281,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The DateTimeUnix to use. </param>
+        /// <param name="value"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -313,7 +313,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The Array to use. </param>
+        /// <param name="value"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -348,7 +348,7 @@ namespace Encode.Datetime
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="value"> The Array to use. </param>
+        /// <param name="value"> The IEnumerable{DateTimeOffset} to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

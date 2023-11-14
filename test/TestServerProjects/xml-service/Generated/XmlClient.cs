@@ -528,7 +528,7 @@ namespace xml_service
         }
 
         /// <summary> Puts a list as the root element. </summary>
-        /// <param name="bananas"> The ArrayOfBanana to use. </param>
+        /// <param name="bananas"> The IEnumerable{Banana} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -546,7 +546,7 @@ namespace xml_service
         }
 
         /// <summary> Puts a list as the root element. </summary>
-        /// <param name="bananas"> The ArrayOfBanana to use. </param>
+        /// <param name="bananas"> The IEnumerable{Banana} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -598,7 +598,7 @@ namespace xml_service
         }
 
         /// <summary> Puts a list with a single item. </summary>
-        /// <param name="bananas"> The ArrayOfBanana to use. </param>
+        /// <param name="bananas"> The IEnumerable{Banana} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutRootListSingleItemAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -616,7 +616,7 @@ namespace xml_service
         }
 
         /// <summary> Puts a list with a single item. </summary>
-        /// <param name="bananas"> The ArrayOfBanana to use. </param>
+        /// <param name="bananas"> The IEnumerable{Banana} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutRootListSingleItem(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -668,7 +668,7 @@ namespace xml_service
         }
 
         /// <summary> Puts an empty list as the root element. </summary>
-        /// <param name="bananas"> The ArrayOfBanana to use. </param>
+        /// <param name="bananas"> The IEnumerable{Banana} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutEmptyRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -686,7 +686,7 @@ namespace xml_service
         }
 
         /// <summary> Puts an empty list as the root element. </summary>
-        /// <param name="bananas"> The ArrayOfBanana to use. </param>
+        /// <param name="bananas"> The IEnumerable{Banana} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutEmptyRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
@@ -912,7 +912,7 @@ namespace xml_service
         }
 
         /// <summary> Puts storage ACLs for a container. </summary>
-        /// <param name="properties"> The SignedIdentifiers to use. </param>
+        /// <param name="properties"> The IEnumerable{SignedIdentifier} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutAclsAsync(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
         {
@@ -930,7 +930,7 @@ namespace xml_service
         }
 
         /// <summary> Puts storage ACLs for a container. </summary>
-        /// <param name="properties"> The SignedIdentifiers to use. </param>
+        /// <param name="properties"> The IEnumerable{SignedIdentifier} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutAcls(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
         {

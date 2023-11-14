@@ -272,7 +272,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
         /// </summary>
-        /// <param name="fineTuningJobId"> The String to use. </param>
+        /// <param name="fineTuningJobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -290,7 +290,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
         /// </summary>
-        /// <param name="fineTuningJobId"> The String to use. </param>
+        /// <param name="fineTuningJobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -320,7 +320,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The String to use. </param>
+        /// <param name="fineTuningJobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -361,7 +361,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The String to use. </param>
+        /// <param name="fineTuningJobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>

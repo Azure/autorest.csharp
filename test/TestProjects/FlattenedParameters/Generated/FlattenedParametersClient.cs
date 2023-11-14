@@ -38,7 +38,7 @@ namespace FlattenedParameters
             _pipeline = pipeline;
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -55,7 +55,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The PatchContentSchemaItems to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -72,7 +72,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -89,7 +89,7 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="items"> The IEnumerable{string} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
@@ -106,8 +106,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationNotRequiredAsync(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -124,8 +124,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationNotRequired(string required = null, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -142,8 +142,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
@@ -160,8 +160,8 @@ namespace FlattenedParameters
             }
         }
 
-        /// <param name="required"> The String to use. </param>
-        /// <param name="nonRequired"> The String to use. </param>
+        /// <param name="required"> The string to use. </param>
+        /// <param name="nonRequired"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {

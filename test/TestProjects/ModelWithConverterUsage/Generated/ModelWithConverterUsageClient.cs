@@ -72,7 +72,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The ModelStruct? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelStruct>> OperationStructAsync(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -89,7 +89,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The ModelStruct? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelStruct> OperationStruct(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {

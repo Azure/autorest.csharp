@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
             FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? (FormattableString)$"The {operationParameter.Type.Name} to use."
+                ? (FormattableString)$"The {TypeFactory.GetInputType(type).ToStringForDocs()} to use."
                 : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
             if (defaultValue != null)
             {
@@ -192,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static FormattableString CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
             FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                (FormattableString)$"The {requestParameter.Schema.Name} to use." :
+                (FormattableString)$"The {TypeFactory.GetInputType(type).ToStringForDocs()} to use." :
                 $"{BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description)}";
             if (defaultValue != null)
             {

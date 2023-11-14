@@ -91,7 +91,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
@@ -102,7 +102,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
@@ -127,7 +127,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -163,7 +163,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTime to use. </param>
+        /// <param name="action"> The DateTimeOffset to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -909,7 +909,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -945,7 +945,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -971,7 +971,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> The body parameter type is string. </summary>
-        /// <param name="body"> The String to use. </param>
+        /// <param name="body"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
@@ -987,7 +987,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> The body parameter type is string. </summary>
-        /// <param name="body"> The String to use. </param>
+        /// <param name="body"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="body"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1081,7 +1081,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> The body parameter type is bool. </summary>
-        /// <param name="body"> The Boolean to use. </param>
+        /// <param name="body"> The bool to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBodyAsync(bool,CancellationToken)']/*" />
         public virtual async Task<Response> BoolBodyAsync(bool body, CancellationToken cancellationToken = default)
@@ -1093,7 +1093,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> The body parameter type is bool. </summary>
-        /// <param name="body"> The Boolean to use. </param>
+        /// <param name="body"> The bool to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='BoolBody(bool,CancellationToken)']/*" />
         public virtual Response BoolBody(bool body, CancellationToken cancellationToken = default)
@@ -1183,7 +1183,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> The body parameter type is datetime. </summary>
-        /// <param name="body"> The DateTime to use. </param>
+        /// <param name="body"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBodyAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response> DateTimeBodyAsync(DateTimeOffset body, CancellationToken cancellationToken = default)
@@ -1195,7 +1195,7 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> The body parameter type is datetime. </summary>
-        /// <param name="body"> The DateTime to use. </param>
+        /// <param name="body"> The DateTimeOffset to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='DateTimeBody(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response DateTimeBody(DateTimeOffset body, CancellationToken cancellationToken = default)
@@ -1472,9 +1472,9 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="headParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="optionalQuery"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1509,9 +1509,9 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="headParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="optionalQuery"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1537,8 +1537,8 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
@@ -1557,8 +1557,8 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
@@ -1591,8 +1591,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -1635,8 +1635,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -1674,8 +1674,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -1713,8 +1713,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>

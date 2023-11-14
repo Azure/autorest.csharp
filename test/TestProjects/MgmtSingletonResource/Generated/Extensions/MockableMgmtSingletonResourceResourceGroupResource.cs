@@ -55,7 +55,7 @@ namespace MgmtSingletonResource.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="carName"> The String to use. </param>
+        /// <param name="carName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -77,7 +77,7 @@ namespace MgmtSingletonResource.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="carName"> The String to use. </param>
+        /// <param name="carName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -107,7 +107,7 @@ namespace MgmtSingletonResource.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -130,7 +130,7 @@ namespace MgmtSingletonResource.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>

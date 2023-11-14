@@ -36,7 +36,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary> Initializes a new instance of RootClient. </summary>
-        /// <param name="cachedParameter"> The String to use. </param>
+        /// <param name="cachedParameter"> The string to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="cachedParameter"/> is an empty string, and was expected to be non-empty. </exception>
@@ -46,7 +46,7 @@ namespace SubClients_LowLevel
 
         /// <summary> Initializes a new instance of RootClient. </summary>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="cachedParameter"> The String to use. </param>
+        /// <param name="cachedParameter"> The string to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/>, <paramref name="cachedParameter"/> or <paramref name="credential"/> is null. </exception>

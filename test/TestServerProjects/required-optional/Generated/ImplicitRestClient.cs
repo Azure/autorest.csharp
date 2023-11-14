@@ -60,7 +60,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
-        /// <param name="pathParameter"> The String to use. </param>
+        /// <param name="pathParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         public async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
@@ -82,7 +82,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
-        /// <param name="pathParameter"> The String to use. </param>
+        /// <param name="pathParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pathParameter"/> is null. </exception>
         public Response GetRequiredPath(string pathParameter, CancellationToken cancellationToken = default)
@@ -121,7 +121,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
-        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutOptionalQueryAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -137,7 +137,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
-        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutOptionalQuery(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -170,7 +170,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional header parameter. </summary>
-        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutOptionalHeaderAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -186,7 +186,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional header parameter. </summary>
-        /// <param name="queryParameter"> The String to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutOptionalHeader(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -222,7 +222,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PutOptionalBodyAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -238,7 +238,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The String to use. </param>
+        /// <param name="bodyParameter"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PutOptionalBody(string bodyParameter = null, CancellationToken cancellationToken = default)
         {

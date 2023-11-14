@@ -305,8 +305,8 @@ namespace ModelShapes
             return message;
         }
 
-        /// <param name="code"> The String to use. </param>
-        /// <param name="status"> The String to use. </param>
+        /// <param name="code"> The string to use. </param>
+        /// <param name="status"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> FlattenedParameterOperationAsync(string code = null, string status = null, CancellationToken cancellationToken = default)
         {
@@ -321,8 +321,8 @@ namespace ModelShapes
             }
         }
 
-        /// <param name="code"> The String to use. </param>
-        /// <param name="status"> The String to use. </param>
+        /// <param name="code"> The string to use. </param>
+        /// <param name="status"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FlattenedParameterOperation(string code = null, string status = null, CancellationToken cancellationToken = default)
         {

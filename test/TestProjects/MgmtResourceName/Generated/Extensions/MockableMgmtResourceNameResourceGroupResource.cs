@@ -55,7 +55,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="machineName"> The String to use. </param>
+        /// <param name="machineName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -77,7 +77,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="machineName"> The String to use. </param>
+        /// <param name="machineName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -106,7 +106,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="diskResourceName"> The String to use. </param>
+        /// <param name="diskResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -128,7 +128,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="diskResourceName"> The String to use. </param>
+        /// <param name="diskResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -157,7 +157,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -179,7 +179,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -208,7 +208,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="networkResourceName"> The String to use. </param>
+        /// <param name="networkResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -230,7 +230,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="networkResourceName"> The String to use. </param>
+        /// <param name="networkResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -259,7 +259,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="displayResourceName"> The String to use. </param>
+        /// <param name="displayResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -281,7 +281,7 @@ namespace MgmtResourceName.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="displayResourceName"> The String to use. </param>
+        /// <param name="displayResourceName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
