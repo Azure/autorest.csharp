@@ -991,10 +991,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var jsonSerialization = SerializationBuilder.BuildJsonSerialization(inputParameter.Type, value.Type);
             conversions = new[]
             {
-                Var("content", New.Utf8JsonRequestContent(), out Utf8JsonRequestContentExpression utf8JsonContent),
-                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, value),
+                Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out content, out var writer),
+                JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, value),
             };
-            content = utf8JsonContent;
         }
 
         private static void CreateConversionToXmlWriterRequestContent(InputParameter inputParameter, TypedValueExpression value, out TypedValueExpression content, out MethodBodyStatement conversions)
@@ -1002,10 +1001,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var xmlSerialization = SerializationBuilder.BuildXmlSerialization(inputParameter.Type, value.Type);
             conversions = new[]
             {
-                Var("content", New.XmlWriterContent(), out XmlWriterContentExpression xmlWriterContent),
-                XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, value),
+                Extensible.RestOperations.DeclareContentWithXmlWriter(out content, out var writer),
+                XmlSerializationMethodsBuilder.SerializeExpression(writer, xmlSerialization, value),
             };
-            content = xmlWriterContent;
         }
 
         private void GetConversionsForFlattenedParameter(IReadOnlyDictionary<InputParameter, Parameter> parameters, out TypedValueExpression content, out MethodBodyStatement conversion)
