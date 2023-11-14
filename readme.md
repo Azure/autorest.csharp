@@ -185,7 +185,7 @@ to the autorest configuration to attach a debugger to the plugin process.
 There are two kinds of SDK libraries, one of them is using swaggers as input, the other kind is using TypeSpec files as input.
 
 To debug the generator in a project that takes swaggers as input, you need to add
-```
+```yml
 csharpgen:
   attach: true
 ```
