@@ -221,9 +221,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (declaration)
             {
+                case AssignValueIfNullStatement setValue:
+                    writer.WriteValueExpression(setValue.To);
+                    writer.AppendRaw(" ??= ");
+                    writer.WriteValueExpression(setValue.From);
+                    break;
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
-                    writer.AppendRaw(setValue.Operator);
+                    writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:

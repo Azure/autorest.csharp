@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (additionalProperties is null)
             {
-                return new MethodBodyStatement();
+                return EmptyStatement;
             }
 
             var additionalPropertiesExpression = new DictionaryExpression(additionalProperties.Type.Arguments[0], additionalProperties.Type.Arguments[1], additionalProperties.Value);
@@ -299,7 +299,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement CheckCollectionItemForNull(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization valueSerialization, ValueExpression value)
             => CollectionItemRequiresNullCheckInSerialization(valueSerialization)
                 ? new IfStatement(Equal(value, Null)) { utf8JsonWriter.WriteNullValue(), Continue }
-                : new MethodBodyStatement();
+                : EmptyStatement;
 
         public static Method? BuildDeserialize(TypeDeclarationOptions declaration, JsonObjectSerialization serialization, INamedTypeSymbol? existingType)
         {
@@ -488,7 +488,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (jsonPropertySerialization.CustomDeserializationMethodName is not null)
             {
                 // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
-                return new MethodBodyStatement();
+                return EmptyStatement;
             }
 
             var checkEmptyProperty = GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull);
@@ -541,7 +541,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 };
             }
 
-            return new MethodBodyStatement();
+            return EmptyStatement;
         }
 
         private static ValueExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
@@ -673,7 +673,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 case JsonValueSerialization valueSerialization:
                     value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format);
-                    return new MethodBodyStatement();
+                    return EmptyStatement;
 
                 default:
                     throw new InvalidOperationException($"{serialization.GetType()} is not supported.");

@@ -249,7 +249,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement BuildDeserializationForXContainer(XmlElementSerialization serialization, XElementExpression element, out ValueExpression deserializedContainer)
         {
-            var deserialization = new MethodBodyStatement();
+            var deserialization = EmptyStatement;
             switch (serialization)
             {
                 case XmlArraySerialization arraySerialization:
