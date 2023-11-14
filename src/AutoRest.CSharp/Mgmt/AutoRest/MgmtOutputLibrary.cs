@@ -19,9 +19,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
-using Azure.ResourceManager.ManagementGroups;
-using Azure.ResourceManager.Resources;
 using Humanizer.Inflections;
 using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
@@ -431,7 +428,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             => !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
-        public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
+        public IEnumerable<MgmtMockableExtension> MockableExtensions => ExtensionBuilder.MockableExtensions;
         public MgmtExtensionWrapper ExtensionWrapper => ExtensionBuilder.ExtensionWrapper;
 
         public MgmtExtension GetExtension(Type armCoreType) => ExtensionBuilder.GetExtension(armCoreType);

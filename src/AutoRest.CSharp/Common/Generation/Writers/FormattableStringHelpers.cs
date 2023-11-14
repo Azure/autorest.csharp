@@ -75,6 +75,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
         {
+            if (parameterType.IsValueType)
+            {
+                return null;
+            }
+
             if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
             {
                 defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
@@ -133,6 +138,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
+                { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
+                { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
                 { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };

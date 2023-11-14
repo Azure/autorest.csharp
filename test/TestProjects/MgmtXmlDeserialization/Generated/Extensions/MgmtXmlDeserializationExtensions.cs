@@ -12,52 +12,51 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtXmlDeserialization.Mocking;
 
 namespace MgmtXmlDeserialization
 {
     /// <summary> A class to add extension methods to MgmtXmlDeserialization. </summary>
     public static partial class MgmtXmlDeserializationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MockableMgmtXmlDeserializationArmClient GetMockableMgmtXmlDeserializationArmClient(ArmClient client)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
+            return client.GetCachedClient(client0 => new MockableMgmtXmlDeserializationArmClient(client0));
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static MockableMgmtXmlDeserializationResourceGroupResource GetMockableMgmtXmlDeserializationResourceGroupResource(ArmResource resource)
         {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtXmlDeserializationResourceGroupResource(client, resource.Id));
         }
-        #region XmlInstanceResource
+
         /// <summary>
         /// Gets an object representing a <see cref="XmlInstanceResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="XmlInstanceResource.CreateResourceIdentifier" /> to create a <see cref="XmlInstanceResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtXmlDeserializationArmClient.GetXmlInstanceResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <returns> Returns a <see cref="XmlInstanceResource" /> object. </returns>
         public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                XmlInstanceResource.ValidateResourceId(id);
-                return new XmlInstanceResource(client, id);
-            }
-            );
+            return GetMockableMgmtXmlDeserializationArmClient(client).GetXmlInstanceResource(id);
         }
-        #endregion
 
-        /// <summary> Gets a collection of XmlInstanceResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of XmlInstanceResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtXmlDeserializationResourceGroupResource.GetXmlInstances()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetXmlInstances();
+            return GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstances();
         }
 
         /// <summary>
@@ -72,16 +71,20 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtXmlDeserializationResourceGroupResource.GetXmlInstanceAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetXmlInstances().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstanceAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -96,16 +99,20 @@ namespace MgmtXmlDeserialization
         /// <description>XmlDeserialization_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtXmlDeserializationResourceGroupResource.GetXmlInstance(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<XmlInstanceResource> GetXmlInstance(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetXmlInstances().Get(xmlName, cancellationToken);
+            return GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstance(xmlName, cancellationToken);
         }
     }
 }
