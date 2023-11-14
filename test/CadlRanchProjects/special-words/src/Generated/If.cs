@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The if. </summary>
+    /// <summary> The If. </summary>
     public partial class If
     {
         /// <summary> Initializes a new instance of <see cref="If"/>. </summary>

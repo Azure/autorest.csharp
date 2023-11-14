@@ -345,5 +345,107 @@ Console.WriteLine(result.GetProperty("propertyModelToAddAdditionalSerializablePr
 Console.WriteLine(result.GetProperty("propertyToMoveToCustomization").ToString());
 ]]></code></example>
     </member>
+    <member name="FooAsync(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call FooAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234);
+Response<RenamedModel> response = await client.FooAsync(input);
+]]></code>
+This sample shows how to call FooAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = await client.FooAsync(input);
+]]></code></example>
+    </member>
+    <member name="Foo(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call Foo.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234);
+Response<RenamedModel> response = client.Foo(input);
+]]></code>
+This sample shows how to call Foo with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel input = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = client.Foo(input);
+]]></code></example>
+    </member>
+    <member name="FooAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call FooAsync and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = await client.FooAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call FooAsync with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = await client.FooAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
+    <member name="Foo(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Foo and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = client.Foo(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call Foo with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = client.Foo(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
   </members>
 </doc>

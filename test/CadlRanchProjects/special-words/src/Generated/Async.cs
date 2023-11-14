@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The async. </summary>
+    /// <summary> The Async. </summary>
     public partial class Async
     {
         /// <summary> Initializes a new instance of <see cref="Async"/>. </summary>

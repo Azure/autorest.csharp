@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The global. </summary>
+    /// <summary> The Global. </summary>
     public partial class Global
     {
         /// <summary> Initializes a new instance of <see cref="Global"/>. </summary>

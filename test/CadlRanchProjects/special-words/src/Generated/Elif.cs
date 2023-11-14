@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The elif. </summary>
+    /// <summary> The Elif. </summary>
     public partial class Elif
     {
         /// <summary> Initializes a new instance of <see cref="Elif"/>. </summary>

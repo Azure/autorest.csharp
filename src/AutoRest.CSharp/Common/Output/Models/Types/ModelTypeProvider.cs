@@ -92,7 +92,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override FormattableString CreateDescription()
         {
-            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : $"The {_inputModel.Name}.";
+            FormattableString defaultDescription = $"The {_inputModel.Name}.";
+            ObjectType? type = this;
+
+            if (type?.Type != null)
+            {
+                CSharpType outputType = type.Type;
+                defaultDescription = !string.IsNullOrEmpty(outputType.Name) ? $"The {outputType.Name}." : defaultDescription;
+            }
+
+            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : defaultDescription;
         }
 
         private ModelTypeProviderFields EnsureFields()

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The from. </summary>
+    /// <summary> The From. </summary>
     public partial class From
     {
         /// <summary> Initializes a new instance of <see cref="From"/>. </summary>

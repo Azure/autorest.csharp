@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.LowLevel.Extensions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -129,7 +128,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     continue;
 
                 // find the corresponding input parameter
-                var exampleValue = FindExampleValueBySerializedName(parameterExamples, parameter.Name);
+                var paramName = parameter.NameInRequest ?? parameter.Name;
+                var exampleValue = FindExampleValueBySerializedName(parameterExamples, paramName);
 
                 if (exampleValue == null)
                 {

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The lambda. </summary>
+    /// <summary> The Lambda. </summary>
     public partial class Lambda
     {
         /// <summary> Initializes a new instance of <see cref="Lambda"/>. </summary>

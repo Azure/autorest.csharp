@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The assert. </summary>
+    /// <summary> The Assert. </summary>
     public partial class Assert
     {
         /// <summary> Initializes a new instance of <see cref="Assert"/>. </summary>

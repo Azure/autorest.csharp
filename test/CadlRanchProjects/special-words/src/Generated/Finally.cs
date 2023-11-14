@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The finally. </summary>
+    /// <summary> The Finally. </summary>
     public partial class Finally
     {
         /// <summary> Initializes a new instance of <see cref="Finally"/>. </summary>
