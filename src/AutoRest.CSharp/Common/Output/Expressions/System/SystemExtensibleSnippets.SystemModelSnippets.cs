@@ -4,6 +4,7 @@
 using System;
 using System.Net.ClientModel.Core;
 using System.Net.ClientModel.Internal;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.System;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -23,7 +24,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
             {
                 return new Method
                 (
-                    new MethodSignature("ToRequestBody", null, $"Convert into a {nameof(Utf8JsonRequestBody)}.", modifiers, typeof(RequestBody), null, Array.Empty<Parameter>()),
+                    new MethodSignature(Configuration.ApiTypes.ToRequestContentName, null, $"Convert into a {nameof(Utf8JsonRequestBody)}.", modifiers, typeof(RequestBody), null, Array.Empty<Parameter>()),
                     new[]
                     {
                         Snippets.Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var requestContent, out var writer),
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                 var result = new Parameter("result", $"The result to deserialize the model from.", typeof(PipelineResponse), null, ValidationType.None, null);
                 return new Method
                 (
-                    new MethodSignature("FromResponse", null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[] { result }),
+                    new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[] { result }),
                     new MethodBodyStatement[]
                     {
                         Snippets.UsingVar("document", JsonDocumentExpression.Parse(new PipelineResponseExpression(result).Content), out var document),

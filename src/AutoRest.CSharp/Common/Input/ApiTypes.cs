@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
 
-        public abstract string FromResponseName { get; }
+        public string FromResponseName => "FromResponse";
         public abstract string ResponseParameterName { get; }
         public abstract string ContentStreamName { get; }
         public abstract string StatusName { get; }

@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -26,7 +27,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
             public override TypedValueExpression GetTypedResponseFromModel(SerializableObjectType type, TypedValueExpression response)
             {
                 var rawResponse = new ResponseExpression(response);
-                var model = new InvokeStaticMethodExpression(type.Type, FromResponseMethodName, new[] { rawResponse });
+                var model = new InvokeStaticMethodExpression(type.Type, Configuration.ApiTypes.FromResponseName, new[] { rawResponse });
                 return ResponseExpression.FromValue(model, rawResponse);
             }
 

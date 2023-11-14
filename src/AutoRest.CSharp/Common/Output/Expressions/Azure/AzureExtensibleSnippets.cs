@@ -5,9 +5,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 {
     internal partial class AzureExtensibleSnippets : ExtensibleSnippets
     {
-        private const string FromResponseMethodName = "FromResponse";
-        private const string ToRequestContentMethodName = "ToRequestContent";
-
         public override JsonElementSnippets JsonElement { get; } = new AzureJsonElementSnippets();
         public override XElementSnippets XElement { get; } = new AzureXElementSnippets();
         public override XmlWriterSnippets XmlWriter { get; } = new AzureXmlWriterSnippets();
