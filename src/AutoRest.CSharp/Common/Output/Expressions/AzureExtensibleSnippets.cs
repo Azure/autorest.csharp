@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 var contentVar = new VariableReference(typeof(Utf8JsonRequestContent), "content");
                 content = contentVar;
                 writer = new Utf8JsonRequestContentExpression(content).JsonWriter;
-                return Declare(contentVar, New.Instance(typeof(Utf8JsonRequestContent)));
+                return Var(contentVar, New.Instance(typeof(Utf8JsonRequestContent)));
             }
 
             public override MethodBodyStatement DeclareContentWithXmlWriter(out TypedValueExpression content, out XmlWriterExpression writer)
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
                 var contentVar = new VariableReference(typeof(XmlWriterContent), "content");
                 content = contentVar;
                 writer = new XmlWriterContentExpression(content).XmlWriter;
-                return Declare(contentVar, New.Instance(typeof(XmlWriterContent)));
+                return Var(contentVar, New.Instance(typeof(XmlWriterContent)));
             }
 
             public override MethodBodyStatement InvokeServiceOperationCallAndReturnHeadAsBool(TypedValueExpression pipeline, TypedValueExpression message, TypedValueExpression clientDiagnostics, bool async)
