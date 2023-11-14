@@ -448,8 +448,8 @@ namespace AutoRest.TestServer.Tests
         {
             var options = format switch
             {
-                "W" => ModelReaderWriterOptions.DefaultWireOptions,
-                "J" => new ModelReaderWriterOptions(),
+                "W" => ModelReaderWriterOptions.Wire,
+                "J" => ModelReaderWriterOptions.Json,
                 _ => throw new NotSupportedException()
             };
             var baseModel = new BaseModel();
@@ -579,8 +579,8 @@ namespace AutoRest.TestServer.Tests
         {
             var options = format switch
             {
-                "W" => ModelReaderWriterOptions.DefaultWireOptions,
-                "J" => new ModelReaderWriterOptions(),
+                "W" => ModelReaderWriterOptions.Wire,
+                "J" => ModelReaderWriterOptions.Json,
                 _ => throw new NotSupportedException()
             };
             var json = @"{""requiredString"": ""foo"", ""requiredCollectionWithNullableBooleanElement"": [false, null], ""extraProperty"": ""test""}";
@@ -606,8 +606,8 @@ namespace AutoRest.TestServer.Tests
         {
             var options = format switch
             {
-                "W" => ModelReaderWriterOptions.DefaultWireOptions,
-                "J" => new ModelReaderWriterOptions(),
+                "W" => ModelReaderWriterOptions.Wire,
+                "J" => ModelReaderWriterOptions.Json,
                 _ => throw new NotSupportedException()
             };
             var output = ModelsTypeSpecModelFactory.OutputModel(requiredString: "requiredString", requiredInt: 314, optionalNullableList: new[]
