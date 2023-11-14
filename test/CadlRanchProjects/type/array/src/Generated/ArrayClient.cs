@@ -25,19 +25,22 @@ namespace _Type._Array
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ArrayClient. </summary>
-        public ArrayClient() : this(new ArrayClientOptions())
+        public ArrayClient() : this(new Uri("http://localhost:3000"), new ArrayClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ArrayClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public ArrayClient(ArrayClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ArrayClient(Uri endpoint, ArrayClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ArrayClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of Int32Value. </summary>

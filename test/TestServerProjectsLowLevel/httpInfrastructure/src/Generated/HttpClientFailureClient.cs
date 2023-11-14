@@ -36,23 +36,25 @@ namespace httpInfrastructure_LowLevel
         /// <summary> Initializes a new instance of HttpClientFailureClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpClientFailureClient(AzureKeyCredential credential) : this(credential, new AutoRestHttpInfrastructureTestServiceClientOptions())
+        public HttpClientFailureClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new AutoRestHttpInfrastructureTestServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of HttpClientFailureClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HttpClientFailureClient(AzureKeyCredential credential, AutoRestHttpInfrastructureTestServiceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public HttpClientFailureClient(Uri endpoint, AzureKeyCredential credential, AutoRestHttpInfrastructureTestServiceClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestHttpInfrastructureTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary>

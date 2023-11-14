@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure;
 using Azure.Core.Extensions;
 using lro_LowLevel;
@@ -16,38 +17,42 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="LROsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<LROsClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLROsClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
+        public static IAzureClientBuilder<LROsClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLROsClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<LROsClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LROsClient(credential, options));
+            return builder.RegisterClientFactory<LROsClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LROsClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="LRORetrysClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<LRORetrysClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLRORetrysClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
+        public static IAzureClientBuilder<LRORetrysClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLRORetrysClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<LRORetrysClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LRORetrysClient(credential, options));
+            return builder.RegisterClientFactory<LRORetrysClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LRORetrysClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="LrosaDsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<LrosaDsClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLrosaDsClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
+        public static IAzureClientBuilder<LrosaDsClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLrosaDsClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<LrosaDsClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LrosaDsClient(credential, options));
+            return builder.RegisterClientFactory<LrosaDsClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LrosaDsClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="LROsCustomHeaderClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<LROsCustomHeaderClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLROsCustomHeaderClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential)
+        public static IAzureClientBuilder<LROsCustomHeaderClient, AutoRestLongRunningOperationTestServiceClientOptions> AddLROsCustomHeaderClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<LROsCustomHeaderClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LROsCustomHeaderClient(credential, options));
+            return builder.RegisterClientFactory<LROsCustomHeaderClient, AutoRestLongRunningOperationTestServiceClientOptions>((options) => new LROsCustomHeaderClient(endpoint, credential, options));
         }
 
         /// <summary> Registers a <see cref="LROsClient"/> instance. </summary>

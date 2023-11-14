@@ -30,19 +30,22 @@ namespace _Azure.Lro.RpcLegacy
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of LegacyClient. </summary>
-        public LegacyClient() : this(new LegacyClientOptions())
+        public LegacyClient() : this(new Uri("http://localhost:3000"), new LegacyClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of LegacyClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public LegacyClient(LegacyClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public LegacyClient(Uri endpoint, LegacyClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new LegacyClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 

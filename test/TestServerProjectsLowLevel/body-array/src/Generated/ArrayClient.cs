@@ -36,23 +36,25 @@ namespace body_array_LowLevel
         /// <summary> Initializes a new instance of ArrayClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ArrayClient(AzureKeyCredential credential) : this(credential, new ArrayClientOptions())
+        public ArrayClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new ArrayClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ArrayClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public ArrayClient(AzureKeyCredential credential, ArrayClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public ArrayClient(Uri endpoint, AzureKeyCredential credential, ArrayClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new ArrayClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary>

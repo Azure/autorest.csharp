@@ -25,19 +25,22 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of AccessClient. </summary>
-        public AccessClient() : this(new AccessClientOptions())
+        public AccessClient() : this(new Uri("http://localhost:3000"), new AccessClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AccessClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public AccessClient(AccessClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public AccessClient(Uri endpoint, AccessClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of PublicOperation. </summary>

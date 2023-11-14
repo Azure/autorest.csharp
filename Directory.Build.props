@@ -8,7 +8,7 @@
     <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
     <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
     <NoWarn Condition="'$(IsTestGenerationTestProject)' == 'true'">$(NoWarn);CS1591</NoWarn>
-    <NoWarn>$(NoWarn);NU5105;AD0001</NoWarn>
+    <NoWarn>$(NoWarn);NU5105</NoWarn>
     <!-- Test client libraries won't be in the approved namespace list -->
     <NoWarn Condition="'$(IsTestGenerationSrcProject)' == 'true'">$(NoWarn);AZC0001</NoWarn>
     <!-- Test client libraries can have single word class names -->

@@ -36,23 +36,25 @@ namespace header_LowLevel
         /// <summary> Initializes a new instance of HeaderClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HeaderClient(AzureKeyCredential credential) : this(credential, new HeaderClientOptions())
+        public HeaderClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new HeaderClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of HeaderClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public HeaderClient(AzureKeyCredential credential, HeaderClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public HeaderClient(Uri endpoint, AzureKeyCredential credential, HeaderClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new HeaderClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary>

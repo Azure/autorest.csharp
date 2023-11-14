@@ -25,19 +25,22 @@ namespace Encode.Bytes
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of BytesClient. </summary>
-        public BytesClient() : this(new BytesClientOptions())
+        public BytesClient() : this(new Uri("http://localhost:3000"), new BytesClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of BytesClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public BytesClient(BytesClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public BytesClient(Uri endpoint, BytesClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new BytesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of Query. </summary>

@@ -33,8 +33,5 @@ namespace Parameters.CollectionFormat
                 _ => throw new NotSupportedException()
             };
         }
-
-        /// <summary> TestServer endpoint. </summary>
-        public Uri Endpoint { get; set; }
     }
 }

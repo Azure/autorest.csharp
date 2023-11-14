@@ -37,23 +37,25 @@ namespace Authentication.OAuth2
         /// <summary> Initializes a new instance of OAuth2Client. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public OAuth2Client(TokenCredential credential) : this(credential, new OAuth2ClientOptions())
+        public OAuth2Client(TokenCredential credential) : this(new Uri("http://localhost:3000"), credential, new OAuth2ClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of OAuth2Client. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public OAuth2Client(TokenCredential credential, OAuth2ClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public OAuth2Client(Uri endpoint, TokenCredential credential, OAuth2ClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new OAuth2ClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using Parameters.CollectionFormat;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="CollectionFormatClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<CollectionFormatClient, CollectionFormatClientOptions> AddCollectionFormatClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<CollectionFormatClient, CollectionFormatClientOptions> AddCollectionFormatClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<CollectionFormatClient, CollectionFormatClientOptions>((options) => new CollectionFormatClient(options));
+            return builder.RegisterClientFactory<CollectionFormatClient, CollectionFormatClientOptions>((options) => new CollectionFormatClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="CollectionFormatClient"/> instance. </summary>

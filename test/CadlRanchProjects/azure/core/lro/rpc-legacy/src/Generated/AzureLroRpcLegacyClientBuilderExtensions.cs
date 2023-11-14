@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using _Azure.Lro.RpcLegacy;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="LegacyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<LegacyClient, LegacyClientOptions> AddLegacyClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<LegacyClient, LegacyClientOptions> AddLegacyClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<LegacyClient, LegacyClientOptions>((options) => new LegacyClient(options));
+            return builder.RegisterClientFactory<LegacyClient, LegacyClientOptions>((options) => new LegacyClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="LegacyClient"/> instance. </summary>

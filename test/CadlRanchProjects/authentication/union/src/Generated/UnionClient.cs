@@ -39,46 +39,50 @@ namespace Authentication.Union
         /// <summary> Initializes a new instance of UnionClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public UnionClient(AzureKeyCredential credential) : this(credential, new UnionClientOptions())
+        public UnionClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new UnionClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public UnionClient(TokenCredential credential) : this(credential, new UnionClientOptions())
+        public UnionClient(TokenCredential credential) : this(new Uri("http://localhost:3000"), credential, new UnionClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public UnionClient(AzureKeyCredential credential, UnionClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public UnionClient(Uri endpoint, AzureKeyCredential credential, UnionClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new UnionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
         /// <summary> Initializes a new instance of UnionClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public UnionClient(TokenCredential credential, UnionClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public UnionClient(Uri endpoint, TokenCredential credential, UnionClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new UnionClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 

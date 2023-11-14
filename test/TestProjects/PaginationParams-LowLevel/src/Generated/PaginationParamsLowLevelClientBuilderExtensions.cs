@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using PaginationParams_LowLevel;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PaginationParamsClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<PaginationParamsClient, PaginationParamsClientOptions> AddPaginationParamsClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> server parameter. </param>
+        public static IAzureClientBuilder<PaginationParamsClient, PaginationParamsClientOptions> AddPaginationParamsClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
-            return builder.RegisterClientFactory<PaginationParamsClient, PaginationParamsClientOptions>((options, cred) => new PaginationParamsClient(cred, options));
+            return builder.RegisterClientFactory<PaginationParamsClient, PaginationParamsClientOptions>((options, cred) => new PaginationParamsClient(endpoint, cred, options));
         }
 
         /// <summary> Registers a <see cref="PaginationParamsClient"/> instance. </summary>

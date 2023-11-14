@@ -27,19 +27,22 @@ namespace Accessibility_LowLevel_NoAuth
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
-        public AccessibilityClient() : this(new AccessibilityClientOptions())
+        public AccessibilityClient() : this(new Uri("http://localhost:3000"), new AccessibilityClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AccessibilityClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public AccessibilityClient(AccessibilityClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public AccessibilityClient(Uri endpoint, AccessibilityClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new AccessibilityClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary>

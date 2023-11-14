@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using Payload.ContentNegotiation;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ContentNegotiationClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ContentNegotiationClient, ContentNegotiationClientOptions> AddContentNegotiationClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<ContentNegotiationClient, ContentNegotiationClientOptions> AddContentNegotiationClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ContentNegotiationClient, ContentNegotiationClientOptions>((options) => new ContentNegotiationClient(options));
+            return builder.RegisterClientFactory<ContentNegotiationClient, ContentNegotiationClientOptions>((options) => new ContentNegotiationClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ContentNegotiationClient"/> instance. </summary>

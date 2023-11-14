@@ -28,19 +28,22 @@ namespace SpecialHeaders.ClientRequestId
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ClientRequestIdClient. </summary>
-        public ClientRequestIdClient() : this(new ClientRequestIdClientOptions())
+        public ClientRequestIdClient() : this(new Uri("http://localhost:3000"), new ClientRequestIdClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ClientRequestIdClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public ClientRequestIdClient(ClientRequestIdClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ClientRequestIdClient(Uri endpoint, ClientRequestIdClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ClientRequestIdClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 

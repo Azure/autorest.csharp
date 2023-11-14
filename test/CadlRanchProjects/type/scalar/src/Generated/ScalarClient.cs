@@ -25,19 +25,22 @@ namespace _Type.Scalar
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of ScalarClient. </summary>
-        public ScalarClient() : this(new ScalarClientOptions())
+        public ScalarClient() : this(new Uri("http://localhost:3000"), new ScalarClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ScalarClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public ScalarClient(ScalarClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ScalarClient(Uri endpoint, ScalarClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ScalarClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of String. </summary>

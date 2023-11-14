@@ -25,19 +25,22 @@ namespace _Type.Property.Nullable
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of NullableClient. </summary>
-        public NullableClient() : this(new NullableClientOptions())
+        public NullableClient() : this(new Uri("http://localhost:3000"), new NullableClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of NullableClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public NullableClient(NullableClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public NullableClient(Uri endpoint, NullableClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new NullableClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
         }
 
         /// <summary> Initializes a new instance of String. </summary>

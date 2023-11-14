@@ -30,19 +30,22 @@ namespace _Type.Model.Usage
         public virtual HttpPipeline Pipeline => _pipeline;
 
         /// <summary> Initializes a new instance of UsageClient. </summary>
-        public UsageClient() : this(new UsageClientOptions())
+        public UsageClient() : this(new Uri("http://localhost:3000"), new UsageClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of UsageClient. </summary>
+        /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public UsageClient(UsageClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public UsageClient(Uri endpoint, UsageClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new UsageClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 

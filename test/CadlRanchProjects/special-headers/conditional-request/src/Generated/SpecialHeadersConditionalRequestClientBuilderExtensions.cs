@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using SpecialHeaders.ConditionalRequest;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ConditionalRequestClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ConditionalRequestClient, ConditionalRequestClientOptions> AddConditionalRequestClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> TestServer endpoint. </param>
+        public static IAzureClientBuilder<ConditionalRequestClient, ConditionalRequestClientOptions> AddConditionalRequestClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ConditionalRequestClient, ConditionalRequestClientOptions>((options) => new ConditionalRequestClient(options));
+            return builder.RegisterClientFactory<ConditionalRequestClient, ConditionalRequestClientOptions>((options) => new ConditionalRequestClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ConditionalRequestClient"/> instance. </summary>

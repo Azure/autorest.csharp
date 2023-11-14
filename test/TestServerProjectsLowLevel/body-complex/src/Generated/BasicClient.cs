@@ -37,23 +37,25 @@ namespace body_complex_LowLevel
         /// <summary> Initializes a new instance of BasicClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public BasicClient(AzureKeyCredential credential) : this(credential, new AutoRestComplexTestServiceClientOptions())
+        public BasicClient(AzureKeyCredential credential) : this(new Uri("http://localhost:3000"), credential, new AutoRestComplexTestServiceClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of BasicClient. </summary>
+        /// <param name="endpoint"> server parameter. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public BasicClient(AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
+        public BasicClient(Uri endpoint, AzureKeyCredential credential, AutoRestComplexTestServiceClientOptions options)
         {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
             options ??= new AutoRestComplexTestServiceClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
-            _endpoint = options.Endpoint;
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
