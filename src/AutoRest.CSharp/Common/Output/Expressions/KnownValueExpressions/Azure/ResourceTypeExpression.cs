@@ -5,7 +5,7 @@ using System;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using Azure.Core;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record ResourceTypeExpression(ValueExpression Untyped) : TypedValueExpression<ResourceType>(Untyped)
     {

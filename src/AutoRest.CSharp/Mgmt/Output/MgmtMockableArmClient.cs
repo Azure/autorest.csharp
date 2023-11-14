@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -16,6 +17,7 @@ using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -88,18 +90,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         private MethodBodyStatement BuildScopeResourceTypeValidations(ResourceTypeSegment[]? scopeTypes)
         {
             if (scopeTypes is null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))
-                return MethodBodyStatement.Empty;
+            {
+                return new MethodBodyStatement();
+            }
 
-            var scopeVariable = (ValueExpression)_scopeParameter;
             var resourceTypeVariable = new ResourceIdentifierExpression(_scopeParameter).ResourceType;
             var conditions = new List<BoolExpression>();
             var resourceTypeStrings = new List<FormattableString>();
             foreach (var type in scopeTypes)
             {
                 // here we have an expression of `!scope.ResourceType.Equals("<type>")`
-                conditions.Add(
-                    resourceTypeVariable.InvokeEquals(Snippets.Literal(type.ToString())).Not()
-                );
+                conditions.Add(Not(resourceTypeVariable.InvokeEquals(Literal(type.ToString()))));
                 resourceTypeStrings.Add($"{type}");
             }
 
@@ -108,14 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var errorMessageFormat = $"Invalid resource type {{0}}, expected {resourceTypeStrings.Join(", ", " or ")}";
             return new IfStatement(condition)
             {
-                Snippets.Throw(
-                    Snippets.New.Instance(
-                        typeof(ArgumentException),
-                        new InvokeStaticMethodExpression(
-                            typeof(string),
-                            nameof(string.Format),
-                            new ValueExpression[] { Snippets.Literal(errorMessageFormat), resourceTypeVariable })
-                    ))
+                Throw(New.Instance(typeof(ArgumentException), new InvokeStaticMethodExpression(typeof(string), nameof(string.Format), new ValueExpression[] { Literal(errorMessageFormat), resourceTypeVariable })))
             };
         }
 

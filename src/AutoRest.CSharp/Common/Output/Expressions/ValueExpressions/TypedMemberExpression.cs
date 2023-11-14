@@ -5,5 +5,5 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
-    internal record TypeReference(CSharpType Type) : ValueExpression;
+    internal record TypedMemberExpression(ValueExpression? Inner, string MemberName, CSharpType MemberType) : TypedValueExpression(MemberType, new MemberExpression(Inner, MemberName));
 }

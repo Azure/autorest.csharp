@@ -47,36 +47,40 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case IfStatement ifStatement:
-                    writer.WriteMethodBodyStatement(new IfElseStatement(ifStatement.Condition, ifStatement.Body, null));
-                    break;
-                case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline):
                     writer.AppendRaw("if (");
-                    writer.WriteValueExpression(condition);
+                    writer.WriteValueExpression(ifStatement.Condition);
 
-                    if (inline)
+                    if (ifStatement.Inline)
                     {
                         writer.AppendRaw(") ");
                         using (writer.AmbientScope())
                         {
-                            WriteMethodBodyStatement(writer, ifBlock);
+                            WriteMethodBodyStatement(writer, ifStatement.Body);
                         }
                     }
                     else
                     {
                         writer.LineRaw(")");
-                        using (writer.Scope())
+                        using (ifStatement.AddBraces ? writer.Scope() : writer.AmbientScope())
                         {
-                            WriteMethodBodyStatement(writer, ifBlock);
+                            WriteMethodBodyStatement(writer, ifStatement.Body);
                         }
                     }
 
+                    break;
+                case IfElseStatement(var ifBlock, var elseBlock):
+                    writer.WriteMethodBodyStatement(ifBlock);
                     if (elseBlock is not null)
                     {
-                        if (inline)
+                        if (ifBlock.Inline || !ifBlock.AddBraces)
                         {
                             using (writer.AmbientScope())
                             {
                                 writer.AppendRaw("else ");
+                                if (!ifBlock.Inline)
+                                {
+                                    writer.Line();
+                                }
                                 WriteMethodBodyStatement(writer, elseBlock);
                             }
                         }
@@ -219,7 +223,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
-                    writer.AppendRaw(" = ");
+                    writer.AppendRaw(setValue.Operator);
                     writer.WriteValueExpression(setValue.From);
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:
@@ -516,13 +520,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 case NewArrayExpression(var type, var items, var size):
                     if (size is not null)
                     {
-                        writer.Append($"new {type?.FrameworkType.GetElementType()}");
+                        writer.Append($"new {type?.FrameworkType}");
                         writer.AppendRaw("[");
                         writer.WriteValueExpression(size);
                         writer.AppendRaw("]");
                         break;
                     }
-                    else if (items is { Elements.Count: > 0 })
+
+                    if (items is { Elements.Count: > 0 })
                     {
                         if (type is null)
                         {
