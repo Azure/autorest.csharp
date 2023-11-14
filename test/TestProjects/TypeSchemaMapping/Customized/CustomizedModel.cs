@@ -29,7 +29,7 @@ namespace CustomNamespace
 
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             int? propertyRenamedAndTypeChanged = default;
             CustomFruitEnum fruit = default;
