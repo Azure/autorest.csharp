@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(CheckNameAvailabilityRequestConverter))]
     public partial class CheckNameAvailabilityRequest : IUtf8JsonSerializable, IJsonModel<CheckNameAvailabilityRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CheckNameAvailabilityRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CheckNameAvailabilityRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CheckNameAvailabilityRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CheckNameAvailabilityRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CheckNameAvailabilityRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CheckNameAvailabilityRequest>)} interface");
             }
@@ -40,9 +40,9 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        CheckNameAvailabilityRequest IJsonModel<CheckNameAvailabilityRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CheckNameAvailabilityRequest IJsonModel<CheckNameAvailabilityRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CheckNameAvailabilityRequest)} does not support '{options.Format}' format.");
@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static CheckNameAvailabilityRequest DeserializeCheckNameAvailabilityRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -82,9 +82,9 @@ namespace Azure.ResourceManager.Fake.Models
             return new CheckNameAvailabilityRequest(name.Value, type);
         }
 
-        BinaryData IModel<CheckNameAvailabilityRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CheckNameAvailabilityRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CheckNameAvailabilityRequest)} does not support '{options.Format}' format.");
@@ -93,9 +93,9 @@ namespace Azure.ResourceManager.Fake.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CheckNameAvailabilityRequest IModel<CheckNameAvailabilityRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CheckNameAvailabilityRequest IPersistableModel<CheckNameAvailabilityRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CheckNameAvailabilityRequest)} does not support '{options.Format}' format.");
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeCheckNameAvailabilityRequest(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CheckNameAvailabilityRequest>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CheckNameAvailabilityRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class CheckNameAvailabilityRequestConverter : JsonConverter<CheckNameAvailabilityRequest>
         {

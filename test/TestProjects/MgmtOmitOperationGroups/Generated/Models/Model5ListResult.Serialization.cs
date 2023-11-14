@@ -16,17 +16,17 @@ namespace MgmtOmitOperationGroups.Models
 {
     internal partial class Model5ListResult : IUtf8JsonSerializable, IJsonModel<Model5ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model5ListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model5ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Model5ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Model5ListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Model5ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Model5ListResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -39,7 +39,7 @@ namespace MgmtOmitOperationGroups.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -47,7 +47,7 @@ namespace MgmtOmitOperationGroups.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace MgmtOmitOperationGroups.Models
             writer.WriteEndObject();
         }
 
-        Model5ListResult IJsonModel<Model5ListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Model5ListResult IJsonModel<Model5ListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Model5ListResult)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace MgmtOmitOperationGroups.Models
 
         internal static Model5ListResult DeserializeModel5ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -110,7 +110,7 @@ namespace MgmtOmitOperationGroups.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -119,9 +119,9 @@ namespace MgmtOmitOperationGroups.Models
             return new Model5ListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Model5ListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Model5ListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Model5ListResult)} does not support '{options.Format}' format.");
@@ -130,9 +130,9 @@ namespace MgmtOmitOperationGroups.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Model5ListResult IModel<Model5ListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Model5ListResult IPersistableModel<Model5ListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Model5ListResult)} does not support '{options.Format}' format.");
@@ -142,6 +142,6 @@ namespace MgmtOmitOperationGroups.Models
             return DeserializeModel5ListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Model5ListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Model5ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

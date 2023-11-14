@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class HeaderActionParameters : IUtf8JsonSerializable, IJsonModel<HeaderActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HeaderActionParameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HeaderActionParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<HeaderActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<HeaderActionParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<HeaderActionParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<HeaderActionParameters>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        HeaderActionParameters IJsonModel<HeaderActionParameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        HeaderActionParameters IJsonModel<HeaderActionParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HeaderActionParameters)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
 
         internal static HeaderActionParameters DeserializeHeaderActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -103,7 +103,7 @@ namespace MgmtDiscriminator.Models
                     value = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -112,9 +112,9 @@ namespace MgmtDiscriminator.Models
             return new HeaderActionParameters(typeName, headerAction, headerName, value.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<HeaderActionParameters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<HeaderActionParameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HeaderActionParameters)} does not support '{options.Format}' format.");
@@ -123,9 +123,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        HeaderActionParameters IModel<HeaderActionParameters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        HeaderActionParameters IPersistableModel<HeaderActionParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HeaderActionParameters)} does not support '{options.Format}' format.");
@@ -135,6 +135,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeHeaderActionParameters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<HeaderActionParameters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<HeaderActionParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

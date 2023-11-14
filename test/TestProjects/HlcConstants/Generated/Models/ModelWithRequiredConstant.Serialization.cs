@@ -16,11 +16,11 @@ namespace HlcConstants.Models
 {
     public partial class ModelWithRequiredConstant : IUtf8JsonSerializable, IJsonModel<ModelWithRequiredConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredConstant>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredConstant>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithRequiredConstant>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithRequiredConstant>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithRequiredConstant>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithRequiredConstant>)} interface");
             }
@@ -34,7 +34,7 @@ namespace HlcConstants.Models
             writer.WriteBooleanValue(RequiredBooleanConstant);
             writer.WritePropertyName("requiredFloatConstant"u8);
             writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace HlcConstants.Models
             writer.WriteEndObject();
         }
 
-        ModelWithRequiredConstant IJsonModel<ModelWithRequiredConstant>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithRequiredConstant IJsonModel<ModelWithRequiredConstant>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredConstant)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace HlcConstants.Models
 
         internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,7 +100,7 @@ namespace HlcConstants.Models
                     requiredFloatConstant = new FloatConstant(property.Value.GetSingle());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -109,9 +109,9 @@ namespace HlcConstants.Models
             return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithRequiredConstant>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithRequiredConstant>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredConstant)} does not support '{options.Format}' format.");
@@ -120,9 +120,9 @@ namespace HlcConstants.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithRequiredConstant IModel<ModelWithRequiredConstant>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithRequiredConstant IPersistableModel<ModelWithRequiredConstant>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredConstant)} does not support '{options.Format}' format.");
@@ -132,6 +132,6 @@ namespace HlcConstants.Models
             return DeserializeModelWithRequiredConstant(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithRequiredConstant>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithRequiredConstant>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

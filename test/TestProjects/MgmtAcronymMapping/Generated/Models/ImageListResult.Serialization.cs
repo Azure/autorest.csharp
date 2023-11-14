@@ -17,11 +17,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class ImageListResult : IUtf8JsonSerializable, IJsonModel<ImageListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImageListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImageListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImageListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImageListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        ImageListResult IJsonModel<ImageListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImageListResult IJsonModel<ImageListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static ImageListResult DeserializeImageListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtAcronymMapping.Models
             return new ImageListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ImageListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImageListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImageListResult IModel<ImageListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImageListResult IPersistableModel<ImageListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImageListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeImageListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImageListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImageListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtExactMatchInheritance.Models
 {
     public partial class ExactMatchModel9 : IUtf8JsonSerializable, IJsonModel<ExactMatchModel9>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel9>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel9>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ExactMatchModel9>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ExactMatchModel9>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel9>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExactMatchModel9>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtExactMatchInheritance.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel9Type);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtExactMatchInheritance.Models
             writer.WriteEndObject();
         }
 
-        ExactMatchModel9 IJsonModel<ExactMatchModel9>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ExactMatchModel9 IJsonModel<ExactMatchModel9>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExactMatchModel9)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtExactMatchInheritance.Models
 
         internal static ExactMatchModel9 DeserializeExactMatchModel9(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace MgmtExactMatchInheritance.Models
                     type = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace MgmtExactMatchInheritance.Models
             return new ExactMatchModel9(Optional.ToNullable(id), name.Value, type.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ExactMatchModel9>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ExactMatchModel9>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExactMatchModel9)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace MgmtExactMatchInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ExactMatchModel9 IModel<ExactMatchModel9>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ExactMatchModel9 IPersistableModel<ExactMatchModel9>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExactMatchModel9)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel9(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ExactMatchModel9>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ExactMatchModel9>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class Facet : IUtf8JsonSerializable, IJsonModel<Facet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Facet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Facet>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Facet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Facet>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Facet>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Facet>)} interface");
             }
@@ -29,7 +29,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("field"u8);
             writer.WriteStringValue(Field);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Facet IJsonModel<Facet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Facet IJsonModel<Facet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Facet)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
 
         internal static Facet DeserializeFacet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace ModelsTypeSpec.Models
                     field = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace ModelsTypeSpec.Models
             return new Facet(field, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Facet>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Facet>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Facet)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Facet IModel<Facet>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Facet IPersistableModel<Facet>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Facet)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeFacet(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Facet>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Facet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Facet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFacet(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeFacet(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

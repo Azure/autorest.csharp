@@ -17,11 +17,11 @@ namespace Inheritance.Models
 {
     public partial class BaseClass : IUtf8JsonSerializable, IJsonModel<BaseClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClass>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClass>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BaseClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BaseClass>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BaseClass>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseClass>)} interface");
             }
@@ -87,7 +87,7 @@ namespace Inheritance.Models
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -105,9 +105,9 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        BaseClass IJsonModel<BaseClass>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BaseClass IJsonModel<BaseClass>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BaseClass)} does not support '{options.Format}' format.");
@@ -119,7 +119,7 @@ namespace Inheritance.Models
 
         internal static BaseClass DeserializeBaseClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -245,7 +245,7 @@ namespace Inheritance.Models
                     dfeUri = JsonSerializer.Deserialize<DataFactoryElement<Uri>>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -254,9 +254,9 @@ namespace Inheritance.Models
             return new BaseClass(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BaseClass>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BaseClass>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BaseClass)} does not support '{options.Format}' format.");
@@ -265,9 +265,9 @@ namespace Inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BaseClass IModel<BaseClass>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BaseClass IPersistableModel<BaseClass>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BaseClass)} does not support '{options.Format}' format.");
@@ -277,6 +277,6 @@ namespace Inheritance.Models
             return DeserializeBaseClass(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BaseClass>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BaseClass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

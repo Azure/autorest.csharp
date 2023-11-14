@@ -17,11 +17,11 @@ namespace MgmtParamOrdering.Models
 {
     internal partial class WorkspaceListResult : IUtf8JsonSerializable, IJsonModel<WorkspaceListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WorkspaceListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WorkspaceListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<WorkspaceListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<WorkspaceListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<WorkspaceListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WorkspaceListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtParamOrdering.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtParamOrdering.Models
             writer.WriteEndObject();
         }
 
-        WorkspaceListResult IJsonModel<WorkspaceListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        WorkspaceListResult IJsonModel<WorkspaceListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WorkspaceListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtParamOrdering.Models
 
         internal static WorkspaceListResult DeserializeWorkspaceListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtParamOrdering.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtParamOrdering.Models
             return new WorkspaceListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<WorkspaceListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<WorkspaceListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WorkspaceListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtParamOrdering.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        WorkspaceListResult IModel<WorkspaceListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        WorkspaceListResult IPersistableModel<WorkspaceListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WorkspaceListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeWorkspaceListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<WorkspaceListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<WorkspaceListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

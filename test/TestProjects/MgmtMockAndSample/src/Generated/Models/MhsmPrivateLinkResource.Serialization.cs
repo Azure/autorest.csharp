@@ -17,11 +17,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class MhsmPrivateLinkResource : IUtf8JsonSerializable, IJsonModel<MhsmPrivateLinkResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateLinkResource>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateLinkResource>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MhsmPrivateLinkResource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MhsmPrivateLinkResource>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MhsmPrivateLinkResource>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MhsmPrivateLinkResource>)} interface");
             }
@@ -45,22 +45,22 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -70,7 +70,7 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(GroupId))
                 {
@@ -78,7 +78,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(GroupId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(RequiredMembers))
                 {
@@ -102,7 +102,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -120,9 +120,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        MhsmPrivateLinkResource IJsonModel<MhsmPrivateLinkResource>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MhsmPrivateLinkResource IJsonModel<MhsmPrivateLinkResource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MhsmPrivateLinkResource)} does not support '{options.Format}' format.");
@@ -134,7 +134,7 @@ namespace MgmtMockAndSample.Models
 
         internal static MhsmPrivateLinkResource DeserializeMhsmPrivateLinkResource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -251,7 +251,7 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -260,9 +260,9 @@ namespace MgmtMockAndSample.Models
             return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), sku.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MhsmPrivateLinkResource>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MhsmPrivateLinkResource>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MhsmPrivateLinkResource)} does not support '{options.Format}' format.");
@@ -271,9 +271,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MhsmPrivateLinkResource IModel<MhsmPrivateLinkResource>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MhsmPrivateLinkResource IPersistableModel<MhsmPrivateLinkResource>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MhsmPrivateLinkResource)} does not support '{options.Format}' format.");
@@ -283,6 +283,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateLinkResource(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MhsmPrivateLinkResource>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MhsmPrivateLinkResource>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

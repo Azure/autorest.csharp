@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ContainerProperties : IXmlSerializable, IModel<ContainerProperties>
+    public partial class ContainerProperties : IXmlSerializable, IPersistableModel<ContainerProperties>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -88,10 +88,10 @@ namespace xml_service.Models
             return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, default);
         }
 
-        BinaryData IModel<ContainerProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ContainerProperties>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ContainerProperties>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -111,9 +111,9 @@ namespace xml_service.Models
             }
         }
 
-        ContainerProperties IModel<ContainerProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ContainerProperties IPersistableModel<ContainerProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ContainerProperties)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace xml_service.Models
             return DeserializeContainerProperties(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ContainerProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ContainerProperties>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

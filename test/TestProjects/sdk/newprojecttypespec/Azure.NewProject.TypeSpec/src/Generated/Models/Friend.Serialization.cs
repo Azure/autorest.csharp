@@ -17,11 +17,11 @@ namespace Azure.NewProject.TypeSpec.Models
 {
     public partial class Friend : IUtf8JsonSerializable, IJsonModel<Friend>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Friend>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Friend>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Friend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Friend>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Friend>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Friend>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Azure.NewProject.TypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Azure.NewProject.TypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Friend IJsonModel<Friend>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Friend IJsonModel<Friend>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Azure.NewProject.TypeSpec.Models
 
         internal static Friend DeserializeFriend(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Azure.NewProject.TypeSpec.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Azure.NewProject.TypeSpec.Models
             return new Friend(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Friend>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Friend>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Azure.NewProject.TypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Friend IModel<Friend>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Friend IPersistableModel<Friend>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Friend)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Azure.NewProject.TypeSpec.Models
             return DeserializeFriend(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Friend>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Friend>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Friend FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeFriend(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

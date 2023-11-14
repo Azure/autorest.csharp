@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class VirtualMachineReimageContent : IUtf8JsonSerializable, IJsonModel<VirtualMachineReimageContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineReimageContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineReimageContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VirtualMachineReimageContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VirtualMachineReimageContent>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineReimageContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineReimageContent>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("tempDisk"u8);
                 writer.WriteBooleanValue(TempDisk.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachineReimageContent IJsonModel<VirtualMachineReimageContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VirtualMachineReimageContent IJsonModel<VirtualMachineReimageContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineReimageContent)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static VirtualMachineReimageContent DeserializeVirtualMachineReimageContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     tempDisk = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineReimageContent(Optional.ToNullable(tempDisk), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VirtualMachineReimageContent>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VirtualMachineReimageContent>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineReimageContent)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VirtualMachineReimageContent IModel<VirtualMachineReimageContent>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VirtualMachineReimageContent IPersistableModel<VirtualMachineReimageContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineReimageContent)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineReimageContent(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VirtualMachineReimageContent>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VirtualMachineReimageContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

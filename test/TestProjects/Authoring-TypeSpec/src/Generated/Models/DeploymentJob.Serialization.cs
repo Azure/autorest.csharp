@@ -17,11 +17,11 @@ namespace AuthoringTypeSpec.Models
 {
     public partial class DeploymentJob : IUtf8JsonSerializable, IJsonModel<DeploymentJob>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentJob>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentJob>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeploymentJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeploymentJob>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentJob>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentJob>)} interface");
             }
@@ -29,17 +29,17 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("jobId"u8);
             writer.WriteStringValue(JobId);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("createdDateTime"u8);
                 writer.WriteStringValue(CreatedDateTime, "O");
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("lastUpdatedDateTime"u8);
                 writer.WriteStringValue(LastUpdatedDateTime, "O");
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("expirationDateTime"u8);
                 writer.WriteStringValue(ExpirationDateTime, "O");
@@ -55,12 +55,12 @@ namespace AuthoringTypeSpec.Models
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
             JsonSerializer.Serialize(writer, Errors);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -78,9 +78,9 @@ namespace AuthoringTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        DeploymentJob IJsonModel<DeploymentJob>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeploymentJob IJsonModel<DeploymentJob>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{options.Format}' format.");
@@ -92,7 +92,7 @@ namespace AuthoringTypeSpec.Models
 
         internal static DeploymentJob DeserializeDeploymentJob(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -155,7 +155,7 @@ namespace AuthoringTypeSpec.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -164,9 +164,9 @@ namespace AuthoringTypeSpec.Models
             return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeploymentJob>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeploymentJob>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{options.Format}' format.");
@@ -175,9 +175,9 @@ namespace AuthoringTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeploymentJob IModel<DeploymentJob>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeploymentJob IPersistableModel<DeploymentJob>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentJob)} does not support '{options.Format}' format.");
@@ -187,14 +187,14 @@ namespace AuthoringTypeSpec.Models
             return DeserializeDeploymentJob(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeploymentJob>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeploymentJob>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DeploymentJob FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDeploymentJob(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDeploymentJob(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

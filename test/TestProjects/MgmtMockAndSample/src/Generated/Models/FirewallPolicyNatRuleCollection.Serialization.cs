@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyNatRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyNatRuleCollection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyNatRuleCollection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyNatRuleCollection>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicyNatRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicyNatRuleCollection>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyNatRuleCollection>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyNatRuleCollection>)} interface");
             }
@@ -53,7 +53,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -71,9 +71,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicyNatRuleCollection IJsonModel<FirewallPolicyNatRuleCollection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyNatRuleCollection IJsonModel<FirewallPolicyNatRuleCollection>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyNatRuleCollection)} does not support '{options.Format}' format.");
@@ -85,7 +85,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyNatRuleCollection DeserializeFirewallPolicyNatRuleCollection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,7 +142,7 @@ namespace MgmtMockAndSample.Models
                     priority = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -151,9 +151,9 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyNatRuleCollection(ruleCollectionType, name.Value, Optional.ToNullable(priority), serializedAdditionalRawData, action.Value, Optional.ToList(rules));
         }
 
-        BinaryData IModel<FirewallPolicyNatRuleCollection>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicyNatRuleCollection>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyNatRuleCollection)} does not support '{options.Format}' format.");
@@ -162,9 +162,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicyNatRuleCollection IModel<FirewallPolicyNatRuleCollection>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyNatRuleCollection IPersistableModel<FirewallPolicyNatRuleCollection>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyNatRuleCollection)} does not support '{options.Format}' format.");
@@ -174,6 +174,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyNatRuleCollection(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicyNatRuleCollection>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicyNatRuleCollection>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

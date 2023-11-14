@@ -16,17 +16,17 @@ namespace MgmtScopeResource.Models
 {
     public partial class DeploymentPropertiesExtended : IUtf8JsonSerializable, IJsonModel<DeploymentPropertiesExtended>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentPropertiesExtended>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentPropertiesExtended>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeploymentPropertiesExtended>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeploymentPropertiesExtended>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentPropertiesExtended>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentPropertiesExtended>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -34,7 +34,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(CorrelationId))
                 {
@@ -42,7 +42,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(CorrelationId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Timestamp))
                 {
@@ -50,7 +50,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Timestamp.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Duration))
                 {
@@ -58,7 +58,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Duration.Value, "P");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Outputs))
                 {
@@ -73,7 +73,7 @@ namespace MgmtScopeResource.Models
 #endif
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Parameters))
                 {
@@ -93,7 +93,7 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToSerialString());
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ErrorResponse))
                 {
@@ -101,7 +101,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteObjectValue(ErrorResponse);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -119,9 +119,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        DeploymentPropertiesExtended IJsonModel<DeploymentPropertiesExtended>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeploymentPropertiesExtended IJsonModel<DeploymentPropertiesExtended>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentPropertiesExtended)} does not support '{options.Format}' format.");
@@ -133,7 +133,7 @@ namespace MgmtScopeResource.Models
 
         internal static DeploymentPropertiesExtended DeserializeDeploymentPropertiesExtended(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -219,7 +219,7 @@ namespace MgmtScopeResource.Models
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -228,9 +228,9 @@ namespace MgmtScopeResource.Models
             return new DeploymentPropertiesExtended(Optional.ToNullable(provisioningState), correlationId.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), outputs.Value, parameters.Value, Optional.ToNullable(mode), errorResponse.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeploymentPropertiesExtended>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeploymentPropertiesExtended>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentPropertiesExtended)} does not support '{options.Format}' format.");
@@ -239,9 +239,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeploymentPropertiesExtended IModel<DeploymentPropertiesExtended>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeploymentPropertiesExtended IPersistableModel<DeploymentPropertiesExtended>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentPropertiesExtended)} does not support '{options.Format}' format.");
@@ -251,6 +251,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentPropertiesExtended(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeploymentPropertiesExtended>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeploymentPropertiesExtended>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

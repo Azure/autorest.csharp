@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyCertificateAuthority : IUtf8JsonSerializable, IJsonModel<FirewallPolicyCertificateAuthority>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyCertificateAuthority>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyCertificateAuthority>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicyCertificateAuthority>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicyCertificateAuthority>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyCertificateAuthority>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyCertificateAuthority>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicyCertificateAuthority IJsonModel<FirewallPolicyCertificateAuthority>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyCertificateAuthority IJsonModel<FirewallPolicyCertificateAuthority>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyCertificateAuthority)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyCertificateAuthority DeserializeFirewallPolicyCertificateAuthority(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace MgmtMockAndSample.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyCertificateAuthority(keyVaultSecretId.Value, name.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FirewallPolicyCertificateAuthority>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicyCertificateAuthority>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyCertificateAuthority)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicyCertificateAuthority IModel<FirewallPolicyCertificateAuthority>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyCertificateAuthority IPersistableModel<FirewallPolicyCertificateAuthority>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyCertificateAuthority)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyCertificateAuthority(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicyCertificateAuthority>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicyCertificateAuthority>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace TypeSchemaMapping.Models
 {
     internal partial class SecondModel : IUtf8JsonSerializable, IJsonModel<SecondModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecondModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecondModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SecondModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SecondModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SecondModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SecondModel>)} interface");
             }
@@ -48,7 +48,7 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        SecondModel IJsonModel<SecondModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SecondModel IJsonModel<SecondModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace TypeSchemaMapping.Models
 
         internal static SecondModel DeserializeSecondModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -125,7 +125,7 @@ namespace TypeSchemaMapping.Models
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -134,9 +134,9 @@ namespace TypeSchemaMapping.Models
             return new SecondModel(stringProperty, Optional.ToDictionary(dictionaryProperty), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SecondModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SecondModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
@@ -145,9 +145,9 @@ namespace TypeSchemaMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SecondModel IModel<SecondModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SecondModel IPersistableModel<SecondModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecondModel)} does not support '{options.Format}' format.");
@@ -157,6 +157,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeSecondModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SecondModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SecondModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

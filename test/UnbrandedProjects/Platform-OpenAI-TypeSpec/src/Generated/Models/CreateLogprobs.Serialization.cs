@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateLogprobs : IUtf8JsonWriteable, IJsonModel<CreateLogprobs>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateLogprobs>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateLogprobs>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateLogprobs>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateLogprobs>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateLogprobs>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateLogprobs>)} interface");
             }
@@ -62,7 +62,7 @@ namespace OpenAI.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -80,9 +80,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateLogprobs IJsonModel<CreateLogprobs>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateLogprobs IJsonModel<CreateLogprobs>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateLogprobs)} does not support '{options.Format}' format.");
@@ -94,7 +94,7 @@ namespace OpenAI.Models
 
         internal static CreateLogprobs DeserializeCreateLogprobs(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -160,7 +160,7 @@ namespace OpenAI.Models
                     textOffset = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -169,9 +169,9 @@ namespace OpenAI.Models
             return new CreateLogprobs(tokens, tokenLogprobs, topLogprobs, textOffset, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateLogprobs>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateLogprobs>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateLogprobs)} does not support '{options.Format}' format.");
@@ -180,9 +180,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateLogprobs IModel<CreateLogprobs>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateLogprobs IPersistableModel<CreateLogprobs>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateLogprobs)} does not support '{options.Format}' format.");
@@ -192,14 +192,14 @@ namespace OpenAI.Models
             return DeserializeCreateLogprobs(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateLogprobs>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateLogprobs>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateLogprobs FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateLogprobs(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateLogprobs(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

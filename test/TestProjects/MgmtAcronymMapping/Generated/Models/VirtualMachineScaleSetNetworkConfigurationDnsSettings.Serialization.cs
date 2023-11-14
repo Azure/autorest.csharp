@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class VirtualMachineScaleSetNetworkConfigurationDnsSettings : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachineScaleSetNetworkConfigurationDnsSettings IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VirtualMachineScaleSetNetworkConfigurationDnsSettings IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineScaleSetNetworkConfigurationDnsSettings)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static VirtualMachineScaleSetNetworkConfigurationDnsSettings DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace MgmtAcronymMapping.Models
                     dnsServers = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineScaleSetNetworkConfigurationDnsSettings(Optional.ToList(dnsServers), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineScaleSetNetworkConfigurationDnsSettings)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VirtualMachineScaleSetNetworkConfigurationDnsSettings IModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VirtualMachineScaleSetNetworkConfigurationDnsSettings IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineScaleSetNetworkConfigurationDnsSettings)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

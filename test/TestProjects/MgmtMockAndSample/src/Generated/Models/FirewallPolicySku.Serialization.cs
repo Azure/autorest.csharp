@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     internal partial class FirewallPolicySku : IUtf8JsonSerializable, IJsonModel<FirewallPolicySku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicySku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicySku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicySku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicySku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicySku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicySku>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("tier"u8);
                 writer.WriteStringValue(Tier.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicySku IJsonModel<FirewallPolicySku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicySku IJsonModel<FirewallPolicySku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicySku)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicySku DeserializeFirewallPolicySku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtMockAndSample.Models
                     tier = new FirewallPolicySkuTier(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicySku(Optional.ToNullable(tier), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FirewallPolicySku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicySku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicySku)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicySku IModel<FirewallPolicySku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicySku IPersistableModel<FirewallPolicySku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicySku)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicySku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicySku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicySku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

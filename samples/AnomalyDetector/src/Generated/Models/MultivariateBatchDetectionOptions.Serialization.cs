@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class MultivariateBatchDetectionOptions : IUtf8JsonSerializable, IJsonModel<MultivariateBatchDetectionOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultivariateBatchDetectionOptions>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultivariateBatchDetectionOptions>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MultivariateBatchDetectionOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MultivariateBatchDetectionOptions>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MultivariateBatchDetectionOptions>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MultivariateBatchDetectionOptions>)} interface");
             }
@@ -35,7 +35,7 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(StartTime, "O");
             writer.WritePropertyName("endTime"u8);
             writer.WriteStringValue(EndTime, "O");
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -53,9 +53,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        MultivariateBatchDetectionOptions IJsonModel<MultivariateBatchDetectionOptions>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MultivariateBatchDetectionOptions IJsonModel<MultivariateBatchDetectionOptions>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MultivariateBatchDetectionOptions)} does not support '{options.Format}' format.");
@@ -67,7 +67,7 @@ namespace AnomalyDetector.Models
 
         internal static MultivariateBatchDetectionOptions DeserializeMultivariateBatchDetectionOptions(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace AnomalyDetector.Models
                     endTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace AnomalyDetector.Models
             return new MultivariateBatchDetectionOptions(dataSource, topContributorCount, startTime, endTime, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MultivariateBatchDetectionOptions>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MultivariateBatchDetectionOptions>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MultivariateBatchDetectionOptions)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MultivariateBatchDetectionOptions IModel<MultivariateBatchDetectionOptions>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MultivariateBatchDetectionOptions IPersistableModel<MultivariateBatchDetectionOptions>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MultivariateBatchDetectionOptions)} does not support '{options.Format}' format.");
@@ -133,14 +133,14 @@ namespace AnomalyDetector.Models
             return DeserializeMultivariateBatchDetectionOptions(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MultivariateBatchDetectionOptions>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MultivariateBatchDetectionOptions>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static MultivariateBatchDetectionOptions FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateBatchDetectionOptions(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeMultivariateBatchDetectionOptions(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

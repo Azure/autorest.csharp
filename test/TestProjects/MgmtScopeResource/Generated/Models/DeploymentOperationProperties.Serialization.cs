@@ -16,17 +16,17 @@ namespace MgmtScopeResource.Models
 {
     public partial class DeploymentOperationProperties : IUtf8JsonSerializable, IJsonModel<DeploymentOperationProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentOperationProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentOperationProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeploymentOperationProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeploymentOperationProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentOperationProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentOperationProperties>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningOperation))
                 {
@@ -34,7 +34,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ProvisioningOperation.Value.ToSerialString());
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -42,7 +42,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ProvisioningState);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Timestamp))
                 {
@@ -50,7 +50,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Timestamp.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Duration))
                 {
@@ -58,7 +58,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Duration.Value, "P");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(AnotherDuration))
                 {
@@ -66,7 +66,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AnotherDuration.Value, "c");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ServiceRequestId))
                 {
@@ -74,7 +74,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ServiceRequestId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(StatusCode))
                 {
@@ -82,7 +82,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(StatusCode);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(StatusMessage))
                 {
@@ -90,7 +90,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteObjectValue(StatusMessage);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Request))
                 {
@@ -98,7 +98,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteObjectValue(Request);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Response))
                 {
@@ -106,7 +106,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteObjectValue(Response);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -124,9 +124,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        DeploymentOperationProperties IJsonModel<DeploymentOperationProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeploymentOperationProperties IJsonModel<DeploymentOperationProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentOperationProperties)} does not support '{options.Format}' format.");
@@ -138,7 +138,7 @@ namespace MgmtScopeResource.Models
 
         internal static DeploymentOperationProperties DeserializeDeploymentOperationProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -236,7 +236,7 @@ namespace MgmtScopeResource.Models
                     response = HttpMessage.DeserializeHttpMessage(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -245,9 +245,9 @@ namespace MgmtScopeResource.Models
             return new DeploymentOperationProperties(Optional.ToNullable(provisioningOperation), provisioningState.Value, Optional.ToNullable(timestamp), Optional.ToNullable(duration), Optional.ToNullable(anotherDuration), serviceRequestId.Value, statusCode.Value, statusMessage.Value, request.Value, response.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeploymentOperationProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeploymentOperationProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentOperationProperties)} does not support '{options.Format}' format.");
@@ -256,9 +256,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeploymentOperationProperties IModel<DeploymentOperationProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeploymentOperationProperties IPersistableModel<DeploymentOperationProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentOperationProperties)} does not support '{options.Format}' format.");
@@ -268,6 +268,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentOperationProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeploymentOperationProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeploymentOperationProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

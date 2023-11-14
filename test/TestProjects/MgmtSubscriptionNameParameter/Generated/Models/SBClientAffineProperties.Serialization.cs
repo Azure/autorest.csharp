@@ -16,11 +16,11 @@ namespace MgmtSubscriptionNameParameter.Models
 {
     public partial class SBClientAffineProperties : IUtf8JsonSerializable, IJsonModel<SBClientAffineProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBClientAffineProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBClientAffineProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SBClientAffineProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SBClientAffineProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SBClientAffineProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SBClientAffineProperties>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtSubscriptionNameParameter.Models
                 writer.WritePropertyName("isShared"u8);
                 writer.WriteBooleanValue(IsShared.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtSubscriptionNameParameter.Models
             writer.WriteEndObject();
         }
 
-        SBClientAffineProperties IJsonModel<SBClientAffineProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SBClientAffineProperties IJsonModel<SBClientAffineProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SBClientAffineProperties)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtSubscriptionNameParameter.Models
 
         internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace MgmtSubscriptionNameParameter.Models
                     isShared = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace MgmtSubscriptionNameParameter.Models
             return new SBClientAffineProperties(clientId.Value, Optional.ToNullable(isDurable), Optional.ToNullable(isShared), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SBClientAffineProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SBClientAffineProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SBClientAffineProperties)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace MgmtSubscriptionNameParameter.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SBClientAffineProperties IModel<SBClientAffineProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SBClientAffineProperties IPersistableModel<SBClientAffineProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SBClientAffineProperties)} does not support '{options.Format}' format.");
@@ -141,6 +141,6 @@ namespace MgmtSubscriptionNameParameter.Models
             return DeserializeSBClientAffineProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SBClientAffineProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SBClientAffineProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

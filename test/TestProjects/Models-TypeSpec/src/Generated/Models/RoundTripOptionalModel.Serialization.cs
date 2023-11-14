@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripOptionalModel : IUtf8JsonSerializable, IJsonModel<RoundTripOptionalModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOptionalModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOptionalModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RoundTripOptionalModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RoundTripOptionalModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RoundTripOptionalModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripOptionalModel>)} interface");
             }
@@ -145,7 +145,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -163,9 +163,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        RoundTripOptionalModel IJsonModel<RoundTripOptionalModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RoundTripOptionalModel IJsonModel<RoundTripOptionalModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{options.Format}' format.");
@@ -177,7 +177,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripOptionalModel DeserializeRoundTripOptionalModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -375,7 +375,7 @@ namespace ModelsTypeSpec.Models
                     optionalCollectionWithNullableIntElement = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -384,9 +384,9 @@ namespace ModelsTypeSpec.Models
             return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelList), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RoundTripOptionalModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RoundTripOptionalModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{options.Format}' format.");
@@ -395,9 +395,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RoundTripOptionalModel IModel<RoundTripOptionalModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RoundTripOptionalModel IPersistableModel<RoundTripOptionalModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripOptionalModel)} does not support '{options.Format}' format.");
@@ -407,14 +407,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripOptionalModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RoundTripOptionalModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RoundTripOptionalModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripOptionalModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripOptionalModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRoundTripOptionalModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

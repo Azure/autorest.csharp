@@ -18,11 +18,11 @@ namespace MgmtMockAndSample
 {
     public partial class ManagedHsmData : IUtf8JsonSerializable, IJsonModel<ManagedHsmData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ManagedHsmData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ManagedHsmData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ManagedHsmData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagedHsmData>)} interface");
             }
@@ -51,22 +51,22 @@ namespace MgmtMockAndSample
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -74,7 +74,7 @@ namespace MgmtMockAndSample
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -92,9 +92,9 @@ namespace MgmtMockAndSample
             writer.WriteEndObject();
         }
 
-        ManagedHsmData IJsonModel<ManagedHsmData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ManagedHsmData IJsonModel<ManagedHsmData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedHsmData)} does not support '{options.Format}' format.");
@@ -106,7 +106,7 @@ namespace MgmtMockAndSample
 
         internal static ManagedHsmData DeserializeManagedHsmData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -185,7 +185,7 @@ namespace MgmtMockAndSample
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -194,9 +194,9 @@ namespace MgmtMockAndSample
             return new ManagedHsmData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties.Value, sku.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ManagedHsmData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ManagedHsmData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedHsmData)} does not support '{options.Format}' format.");
@@ -205,9 +205,9 @@ namespace MgmtMockAndSample
             return ModelReaderWriter.Write(this, options);
         }
 
-        ManagedHsmData IModel<ManagedHsmData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ManagedHsmData IPersistableModel<ManagedHsmData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedHsmData)} does not support '{options.Format}' format.");
@@ -217,6 +217,6 @@ namespace MgmtMockAndSample
             return DeserializeManagedHsmData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ManagedHsmData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ManagedHsmData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

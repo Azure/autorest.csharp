@@ -16,11 +16,11 @@ namespace MgmtPartialResource.Models
 {
     public partial class ConfigurationProfileAssignmentProperties : IUtf8JsonSerializable, IJsonModel<ConfigurationProfileAssignmentProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConfigurationProfileAssignmentProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConfigurationProfileAssignmentProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ConfigurationProfileAssignmentProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ConfigurationProfileAssignmentProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ConfigurationProfileAssignmentProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ConfigurationProfileAssignmentProperties>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtPartialResource.Models
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -44,7 +44,7 @@ namespace MgmtPartialResource.Models
                     writer.WriteStringValue(Status);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -62,9 +62,9 @@ namespace MgmtPartialResource.Models
             writer.WriteEndObject();
         }
 
-        ConfigurationProfileAssignmentProperties IJsonModel<ConfigurationProfileAssignmentProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ConfigurationProfileAssignmentProperties IJsonModel<ConfigurationProfileAssignmentProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConfigurationProfileAssignmentProperties)} does not support '{options.Format}' format.");
@@ -76,7 +76,7 @@ namespace MgmtPartialResource.Models
 
         internal static ConfigurationProfileAssignmentProperties DeserializeConfigurationProfileAssignmentProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace MgmtPartialResource.Models
                     status = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,9 +113,9 @@ namespace MgmtPartialResource.Models
             return new ConfigurationProfileAssignmentProperties(configurationProfile.Value, targetId.Value, status.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ConfigurationProfileAssignmentProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ConfigurationProfileAssignmentProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConfigurationProfileAssignmentProperties)} does not support '{options.Format}' format.");
@@ -124,9 +124,9 @@ namespace MgmtPartialResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ConfigurationProfileAssignmentProperties IModel<ConfigurationProfileAssignmentProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ConfigurationProfileAssignmentProperties IPersistableModel<ConfigurationProfileAssignmentProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConfigurationProfileAssignmentProperties)} does not support '{options.Format}' format.");
@@ -136,6 +136,6 @@ namespace MgmtPartialResource.Models
             return DeserializeConfigurationProfileAssignmentProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ConfigurationProfileAssignmentProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ConfigurationProfileAssignmentProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,17 +17,17 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(PrivateEndpointConverter))]
     public partial class PrivateEndpoint : IUtf8JsonSerializable, IJsonModel<PrivateEndpoint>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpoint>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpoint>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PrivateEndpoint>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PrivateEndpoint>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PrivateEndpoint>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PrivateEndpoint>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -38,9 +38,9 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        PrivateEndpoint IJsonModel<PrivateEndpoint>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PrivateEndpoint IJsonModel<PrivateEndpoint>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support '{options.Format}' format.");
@@ -52,7 +52,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static PrivateEndpoint DeserializePrivateEndpoint(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -74,9 +74,9 @@ namespace Azure.ResourceManager.Fake.Models
             return new PrivateEndpoint(id);
         }
 
-        BinaryData IModel<PrivateEndpoint>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PrivateEndpoint>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support '{options.Format}' format.");
@@ -85,9 +85,9 @@ namespace Azure.ResourceManager.Fake.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PrivateEndpoint IModel<PrivateEndpoint>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PrivateEndpoint IPersistableModel<PrivateEndpoint>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PrivateEndpoint)} does not support '{options.Format}' format.");
@@ -97,7 +97,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateEndpoint(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PrivateEndpoint>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PrivateEndpoint>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class PrivateEndpointConverter : JsonConverter<PrivateEndpoint>
         {

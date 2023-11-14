@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class InputRecursiveModel : IUtf8JsonSerializable, IJsonModel<InputRecursiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecursiveModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecursiveModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<InputRecursiveModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<InputRecursiveModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<InputRecursiveModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputRecursiveModel>)} interface");
             }
@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        InputRecursiveModel IJsonModel<InputRecursiveModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        InputRecursiveModel IJsonModel<InputRecursiveModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputRecursiveModel)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
 
         internal static InputRecursiveModel DeserializeInputRecursiveModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace ModelsTypeSpec.Models
                     inner = DeserializeInputRecursiveModel(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace ModelsTypeSpec.Models
             return new InputRecursiveModel(message, inner.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<InputRecursiveModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<InputRecursiveModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputRecursiveModel)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        InputRecursiveModel IModel<InputRecursiveModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        InputRecursiveModel IPersistableModel<InputRecursiveModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputRecursiveModel)} does not support '{options.Format}' format.");
@@ -124,14 +124,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeInputRecursiveModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<InputRecursiveModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<InputRecursiveModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InputRecursiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputRecursiveModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeInputRecursiveModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

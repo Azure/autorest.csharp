@@ -16,11 +16,11 @@ namespace multiple_inheritance.Models
 {
     public partial class Kitten : IUtf8JsonSerializable, IJsonModel<Kitten>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Kitten>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Kitten>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Kitten>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Kitten>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Kitten>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Kitten>)} interface");
             }
@@ -48,7 +48,7 @@ namespace multiple_inheritance.Models
             }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace multiple_inheritance.Models
             writer.WriteEndObject();
         }
 
-        Kitten IJsonModel<Kitten>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Kitten IJsonModel<Kitten>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Kitten)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace multiple_inheritance.Models
 
         internal static Kitten DeserializeKitten(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,7 +136,7 @@ namespace multiple_inheritance.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -145,9 +145,9 @@ namespace multiple_inheritance.Models
             return new Kitten(name, serializedAdditionalRawData, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses), Optional.ToNullable(eatsMiceYet));
         }
 
-        BinaryData IModel<Kitten>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Kitten>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Kitten)} does not support '{options.Format}' format.");
@@ -156,9 +156,9 @@ namespace multiple_inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Kitten IModel<Kitten>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Kitten IPersistableModel<Kitten>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Kitten)} does not support '{options.Format}' format.");
@@ -168,6 +168,6 @@ namespace multiple_inheritance.Models
             return DeserializeKitten(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Kitten>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Kitten>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

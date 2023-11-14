@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     public partial class Golden : IUtf8JsonSerializable, IJsonModel<Golden>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Golden>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Golden>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Golden>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Golden>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Golden>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Golden>)} interface");
             }
@@ -31,7 +31,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("weight"u8);
             writer.WriteNumberValue(Weight);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        Golden IJsonModel<Golden>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Golden IJsonModel<Golden>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Golden)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 
         internal static Golden DeserializeGolden(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                     weight = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return new Golden(kind, weight, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Golden>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Golden>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Golden)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Golden IModel<Golden>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Golden IPersistableModel<Golden>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Golden)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return DeserializeGolden(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Golden>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Golden>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Golden FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeGolden(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeGolden(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

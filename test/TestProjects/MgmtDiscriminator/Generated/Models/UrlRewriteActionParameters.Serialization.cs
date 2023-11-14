@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class UrlRewriteActionParameters : IUtf8JsonSerializable, IJsonModel<UrlRewriteActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRewriteActionParameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRewriteActionParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UrlRewriteActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UrlRewriteActionParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UrlRewriteActionParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UrlRewriteActionParameters>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("preserveUnmatchedPath"u8);
                 writer.WriteBooleanValue(PreserveUnmatchedPath.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        UrlRewriteActionParameters IJsonModel<UrlRewriteActionParameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UrlRewriteActionParameters IJsonModel<UrlRewriteActionParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UrlRewriteActionParameters)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRewriteActionParameters DeserializeUrlRewriteActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace MgmtDiscriminator.Models
                     preserveUnmatchedPath = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,9 +116,9 @@ namespace MgmtDiscriminator.Models
             return new UrlRewriteActionParameters(typeName, sourcePattern, destination, Optional.ToNullable(preserveUnmatchedPath), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UrlRewriteActionParameters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UrlRewriteActionParameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UrlRewriteActionParameters)} does not support '{options.Format}' format.");
@@ -127,9 +127,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UrlRewriteActionParameters IModel<UrlRewriteActionParameters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UrlRewriteActionParameters IPersistableModel<UrlRewriteActionParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UrlRewriteActionParameters)} does not support '{options.Format}' format.");
@@ -139,6 +139,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlRewriteActionParameters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UrlRewriteActionParameters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UrlRewriteActionParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class NumericValuesFacetint32 : IUtf8JsonSerializable, IJsonModel<NumericValuesFacetint32>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NumericValuesFacetint32>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NumericValuesFacetint32>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NumericValuesFacetint32>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NumericValuesFacetint32>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NumericValuesFacetint32>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NumericValuesFacetint32>)} interface");
             }
@@ -38,7 +38,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteNumberValue(Value);
             writer.WritePropertyName("field"u8);
             writer.WriteStringValue(Field);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        NumericValuesFacetint32 IJsonModel<NumericValuesFacetint32>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NumericValuesFacetint32 IJsonModel<NumericValuesFacetint32>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace ModelsTypeSpec.Models
 
         internal static NumericValuesFacetint32 DeserializeNumericValuesFacetint32(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -103,7 +103,7 @@ namespace ModelsTypeSpec.Models
                     field = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -112,9 +112,9 @@ namespace ModelsTypeSpec.Models
             return new NumericValuesFacetint32(field, serializedAdditionalRawData, values, value);
         }
 
-        BinaryData IModel<NumericValuesFacetint32>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NumericValuesFacetint32>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
@@ -123,9 +123,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NumericValuesFacetint32 IModel<NumericValuesFacetint32>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NumericValuesFacetint32 IPersistableModel<NumericValuesFacetint32>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NumericValuesFacetint32)} does not support '{options.Format}' format.");
@@ -135,14 +135,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeNumericValuesFacetint32(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NumericValuesFacetint32>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NumericValuesFacetint32>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new NumericValuesFacetint32 FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNumericValuesFacetint32(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeNumericValuesFacetint32(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

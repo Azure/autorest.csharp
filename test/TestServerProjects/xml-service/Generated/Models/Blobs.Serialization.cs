@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Blobs : IXmlSerializable, IModel<Blobs>
+    public partial class Blobs : IXmlSerializable, IPersistableModel<Blobs>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -57,10 +57,10 @@ namespace xml_service.Models
             return new Blobs(blobPrefix, blob, default);
         }
 
-        BinaryData IModel<Blobs>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Blobs>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Blobs>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -80,9 +80,9 @@ namespace xml_service.Models
             }
         }
 
-        Blobs IModel<Blobs>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Blobs IPersistableModel<Blobs>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Blobs)} does not support '{options.Format}' format.");
@@ -91,6 +91,6 @@ namespace xml_service.Models
             return DeserializeBlobs(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Blobs>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Blobs>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

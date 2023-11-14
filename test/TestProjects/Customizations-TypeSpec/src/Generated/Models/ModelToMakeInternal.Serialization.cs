@@ -17,11 +17,11 @@ namespace CustomizationsInTsp.Models
 {
     internal partial class ModelToMakeInternal : IUtf8JsonSerializable, IJsonModel<ModelToMakeInternal>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToMakeInternal>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToMakeInternal>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelToMakeInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelToMakeInternal>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelToMakeInternal>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelToMakeInternal>)} interface");
             }
@@ -29,7 +29,7 @@ namespace CustomizationsInTsp.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndObject();
         }
 
-        ModelToMakeInternal IJsonModel<ModelToMakeInternal>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelToMakeInternal IJsonModel<ModelToMakeInternal>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace CustomizationsInTsp.Models
 
         internal static ModelToMakeInternal DeserializeModelToMakeInternal(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace CustomizationsInTsp.Models
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace CustomizationsInTsp.Models
             return new ModelToMakeInternal(requiredInt, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelToMakeInternal>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelToMakeInternal>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace CustomizationsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelToMakeInternal IModel<ModelToMakeInternal>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelToMakeInternal IPersistableModel<ModelToMakeInternal>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelToMakeInternal)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelToMakeInternal(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelToMakeInternal>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelToMakeInternal>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelToMakeInternal FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToMakeInternal(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeModelToMakeInternal(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

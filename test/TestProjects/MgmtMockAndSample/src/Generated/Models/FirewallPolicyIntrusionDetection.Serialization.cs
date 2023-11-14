@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyIntrusionDetection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyIntrusionDetection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetection>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicyIntrusionDetection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicyIntrusionDetection>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyIntrusionDetection>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyIntrusionDetection>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("configuration"u8);
                 writer.WriteObjectValue(Configuration);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicyIntrusionDetection IJsonModel<FirewallPolicyIntrusionDetection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyIntrusionDetection IJsonModel<FirewallPolicyIntrusionDetection>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyIntrusionDetection)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyIntrusionDetection DeserializeFirewallPolicyIntrusionDetection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtMockAndSample.Models
                     configuration = FirewallPolicyIntrusionDetectionConfiguration.DeserializeFirewallPolicyIntrusionDetectionConfiguration(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyIntrusionDetection(Optional.ToNullable(mode), configuration.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FirewallPolicyIntrusionDetection>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicyIntrusionDetection>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyIntrusionDetection)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicyIntrusionDetection IModel<FirewallPolicyIntrusionDetection>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyIntrusionDetection IPersistableModel<FirewallPolicyIntrusionDetection>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyIntrusionDetection)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicyIntrusionDetection>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicyIntrusionDetection>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

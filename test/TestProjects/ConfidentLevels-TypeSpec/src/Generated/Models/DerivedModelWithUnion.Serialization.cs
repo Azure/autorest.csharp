@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class DerivedModelWithUnion : IUtf8JsonSerializable, IJsonModel<DerivedModelWithUnion>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModelWithUnion>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModelWithUnion>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DerivedModelWithUnion>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DerivedModelWithUnion>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DerivedModelWithUnion>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DerivedModelWithUnion>)} interface");
             }
@@ -43,7 +43,7 @@ namespace ConfidentLevelsInTsp.Models
                 writer.WritePropertyName("size"u8);
                 writer.WriteNumberValue(Size.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -61,9 +61,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        DerivedModelWithUnion IJsonModel<DerivedModelWithUnion>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DerivedModelWithUnion IJsonModel<DerivedModelWithUnion>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModelWithUnion)} does not support '{options.Format}' format.");
@@ -75,7 +75,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static DerivedModelWithUnion DeserializeDerivedModelWithUnion(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace ConfidentLevelsInTsp.Models
                     size = property.Value.GetDouble();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,9 +116,9 @@ namespace ConfidentLevelsInTsp.Models
             return new DerivedModelWithUnion(name, Optional.ToNullable(size), serializedAdditionalRawData, unionProperty);
         }
 
-        BinaryData IModel<DerivedModelWithUnion>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DerivedModelWithUnion>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModelWithUnion)} does not support '{options.Format}' format.");
@@ -127,9 +127,9 @@ namespace ConfidentLevelsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DerivedModelWithUnion IModel<DerivedModelWithUnion>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DerivedModelWithUnion IPersistableModel<DerivedModelWithUnion>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModelWithUnion)} does not support '{options.Format}' format.");
@@ -139,14 +139,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeDerivedModelWithUnion(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DerivedModelWithUnion>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DerivedModelWithUnion>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new DerivedModelWithUnion FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithUnion(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDerivedModelWithUnion(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

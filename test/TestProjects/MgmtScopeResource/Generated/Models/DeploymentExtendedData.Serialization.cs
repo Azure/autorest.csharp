@@ -18,11 +18,11 @@ namespace MgmtScopeResource
 {
     public partial class DeploymentExtendedData : IUtf8JsonSerializable, IJsonModel<DeploymentExtendedData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentExtendedData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentExtendedData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeploymentExtendedData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeploymentExtendedData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentExtendedData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentExtendedData>)} interface");
             }
@@ -49,22 +49,22 @@ namespace MgmtScopeResource
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -72,7 +72,7 @@ namespace MgmtScopeResource
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -90,9 +90,9 @@ namespace MgmtScopeResource
             writer.WriteEndObject();
         }
 
-        DeploymentExtendedData IJsonModel<DeploymentExtendedData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeploymentExtendedData IJsonModel<DeploymentExtendedData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support '{options.Format}' format.");
@@ -104,7 +104,7 @@ namespace MgmtScopeResource
 
         internal static DeploymentExtendedData DeserializeDeploymentExtendedData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -173,7 +173,7 @@ namespace MgmtScopeResource
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -182,9 +182,9 @@ namespace MgmtScopeResource
             return new DeploymentExtendedData(id, name, type, systemData.Value, location.Value, properties.Value, Optional.ToDictionary(tags), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeploymentExtendedData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeploymentExtendedData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support '{options.Format}' format.");
@@ -193,9 +193,9 @@ namespace MgmtScopeResource
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeploymentExtendedData IModel<DeploymentExtendedData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeploymentExtendedData IPersistableModel<DeploymentExtendedData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentExtendedData)} does not support '{options.Format}' format.");
@@ -205,6 +205,6 @@ namespace MgmtScopeResource
             return DeserializeDeploymentExtendedData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeploymentExtendedData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeploymentExtendedData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

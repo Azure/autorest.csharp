@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithInternalModel : IUtf8JsonSerializable, IJsonModel<ModelWithInternalModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithInternalModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithInternalModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithInternalModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithInternalModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithInternalModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithInternalModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("InternalProperty"u8);
                 writer.WriteObjectValue(InternalProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        ModelWithInternalModel IJsonModel<ModelWithInternalModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithInternalModel IJsonModel<ModelWithInternalModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithInternalModel DeserializeModelWithInternalModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace TypeSchemaMapping.Models
                     internalProperty = InternalModel.DeserializeInternalModel(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace TypeSchemaMapping.Models
             return new ModelWithInternalModel(internalProperty.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithInternalModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithInternalModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace TypeSchemaMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithInternalModel IModel<ModelWithInternalModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithInternalModel IPersistableModel<ModelWithInternalModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithInternalModel)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithInternalModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithInternalModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithInternalModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

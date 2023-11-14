@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class DerivedModel : IUtf8JsonSerializable, IJsonModel<DerivedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DerivedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DerivedModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DerivedModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DerivedModel>)} interface");
             }
@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        DerivedModel IJsonModel<DerivedModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DerivedModel IJsonModel<DerivedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModel)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DerivedModel DeserializeDerivedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -97,7 +97,7 @@ namespace MgmtDiscriminator.Models
                     optionalString = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -106,9 +106,9 @@ namespace MgmtDiscriminator.Models
             return new DerivedModel(optionalString.Value, serializedAdditionalRawData, requiredCollection);
         }
 
-        BinaryData IModel<DerivedModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DerivedModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModel)} does not support '{options.Format}' format.");
@@ -117,9 +117,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DerivedModel IModel<DerivedModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DerivedModel IPersistableModel<DerivedModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModel)} does not support '{options.Format}' format.");
@@ -129,6 +129,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDerivedModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DerivedModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DerivedModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

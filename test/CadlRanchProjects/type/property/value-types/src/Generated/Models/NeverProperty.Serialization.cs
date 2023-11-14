@@ -17,17 +17,17 @@ namespace _Type.Property.ValueTypes.Models
 {
     public partial class NeverProperty : IUtf8JsonSerializable, IJsonModel<NeverProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NeverProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NeverProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NeverProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NeverProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NeverProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NeverProperty>)} interface");
             }
 
             writer.WriteStartObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,9 +45,9 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteEndObject();
         }
 
-        NeverProperty IJsonModel<NeverProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NeverProperty IJsonModel<NeverProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NeverProperty)} does not support '{options.Format}' format.");
@@ -59,7 +59,7 @@ namespace _Type.Property.ValueTypes.Models
 
         internal static NeverProperty DeserializeNeverProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -69,7 +69,7 @@ namespace _Type.Property.ValueTypes.Models
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -78,9 +78,9 @@ namespace _Type.Property.ValueTypes.Models
             return new NeverProperty(serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NeverProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NeverProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NeverProperty)} does not support '{options.Format}' format.");
@@ -89,9 +89,9 @@ namespace _Type.Property.ValueTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NeverProperty IModel<NeverProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NeverProperty IPersistableModel<NeverProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NeverProperty)} does not support '{options.Format}' format.");
@@ -101,14 +101,14 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeNeverProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NeverProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NeverProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static NeverProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNeverProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeNeverProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

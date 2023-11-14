@@ -16,11 +16,11 @@ namespace MgmtNonStringPathVariable.Models
 {
     public partial class FakeProperties : IUtf8JsonSerializable, IJsonModel<FakeProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FakeProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FakeProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FakeProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FakeProperties>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtNonStringPathVariable.Models
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtNonStringPathVariable.Models
             writer.WriteEndObject();
         }
 
-        FakeProperties IJsonModel<FakeProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FakeProperties IJsonModel<FakeProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakeProperties)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtNonStringPathVariable.Models
 
         internal static FakeProperties DeserializeFakeProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtNonStringPathVariable.Models
                     platformFaultDomainCount = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtNonStringPathVariable.Models
             return new FakeProperties(Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FakeProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FakeProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakeProperties)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtNonStringPathVariable.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FakeProperties IModel<FakeProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FakeProperties IPersistableModel<FakeProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakeProperties)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtNonStringPathVariable.Models
             return DeserializeFakeProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FakeProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FakeProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

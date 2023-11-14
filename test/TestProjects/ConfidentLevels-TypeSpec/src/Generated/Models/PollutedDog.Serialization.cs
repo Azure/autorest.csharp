@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class PollutedDog : IUtf8JsonSerializable, IJsonModel<PollutedDog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedDog>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedDog>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PollutedDog>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PollutedDog>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PollutedDog>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PollutedDog>)} interface");
             }
@@ -42,7 +42,7 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        PollutedDog IJsonModel<PollutedDog>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PollutedDog IJsonModel<PollutedDog>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PollutedDog)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static PollutedDog DeserializePollutedDog(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +108,7 @@ namespace ConfidentLevelsInTsp.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -117,9 +117,9 @@ namespace ConfidentLevelsInTsp.Models
             return new PollutedDog(kind, name, serializedAdditionalRawData, woof, color);
         }
 
-        BinaryData IModel<PollutedDog>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PollutedDog>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PollutedDog)} does not support '{options.Format}' format.");
@@ -128,9 +128,9 @@ namespace ConfidentLevelsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PollutedDog IModel<PollutedDog>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PollutedDog IPersistableModel<PollutedDog>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PollutedDog)} does not support '{options.Format}' format.");
@@ -140,14 +140,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializePollutedDog(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PollutedDog>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PollutedDog>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new PollutedDog FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePollutedDog(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializePollutedDog(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

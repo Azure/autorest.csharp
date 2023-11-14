@@ -17,11 +17,11 @@ namespace MgmtOperations.Models
 {
     internal partial class AvailabilitySetGrandChildListResult : IUtf8JsonSerializable, IJsonModel<AvailabilitySetGrandChildListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetGrandChildListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetGrandChildListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AvailabilitySetGrandChildListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AvailabilitySetGrandChildListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AvailabilitySetGrandChildListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AvailabilitySetGrandChildListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtOperations.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtOperations.Models
             writer.WriteEndObject();
         }
 
-        AvailabilitySetGrandChildListResult IJsonModel<AvailabilitySetGrandChildListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AvailabilitySetGrandChildListResult IJsonModel<AvailabilitySetGrandChildListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AvailabilitySetGrandChildListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtOperations.Models
 
         internal static AvailabilitySetGrandChildListResult DeserializeAvailabilitySetGrandChildListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtOperations.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtOperations.Models
             return new AvailabilitySetGrandChildListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AvailabilitySetGrandChildListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AvailabilitySetGrandChildListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AvailabilitySetGrandChildListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtOperations.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AvailabilitySetGrandChildListResult IModel<AvailabilitySetGrandChildListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AvailabilitySetGrandChildListResult IPersistableModel<AvailabilitySetGrandChildListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AvailabilitySetGrandChildListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtOperations.Models
             return DeserializeAvailabilitySetGrandChildListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AvailabilitySetGrandChildListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AvailabilitySetGrandChildListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

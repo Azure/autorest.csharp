@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Banana : IXmlSerializable, IModel<Banana>
+    public partial class Banana : IXmlSerializable, IPersistableModel<Banana>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -61,10 +61,10 @@ namespace xml_service.Models
             return new Banana(name, flavor, expiration, default);
         }
 
-        BinaryData IModel<Banana>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Banana>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Banana>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -84,9 +84,9 @@ namespace xml_service.Models
             }
         }
 
-        Banana IModel<Banana>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Banana IPersistableModel<Banana>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Banana)} does not support '{options.Format}' format.");
@@ -95,6 +95,6 @@ namespace xml_service.Models
             return DeserializeBanana(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Banana>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Banana>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

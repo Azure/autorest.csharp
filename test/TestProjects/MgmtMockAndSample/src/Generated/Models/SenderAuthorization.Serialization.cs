@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class SenderAuthorization : IUtf8JsonSerializable, IJsonModel<SenderAuthorization>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SenderAuthorization>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SenderAuthorization>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SenderAuthorization>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SenderAuthorization>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SenderAuthorization>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SenderAuthorization>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("scope"u8);
                 writer.WriteStringValue(Scope);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        SenderAuthorization IJsonModel<SenderAuthorization>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SenderAuthorization IJsonModel<SenderAuthorization>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SenderAuthorization)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtMockAndSample.Models
 
         internal static SenderAuthorization DeserializeSenderAuthorization(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace MgmtMockAndSample.Models
                     scope = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace MgmtMockAndSample.Models
             return new SenderAuthorization(action.Value, role.Value, scope.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SenderAuthorization>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SenderAuthorization>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SenderAuthorization)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SenderAuthorization IModel<SenderAuthorization>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SenderAuthorization IPersistableModel<SenderAuthorization>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SenderAuthorization)} does not support '{options.Format}' format.");
@@ -133,6 +133,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeSenderAuthorization(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SenderAuthorization>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SenderAuthorization>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

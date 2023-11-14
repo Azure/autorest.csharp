@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class NsRecord : IUtf8JsonSerializable, IJsonModel<NsRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NsRecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NsRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NsRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NsRecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NsRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NsRecord>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("nsdname"u8);
                 writer.WriteStringValue(Nsdname);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        NsRecord IJsonModel<NsRecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NsRecord IJsonModel<NsRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NsRecord)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static NsRecord DeserializeNsRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtExpandResourceTypes.Models
                     nsdname = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtExpandResourceTypes.Models
             return new NsRecord(nsdname.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NsRecord>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NsRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NsRecord)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NsRecord IModel<NsRecord>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NsRecord IPersistableModel<NsRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NsRecord)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeNsRecord(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NsRecord>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NsRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

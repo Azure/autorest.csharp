@@ -17,11 +17,11 @@ namespace Pagination.Models
 {
     public partial class TextBlockItem : IUtf8JsonSerializable, IJsonModel<TextBlockItem>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextBlockItem>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextBlockItem>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TextBlockItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TextBlockItem>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TextBlockItem>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TextBlockItem>)} interface");
             }
@@ -36,7 +36,7 @@ namespace Pagination.Models
             }
             writer.WritePropertyName("text"u8);
             writer.WriteStringValue(Text);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace Pagination.Models
             writer.WriteEndObject();
         }
 
-        TextBlockItem IJsonModel<TextBlockItem>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TextBlockItem IJsonModel<TextBlockItem>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TextBlockItem)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace Pagination.Models
 
         internal static TextBlockItem DeserializeTextBlockItem(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +96,7 @@ namespace Pagination.Models
                     text = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,9 +105,9 @@ namespace Pagination.Models
             return new TextBlockItem(blockItemId, description.Value, text, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TextBlockItem>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TextBlockItem>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TextBlockItem)} does not support '{options.Format}' format.");
@@ -116,9 +116,9 @@ namespace Pagination.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TextBlockItem IModel<TextBlockItem>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TextBlockItem IPersistableModel<TextBlockItem>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TextBlockItem)} does not support '{options.Format}' format.");
@@ -128,14 +128,14 @@ namespace Pagination.Models
             return DeserializeTextBlockItem(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TextBlockItem>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TextBlockItem>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static TextBlockItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTextBlockItem(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeTextBlockItem(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

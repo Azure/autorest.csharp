@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slideshow : IXmlSerializable, IModel<Slideshow>
+    public partial class Slideshow : IXmlSerializable, IPersistableModel<Slideshow>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -76,10 +76,10 @@ namespace xml_service.Models
             return new Slideshow(title, date, author, slides, default);
         }
 
-        BinaryData IModel<Slideshow>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Slideshow>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Slideshow>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace xml_service.Models
             }
         }
 
-        Slideshow IModel<Slideshow>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Slideshow IPersistableModel<Slideshow>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Slideshow)} does not support '{options.Format}' format.");
@@ -110,6 +110,6 @@ namespace xml_service.Models
             return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Slideshow>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Slideshow>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

@@ -17,11 +17,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     public partial class SharedModel : IUtf8JsonSerializable, IJsonModel<SharedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SharedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SharedModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SharedModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SharedModel>)} interface");
             }
@@ -29,7 +29,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteEndObject();
         }
 
-        SharedModel IJsonModel<SharedModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SharedModel IJsonModel<SharedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SharedModel)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         internal static SharedModel DeserializeSharedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new SharedModel(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SharedModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SharedModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SharedModel)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SharedModel IModel<SharedModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SharedModel IPersistableModel<SharedModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SharedModel)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return DeserializeSharedModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SharedModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SharedModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SharedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSharedModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeSharedModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

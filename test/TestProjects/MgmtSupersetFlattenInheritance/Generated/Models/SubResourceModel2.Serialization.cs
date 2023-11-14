@@ -16,17 +16,17 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     public partial class SubResourceModel2 : IUtf8JsonSerializable, IJsonModel<SubResourceModel2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResourceModel2>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResourceModel2>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SubResourceModel2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SubResourceModel2>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SubResourceModel2>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubResourceModel2>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -47,7 +47,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WriteStringValue(Foo);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        SubResourceModel2 IJsonModel<SubResourceModel2>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SubResourceModel2 IJsonModel<SubResourceModel2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubResourceModel2)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static SubResourceModel2 DeserializeSubResourceModel2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -119,7 +119,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -128,9 +128,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new SubResourceModel2(id.Value, id0.Value, foo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SubResourceModel2>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SubResourceModel2>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubResourceModel2)} does not support '{options.Format}' format.");
@@ -139,9 +139,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SubResourceModel2 IModel<SubResourceModel2>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SubResourceModel2 IPersistableModel<SubResourceModel2>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubResourceModel2)} does not support '{options.Format}' format.");
@@ -151,6 +151,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeSubResourceModel2(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SubResourceModel2>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SubResourceModel2>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

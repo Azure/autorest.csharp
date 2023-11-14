@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class ApplicationRule : IUtf8JsonSerializable, IJsonModel<ApplicationRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationRule>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ApplicationRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ApplicationRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ApplicationRule>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ApplicationRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ApplicationRule>)} interface");
             }
@@ -123,7 +123,7 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("ruleType"u8);
             writer.WriteStringValue(RuleType.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -141,9 +141,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        ApplicationRule IJsonModel<ApplicationRule>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ApplicationRule IJsonModel<ApplicationRule>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ApplicationRule)} does not support '{options.Format}' format.");
@@ -155,7 +155,7 @@ namespace MgmtMockAndSample.Models
 
         internal static ApplicationRule DeserializeApplicationRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -313,7 +313,7 @@ namespace MgmtMockAndSample.Models
                     ruleType = new FirewallPolicyRuleType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -322,9 +322,9 @@ namespace MgmtMockAndSample.Models
             return new ApplicationRule(name.Value, description.Value, ruleType, serializedAdditionalRawData, Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(protocols), Optional.ToList(targetFqdns), Optional.ToList(targetUrls), Optional.ToList(fqdnTags), Optional.ToList(sourceIpGroups), Optional.ToNullable(terminateTLS), Optional.ToList(webCategories));
         }
 
-        BinaryData IModel<ApplicationRule>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ApplicationRule>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ApplicationRule)} does not support '{options.Format}' format.");
@@ -333,9 +333,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ApplicationRule IModel<ApplicationRule>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ApplicationRule IPersistableModel<ApplicationRule>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ApplicationRule)} does not support '{options.Format}' format.");
@@ -345,6 +345,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeApplicationRule(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ApplicationRule>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ApplicationRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     internal partial class SinglePropertyModel : IUtf8JsonSerializable, IJsonModel<SinglePropertyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SinglePropertyModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SinglePropertyModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SinglePropertyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SinglePropertyModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SinglePropertyModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SinglePropertyModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        SinglePropertyModel IJsonModel<SinglePropertyModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SinglePropertyModel IJsonModel<SinglePropertyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SinglePropertyModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
 
         internal static SinglePropertyModel DeserializeSinglePropertyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtMockAndSample.Models
                     something = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtMockAndSample.Models
             return new SinglePropertyModel(something.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SinglePropertyModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SinglePropertyModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SinglePropertyModel)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SinglePropertyModel IModel<SinglePropertyModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SinglePropertyModel IPersistableModel<SinglePropertyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SinglePropertyModel)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeSinglePropertyModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SinglePropertyModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SinglePropertyModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

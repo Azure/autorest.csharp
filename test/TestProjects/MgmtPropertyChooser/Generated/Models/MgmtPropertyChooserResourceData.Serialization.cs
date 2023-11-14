@@ -17,11 +17,11 @@ namespace MgmtPropertyChooser.Models
 {
     public partial class MgmtPropertyChooserResourceData : IUtf8JsonSerializable, IJsonModel<MgmtPropertyChooserResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtPropertyChooserResourceData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtPropertyChooserResourceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtPropertyChooserResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtPropertyChooserResourceData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtPropertyChooserResourceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtPropertyChooserResourceData>)} interface");
             }
@@ -40,22 +40,22 @@ namespace MgmtPropertyChooser.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -63,7 +63,7 @@ namespace MgmtPropertyChooser.Models
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -81,9 +81,9 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        MgmtPropertyChooserResourceData IJsonModel<MgmtPropertyChooserResourceData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtPropertyChooserResourceData IJsonModel<MgmtPropertyChooserResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtPropertyChooserResourceData)} does not support '{options.Format}' format.");
@@ -95,7 +95,7 @@ namespace MgmtPropertyChooser.Models
 
         internal static MgmtPropertyChooserResourceData DeserializeMgmtPropertyChooserResourceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -154,7 +154,7 @@ namespace MgmtPropertyChooser.Models
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -163,9 +163,9 @@ namespace MgmtPropertyChooser.Models
             return new MgmtPropertyChooserResourceData(id, name, type, systemData.Value, location, Optional.ToDictionary(tags), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MgmtPropertyChooserResourceData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtPropertyChooserResourceData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtPropertyChooserResourceData)} does not support '{options.Format}' format.");
@@ -174,9 +174,9 @@ namespace MgmtPropertyChooser.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtPropertyChooserResourceData IModel<MgmtPropertyChooserResourceData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtPropertyChooserResourceData IPersistableModel<MgmtPropertyChooserResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtPropertyChooserResourceData)} does not support '{options.Format}' format.");
@@ -186,6 +186,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeMgmtPropertyChooserResourceData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtPropertyChooserResourceData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtPropertyChooserResourceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

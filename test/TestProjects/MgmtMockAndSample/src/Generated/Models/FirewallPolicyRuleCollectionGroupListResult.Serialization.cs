@@ -17,11 +17,11 @@ namespace MgmtMockAndSample.Models
 {
     internal partial class FirewallPolicyRuleCollectionGroupListResult : IUtf8JsonSerializable, IJsonModel<FirewallPolicyRuleCollectionGroupListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRuleCollectionGroupListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRuleCollectionGroupListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicyRuleCollectionGroupListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicyRuleCollectionGroupListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyRuleCollectionGroupListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyRuleCollectionGroupListResult>)} interface");
             }
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicyRuleCollectionGroupListResult IJsonModel<FirewallPolicyRuleCollectionGroupListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyRuleCollectionGroupListResult IJsonModel<FirewallPolicyRuleCollectionGroupListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyRuleCollectionGroupListResult)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyRuleCollectionGroupListResult DeserializeFirewallPolicyRuleCollectionGroupListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace MgmtMockAndSample.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyRuleCollectionGroupListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FirewallPolicyRuleCollectionGroupListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicyRuleCollectionGroupListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyRuleCollectionGroupListResult)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicyRuleCollectionGroupListResult IModel<FirewallPolicyRuleCollectionGroupListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyRuleCollectionGroupListResult IPersistableModel<FirewallPolicyRuleCollectionGroupListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyRuleCollectionGroupListResult)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyRuleCollectionGroupListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicyRuleCollectionGroupListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicyRuleCollectionGroupListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace xms_error_responses.Models
 {
     public partial class PetHungryOrThirstyError : IUtf8JsonSerializable, IJsonModel<PetHungryOrThirstyError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetHungryOrThirstyError>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetHungryOrThirstyError>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PetHungryOrThirstyError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PetHungryOrThirstyError>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PetHungryOrThirstyError>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetHungryOrThirstyError>)} interface");
             }
@@ -48,7 +48,7 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace xms_error_responses.Models
             writer.WriteEndObject();
         }
 
-        PetHungryOrThirstyError IJsonModel<PetHungryOrThirstyError>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PetHungryOrThirstyError IJsonModel<PetHungryOrThirstyError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace xms_error_responses.Models
 
         internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -120,7 +120,7 @@ namespace xms_error_responses.Models
                     actionResponse = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -129,9 +129,9 @@ namespace xms_error_responses.Models
             return new PetHungryOrThirstyError(actionResponse.Value, serializedAdditionalRawData, errorType, errorMessage.Value, reason.Value, hungryOrThirsty.Value);
         }
 
-        BinaryData IModel<PetHungryOrThirstyError>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PetHungryOrThirstyError>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
@@ -140,9 +140,9 @@ namespace xms_error_responses.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PetHungryOrThirstyError IModel<PetHungryOrThirstyError>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PetHungryOrThirstyError IPersistableModel<PetHungryOrThirstyError>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetHungryOrThirstyError)} does not support '{options.Format}' format.");
@@ -152,6 +152,6 @@ namespace xms_error_responses.Models
             return DeserializePetHungryOrThirstyError(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PetHungryOrThirstyError>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PetHungryOrThirstyError>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

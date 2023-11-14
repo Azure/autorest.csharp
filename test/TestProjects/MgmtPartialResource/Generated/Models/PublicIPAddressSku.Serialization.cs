@@ -16,11 +16,11 @@ namespace MgmtPartialResource.Models
 {
     public partial class PublicIPAddressSku : IUtf8JsonSerializable, IJsonModel<PublicIPAddressSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicIPAddressSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicIPAddressSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PublicIPAddressSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PublicIPAddressSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PublicIPAddressSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PublicIPAddressSku>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtPartialResource.Models
                 writer.WritePropertyName("tier"u8);
                 writer.WriteStringValue(Tier.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtPartialResource.Models
             writer.WriteEndObject();
         }
 
-        PublicIPAddressSku IJsonModel<PublicIPAddressSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PublicIPAddressSku IJsonModel<PublicIPAddressSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PublicIPAddressSku)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtPartialResource.Models
 
         internal static PublicIPAddressSku DeserializePublicIPAddressSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtPartialResource.Models
                     tier = new PublicIPAddressSkuTier(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtPartialResource.Models
             return new PublicIPAddressSku(Optional.ToNullable(name), Optional.ToNullable(tier), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PublicIPAddressSku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PublicIPAddressSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PublicIPAddressSku)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtPartialResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PublicIPAddressSku IModel<PublicIPAddressSku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PublicIPAddressSku IPersistableModel<PublicIPAddressSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PublicIPAddressSku)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtPartialResource.Models
             return DeserializePublicIPAddressSku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PublicIPAddressSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PublicIPAddressSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

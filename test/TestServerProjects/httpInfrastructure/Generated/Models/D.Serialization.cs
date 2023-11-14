@@ -16,11 +16,11 @@ namespace httpInfrastructure.Models
 {
     public partial class D : IUtf8JsonSerializable, IJsonModel<D>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<D>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<D>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<D>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<D>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<D>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<D>)} interface");
             }
@@ -31,7 +31,7 @@ namespace httpInfrastructure.Models
                 writer.WritePropertyName("httpStatusCode"u8);
                 writer.WriteStringValue(HttpStatusCode);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace httpInfrastructure.Models
             writer.WriteEndObject();
         }
 
-        D IJsonModel<D>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        D IJsonModel<D>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(D)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace httpInfrastructure.Models
 
         internal static D DeserializeD(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace httpInfrastructure.Models
                     httpStatusCode = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace httpInfrastructure.Models
             return new D(httpStatusCode.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<D>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<D>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(D)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace httpInfrastructure.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        D IModel<D>.Read(BinaryData data, ModelReaderWriterOptions options)
+        D IPersistableModel<D>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(D)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace httpInfrastructure.Models
             return DeserializeD(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<D>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<D>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

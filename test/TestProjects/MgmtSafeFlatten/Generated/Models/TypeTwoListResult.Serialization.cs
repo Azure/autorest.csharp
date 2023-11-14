@@ -17,11 +17,11 @@ namespace MgmtSafeFlatten.Models
 {
     internal partial class TypeTwoListResult : IUtf8JsonSerializable, IJsonModel<TypeTwoListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TypeTwoListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TypeTwoListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TypeTwoListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TypeTwoListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TypeTwoListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TypeTwoListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtSafeFlatten.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        TypeTwoListResult IJsonModel<TypeTwoListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TypeTwoListResult IJsonModel<TypeTwoListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TypeTwoListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtSafeFlatten.Models
 
         internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtSafeFlatten.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtSafeFlatten.Models
             return new TypeTwoListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TypeTwoListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TypeTwoListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TypeTwoListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtSafeFlatten.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TypeTwoListResult IModel<TypeTwoListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TypeTwoListResult IPersistableModel<TypeTwoListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TypeTwoListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeTypeTwoListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TypeTwoListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TypeTwoListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

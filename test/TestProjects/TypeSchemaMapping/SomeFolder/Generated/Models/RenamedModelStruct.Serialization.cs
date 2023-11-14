@@ -17,11 +17,11 @@ namespace CustomNamespace
 {
     internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IJsonModel<RenamedModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RenamedModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RenamedModelStruct>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RenamedModelStruct>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RenamedModelStruct>)} interface");
             }
@@ -50,7 +50,7 @@ namespace CustomNamespace
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace CustomNamespace
             writer.WriteEndObject();
         }
 
-        RenamedModelStruct IJsonModel<RenamedModelStruct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RenamedModelStruct IJsonModel<RenamedModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
@@ -82,11 +82,11 @@ namespace CustomNamespace
 
         void IJsonModel<object>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Write(writer, options);
 
-        object IJsonModel<object>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Read(ref reader, options);
+        object IJsonModel<object>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((IJsonModel<RenamedModelStruct>)this).Create(ref reader, options);
 
         internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             Optional<string> modelProperty = default;
             Optional<string> propertyToField = default;
@@ -136,7 +136,7 @@ namespace CustomNamespace
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -145,9 +145,9 @@ namespace CustomNamespace
             return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RenamedModelStruct>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RenamedModelStruct>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
@@ -156,9 +156,9 @@ namespace CustomNamespace
             return ModelReaderWriter.Write(this, options);
         }
 
-        RenamedModelStruct IModel<RenamedModelStruct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RenamedModelStruct IPersistableModel<RenamedModelStruct>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedModelStruct)} does not support '{options.Format}' format.");
@@ -168,12 +168,12 @@ namespace CustomNamespace
             return DeserializeRenamedModelStruct(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RenamedModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RenamedModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
-        BinaryData IModel<object>.Write(ModelReaderWriterOptions options) => ((IModel<RenamedModelStruct>)this).Write(options);
+        BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options) => ((IPersistableModel<RenamedModelStruct>)this).Write(options);
 
-        object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options) => ((IModel<RenamedModelStruct>)this).Read(data, options);
+        object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<RenamedModelStruct>)this).Create(data, options);
 
-        ModelReaderWriterFormat IModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IModel<RenamedModelStruct>)this).GetWireFormat(options);
+        string IPersistableModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IPersistableModel<RenamedModelStruct>)this).GetWireFormat(options);
     }
 }

@@ -18,11 +18,11 @@ namespace Inheritance.Models
     [JsonConverter(typeof(SeparateClassConverter))]
     public partial class SeparateClass : IUtf8JsonSerializable, IJsonModel<SeparateClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SeparateClass>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SeparateClass>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SeparateClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SeparateClass>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SeparateClass>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SeparateClass>)} interface");
             }
@@ -38,7 +38,7 @@ namespace Inheritance.Models
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteObjectValue(ModelProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        SeparateClass IJsonModel<SeparateClass>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SeparateClass IJsonModel<SeparateClass>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SeparateClass)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace Inheritance.Models
 
         internal static SeparateClass DeserializeSeparateClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +96,7 @@ namespace Inheritance.Models
                     modelProperty = BaseClassWithExtensibleEnumDiscriminator.DeserializeBaseClassWithExtensibleEnumDiscriminator(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,9 +105,9 @@ namespace Inheritance.Models
             return new SeparateClass(stringProperty.Value, modelProperty.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SeparateClass>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SeparateClass>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SeparateClass)} does not support '{options.Format}' format.");
@@ -116,9 +116,9 @@ namespace Inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SeparateClass IModel<SeparateClass>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SeparateClass IPersistableModel<SeparateClass>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SeparateClass)} does not support '{options.Format}' format.");
@@ -128,7 +128,7 @@ namespace Inheritance.Models
             return DeserializeSeparateClass(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SeparateClass>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SeparateClass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>
         {

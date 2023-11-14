@@ -20,11 +20,11 @@ namespace MgmtExactMatchInheritance
 {
     public partial class ExactMatchModel1Data : IUtf8JsonSerializable, IJsonModel<ExactMatchModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel1Data>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel1Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ExactMatchModel1Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ExactMatchModel1Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel1Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExactMatchModel1Data>)} interface");
             }
@@ -145,22 +145,22 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -168,7 +168,7 @@ namespace MgmtExactMatchInheritance
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -186,9 +186,9 @@ namespace MgmtExactMatchInheritance
             writer.WriteEndObject();
         }
 
-        ExactMatchModel1Data IJsonModel<ExactMatchModel1Data>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ExactMatchModel1Data IJsonModel<ExactMatchModel1Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExactMatchModel1Data)} does not support '{options.Format}' format.");
@@ -200,7 +200,7 @@ namespace MgmtExactMatchInheritance
 
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -456,7 +456,7 @@ namespace MgmtExactMatchInheritance
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -465,9 +465,9 @@ namespace MgmtExactMatchInheritance
             return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ExactMatchModel1Data>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ExactMatchModel1Data>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExactMatchModel1Data)} does not support '{options.Format}' format.");
@@ -476,9 +476,9 @@ namespace MgmtExactMatchInheritance
             return ModelReaderWriter.Write(this, options);
         }
 
-        ExactMatchModel1Data IModel<ExactMatchModel1Data>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ExactMatchModel1Data IPersistableModel<ExactMatchModel1Data>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExactMatchModel1Data)} does not support '{options.Format}' format.");
@@ -488,6 +488,6 @@ namespace MgmtExactMatchInheritance
             return DeserializeExactMatchModel1Data(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ExactMatchModel1Data>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ExactMatchModel1Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

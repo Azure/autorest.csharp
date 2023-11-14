@@ -17,11 +17,11 @@ namespace SpecialWords
 {
     public partial class Yield : IUtf8JsonSerializable, IJsonModel<Yield>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Yield>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Yield>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Yield>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Yield>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Yield>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Yield>)} interface");
             }
@@ -29,7 +29,7 @@ namespace SpecialWords
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace SpecialWords
             writer.WriteEndObject();
         }
 
-        Yield IJsonModel<Yield>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Yield IJsonModel<Yield>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Yield)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace SpecialWords
 
         internal static Yield DeserializeYield(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace SpecialWords
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace SpecialWords
             return new Yield(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Yield>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Yield>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Yield)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace SpecialWords
             return ModelReaderWriter.Write(this, options);
         }
 
-        Yield IModel<Yield>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Yield IPersistableModel<Yield>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Yield)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace SpecialWords
             return DeserializeYield(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Yield>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Yield>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Yield FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeYield(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeYield(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

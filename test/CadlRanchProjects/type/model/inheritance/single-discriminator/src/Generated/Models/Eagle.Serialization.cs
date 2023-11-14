@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     public partial class Eagle : IUtf8JsonSerializable, IJsonModel<Eagle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Eagle>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Eagle>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Eagle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Eagle>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Eagle>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Eagle>)} interface");
             }
@@ -57,7 +57,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("wingspan"u8);
             writer.WriteNumberValue(Wingspan);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        Eagle IJsonModel<Eagle>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Eagle IJsonModel<Eagle>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Eagle)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         internal static Eagle DeserializeEagle(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -151,7 +151,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     wingspan = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -160,9 +160,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return new Eagle(kind, wingspan, serializedAdditionalRawData, Optional.ToList(friends), Optional.ToDictionary(hate), partner.Value);
         }
 
-        BinaryData IModel<Eagle>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Eagle>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Eagle)} does not support '{options.Format}' format.");
@@ -171,9 +171,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Eagle IModel<Eagle>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Eagle IPersistableModel<Eagle>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Eagle)} does not support '{options.Format}' format.");
@@ -183,14 +183,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeEagle(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Eagle>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Eagle>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Eagle FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeEagle(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeEagle(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

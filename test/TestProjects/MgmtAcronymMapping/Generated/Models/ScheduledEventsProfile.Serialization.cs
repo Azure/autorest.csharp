@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class ScheduledEventsProfile : IUtf8JsonSerializable, IJsonModel<ScheduledEventsProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScheduledEventsProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScheduledEventsProfile>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ScheduledEventsProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ScheduledEventsProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ScheduledEventsProfile>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ScheduledEventsProfile>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("terminateNotificationProfile"u8);
                 writer.WriteObjectValue(TerminateNotificationProfile);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        ScheduledEventsProfile IJsonModel<ScheduledEventsProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ScheduledEventsProfile IJsonModel<ScheduledEventsProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static ScheduledEventsProfile DeserializeScheduledEventsProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     terminateNotificationProfile = TerminateNotificationProfile.DeserializeTerminateNotificationProfile(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtAcronymMapping.Models
             return new ScheduledEventsProfile(terminateNotificationProfile.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ScheduledEventsProfile>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ScheduledEventsProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ScheduledEventsProfile IModel<ScheduledEventsProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ScheduledEventsProfile IPersistableModel<ScheduledEventsProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ScheduledEventsProfile)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeScheduledEventsProfile(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ScheduledEventsProfile>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ScheduledEventsProfile>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

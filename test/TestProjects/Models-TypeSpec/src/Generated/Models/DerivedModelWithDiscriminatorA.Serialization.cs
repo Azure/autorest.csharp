@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class DerivedModelWithDiscriminatorA : IUtf8JsonSerializable, IJsonModel<DerivedModelWithDiscriminatorA>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModelWithDiscriminatorA>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DerivedModelWithDiscriminatorA>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DerivedModelWithDiscriminatorA>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DerivedModelWithDiscriminatorA>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DerivedModelWithDiscriminatorA>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DerivedModelWithDiscriminatorA>)} interface");
             }
@@ -38,7 +38,7 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        DerivedModelWithDiscriminatorA IJsonModel<DerivedModelWithDiscriminatorA>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DerivedModelWithDiscriminatorA IJsonModel<DerivedModelWithDiscriminatorA>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace ModelsTypeSpec.Models
 
         internal static DerivedModelWithDiscriminatorA DeserializeDerivedModelWithDiscriminatorA(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace ModelsTypeSpec.Models
                     requiredPropertyOnBase = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,9 +113,9 @@ namespace ModelsTypeSpec.Models
             return new DerivedModelWithDiscriminatorA(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, serializedAdditionalRawData, requiredString);
         }
 
-        BinaryData IModel<DerivedModelWithDiscriminatorA>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DerivedModelWithDiscriminatorA>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support '{options.Format}' format.");
@@ -124,9 +124,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DerivedModelWithDiscriminatorA IModel<DerivedModelWithDiscriminatorA>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DerivedModelWithDiscriminatorA IPersistableModel<DerivedModelWithDiscriminatorA>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DerivedModelWithDiscriminatorA)} does not support '{options.Format}' format.");
@@ -136,14 +136,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeDerivedModelWithDiscriminatorA(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DerivedModelWithDiscriminatorA>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DerivedModelWithDiscriminatorA>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new DerivedModelWithDiscriminatorA FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithDiscriminatorA(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDerivedModelWithDiscriminatorA(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

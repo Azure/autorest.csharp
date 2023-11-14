@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class FirstDerivedOutputModel : IUtf8JsonSerializable, IJsonModel<FirstDerivedOutputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirstDerivedOutputModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirstDerivedOutputModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirstDerivedOutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirstDerivedOutputModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirstDerivedOutputModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirstDerivedOutputModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteBooleanValue(First);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        FirstDerivedOutputModel IJsonModel<FirstDerivedOutputModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirstDerivedOutputModel IJsonModel<FirstDerivedOutputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
 
         internal static FirstDerivedOutputModel DeserializeFirstDerivedOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace ModelsTypeSpec.Models
                     kind = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace ModelsTypeSpec.Models
             return new FirstDerivedOutputModel(kind, serializedAdditionalRawData, first);
         }
 
-        BinaryData IModel<FirstDerivedOutputModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirstDerivedOutputModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirstDerivedOutputModel IModel<FirstDerivedOutputModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirstDerivedOutputModel IPersistableModel<FirstDerivedOutputModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirstDerivedOutputModel)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeFirstDerivedOutputModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirstDerivedOutputModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirstDerivedOutputModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new FirstDerivedOutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFirstDerivedOutputModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeFirstDerivedOutputModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

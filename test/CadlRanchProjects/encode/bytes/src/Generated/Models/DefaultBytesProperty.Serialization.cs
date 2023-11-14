@@ -17,11 +17,11 @@ namespace Encode.Bytes.Models
 {
     public partial class DefaultBytesProperty : IUtf8JsonSerializable, IJsonModel<DefaultBytesProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DefaultBytesProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DefaultBytesProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DefaultBytesProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DefaultBytesProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DefaultBytesProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DefaultBytesProperty>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Encode.Bytes.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteBase64StringValue(Value.ToArray(), "D");
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Encode.Bytes.Models
             writer.WriteEndObject();
         }
 
-        DefaultBytesProperty IJsonModel<DefaultBytesProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DefaultBytesProperty IJsonModel<DefaultBytesProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DefaultBytesProperty)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Encode.Bytes.Models
 
         internal static DefaultBytesProperty DeserializeDefaultBytesProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Encode.Bytes.Models
                     value = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Encode.Bytes.Models
             return new DefaultBytesProperty(value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DefaultBytesProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DefaultBytesProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DefaultBytesProperty)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Encode.Bytes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DefaultBytesProperty IModel<DefaultBytesProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DefaultBytesProperty IPersistableModel<DefaultBytesProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DefaultBytesProperty)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Encode.Bytes.Models
             return DeserializeDefaultBytesProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DefaultBytesProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DefaultBytesProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DefaultBytesProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDefaultBytesProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDefaultBytesProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -17,11 +17,11 @@ namespace Projection.ProjectedName.Models
 {
     public partial class JsonAndClientProjectedNameModel : IUtf8JsonSerializable, IJsonModel<JsonAndClientProjectedNameModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonAndClientProjectedNameModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonAndClientProjectedNameModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<JsonAndClientProjectedNameModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<JsonAndClientProjectedNameModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<JsonAndClientProjectedNameModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JsonAndClientProjectedNameModel>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Projection.ProjectedName.Models
             writer.WriteStartObject();
             writer.WritePropertyName("wireName"u8);
             writer.WriteBooleanValue(ClientName);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Projection.ProjectedName.Models
             writer.WriteEndObject();
         }
 
-        JsonAndClientProjectedNameModel IJsonModel<JsonAndClientProjectedNameModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        JsonAndClientProjectedNameModel IJsonModel<JsonAndClientProjectedNameModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonAndClientProjectedNameModel)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Projection.ProjectedName.Models
 
         internal static JsonAndClientProjectedNameModel DeserializeJsonAndClientProjectedNameModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Projection.ProjectedName.Models
                     wireName = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Projection.ProjectedName.Models
             return new JsonAndClientProjectedNameModel(wireName, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<JsonAndClientProjectedNameModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<JsonAndClientProjectedNameModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonAndClientProjectedNameModel)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Projection.ProjectedName.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        JsonAndClientProjectedNameModel IModel<JsonAndClientProjectedNameModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        JsonAndClientProjectedNameModel IPersistableModel<JsonAndClientProjectedNameModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonAndClientProjectedNameModel)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Projection.ProjectedName.Models
             return DeserializeJsonAndClientProjectedNameModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<JsonAndClientProjectedNameModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<JsonAndClientProjectedNameModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static JsonAndClientProjectedNameModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJsonAndClientProjectedNameModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeJsonAndClientProjectedNameModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

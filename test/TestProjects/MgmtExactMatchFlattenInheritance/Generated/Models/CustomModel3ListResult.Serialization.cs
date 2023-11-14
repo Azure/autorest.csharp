@@ -17,17 +17,17 @@ namespace MgmtExactMatchFlattenInheritance.Models
 {
     internal partial class CustomModel3ListResult : IUtf8JsonSerializable, IJsonModel<CustomModel3ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel3ListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel3ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CustomModel3ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CustomModel3ListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CustomModel3ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CustomModel3ListResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -40,7 +40,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -48,7 +48,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        CustomModel3ListResult IJsonModel<CustomModel3ListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CustomModel3ListResult IJsonModel<CustomModel3ListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomModel3ListResult)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
 
         internal static CustomModel3ListResult DeserializeCustomModel3ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,7 +111,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -120,9 +120,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return new CustomModel3ListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CustomModel3ListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CustomModel3ListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomModel3ListResult)} does not support '{options.Format}' format.");
@@ -131,9 +131,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CustomModel3ListResult IModel<CustomModel3ListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CustomModel3ListResult IPersistableModel<CustomModel3ListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomModel3ListResult)} does not support '{options.Format}' format.");
@@ -143,6 +143,6 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return DeserializeCustomModel3ListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CustomModel3ListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CustomModel3ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

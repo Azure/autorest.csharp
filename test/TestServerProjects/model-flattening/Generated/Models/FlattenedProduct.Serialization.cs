@@ -16,17 +16,17 @@ namespace model_flattening.Models
 {
     public partial class FlattenedProduct : IUtf8JsonSerializable, IJsonModel<FlattenedProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FlattenedProduct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FlattenedProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FlattenedProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FlattenedProduct>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FlattenedProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FlattenedProduct>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -34,7 +34,7 @@ namespace model_flattening.Models
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -58,7 +58,7 @@ namespace model_flattening.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -78,7 +78,7 @@ namespace model_flattening.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(TypePropertiesType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningStateValues))
                 {
@@ -92,7 +92,7 @@ namespace model_flattening.Models
                 writer.WriteStringValue(ProvisioningState);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -110,9 +110,9 @@ namespace model_flattening.Models
             writer.WriteEndObject();
         }
 
-        FlattenedProduct IJsonModel<FlattenedProduct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FlattenedProduct IJsonModel<FlattenedProduct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{options.Format}' format.");
@@ -124,7 +124,7 @@ namespace model_flattening.Models
 
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -213,7 +213,7 @@ namespace model_flattening.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -222,9 +222,9 @@ namespace model_flattening.Models
             return new FlattenedProduct(id.Value, type.Value, Optional.ToDictionary(tags), location.Value, name.Value, serializedAdditionalRawData, pName.Value, type0.Value, Optional.ToNullable(provisioningStateValues), provisioningState.Value);
         }
 
-        BinaryData IModel<FlattenedProduct>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FlattenedProduct>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{options.Format}' format.");
@@ -233,9 +233,9 @@ namespace model_flattening.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FlattenedProduct IModel<FlattenedProduct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FlattenedProduct IPersistableModel<FlattenedProduct>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FlattenedProduct)} does not support '{options.Format}' format.");
@@ -245,6 +245,6 @@ namespace model_flattening.Models
             return DeserializeFlattenedProduct(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FlattenedProduct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FlattenedProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

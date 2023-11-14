@@ -16,11 +16,11 @@ namespace MgmtParent.Models
 {
     public partial class AvailabilitySetPatch : IUtf8JsonSerializable, IJsonModel<AvailabilitySetPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AvailabilitySetPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AvailabilitySetPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AvailabilitySetPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AvailabilitySetPatch>)} interface");
             }
@@ -50,7 +50,7 @@ namespace MgmtParent.Models
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace MgmtParent.Models
             writer.WriteEndObject();
         }
 
-        AvailabilitySetPatch IJsonModel<AvailabilitySetPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AvailabilitySetPatch IJsonModel<AvailabilitySetPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace MgmtParent.Models
 
         internal static AvailabilitySetPatch DeserializeAvailabilitySetPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -139,7 +139,7 @@ namespace MgmtParent.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -148,9 +148,9 @@ namespace MgmtParent.Models
             return new AvailabilitySetPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount));
         }
 
-        BinaryData IModel<AvailabilitySetPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AvailabilitySetPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
@@ -159,9 +159,9 @@ namespace MgmtParent.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AvailabilitySetPatch IModel<AvailabilitySetPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AvailabilitySetPatch IPersistableModel<AvailabilitySetPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AvailabilitySetPatch)} does not support '{options.Format}' format.");
@@ -171,6 +171,6 @@ namespace MgmtParent.Models
             return DeserializeAvailabilitySetPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AvailabilitySetPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AvailabilitySetPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

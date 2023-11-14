@@ -17,11 +17,11 @@ namespace Encode.Datetime.Models
 {
     public partial class Rfc7231DatetimeProperty : IUtf8JsonSerializable, IJsonModel<Rfc7231DatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc7231DatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc7231DatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Rfc7231DatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Rfc7231DatetimeProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Rfc7231DatetimeProperty>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Encode.Datetime.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteStringValue(Value, "R");
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Encode.Datetime.Models
             writer.WriteEndObject();
         }
 
-        Rfc7231DatetimeProperty IJsonModel<Rfc7231DatetimeProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Rfc7231DatetimeProperty IJsonModel<Rfc7231DatetimeProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Encode.Datetime.Models
 
         internal static Rfc7231DatetimeProperty DeserializeRfc7231DatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Encode.Datetime.Models
                     value = property.Value.GetDateTimeOffset("R");
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Encode.Datetime.Models
             return new Rfc7231DatetimeProperty(value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Rfc7231DatetimeProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Rfc7231DatetimeProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Encode.Datetime.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Rfc7231DatetimeProperty IModel<Rfc7231DatetimeProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Rfc7231DatetimeProperty IPersistableModel<Rfc7231DatetimeProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Rfc7231DatetimeProperty)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Encode.Datetime.Models
             return DeserializeRfc7231DatetimeProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Rfc7231DatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Rfc7231DatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Rfc7231DatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRfc7231DatetimeProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRfc7231DatetimeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

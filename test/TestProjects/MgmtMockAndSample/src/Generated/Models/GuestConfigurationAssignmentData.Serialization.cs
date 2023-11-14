@@ -17,11 +17,11 @@ namespace MgmtMockAndSample
 {
     public partial class GuestConfigurationAssignmentData : IUtf8JsonSerializable, IJsonModel<GuestConfigurationAssignmentData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<GuestConfigurationAssignmentData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<GuestConfigurationAssignmentData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<GuestConfigurationAssignmentData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<GuestConfigurationAssignmentData>)} interface");
             }
@@ -32,7 +32,7 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -50,7 +50,7 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ResourceType))
                 {
@@ -58,7 +58,7 @@ namespace MgmtMockAndSample
                     writer.WriteStringValue(ResourceType.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -76,9 +76,9 @@ namespace MgmtMockAndSample
             writer.WriteEndObject();
         }
 
-        GuestConfigurationAssignmentData IJsonModel<GuestConfigurationAssignmentData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        GuestConfigurationAssignmentData IJsonModel<GuestConfigurationAssignmentData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support '{options.Format}' format.");
@@ -90,7 +90,7 @@ namespace MgmtMockAndSample
 
         internal static GuestConfigurationAssignmentData DeserializeGuestConfigurationAssignmentData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,7 +142,7 @@ namespace MgmtMockAndSample
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -151,9 +151,9 @@ namespace MgmtMockAndSample
             return new GuestConfigurationAssignmentData(id.Value, name.Value, Optional.ToNullable(location), Optional.ToNullable(type), serializedAdditionalRawData, properties.Value);
         }
 
-        BinaryData IModel<GuestConfigurationAssignmentData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<GuestConfigurationAssignmentData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support '{options.Format}' format.");
@@ -162,9 +162,9 @@ namespace MgmtMockAndSample
             return ModelReaderWriter.Write(this, options);
         }
 
-        GuestConfigurationAssignmentData IModel<GuestConfigurationAssignmentData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        GuestConfigurationAssignmentData IPersistableModel<GuestConfigurationAssignmentData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GuestConfigurationAssignmentData)} does not support '{options.Format}' format.");
@@ -174,6 +174,6 @@ namespace MgmtMockAndSample
             return DeserializeGuestConfigurationAssignmentData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<GuestConfigurationAssignmentData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<GuestConfigurationAssignmentData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

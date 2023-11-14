@@ -17,7 +17,7 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsage>, IXmlSerializable, IModel<ModelWithCustomUsage>
+    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsage>, IXmlSerializable, IPersistableModel<ModelWithCustomUsage>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -41,11 +41,11 @@ namespace TypeSchemaMapping.Models
             return new ModelWithCustomUsage(modelProperty, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsage>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsage>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithCustomUsage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithCustomUsage>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithCustomUsage>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithCustomUsage>)} interface");
             }
@@ -56,7 +56,7 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        ModelWithCustomUsage IJsonModel<ModelWithCustomUsage>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithCustomUsage IJsonModel<ModelWithCustomUsage>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace TypeSchemaMapping.Models
                     modelProperty = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,15 +113,15 @@ namespace TypeSchemaMapping.Models
             return new ModelWithCustomUsage(modelProperty.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithCustomUsage>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithCustomUsage>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
 
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 return ModelReaderWriter.Write(this, options);
             }
@@ -142,15 +142,15 @@ namespace TypeSchemaMapping.Models
             }
         }
 
-        ModelWithCustomUsage IModel<ModelWithCustomUsage>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithCustomUsage IPersistableModel<ModelWithCustomUsage>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomUsage)} does not support '{options.Format}' format.");
             }
 
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 using JsonDocument document = JsonDocument.Parse(data);
                 return DeserializeModelWithCustomUsage(document.RootElement, options);
@@ -161,6 +161,6 @@ namespace TypeSchemaMapping.Models
             }
         }
 
-        ModelReaderWriterFormat IModel<ModelWithCustomUsage>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ModelWithCustomUsage>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

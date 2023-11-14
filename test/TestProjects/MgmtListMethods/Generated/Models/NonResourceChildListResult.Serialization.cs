@@ -16,11 +16,11 @@ namespace MgmtListMethods.Models
 {
     internal partial class NonResourceChildListResult : IUtf8JsonSerializable, IJsonModel<NonResourceChildListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceChildListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceChildListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NonResourceChildListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NonResourceChildListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NonResourceChildListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NonResourceChildListResult>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtListMethods.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        NonResourceChildListResult IJsonModel<NonResourceChildListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NonResourceChildListResult IJsonModel<NonResourceChildListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NonResourceChildListResult)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtListMethods.Models
 
         internal static NonResourceChildListResult DeserializeNonResourceChildListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace MgmtListMethods.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace MgmtListMethods.Models
             return new NonResourceChildListResult(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NonResourceChildListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NonResourceChildListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NonResourceChildListResult)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace MgmtListMethods.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NonResourceChildListResult IModel<NonResourceChildListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NonResourceChildListResult IPersistableModel<NonResourceChildListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NonResourceChildListResult)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace MgmtListMethods.Models
             return DeserializeNonResourceChildListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NonResourceChildListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NonResourceChildListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

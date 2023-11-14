@@ -19,11 +19,11 @@ namespace MgmtExpandResourceTypes
 {
     public partial class RecordSetData : IUtf8JsonSerializable, IJsonModel<RecordSetData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecordSetData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecordSetData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RecordSetData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RecordSetData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RecordSetData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RecordSetData>)} interface");
             }
@@ -34,22 +34,22 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -75,7 +75,7 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("TTL"u8);
                 writer.WriteNumberValue(TTL.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Fqdn))
                 {
@@ -83,7 +83,7 @@ namespace MgmtExpandResourceTypes
                     writer.WriteStringValue(Fqdn);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -187,7 +187,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -205,9 +205,9 @@ namespace MgmtExpandResourceTypes
             writer.WriteEndObject();
         }
 
-        RecordSetData IJsonModel<RecordSetData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RecordSetData IJsonModel<RecordSetData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RecordSetData)} does not support '{options.Format}' format.");
@@ -219,7 +219,7 @@ namespace MgmtExpandResourceTypes
 
         internal static RecordSetData DeserializeRecordSetData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -462,7 +462,7 @@ namespace MgmtExpandResourceTypes
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -471,9 +471,9 @@ namespace MgmtExpandResourceTypes
             return new RecordSetData(id, name, type, systemData.Value, etag.Value, Optional.ToDictionary(metadata), Optional.ToNullable(ttl), fqdn.Value, provisioningState.Value, targetResource, Optional.ToList(aRecords), Optional.ToList(aaaaRecords), Optional.ToList(mxRecords), Optional.ToList(nsRecords), Optional.ToList(ptrRecords), Optional.ToList(srvRecords), Optional.ToList(txtRecords), cnameRecord.Value, soaRecord.Value, Optional.ToList(caaRecords), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RecordSetData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RecordSetData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RecordSetData)} does not support '{options.Format}' format.");
@@ -482,9 +482,9 @@ namespace MgmtExpandResourceTypes
             return ModelReaderWriter.Write(this, options);
         }
 
-        RecordSetData IModel<RecordSetData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RecordSetData IPersistableModel<RecordSetData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RecordSetData)} does not support '{options.Format}' format.");
@@ -494,6 +494,6 @@ namespace MgmtExpandResourceTypes
             return DeserializeRecordSetData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RecordSetData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RecordSetData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateEmbeddingResponse : IUtf8JsonWriteable, IJsonModel<CreateEmbeddingResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEmbeddingResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEmbeddingResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateEmbeddingResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateEmbeddingResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateEmbeddingResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateEmbeddingResponse>)} interface");
             }
@@ -36,7 +36,7 @@ namespace OpenAI.Models
             writer.WriteEndArray();
             writer.WritePropertyName("usage"u8);
             writer.WriteObjectValue(Usage);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateEmbeddingResponse IJsonModel<CreateEmbeddingResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateEmbeddingResponse IJsonModel<CreateEmbeddingResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateEmbeddingResponse)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace OpenAI.Models
 
         internal static CreateEmbeddingResponse DeserializeCreateEmbeddingResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace OpenAI.Models
                     usage = CreateUsage.DeserializeCreateUsage(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,9 +116,9 @@ namespace OpenAI.Models
             return new CreateEmbeddingResponse(@object, model, data, usage, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateEmbeddingResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateEmbeddingResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateEmbeddingResponse)} does not support '{options.Format}' format.");
@@ -127,9 +127,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateEmbeddingResponse IModel<CreateEmbeddingResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateEmbeddingResponse IPersistableModel<CreateEmbeddingResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateEmbeddingResponse)} does not support '{options.Format}' format.");
@@ -139,14 +139,14 @@ namespace OpenAI.Models
             return DeserializeCreateEmbeddingResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateEmbeddingResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateEmbeddingResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateEmbeddingResponse FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateEmbeddingResponse(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateEmbeddingResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

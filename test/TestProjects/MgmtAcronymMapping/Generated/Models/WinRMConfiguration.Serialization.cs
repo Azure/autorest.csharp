@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class WinRMConfiguration : IUtf8JsonSerializable, IJsonModel<WinRMConfiguration>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WinRMConfiguration>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WinRMConfiguration>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<WinRMConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<WinRMConfiguration>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<WinRMConfiguration>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WinRMConfiguration>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        WinRMConfiguration IJsonModel<WinRMConfiguration>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        WinRMConfiguration IJsonModel<WinRMConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WinRMConfiguration)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static WinRMConfiguration DeserializeWinRMConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace MgmtAcronymMapping.Models
                     listeners = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace MgmtAcronymMapping.Models
             return new WinRMConfiguration(Optional.ToList(listeners), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<WinRMConfiguration>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<WinRMConfiguration>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WinRMConfiguration)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        WinRMConfiguration IModel<WinRMConfiguration>.Read(BinaryData data, ModelReaderWriterOptions options)
+        WinRMConfiguration IPersistableModel<WinRMConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WinRMConfiguration)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeWinRMConfiguration(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<WinRMConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<WinRMConfiguration>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

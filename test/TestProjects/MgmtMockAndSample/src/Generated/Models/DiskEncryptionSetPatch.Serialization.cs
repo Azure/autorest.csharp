@@ -17,11 +17,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class DiskEncryptionSetPatch : IUtf8JsonSerializable, IJsonModel<DiskEncryptionSetPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskEncryptionSetPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskEncryptionSetPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DiskEncryptionSetPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DiskEncryptionSetPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DiskEncryptionSetPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DiskEncryptionSetPatch>)} interface");
             }
@@ -67,7 +67,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(FederatedClientId);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -85,9 +85,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        DiskEncryptionSetPatch IJsonModel<DiskEncryptionSetPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DiskEncryptionSetPatch IJsonModel<DiskEncryptionSetPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiskEncryptionSetPatch)} does not support '{options.Format}' format.");
@@ -99,7 +99,7 @@ namespace MgmtMockAndSample.Models
 
         internal static DiskEncryptionSetPatch DeserializeDiskEncryptionSetPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -183,7 +183,7 @@ namespace MgmtMockAndSample.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -192,9 +192,9 @@ namespace MgmtMockAndSample.Models
             return new DiskEncryptionSetPatch(Optional.ToDictionary(tags), identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), federatedClientId.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DiskEncryptionSetPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DiskEncryptionSetPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiskEncryptionSetPatch)} does not support '{options.Format}' format.");
@@ -203,9 +203,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DiskEncryptionSetPatch IModel<DiskEncryptionSetPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DiskEncryptionSetPatch IPersistableModel<DiskEncryptionSetPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiskEncryptionSetPatch)} does not support '{options.Format}' format.");
@@ -215,6 +215,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeDiskEncryptionSetPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DiskEncryptionSetPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DiskEncryptionSetPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

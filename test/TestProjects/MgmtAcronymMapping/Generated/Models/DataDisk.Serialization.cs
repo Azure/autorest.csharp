@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class DataDisk : IUtf8JsonSerializable, IJsonModel<DataDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDisk>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDisk>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DataDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DataDisk>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DataDisk>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataDisk>)} interface");
             }
@@ -70,7 +70,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("toBeDetached"u8);
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DiskIopsReadWrite))
                 {
@@ -78,7 +78,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(DiskIopsReadWrite.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DiskMBpsReadWrite))
                 {
@@ -86,7 +86,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(DiskMBpsReadWrite.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -104,9 +104,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        DataDisk IJsonModel<DataDisk>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DataDisk IJsonModel<DataDisk>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataDisk)} does not support '{options.Format}' format.");
@@ -118,7 +118,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static DataDisk DeserializeDataDisk(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -236,7 +236,7 @@ namespace MgmtAcronymMapping.Models
                     diskMBpsReadWrite = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -245,9 +245,9 @@ namespace MgmtAcronymMapping.Models
             return new DataDisk(lun, name.Value, vhd.Value, image.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, Optional.ToNullable(diskSizeGB), managedDisk.Value, Optional.ToNullable(toBeDetached), Optional.ToNullable(diskIOPSReadWrite), Optional.ToNullable(diskMBpsReadWrite), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DataDisk>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DataDisk>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataDisk)} does not support '{options.Format}' format.");
@@ -256,9 +256,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DataDisk IModel<DataDisk>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DataDisk IPersistableModel<DataDisk>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DataDisk)} does not support '{options.Format}' format.");
@@ -268,6 +268,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeDataDisk(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DataDisk>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DataDisk>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace AuthoringTypeSpec.Models
 {
     public partial class JobWarning : IUtf8JsonSerializable, IJsonModel<JobWarning>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JobWarning>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JobWarning>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<JobWarning>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<JobWarning>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<JobWarning>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JobWarning>)} interface");
             }
@@ -31,7 +31,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStringValue(Code);
             writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace AuthoringTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        JobWarning IJsonModel<JobWarning>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        JobWarning IJsonModel<JobWarning>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace AuthoringTypeSpec.Models
 
         internal static JobWarning DeserializeJobWarning(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace AuthoringTypeSpec.Models
                     message = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace AuthoringTypeSpec.Models
             return new JobWarning(code, message, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<JobWarning>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<JobWarning>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace AuthoringTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        JobWarning IModel<JobWarning>.Read(BinaryData data, ModelReaderWriterOptions options)
+        JobWarning IPersistableModel<JobWarning>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JobWarning)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace AuthoringTypeSpec.Models
             return DeserializeJobWarning(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<JobWarning>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<JobWarning>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static JobWarning FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJobWarning(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeJobWarning(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

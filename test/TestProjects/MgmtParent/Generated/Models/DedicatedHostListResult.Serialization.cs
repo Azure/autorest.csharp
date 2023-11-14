@@ -17,11 +17,11 @@ namespace MgmtParent.Models
 {
     internal partial class DedicatedHostListResult : IUtf8JsonSerializable, IJsonModel<DedicatedHostListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DedicatedHostListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DedicatedHostListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DedicatedHostListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtParent.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtParent.Models
             writer.WriteEndObject();
         }
 
-        DedicatedHostListResult IJsonModel<DedicatedHostListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DedicatedHostListResult IJsonModel<DedicatedHostListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtParent.Models
 
         internal static DedicatedHostListResult DeserializeDedicatedHostListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtParent.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtParent.Models
             return new DedicatedHostListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DedicatedHostListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DedicatedHostListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtParent.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DedicatedHostListResult IModel<DedicatedHostListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DedicatedHostListResult IPersistableModel<DedicatedHostListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtParent.Models
             return DeserializeDedicatedHostListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DedicatedHostListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DedicatedHostListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace _Type.Property.ValueTypes.Models
 {
     public partial class UnknownIntProperty : IUtf8JsonSerializable, IJsonModel<UnknownIntProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownIntProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownIntProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnknownIntProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnknownIntProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnknownIntProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnknownIntProperty>)} interface");
             }
@@ -36,7 +36,7 @@ namespace _Type.Property.ValueTypes.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteEndObject();
         }
 
-        UnknownIntProperty IJsonModel<UnknownIntProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnknownIntProperty IJsonModel<UnknownIntProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace _Type.Property.ValueTypes.Models
 
         internal static UnknownIntProperty DeserializeUnknownIntProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace _Type.Property.ValueTypes.Models
                     property = BinaryData.FromString(property0.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace _Type.Property.ValueTypes.Models
             return new UnknownIntProperty(property, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnknownIntProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnknownIntProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace _Type.Property.ValueTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnknownIntProperty IModel<UnknownIntProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnknownIntProperty IPersistableModel<UnknownIntProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnknownIntProperty)} does not support '{options.Format}' format.");
@@ -116,14 +116,14 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeUnknownIntProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnknownIntProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnknownIntProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnknownIntProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownIntProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnknownIntProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

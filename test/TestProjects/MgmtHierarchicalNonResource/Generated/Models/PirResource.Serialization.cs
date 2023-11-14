@@ -16,17 +16,17 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class PirResource : IUtf8JsonSerializable, IJsonModel<PirResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PirResource>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PirResource>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PirResource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PirResource>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PirResource>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PirResource>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -34,7 +34,7 @@ namespace MgmtHierarchicalNonResource.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Location))
                 {
@@ -42,7 +42,7 @@ namespace MgmtHierarchicalNonResource.Models
                     writer.WriteStringValue(Location);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteEndObject();
         }
 
-        PirResource IJsonModel<PirResource>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PirResource IJsonModel<PirResource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PirResource)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static PirResource DeserializePirResource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -96,7 +96,7 @@ namespace MgmtHierarchicalNonResource.Models
                     location = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,9 +105,9 @@ namespace MgmtHierarchicalNonResource.Models
             return new PirResource(name.Value, location.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PirResource>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PirResource>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PirResource)} does not support '{options.Format}' format.");
@@ -116,9 +116,9 @@ namespace MgmtHierarchicalNonResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PirResource IModel<PirResource>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PirResource IPersistableModel<PirResource>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PirResource)} does not support '{options.Format}' format.");
@@ -128,6 +128,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializePirResource(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PirResource>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PirResource>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

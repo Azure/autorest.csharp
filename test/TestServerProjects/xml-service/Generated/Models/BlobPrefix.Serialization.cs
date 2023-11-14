@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class BlobPrefix : IXmlSerializable, IModel<BlobPrefix>
+    public partial class BlobPrefix : IXmlSerializable, IPersistableModel<BlobPrefix>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -36,10 +36,10 @@ namespace xml_service.Models
             return new BlobPrefix(name, default);
         }
 
-        BinaryData IModel<BlobPrefix>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BlobPrefix>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<BlobPrefix>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -59,9 +59,9 @@ namespace xml_service.Models
             }
         }
 
-        BlobPrefix IModel<BlobPrefix>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BlobPrefix IPersistableModel<BlobPrefix>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobPrefix)} does not support '{options.Format}' format.");
@@ -70,6 +70,6 @@ namespace xml_service.Models
             return DeserializeBlobPrefix(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<BlobPrefix>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<BlobPrefix>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

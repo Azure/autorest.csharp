@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     public partial class TRex : IUtf8JsonSerializable, IJsonModel<TRex>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TRex>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TRex>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TRex>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TRex>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TRex>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TRex>)} interface");
             }
@@ -31,7 +31,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("size"u8);
             writer.WriteNumberValue(Size);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        TRex IJsonModel<TRex>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TRex IJsonModel<TRex>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TRex)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         internal static TRex DeserializeTRex(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     size = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return new TRex(kind, size, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TRex>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TRex>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TRex)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TRex IModel<TRex>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TRex IPersistableModel<TRex>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TRex)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeTRex(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TRex>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TRex>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new TRex FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTRex(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeTRex(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -17,17 +17,17 @@ namespace MgmtPagination.Models
 {
     internal partial class PageSizeNumericModelListResult : IUtf8JsonSerializable, IJsonModel<PageSizeNumericModelListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeNumericModelListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeNumericModelListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PageSizeNumericModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PageSizeNumericModelListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PageSizeNumericModelListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeNumericModelListResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -40,7 +40,7 @@ namespace MgmtPagination.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -48,7 +48,7 @@ namespace MgmtPagination.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace MgmtPagination.Models
             writer.WriteEndObject();
         }
 
-        PageSizeNumericModelListResult IJsonModel<PageSizeNumericModelListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PageSizeNumericModelListResult IJsonModel<PageSizeNumericModelListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace MgmtPagination.Models
 
         internal static PageSizeNumericModelListResult DeserializePageSizeNumericModelListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,7 +111,7 @@ namespace MgmtPagination.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -120,9 +120,9 @@ namespace MgmtPagination.Models
             return new PageSizeNumericModelListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PageSizeNumericModelListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PageSizeNumericModelListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
@@ -131,9 +131,9 @@ namespace MgmtPagination.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PageSizeNumericModelListResult IModel<PageSizeNumericModelListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PageSizeNumericModelListResult IPersistableModel<PageSizeNumericModelListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
@@ -143,6 +143,6 @@ namespace MgmtPagination.Models
             return DeserializePageSizeNumericModelListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PageSizeNumericModelListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PageSizeNumericModelListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

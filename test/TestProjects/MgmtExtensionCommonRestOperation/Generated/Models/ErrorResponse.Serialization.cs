@@ -16,11 +16,11 @@ namespace MgmtExtensionCommonRestOperation.Models
 {
     internal partial class ErrorResponse : IUtf8JsonSerializable, IJsonModel<ErrorResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ErrorResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ErrorResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ErrorResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ErrorResponse>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                 writer.WritePropertyName("error"u8);
                 writer.WriteStringValue(Error);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtExtensionCommonRestOperation.Models
             writer.WriteEndObject();
         }
 
-        ErrorResponse IJsonModel<ErrorResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ErrorResponse IJsonModel<ErrorResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ErrorResponse)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtExtensionCommonRestOperation.Models
 
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                     error = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtExtensionCommonRestOperation.Models
             return new ErrorResponse(error.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ErrorResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ErrorResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ErrorResponse)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtExtensionCommonRestOperation.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ErrorResponse IModel<ErrorResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ErrorResponse IPersistableModel<ErrorResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ErrorResponse)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtExtensionCommonRestOperation.Models
             return DeserializeErrorResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ErrorResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ErrorResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripRecursiveModel : IUtf8JsonSerializable, IJsonModel<RoundTripRecursiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripRecursiveModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripRecursiveModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RoundTripRecursiveModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RoundTripRecursiveModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RoundTripRecursiveModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripRecursiveModel>)} interface");
             }
@@ -34,7 +34,7 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        RoundTripRecursiveModel IJsonModel<RoundTripRecursiveModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RoundTripRecursiveModel IJsonModel<RoundTripRecursiveModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripRecursiveModel)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripRecursiveModel DeserializeRoundTripRecursiveModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace ModelsTypeSpec.Models
                     inner = DeserializeRoundTripRecursiveModel(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace ModelsTypeSpec.Models
             return new RoundTripRecursiveModel(message, inner.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RoundTripRecursiveModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RoundTripRecursiveModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripRecursiveModel)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RoundTripRecursiveModel IModel<RoundTripRecursiveModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RoundTripRecursiveModel IPersistableModel<RoundTripRecursiveModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripRecursiveModel)} does not support '{options.Format}' format.");
@@ -124,14 +124,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripRecursiveModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RoundTripRecursiveModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RoundTripRecursiveModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripRecursiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripRecursiveModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRoundTripRecursiveModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class RouteConfigurationOverrideActionParameters : IUtf8JsonSerializable, IJsonModel<RouteConfigurationOverrideActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RouteConfigurationOverrideActionParameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RouteConfigurationOverrideActionParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RouteConfigurationOverrideActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RouteConfigurationOverrideActionParameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RouteConfigurationOverrideActionParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RouteConfigurationOverrideActionParameters>)} interface");
             }
@@ -33,7 +33,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("originGroupOverride"u8);
                 writer.WriteObjectValue(OriginGroupOverride);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        RouteConfigurationOverrideActionParameters IJsonModel<RouteConfigurationOverrideActionParameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RouteConfigurationOverrideActionParameters IJsonModel<RouteConfigurationOverrideActionParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RouteConfigurationOverrideActionParameters)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace MgmtDiscriminator.Models
 
         internal static RouteConfigurationOverrideActionParameters DeserializeRouteConfigurationOverrideActionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -91,7 +91,7 @@ namespace MgmtDiscriminator.Models
                     originGroupOverride = OriginGroupOverride.DeserializeOriginGroupOverride(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -100,9 +100,9 @@ namespace MgmtDiscriminator.Models
             return new RouteConfigurationOverrideActionParameters(typeName, originGroupOverride.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RouteConfigurationOverrideActionParameters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RouteConfigurationOverrideActionParameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RouteConfigurationOverrideActionParameters)} does not support '{options.Format}' format.");
@@ -111,9 +111,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RouteConfigurationOverrideActionParameters IModel<RouteConfigurationOverrideActionParameters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RouteConfigurationOverrideActionParameters IPersistableModel<RouteConfigurationOverrideActionParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RouteConfigurationOverrideActionParameters)} does not support '{options.Format}' format.");
@@ -123,6 +123,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeRouteConfigurationOverrideActionParameters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RouteConfigurationOverrideActionParameters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RouteConfigurationOverrideActionParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

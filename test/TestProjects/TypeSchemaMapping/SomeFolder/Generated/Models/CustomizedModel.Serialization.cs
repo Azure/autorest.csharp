@@ -16,11 +16,11 @@ namespace CustomNamespace
 {
     internal partial class CustomizedModel : IUtf8JsonSerializable, IJsonModel<CustomizedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CustomizedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CustomizedModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CustomizedModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CustomizedModel>)} interface");
             }
@@ -40,7 +40,7 @@ namespace CustomNamespace
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
             writer.WritePropertyName("DaysOfWeek"u8);
             writer.WriteStringValue(DaysOfWeek.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,9 +58,9 @@ namespace CustomNamespace
             writer.WriteEndObject();
         }
 
-        CustomizedModel IJsonModel<CustomizedModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CustomizedModel IJsonModel<CustomizedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{options.Format}' format.");
@@ -70,9 +70,9 @@ namespace CustomNamespace
             return DeserializeCustomizedModel(document.RootElement, options);
         }
 
-        BinaryData IModel<CustomizedModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CustomizedModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{options.Format}' format.");
@@ -81,9 +81,9 @@ namespace CustomNamespace
             return ModelReaderWriter.Write(this, options);
         }
 
-        CustomizedModel IModel<CustomizedModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CustomizedModel IPersistableModel<CustomizedModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomizedModel)} does not support '{options.Format}' format.");
@@ -93,6 +93,6 @@ namespace CustomNamespace
             return DeserializeCustomizedModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CustomizedModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CustomizedModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

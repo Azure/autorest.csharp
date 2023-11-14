@@ -17,11 +17,11 @@ namespace _Type.Model.Usage.Models
 {
     public partial class InputRecord : IUtf8JsonSerializable, IJsonModel<InputRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<InputRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<InputRecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<InputRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputRecord>)} interface");
             }
@@ -29,7 +29,7 @@ namespace _Type.Model.Usage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredProp"u8);
             writer.WriteStringValue(RequiredProp);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace _Type.Model.Usage.Models
             writer.WriteEndObject();
         }
 
-        InputRecord IJsonModel<InputRecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        InputRecord IJsonModel<InputRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputRecord)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace _Type.Model.Usage.Models
 
         internal static InputRecord DeserializeInputRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace _Type.Model.Usage.Models
                     requiredProp = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace _Type.Model.Usage.Models
             return new InputRecord(requiredProp, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<InputRecord>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<InputRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputRecord)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace _Type.Model.Usage.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        InputRecord IModel<InputRecord>.Read(BinaryData data, ModelReaderWriterOptions options)
+        InputRecord IPersistableModel<InputRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InputRecord)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace _Type.Model.Usage.Models
             return DeserializeInputRecord(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<InputRecord>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<InputRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InputRecord FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputRecord(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeInputRecord(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

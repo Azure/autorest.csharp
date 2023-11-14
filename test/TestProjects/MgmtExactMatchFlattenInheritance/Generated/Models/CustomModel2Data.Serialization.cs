@@ -17,11 +17,11 @@ namespace MgmtExactMatchFlattenInheritance
 {
     public partial class CustomModel2Data : IUtf8JsonSerializable, IJsonModel<CustomModel2Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel2Data>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel2Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CustomModel2Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CustomModel2Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CustomModel2Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CustomModel2Data>)} interface");
             }
@@ -32,22 +32,22 @@ namespace MgmtExactMatchFlattenInheritance
                 writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -55,7 +55,7 @@ namespace MgmtExactMatchFlattenInheritance
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace MgmtExactMatchFlattenInheritance
             writer.WriteEndObject();
         }
 
-        CustomModel2Data IJsonModel<CustomModel2Data>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CustomModel2Data IJsonModel<CustomModel2Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomModel2Data)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace MgmtExactMatchFlattenInheritance
 
         internal static CustomModel2Data DeserializeCustomModel2Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,7 +131,7 @@ namespace MgmtExactMatchFlattenInheritance
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -140,9 +140,9 @@ namespace MgmtExactMatchFlattenInheritance
             return new CustomModel2Data(id, name, type, systemData.Value, foo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CustomModel2Data>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CustomModel2Data>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomModel2Data)} does not support '{options.Format}' format.");
@@ -151,9 +151,9 @@ namespace MgmtExactMatchFlattenInheritance
             return ModelReaderWriter.Write(this, options);
         }
 
-        CustomModel2Data IModel<CustomModel2Data>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CustomModel2Data IPersistableModel<CustomModel2Data>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CustomModel2Data)} does not support '{options.Format}' format.");
@@ -163,6 +163,6 @@ namespace MgmtExactMatchFlattenInheritance
             return DeserializeCustomModel2Data(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CustomModel2Data>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CustomModel2Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

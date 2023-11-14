@@ -16,11 +16,11 @@ namespace MgmtScopeResource.Models
 {
     public partial class TemplateHashResult : IUtf8JsonSerializable, IJsonModel<TemplateHashResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TemplateHashResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TemplateHashResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TemplateHashResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TemplateHashResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TemplateHashResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TemplateHashResult>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("templateHash"u8);
                 writer.WriteStringValue(TemplateHash);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        TemplateHashResult IJsonModel<TemplateHashResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TemplateHashResult IJsonModel<TemplateHashResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TemplateHashResult)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtScopeResource.Models
 
         internal static TemplateHashResult DeserializeTemplateHashResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace MgmtScopeResource.Models
                     templateHash = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace MgmtScopeResource.Models
             return new TemplateHashResult(minifiedTemplate.Value, templateHash.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TemplateHashResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TemplateHashResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TemplateHashResult)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TemplateHashResult IModel<TemplateHashResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TemplateHashResult IPersistableModel<TemplateHashResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TemplateHashResult)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace MgmtScopeResource.Models
             return DeserializeTemplateHashResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TemplateHashResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TemplateHashResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

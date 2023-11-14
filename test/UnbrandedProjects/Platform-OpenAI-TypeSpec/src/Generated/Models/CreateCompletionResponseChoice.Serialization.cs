@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateCompletionResponseChoice : IUtf8JsonWriteable, IJsonModel<CreateCompletionResponseChoice>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponseChoice>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponseChoice>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateCompletionResponseChoice>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateCompletionResponseChoice>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateCompletionResponseChoice>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateCompletionResponseChoice>)} interface");
             }
@@ -38,7 +38,7 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("finish_reason"u8);
             writer.WriteStringValue(FinishReason.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateCompletionResponseChoice IJsonModel<CreateCompletionResponseChoice>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateCompletionResponseChoice IJsonModel<CreateCompletionResponseChoice>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace OpenAI.Models
 
         internal static CreateCompletionResponseChoice DeserializeCreateCompletionResponseChoice(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace OpenAI.Models
                     finishReason = new CreateCompletionResponseChoiceFinishReason(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace OpenAI.Models
             return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateCompletionResponseChoice>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateCompletionResponseChoice>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateCompletionResponseChoice IModel<CreateCompletionResponseChoice>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateCompletionResponseChoice IPersistableModel<CreateCompletionResponseChoice>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
@@ -141,14 +141,14 @@ namespace OpenAI.Models
             return DeserializeCreateCompletionResponseChoice(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateCompletionResponseChoice>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateCompletionResponseChoice>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateCompletionResponseChoice FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateCompletionResponseChoice(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateCompletionResponseChoice(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

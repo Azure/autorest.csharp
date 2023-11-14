@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     public partial class FakeConfigurationListResult : IUtf8JsonSerializable, IJsonModel<FakeConfigurationListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeConfigurationListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeConfigurationListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FakeConfigurationListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FakeConfigurationListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FakeConfigurationListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FakeConfigurationListResult>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtListMethods.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        FakeConfigurationListResult IJsonModel<FakeConfigurationListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FakeConfigurationListResult IJsonModel<FakeConfigurationListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakeConfigurationListResult)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace MgmtListMethods.Models
 
         internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace MgmtListMethods.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace MgmtListMethods.Models
             return new FakeConfigurationListResult(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FakeConfigurationListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FakeConfigurationListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakeConfigurationListResult)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace MgmtListMethods.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FakeConfigurationListResult IModel<FakeConfigurationListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FakeConfigurationListResult IPersistableModel<FakeConfigurationListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakeConfigurationListResult)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace MgmtListMethods.Models
             return DeserializeFakeConfigurationListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FakeConfigurationListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FakeConfigurationListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

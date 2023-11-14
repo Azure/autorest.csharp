@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications : IUtf8JsonSerializable, IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)} interface");
             }
@@ -91,7 +91,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -109,9 +109,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyIntrusionDetectionBypassTrafficSpecifications)} does not support '{options.Format}' format.");
@@ -123,7 +123,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -230,7 +230,7 @@ namespace MgmtMockAndSample.Models
                     destinationIpGroups = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -239,9 +239,9 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(name.Value, description.Value, Optional.ToNullable(protocol), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyIntrusionDetectionBypassTrafficSpecifications)} does not support '{options.Format}' format.");
@@ -250,9 +250,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyIntrusionDetectionBypassTrafficSpecifications IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyIntrusionDetectionBypassTrafficSpecifications)} does not support '{options.Format}' format.");
@@ -262,6 +262,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

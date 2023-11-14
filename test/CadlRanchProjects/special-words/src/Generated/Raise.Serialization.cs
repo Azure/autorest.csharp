@@ -17,11 +17,11 @@ namespace SpecialWords
 {
     public partial class Raise : IUtf8JsonSerializable, IJsonModel<Raise>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Raise>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Raise>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Raise>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Raise>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Raise>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Raise>)} interface");
             }
@@ -29,7 +29,7 @@ namespace SpecialWords
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace SpecialWords
             writer.WriteEndObject();
         }
 
-        Raise IJsonModel<Raise>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Raise IJsonModel<Raise>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Raise)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace SpecialWords
 
         internal static Raise DeserializeRaise(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace SpecialWords
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace SpecialWords
             return new Raise(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Raise>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Raise>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Raise)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace SpecialWords
             return ModelReaderWriter.Write(this, options);
         }
 
-        Raise IModel<Raise>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Raise IPersistableModel<Raise>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Raise)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace SpecialWords
             return DeserializeRaise(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Raise>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Raise>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Raise FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRaise(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRaise(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

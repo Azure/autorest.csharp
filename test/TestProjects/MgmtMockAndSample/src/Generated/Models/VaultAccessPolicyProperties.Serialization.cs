@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class VaultAccessPolicyProperties : IUtf8JsonSerializable, IJsonModel<VaultAccessPolicyProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultAccessPolicyProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultAccessPolicyProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VaultAccessPolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VaultAccessPolicyProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VaultAccessPolicyProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VaultAccessPolicyProperties>)} interface");
             }
@@ -33,7 +33,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        VaultAccessPolicyProperties IJsonModel<VaultAccessPolicyProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VaultAccessPolicyProperties IJsonModel<VaultAccessPolicyProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VaultAccessPolicyProperties)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultAccessPolicyProperties DeserializeVaultAccessPolicyProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -86,7 +86,7 @@ namespace MgmtMockAndSample.Models
                     accessPolicies = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,9 +95,9 @@ namespace MgmtMockAndSample.Models
             return new VaultAccessPolicyProperties(accessPolicies, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VaultAccessPolicyProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VaultAccessPolicyProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VaultAccessPolicyProperties)} does not support '{options.Format}' format.");
@@ -106,9 +106,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VaultAccessPolicyProperties IModel<VaultAccessPolicyProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VaultAccessPolicyProperties IPersistableModel<VaultAccessPolicyProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VaultAccessPolicyProperties)} does not support '{options.Format}' format.");
@@ -118,6 +118,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultAccessPolicyProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VaultAccessPolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VaultAccessPolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

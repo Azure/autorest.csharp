@@ -16,11 +16,11 @@ namespace MgmtSafeFlatten.Models
 {
     internal partial class LayerTwoSingle : IUtf8JsonSerializable, IJsonModel<LayerTwoSingle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerTwoSingle>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerTwoSingle>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LayerTwoSingle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LayerTwoSingle>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LayerTwoSingle>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LayerTwoSingle>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtSafeFlatten.Models
                 writer.WritePropertyName("myProp"u8);
                 writer.WriteStringValue(MyProp);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtSafeFlatten.Models
             writer.WriteEndObject();
         }
 
-        LayerTwoSingle IJsonModel<LayerTwoSingle>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LayerTwoSingle IJsonModel<LayerTwoSingle>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtSafeFlatten.Models
 
         internal static LayerTwoSingle DeserializeLayerTwoSingle(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtSafeFlatten.Models
                     myProp = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtSafeFlatten.Models
             return new LayerTwoSingle(myProp.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LayerTwoSingle>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LayerTwoSingle>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtSafeFlatten.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LayerTwoSingle IModel<LayerTwoSingle>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LayerTwoSingle IPersistableModel<LayerTwoSingle>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeLayerTwoSingle(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LayerTwoSingle>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LayerTwoSingle>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

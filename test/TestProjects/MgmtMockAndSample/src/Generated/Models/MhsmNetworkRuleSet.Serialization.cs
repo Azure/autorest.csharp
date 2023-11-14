@@ -17,11 +17,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class MhsmNetworkRuleSet : IUtf8JsonSerializable, IJsonModel<MhsmNetworkRuleSet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmNetworkRuleSet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmNetworkRuleSet>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MhsmNetworkRuleSet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MhsmNetworkRuleSet>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MhsmNetworkRuleSet>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MhsmNetworkRuleSet>)} interface");
             }
@@ -57,7 +57,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        MhsmNetworkRuleSet IJsonModel<MhsmNetworkRuleSet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MhsmNetworkRuleSet IJsonModel<MhsmNetworkRuleSet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MhsmNetworkRuleSet)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace MgmtMockAndSample.Models
 
         internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -149,7 +149,7 @@ namespace MgmtMockAndSample.Models
                     virtualNetworkRules = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -158,9 +158,9 @@ namespace MgmtMockAndSample.Models
             return new MhsmNetworkRuleSet(Optional.ToNullable(bypass), Optional.ToNullable(defaultAction), Optional.ToList(ipRules), Optional.ToList(virtualNetworkRules), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MhsmNetworkRuleSet>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MhsmNetworkRuleSet>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MhsmNetworkRuleSet)} does not support '{options.Format}' format.");
@@ -169,9 +169,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MhsmNetworkRuleSet IModel<MhsmNetworkRuleSet>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MhsmNetworkRuleSet IPersistableModel<MhsmNetworkRuleSet>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MhsmNetworkRuleSet)} does not support '{options.Format}' format.");
@@ -181,6 +181,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmNetworkRuleSet(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MhsmNetworkRuleSet>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MhsmNetworkRuleSet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

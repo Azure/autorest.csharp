@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class DeliveryRuleCacheExpirationAction : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCacheExpirationAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCacheExpirationAction>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCacheExpirationAction>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeliveryRuleCacheExpirationAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeliveryRuleCacheExpirationAction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeliveryRuleCacheExpirationAction>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeliveryRuleCacheExpirationAction>)} interface");
             }
@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteObjectValue(Parameters);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Foo))
                 {
@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
                     writer.WriteStringValue(Foo);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        DeliveryRuleCacheExpirationAction IJsonModel<DeliveryRuleCacheExpirationAction>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeliveryRuleCacheExpirationAction IJsonModel<DeliveryRuleCacheExpirationAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeliveryRuleCacheExpirationAction)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleCacheExpirationAction DeserializeDeliveryRuleCacheExpirationAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtDiscriminator.Models
                     foo = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleCacheExpirationAction(name, foo.Value, serializedAdditionalRawData, parameters);
         }
 
-        BinaryData IModel<DeliveryRuleCacheExpirationAction>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeliveryRuleCacheExpirationAction>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeliveryRuleCacheExpirationAction)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeliveryRuleCacheExpirationAction IModel<DeliveryRuleCacheExpirationAction>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeliveryRuleCacheExpirationAction IPersistableModel<DeliveryRuleCacheExpirationAction>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeliveryRuleCacheExpirationAction)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleCacheExpirationAction(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeliveryRuleCacheExpirationAction>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeliveryRuleCacheExpirationAction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

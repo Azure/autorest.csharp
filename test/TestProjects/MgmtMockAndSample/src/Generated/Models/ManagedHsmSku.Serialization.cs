@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class ManagedHsmSku : IUtf8JsonSerializable, IJsonModel<ManagedHsmSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ManagedHsmSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ManagedHsmSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ManagedHsmSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagedHsmSku>)} interface");
             }
@@ -30,7 +30,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStringValue(Family.ToString());
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToSerialString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        ManagedHsmSku IJsonModel<ManagedHsmSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ManagedHsmSku IJsonModel<ManagedHsmSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedHsmSku)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Models
 
         internal static ManagedHsmSku DeserializeManagedHsmSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace MgmtMockAndSample.Models
                     name = property.Value.GetString().ToManagedHsmSkuName();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace MgmtMockAndSample.Models
             return new ManagedHsmSku(family, name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ManagedHsmSku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ManagedHsmSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedHsmSku)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ManagedHsmSku IModel<ManagedHsmSku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ManagedHsmSku IPersistableModel<ManagedHsmSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ManagedHsmSku)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeManagedHsmSku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ManagedHsmSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ManagedHsmSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

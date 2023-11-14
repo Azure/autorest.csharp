@@ -17,11 +17,11 @@ namespace MgmtMultipleParentResource.Models
 {
     internal partial class AnotherParentsListResult : IUtf8JsonSerializable, IJsonModel<AnotherParentsListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnotherParentsListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnotherParentsListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AnotherParentsListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AnotherParentsListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AnotherParentsListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AnotherParentsListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtMultipleParentResource.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtMultipleParentResource.Models
             writer.WriteEndObject();
         }
 
-        AnotherParentsListResult IJsonModel<AnotherParentsListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AnotherParentsListResult IJsonModel<AnotherParentsListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnotherParentsListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtMultipleParentResource.Models
 
         internal static AnotherParentsListResult DeserializeAnotherParentsListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtMultipleParentResource.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtMultipleParentResource.Models
             return new AnotherParentsListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AnotherParentsListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AnotherParentsListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnotherParentsListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtMultipleParentResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AnotherParentsListResult IModel<AnotherParentsListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AnotherParentsListResult IPersistableModel<AnotherParentsListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnotherParentsListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeAnotherParentsListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AnotherParentsListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AnotherParentsListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

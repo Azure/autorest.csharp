@@ -17,17 +17,17 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateChangePointDetectionResult : IUtf8JsonSerializable, IJsonModel<UnivariateChangePointDetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateChangePointDetectionResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateChangePointDetectionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnivariateChangePointDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnivariateChangePointDetectionResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnivariateChangePointDetectionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnivariateChangePointDetectionResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Period))
                 {
@@ -55,7 +55,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        UnivariateChangePointDetectionResult IJsonModel<UnivariateChangePointDetectionResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnivariateChangePointDetectionResult IJsonModel<UnivariateChangePointDetectionResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateChangePointDetectionResult)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateChangePointDetectionResult DeserializeUnivariateChangePointDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,7 +137,7 @@ namespace AnomalyDetector.Models
                     confidenceScores = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -146,9 +146,9 @@ namespace AnomalyDetector.Models
             return new UnivariateChangePointDetectionResult(Optional.ToNullable(period), Optional.ToList(isChangePoint), Optional.ToList(confidenceScores), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnivariateChangePointDetectionResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnivariateChangePointDetectionResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateChangePointDetectionResult)} does not support '{options.Format}' format.");
@@ -157,9 +157,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnivariateChangePointDetectionResult IModel<UnivariateChangePointDetectionResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnivariateChangePointDetectionResult IPersistableModel<UnivariateChangePointDetectionResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateChangePointDetectionResult)} does not support '{options.Format}' format.");
@@ -169,14 +169,14 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateChangePointDetectionResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnivariateChangePointDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnivariateChangePointDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnivariateChangePointDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateChangePointDetectionResult(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnivariateChangePointDetectionResult(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

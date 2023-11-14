@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ListBlobsResponse : IXmlSerializable, IModel<ListBlobsResponse>
+    public partial class ListBlobsResponse : IXmlSerializable, IPersistableModel<ListBlobsResponse>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -93,10 +93,10 @@ namespace xml_service.Models
             return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, default);
         }
 
-        BinaryData IModel<ListBlobsResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ListBlobsResponse>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ListBlobsResponse>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -116,9 +116,9 @@ namespace xml_service.Models
             }
         }
 
-        ListBlobsResponse IModel<ListBlobsResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ListBlobsResponse IPersistableModel<ListBlobsResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListBlobsResponse)} does not support '{options.Format}' format.");
@@ -127,6 +127,6 @@ namespace xml_service.Models
             return DeserializeListBlobsResponse(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ListBlobsResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ListBlobsResponse>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

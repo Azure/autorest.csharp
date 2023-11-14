@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class AppleBarrel : IXmlSerializable, IModel<AppleBarrel>
+    public partial class AppleBarrel : IXmlSerializable, IPersistableModel<AppleBarrel>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -71,10 +71,10 @@ namespace xml_service.Models
             return new AppleBarrel(goodApples, badApples, default);
         }
 
-        BinaryData IModel<AppleBarrel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AppleBarrel>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<AppleBarrel>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -94,9 +94,9 @@ namespace xml_service.Models
             }
         }
 
-        AppleBarrel IModel<AppleBarrel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AppleBarrel IPersistableModel<AppleBarrel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AppleBarrel)} does not support '{options.Format}' format.");
@@ -105,6 +105,6 @@ namespace xml_service.Models
             return DeserializeAppleBarrel(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<AppleBarrel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<AppleBarrel>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

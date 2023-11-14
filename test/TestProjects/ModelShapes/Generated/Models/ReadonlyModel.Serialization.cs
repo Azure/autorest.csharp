@@ -16,11 +16,11 @@ namespace ModelShapes.Models
 {
     public partial class ReadonlyModel : IUtf8JsonSerializable, IJsonModel<ReadonlyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ReadonlyModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ReadonlyModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ReadonlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ReadonlyModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ReadonlyModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ReadonlyModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("Name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace ModelShapes.Models
             writer.WriteEndObject();
         }
 
-        ReadonlyModel IJsonModel<ReadonlyModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ReadonlyModel IJsonModel<ReadonlyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ReadonlyModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace ModelShapes.Models
 
         internal static ReadonlyModel DeserializeReadonlyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace ModelShapes.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace ModelShapes.Models
             return new ReadonlyModel(name.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ReadonlyModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ReadonlyModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ReadonlyModel)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace ModelShapes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ReadonlyModel IModel<ReadonlyModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ReadonlyModel IPersistableModel<ReadonlyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ReadonlyModel)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace ModelShapes.Models
             return DeserializeReadonlyModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ReadonlyModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ReadonlyModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class DnsSettings : IUtf8JsonSerializable, IJsonModel<DnsSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DnsSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DnsSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DnsSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DnsSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DnsSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DnsSettings>)} interface");
             }
@@ -53,7 +53,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteNull("requireProxyForNetworkRules");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -71,9 +71,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        DnsSettings IJsonModel<DnsSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DnsSettings IJsonModel<DnsSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DnsSettings)} does not support '{options.Format}' format.");
@@ -85,7 +85,7 @@ namespace MgmtMockAndSample.Models
 
         internal static DnsSettings DeserializeDnsSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,7 +131,7 @@ namespace MgmtMockAndSample.Models
                     requireProxyForNetworkRules = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -140,9 +140,9 @@ namespace MgmtMockAndSample.Models
             return new DnsSettings(Optional.ToList(servers), Optional.ToNullable(enableProxy), Optional.ToNullable(requireProxyForNetworkRules), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DnsSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DnsSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DnsSettings)} does not support '{options.Format}' format.");
@@ -151,9 +151,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DnsSettings IModel<DnsSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DnsSettings IPersistableModel<DnsSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DnsSettings)} does not support '{options.Format}' format.");
@@ -163,6 +163,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeDnsSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

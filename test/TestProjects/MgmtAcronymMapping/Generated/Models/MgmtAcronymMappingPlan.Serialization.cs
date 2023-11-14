@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class MgmtAcronymMappingPlan : IUtf8JsonSerializable, IJsonModel<MgmtAcronymMappingPlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingPlan>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingPlan>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtAcronymMappingPlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtAcronymMappingPlan>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtAcronymMappingPlan>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtAcronymMappingPlan>)} interface");
             }
@@ -46,7 +46,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("promotionCode"u8);
                 writer.WriteStringValue(PromotionCode);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        MgmtAcronymMappingPlan IJsonModel<MgmtAcronymMappingPlan>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtAcronymMappingPlan IJsonModel<MgmtAcronymMappingPlan>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static MgmtAcronymMappingPlan DeserializeMgmtAcronymMappingPlan(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -112,7 +112,7 @@ namespace MgmtAcronymMapping.Models
                     promotionCode = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -121,9 +121,9 @@ namespace MgmtAcronymMapping.Models
             return new MgmtAcronymMappingPlan(name.Value, publisher.Value, product.Value, promotionCode.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MgmtAcronymMappingPlan>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtAcronymMappingPlan>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{options.Format}' format.");
@@ -132,9 +132,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtAcronymMappingPlan IModel<MgmtAcronymMappingPlan>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtAcronymMappingPlan IPersistableModel<MgmtAcronymMappingPlan>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{options.Format}' format.");
@@ -144,6 +144,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeMgmtAcronymMappingPlan(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtAcronymMappingPlan>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtAcronymMappingPlan>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

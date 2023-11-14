@@ -17,11 +17,11 @@ namespace Payload.ContentNegotiation.Models
 {
     public partial class PngImageAsJson : IUtf8JsonSerializable, IJsonModel<PngImageAsJson>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PngImageAsJson>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PngImageAsJson>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PngImageAsJson>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PngImageAsJson>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PngImageAsJson>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PngImageAsJson>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Payload.ContentNegotiation.Models
             writer.WriteStartObject();
             writer.WritePropertyName("content"u8);
             writer.WriteBase64StringValue(Content.ToArray(), "D");
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Payload.ContentNegotiation.Models
             writer.WriteEndObject();
         }
 
-        PngImageAsJson IJsonModel<PngImageAsJson>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PngImageAsJson IJsonModel<PngImageAsJson>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PngImageAsJson)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Payload.ContentNegotiation.Models
 
         internal static PngImageAsJson DeserializePngImageAsJson(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Payload.ContentNegotiation.Models
                     content = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Payload.ContentNegotiation.Models
             return new PngImageAsJson(content, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PngImageAsJson>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PngImageAsJson>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PngImageAsJson)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Payload.ContentNegotiation.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PngImageAsJson IModel<PngImageAsJson>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PngImageAsJson IPersistableModel<PngImageAsJson>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PngImageAsJson)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Payload.ContentNegotiation.Models
             return DeserializePngImageAsJson(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PngImageAsJson>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PngImageAsJson>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static PngImageAsJson FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePngImageAsJson(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializePngImageAsJson(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

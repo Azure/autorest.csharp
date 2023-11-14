@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     internal partial class TenantParentWithLocListResult : IUtf8JsonSerializable, IJsonModel<TenantParentWithLocListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TenantParentWithLocListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TenantParentWithLocListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TenantParentWithLocListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TenantParentWithLocListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TenantParentWithLocListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TenantParentWithLocListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        TenantParentWithLocListResult IJsonModel<TenantParentWithLocListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TenantParentWithLocListResult IJsonModel<TenantParentWithLocListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TenantParentWithLocListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtListMethods.Models
 
         internal static TenantParentWithLocListResult DeserializeTenantParentWithLocListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtListMethods.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtListMethods.Models
             return new TenantParentWithLocListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TenantParentWithLocListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TenantParentWithLocListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TenantParentWithLocListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtListMethods.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TenantParentWithLocListResult IModel<TenantParentWithLocListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TenantParentWithLocListResult IPersistableModel<TenantParentWithLocListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TenantParentWithLocListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtListMethods.Models
             return DeserializeTenantParentWithLocListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TenantParentWithLocListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TenantParentWithLocListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

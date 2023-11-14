@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class ImagePurchasePlan : IUtf8JsonSerializable, IJsonModel<ImagePurchasePlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePurchasePlan>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePurchasePlan>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImagePurchasePlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImagePurchasePlan>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImagePurchasePlan>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImagePurchasePlan>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WritePropertyName("product"u8);
                 writer.WriteStringValue(Product);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteEndObject();
         }
 
-        ImagePurchasePlan IJsonModel<ImagePurchasePlan>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImagePurchasePlan IJsonModel<ImagePurchasePlan>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImagePurchasePlan)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace MgmtHierarchicalNonResource.Models
                     product = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace MgmtHierarchicalNonResource.Models
             return new ImagePurchasePlan(name.Value, publisher.Value, product.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ImagePurchasePlan>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImagePurchasePlan>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImagePurchasePlan)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace MgmtHierarchicalNonResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImagePurchasePlan IModel<ImagePurchasePlan>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImagePurchasePlan IPersistableModel<ImagePurchasePlan>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImagePurchasePlan)} does not support '{options.Format}' format.");
@@ -133,6 +133,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeImagePurchasePlan(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImagePurchasePlan>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImagePurchasePlan>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

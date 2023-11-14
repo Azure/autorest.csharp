@@ -17,11 +17,11 @@ namespace CustomizationsInTsp.Models
 {
     public partial class RootModel : IUtf8JsonSerializable, IJsonModel<RootModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RootModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RootModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RootModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RootModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RootModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RootModel>)} interface");
             }
@@ -77,7 +77,7 @@ namespace CustomizationsInTsp.Models
                 writer.WritePropertyName("propertyToMoveToCustomization"u8);
                 writer.WriteStringValue(PropertyToMoveToCustomization.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -95,9 +95,9 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndObject();
         }
 
-        RootModel IJsonModel<RootModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RootModel IJsonModel<RootModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RootModel)} does not support '{options.Format}' format.");
@@ -109,7 +109,7 @@ namespace CustomizationsInTsp.Models
 
         internal static RootModel DeserializeRootModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -219,7 +219,7 @@ namespace CustomizationsInTsp.Models
                     propertyToMoveToCustomization = new NormalEnum(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -228,9 +228,9 @@ namespace CustomizationsInTsp.Models
             return new RootModel(Optional.ToNullable(propertyExtensibleEnum), propertyModelToMakeInternal.Value, propertyModelToRename.Value, propertyModelToChangeNamespace.Value, propertyModelWithCustomizedProperties.Value, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty.Value, Optional.ToNullable(propertyToMoveToCustomization), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RootModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RootModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RootModel)} does not support '{options.Format}' format.");
@@ -239,9 +239,9 @@ namespace CustomizationsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RootModel IModel<RootModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RootModel IPersistableModel<RootModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RootModel)} does not support '{options.Format}' format.");
@@ -251,14 +251,14 @@ namespace CustomizationsInTsp.Models
             return DeserializeRootModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RootModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RootModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RootModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRootModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRootModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

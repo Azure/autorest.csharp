@@ -17,17 +17,17 @@ namespace _Specs_.Azure.Core.Basic.Models
 {
     public partial class User : IUtf8JsonSerializable, IJsonModel<User>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<User>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<User>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<User>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<User>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<User>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<User>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id);
@@ -44,12 +44,12 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -67,9 +67,9 @@ namespace _Specs_.Azure.Core.Basic.Models
             writer.WriteEndObject();
         }
 
-        User IJsonModel<User>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        User IJsonModel<User>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(User)} does not support '{options.Format}' format.");
@@ -81,7 +81,7 @@ namespace _Specs_.Azure.Core.Basic.Models
 
         internal static User DeserializeUser(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace _Specs_.Azure.Core.Basic.Models
             return new User(id, name, Optional.ToList(orders), etag, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<User>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<User>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(User)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace _Specs_.Azure.Core.Basic.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        User IModel<User>.Read(BinaryData data, ModelReaderWriterOptions options)
+        User IPersistableModel<User>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(User)} does not support '{options.Format}' format.");
@@ -156,14 +156,14 @@ namespace _Specs_.Azure.Core.Basic.Models
             return DeserializeUser(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<User>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<User>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static User FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUser(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUser(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

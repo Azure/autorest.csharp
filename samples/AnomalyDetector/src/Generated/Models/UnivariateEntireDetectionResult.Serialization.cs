@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateEntireDetectionResult : IUtf8JsonSerializable, IJsonModel<UnivariateEntireDetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateEntireDetectionResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateEntireDetectionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnivariateEntireDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnivariateEntireDetectionResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnivariateEntireDetectionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnivariateEntireDetectionResult>)} interface");
             }
@@ -81,7 +81,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -99,9 +99,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        UnivariateEntireDetectionResult IJsonModel<UnivariateEntireDetectionResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnivariateEntireDetectionResult IJsonModel<UnivariateEntireDetectionResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateEntireDetectionResult)} does not support '{options.Format}' format.");
@@ -113,7 +113,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -210,7 +210,7 @@ namespace AnomalyDetector.Models
                     severity = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -219,9 +219,9 @@ namespace AnomalyDetector.Models
             return new UnivariateEntireDetectionResult(period, expectedValues, upperMargins, lowerMargins, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToList(severity), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnivariateEntireDetectionResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnivariateEntireDetectionResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateEntireDetectionResult)} does not support '{options.Format}' format.");
@@ -230,9 +230,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnivariateEntireDetectionResult IModel<UnivariateEntireDetectionResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnivariateEntireDetectionResult IPersistableModel<UnivariateEntireDetectionResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateEntireDetectionResult)} does not support '{options.Format}' format.");
@@ -242,14 +242,14 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateEntireDetectionResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnivariateEntireDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnivariateEntireDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnivariateEntireDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateEntireDetectionResult(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnivariateEntireDetectionResult(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

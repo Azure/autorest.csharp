@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class AutomaticOSUpgradePolicy : IUtf8JsonSerializable, IJsonModel<AutomaticOSUpgradePolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticOSUpgradePolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticOSUpgradePolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AutomaticOSUpgradePolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AutomaticOSUpgradePolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AutomaticOSUpgradePolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AutomaticOSUpgradePolicy>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("disableAutomaticRollback"u8);
                 writer.WriteBooleanValue(DisableAutomaticRollback.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        AutomaticOSUpgradePolicy IJsonModel<AutomaticOSUpgradePolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AutomaticOSUpgradePolicy IJsonModel<AutomaticOSUpgradePolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutomaticOSUpgradePolicy)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static AutomaticOSUpgradePolicy DeserializeAutomaticOSUpgradePolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtAcronymMapping.Models
                     disableAutomaticRollback = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtAcronymMapping.Models
             return new AutomaticOSUpgradePolicy(Optional.ToNullable(enableAutomaticOSUpgrade), Optional.ToNullable(disableAutomaticRollback), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AutomaticOSUpgradePolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AutomaticOSUpgradePolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutomaticOSUpgradePolicy)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AutomaticOSUpgradePolicy IModel<AutomaticOSUpgradePolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AutomaticOSUpgradePolicy IPersistableModel<AutomaticOSUpgradePolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutomaticOSUpgradePolicy)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAutomaticOSUpgradePolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AutomaticOSUpgradePolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AutomaticOSUpgradePolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

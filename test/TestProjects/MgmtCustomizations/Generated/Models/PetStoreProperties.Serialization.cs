@@ -16,11 +16,11 @@ namespace MgmtCustomizations.Models
 {
     public partial class PetStoreProperties : IUtf8JsonSerializable, IJsonModel<PetStoreProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PetStoreProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PetStoreProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PetStoreProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetStoreProperties>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtCustomizations.Models
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtCustomizations.Models
             writer.WriteEndObject();
         }
 
-        PetStoreProperties IJsonModel<PetStoreProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PetStoreProperties IJsonModel<PetStoreProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetStoreProperties)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtCustomizations.Models
 
         internal static PetStoreProperties DeserializePetStoreProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtCustomizations.Models
                     pet = Pet.DeserializePet(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtCustomizations.Models
             return new PetStoreProperties(Optional.ToNullable(order), pet.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PetStoreProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PetStoreProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetStoreProperties)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtCustomizations.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PetStoreProperties IModel<PetStoreProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PetStoreProperties IPersistableModel<PetStoreProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetStoreProperties)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtCustomizations.Models
             return DeserializePetStoreProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PetStoreProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PetStoreProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

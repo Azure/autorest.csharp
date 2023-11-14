@@ -17,11 +17,11 @@ namespace Encode.Duration.Models
 {
     public partial class Int32SecondsDurationProperty : IUtf8JsonSerializable, IJsonModel<Int32SecondsDurationProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Int32SecondsDurationProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Int32SecondsDurationProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Int32SecondsDurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Int32SecondsDurationProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Int32SecondsDurationProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Int32SecondsDurationProperty>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Encode.Duration.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Convert.ToInt32(Value.ToString("%s")));
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Encode.Duration.Models
             writer.WriteEndObject();
         }
 
-        Int32SecondsDurationProperty IJsonModel<Int32SecondsDurationProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Int32SecondsDurationProperty IJsonModel<Int32SecondsDurationProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Int32SecondsDurationProperty)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Encode.Duration.Models
 
         internal static Int32SecondsDurationProperty DeserializeInt32SecondsDurationProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Encode.Duration.Models
                     value = TimeSpan.FromSeconds(property.Value.GetInt32());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Encode.Duration.Models
             return new Int32SecondsDurationProperty(value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Int32SecondsDurationProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Int32SecondsDurationProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Int32SecondsDurationProperty)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Encode.Duration.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Int32SecondsDurationProperty IModel<Int32SecondsDurationProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Int32SecondsDurationProperty IPersistableModel<Int32SecondsDurationProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Int32SecondsDurationProperty)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Encode.Duration.Models
             return DeserializeInt32SecondsDurationProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Int32SecondsDurationProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Int32SecondsDurationProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Int32SecondsDurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInt32SecondsDurationProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeInt32SecondsDurationProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -17,11 +17,11 @@ namespace MgmtMultipleParentResource
 {
     public partial class TheParentData : IUtf8JsonSerializable, IJsonModel<TheParentData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TheParentData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TheParentData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TheParentData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TheParentData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TheParentData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TheParentData>)} interface");
             }
@@ -40,22 +40,22 @@ namespace MgmtMultipleParentResource
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -95,7 +95,7 @@ namespace MgmtMultipleParentResource
                 writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -104,7 +104,7 @@ namespace MgmtMultipleParentResource
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -122,9 +122,9 @@ namespace MgmtMultipleParentResource
             writer.WriteEndObject();
         }
 
-        TheParentData IJsonModel<TheParentData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TheParentData IJsonModel<TheParentData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TheParentData)} does not support '{options.Format}' format.");
@@ -136,7 +136,7 @@ namespace MgmtMultipleParentResource
 
         internal static TheParentData DeserializeTheParentData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -265,7 +265,7 @@ namespace MgmtMultipleParentResource
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -274,9 +274,9 @@ namespace MgmtMultipleParentResource
             return new TheParentData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TheParentData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TheParentData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TheParentData)} does not support '{options.Format}' format.");
@@ -285,9 +285,9 @@ namespace MgmtMultipleParentResource
             return ModelReaderWriter.Write(this, options);
         }
 
-        TheParentData IModel<TheParentData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TheParentData IPersistableModel<TheParentData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TheParentData)} does not support '{options.Format}' format.");
@@ -297,6 +297,6 @@ namespace MgmtMultipleParentResource
             return DeserializeTheParentData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TheParentData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TheParentData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace _Specs_.Azure.Core.Traits.Models
 {
     public partial class UserActionResponse : IUtf8JsonSerializable, IJsonModel<UserActionResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UserActionResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UserActionResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UserActionResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UserActionResponse>)} interface");
             }
@@ -29,7 +29,7 @@ namespace _Specs_.Azure.Core.Traits.Models
             writer.WriteStartObject();
             writer.WritePropertyName("userActionResult"u8);
             writer.WriteStringValue(UserActionResult);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace _Specs_.Azure.Core.Traits.Models
             writer.WriteEndObject();
         }
 
-        UserActionResponse IJsonModel<UserActionResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UserActionResponse IJsonModel<UserActionResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UserActionResponse)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         internal static UserActionResponse DeserializeUserActionResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace _Specs_.Azure.Core.Traits.Models
                     userActionResult = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace _Specs_.Azure.Core.Traits.Models
             return new UserActionResponse(userActionResult, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UserActionResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UserActionResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UserActionResponse)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace _Specs_.Azure.Core.Traits.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UserActionResponse IModel<UserActionResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UserActionResponse IPersistableModel<UserActionResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UserActionResponse)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace _Specs_.Azure.Core.Traits.Models
             return DeserializeUserActionResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UserActionResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UserActionResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UserActionResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserActionResponse(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUserActionResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

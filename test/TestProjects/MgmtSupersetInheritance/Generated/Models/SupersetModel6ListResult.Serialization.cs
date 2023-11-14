@@ -17,17 +17,17 @@ namespace MgmtSupersetInheritance.Models
 {
     internal partial class SupersetModel6ListResult : IUtf8JsonSerializable, IJsonModel<SupersetModel6ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel6ListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel6ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SupersetModel6ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SupersetModel6ListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SupersetModel6ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SupersetModel6ListResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -40,7 +40,7 @@ namespace MgmtSupersetInheritance.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -48,7 +48,7 @@ namespace MgmtSupersetInheritance.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace MgmtSupersetInheritance.Models
             writer.WriteEndObject();
         }
 
-        SupersetModel6ListResult IJsonModel<SupersetModel6ListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SupersetModel6ListResult IJsonModel<SupersetModel6ListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SupersetModel6ListResult)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace MgmtSupersetInheritance.Models
 
         internal static SupersetModel6ListResult DeserializeSupersetModel6ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,7 +111,7 @@ namespace MgmtSupersetInheritance.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -120,9 +120,9 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel6ListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SupersetModel6ListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SupersetModel6ListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SupersetModel6ListResult)} does not support '{options.Format}' format.");
@@ -131,9 +131,9 @@ namespace MgmtSupersetInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SupersetModel6ListResult IModel<SupersetModel6ListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SupersetModel6ListResult IPersistableModel<SupersetModel6ListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SupersetModel6ListResult)} does not support '{options.Format}' format.");
@@ -143,6 +143,6 @@ namespace MgmtSupersetInheritance.Models
             return DeserializeSupersetModel6ListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SupersetModel6ListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SupersetModel6ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

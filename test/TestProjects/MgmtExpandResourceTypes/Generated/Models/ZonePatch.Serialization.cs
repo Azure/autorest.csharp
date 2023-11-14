@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class ZonePatch : IUtf8JsonSerializable, IJsonModel<ZonePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ZonePatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ZonePatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ZonePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ZonePatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ZonePatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ZonePatch>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtExpandResourceTypes.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        ZonePatch IJsonModel<ZonePatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ZonePatch IJsonModel<ZonePatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ZonePatch)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static ZonePatch DeserializeZonePatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace MgmtExpandResourceTypes.Models
                     tags = dictionary;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace MgmtExpandResourceTypes.Models
             return new ZonePatch(Optional.ToDictionary(tags), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ZonePatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ZonePatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ZonePatch)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ZonePatch IModel<ZonePatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ZonePatch IPersistableModel<ZonePatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ZonePatch)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeZonePatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ZonePatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ZonePatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

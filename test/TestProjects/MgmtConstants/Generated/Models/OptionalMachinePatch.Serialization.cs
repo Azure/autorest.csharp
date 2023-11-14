@@ -16,11 +16,11 @@ namespace MgmtConstants.Models
 {
     public partial class OptionalMachinePatch : IUtf8JsonSerializable, IJsonModel<OptionalMachinePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachinePatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachinePatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OptionalMachinePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OptionalMachinePatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OptionalMachinePatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OptionalMachinePatch>)} interface");
             }
@@ -50,7 +50,7 @@ namespace MgmtConstants.Models
                 writer.WriteObjectValue(Content);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace MgmtConstants.Models
             writer.WriteEndObject();
         }
 
-        OptionalMachinePatch IJsonModel<OptionalMachinePatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OptionalMachinePatch IJsonModel<OptionalMachinePatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OptionalMachinePatch)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace MgmtConstants.Models
 
         internal static OptionalMachinePatch DeserializeOptionalMachinePatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -139,7 +139,7 @@ namespace MgmtConstants.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -148,9 +148,9 @@ namespace MgmtConstants.Models
             return new OptionalMachinePatch(Optional.ToDictionary(tags), serializedAdditionalRawData, listener.Value, content.Value);
         }
 
-        BinaryData IModel<OptionalMachinePatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OptionalMachinePatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OptionalMachinePatch)} does not support '{options.Format}' format.");
@@ -159,9 +159,9 @@ namespace MgmtConstants.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OptionalMachinePatch IModel<OptionalMachinePatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OptionalMachinePatch IPersistableModel<OptionalMachinePatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OptionalMachinePatch)} does not support '{options.Format}' format.");
@@ -171,6 +171,6 @@ namespace MgmtConstants.Models
             return DeserializeOptionalMachinePatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OptionalMachinePatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OptionalMachinePatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

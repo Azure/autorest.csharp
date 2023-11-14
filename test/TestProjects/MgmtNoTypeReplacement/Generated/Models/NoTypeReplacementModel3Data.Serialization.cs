@@ -18,11 +18,11 @@ namespace MgmtNoTypeReplacement
 {
     public partial class NoTypeReplacementModel3Data : IUtf8JsonSerializable, IJsonModel<NoTypeReplacementModel3Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoTypeReplacementModel3Data>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoTypeReplacementModel3Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NoTypeReplacementModel3Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NoTypeReplacementModel3Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NoTypeReplacementModel3Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NoTypeReplacementModel3Data>)} interface");
             }
@@ -33,22 +33,22 @@ namespace MgmtNoTypeReplacement
                 writer.WritePropertyName("foo"u8);
                 writer.WriteObjectValue(Foo);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -56,7 +56,7 @@ namespace MgmtNoTypeReplacement
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace MgmtNoTypeReplacement
             writer.WriteEndObject();
         }
 
-        NoTypeReplacementModel3Data IJsonModel<NoTypeReplacementModel3Data>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NoTypeReplacementModel3Data IJsonModel<NoTypeReplacementModel3Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NoTypeReplacementModel3Data)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace MgmtNoTypeReplacement
 
         internal static NoTypeReplacementModel3Data DeserializeNoTypeReplacementModel3Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,7 +136,7 @@ namespace MgmtNoTypeReplacement
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -145,9 +145,9 @@ namespace MgmtNoTypeReplacement
             return new NoTypeReplacementModel3Data(id, name, type, systemData.Value, foo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NoTypeReplacementModel3Data>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NoTypeReplacementModel3Data>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NoTypeReplacementModel3Data)} does not support '{options.Format}' format.");
@@ -156,9 +156,9 @@ namespace MgmtNoTypeReplacement
             return ModelReaderWriter.Write(this, options);
         }
 
-        NoTypeReplacementModel3Data IModel<NoTypeReplacementModel3Data>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NoTypeReplacementModel3Data IPersistableModel<NoTypeReplacementModel3Data>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NoTypeReplacementModel3Data)} does not support '{options.Format}' format.");
@@ -168,6 +168,6 @@ namespace MgmtNoTypeReplacement
             return DeserializeNoTypeReplacementModel3Data(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NoTypeReplacementModel3Data>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NoTypeReplacementModel3Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

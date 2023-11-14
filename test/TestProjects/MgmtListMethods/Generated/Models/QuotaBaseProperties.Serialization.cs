@@ -16,11 +16,11 @@ namespace MgmtListMethods.Models
 {
     public partial class QuotaBaseProperties : IUtf8JsonSerializable, IJsonModel<QuotaBaseProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QuotaBaseProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QuotaBaseProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<QuotaBaseProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<QuotaBaseProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<QuotaBaseProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<QuotaBaseProperties>)} interface");
             }
@@ -46,7 +46,7 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("unit"u8);
                 writer.WriteStringValue(Unit.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        QuotaBaseProperties IJsonModel<QuotaBaseProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        QuotaBaseProperties IJsonModel<QuotaBaseProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(QuotaBaseProperties)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace MgmtListMethods.Models
 
         internal static QuotaBaseProperties DeserializeQuotaBaseProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -120,7 +120,7 @@ namespace MgmtListMethods.Models
                     unit = new QuotaUnit(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -129,9 +129,9 @@ namespace MgmtListMethods.Models
             return new QuotaBaseProperties(id.Value, type.Value, Optional.ToNullable(limit), Optional.ToNullable(unit), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<QuotaBaseProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<QuotaBaseProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(QuotaBaseProperties)} does not support '{options.Format}' format.");
@@ -140,9 +140,9 @@ namespace MgmtListMethods.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        QuotaBaseProperties IModel<QuotaBaseProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        QuotaBaseProperties IPersistableModel<QuotaBaseProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(QuotaBaseProperties)} does not support '{options.Format}' format.");
@@ -152,6 +152,6 @@ namespace MgmtListMethods.Models
             return DeserializeQuotaBaseProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<QuotaBaseProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<QuotaBaseProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

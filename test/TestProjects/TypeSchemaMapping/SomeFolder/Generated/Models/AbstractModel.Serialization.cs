@@ -13,14 +13,14 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    [ModelReaderProxy(typeof(UnknownAbstractModel))]
+    [PersistableModelProxy(typeof(UnknownAbstractModel))]
     public partial class AbstractModel : IUtf8JsonSerializable, IJsonModel<AbstractModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AbstractModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AbstractModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AbstractModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AbstractModel>)} interface");
             }
@@ -28,7 +28,7 @@ namespace TypeSchemaMapping.Models
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -46,9 +46,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        AbstractModel IJsonModel<AbstractModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AbstractModel IJsonModel<AbstractModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
@@ -60,7 +60,7 @@ namespace TypeSchemaMapping.Models
 
         internal static AbstractModel DeserializeAbstractModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -76,9 +76,9 @@ namespace TypeSchemaMapping.Models
             return UnknownAbstractModel.DeserializeUnknownAbstractModel(element);
         }
 
-        BinaryData IModel<AbstractModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AbstractModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
@@ -87,9 +87,9 @@ namespace TypeSchemaMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AbstractModel IModel<AbstractModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AbstractModel IPersistableModel<AbstractModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AbstractModel)} does not support '{options.Format}' format.");
@@ -99,6 +99,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeAbstractModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AbstractModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AbstractModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

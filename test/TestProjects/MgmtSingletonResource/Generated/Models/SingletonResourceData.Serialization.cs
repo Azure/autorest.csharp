@@ -17,11 +17,11 @@ namespace MgmtSingletonResource
 {
     public partial class SingletonResourceData : IUtf8JsonSerializable, IJsonModel<SingletonResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingletonResourceData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingletonResourceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SingletonResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SingletonResourceData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SingletonResourceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SingletonResourceData>)} interface");
             }
@@ -32,22 +32,22 @@ namespace MgmtSingletonResource
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -55,7 +55,7 @@ namespace MgmtSingletonResource
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace MgmtSingletonResource
             writer.WriteEndObject();
         }
 
-        SingletonResourceData IJsonModel<SingletonResourceData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SingletonResourceData IJsonModel<SingletonResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SingletonResourceData)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace MgmtSingletonResource
 
         internal static SingletonResourceData DeserializeSingletonResourceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,7 +131,7 @@ namespace MgmtSingletonResource
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -140,9 +140,9 @@ namespace MgmtSingletonResource
             return new SingletonResourceData(id, name, type, systemData.Value, @new.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SingletonResourceData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SingletonResourceData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SingletonResourceData)} does not support '{options.Format}' format.");
@@ -151,9 +151,9 @@ namespace MgmtSingletonResource
             return ModelReaderWriter.Write(this, options);
         }
 
-        SingletonResourceData IModel<SingletonResourceData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SingletonResourceData IPersistableModel<SingletonResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SingletonResourceData)} does not support '{options.Format}' format.");
@@ -163,6 +163,6 @@ namespace MgmtSingletonResource
             return DeserializeSingletonResourceData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SingletonResourceData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SingletonResourceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

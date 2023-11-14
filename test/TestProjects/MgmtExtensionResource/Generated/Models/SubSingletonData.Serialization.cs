@@ -17,11 +17,11 @@ namespace MgmtExtensionResource
 {
     public partial class SubSingletonData : IUtf8JsonSerializable, IJsonModel<SubSingletonData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubSingletonData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubSingletonData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SubSingletonData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SubSingletonData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SubSingletonData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubSingletonData>)} interface");
             }
@@ -32,22 +32,22 @@ namespace MgmtExtensionResource
                 writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -55,7 +55,7 @@ namespace MgmtExtensionResource
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace MgmtExtensionResource
             writer.WriteEndObject();
         }
 
-        SubSingletonData IJsonModel<SubSingletonData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SubSingletonData IJsonModel<SubSingletonData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubSingletonData)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace MgmtExtensionResource
 
         internal static SubSingletonData DeserializeSubSingletonData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,7 +131,7 @@ namespace MgmtExtensionResource
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -140,9 +140,9 @@ namespace MgmtExtensionResource
             return new SubSingletonData(id, name, type, systemData.Value, something.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SubSingletonData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SubSingletonData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubSingletonData)} does not support '{options.Format}' format.");
@@ -151,9 +151,9 @@ namespace MgmtExtensionResource
             return ModelReaderWriter.Write(this, options);
         }
 
-        SubSingletonData IModel<SubSingletonData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SubSingletonData IPersistableModel<SubSingletonData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubSingletonData)} does not support '{options.Format}' format.");
@@ -163,6 +163,6 @@ namespace MgmtExtensionResource
             return DeserializeSubSingletonData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SubSingletonData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SubSingletonData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

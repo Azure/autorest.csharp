@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Container : IXmlSerializable, IModel<Container>
+    public partial class Container : IXmlSerializable, IPersistableModel<Container>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -62,10 +62,10 @@ namespace xml_service.Models
             return new Container(name, properties, metadata, default);
         }
 
-        BinaryData IModel<Container>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Container>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Container>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -85,9 +85,9 @@ namespace xml_service.Models
             }
         }
 
-        Container IModel<Container>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Container IPersistableModel<Container>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Container)} does not support '{options.Format}' format.");
@@ -96,6 +96,6 @@ namespace xml_service.Models
             return DeserializeContainer(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Container>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Container>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class FineTuningJobError : IUtf8JsonWriteable, IJsonModel<FineTuningJobError>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuningJobError>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuningJobError>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FineTuningJobError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FineTuningJobError>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FineTuningJobError>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FineTuningJobError>)} interface");
             }
@@ -45,7 +45,7 @@ namespace OpenAI.Models
                     writer.WriteNull("param");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        FineTuningJobError IJsonModel<FineTuningJobError>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FineTuningJobError IJsonModel<FineTuningJobError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FineTuningJobError)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace OpenAI.Models
 
         internal static FineTuningJobError DeserializeFineTuningJobError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -110,7 +110,7 @@ namespace OpenAI.Models
                     param = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -119,9 +119,9 @@ namespace OpenAI.Models
             return new FineTuningJobError(message.Value, code.Value, param.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FineTuningJobError>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FineTuningJobError>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FineTuningJobError)} does not support '{options.Format}' format.");
@@ -130,9 +130,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FineTuningJobError IModel<FineTuningJobError>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FineTuningJobError IPersistableModel<FineTuningJobError>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FineTuningJobError)} does not support '{options.Format}' format.");
@@ -142,14 +142,14 @@ namespace OpenAI.Models
             return DeserializeFineTuningJobError(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FineTuningJobError>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FineTuningJobError>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static FineTuningJobError FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFineTuningJobError(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeFineTuningJobError(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

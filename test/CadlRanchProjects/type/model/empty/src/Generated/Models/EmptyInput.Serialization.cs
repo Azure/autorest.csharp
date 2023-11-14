@@ -17,17 +17,17 @@ namespace _Type.Model.Empty.Models
 {
     public partial class EmptyInput : IUtf8JsonSerializable, IJsonModel<EmptyInput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EmptyInput>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EmptyInput>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<EmptyInput>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<EmptyInput>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<EmptyInput>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EmptyInput>)} interface");
             }
 
             writer.WriteStartObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -45,9 +45,9 @@ namespace _Type.Model.Empty.Models
             writer.WriteEndObject();
         }
 
-        EmptyInput IJsonModel<EmptyInput>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        EmptyInput IJsonModel<EmptyInput>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EmptyInput)} does not support '{options.Format}' format.");
@@ -59,7 +59,7 @@ namespace _Type.Model.Empty.Models
 
         internal static EmptyInput DeserializeEmptyInput(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -69,7 +69,7 @@ namespace _Type.Model.Empty.Models
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -78,9 +78,9 @@ namespace _Type.Model.Empty.Models
             return new EmptyInput(serializedAdditionalRawData);
         }
 
-        BinaryData IModel<EmptyInput>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<EmptyInput>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EmptyInput)} does not support '{options.Format}' format.");
@@ -89,9 +89,9 @@ namespace _Type.Model.Empty.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        EmptyInput IModel<EmptyInput>.Read(BinaryData data, ModelReaderWriterOptions options)
+        EmptyInput IPersistableModel<EmptyInput>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(EmptyInput)} does not support '{options.Format}' format.");
@@ -101,14 +101,14 @@ namespace _Type.Model.Empty.Models
             return DeserializeEmptyInput(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<EmptyInput>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<EmptyInput>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static EmptyInput FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeEmptyInput(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeEmptyInput(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -17,32 +17,32 @@ namespace _Azure.Lro.RpcLegacy.Models
 {
     public partial class JobResult : IUtf8JsonSerializable, IJsonModel<JobResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JobResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JobResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<JobResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<JobResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<JobResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JobResult>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("jobId"u8);
                 writer.WriteStringValue(JobId);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("comment"u8);
                 writer.WriteStringValue(Comment);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToString());
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Errors))
                 {
@@ -55,7 +55,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Results))
                 {
@@ -68,7 +68,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                     writer.WriteEndArray();
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -86,9 +86,9 @@ namespace _Azure.Lro.RpcLegacy.Models
             writer.WriteEndObject();
         }
 
-        JobResult IJsonModel<JobResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        JobResult IJsonModel<JobResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
@@ -100,7 +100,7 @@ namespace _Azure.Lro.RpcLegacy.Models
 
         internal static JobResult DeserializeJobResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -158,7 +158,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                     results = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -167,9 +167,9 @@ namespace _Azure.Lro.RpcLegacy.Models
             return new JobResult(jobId, comment, status, Optional.ToList(errors), Optional.ToList(results), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<JobResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<JobResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
@@ -178,9 +178,9 @@ namespace _Azure.Lro.RpcLegacy.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        JobResult IModel<JobResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        JobResult IPersistableModel<JobResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JobResult)} does not support '{options.Format}' format.");
@@ -190,14 +190,14 @@ namespace _Azure.Lro.RpcLegacy.Models
             return DeserializeJobResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<JobResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<JobResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static JobResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJobResult(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeJobResult(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

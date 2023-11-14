@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     internal partial class SharedGalleryImageVersionList : IUtf8JsonSerializable, IJsonModel<SharedGalleryImageVersionList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImageVersionList>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImageVersionList>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SharedGalleryImageVersionList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SharedGalleryImageVersionList>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SharedGalleryImageVersionList>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SharedGalleryImageVersionList>)} interface");
             }
@@ -38,7 +38,7 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteEndObject();
         }
 
-        SharedGalleryImageVersionList IJsonModel<SharedGalleryImageVersionList>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SharedGalleryImageVersionList IJsonModel<SharedGalleryImageVersionList>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SharedGalleryImageVersionList)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static SharedGalleryImageVersionList DeserializeSharedGalleryImageVersionList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -97,7 +97,7 @@ namespace MgmtHierarchicalNonResource.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -106,9 +106,9 @@ namespace MgmtHierarchicalNonResource.Models
             return new SharedGalleryImageVersionList(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SharedGalleryImageVersionList>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SharedGalleryImageVersionList>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SharedGalleryImageVersionList)} does not support '{options.Format}' format.");
@@ -117,9 +117,9 @@ namespace MgmtHierarchicalNonResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SharedGalleryImageVersionList IModel<SharedGalleryImageVersionList>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SharedGalleryImageVersionList IPersistableModel<SharedGalleryImageVersionList>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SharedGalleryImageVersionList)} does not support '{options.Format}' format.");
@@ -129,6 +129,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeSharedGalleryImageVersionList(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SharedGalleryImageVersionList>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SharedGalleryImageVersionList>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

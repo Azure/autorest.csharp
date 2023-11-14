@@ -16,11 +16,11 @@ namespace required_optional.Models
 {
     public partial class ArrayWrapper : IUtf8JsonSerializable, IJsonModel<ArrayWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ArrayWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ArrayWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ArrayWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ArrayWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ArrayWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ArrayWrapper>)} interface");
             }
@@ -33,7 +33,7 @@ namespace required_optional.Models
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace required_optional.Models
             writer.WriteEndObject();
         }
 
-        ArrayWrapper IJsonModel<ArrayWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ArrayWrapper IJsonModel<ArrayWrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ArrayWrapper)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace required_optional.Models
 
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -86,7 +86,7 @@ namespace required_optional.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,9 +95,9 @@ namespace required_optional.Models
             return new ArrayWrapper(value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ArrayWrapper>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ArrayWrapper>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ArrayWrapper)} does not support '{options.Format}' format.");
@@ -106,9 +106,9 @@ namespace required_optional.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ArrayWrapper IModel<ArrayWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ArrayWrapper IPersistableModel<ArrayWrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ArrayWrapper)} does not support '{options.Format}' format.");
@@ -118,6 +118,6 @@ namespace required_optional.Models
             return DeserializeArrayWrapper(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ArrayWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ArrayWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

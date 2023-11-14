@@ -13,14 +13,14 @@ using Azure.Core;
 
 namespace MgmtDiscriminator.Models
 {
-    [ModelReaderProxy(typeof(UnknownDeliveryRuleCondition))]
+    [PersistableModelProxy(typeof(UnknownDeliveryRuleCondition))]
     public partial class DeliveryRuleCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCondition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeliveryRuleCondition>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeliveryRuleCondition>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeliveryRuleCondition>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeliveryRuleCondition>)} interface");
             }
@@ -28,7 +28,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Foo))
                 {
@@ -36,7 +36,7 @@ namespace MgmtDiscriminator.Models
                     writer.WriteStringValue(Foo);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        DeliveryRuleCondition IJsonModel<DeliveryRuleCondition>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeliveryRuleCondition IJsonModel<DeliveryRuleCondition>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleCondition DeserializeDeliveryRuleCondition(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -86,9 +86,9 @@ namespace MgmtDiscriminator.Models
             return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element);
         }
 
-        BinaryData IModel<DeliveryRuleCondition>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeliveryRuleCondition>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeliveryRuleCondition IModel<DeliveryRuleCondition>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeliveryRuleCondition IPersistableModel<DeliveryRuleCondition>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeliveryRuleCondition)} does not support '{options.Format}' format.");
@@ -109,6 +109,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleCondition(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeliveryRuleCondition>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeliveryRuleCondition>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

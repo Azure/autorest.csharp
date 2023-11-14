@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class AlignPolicy : IUtf8JsonSerializable, IJsonModel<AlignPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AlignPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AlignPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AlignPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AlignPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AlignPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AlignPolicy>)} interface");
             }
@@ -42,7 +42,7 @@ namespace AnomalyDetector.Models
                 writer.WritePropertyName("paddingValue"u8);
                 writer.WriteNumberValue(PaddingValue.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        AlignPolicy IJsonModel<AlignPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AlignPolicy IJsonModel<AlignPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AlignPolicy)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace AnomalyDetector.Models
 
         internal static AlignPolicy DeserializeAlignPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,7 +114,7 @@ namespace AnomalyDetector.Models
                     paddingValue = property.Value.GetSingle();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -123,9 +123,9 @@ namespace AnomalyDetector.Models
             return new AlignPolicy(Optional.ToNullable(alignMode), Optional.ToNullable(fillNAMethod), Optional.ToNullable(paddingValue), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AlignPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AlignPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AlignPolicy)} does not support '{options.Format}' format.");
@@ -134,9 +134,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AlignPolicy IModel<AlignPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AlignPolicy IPersistableModel<AlignPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AlignPolicy)} does not support '{options.Format}' format.");
@@ -146,14 +146,14 @@ namespace AnomalyDetector.Models
             return DeserializeAlignPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AlignPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AlignPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static AlignPolicy FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAlignPolicy(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeAlignPolicy(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

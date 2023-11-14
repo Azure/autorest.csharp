@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class SecondDerivedOutputModel : IUtf8JsonSerializable, IJsonModel<SecondDerivedOutputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecondDerivedOutputModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecondDerivedOutputModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SecondDerivedOutputModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SecondDerivedOutputModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SecondDerivedOutputModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SecondDerivedOutputModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteBooleanValue(Second);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        SecondDerivedOutputModel IJsonModel<SecondDerivedOutputModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SecondDerivedOutputModel IJsonModel<SecondDerivedOutputModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecondDerivedOutputModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
 
         internal static SecondDerivedOutputModel DeserializeSecondDerivedOutputModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace ModelsTypeSpec.Models
                     kind = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace ModelsTypeSpec.Models
             return new SecondDerivedOutputModel(kind, serializedAdditionalRawData, second);
         }
 
-        BinaryData IModel<SecondDerivedOutputModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SecondDerivedOutputModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecondDerivedOutputModel)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SecondDerivedOutputModel IModel<SecondDerivedOutputModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SecondDerivedOutputModel IPersistableModel<SecondDerivedOutputModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecondDerivedOutputModel)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeSecondDerivedOutputModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SecondDerivedOutputModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SecondDerivedOutputModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new SecondDerivedOutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSecondDerivedOutputModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeSecondDerivedOutputModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

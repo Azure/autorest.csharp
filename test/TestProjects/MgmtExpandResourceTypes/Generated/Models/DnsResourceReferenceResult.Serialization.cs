@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class DnsResourceReferenceResult : IUtf8JsonSerializable, IJsonModel<DnsResourceReferenceResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DnsResourceReferenceResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DnsResourceReferenceResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DnsResourceReferenceResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DnsResourceReferenceResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DnsResourceReferenceResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DnsResourceReferenceResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        DnsResourceReferenceResult IJsonModel<DnsResourceReferenceResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DnsResourceReferenceResult IJsonModel<DnsResourceReferenceResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DnsResourceReferenceResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static DnsResourceReferenceResult DeserializeDnsResourceReferenceResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +108,7 @@ namespace MgmtExpandResourceTypes.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -117,9 +117,9 @@ namespace MgmtExpandResourceTypes.Models
             return new DnsResourceReferenceResult(Optional.ToList(dnsResourceReferences), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DnsResourceReferenceResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DnsResourceReferenceResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DnsResourceReferenceResult)} does not support '{options.Format}' format.");
@@ -128,9 +128,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DnsResourceReferenceResult IModel<DnsResourceReferenceResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DnsResourceReferenceResult IPersistableModel<DnsResourceReferenceResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DnsResourceReferenceResult)} does not support '{options.Format}' format.");
@@ -140,6 +140,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeDnsResourceReferenceResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DnsResourceReferenceResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DnsResourceReferenceResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

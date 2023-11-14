@@ -18,11 +18,11 @@ namespace MgmtScopeResource
 {
     public partial class FakePolicyAssignmentData : IUtf8JsonSerializable, IJsonModel<FakePolicyAssignmentData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakePolicyAssignmentData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakePolicyAssignmentData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FakePolicyAssignmentData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FakePolicyAssignmentData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FakePolicyAssignmentData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FakePolicyAssignmentData>)} interface");
             }
@@ -38,22 +38,22 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -73,7 +73,7 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("policyDefinitionId"u8);
                 writer.WriteStringValue(PolicyDefinitionId);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Scope))
                 {
@@ -135,7 +135,7 @@ namespace MgmtScopeResource
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -153,9 +153,9 @@ namespace MgmtScopeResource
             writer.WriteEndObject();
         }
 
-        FakePolicyAssignmentData IJsonModel<FakePolicyAssignmentData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FakePolicyAssignmentData IJsonModel<FakePolicyAssignmentData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakePolicyAssignmentData)} does not support '{options.Format}' format.");
@@ -167,7 +167,7 @@ namespace MgmtScopeResource
 
         internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -322,7 +322,7 @@ namespace MgmtScopeResource
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -331,9 +331,9 @@ namespace MgmtScopeResource
             return new FakePolicyAssignmentData(id, name, type, systemData.Value, location.Value, identity, displayName.Value, policyDefinitionId.Value, scope.Value, Optional.ToList(notScopes), Optional.ToDictionary(parameters), description.Value, metadata.Value, Optional.ToNullable(enforcementMode), Optional.ToList(nonComplianceMessages), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FakePolicyAssignmentData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FakePolicyAssignmentData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakePolicyAssignmentData)} does not support '{options.Format}' format.");
@@ -342,9 +342,9 @@ namespace MgmtScopeResource
             return ModelReaderWriter.Write(this, options);
         }
 
-        FakePolicyAssignmentData IModel<FakePolicyAssignmentData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FakePolicyAssignmentData IPersistableModel<FakePolicyAssignmentData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FakePolicyAssignmentData)} does not support '{options.Format}' format.");
@@ -354,6 +354,6 @@ namespace MgmtScopeResource
             return DeserializeFakePolicyAssignmentData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FakePolicyAssignmentData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FakePolicyAssignmentData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

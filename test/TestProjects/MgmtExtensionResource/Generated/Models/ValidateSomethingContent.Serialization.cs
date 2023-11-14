@@ -16,11 +16,11 @@ namespace MgmtExtensionResource.Models
 {
     public partial class ValidateSomethingContent : IUtf8JsonSerializable, IJsonModel<ValidateSomethingContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ValidateSomethingContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ValidateSomethingContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ValidateSomethingContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ValidateSomethingContent>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ValidateSomethingContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ValidateSomethingContent>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtExtensionResource.Models
                 writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtExtensionResource.Models
             writer.WriteEndObject();
         }
 
-        ValidateSomethingContent IJsonModel<ValidateSomethingContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ValidateSomethingContent IJsonModel<ValidateSomethingContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ValidateSomethingContent)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtExtensionResource.Models
 
         internal static ValidateSomethingContent DeserializeValidateSomethingContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtExtensionResource.Models
                     something = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtExtensionResource.Models
             return new ValidateSomethingContent(something.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ValidateSomethingContent>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ValidateSomethingContent>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ValidateSomethingContent)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtExtensionResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ValidateSomethingContent IModel<ValidateSomethingContent>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ValidateSomethingContent IPersistableModel<ValidateSomethingContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ValidateSomethingContent)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeValidateSomethingContent(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ValidateSomethingContent>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ValidateSomethingContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

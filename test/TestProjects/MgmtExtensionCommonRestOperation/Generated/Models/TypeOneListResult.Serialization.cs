@@ -17,11 +17,11 @@ namespace MgmtExtensionCommonRestOperation.Models
 {
     internal partial class TypeOneListResult : IUtf8JsonSerializable, IJsonModel<TypeOneListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TypeOneListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TypeOneListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TypeOneListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TypeOneListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TypeOneListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TypeOneListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtExtensionCommonRestOperation.Models
             writer.WriteEndObject();
         }
 
-        TypeOneListResult IJsonModel<TypeOneListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TypeOneListResult IJsonModel<TypeOneListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TypeOneListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtExtensionCommonRestOperation.Models
 
         internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtExtensionCommonRestOperation.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtExtensionCommonRestOperation.Models
             return new TypeOneListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TypeOneListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TypeOneListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TypeOneListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtExtensionCommonRestOperation.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TypeOneListResult IModel<TypeOneListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TypeOneListResult IPersistableModel<TypeOneListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TypeOneListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtExtensionCommonRestOperation.Models
             return DeserializeTypeOneListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TypeOneListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TypeOneListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace _Azure.Lro.Standard.Models
 {
     public partial class ExportedUser : IUtf8JsonSerializable, IJsonModel<ExportedUser>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExportedUser>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExportedUser>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ExportedUser>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ExportedUser>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ExportedUser>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExportedUser>)} interface");
             }
@@ -31,7 +31,7 @@ namespace _Azure.Lro.Standard.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("resourceUri"u8);
             writer.WriteStringValue(ResourceUri);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace _Azure.Lro.Standard.Models
             writer.WriteEndObject();
         }
 
-        ExportedUser IJsonModel<ExportedUser>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ExportedUser IJsonModel<ExportedUser>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExportedUser)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace _Azure.Lro.Standard.Models
 
         internal static ExportedUser DeserializeExportedUser(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace _Azure.Lro.Standard.Models
                     resourceUri = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace _Azure.Lro.Standard.Models
             return new ExportedUser(name, resourceUri, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ExportedUser>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ExportedUser>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExportedUser)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace _Azure.Lro.Standard.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ExportedUser IModel<ExportedUser>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ExportedUser IPersistableModel<ExportedUser>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ExportedUser)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace _Azure.Lro.Standard.Models
             return DeserializeExportedUser(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ExportedUser>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ExportedUser>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ExportedUser FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeExportedUser(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeExportedUser(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

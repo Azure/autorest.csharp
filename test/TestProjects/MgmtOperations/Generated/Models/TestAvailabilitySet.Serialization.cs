@@ -16,11 +16,11 @@ namespace MgmtOperations.Models
 {
     public partial class TestAvailabilitySet : IUtf8JsonSerializable, IJsonModel<TestAvailabilitySet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TestAvailabilitySet>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TestAvailabilitySet>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TestAvailabilitySet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TestAvailabilitySet>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TestAvailabilitySet>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TestAvailabilitySet>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtOperations.Models
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtOperations.Models
             writer.WriteEndObject();
         }
 
-        TestAvailabilitySet IJsonModel<TestAvailabilitySet>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TestAvailabilitySet IJsonModel<TestAvailabilitySet>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TestAvailabilitySet)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtOperations.Models
 
         internal static TestAvailabilitySet DeserializeTestAvailabilitySet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtOperations.Models
                     bar = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtOperations.Models
             return new TestAvailabilitySet(bar.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TestAvailabilitySet>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TestAvailabilitySet>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TestAvailabilitySet)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtOperations.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TestAvailabilitySet IModel<TestAvailabilitySet>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TestAvailabilitySet IPersistableModel<TestAvailabilitySet>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TestAvailabilitySet)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtOperations.Models
             return DeserializeTestAvailabilitySet(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TestAvailabilitySet>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TestAvailabilitySet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

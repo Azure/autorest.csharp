@@ -16,11 +16,11 @@ namespace httpInfrastructure.Models
 {
     public partial class MyException : IUtf8JsonSerializable, IJsonModel<MyException>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyException>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyException>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MyException>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MyException>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MyException>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MyException>)} interface");
             }
@@ -31,7 +31,7 @@ namespace httpInfrastructure.Models
                 writer.WritePropertyName("statusCode"u8);
                 writer.WriteStringValue(StatusCode);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace httpInfrastructure.Models
             writer.WriteEndObject();
         }
 
-        MyException IJsonModel<MyException>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MyException IJsonModel<MyException>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MyException)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace httpInfrastructure.Models
 
         internal static MyException DeserializeMyException(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace httpInfrastructure.Models
                     statusCode = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace httpInfrastructure.Models
             return new MyException(statusCode.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MyException>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MyException>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MyException)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace httpInfrastructure.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MyException IModel<MyException>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MyException IPersistableModel<MyException>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MyException)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace httpInfrastructure.Models
             return DeserializeMyException(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MyException>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MyException>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

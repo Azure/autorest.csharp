@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class ARecord : IUtf8JsonSerializable, IJsonModel<ARecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ARecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ARecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ARecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ARecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ARecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ARecord>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("ipv4Address"u8);
                 writer.WriteStringValue(Ipv4Address);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        ARecord IJsonModel<ARecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ARecord IJsonModel<ARecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ARecord)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static ARecord DeserializeARecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtExpandResourceTypes.Models
                     ipv4Address = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtExpandResourceTypes.Models
             return new ARecord(ipv4Address.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ARecord>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ARecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ARecord)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ARecord IModel<ARecord>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ARecord IPersistableModel<ARecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ARecord)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeARecord(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ARecord>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ARecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

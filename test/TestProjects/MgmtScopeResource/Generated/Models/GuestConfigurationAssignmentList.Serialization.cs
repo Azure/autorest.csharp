@@ -17,11 +17,11 @@ namespace MgmtScopeResource.Models
 {
     internal partial class GuestConfigurationAssignmentList : IUtf8JsonSerializable, IJsonModel<GuestConfigurationAssignmentList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentList>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GuestConfigurationAssignmentList>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<GuestConfigurationAssignmentList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<GuestConfigurationAssignmentList>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<GuestConfigurationAssignmentList>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<GuestConfigurationAssignmentList>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtScopeResource.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        GuestConfigurationAssignmentList IJsonModel<GuestConfigurationAssignmentList>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        GuestConfigurationAssignmentList IJsonModel<GuestConfigurationAssignmentList>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GuestConfigurationAssignmentList)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace MgmtScopeResource.Models
 
         internal static GuestConfigurationAssignmentList DeserializeGuestConfigurationAssignmentList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace MgmtScopeResource.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace MgmtScopeResource.Models
             return new GuestConfigurationAssignmentList(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<GuestConfigurationAssignmentList>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<GuestConfigurationAssignmentList>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GuestConfigurationAssignmentList)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        GuestConfigurationAssignmentList IModel<GuestConfigurationAssignmentList>.Read(BinaryData data, ModelReaderWriterOptions options)
+        GuestConfigurationAssignmentList IPersistableModel<GuestConfigurationAssignmentList>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(GuestConfigurationAssignmentList)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace MgmtScopeResource.Models
             return DeserializeGuestConfigurationAssignmentList(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<GuestConfigurationAssignmentList>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<GuestConfigurationAssignmentList>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

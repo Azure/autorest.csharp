@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class SecurityProfile : IUtf8JsonSerializable, IJsonModel<SecurityProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecurityProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SecurityProfile>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SecurityProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SecurityProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SecurityProfile>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SecurityProfile>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("encryptionAtHost"u8);
                 writer.WriteBooleanValue(EncryptionAtHost.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        SecurityProfile IJsonModel<SecurityProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SecurityProfile IJsonModel<SecurityProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecurityProfile)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static SecurityProfile DeserializeSecurityProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     encryptionAtHost = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtAcronymMapping.Models
             return new SecurityProfile(Optional.ToNullable(encryptionAtHost), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SecurityProfile>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SecurityProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecurityProfile)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SecurityProfile IModel<SecurityProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SecurityProfile IPersistableModel<SecurityProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SecurityProfile)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeSecurityProfile(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SecurityProfile>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SecurityProfile>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

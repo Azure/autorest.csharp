@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     internal partial class VeryDeepSinglePropertyModel : IUtf8JsonSerializable, IJsonModel<VeryDeepSinglePropertyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VeryDeepSinglePropertyModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VeryDeepSinglePropertyModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VeryDeepSinglePropertyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VeryDeepSinglePropertyModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VeryDeepSinglePropertyModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VeryDeepSinglePropertyModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("very"u8);
                 writer.WriteObjectValue(Very);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        VeryDeepSinglePropertyModel IJsonModel<VeryDeepSinglePropertyModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VeryDeepSinglePropertyModel IJsonModel<VeryDeepSinglePropertyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VeryDeepSinglePropertyModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
 
         internal static VeryDeepSinglePropertyModel DeserializeVeryDeepSinglePropertyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtMockAndSample.Models
                     very = DeepSinglePropertyModel.DeserializeDeepSinglePropertyModel(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtMockAndSample.Models
             return new VeryDeepSinglePropertyModel(very.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VeryDeepSinglePropertyModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VeryDeepSinglePropertyModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VeryDeepSinglePropertyModel)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VeryDeepSinglePropertyModel IModel<VeryDeepSinglePropertyModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VeryDeepSinglePropertyModel IPersistableModel<VeryDeepSinglePropertyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VeryDeepSinglePropertyModel)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVeryDeepSinglePropertyModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VeryDeepSinglePropertyModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VeryDeepSinglePropertyModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

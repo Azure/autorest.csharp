@@ -16,11 +16,11 @@ namespace ModelShapes.Models
 {
     internal partial class ParametersModel : IUtf8JsonSerializable, IJsonModel<ParametersModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParametersModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParametersModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ParametersModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ParametersModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ParametersModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ParametersModel>)} interface");
             }
@@ -36,7 +36,7 @@ namespace ModelShapes.Models
                 writer.WritePropertyName("Status"u8);
                 writer.WriteStringValue(Status);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace ModelShapes.Models
             writer.WriteEndObject();
         }
 
-        ParametersModel IJsonModel<ParametersModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ParametersModel IJsonModel<ParametersModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ParametersModel)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace ModelShapes.Models
 
         internal static ParametersModel DeserializeParametersModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace ModelShapes.Models
                     status = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace ModelShapes.Models
             return new ParametersModel(code.Value, status.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ParametersModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ParametersModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ParametersModel)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace ModelShapes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ParametersModel IModel<ParametersModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ParametersModel IPersistableModel<ParametersModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ParametersModel)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace ModelShapes.Models
             return DeserializeParametersModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ParametersModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ParametersModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

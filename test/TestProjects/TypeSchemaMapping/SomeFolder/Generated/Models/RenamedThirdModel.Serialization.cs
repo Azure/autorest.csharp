@@ -17,11 +17,11 @@ namespace CustomNamespace
 {
     internal partial class RenamedThirdModel : IUtf8JsonSerializable, IJsonModel<RenamedThirdModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedThirdModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedThirdModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RenamedThirdModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RenamedThirdModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RenamedThirdModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RenamedThirdModel>)} interface");
             }
@@ -37,7 +37,7 @@ namespace CustomNamespace
                 writer.WritePropertyName("CreatedAt"u8);
                 writer.WriteStringValue(CustomizedCreatedAtProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace CustomNamespace
             writer.WriteEndObject();
         }
 
-        RenamedThirdModel IJsonModel<RenamedThirdModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RenamedThirdModel IJsonModel<RenamedThirdModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace CustomNamespace
 
         internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,7 +99,7 @@ namespace CustomNamespace
                     createdAt = property.Value.GetDateTime();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,9 +108,9 @@ namespace CustomNamespace
             return new RenamedThirdModel(eTag, createdAt, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RenamedThirdModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RenamedThirdModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
@@ -119,9 +119,9 @@ namespace CustomNamespace
             return ModelReaderWriter.Write(this, options);
         }
 
-        RenamedThirdModel IModel<RenamedThirdModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RenamedThirdModel IPersistableModel<RenamedThirdModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedThirdModel)} does not support '{options.Format}' format.");
@@ -131,6 +131,6 @@ namespace CustomNamespace
             return DeserializeRenamedThirdModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RenamedThirdModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RenamedThirdModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

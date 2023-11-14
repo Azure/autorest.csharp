@@ -17,11 +17,11 @@ namespace MgmtSingletonResource
 {
     public partial class IgnitionData : IUtf8JsonSerializable, IJsonModel<IgnitionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IgnitionData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IgnitionData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IgnitionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IgnitionData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IgnitionData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IgnitionData>)} interface");
             }
@@ -32,22 +32,22 @@ namespace MgmtSingletonResource
                 writer.WritePropertyName("pushButton"u8);
                 writer.WriteBooleanValue(PushButton.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -55,7 +55,7 @@ namespace MgmtSingletonResource
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -73,9 +73,9 @@ namespace MgmtSingletonResource
             writer.WriteEndObject();
         }
 
-        IgnitionData IJsonModel<IgnitionData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IgnitionData IJsonModel<IgnitionData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IgnitionData)} does not support '{options.Format}' format.");
@@ -87,7 +87,7 @@ namespace MgmtSingletonResource
 
         internal static IgnitionData DeserializeIgnitionData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -135,7 +135,7 @@ namespace MgmtSingletonResource
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -144,9 +144,9 @@ namespace MgmtSingletonResource
             return new IgnitionData(id, name, type, systemData.Value, Optional.ToNullable(pushButton), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<IgnitionData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IgnitionData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IgnitionData)} does not support '{options.Format}' format.");
@@ -155,9 +155,9 @@ namespace MgmtSingletonResource
             return ModelReaderWriter.Write(this, options);
         }
 
-        IgnitionData IModel<IgnitionData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IgnitionData IPersistableModel<IgnitionData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IgnitionData)} does not support '{options.Format}' format.");
@@ -167,6 +167,6 @@ namespace MgmtSingletonResource
             return DeserializeIgnitionData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IgnitionData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IgnitionData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

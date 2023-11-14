@@ -16,11 +16,11 @@ namespace MgmtParamOrdering.Models
 {
     public partial class DedicatedHostPatch : IUtf8JsonSerializable, IJsonModel<DedicatedHostPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DedicatedHostPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DedicatedHostPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DedicatedHostPatch>)} interface");
             }
@@ -49,7 +49,7 @@ namespace MgmtParamOrdering.Models
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(HostId))
                 {
@@ -57,7 +57,7 @@ namespace MgmtParamOrdering.Models
                     writer.WriteStringValue(HostId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningOn))
                 {
@@ -65,7 +65,7 @@ namespace MgmtParamOrdering.Models
                     writer.WriteStringValue(ProvisioningOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -74,7 +74,7 @@ namespace MgmtParamOrdering.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -92,9 +92,9 @@ namespace MgmtParamOrdering.Models
             writer.WriteEndObject();
         }
 
-        DedicatedHostPatch IJsonModel<DedicatedHostPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DedicatedHostPatch IJsonModel<DedicatedHostPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostPatch)} does not support '{options.Format}' format.");
@@ -106,7 +106,7 @@ namespace MgmtParamOrdering.Models
 
         internal static DedicatedHostPatch DeserializeDedicatedHostPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -185,7 +185,7 @@ namespace MgmtParamOrdering.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -194,9 +194,9 @@ namespace MgmtParamOrdering.Models
             return new DedicatedHostPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(platformFaultDomain), Optional.ToNullable(autoReplaceOnFailure), hostId.Value, Optional.ToNullable(provisioningTime), provisioningState.Value);
         }
 
-        BinaryData IModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DedicatedHostPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostPatch)} does not support '{options.Format}' format.");
@@ -205,9 +205,9 @@ namespace MgmtParamOrdering.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DedicatedHostPatch IModel<DedicatedHostPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DedicatedHostPatch IPersistableModel<DedicatedHostPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DedicatedHostPatch)} does not support '{options.Format}' format.");
@@ -217,6 +217,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeDedicatedHostPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DedicatedHostPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DedicatedHostPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

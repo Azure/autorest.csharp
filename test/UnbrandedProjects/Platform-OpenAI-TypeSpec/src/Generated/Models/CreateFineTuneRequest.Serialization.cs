@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateFineTuneRequest : IUtf8JsonWriteable, IJsonModel<CreateFineTuneRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFineTuneRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFineTuneRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateFineTuneRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateFineTuneRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateFineTuneRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateFineTuneRequest>)} interface");
             }
@@ -155,7 +155,7 @@ namespace OpenAI.Models
                     writer.WriteNull("suffix");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -173,9 +173,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateFineTuneRequest IJsonModel<CreateFineTuneRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateFineTuneRequest IJsonModel<CreateFineTuneRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{options.Format}' format.");
@@ -187,7 +187,7 @@ namespace OpenAI.Models
 
         internal static CreateFineTuneRequest DeserializeCreateFineTuneRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -327,7 +327,7 @@ namespace OpenAI.Models
                     suffix = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -336,9 +336,9 @@ namespace OpenAI.Models
             return new CreateFineTuneRequest(trainingFile, validationFile.Value, OptionalProperty.ToNullable(model), OptionalProperty.ToNullable(nEpochs), OptionalProperty.ToNullable(batchSize), OptionalProperty.ToNullable(learningRateMultiplier), OptionalProperty.ToNullable(promptLossRate), OptionalProperty.ToNullable(computeClassificationMetrics), OptionalProperty.ToNullable(classificationNClasses), classificationPositiveClass.Value, OptionalProperty.ToList(classificationBetas), suffix.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateFineTuneRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateFineTuneRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{options.Format}' format.");
@@ -347,9 +347,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateFineTuneRequest IModel<CreateFineTuneRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateFineTuneRequest IPersistableModel<CreateFineTuneRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateFineTuneRequest)} does not support '{options.Format}' format.");
@@ -359,14 +359,14 @@ namespace OpenAI.Models
             return DeserializeCreateFineTuneRequest(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateFineTuneRequest>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateFineTuneRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateFineTuneRequest FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateFineTuneRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateFineTuneRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -18,11 +18,11 @@ namespace Inheritance.Models
     [JsonConverter(typeof(AnotherDerivedClassWithExtensibleEnumDiscriminatorConverter))]
     public partial class AnotherDerivedClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>)} interface");
             }
@@ -30,7 +30,7 @@ namespace Inheritance.Models
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        AnotherDerivedClassWithExtensibleEnumDiscriminator IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AnotherDerivedClassWithExtensibleEnumDiscriminator IJsonModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnotherDerivedClassWithExtensibleEnumDiscriminator)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace Inheritance.Models
 
         internal static AnotherDerivedClassWithExtensibleEnumDiscriminator DeserializeAnotherDerivedClassWithExtensibleEnumDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -78,7 +78,7 @@ namespace Inheritance.Models
                     discriminatorProperty = new BaseClassWithEntensibleEnumDiscriminatorEnum(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -87,9 +87,9 @@ namespace Inheritance.Models
             return new AnotherDerivedClassWithExtensibleEnumDiscriminator(discriminatorProperty, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnotherDerivedClassWithExtensibleEnumDiscriminator)} does not support '{options.Format}' format.");
@@ -98,9 +98,9 @@ namespace Inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AnotherDerivedClassWithExtensibleEnumDiscriminator IModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AnotherDerivedClassWithExtensibleEnumDiscriminator IPersistableModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnotherDerivedClassWithExtensibleEnumDiscriminator)} does not support '{options.Format}' format.");
@@ -110,7 +110,7 @@ namespace Inheritance.Models
             return DeserializeAnotherDerivedClassWithExtensibleEnumDiscriminator(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AnotherDerivedClassWithExtensibleEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class AnotherDerivedClassWithExtensibleEnumDiscriminatorConverter : JsonConverter<AnotherDerivedClassWithExtensibleEnumDiscriminator>
         {

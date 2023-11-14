@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
 {
     internal partial class ModelWithArrayOfEnum : IUtf8JsonSerializable, IJsonModel<ModelWithArrayOfEnum>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithArrayOfEnum>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithArrayOfEnum>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithArrayOfEnum>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithArrayOfEnum>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithArrayOfEnum>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithArrayOfEnum>)} interface");
             }
@@ -51,7 +51,7 @@ namespace TypeSchemaMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -69,9 +69,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        ModelWithArrayOfEnum IJsonModel<ModelWithArrayOfEnum>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithArrayOfEnum IJsonModel<ModelWithArrayOfEnum>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{options.Format}' format.");
@@ -83,7 +83,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,7 +130,7 @@ namespace TypeSchemaMapping.Models
                     arrayOfEnumCustomizedToNullable = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -139,9 +139,9 @@ namespace TypeSchemaMapping.Models
             return new ModelWithArrayOfEnum(Optional.ToList(arrayOfEnum), Optional.ToList(arrayOfEnumCustomizedToNullable), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithArrayOfEnum>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithArrayOfEnum>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{options.Format}' format.");
@@ -150,9 +150,9 @@ namespace TypeSchemaMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithArrayOfEnum IModel<ModelWithArrayOfEnum>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithArrayOfEnum IPersistableModel<ModelWithArrayOfEnum>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithArrayOfEnum)} does not support '{options.Format}' format.");
@@ -162,6 +162,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithArrayOfEnum(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithArrayOfEnum>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithArrayOfEnum>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

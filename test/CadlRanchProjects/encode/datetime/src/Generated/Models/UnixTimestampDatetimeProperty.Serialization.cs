@@ -17,11 +17,11 @@ namespace Encode.Datetime.Models
 {
     public partial class UnixTimestampDatetimeProperty : IUtf8JsonSerializable, IJsonModel<UnixTimestampDatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnixTimestampDatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnixTimestampDatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnixTimestampDatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnixTimestampDatetimeProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnixTimestampDatetimeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnixTimestampDatetimeProperty>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Encode.Datetime.Models
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Value, "U");
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Encode.Datetime.Models
             writer.WriteEndObject();
         }
 
-        UnixTimestampDatetimeProperty IJsonModel<UnixTimestampDatetimeProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnixTimestampDatetimeProperty IJsonModel<UnixTimestampDatetimeProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Encode.Datetime.Models
 
         internal static UnixTimestampDatetimeProperty DeserializeUnixTimestampDatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Encode.Datetime.Models
                     value = DateTimeOffset.FromUnixTimeSeconds(property.Value.GetInt64());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Encode.Datetime.Models
             return new UnixTimestampDatetimeProperty(value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnixTimestampDatetimeProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnixTimestampDatetimeProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Encode.Datetime.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnixTimestampDatetimeProperty IModel<UnixTimestampDatetimeProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnixTimestampDatetimeProperty IPersistableModel<UnixTimestampDatetimeProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnixTimestampDatetimeProperty)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Encode.Datetime.Models
             return DeserializeUnixTimestampDatetimeProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnixTimestampDatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnixTimestampDatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnixTimestampDatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class SrvRecord : IUtf8JsonSerializable, IJsonModel<SrvRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SrvRecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SrvRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SrvRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SrvRecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SrvRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SrvRecord>)} interface");
             }
@@ -46,7 +46,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("target"u8);
                 writer.WriteStringValue(Target);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        SrvRecord IJsonModel<SrvRecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SrvRecord IJsonModel<SrvRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SrvRecord)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static SrvRecord DeserializeSrvRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace MgmtExpandResourceTypes.Models
                     target = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace MgmtExpandResourceTypes.Models
             return new SrvRecord(Optional.ToNullable(priority), Optional.ToNullable(weight), Optional.ToNullable(port), target.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SrvRecord>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SrvRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SrvRecord)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SrvRecord IModel<SrvRecord>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SrvRecord IPersistableModel<SrvRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SrvRecord)} does not support '{options.Format}' format.");
@@ -156,6 +156,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeSrvRecord(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SrvRecord>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SrvRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

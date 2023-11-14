@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     public partial class Sparrow : IUtf8JsonSerializable, IJsonModel<Sparrow>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sparrow>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Sparrow>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Sparrow>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Sparrow>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Sparrow>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Sparrow>)} interface");
             }
@@ -31,7 +31,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("wingspan"u8);
             writer.WriteNumberValue(Wingspan);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        Sparrow IJsonModel<Sparrow>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Sparrow IJsonModel<Sparrow>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Sparrow)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         internal static Sparrow DeserializeSparrow(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     wingspan = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return new Sparrow(kind, wingspan, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Sparrow>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Sparrow>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Sparrow)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Sparrow IModel<Sparrow>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Sparrow IPersistableModel<Sparrow>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Sparrow)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeSparrow(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Sparrow>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Sparrow>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Sparrow FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSparrow(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeSparrow(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

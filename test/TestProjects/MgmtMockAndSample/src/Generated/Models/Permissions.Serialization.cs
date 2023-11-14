@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class Permissions : IUtf8JsonSerializable, IJsonModel<Permissions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Permissions>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Permissions>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Permissions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Permissions>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Permissions>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Permissions>)} interface");
             }
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -84,9 +84,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        Permissions IJsonModel<Permissions>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Permissions IJsonModel<Permissions>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Permissions)} does not support '{options.Format}' format.");
@@ -98,7 +98,7 @@ namespace MgmtMockAndSample.Models
 
         internal static Permissions DeserializePermissions(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -168,7 +168,7 @@ namespace MgmtMockAndSample.Models
                     storage = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -177,9 +177,9 @@ namespace MgmtMockAndSample.Models
             return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Permissions>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Permissions>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Permissions)} does not support '{options.Format}' format.");
@@ -188,9 +188,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Permissions IModel<Permissions>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Permissions IPersistableModel<Permissions>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Permissions)} does not support '{options.Format}' format.");
@@ -200,6 +200,6 @@ namespace MgmtMockAndSample.Models
             return DeserializePermissions(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Permissions>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Permissions>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

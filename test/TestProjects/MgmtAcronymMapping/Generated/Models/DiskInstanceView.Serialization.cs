@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class DiskInstanceView : IUtf8JsonSerializable, IJsonModel<DiskInstanceView>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskInstanceView>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskInstanceView>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DiskInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DiskInstanceView>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DiskInstanceView>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DiskInstanceView>)} interface");
             }
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -69,9 +69,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        DiskInstanceView IJsonModel<DiskInstanceView>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DiskInstanceView IJsonModel<DiskInstanceView>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{options.Format}' format.");
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static DiskInstanceView DeserializeDiskInstanceView(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -129,7 +129,7 @@ namespace MgmtAcronymMapping.Models
                     statuses = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -138,9 +138,9 @@ namespace MgmtAcronymMapping.Models
             return new DiskInstanceView(name.Value, Optional.ToList(encryptionSettings), Optional.ToList(statuses), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DiskInstanceView>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DiskInstanceView>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{options.Format}' format.");
@@ -149,9 +149,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DiskInstanceView IModel<DiskInstanceView>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DiskInstanceView IPersistableModel<DiskInstanceView>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiskInstanceView)} does not support '{options.Format}' format.");
@@ -161,6 +161,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeDiskInstanceView(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DiskInstanceView>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DiskInstanceView>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

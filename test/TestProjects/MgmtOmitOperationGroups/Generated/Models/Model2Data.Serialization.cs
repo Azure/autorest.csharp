@@ -18,11 +18,11 @@ namespace MgmtOmitOperationGroups
 {
     public partial class Model2Data : IUtf8JsonSerializable, IJsonModel<Model2Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model2Data>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model2Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Model2Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Model2Data>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Model2Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Model2Data>)} interface");
             }
@@ -38,7 +38,7 @@ namespace MgmtOmitOperationGroups
                 writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(F))
                 {
@@ -46,7 +46,7 @@ namespace MgmtOmitOperationGroups
                     writer.WriteStringValue(F);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(G))
                 {
@@ -54,22 +54,22 @@ namespace MgmtOmitOperationGroups
                     writer.WriteStringValue(G);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -77,7 +77,7 @@ namespace MgmtOmitOperationGroups
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -95,9 +95,9 @@ namespace MgmtOmitOperationGroups
             writer.WriteEndObject();
         }
 
-        Model2Data IJsonModel<Model2Data>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Model2Data IJsonModel<Model2Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Model2Data)} does not support '{options.Format}' format.");
@@ -109,7 +109,7 @@ namespace MgmtOmitOperationGroups
 
         internal static Model2Data DeserializeModel2Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -175,7 +175,7 @@ namespace MgmtOmitOperationGroups
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -184,9 +184,9 @@ namespace MgmtOmitOperationGroups
             return new Model2Data(id, name, type, systemData.Value, b.Value, modelx.Value, f.Value, g.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Model2Data>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Model2Data>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Model2Data)} does not support '{options.Format}' format.");
@@ -195,9 +195,9 @@ namespace MgmtOmitOperationGroups
             return ModelReaderWriter.Write(this, options);
         }
 
-        Model2Data IModel<Model2Data>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Model2Data IPersistableModel<Model2Data>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Model2Data)} does not support '{options.Format}' format.");
@@ -207,6 +207,6 @@ namespace MgmtOmitOperationGroups
             return DeserializeModel2Data(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Model2Data>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Model2Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

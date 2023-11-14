@@ -16,11 +16,11 @@ namespace required_optional.Models
 {
     public partial class StringOptionalWrapper : IUtf8JsonSerializable, IJsonModel<StringOptionalWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StringOptionalWrapper>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StringOptionalWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<StringOptionalWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<StringOptionalWrapper>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<StringOptionalWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StringOptionalWrapper>)} interface");
             }
@@ -31,7 +31,7 @@ namespace required_optional.Models
                 writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace required_optional.Models
             writer.WriteEndObject();
         }
 
-        StringOptionalWrapper IJsonModel<StringOptionalWrapper>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        StringOptionalWrapper IJsonModel<StringOptionalWrapper>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StringOptionalWrapper)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace required_optional.Models
 
         internal static StringOptionalWrapper DeserializeStringOptionalWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace required_optional.Models
                     value = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace required_optional.Models
             return new StringOptionalWrapper(value.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<StringOptionalWrapper>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StringOptionalWrapper>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StringOptionalWrapper)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace required_optional.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        StringOptionalWrapper IModel<StringOptionalWrapper>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StringOptionalWrapper IPersistableModel<StringOptionalWrapper>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StringOptionalWrapper)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace required_optional.Models
             return DeserializeStringOptionalWrapper(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<StringOptionalWrapper>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<StringOptionalWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

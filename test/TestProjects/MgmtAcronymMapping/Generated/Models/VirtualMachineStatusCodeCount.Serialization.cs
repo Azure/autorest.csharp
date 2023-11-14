@@ -16,17 +16,17 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class VirtualMachineStatusCodeCount : IUtf8JsonSerializable, IJsonModel<VirtualMachineStatusCodeCount>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineStatusCodeCount>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineStatusCodeCount>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VirtualMachineStatusCodeCount>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VirtualMachineStatusCodeCount>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineStatusCodeCount>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineStatusCodeCount>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Code))
                 {
@@ -34,7 +34,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(Code);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Count))
                 {
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(Count.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachineStatusCodeCount IJsonModel<VirtualMachineStatusCodeCount>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VirtualMachineStatusCodeCount IJsonModel<VirtualMachineStatusCodeCount>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineStatusCodeCount)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static VirtualMachineStatusCodeCount DeserializeVirtualMachineStatusCodeCount(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -100,7 +100,7 @@ namespace MgmtAcronymMapping.Models
                     count = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -109,9 +109,9 @@ namespace MgmtAcronymMapping.Models
             return new VirtualMachineStatusCodeCount(code.Value, Optional.ToNullable(count), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VirtualMachineStatusCodeCount>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VirtualMachineStatusCodeCount>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineStatusCodeCount)} does not support '{options.Format}' format.");
@@ -120,9 +120,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VirtualMachineStatusCodeCount IModel<VirtualMachineStatusCodeCount>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VirtualMachineStatusCodeCount IPersistableModel<VirtualMachineStatusCodeCount>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachineStatusCodeCount)} does not support '{options.Format}' format.");
@@ -132,6 +132,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineStatusCodeCount(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VirtualMachineStatusCodeCount>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VirtualMachineStatusCodeCount>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

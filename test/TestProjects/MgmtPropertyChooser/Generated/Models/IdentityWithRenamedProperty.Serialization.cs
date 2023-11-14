@@ -17,17 +17,17 @@ namespace MgmtPropertyChooser.Models
 {
     public partial class IdentityWithRenamedProperty : IUtf8JsonSerializable, IJsonModel<IdentityWithRenamedProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithRenamedProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithRenamedProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IdentityWithRenamedProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IdentityWithRenamedProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IdentityWithRenamedProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IdentityWithRenamedProperty>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(TestPrincipalId))
                 {
@@ -35,7 +35,7 @@ namespace MgmtPropertyChooser.Models
                     writer.WriteStringValue(TestPrincipalId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(TenantId))
                 {
@@ -59,7 +59,7 @@ namespace MgmtPropertyChooser.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -77,9 +77,9 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        IdentityWithRenamedProperty IJsonModel<IdentityWithRenamedProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IdentityWithRenamedProperty IJsonModel<IdentityWithRenamedProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IdentityWithRenamedProperty)} does not support '{options.Format}' format.");
@@ -91,7 +91,7 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithRenamedProperty DeserializeIdentityWithRenamedProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -138,7 +138,7 @@ namespace MgmtPropertyChooser.Models
                     userAssignedIdentities = dictionary;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -147,9 +147,9 @@ namespace MgmtPropertyChooser.Models
             return new IdentityWithRenamedProperty(testPrincipalId.Value, tenantId.Value, Optional.ToNullable(type), Optional.ToDictionary(userAssignedIdentities), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<IdentityWithRenamedProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IdentityWithRenamedProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IdentityWithRenamedProperty)} does not support '{options.Format}' format.");
@@ -158,9 +158,9 @@ namespace MgmtPropertyChooser.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        IdentityWithRenamedProperty IModel<IdentityWithRenamedProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IdentityWithRenamedProperty IPersistableModel<IdentityWithRenamedProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IdentityWithRenamedProperty)} does not support '{options.Format}' format.");
@@ -170,6 +170,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithRenamedProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IdentityWithRenamedProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IdentityWithRenamedProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

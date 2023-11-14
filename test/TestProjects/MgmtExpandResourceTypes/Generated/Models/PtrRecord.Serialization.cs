@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class PtrRecord : IUtf8JsonSerializable, IJsonModel<PtrRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PtrRecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PtrRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PtrRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PtrRecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PtrRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PtrRecord>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("ptrdname"u8);
                 writer.WriteStringValue(Ptrdname);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        PtrRecord IJsonModel<PtrRecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PtrRecord IJsonModel<PtrRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static PtrRecord DeserializePtrRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtExpandResourceTypes.Models
                     ptrdname = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtExpandResourceTypes.Models
             return new PtrRecord(ptrdname.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PtrRecord>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PtrRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PtrRecord IModel<PtrRecord>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PtrRecord IPersistableModel<PtrRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializePtrRecord(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PtrRecord>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PtrRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

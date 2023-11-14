@@ -17,11 +17,11 @@ namespace Projection.ProjectedName.Models
 {
     public partial class JsonProjectedNameModel : IUtf8JsonSerializable, IJsonModel<JsonProjectedNameModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonProjectedNameModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonProjectedNameModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<JsonProjectedNameModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<JsonProjectedNameModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<JsonProjectedNameModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JsonProjectedNameModel>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Projection.ProjectedName.Models
             writer.WriteStartObject();
             writer.WritePropertyName("wireName"u8);
             writer.WriteBooleanValue(DefaultName);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Projection.ProjectedName.Models
             writer.WriteEndObject();
         }
 
-        JsonProjectedNameModel IJsonModel<JsonProjectedNameModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        JsonProjectedNameModel IJsonModel<JsonProjectedNameModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonProjectedNameModel)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Projection.ProjectedName.Models
 
         internal static JsonProjectedNameModel DeserializeJsonProjectedNameModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Projection.ProjectedName.Models
                     wireName = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Projection.ProjectedName.Models
             return new JsonProjectedNameModel(wireName, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<JsonProjectedNameModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<JsonProjectedNameModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonProjectedNameModel)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Projection.ProjectedName.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        JsonProjectedNameModel IModel<JsonProjectedNameModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        JsonProjectedNameModel IPersistableModel<JsonProjectedNameModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonProjectedNameModel)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Projection.ProjectedName.Models
             return DeserializeJsonProjectedNameModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<JsonProjectedNameModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<JsonProjectedNameModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static JsonProjectedNameModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJsonProjectedNameModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeJsonProjectedNameModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

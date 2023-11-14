@@ -16,11 +16,11 @@ namespace media_types.Models
 {
     public partial class SourcePath : IUtf8JsonSerializable, IJsonModel<SourcePath>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SourcePath>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SourcePath>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SourcePath>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SourcePath>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SourcePath>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SourcePath>)} interface");
             }
@@ -31,7 +31,7 @@ namespace media_types.Models
                 writer.WritePropertyName("source"u8);
                 writer.WriteStringValue(Source);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace media_types.Models
             writer.WriteEndObject();
         }
 
-        SourcePath IJsonModel<SourcePath>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SourcePath IJsonModel<SourcePath>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace media_types.Models
 
         internal static SourcePath DeserializeSourcePath(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace media_types.Models
                     source = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace media_types.Models
             return new SourcePath(source.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SourcePath>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SourcePath>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace media_types.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SourcePath IModel<SourcePath>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SourcePath IPersistableModel<SourcePath>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SourcePath)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace media_types.Models
             return DeserializeSourcePath(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SourcePath>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SourcePath>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

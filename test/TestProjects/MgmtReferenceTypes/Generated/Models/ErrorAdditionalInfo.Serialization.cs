@@ -17,17 +17,17 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(ErrorAdditionalInfoConverter))]
     public partial class ErrorAdditionalInfo : IUtf8JsonSerializable, IJsonModel<ErrorAdditionalInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorAdditionalInfo>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorAdditionalInfo>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ErrorAdditionalInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ErrorAdditionalInfo>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ErrorAdditionalInfo>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ErrorAdditionalInfo>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ErrorAdditionalInfoType))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Fake.Models
                     writer.WriteStringValue(ErrorAdditionalInfoType);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Info))
                 {
@@ -53,9 +53,9 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        ErrorAdditionalInfo IJsonModel<ErrorAdditionalInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ErrorAdditionalInfo IJsonModel<ErrorAdditionalInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ErrorAdditionalInfo)} does not support '{options.Format}' format.");
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -95,9 +95,9 @@ namespace Azure.ResourceManager.Fake.Models
             return new ErrorAdditionalInfo(type.Value, info.Value);
         }
 
-        BinaryData IModel<ErrorAdditionalInfo>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ErrorAdditionalInfo>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ErrorAdditionalInfo)} does not support '{options.Format}' format.");
@@ -106,9 +106,9 @@ namespace Azure.ResourceManager.Fake.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ErrorAdditionalInfo IModel<ErrorAdditionalInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ErrorAdditionalInfo IPersistableModel<ErrorAdditionalInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ErrorAdditionalInfo)} does not support '{options.Format}' format.");
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeErrorAdditionalInfo(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ErrorAdditionalInfo>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ErrorAdditionalInfo>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class ErrorAdditionalInfoConverter : JsonConverter<ErrorAdditionalInfo>
         {

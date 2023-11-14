@@ -16,17 +16,17 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class PirSharedGalleryResource : IUtf8JsonSerializable, IJsonModel<PirSharedGalleryResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PirSharedGalleryResource>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PirSharedGalleryResource>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PirSharedGalleryResource>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PirSharedGalleryResource>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PirSharedGalleryResource>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PirSharedGalleryResource>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -34,7 +34,7 @@ namespace MgmtHierarchicalNonResource.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Location))
                 {
@@ -50,7 +50,7 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WriteStringValue(UniqueId);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteEndObject();
         }
 
-        PirSharedGalleryResource IJsonModel<PirSharedGalleryResource>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PirSharedGalleryResource IJsonModel<PirSharedGalleryResource>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PirSharedGalleryResource)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static PirSharedGalleryResource DeserializePirSharedGalleryResource(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,7 +122,7 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -131,9 +131,9 @@ namespace MgmtHierarchicalNonResource.Models
             return new PirSharedGalleryResource(name.Value, location.Value, serializedAdditionalRawData, uniqueId.Value);
         }
 
-        BinaryData IModel<PirSharedGalleryResource>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PirSharedGalleryResource>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PirSharedGalleryResource)} does not support '{options.Format}' format.");
@@ -142,9 +142,9 @@ namespace MgmtHierarchicalNonResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PirSharedGalleryResource IModel<PirSharedGalleryResource>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PirSharedGalleryResource IPersistableModel<PirSharedGalleryResource>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PirSharedGalleryResource)} does not support '{options.Format}' format.");
@@ -154,6 +154,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializePirSharedGalleryResource(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PirSharedGalleryResource>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PirSharedGalleryResource>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

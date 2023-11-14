@@ -17,17 +17,17 @@ namespace AnomalyDetector.Models
 {
     public partial class AnomalyDetectionModel : IUtf8JsonSerializable, IJsonModel<AnomalyDetectionModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnomalyDetectionModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnomalyDetectionModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AnomalyDetectionModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AnomalyDetectionModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AnomalyDetectionModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AnomalyDetectionModel>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("modelId"u8);
                 writer.WriteStringValue(ModelId);
@@ -41,7 +41,7 @@ namespace AnomalyDetector.Models
                 writer.WritePropertyName("modelInfo"u8);
                 writer.WriteObjectValue(ModelInfo);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        AnomalyDetectionModel IJsonModel<AnomalyDetectionModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AnomalyDetectionModel IJsonModel<AnomalyDetectionModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnomalyDetectionModel)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace AnomalyDetector.Models
 
         internal static AnomalyDetectionModel DeserializeAnomalyDetectionModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,7 +111,7 @@ namespace AnomalyDetector.Models
                     modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -120,9 +120,9 @@ namespace AnomalyDetector.Models
             return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AnomalyDetectionModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AnomalyDetectionModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnomalyDetectionModel)} does not support '{options.Format}' format.");
@@ -131,9 +131,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AnomalyDetectionModel IModel<AnomalyDetectionModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AnomalyDetectionModel IPersistableModel<AnomalyDetectionModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AnomalyDetectionModel)} does not support '{options.Format}' format.");
@@ -143,14 +143,14 @@ namespace AnomalyDetector.Models
             return DeserializeAnomalyDetectionModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AnomalyDetectionModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AnomalyDetectionModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static AnomalyDetectionModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnomalyDetectionModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeAnomalyDetectionModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

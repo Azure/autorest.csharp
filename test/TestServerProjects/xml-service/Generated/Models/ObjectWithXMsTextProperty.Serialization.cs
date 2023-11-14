@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ObjectWithXMsTextProperty : IXmlSerializable, IModel<ObjectWithXMsTextProperty>
+    public partial class ObjectWithXMsTextProperty : IXmlSerializable, IPersistableModel<ObjectWithXMsTextProperty>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -42,10 +42,10 @@ namespace xml_service.Models
             return new ObjectWithXMsTextProperty(language, content, default);
         }
 
-        BinaryData IModel<ObjectWithXMsTextProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ObjectWithXMsTextProperty>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ObjectWithXMsTextProperty>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -65,9 +65,9 @@ namespace xml_service.Models
             }
         }
 
-        ObjectWithXMsTextProperty IModel<ObjectWithXMsTextProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ObjectWithXMsTextProperty IPersistableModel<ObjectWithXMsTextProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ObjectWithXMsTextProperty)} does not support '{options.Format}' format.");
@@ -76,6 +76,6 @@ namespace xml_service.Models
             return DeserializeObjectWithXMsTextProperty(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ObjectWithXMsTextProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ObjectWithXMsTextProperty>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

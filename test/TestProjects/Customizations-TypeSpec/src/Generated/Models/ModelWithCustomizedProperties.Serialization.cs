@@ -17,11 +17,11 @@ namespace CustomizationsInTsp.Models
 {
     public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable, IJsonModel<ModelWithCustomizedProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomizedProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomizedProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithCustomizedProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithCustomizedProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithCustomizedProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithCustomizedProperties>)} interface");
             }
@@ -142,7 +142,7 @@ namespace CustomizationsInTsp.Models
             {
                 writer.WriteNull("vectorOptionalNullable");
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("vectorReadOnly"u8);
                 writer.WriteStartArray();
@@ -152,7 +152,7 @@ namespace CustomizationsInTsp.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (VectorOptionalReadOnly != null)
                 {
@@ -169,7 +169,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorOptionalReadOnly");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (VectorNullableReadOnly != null)
                 {
@@ -186,7 +186,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorNullableReadOnly");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (VectorOptionalNullableReadOnly != null)
                 {
@@ -203,7 +203,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorOptionalNullableReadOnly");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -221,9 +221,9 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndObject();
         }
 
-        ModelWithCustomizedProperties IJsonModel<ModelWithCustomizedProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithCustomizedProperties IJsonModel<ModelWithCustomizedProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
@@ -235,7 +235,7 @@ namespace CustomizationsInTsp.Models
 
         internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -497,7 +497,7 @@ namespace CustomizationsInTsp.Models
                     vectorOptionalNullableReadOnly = new ReadOnlyMemory<float>?(array);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -506,9 +506,9 @@ namespace CustomizationsInTsp.Models
             return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName, vector, Optional.ToNullable(vectorOptional), vectorNullable, Optional.ToNullable(vectorOptionalNullable), vectorReadOnly, Optional.ToNullable(vectorOptionalReadOnly), vectorNullableReadOnly, Optional.ToNullable(vectorOptionalNullableReadOnly), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithCustomizedProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithCustomizedProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
@@ -517,9 +517,9 @@ namespace CustomizationsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithCustomizedProperties IModel<ModelWithCustomizedProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithCustomizedProperties IPersistableModel<ModelWithCustomizedProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithCustomizedProperties)} does not support '{options.Format}' format.");
@@ -529,14 +529,14 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelWithCustomizedProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithCustomizedProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithCustomizedProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithCustomizedProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithCustomizedProperties(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeModelWithCustomizedProperties(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

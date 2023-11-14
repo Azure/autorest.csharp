@@ -17,11 +17,11 @@ namespace Inheritance.Models
 {
     internal partial class ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride : IUtf8JsonSerializable, IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>)} interface");
             }
@@ -97,7 +97,7 @@ namespace Inheritance.Models
                 writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -115,9 +115,9 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IJsonModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride)} does not support '{options.Format}' format.");
@@ -129,7 +129,7 @@ namespace Inheritance.Models
 
         internal static ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -267,7 +267,7 @@ namespace Inheritance.Models
                     someOtherProperty = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -276,9 +276,9 @@ namespace Inheritance.Models
             return new ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(someProperty.Value, someOtherProperty.Value, serializedAdditionalRawData, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
         }
 
-        BinaryData IModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride)} does not support '{options.Format}' format.");
@@ -287,9 +287,9 @@ namespace Inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride IPersistableModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride)} does not support '{options.Format}' format.");
@@ -299,6 +299,6 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ClassThatInheritsFromBaseClassAndSomePropertiesWithBaseClassOverride>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

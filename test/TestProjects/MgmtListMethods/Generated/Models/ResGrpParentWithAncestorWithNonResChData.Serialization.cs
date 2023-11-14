@@ -17,11 +17,11 @@ namespace MgmtListMethods
 {
     public partial class ResGrpParentWithAncestorWithNonResChData : IUtf8JsonSerializable, IJsonModel<ResGrpParentWithAncestorWithNonResChData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResGrpParentWithAncestorWithNonResChData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResGrpParentWithAncestorWithNonResChData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ResGrpParentWithAncestorWithNonResChData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ResGrpParentWithAncestorWithNonResChData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ResGrpParentWithAncestorWithNonResChData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResGrpParentWithAncestorWithNonResChData>)} interface");
             }
@@ -45,22 +45,22 @@ namespace MgmtListMethods
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -68,7 +68,7 @@ namespace MgmtListMethods
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -86,9 +86,9 @@ namespace MgmtListMethods
             writer.WriteEndObject();
         }
 
-        ResGrpParentWithAncestorWithNonResChData IJsonModel<ResGrpParentWithAncestorWithNonResChData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ResGrpParentWithAncestorWithNonResChData IJsonModel<ResGrpParentWithAncestorWithNonResChData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResGrpParentWithAncestorWithNonResChData)} does not support '{options.Format}' format.");
@@ -100,7 +100,7 @@ namespace MgmtListMethods
 
         internal static ResGrpParentWithAncestorWithNonResChData DeserializeResGrpParentWithAncestorWithNonResChData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -165,7 +165,7 @@ namespace MgmtListMethods
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -174,9 +174,9 @@ namespace MgmtListMethods
             return new ResGrpParentWithAncestorWithNonResChData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ResGrpParentWithAncestorWithNonResChData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ResGrpParentWithAncestorWithNonResChData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResGrpParentWithAncestorWithNonResChData)} does not support '{options.Format}' format.");
@@ -185,9 +185,9 @@ namespace MgmtListMethods
             return ModelReaderWriter.Write(this, options);
         }
 
-        ResGrpParentWithAncestorWithNonResChData IModel<ResGrpParentWithAncestorWithNonResChData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ResGrpParentWithAncestorWithNonResChData IPersistableModel<ResGrpParentWithAncestorWithNonResChData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResGrpParentWithAncestorWithNonResChData)} does not support '{options.Format}' format.");
@@ -197,6 +197,6 @@ namespace MgmtListMethods
             return DeserializeResGrpParentWithAncestorWithNonResChData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ResGrpParentWithAncestorWithNonResChData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ResGrpParentWithAncestorWithNonResChData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace xms_error_responses.Models
 {
     internal partial class LinkNotFound : IUtf8JsonSerializable, IJsonModel<LinkNotFound>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LinkNotFound>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LinkNotFound>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LinkNotFound>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LinkNotFound>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LinkNotFound>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LinkNotFound>)} interface");
             }
@@ -43,7 +43,7 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -61,9 +61,9 @@ namespace xms_error_responses.Models
             writer.WriteEndObject();
         }
 
-        LinkNotFound IJsonModel<LinkNotFound>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LinkNotFound IJsonModel<LinkNotFound>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{options.Format}' format.");
@@ -75,7 +75,7 @@ namespace xms_error_responses.Models
 
         internal static LinkNotFound DeserializeLinkNotFound(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace xms_error_responses.Models
                     someBaseProp = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace xms_error_responses.Models
             return new LinkNotFound(someBaseProp.Value, serializedAdditionalRawData, reason.Value, whatNotFound, whatSubAddress.Value);
         }
 
-        BinaryData IModel<LinkNotFound>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LinkNotFound>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace xms_error_responses.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LinkNotFound IModel<LinkNotFound>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LinkNotFound IPersistableModel<LinkNotFound>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LinkNotFound)} does not support '{options.Format}' format.");
@@ -141,6 +141,6 @@ namespace xms_error_responses.Models
             return DeserializeLinkNotFound(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LinkNotFound>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LinkNotFound>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

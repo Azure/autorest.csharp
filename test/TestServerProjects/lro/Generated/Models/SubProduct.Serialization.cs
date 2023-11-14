@@ -16,17 +16,17 @@ namespace lro.Models
 {
     public partial class SubProduct : IUtf8JsonSerializable, IJsonModel<SubProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubProduct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SubProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SubProduct>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SubProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubProduct>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -41,7 +41,7 @@ namespace lro.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningStateValues))
                 {
@@ -50,7 +50,7 @@ namespace lro.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,9 +68,9 @@ namespace lro.Models
             writer.WriteEndObject();
         }
 
-        SubProduct IJsonModel<SubProduct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SubProduct IJsonModel<SubProduct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubProduct)} does not support '{options.Format}' format.");
@@ -82,7 +82,7 @@ namespace lro.Models
 
         internal static SubProduct DeserializeSubProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,7 +126,7 @@ namespace lro.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -135,9 +135,9 @@ namespace lro.Models
             return new SubProduct(id.Value, serializedAdditionalRawData, provisioningState.Value, Optional.ToNullable(provisioningStateValues));
         }
 
-        BinaryData IModel<SubProduct>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SubProduct>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubProduct)} does not support '{options.Format}' format.");
@@ -146,9 +146,9 @@ namespace lro.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SubProduct IModel<SubProduct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SubProduct IPersistableModel<SubProduct>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubProduct)} does not support '{options.Format}' format.");
@@ -158,6 +158,6 @@ namespace lro.Models
             return DeserializeSubProduct(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SubProduct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SubProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

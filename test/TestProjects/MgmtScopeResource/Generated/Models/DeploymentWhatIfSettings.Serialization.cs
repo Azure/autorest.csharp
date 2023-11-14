@@ -16,11 +16,11 @@ namespace MgmtScopeResource.Models
 {
     internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable, IJsonModel<DeploymentWhatIfSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentWhatIfSettings>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentWhatIfSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeploymentWhatIfSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeploymentWhatIfSettings>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentWhatIfSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentWhatIfSettings>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("resultFormat"u8);
                 writer.WriteStringValue(ResultFormat.Value.ToSerialString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        DeploymentWhatIfSettings IJsonModel<DeploymentWhatIfSettings>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeploymentWhatIfSettings IJsonModel<DeploymentWhatIfSettings>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentWhatIfSettings)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtScopeResource.Models
 
         internal static DeploymentWhatIfSettings DeserializeDeploymentWhatIfSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtScopeResource.Models
                     resultFormat = property.Value.GetString().ToWhatIfResultFormat();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtScopeResource.Models
             return new DeploymentWhatIfSettings(Optional.ToNullable(resultFormat), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeploymentWhatIfSettings>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeploymentWhatIfSettings>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentWhatIfSettings)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeploymentWhatIfSettings IModel<DeploymentWhatIfSettings>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeploymentWhatIfSettings IPersistableModel<DeploymentWhatIfSettings>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeploymentWhatIfSettings)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentWhatIfSettings(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeploymentWhatIfSettings>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeploymentWhatIfSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

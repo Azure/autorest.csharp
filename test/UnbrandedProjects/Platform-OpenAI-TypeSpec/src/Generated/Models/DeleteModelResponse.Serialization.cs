@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class DeleteModelResponse : IUtf8JsonWriteable, IJsonModel<DeleteModelResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeleteModelResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeleteModelResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeleteModelResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeleteModelResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeleteModelResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeleteModelResponse>)} interface");
             }
@@ -29,7 +29,7 @@ namespace OpenAI.Models
             writer.WriteStringValue(Object);
             writer.WritePropertyName("deleted"u8);
             writer.WriteBooleanValue(Deleted);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        DeleteModelResponse IJsonModel<DeleteModelResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeleteModelResponse IJsonModel<DeleteModelResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeleteModelResponse)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace OpenAI.Models
 
         internal static DeleteModelResponse DeserializeDeleteModelResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -89,7 +89,7 @@ namespace OpenAI.Models
                     deleted = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -98,9 +98,9 @@ namespace OpenAI.Models
             return new DeleteModelResponse(id, @object, deleted, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeleteModelResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeleteModelResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeleteModelResponse)} does not support '{options.Format}' format.");
@@ -109,9 +109,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeleteModelResponse IModel<DeleteModelResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeleteModelResponse IPersistableModel<DeleteModelResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeleteModelResponse)} does not support '{options.Format}' format.");
@@ -121,14 +121,14 @@ namespace OpenAI.Models
             return DeserializeDeleteModelResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeleteModelResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeleteModelResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static DeleteModelResponse FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeDeleteModelResponse(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDeleteModelResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

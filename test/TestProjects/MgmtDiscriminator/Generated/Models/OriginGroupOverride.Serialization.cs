@@ -17,11 +17,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class OriginGroupOverride : IUtf8JsonSerializable, IJsonModel<OriginGroupOverride>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverride>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OriginGroupOverride>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OriginGroupOverride>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OriginGroupOverride>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OriginGroupOverride>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OriginGroupOverride>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("forwardingProtocol"u8);
                 writer.WriteStringValue(ForwardingProtocol.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -55,9 +55,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        OriginGroupOverride IJsonModel<OriginGroupOverride>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OriginGroupOverride IJsonModel<OriginGroupOverride>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{options.Format}' format.");
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
 
         internal static OriginGroupOverride DeserializeOriginGroupOverride(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,7 +99,7 @@ namespace MgmtDiscriminator.Models
                     forwardingProtocol = new ForwardingProtocol(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,9 +108,9 @@ namespace MgmtDiscriminator.Models
             return new OriginGroupOverride(originGroup, Optional.ToNullable(forwardingProtocol), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<OriginGroupOverride>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OriginGroupOverride>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{options.Format}' format.");
@@ -119,9 +119,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OriginGroupOverride IModel<OriginGroupOverride>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OriginGroupOverride IPersistableModel<OriginGroupOverride>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OriginGroupOverride)} does not support '{options.Format}' format.");
@@ -131,6 +131,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeOriginGroupOverride(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OriginGroupOverride>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OriginGroupOverride>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

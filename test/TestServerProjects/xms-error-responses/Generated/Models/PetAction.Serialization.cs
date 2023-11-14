@@ -16,11 +16,11 @@ namespace xms_error_responses.Models
 {
     public partial class PetAction : IUtf8JsonSerializable, IJsonModel<PetAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAction>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAction>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<PetAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<PetAction>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<PetAction>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetAction>)} interface");
             }
@@ -31,7 +31,7 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace xms_error_responses.Models
             writer.WriteEndObject();
         }
 
-        PetAction IJsonModel<PetAction>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        PetAction IJsonModel<PetAction>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetAction)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace xms_error_responses.Models
 
         internal static PetAction DeserializePetAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace xms_error_responses.Models
                     actionResponse = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace xms_error_responses.Models
             return new PetAction(actionResponse.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<PetAction>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<PetAction>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetAction)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace xms_error_responses.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        PetAction IModel<PetAction>.Read(BinaryData data, ModelReaderWriterOptions options)
+        PetAction IPersistableModel<PetAction>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(PetAction)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace xms_error_responses.Models
             return DeserializePetAction(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<PetAction>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<PetAction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

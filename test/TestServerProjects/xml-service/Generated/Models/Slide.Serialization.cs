@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slide : IXmlSerializable, IModel<Slide>
+    public partial class Slide : IXmlSerializable, IPersistableModel<Slide>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -67,10 +67,10 @@ namespace xml_service.Models
             return new Slide(type, title, items, default);
         }
 
-        BinaryData IModel<Slide>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Slide>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<Slide>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -90,9 +90,9 @@ namespace xml_service.Models
             }
         }
 
-        Slide IModel<Slide>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Slide IPersistableModel<Slide>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Slide)} does not support '{options.Format}' format.");
@@ -101,6 +101,6 @@ namespace xml_service.Models
             return DeserializeSlide(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<Slide>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<Slide>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

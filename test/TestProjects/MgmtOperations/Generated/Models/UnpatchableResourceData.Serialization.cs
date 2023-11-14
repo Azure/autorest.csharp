@@ -17,11 +17,11 @@ namespace MgmtOperations
 {
     public partial class UnpatchableResourceData : IUtf8JsonSerializable, IJsonModel<UnpatchableResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnpatchableResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnpatchableResourceData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnpatchableResourceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnpatchableResourceData>)} interface");
             }
@@ -45,22 +45,22 @@ namespace MgmtOperations
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -68,7 +68,7 @@ namespace MgmtOperations
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -86,9 +86,9 @@ namespace MgmtOperations
             writer.WriteEndObject();
         }
 
-        UnpatchableResourceData IJsonModel<UnpatchableResourceData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnpatchableResourceData IJsonModel<UnpatchableResourceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support '{options.Format}' format.");
@@ -100,7 +100,7 @@ namespace MgmtOperations
 
         internal static UnpatchableResourceData DeserializeUnpatchableResourceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -165,7 +165,7 @@ namespace MgmtOperations
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -174,9 +174,9 @@ namespace MgmtOperations
             return new UnpatchableResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnpatchableResourceData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnpatchableResourceData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support '{options.Format}' format.");
@@ -185,9 +185,9 @@ namespace MgmtOperations
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnpatchableResourceData IModel<UnpatchableResourceData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnpatchableResourceData IPersistableModel<UnpatchableResourceData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnpatchableResourceData)} does not support '{options.Format}' format.");
@@ -197,6 +197,6 @@ namespace MgmtOperations
             return DeserializeUnpatchableResourceData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnpatchableResourceData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnpatchableResourceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class HardwareProfile : IUtf8JsonSerializable, IJsonModel<HardwareProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HardwareProfile>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<HardwareProfile>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<HardwareProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<HardwareProfile>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<HardwareProfile>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<HardwareProfile>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("vmSize"u8);
                 writer.WriteStringValue(VmSize.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        HardwareProfile IJsonModel<HardwareProfile>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        HardwareProfile IJsonModel<HardwareProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HardwareProfile)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static HardwareProfile DeserializeHardwareProfile(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     vmSize = new VirtualMachineSizeType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtAcronymMapping.Models
             return new HardwareProfile(Optional.ToNullable(vmSize), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<HardwareProfile>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<HardwareProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HardwareProfile)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        HardwareProfile IModel<HardwareProfile>.Read(BinaryData data, ModelReaderWriterOptions options)
+        HardwareProfile IPersistableModel<HardwareProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(HardwareProfile)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeHardwareProfile(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<HardwareProfile>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<HardwareProfile>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

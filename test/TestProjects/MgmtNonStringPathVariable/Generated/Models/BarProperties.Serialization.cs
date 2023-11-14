@@ -16,11 +16,11 @@ namespace MgmtNonStringPathVariable.Models
 {
     internal partial class BarProperties : IUtf8JsonSerializable, IJsonModel<BarProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BarProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BarProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BarProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BarProperties>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtNonStringPathVariable.Models
                 writer.WritePropertyName("buzz"u8);
                 writer.WriteStringValue(Buzz.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtNonStringPathVariable.Models
             writer.WriteEndObject();
         }
 
-        BarProperties IJsonModel<BarProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BarProperties IJsonModel<BarProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BarProperties)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtNonStringPathVariable.Models
 
         internal static BarProperties DeserializeBarProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace MgmtNonStringPathVariable.Models
                     buzz = property.Value.GetGuid();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace MgmtNonStringPathVariable.Models
             return new BarProperties(Optional.ToNullable(buzz), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BarProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BarProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BarProperties)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace MgmtNonStringPathVariable.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BarProperties IModel<BarProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BarProperties IPersistableModel<BarProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BarProperties)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace MgmtNonStringPathVariable.Models
             return DeserializeBarProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BarProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BarProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

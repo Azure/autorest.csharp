@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateImageRequest : IUtf8JsonWriteable, IJsonModel<CreateImageRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateImageRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateImageRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateImageRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateImageRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateImageRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateImageRequest>)} interface");
             }
@@ -52,7 +52,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("user"u8);
                 writer.WriteStringValue(User);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -70,9 +70,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateImageRequest IJsonModel<CreateImageRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateImageRequest IJsonModel<CreateImageRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateImageRequest)} does not support '{options.Format}' format.");
@@ -84,7 +84,7 @@ namespace OpenAI.Models
 
         internal static CreateImageRequest DeserializeCreateImageRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,7 +137,7 @@ namespace OpenAI.Models
                     user = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -146,9 +146,9 @@ namespace OpenAI.Models
             return new CreateImageRequest(prompt, OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(size), OptionalProperty.ToNullable(responseFormat), user.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateImageRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateImageRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateImageRequest)} does not support '{options.Format}' format.");
@@ -157,9 +157,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateImageRequest IModel<CreateImageRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateImageRequest IPersistableModel<CreateImageRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateImageRequest)} does not support '{options.Format}' format.");
@@ -169,14 +169,14 @@ namespace OpenAI.Models
             return DeserializeCreateImageRequest(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateImageRequest>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateImageRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateImageRequest FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateImageRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateImageRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

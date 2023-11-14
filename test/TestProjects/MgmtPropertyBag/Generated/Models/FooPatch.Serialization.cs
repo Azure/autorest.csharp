@@ -16,11 +16,11 @@ namespace MgmtPropertyBag.Models
 {
     public partial class FooPatch : IUtf8JsonSerializable, IJsonModel<FooPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FooPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FooPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FooPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FooPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FooPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FooPatch>)} interface");
             }
@@ -31,7 +31,7 @@ namespace MgmtPropertyBag.Models
                 writer.WritePropertyName("details"u8);
                 writer.WriteStringValue(Details);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace MgmtPropertyBag.Models
             writer.WriteEndObject();
         }
 
-        FooPatch IJsonModel<FooPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FooPatch IJsonModel<FooPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FooPatch)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace MgmtPropertyBag.Models
 
         internal static FooPatch DeserializeFooPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,7 +79,7 @@ namespace MgmtPropertyBag.Models
                     details = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,9 +88,9 @@ namespace MgmtPropertyBag.Models
             return new FooPatch(details.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FooPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FooPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FooPatch)} does not support '{options.Format}' format.");
@@ -99,9 +99,9 @@ namespace MgmtPropertyBag.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FooPatch IModel<FooPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FooPatch IPersistableModel<FooPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FooPatch)} does not support '{options.Format}' format.");
@@ -111,6 +111,6 @@ namespace MgmtPropertyBag.Models
             return DeserializeFooPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FooPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FooPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

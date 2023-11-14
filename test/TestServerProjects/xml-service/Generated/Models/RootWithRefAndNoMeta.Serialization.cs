@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndNoMeta : IXmlSerializable, IModel<RootWithRefAndNoMeta>
+    public partial class RootWithRefAndNoMeta : IXmlSerializable, IPersistableModel<RootWithRefAndNoMeta>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -48,10 +48,10 @@ namespace xml_service.Models
             return new RootWithRefAndNoMeta(refToModel, something, default);
         }
 
-        BinaryData IModel<RootWithRefAndNoMeta>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RootWithRefAndNoMeta>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<RootWithRefAndNoMeta>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -71,9 +71,9 @@ namespace xml_service.Models
             }
         }
 
-        RootWithRefAndNoMeta IModel<RootWithRefAndNoMeta>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RootWithRefAndNoMeta IPersistableModel<RootWithRefAndNoMeta>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RootWithRefAndNoMeta)} does not support '{options.Format}' format.");
@@ -82,6 +82,6 @@ namespace xml_service.Models
             return DeserializeRootWithRefAndNoMeta(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<RootWithRefAndNoMeta>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<RootWithRefAndNoMeta>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

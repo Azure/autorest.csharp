@@ -16,17 +16,17 @@ namespace MgmtListMethods.Models
 {
     public partial class UpdateWorkspaceQuotas : IUtf8JsonSerializable, IJsonModel<UpdateWorkspaceQuotas>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpdateWorkspaceQuotas>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpdateWorkspaceQuotas>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UpdateWorkspaceQuotas>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UpdateWorkspaceQuotas>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UpdateWorkspaceQuotas>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UpdateWorkspaceQuotas>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -34,7 +34,7 @@ namespace MgmtListMethods.Models
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(UpdateWorkspaceQuotasType))
                 {
@@ -47,7 +47,7 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("limit"u8);
                 writer.WriteNumberValue(Limit.Value);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Unit))
                 {
@@ -60,7 +60,7 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -78,9 +78,9 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        UpdateWorkspaceQuotas IJsonModel<UpdateWorkspaceQuotas>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UpdateWorkspaceQuotas IJsonModel<UpdateWorkspaceQuotas>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UpdateWorkspaceQuotas)} does not support '{options.Format}' format.");
@@ -92,7 +92,7 @@ namespace MgmtListMethods.Models
 
         internal static UpdateWorkspaceQuotas DeserializeUpdateWorkspaceQuotas(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -144,7 +144,7 @@ namespace MgmtListMethods.Models
                     status = new Status(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -153,9 +153,9 @@ namespace MgmtListMethods.Models
             return new UpdateWorkspaceQuotas(id.Value, type.Value, Optional.ToNullable(limit), Optional.ToNullable(unit), Optional.ToNullable(status), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UpdateWorkspaceQuotas>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UpdateWorkspaceQuotas>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UpdateWorkspaceQuotas)} does not support '{options.Format}' format.");
@@ -164,9 +164,9 @@ namespace MgmtListMethods.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UpdateWorkspaceQuotas IModel<UpdateWorkspaceQuotas>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UpdateWorkspaceQuotas IPersistableModel<UpdateWorkspaceQuotas>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UpdateWorkspaceQuotas)} does not support '{options.Format}' format.");
@@ -176,6 +176,6 @@ namespace MgmtListMethods.Models
             return DeserializeUpdateWorkspaceQuotas(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UpdateWorkspaceQuotas>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UpdateWorkspaceQuotas>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtSupersetInheritance.Models
 {
     public partial class SupersetModel7SystemData : IUtf8JsonSerializable, IJsonModel<SupersetModel7SystemData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel7SystemData>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel7SystemData>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SupersetModel7SystemData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SupersetModel7SystemData>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SupersetModel7SystemData>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SupersetModel7SystemData>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtSupersetInheritance.Models
                 writer.WritePropertyName("lastModifiedBy"u8);
                 writer.WriteStringValue(LastModifiedBy);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtSupersetInheritance.Models
             writer.WriteEndObject();
         }
 
-        SupersetModel7SystemData IJsonModel<SupersetModel7SystemData>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SupersetModel7SystemData IJsonModel<SupersetModel7SystemData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SupersetModel7SystemData)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtSupersetInheritance.Models
 
         internal static SupersetModel7SystemData DeserializeSupersetModel7SystemData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace MgmtSupersetInheritance.Models
                     lastModifiedBy = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel7SystemData(createdBy.Value, Optional.ToNullable(createdAt), lastModifiedBy.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SupersetModel7SystemData>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SupersetModel7SystemData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SupersetModel7SystemData)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace MgmtSupersetInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SupersetModel7SystemData IModel<SupersetModel7SystemData>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SupersetModel7SystemData IPersistableModel<SupersetModel7SystemData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SupersetModel7SystemData)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace MgmtSupersetInheritance.Models
             return DeserializeSupersetModel7SystemData(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SupersetModel7SystemData>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SupersetModel7SystemData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     internal partial class OuterModel : IUtf8JsonSerializable, IJsonModel<OuterModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OuterModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OuterModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OuterModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OuterModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OuterModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OuterModel>)} interface");
             }
@@ -31,7 +31,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteObjectValue(Inner);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteEndObject();
         }
 
-        OuterModel IJsonModel<OuterModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OuterModel IJsonModel<OuterModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OuterModel)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         internal static OuterModel DeserializeOuterModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new OuterModel(name, serializedAdditionalRawData, inner);
         }
 
-        BinaryData IModel<OuterModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OuterModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OuterModel)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OuterModel IModel<OuterModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OuterModel IPersistableModel<OuterModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OuterModel)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return DeserializeOuterModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OuterModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OuterModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new OuterModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOuterModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeOuterModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

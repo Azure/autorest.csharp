@@ -13,11 +13,11 @@ namespace UnbrandedTypeSpec.Models
 {
     public partial class Thing : IUtf8JsonWriteable, IJsonModel<Thing>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<Thing>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Thing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Thing>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Thing>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Thing>)} interface");
             }
@@ -95,7 +95,7 @@ namespace UnbrandedTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableList");
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -113,9 +113,9 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        Thing IJsonModel<Thing>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Thing IJsonModel<Thing>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
@@ -127,7 +127,7 @@ namespace UnbrandedTypeSpec.Models
 
         internal static Thing DeserializeThing(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -251,7 +251,7 @@ namespace UnbrandedTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -260,9 +260,9 @@ namespace UnbrandedTypeSpec.Models
             return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, OptionalProperty.ToNullable(optionalLiteralString), OptionalProperty.ToNullable(optionalLiteralInt), OptionalProperty.ToNullable(optionalLiteralFloat), OptionalProperty.ToNullable(optionalLiteralBool), requiredBadDescription, OptionalProperty.ToList(optionalNullableList), requiredNullableList, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Thing>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
@@ -271,9 +271,9 @@ namespace UnbrandedTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Thing IModel<Thing>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Thing IPersistableModel<Thing>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Thing)} does not support '{options.Format}' format.");
@@ -283,14 +283,14 @@ namespace UnbrandedTypeSpec.Models
             return DeserializeThing(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Thing>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Thing>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static Thing FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeThing(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeThing(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

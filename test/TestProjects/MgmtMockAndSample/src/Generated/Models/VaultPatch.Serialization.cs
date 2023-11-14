@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class VaultPatch : IUtf8JsonSerializable, IJsonModel<VaultPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VaultPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VaultPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VaultPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VaultPatch>)} interface");
             }
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        VaultPatch IJsonModel<VaultPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VaultPatch IJsonModel<VaultPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VaultPatch)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultPatch DeserializeVaultPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace MgmtMockAndSample.Models
                     properties = VaultPatchProperties.DeserializeVaultPatchProperties(property.Value);
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace MgmtMockAndSample.Models
             return new VaultPatch(Optional.ToDictionary(tags), properties.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<VaultPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VaultPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VaultPatch)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VaultPatch IModel<VaultPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VaultPatch IPersistableModel<VaultPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VaultPatch)} does not support '{options.Format}' format.");
@@ -141,6 +141,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VaultPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VaultPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

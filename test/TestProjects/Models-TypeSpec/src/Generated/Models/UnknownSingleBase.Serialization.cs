@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     internal partial class UnknownSingleBase : IUtf8JsonSerializable, IJsonModel<SingleBase>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingleBase>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SingleBase>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SingleBase>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SingleBase>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SingleBase>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SingleBase>)} interface");
             }
@@ -31,7 +31,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("size"u8);
             writer.WriteNumberValue(Size);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        SingleBase IJsonModel<SingleBase>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SingleBase IJsonModel<SingleBase>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SingleBase)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace ModelsTypeSpec.Models
 
         internal static UnknownSingleBase DeserializeUnknownSingleBase(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace ModelsTypeSpec.Models
                     size = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace ModelsTypeSpec.Models
             return new UnknownSingleBase(kind, size, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SingleBase>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SingleBase>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SingleBase)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SingleBase IModel<SingleBase>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SingleBase IPersistableModel<SingleBase>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SingleBase)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeUnknownSingleBase(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SingleBase>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SingleBase>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new UnknownSingleBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownSingleBase(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnknownSingleBase(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

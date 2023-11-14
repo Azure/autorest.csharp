@@ -16,7 +16,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class StorageServiceProperties : IXmlSerializable, IModel<StorageServiceProperties>
+    public partial class StorageServiceProperties : IXmlSerializable, IPersistableModel<StorageServiceProperties>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -95,10 +95,10 @@ namespace xml_service.Models
             return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy, default);
         }
 
-        BinaryData IModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<StorageServiceProperties>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace xml_service.Models
             }
         }
 
-        StorageServiceProperties IModel<StorageServiceProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        StorageServiceProperties IPersistableModel<StorageServiceProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(StorageServiceProperties)} does not support '{options.Format}' format.");
@@ -129,6 +129,6 @@ namespace xml_service.Models
             return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<StorageServiceProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<StorageServiceProperties>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

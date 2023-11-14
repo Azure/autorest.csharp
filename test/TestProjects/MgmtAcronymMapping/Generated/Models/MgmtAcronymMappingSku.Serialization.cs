@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class MgmtAcronymMappingSku : IUtf8JsonSerializable, IJsonModel<MgmtAcronymMappingSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtAcronymMappingSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtAcronymMappingSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtAcronymMappingSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtAcronymMappingSku>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        MgmtAcronymMappingSku IJsonModel<MgmtAcronymMappingSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtAcronymMappingSku IJsonModel<MgmtAcronymMappingSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtAcronymMappingSku)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static MgmtAcronymMappingSku DeserializeMgmtAcronymMappingSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace MgmtAcronymMapping.Models
                     capacity = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace MgmtAcronymMapping.Models
             return new MgmtAcronymMappingSku(name.Value, tier.Value, Optional.ToNullable(capacity), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MgmtAcronymMappingSku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtAcronymMappingSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtAcronymMappingSku)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtAcronymMappingSku IModel<MgmtAcronymMappingSku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtAcronymMappingSku IPersistableModel<MgmtAcronymMappingSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtAcronymMappingSku)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeMgmtAcronymMappingSku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtAcronymMappingSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtAcronymMappingSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace ApiVersionInTsp.Models
 {
     public partial class DetectionResult : IUtf8JsonSerializable, IJsonModel<DetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DetectionResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DetectionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DetectionResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DetectionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DetectionResult>)} interface");
             }
@@ -29,7 +29,7 @@ namespace ApiVersionInTsp.Models
             writer.WriteStartObject();
             writer.WritePropertyName("resultId"u8);
             writer.WriteStringValue(ResultId);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace ApiVersionInTsp.Models
             writer.WriteEndObject();
         }
 
-        DetectionResult IJsonModel<DetectionResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DetectionResult IJsonModel<DetectionResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace ApiVersionInTsp.Models
 
         internal static DetectionResult DeserializeDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace ApiVersionInTsp.Models
                     resultId = property.Value.GetGuid();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace ApiVersionInTsp.Models
             return new DetectionResult(resultId, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DetectionResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DetectionResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace ApiVersionInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DetectionResult IModel<DetectionResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DetectionResult IPersistableModel<DetectionResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace ApiVersionInTsp.Models
             return DeserializeDetectionResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDetectionResult(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDetectionResult(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

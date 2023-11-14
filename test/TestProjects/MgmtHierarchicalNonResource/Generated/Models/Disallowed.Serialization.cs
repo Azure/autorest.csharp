@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     internal partial class Disallowed : IUtf8JsonSerializable, IJsonModel<Disallowed>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Disallowed>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Disallowed>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Disallowed>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Disallowed>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Disallowed>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Disallowed>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtHierarchicalNonResource.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteEndObject();
         }
 
-        Disallowed IJsonModel<Disallowed>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Disallowed IJsonModel<Disallowed>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Disallowed)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static Disallowed DeserializeDisallowed(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace MgmtHierarchicalNonResource.Models
                     diskTypes = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace MgmtHierarchicalNonResource.Models
             return new Disallowed(Optional.ToList(diskTypes), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Disallowed>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Disallowed>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Disallowed)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace MgmtHierarchicalNonResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Disallowed IModel<Disallowed>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Disallowed IPersistableModel<Disallowed>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Disallowed)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeDisallowed(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Disallowed>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Disallowed>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -17,11 +17,11 @@ namespace CustomizationsInTsp.Models
 {
     public partial class RenamedModel : IUtf8JsonSerializable, IJsonModel<RenamedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RenamedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RenamedModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RenamedModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RenamedModel>)} interface");
             }
@@ -34,7 +34,7 @@ namespace CustomizationsInTsp.Models
                 writer.WritePropertyName("optionalInt"u8);
                 writer.WriteNumberValue(OptionalInt.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndObject();
         }
 
-        RenamedModel IJsonModel<RenamedModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RenamedModel IJsonModel<RenamedModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedModel)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace CustomizationsInTsp.Models
 
         internal static RenamedModel DeserializeRenamedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -92,7 +92,7 @@ namespace CustomizationsInTsp.Models
                     optionalInt = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,9 +101,9 @@ namespace CustomizationsInTsp.Models
             return new RenamedModel(requiredInt, Optional.ToNullable(optionalInt), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RenamedModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RenamedModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedModel)} does not support '{options.Format}' format.");
@@ -112,9 +112,9 @@ namespace CustomizationsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RenamedModel IModel<RenamedModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RenamedModel IPersistableModel<RenamedModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RenamedModel)} does not support '{options.Format}' format.");
@@ -124,14 +124,14 @@ namespace CustomizationsInTsp.Models
             return DeserializeRenamedModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RenamedModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RenamedModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RenamedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRenamedModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRenamedModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

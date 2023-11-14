@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class ResourceRange : IUtf8JsonSerializable, IJsonModel<ResourceRange>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceRange>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceRange>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ResourceRange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ResourceRange>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ResourceRange>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceRange>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WritePropertyName("max"u8);
                 writer.WriteNumberValue(Max.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteEndObject();
         }
 
-        ResourceRange IJsonModel<ResourceRange>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ResourceRange IJsonModel<ResourceRange>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceRange)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static ResourceRange DeserializeResourceRange(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtHierarchicalNonResource.Models
                     max = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtHierarchicalNonResource.Models
             return new ResourceRange(Optional.ToNullable(min), Optional.ToNullable(max), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ResourceRange>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ResourceRange>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceRange)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtHierarchicalNonResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ResourceRange IModel<ResourceRange>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ResourceRange IPersistableModel<ResourceRange>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ResourceRange)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeResourceRange(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ResourceRange>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ResourceRange>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

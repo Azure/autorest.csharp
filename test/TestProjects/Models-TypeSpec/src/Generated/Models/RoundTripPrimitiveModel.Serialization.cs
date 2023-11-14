@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripPrimitiveModel : IUtf8JsonSerializable, IJsonModel<RoundTripPrimitiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripPrimitiveModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripPrimitiveModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RoundTripPrimitiveModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RoundTripPrimitiveModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RoundTripPrimitiveModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripPrimitiveModel>)} interface");
             }
@@ -57,7 +57,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,9 +75,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        RoundTripPrimitiveModel IJsonModel<RoundTripPrimitiveModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RoundTripPrimitiveModel IJsonModel<RoundTripPrimitiveModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripPrimitiveModel)} does not support '{options.Format}' format.");
@@ -89,7 +89,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripPrimitiveModel DeserializeRoundTripPrimitiveModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -171,7 +171,7 @@ namespace ModelsTypeSpec.Models
                     requiredCollectionWithNullableFloatElement = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -180,9 +180,9 @@ namespace ModelsTypeSpec.Models
             return new RoundTripPrimitiveModel(serializedAdditionalRawData, requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
         }
 
-        BinaryData IModel<RoundTripPrimitiveModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RoundTripPrimitiveModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripPrimitiveModel)} does not support '{options.Format}' format.");
@@ -191,9 +191,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RoundTripPrimitiveModel IModel<RoundTripPrimitiveModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RoundTripPrimitiveModel IPersistableModel<RoundTripPrimitiveModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripPrimitiveModel)} does not support '{options.Format}' format.");
@@ -203,14 +203,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripPrimitiveModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RoundTripPrimitiveModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RoundTripPrimitiveModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new RoundTripPrimitiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripPrimitiveModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRoundTripPrimitiveModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

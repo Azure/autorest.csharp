@@ -17,11 +17,11 @@ namespace ParametersCadl.Models
 {
     public partial class Result : IUtf8JsonSerializable, IJsonModel<Result>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Result>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Result>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Result>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Result>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Result>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Result>)} interface");
             }
@@ -29,7 +29,7 @@ namespace ParametersCadl.Models
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteStringValue(Id);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace ParametersCadl.Models
             writer.WriteEndObject();
         }
 
-        Result IJsonModel<Result>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Result IJsonModel<Result>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Result)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace ParametersCadl.Models
 
         internal static Result DeserializeResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace ParametersCadl.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace ParametersCadl.Models
             return new Result(id, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Result>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Result>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Result)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace ParametersCadl.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Result IModel<Result>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Result IPersistableModel<Result>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Result)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace ParametersCadl.Models
             return DeserializeResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Result>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Result>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Result FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeResult(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeResult(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

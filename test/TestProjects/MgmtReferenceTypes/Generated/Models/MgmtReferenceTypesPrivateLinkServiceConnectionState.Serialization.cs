@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(MgmtReferenceTypesPrivateLinkServiceConnectionStateConverter))]
     public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState : IUtf8JsonSerializable, IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>)} interface");
             }
@@ -45,9 +45,9 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        MgmtReferenceTypesPrivateLinkServiceConnectionState IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtReferenceTypesPrivateLinkServiceConnectionState IJsonModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtReferenceTypesPrivateLinkServiceConnectionState)} does not support '{options.Format}' format.");
@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static MgmtReferenceTypesPrivateLinkServiceConnectionState DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,9 +93,9 @@ namespace Azure.ResourceManager.Fake.Models
             return new MgmtReferenceTypesPrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, actionsRequired.Value);
         }
 
-        BinaryData IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtReferenceTypesPrivateLinkServiceConnectionState)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace Azure.ResourceManager.Fake.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtReferenceTypesPrivateLinkServiceConnectionState IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtReferenceTypesPrivateLinkServiceConnectionState IPersistableModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtReferenceTypesPrivateLinkServiceConnectionState)} does not support '{options.Format}' format.");
@@ -116,7 +116,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeMgmtReferenceTypesPrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtReferenceTypesPrivateLinkServiceConnectionState>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class MgmtReferenceTypesPrivateLinkServiceConnectionStateConverter : JsonConverter<MgmtReferenceTypesPrivateLinkServiceConnectionState>
         {

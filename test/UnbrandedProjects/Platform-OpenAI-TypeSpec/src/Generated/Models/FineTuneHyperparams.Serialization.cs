@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class FineTuneHyperparams : IUtf8JsonWriteable, IJsonModel<FineTuneHyperparams>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuneHyperparams>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuneHyperparams>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FineTuneHyperparams>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FineTuneHyperparams>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FineTuneHyperparams>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FineTuneHyperparams>)} interface");
             }
@@ -46,7 +46,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("classification_n_classes"u8);
                 writer.WriteNumberValue(ClassificationNClasses.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,9 +64,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        FineTuneHyperparams IJsonModel<FineTuneHyperparams>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FineTuneHyperparams IJsonModel<FineTuneHyperparams>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{options.Format}' format.");
@@ -78,7 +78,7 @@ namespace OpenAI.Models
 
         internal static FineTuneHyperparams DeserializeFineTuneHyperparams(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -138,7 +138,7 @@ namespace OpenAI.Models
                     classificationNClasses = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -147,9 +147,9 @@ namespace OpenAI.Models
             return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, OptionalProperty.ToNullable(computeClassificationMetrics), classificationPositiveClass.Value, OptionalProperty.ToNullable(classificationNClasses), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<FineTuneHyperparams>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FineTuneHyperparams>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{options.Format}' format.");
@@ -158,9 +158,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FineTuneHyperparams IModel<FineTuneHyperparams>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FineTuneHyperparams IPersistableModel<FineTuneHyperparams>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FineTuneHyperparams)} does not support '{options.Format}' format.");
@@ -170,14 +170,14 @@ namespace OpenAI.Models
             return DeserializeFineTuneHyperparams(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FineTuneHyperparams>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FineTuneHyperparams>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static FineTuneHyperparams FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFineTuneHyperparams(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeFineTuneHyperparams(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

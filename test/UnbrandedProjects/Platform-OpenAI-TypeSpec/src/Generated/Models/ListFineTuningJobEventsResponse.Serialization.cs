@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class ListFineTuningJobEventsResponse : IUtf8JsonWriteable, IJsonModel<ListFineTuningJobEventsResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListFineTuningJobEventsResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListFineTuningJobEventsResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ListFineTuningJobEventsResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ListFineTuningJobEventsResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ListFineTuningJobEventsResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListFineTuningJobEventsResponse>)} interface");
             }
@@ -32,7 +32,7 @@ namespace OpenAI.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,9 +50,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        ListFineTuningJobEventsResponse IJsonModel<ListFineTuningJobEventsResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ListFineTuningJobEventsResponse IJsonModel<ListFineTuningJobEventsResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListFineTuningJobEventsResponse)} does not support '{options.Format}' format.");
@@ -64,7 +64,7 @@ namespace OpenAI.Models
 
         internal static ListFineTuningJobEventsResponse DeserializeListFineTuningJobEventsResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -91,7 +91,7 @@ namespace OpenAI.Models
                     data = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -100,9 +100,9 @@ namespace OpenAI.Models
             return new ListFineTuningJobEventsResponse(@object, data, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ListFineTuningJobEventsResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ListFineTuningJobEventsResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListFineTuningJobEventsResponse)} does not support '{options.Format}' format.");
@@ -111,9 +111,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ListFineTuningJobEventsResponse IModel<ListFineTuningJobEventsResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ListFineTuningJobEventsResponse IPersistableModel<ListFineTuningJobEventsResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ListFineTuningJobEventsResponse)} does not support '{options.Format}' format.");
@@ -123,14 +123,14 @@ namespace OpenAI.Models
             return DeserializeListFineTuningJobEventsResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ListFineTuningJobEventsResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ListFineTuningJobEventsResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static ListFineTuningJobEventsResponse FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeListFineTuningJobEventsResponse(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeListFineTuningJobEventsResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

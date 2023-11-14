@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class ThrottledRequestsContent : IUtf8JsonSerializable, IJsonModel<ThrottledRequestsContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ThrottledRequestsContent>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ThrottledRequestsContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ThrottledRequestsContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ThrottledRequestsContent>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ThrottledRequestsContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ThrottledRequestsContent>)} interface");
             }
@@ -47,7 +47,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("groupByResourceName"u8);
                 writer.WriteBooleanValue(GroupByResourceName.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        ThrottledRequestsContent IJsonModel<ThrottledRequestsContent>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ThrottledRequestsContent IJsonModel<ThrottledRequestsContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ThrottledRequestsContent)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static ThrottledRequestsContent DeserializeThrottledRequestsContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,7 +137,7 @@ namespace MgmtAcronymMapping.Models
                     groupByResourceName = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -146,9 +146,9 @@ namespace MgmtAcronymMapping.Models
             return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ThrottledRequestsContent>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ThrottledRequestsContent>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ThrottledRequestsContent)} does not support '{options.Format}' format.");
@@ -157,9 +157,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ThrottledRequestsContent IModel<ThrottledRequestsContent>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ThrottledRequestsContent IPersistableModel<ThrottledRequestsContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ThrottledRequestsContent)} does not support '{options.Format}' format.");
@@ -169,6 +169,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeThrottledRequestsContent(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ThrottledRequestsContent>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ThrottledRequestsContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

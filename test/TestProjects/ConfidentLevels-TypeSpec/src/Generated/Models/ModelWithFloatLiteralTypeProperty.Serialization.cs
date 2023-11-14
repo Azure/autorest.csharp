@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class ModelWithFloatLiteralTypeProperty : IUtf8JsonSerializable, IJsonModel<ModelWithFloatLiteralTypeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithFloatLiteralTypeProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithFloatLiteralTypeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithFloatLiteralTypeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithFloatLiteralTypeProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithFloatLiteralTypeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithFloatLiteralTypeProperty>)} interface");
             }
@@ -31,7 +31,7 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id.ToSerialSingle());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        ModelWithFloatLiteralTypeProperty IJsonModel<ModelWithFloatLiteralTypeProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithFloatLiteralTypeProperty IJsonModel<ModelWithFloatLiteralTypeProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithFloatLiteralTypeProperty)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static ModelWithFloatLiteralTypeProperty DeserializeModelWithFloatLiteralTypeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace ConfidentLevelsInTsp.Models
                     id = new ModelWithFloatLiteralTypePropertyId(property.Value.GetSingle());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace ConfidentLevelsInTsp.Models
             return new ModelWithFloatLiteralTypeProperty(name, id, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithFloatLiteralTypeProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithFloatLiteralTypeProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithFloatLiteralTypeProperty)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace ConfidentLevelsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithFloatLiteralTypeProperty IModel<ModelWithFloatLiteralTypeProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithFloatLiteralTypeProperty IPersistableModel<ModelWithFloatLiteralTypeProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithFloatLiteralTypeProperty)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeModelWithFloatLiteralTypeProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithFloatLiteralTypeProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithFloatLiteralTypeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithFloatLiteralTypeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithFloatLiteralTypeProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeModelWithFloatLiteralTypeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

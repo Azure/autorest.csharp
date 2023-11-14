@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class UnpollutedCat : IUtf8JsonSerializable, IJsonModel<UnpollutedCat>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpollutedCat>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpollutedCat>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnpollutedCat>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnpollutedCat>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnpollutedCat>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnpollutedCat>)} interface");
             }
@@ -33,7 +33,7 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        UnpollutedCat IJsonModel<UnpollutedCat>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnpollutedCat IJsonModel<UnpollutedCat>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnpollutedCat)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static UnpollutedCat DeserializeUnpollutedCat(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace ConfidentLevelsInTsp.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace ConfidentLevelsInTsp.Models
             return new UnpollutedCat(kind, name, serializedAdditionalRawData, meow);
         }
 
-        BinaryData IModel<UnpollutedCat>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnpollutedCat>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnpollutedCat)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace ConfidentLevelsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnpollutedCat IModel<UnpollutedCat>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnpollutedCat IPersistableModel<UnpollutedCat>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnpollutedCat)} does not support '{options.Format}' format.");
@@ -125,14 +125,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeUnpollutedCat(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnpollutedCat>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnpollutedCat>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new UnpollutedCat FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnpollutedCat(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnpollutedCat(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

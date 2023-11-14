@@ -16,11 +16,11 @@ namespace MultipleInputFiles.Models
 {
     public partial class TestModel : IUtf8JsonSerializable, IJsonModel<TestModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TestModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TestModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TestModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TestModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TestModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TestModel>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MultipleInputFiles.Models
                 writer.WritePropertyName("Status"u8);
                 writer.WriteStringValue(Status);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MultipleInputFiles.Models
             writer.WriteEndObject();
         }
 
-        TestModel IJsonModel<TestModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TestModel IJsonModel<TestModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TestModel)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MultipleInputFiles.Models
 
         internal static TestModel DeserializeTestModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace MultipleInputFiles.Models
                     status = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace MultipleInputFiles.Models
             return new TestModel(code.Value, status.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TestModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TestModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TestModel)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace MultipleInputFiles.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TestModel IModel<TestModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TestModel IPersistableModel<TestModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TestModel)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace MultipleInputFiles.Models
             return DeserializeTestModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TestModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TestModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

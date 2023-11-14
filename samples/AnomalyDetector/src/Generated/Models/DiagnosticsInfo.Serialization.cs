@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class DiagnosticsInfo : IUtf8JsonSerializable, IJsonModel<DiagnosticsInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiagnosticsInfo>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiagnosticsInfo>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DiagnosticsInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DiagnosticsInfo>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DiagnosticsInfo>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DiagnosticsInfo>)} interface");
             }
@@ -42,7 +42,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        DiagnosticsInfo IJsonModel<DiagnosticsInfo>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DiagnosticsInfo IJsonModel<DiagnosticsInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiagnosticsInfo)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace AnomalyDetector.Models
 
         internal static DiagnosticsInfo DeserializeDiagnosticsInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace AnomalyDetector.Models
                     variableStates = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace AnomalyDetector.Models
             return new DiagnosticsInfo(modelState.Value, Optional.ToList(variableStates), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DiagnosticsInfo>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DiagnosticsInfo>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiagnosticsInfo)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DiagnosticsInfo IModel<DiagnosticsInfo>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DiagnosticsInfo IPersistableModel<DiagnosticsInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DiagnosticsInfo)} does not support '{options.Format}' format.");
@@ -141,14 +141,14 @@ namespace AnomalyDetector.Models
             return DeserializeDiagnosticsInfo(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DiagnosticsInfo>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DiagnosticsInfo>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DiagnosticsInfo FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDiagnosticsInfo(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeDiagnosticsInfo(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

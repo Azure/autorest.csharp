@@ -17,11 +17,11 @@ namespace Authentication.ApiKey.Models
 {
     public partial class InvalidAuth : IUtf8JsonSerializable, IJsonModel<InvalidAuth>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InvalidAuth>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InvalidAuth>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<InvalidAuth>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<InvalidAuth>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<InvalidAuth>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InvalidAuth>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Authentication.ApiKey.Models
             writer.WriteStartObject();
             writer.WritePropertyName("error"u8);
             writer.WriteStringValue(Error);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Authentication.ApiKey.Models
             writer.WriteEndObject();
         }
 
-        InvalidAuth IJsonModel<InvalidAuth>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        InvalidAuth IJsonModel<InvalidAuth>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InvalidAuth)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Authentication.ApiKey.Models
 
         internal static InvalidAuth DeserializeInvalidAuth(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Authentication.ApiKey.Models
                     error = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Authentication.ApiKey.Models
             return new InvalidAuth(error, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<InvalidAuth>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<InvalidAuth>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InvalidAuth)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Authentication.ApiKey.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        InvalidAuth IModel<InvalidAuth>.Read(BinaryData data, ModelReaderWriterOptions options)
+        InvalidAuth IPersistableModel<InvalidAuth>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(InvalidAuth)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Authentication.ApiKey.Models
             return DeserializeInvalidAuth(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<InvalidAuth>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<InvalidAuth>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InvalidAuth FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInvalidAuth(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeInvalidAuth(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

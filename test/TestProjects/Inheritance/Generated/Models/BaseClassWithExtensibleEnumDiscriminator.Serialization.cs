@@ -15,14 +15,14 @@ using Azure.Core;
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(BaseClassWithExtensibleEnumDiscriminatorConverter))]
-    [ModelReaderProxy(typeof(UnknownBaseClassWithExtensibleEnumDiscriminator))]
+    [PersistableModelProxy(typeof(UnknownBaseClassWithExtensibleEnumDiscriminator))]
     public partial class BaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IJsonModel<BaseClassWithExtensibleEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BaseClassWithExtensibleEnumDiscriminator>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)} interface");
             }
@@ -30,7 +30,7 @@ namespace Inheritance.Models
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        BaseClassWithExtensibleEnumDiscriminator IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BaseClassWithExtensibleEnumDiscriminator IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BaseClassWithExtensibleEnumDiscriminator)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace Inheritance.Models
 
         internal static BaseClassWithExtensibleEnumDiscriminator DeserializeBaseClassWithExtensibleEnumDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -79,9 +79,9 @@ namespace Inheritance.Models
             return UnknownBaseClassWithExtensibleEnumDiscriminator.DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(element);
         }
 
-        BinaryData IModel<BaseClassWithExtensibleEnumDiscriminator>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BaseClassWithExtensibleEnumDiscriminator)} does not support '{options.Format}' format.");
@@ -90,9 +90,9 @@ namespace Inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BaseClassWithExtensibleEnumDiscriminator IModel<BaseClassWithExtensibleEnumDiscriminator>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BaseClassWithExtensibleEnumDiscriminator IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BaseClassWithExtensibleEnumDiscriminator)} does not support '{options.Format}' format.");
@@ -102,7 +102,7 @@ namespace Inheritance.Models
             return DeserializeBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BaseClassWithExtensibleEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class BaseClassWithExtensibleEnumDiscriminatorConverter : JsonConverter<BaseClassWithExtensibleEnumDiscriminator>
         {

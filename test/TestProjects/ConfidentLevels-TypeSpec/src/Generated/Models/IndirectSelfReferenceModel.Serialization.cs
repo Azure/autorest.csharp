@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class IndirectSelfReferenceModel : IUtf8JsonSerializable, IJsonModel<IndirectSelfReferenceModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndirectSelfReferenceModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndirectSelfReferenceModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<IndirectSelfReferenceModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<IndirectSelfReferenceModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<IndirectSelfReferenceModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IndirectSelfReferenceModel>)} interface");
             }
@@ -43,7 +43,7 @@ namespace ConfidentLevelsInTsp.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -61,9 +61,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        IndirectSelfReferenceModel IJsonModel<IndirectSelfReferenceModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        IndirectSelfReferenceModel IJsonModel<IndirectSelfReferenceModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndirectSelfReferenceModel)} does not support '{options.Format}' format.");
@@ -75,7 +75,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static IndirectSelfReferenceModel DeserializeIndirectSelfReferenceModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -107,7 +107,7 @@ namespace ConfidentLevelsInTsp.Models
                     unionProperty = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,9 +116,9 @@ namespace ConfidentLevelsInTsp.Models
             return new IndirectSelfReferenceModel(something, reference.Value, unionProperty, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<IndirectSelfReferenceModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<IndirectSelfReferenceModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndirectSelfReferenceModel)} does not support '{options.Format}' format.");
@@ -127,9 +127,9 @@ namespace ConfidentLevelsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        IndirectSelfReferenceModel IModel<IndirectSelfReferenceModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        IndirectSelfReferenceModel IPersistableModel<IndirectSelfReferenceModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(IndirectSelfReferenceModel)} does not support '{options.Format}' format.");
@@ -139,14 +139,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeIndirectSelfReferenceModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<IndirectSelfReferenceModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<IndirectSelfReferenceModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static IndirectSelfReferenceModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeIndirectSelfReferenceModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeIndirectSelfReferenceModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

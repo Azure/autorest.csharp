@@ -17,11 +17,11 @@ namespace SpreadTypeSpec.Models
 {
     internal partial class SpreadAliasWithOptionalPropsRequest : IUtf8JsonSerializable, IJsonModel<SpreadAliasWithOptionalPropsRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadAliasWithOptionalPropsRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadAliasWithOptionalPropsRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SpreadAliasWithOptionalPropsRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SpreadAliasWithOptionalPropsRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SpreadAliasWithOptionalPropsRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadAliasWithOptionalPropsRequest>)} interface");
             }
@@ -56,7 +56,7 @@ namespace SpreadTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -74,9 +74,9 @@ namespace SpreadTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        SpreadAliasWithOptionalPropsRequest IJsonModel<SpreadAliasWithOptionalPropsRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SpreadAliasWithOptionalPropsRequest IJsonModel<SpreadAliasWithOptionalPropsRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SpreadAliasWithOptionalPropsRequest)} does not support '{options.Format}' format.");
@@ -88,7 +88,7 @@ namespace SpreadTypeSpec.Models
 
         internal static SpreadAliasWithOptionalPropsRequest DeserializeSpreadAliasWithOptionalPropsRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -146,7 +146,7 @@ namespace SpreadTypeSpec.Models
                     elements = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -155,9 +155,9 @@ namespace SpreadTypeSpec.Models
             return new SpreadAliasWithOptionalPropsRequest(name, color.Value, Optional.ToNullable(age), items, Optional.ToList(elements), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SpreadAliasWithOptionalPropsRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SpreadAliasWithOptionalPropsRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SpreadAliasWithOptionalPropsRequest)} does not support '{options.Format}' format.");
@@ -166,9 +166,9 @@ namespace SpreadTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SpreadAliasWithOptionalPropsRequest IModel<SpreadAliasWithOptionalPropsRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SpreadAliasWithOptionalPropsRequest IPersistableModel<SpreadAliasWithOptionalPropsRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SpreadAliasWithOptionalPropsRequest)} does not support '{options.Format}' format.");
@@ -178,14 +178,14 @@ namespace SpreadTypeSpec.Models
             return DeserializeSpreadAliasWithOptionalPropsRequest(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SpreadAliasWithOptionalPropsRequest>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SpreadAliasWithOptionalPropsRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SpreadAliasWithOptionalPropsRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadAliasWithOptionalPropsRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeSpreadAliasWithOptionalPropsRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

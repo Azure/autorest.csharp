@@ -17,11 +17,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class ImagePatch : IUtf8JsonSerializable, IJsonModel<ImagePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ImagePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ImagePatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ImagePatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImagePatch>)} interface");
             }
@@ -50,7 +50,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -64,7 +64,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -82,9 +82,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        ImagePatch IJsonModel<ImagePatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ImagePatch IJsonModel<ImagePatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImagePatch)} does not support '{options.Format}' format.");
@@ -96,7 +96,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static ImagePatch DeserializeImagePatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -169,7 +169,7 @@ namespace MgmtAcronymMapping.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -178,9 +178,9 @@ namespace MgmtAcronymMapping.Models
             return new ImagePatch(Optional.ToDictionary(tags), serializedAdditionalRawData, sourceVirtualMachine, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
         }
 
-        BinaryData IModel<ImagePatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ImagePatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImagePatch)} does not support '{options.Format}' format.");
@@ -189,9 +189,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ImagePatch IModel<ImagePatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ImagePatch IPersistableModel<ImagePatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ImagePatch)} does not support '{options.Format}' format.");
@@ -201,6 +201,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeImagePatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ImagePatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ImagePatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

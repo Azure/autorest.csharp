@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class AutomaticRepairsPolicy : IUtf8JsonSerializable, IJsonModel<AutomaticRepairsPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticRepairsPolicy>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticRepairsPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AutomaticRepairsPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AutomaticRepairsPolicy>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AutomaticRepairsPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AutomaticRepairsPolicy>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("gracePeriod"u8);
                 writer.WriteStringValue(GracePeriod);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        AutomaticRepairsPolicy IJsonModel<AutomaticRepairsPolicy>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AutomaticRepairsPolicy IJsonModel<AutomaticRepairsPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutomaticRepairsPolicy)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static AutomaticRepairsPolicy DeserializeAutomaticRepairsPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -94,7 +94,7 @@ namespace MgmtAcronymMapping.Models
                     gracePeriod = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,9 +103,9 @@ namespace MgmtAcronymMapping.Models
             return new AutomaticRepairsPolicy(Optional.ToNullable(enabled), gracePeriod.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AutomaticRepairsPolicy>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AutomaticRepairsPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutomaticRepairsPolicy)} does not support '{options.Format}' format.");
@@ -114,9 +114,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AutomaticRepairsPolicy IModel<AutomaticRepairsPolicy>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AutomaticRepairsPolicy IPersistableModel<AutomaticRepairsPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AutomaticRepairsPolicy)} does not support '{options.Format}' format.");
@@ -126,6 +126,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAutomaticRepairsPolicy(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AutomaticRepairsPolicy>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AutomaticRepairsPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

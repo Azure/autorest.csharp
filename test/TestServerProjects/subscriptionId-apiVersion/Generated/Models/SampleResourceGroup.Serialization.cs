@@ -16,11 +16,11 @@ namespace subscriptionId_apiVersion.Models
 {
     public partial class SampleResourceGroup : IUtf8JsonSerializable, IJsonModel<SampleResourceGroup>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SampleResourceGroup>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SampleResourceGroup>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SampleResourceGroup>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SampleResourceGroup>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SampleResourceGroup>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SampleResourceGroup>)} interface");
             }
@@ -36,7 +36,7 @@ namespace subscriptionId_apiVersion.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace subscriptionId_apiVersion.Models
             writer.WriteEndObject();
         }
 
-        SampleResourceGroup IJsonModel<SampleResourceGroup>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SampleResourceGroup IJsonModel<SampleResourceGroup>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace subscriptionId_apiVersion.Models
 
         internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -90,7 +90,7 @@ namespace subscriptionId_apiVersion.Models
                     location = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -99,9 +99,9 @@ namespace subscriptionId_apiVersion.Models
             return new SampleResourceGroup(name.Value, location.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SampleResourceGroup>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SampleResourceGroup>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
@@ -110,9 +110,9 @@ namespace subscriptionId_apiVersion.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SampleResourceGroup IModel<SampleResourceGroup>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SampleResourceGroup IPersistableModel<SampleResourceGroup>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
@@ -122,6 +122,6 @@ namespace subscriptionId_apiVersion.Models
             return DeserializeSampleResourceGroup(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SampleResourceGroup>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SampleResourceGroup>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateChatCompletionRequest : IUtf8JsonWriteable, IJsonModel<CreateChatCompletionRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateChatCompletionRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateChatCompletionRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateChatCompletionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateChatCompletionRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateChatCompletionRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateChatCompletionRequest>)} interface");
             }
@@ -173,7 +173,7 @@ namespace OpenAI.Models
                     writer.WriteNull("stream");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -191,9 +191,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateChatCompletionRequest IJsonModel<CreateChatCompletionRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateChatCompletionRequest IJsonModel<CreateChatCompletionRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support '{options.Format}' format.");
@@ -205,7 +205,7 @@ namespace OpenAI.Models
 
         internal static CreateChatCompletionRequest DeserializeCreateChatCompletionRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -365,7 +365,7 @@ namespace OpenAI.Models
                     stream = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -374,9 +374,9 @@ namespace OpenAI.Models
             return new CreateChatCompletionRequest(model, messages, OptionalProperty.ToList(functions), functionCall.Value, OptionalProperty.ToNullable(temperature), OptionalProperty.ToNullable(topP), OptionalProperty.ToNullable(n), OptionalProperty.ToNullable(maxTokens), stop.Value, OptionalProperty.ToNullable(presencePenalty), OptionalProperty.ToNullable(frequencyPenalty), OptionalProperty.ToDictionary(logitBias), user.Value, OptionalProperty.ToNullable(stream), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateChatCompletionRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateChatCompletionRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support '{options.Format}' format.");
@@ -385,9 +385,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateChatCompletionRequest IModel<CreateChatCompletionRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateChatCompletionRequest IPersistableModel<CreateChatCompletionRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateChatCompletionRequest)} does not support '{options.Format}' format.");
@@ -397,14 +397,14 @@ namespace OpenAI.Models
             return DeserializeCreateChatCompletionRequest(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateChatCompletionRequest>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateChatCompletionRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateChatCompletionRequest FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateChatCompletionRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateChatCompletionRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

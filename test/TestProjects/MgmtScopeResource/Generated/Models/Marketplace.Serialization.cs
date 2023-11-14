@@ -17,17 +17,17 @@ namespace MgmtScopeResource.Models
 {
     public partial class Marketplace : IUtf8JsonSerializable, IJsonModel<Marketplace>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Marketplace>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Marketplace>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Marketplace>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Marketplace>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Marketplace>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Marketplace>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -35,7 +35,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Tags))
                 {
@@ -49,22 +49,22 @@ namespace MgmtScopeResource.Models
                     writer.WriteEndObject();
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -74,7 +74,7 @@ namespace MgmtScopeResource.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(BillingPeriodId))
                 {
@@ -82,7 +82,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(BillingPeriodId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(UsageStart))
                 {
@@ -90,7 +90,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(UsageStart.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(UsageEnd))
                 {
@@ -98,7 +98,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(UsageEnd.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ResourceRate))
                 {
@@ -106,7 +106,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteNumberValue(ResourceRate.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(OfferName))
                 {
@@ -114,7 +114,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(OfferName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ResourceGroup))
                 {
@@ -122,7 +122,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ResourceGroup);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(AdditionalInfo))
                 {
@@ -130,7 +130,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AdditionalInfo);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(OrderNumber))
                 {
@@ -138,7 +138,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(OrderNumber);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InstanceName))
                 {
@@ -146,7 +146,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(InstanceName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(InstanceId))
                 {
@@ -154,7 +154,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(InstanceId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Currency))
                 {
@@ -162,7 +162,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Currency);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ConsumedQuantity))
                 {
@@ -170,7 +170,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteNumberValue(ConsumedQuantity.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(UnitOfMeasure))
                 {
@@ -178,7 +178,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(UnitOfMeasure);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(PretaxCost))
                 {
@@ -186,7 +186,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteNumberValue(PretaxCost.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(IsEstimated))
                 {
@@ -194,7 +194,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteBooleanValue(IsEstimated.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MeterId))
                 {
@@ -202,7 +202,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(MeterId.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SubscriptionGuid))
                 {
@@ -210,7 +210,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(SubscriptionGuid.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SubscriptionName))
                 {
@@ -218,7 +218,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(SubscriptionName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(AccountName))
                 {
@@ -226,7 +226,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AccountName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DepartmentName))
                 {
@@ -234,7 +234,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(DepartmentName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ConsumedService))
                 {
@@ -242,7 +242,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ConsumedService);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(CostCenter))
                 {
@@ -250,7 +250,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(CostCenter);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(AdditionalProperties))
                 {
@@ -258,7 +258,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AdditionalProperties);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(PublisherName))
                 {
@@ -266,7 +266,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(PublisherName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(PlanName))
                 {
@@ -274,7 +274,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(PlanName);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(IsRecurringCharge))
                 {
@@ -283,7 +283,7 @@ namespace MgmtScopeResource.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -301,9 +301,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        Marketplace IJsonModel<Marketplace>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Marketplace IJsonModel<Marketplace>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Marketplace)} does not support '{options.Format}' format.");
@@ -315,7 +315,7 @@ namespace MgmtScopeResource.Models
 
         internal static Marketplace DeserializeMarketplace(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -578,7 +578,7 @@ namespace MgmtScopeResource.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -587,9 +587,9 @@ namespace MgmtScopeResource.Models
             return new Marketplace(id, name, type, systemData.Value, billingPeriodId.Value, Optional.ToNullable(usageStart), Optional.ToNullable(usageEnd), Optional.ToNullable(resourceRate), offerName.Value, resourceGroup.Value, additionalInfo.Value, orderNumber.Value, instanceName.Value, instanceId.Value, currency.Value, Optional.ToNullable(consumedQuantity), unitOfMeasure.Value, Optional.ToNullable(pretaxCost), Optional.ToNullable(isEstimated), Optional.ToNullable(meterId), Optional.ToNullable(subscriptionGuid), subscriptionName.Value, accountName.Value, departmentName.Value, consumedService.Value, costCenter.Value, additionalProperties.Value, publisherName.Value, planName.Value, Optional.ToNullable(isRecurringCharge), etag.Value, Optional.ToDictionary(tags), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Marketplace>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Marketplace>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Marketplace)} does not support '{options.Format}' format.");
@@ -598,9 +598,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Marketplace IModel<Marketplace>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Marketplace IPersistableModel<Marketplace>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Marketplace)} does not support '{options.Format}' format.");
@@ -610,6 +610,6 @@ namespace MgmtScopeResource.Models
             return DeserializeMarketplace(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Marketplace>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Marketplace>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

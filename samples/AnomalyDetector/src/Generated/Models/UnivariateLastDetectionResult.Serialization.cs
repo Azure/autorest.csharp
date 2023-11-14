@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateLastDetectionResult : IUtf8JsonSerializable, IJsonModel<UnivariateLastDetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateLastDetectionResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateLastDetectionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UnivariateLastDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UnivariateLastDetectionResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UnivariateLastDetectionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnivariateLastDetectionResult>)} interface");
             }
@@ -48,7 +48,7 @@ namespace AnomalyDetector.Models
                 writer.WritePropertyName("severity"u8);
                 writer.WriteNumberValue(Severity.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,9 +66,9 @@ namespace AnomalyDetector.Models
             writer.WriteEndObject();
         }
 
-        UnivariateLastDetectionResult IJsonModel<UnivariateLastDetectionResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UnivariateLastDetectionResult IJsonModel<UnivariateLastDetectionResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateLastDetectionResult)} does not support '{options.Format}' format.");
@@ -80,7 +80,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -148,7 +148,7 @@ namespace AnomalyDetector.Models
                     severity = property.Value.GetSingle();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -157,9 +157,9 @@ namespace AnomalyDetector.Models
             return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToNullable(severity), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UnivariateLastDetectionResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UnivariateLastDetectionResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateLastDetectionResult)} does not support '{options.Format}' format.");
@@ -168,9 +168,9 @@ namespace AnomalyDetector.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UnivariateLastDetectionResult IModel<UnivariateLastDetectionResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UnivariateLastDetectionResult IPersistableModel<UnivariateLastDetectionResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UnivariateLastDetectionResult)} does not support '{options.Format}' format.");
@@ -180,14 +180,14 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateLastDetectionResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UnivariateLastDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UnivariateLastDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnivariateLastDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateLastDetectionResult(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnivariateLastDetectionResult(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

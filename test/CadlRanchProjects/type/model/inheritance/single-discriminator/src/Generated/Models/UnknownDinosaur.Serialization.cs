@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     internal partial class UnknownDinosaur : IUtf8JsonSerializable, IJsonModel<Dinosaur>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dinosaur>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Dinosaur>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Dinosaur>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Dinosaur>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Dinosaur>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Dinosaur>)} interface");
             }
@@ -31,7 +31,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("size"u8);
             writer.WriteNumberValue(Size);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        Dinosaur IJsonModel<Dinosaur>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Dinosaur IJsonModel<Dinosaur>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Dinosaur)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         internal static UnknownDinosaur DeserializeUnknownDinosaur(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -85,7 +85,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
                     size = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,9 +94,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return new UnknownDinosaur(kind, size, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Dinosaur>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Dinosaur>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Dinosaur)} does not support '{options.Format}' format.");
@@ -105,9 +105,9 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Dinosaur IModel<Dinosaur>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Dinosaur IPersistableModel<Dinosaur>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Dinosaur)} does not support '{options.Format}' format.");
@@ -117,14 +117,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeUnknownDinosaur(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Dinosaur>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Dinosaur>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new UnknownDinosaur FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownDinosaur(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeUnknownDinosaur(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

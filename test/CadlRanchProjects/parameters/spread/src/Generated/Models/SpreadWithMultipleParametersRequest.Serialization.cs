@@ -17,11 +17,11 @@ namespace Parameters.Spread.Models
 {
     internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IJsonModel<SpreadWithMultipleParametersRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SpreadWithMultipleParametersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SpreadWithMultipleParametersRequest>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadWithMultipleParametersRequest>)} interface");
             }
@@ -39,7 +39,7 @@ namespace Parameters.Spread.Models
             writer.WriteStringValue(Prop5);
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(Prop6);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace Parameters.Spread.Models
             writer.WriteEndObject();
         }
 
-        SpreadWithMultipleParametersRequest IJsonModel<SpreadWithMultipleParametersRequest>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SpreadWithMultipleParametersRequest IJsonModel<SpreadWithMultipleParametersRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace Parameters.Spread.Models
 
         internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,7 +117,7 @@ namespace Parameters.Spread.Models
                     prop6 = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -126,9 +126,9 @@ namespace Parameters.Spread.Models
             return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
@@ -137,9 +137,9 @@ namespace Parameters.Spread.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SpreadWithMultipleParametersRequest IModel<SpreadWithMultipleParametersRequest>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SpreadWithMultipleParametersRequest IPersistableModel<SpreadWithMultipleParametersRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
@@ -149,14 +149,14 @@ namespace Parameters.Spread.Models
             return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SpreadWithMultipleParametersRequest>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SpreadWithMultipleParametersRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SpreadWithMultipleParametersRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

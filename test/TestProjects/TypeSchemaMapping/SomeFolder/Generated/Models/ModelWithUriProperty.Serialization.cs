@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithUriProperty : IUtf8JsonSerializable, IJsonModel<ModelWithUriProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithUriProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithUriProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ModelWithUriProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ModelWithUriProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithUriProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithUriProperty>)} interface");
             }
@@ -31,7 +31,7 @@ namespace TypeSchemaMapping.Models
                 writer.WritePropertyName("Uri"u8);
                 writer.WriteStringValue(Uri.AbsoluteUri);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        ModelWithUriProperty IJsonModel<ModelWithUriProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ModelWithUriProperty IJsonModel<ModelWithUriProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithUriProperty)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithUriProperty DeserializeModelWithUriProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace TypeSchemaMapping.Models
                     uri = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace TypeSchemaMapping.Models
             return new ModelWithUriProperty(uri.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ModelWithUriProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithUriProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithUriProperty)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace TypeSchemaMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithUriProperty IModel<ModelWithUriProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithUriProperty IPersistableModel<ModelWithUriProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithUriProperty)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithUriProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithUriProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ModelWithUriProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

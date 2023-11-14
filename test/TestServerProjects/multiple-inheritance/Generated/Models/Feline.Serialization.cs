@@ -16,11 +16,11 @@ namespace multiple_inheritance.Models
 {
     public partial class Feline : IUtf8JsonSerializable, IJsonModel<Feline>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Feline>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Feline>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Feline>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Feline>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Feline>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Feline>)} interface");
             }
@@ -36,7 +36,7 @@ namespace multiple_inheritance.Models
                 writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace multiple_inheritance.Models
             writer.WriteEndObject();
         }
 
-        Feline IJsonModel<Feline>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Feline IJsonModel<Feline>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Feline)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace multiple_inheritance.Models
 
         internal static Feline DeserializeFeline(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace multiple_inheritance.Models
                     hisses = property.Value.GetBoolean();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace multiple_inheritance.Models
             return new Feline(Optional.ToNullable(meows), Optional.ToNullable(hisses), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Feline>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Feline>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Feline)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace multiple_inheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Feline IModel<Feline>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Feline IPersistableModel<Feline>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Feline)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace multiple_inheritance.Models
             return DeserializeFeline(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Feline>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Feline>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

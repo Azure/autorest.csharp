@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     internal partial class SubParentWithNonResChWithLocListResult : IUtf8JsonSerializable, IJsonModel<SubParentWithNonResChWithLocListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubParentWithNonResChWithLocListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubParentWithNonResChWithLocListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<SubParentWithNonResChWithLocListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<SubParentWithNonResChWithLocListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<SubParentWithNonResChWithLocListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubParentWithNonResChWithLocListResult>)} interface");
             }
@@ -39,7 +39,7 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace MgmtListMethods.Models
             writer.WriteEndObject();
         }
 
-        SubParentWithNonResChWithLocListResult IJsonModel<SubParentWithNonResChWithLocListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SubParentWithNonResChWithLocListResult IJsonModel<SubParentWithNonResChWithLocListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubParentWithNonResChWithLocListResult)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace MgmtListMethods.Models
 
         internal static SubParentWithNonResChWithLocListResult DeserializeSubParentWithNonResChWithLocListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -98,7 +98,7 @@ namespace MgmtListMethods.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -107,9 +107,9 @@ namespace MgmtListMethods.Models
             return new SubParentWithNonResChWithLocListResult(value, nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<SubParentWithNonResChWithLocListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SubParentWithNonResChWithLocListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubParentWithNonResChWithLocListResult)} does not support '{options.Format}' format.");
@@ -118,9 +118,9 @@ namespace MgmtListMethods.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        SubParentWithNonResChWithLocListResult IModel<SubParentWithNonResChWithLocListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        SubParentWithNonResChWithLocListResult IPersistableModel<SubParentWithNonResChWithLocListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(SubParentWithNonResChWithLocListResult)} does not support '{options.Format}' format.");
@@ -130,6 +130,6 @@ namespace MgmtListMethods.Models
             return DeserializeSubParentWithNonResChWithLocListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<SubParentWithNonResChWithLocListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<SubParentWithNonResChWithLocListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

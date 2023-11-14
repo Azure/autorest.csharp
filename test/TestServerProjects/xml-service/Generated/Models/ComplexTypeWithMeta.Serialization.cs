@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ComplexTypeWithMeta : IXmlSerializable, IModel<ComplexTypeWithMeta>
+    public partial class ComplexTypeWithMeta : IXmlSerializable, IPersistableModel<ComplexTypeWithMeta>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -39,10 +39,10 @@ namespace xml_service.Models
             return new ComplexTypeWithMeta(id, default);
         }
 
-        BinaryData IModel<ComplexTypeWithMeta>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ComplexTypeWithMeta>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ComplexTypeWithMeta>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -62,9 +62,9 @@ namespace xml_service.Models
             }
         }
 
-        ComplexTypeWithMeta IModel<ComplexTypeWithMeta>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ComplexTypeWithMeta IPersistableModel<ComplexTypeWithMeta>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ComplexTypeWithMeta)} does not support '{options.Format}' format.");
@@ -73,6 +73,6 @@ namespace xml_service.Models
             return DeserializeComplexTypeWithMeta(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ComplexTypeWithMeta>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ComplexTypeWithMeta>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

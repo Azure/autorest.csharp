@@ -17,11 +17,11 @@ namespace _Type.Property.ValueTypes.Models
 {
     public partial class CollectionsIntProperty : IUtf8JsonSerializable, IJsonModel<CollectionsIntProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CollectionsIntProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CollectionsIntProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CollectionsIntProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CollectionsIntProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CollectionsIntProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CollectionsIntProperty>)} interface");
             }
@@ -34,7 +34,7 @@ namespace _Type.Property.ValueTypes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,9 +52,9 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteEndObject();
         }
 
-        CollectionsIntProperty IJsonModel<CollectionsIntProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CollectionsIntProperty IJsonModel<CollectionsIntProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CollectionsIntProperty)} does not support '{options.Format}' format.");
@@ -66,7 +66,7 @@ namespace _Type.Property.ValueTypes.Models
 
         internal static CollectionsIntProperty DeserializeCollectionsIntProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Models
                     property = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
                 }
@@ -96,9 +96,9 @@ namespace _Type.Property.ValueTypes.Models
             return new CollectionsIntProperty(property, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CollectionsIntProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CollectionsIntProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CollectionsIntProperty)} does not support '{options.Format}' format.");
@@ -107,9 +107,9 @@ namespace _Type.Property.ValueTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CollectionsIntProperty IModel<CollectionsIntProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CollectionsIntProperty IPersistableModel<CollectionsIntProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CollectionsIntProperty)} does not support '{options.Format}' format.");
@@ -119,14 +119,14 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeCollectionsIntProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CollectionsIntProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CollectionsIntProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static CollectionsIntProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionsIntProperty(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCollectionsIntProperty(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

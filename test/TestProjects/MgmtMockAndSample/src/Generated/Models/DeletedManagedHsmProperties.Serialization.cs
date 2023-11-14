@@ -16,17 +16,17 @@ namespace MgmtMockAndSample.Models
 {
     public partial class DeletedManagedHsmProperties : IUtf8JsonSerializable, IJsonModel<DeletedManagedHsmProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedManagedHsmProperties>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedManagedHsmProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<DeletedManagedHsmProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<DeletedManagedHsmProperties>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<DeletedManagedHsmProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeletedManagedHsmProperties>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(MhsmId))
                 {
@@ -34,7 +34,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(MhsmId);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(Location))
                 {
@@ -42,7 +42,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(Location.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(DeletedOn))
                 {
@@ -50,7 +50,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(DeletedOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ScheduledPurgeOn))
                 {
@@ -58,7 +58,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(PurgeProtectionEnabled))
                 {
@@ -66,7 +66,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteBooleanValue(PurgeProtectionEnabled.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Tags))
                 {
@@ -80,7 +80,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteEndObject();
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -98,9 +98,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        DeletedManagedHsmProperties IJsonModel<DeletedManagedHsmProperties>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        DeletedManagedHsmProperties IJsonModel<DeletedManagedHsmProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeletedManagedHsmProperties)} does not support '{options.Format}' format.");
@@ -112,7 +112,7 @@ namespace MgmtMockAndSample.Models
 
         internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -183,7 +183,7 @@ namespace MgmtMockAndSample.Models
                     tags = dictionary;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -192,9 +192,9 @@ namespace MgmtMockAndSample.Models
             return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<DeletedManagedHsmProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<DeletedManagedHsmProperties>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeletedManagedHsmProperties)} does not support '{options.Format}' format.");
@@ -203,9 +203,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        DeletedManagedHsmProperties IModel<DeletedManagedHsmProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        DeletedManagedHsmProperties IPersistableModel<DeletedManagedHsmProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(DeletedManagedHsmProperties)} does not support '{options.Format}' format.");
@@ -215,6 +215,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeDeletedManagedHsmProperties(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<DeletedManagedHsmProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<DeletedManagedHsmProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class MaintenanceRedeployStatus : IUtf8JsonSerializable, IJsonModel<MaintenanceRedeployStatus>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MaintenanceRedeployStatus>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MaintenanceRedeployStatus>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MaintenanceRedeployStatus>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MaintenanceRedeployStatus>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MaintenanceRedeployStatus>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MaintenanceRedeployStatus>)} interface");
             }
@@ -61,7 +61,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("lastOperationMessage"u8);
                 writer.WriteStringValue(LastOperationMessage);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -79,9 +79,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        MaintenanceRedeployStatus IJsonModel<MaintenanceRedeployStatus>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MaintenanceRedeployStatus IJsonModel<MaintenanceRedeployStatus>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MaintenanceRedeployStatus)} does not support '{options.Format}' format.");
@@ -93,7 +93,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static MaintenanceRedeployStatus DeserializeMaintenanceRedeployStatus(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -169,7 +169,7 @@ namespace MgmtAcronymMapping.Models
                     lastOperationMessage = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -178,9 +178,9 @@ namespace MgmtAcronymMapping.Models
             return new MaintenanceRedeployStatus(Optional.ToNullable(isCustomerInitiatedMaintenanceAllowed), Optional.ToNullable(preMaintenanceWindowStartTime), Optional.ToNullable(preMaintenanceWindowEndTime), Optional.ToNullable(maintenanceWindowStartTime), Optional.ToNullable(maintenanceWindowEndTime), Optional.ToNullable(lastOperationResultCode), lastOperationMessage.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MaintenanceRedeployStatus>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MaintenanceRedeployStatus>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MaintenanceRedeployStatus)} does not support '{options.Format}' format.");
@@ -189,9 +189,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MaintenanceRedeployStatus IModel<MaintenanceRedeployStatus>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MaintenanceRedeployStatus IPersistableModel<MaintenanceRedeployStatus>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MaintenanceRedeployStatus)} does not support '{options.Format}' format.");
@@ -201,6 +201,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeMaintenanceRedeployStatus(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MaintenanceRedeployStatus>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MaintenanceRedeployStatus>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

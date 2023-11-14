@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(MgmtReferenceTypesPlanConverter))]
     public partial class MgmtReferenceTypesPlan : IUtf8JsonSerializable, IJsonModel<MgmtReferenceTypesPlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtReferenceTypesPlan>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtReferenceTypesPlan>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtReferenceTypesPlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtReferenceTypesPlan>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtReferenceTypesPlan>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtReferenceTypesPlan>)} interface");
             }
@@ -46,9 +46,9 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        MgmtReferenceTypesPlan IJsonModel<MgmtReferenceTypesPlan>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtReferenceTypesPlan IJsonModel<MgmtReferenceTypesPlan>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtReferenceTypesPlan)} does not support '{options.Format}' format.");
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static MgmtReferenceTypesPlan DeserializeMgmtReferenceTypesPlan(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -102,9 +102,9 @@ namespace Azure.ResourceManager.Fake.Models
             return new MgmtReferenceTypesPlan(name, publisher, product, promotionCode.Value, version.Value);
         }
 
-        BinaryData IModel<MgmtReferenceTypesPlan>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtReferenceTypesPlan>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtReferenceTypesPlan)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace Azure.ResourceManager.Fake.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtReferenceTypesPlan IModel<MgmtReferenceTypesPlan>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtReferenceTypesPlan IPersistableModel<MgmtReferenceTypesPlan>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtReferenceTypesPlan)} does not support '{options.Format}' format.");
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeMgmtReferenceTypesPlan(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtReferenceTypesPlan>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtReferenceTypesPlan>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         internal partial class MgmtReferenceTypesPlanConverter : JsonConverter<MgmtReferenceTypesPlan>
         {

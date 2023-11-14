@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class UrlSigningParamIdentifier : IUtf8JsonSerializable, IJsonModel<UrlSigningParamIdentifier>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlSigningParamIdentifier>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlSigningParamIdentifier>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<UrlSigningParamIdentifier>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<UrlSigningParamIdentifier>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<UrlSigningParamIdentifier>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UrlSigningParamIdentifier>)} interface");
             }
@@ -30,7 +30,7 @@ namespace MgmtDiscriminator.Models
             writer.WriteStringValue(ParamIndicator.ToString());
             writer.WritePropertyName("paramName"u8);
             writer.WriteStringValue(ParamName);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace MgmtDiscriminator.Models
             writer.WriteEndObject();
         }
 
-        UrlSigningParamIdentifier IJsonModel<UrlSigningParamIdentifier>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        UrlSigningParamIdentifier IJsonModel<UrlSigningParamIdentifier>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UrlSigningParamIdentifier)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlSigningParamIdentifier DeserializeUrlSigningParamIdentifier(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace MgmtDiscriminator.Models
                     paramName = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace MgmtDiscriminator.Models
             return new UrlSigningParamIdentifier(paramIndicator, paramName, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<UrlSigningParamIdentifier>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<UrlSigningParamIdentifier>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UrlSigningParamIdentifier)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace MgmtDiscriminator.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        UrlSigningParamIdentifier IModel<UrlSigningParamIdentifier>.Read(BinaryData data, ModelReaderWriterOptions options)
+        UrlSigningParamIdentifier IPersistableModel<UrlSigningParamIdentifier>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(UrlSigningParamIdentifier)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlSigningParamIdentifier(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<UrlSigningParamIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<UrlSigningParamIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

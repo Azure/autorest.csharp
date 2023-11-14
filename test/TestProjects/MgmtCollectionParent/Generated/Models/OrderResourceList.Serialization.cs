@@ -17,17 +17,17 @@ namespace MgmtCollectionParent.Models
 {
     internal partial class OrderResourceList : IUtf8JsonSerializable, IJsonModel<OrderResourceList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceList>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceList>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OrderResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OrderResourceList>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OrderResourceList>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OrderResourceList>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -45,7 +45,7 @@ namespace MgmtCollectionParent.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace MgmtCollectionParent.Models
             writer.WriteEndObject();
         }
 
-        OrderResourceList IJsonModel<OrderResourceList>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OrderResourceList IJsonModel<OrderResourceList>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OrderResourceList)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace MgmtCollectionParent.Models
 
         internal static OrderResourceList DeserializeOrderResourceList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +108,7 @@ namespace MgmtCollectionParent.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -117,9 +117,9 @@ namespace MgmtCollectionParent.Models
             return new OrderResourceList(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<OrderResourceList>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OrderResourceList>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OrderResourceList)} does not support '{options.Format}' format.");
@@ -128,9 +128,9 @@ namespace MgmtCollectionParent.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OrderResourceList IModel<OrderResourceList>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OrderResourceList IPersistableModel<OrderResourceList>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OrderResourceList)} does not support '{options.Format}' format.");
@@ -140,6 +140,6 @@ namespace MgmtCollectionParent.Models
             return DeserializeOrderResourceList(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OrderResourceList>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OrderResourceList>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

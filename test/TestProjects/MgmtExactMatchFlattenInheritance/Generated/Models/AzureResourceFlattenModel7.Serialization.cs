@@ -16,11 +16,11 @@ namespace MgmtExactMatchFlattenInheritance.Models
 {
     public partial class AzureResourceFlattenModel7 : IUtf8JsonSerializable, IJsonModel<AzureResourceFlattenModel7>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureResourceFlattenModel7>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureResourceFlattenModel7>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<AzureResourceFlattenModel7>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<AzureResourceFlattenModel7>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<AzureResourceFlattenModel7>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AzureResourceFlattenModel7>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        AzureResourceFlattenModel7 IJsonModel<AzureResourceFlattenModel7>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        AzureResourceFlattenModel7 IJsonModel<AzureResourceFlattenModel7>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AzureResourceFlattenModel7)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
 
         internal static AzureResourceFlattenModel7 DeserializeAzureResourceFlattenModel7(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,7 +101,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     type = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -110,9 +110,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return new AzureResourceFlattenModel7(id.Value, name.Value, type.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<AzureResourceFlattenModel7>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<AzureResourceFlattenModel7>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AzureResourceFlattenModel7)} does not support '{options.Format}' format.");
@@ -121,9 +121,9 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        AzureResourceFlattenModel7 IModel<AzureResourceFlattenModel7>.Read(BinaryData data, ModelReaderWriterOptions options)
+        AzureResourceFlattenModel7 IPersistableModel<AzureResourceFlattenModel7>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(AzureResourceFlattenModel7)} does not support '{options.Format}' format.");
@@ -133,6 +133,6 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return DeserializeAzureResourceFlattenModel7(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<AzureResourceFlattenModel7>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<AzureResourceFlattenModel7>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class BlobProperties : IXmlSerializable, IModel<BlobProperties>
+    public partial class BlobProperties : IXmlSerializable, IPersistableModel<BlobProperties>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -330,10 +330,10 @@ namespace xml_service.Models
             return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, default);
         }
 
-        BinaryData IModel<BlobProperties>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BlobProperties>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<BlobProperties>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -353,9 +353,9 @@ namespace xml_service.Models
             }
         }
 
-        BlobProperties IModel<BlobProperties>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BlobProperties IPersistableModel<BlobProperties>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BlobProperties)} does not support '{options.Format}' format.");
@@ -364,6 +364,6 @@ namespace xml_service.Models
             return DeserializeBlobProperties(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<BlobProperties>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<BlobProperties>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

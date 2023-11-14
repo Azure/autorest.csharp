@@ -13,14 +13,14 @@ using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
-    [ModelReaderProxy(typeof(UnknownFirewallPolicyRuleCollection))]
+    [PersistableModelProxy(typeof(UnknownFirewallPolicyRuleCollection))]
     public partial class FirewallPolicyRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyRuleCollection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRuleCollection>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyRuleCollection>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<FirewallPolicyRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<FirewallPolicyRuleCollection>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyRuleCollection>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyRuleCollection>)} interface");
             }
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("priority"u8);
                 writer.WriteNumberValue(Priority.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,9 +56,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        FirewallPolicyRuleCollection IJsonModel<FirewallPolicyRuleCollection>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        FirewallPolicyRuleCollection IJsonModel<FirewallPolicyRuleCollection>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{options.Format}' format.");
@@ -70,7 +70,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyRuleCollection DeserializeFirewallPolicyRuleCollection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,9 +87,9 @@ namespace MgmtMockAndSample.Models
             return UnknownFirewallPolicyRuleCollection.DeserializeUnknownFirewallPolicyRuleCollection(element);
         }
 
-        BinaryData IModel<FirewallPolicyRuleCollection>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<FirewallPolicyRuleCollection>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{options.Format}' format.");
@@ -98,9 +98,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        FirewallPolicyRuleCollection IModel<FirewallPolicyRuleCollection>.Read(BinaryData data, ModelReaderWriterOptions options)
+        FirewallPolicyRuleCollection IPersistableModel<FirewallPolicyRuleCollection>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(FirewallPolicyRuleCollection)} does not support '{options.Format}' format.");
@@ -110,6 +110,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyRuleCollection(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<FirewallPolicyRuleCollection>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<FirewallPolicyRuleCollection>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

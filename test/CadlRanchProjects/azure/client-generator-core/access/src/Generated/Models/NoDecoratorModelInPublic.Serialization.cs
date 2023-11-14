@@ -17,11 +17,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     public partial class NoDecoratorModelInPublic : IUtf8JsonSerializable, IJsonModel<NoDecoratorModelInPublic>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoDecoratorModelInPublic>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoDecoratorModelInPublic>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NoDecoratorModelInPublic>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NoDecoratorModelInPublic>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NoDecoratorModelInPublic>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NoDecoratorModelInPublic>)} interface");
             }
@@ -29,7 +29,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             writer.WriteEndObject();
         }
 
-        NoDecoratorModelInPublic IJsonModel<NoDecoratorModelInPublic>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NoDecoratorModelInPublic IJsonModel<NoDecoratorModelInPublic>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NoDecoratorModelInPublic)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         internal static NoDecoratorModelInPublic DeserializeNoDecoratorModelInPublic(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new NoDecoratorModelInPublic(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NoDecoratorModelInPublic>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NoDecoratorModelInPublic>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NoDecoratorModelInPublic)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NoDecoratorModelInPublic IModel<NoDecoratorModelInPublic>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NoDecoratorModelInPublic IPersistableModel<NoDecoratorModelInPublic>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NoDecoratorModelInPublic)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return DeserializeNoDecoratorModelInPublic(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NoDecoratorModelInPublic>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NoDecoratorModelInPublic>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static NoDecoratorModelInPublic FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNoDecoratorModelInPublic(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeNoDecoratorModelInPublic(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

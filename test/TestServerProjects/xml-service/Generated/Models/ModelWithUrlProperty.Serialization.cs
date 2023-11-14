@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ModelWithUrlProperty : IXmlSerializable, IModel<ModelWithUrlProperty>
+    public partial class ModelWithUrlProperty : IXmlSerializable, IPersistableModel<ModelWithUrlProperty>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -39,10 +39,10 @@ namespace xml_service.Models
             return new ModelWithUrlProperty(url, default);
         }
 
-        BinaryData IModel<ModelWithUrlProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithUrlProperty>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ModelWithUrlProperty>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -62,9 +62,9 @@ namespace xml_service.Models
             }
         }
 
-        ModelWithUrlProperty IModel<ModelWithUrlProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithUrlProperty IPersistableModel<ModelWithUrlProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithUrlProperty)} does not support '{options.Format}' format.");
@@ -73,6 +73,6 @@ namespace xml_service.Models
             return DeserializeModelWithUrlProperty(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithUrlProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ModelWithUrlProperty>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

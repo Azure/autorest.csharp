@@ -13,11 +13,11 @@ namespace OpenAI.Models
 {
     public partial class CreateHyperparameters : IUtf8JsonWriteable, IJsonModel<CreateHyperparameters>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateHyperparameters>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateHyperparameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<CreateHyperparameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<CreateHyperparameters>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<CreateHyperparameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateHyperparameters>)} interface");
             }
@@ -35,7 +35,7 @@ namespace OpenAI.Models
                 }
 #endif
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -53,9 +53,9 @@ namespace OpenAI.Models
             writer.WriteEndObject();
         }
 
-        CreateHyperparameters IJsonModel<CreateHyperparameters>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CreateHyperparameters IJsonModel<CreateHyperparameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateHyperparameters)} does not support '{options.Format}' format.");
@@ -67,7 +67,7 @@ namespace OpenAI.Models
 
         internal static CreateHyperparameters DeserializeCreateHyperparameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -87,7 +87,7 @@ namespace OpenAI.Models
                     nEpochs = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -96,9 +96,9 @@ namespace OpenAI.Models
             return new CreateHyperparameters(nEpochs.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<CreateHyperparameters>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CreateHyperparameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateHyperparameters)} does not support '{options.Format}' format.");
@@ -107,9 +107,9 @@ namespace OpenAI.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        CreateHyperparameters IModel<CreateHyperparameters>.Read(BinaryData data, ModelReaderWriterOptions options)
+        CreateHyperparameters IPersistableModel<CreateHyperparameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(CreateHyperparameters)} does not support '{options.Format}' format.");
@@ -119,14 +119,14 @@ namespace OpenAI.Models
             return DeserializeCreateHyperparameters(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<CreateHyperparameters>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<CreateHyperparameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="result"> The result to deserialize the model from. </param>
         internal static CreateHyperparameters FromResponse(PipelineResponse result)
         {
             using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateHyperparameters(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeCreateHyperparameters(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

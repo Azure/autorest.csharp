@@ -17,11 +17,11 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     public partial class TrackedResourceModel2 : IUtf8JsonSerializable, IJsonModel<TrackedResourceModel2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel2>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel2>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TrackedResourceModel2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TrackedResourceModel2>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TrackedResourceModel2>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TrackedResourceModel2>)} interface");
             }
@@ -50,22 +50,22 @@ namespace MgmtSupersetFlattenInheritance.Models
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -81,7 +81,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                 writer.WriteStringValue(FooPropertiesFoo);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -99,9 +99,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             writer.WriteEndObject();
         }
 
-        TrackedResourceModel2 IJsonModel<TrackedResourceModel2>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TrackedResourceModel2 IJsonModel<TrackedResourceModel2>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TrackedResourceModel2)} does not support '{options.Format}' format.");
@@ -113,7 +113,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -202,7 +202,7 @@ namespace MgmtSupersetFlattenInheritance.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -211,9 +211,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new TrackedResourceModel2(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, foo.Value, bar.Value, foo0.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TrackedResourceModel2>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TrackedResourceModel2>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TrackedResourceModel2)} does not support '{options.Format}' format.");
@@ -222,9 +222,9 @@ namespace MgmtSupersetFlattenInheritance.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TrackedResourceModel2 IModel<TrackedResourceModel2>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TrackedResourceModel2 IPersistableModel<TrackedResourceModel2>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TrackedResourceModel2)} does not support '{options.Format}' format.");
@@ -234,6 +234,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeTrackedResourceModel2(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TrackedResourceModel2>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TrackedResourceModel2>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

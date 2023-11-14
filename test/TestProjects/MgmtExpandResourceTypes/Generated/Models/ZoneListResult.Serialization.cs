@@ -17,11 +17,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     internal partial class ZoneListResult : IUtf8JsonSerializable, IJsonModel<ZoneListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ZoneListResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ZoneListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ZoneListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ZoneListResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ZoneListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ZoneListResult>)} interface");
             }
@@ -37,7 +37,7 @@ namespace MgmtExpandResourceTypes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextLink))
                 {
@@ -45,7 +45,7 @@ namespace MgmtExpandResourceTypes.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        ZoneListResult IJsonModel<ZoneListResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ZoneListResult IJsonModel<ZoneListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ZoneListResult)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static ZoneListResult DeserializeZoneListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +108,7 @@ namespace MgmtExpandResourceTypes.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -117,9 +117,9 @@ namespace MgmtExpandResourceTypes.Models
             return new ZoneListResult(Optional.ToList(value), nextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ZoneListResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ZoneListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ZoneListResult)} does not support '{options.Format}' format.");
@@ -128,9 +128,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ZoneListResult IModel<ZoneListResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ZoneListResult IPersistableModel<ZoneListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ZoneListResult)} does not support '{options.Format}' format.");
@@ -140,6 +140,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeZoneListResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ZoneListResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ZoneListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

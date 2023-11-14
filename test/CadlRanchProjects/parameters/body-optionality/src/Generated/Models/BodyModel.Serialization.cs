@@ -17,11 +17,11 @@ namespace Parameters.BodyOptionality.Models
 {
     public partial class BodyModel : IUtf8JsonSerializable, IJsonModel<BodyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BodyModel>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BodyModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BodyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BodyModel>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BodyModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BodyModel>)} interface");
             }
@@ -29,7 +29,7 @@ namespace Parameters.BodyOptionality.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -47,9 +47,9 @@ namespace Parameters.BodyOptionality.Models
             writer.WriteEndObject();
         }
 
-        BodyModel IJsonModel<BodyModel>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BodyModel IJsonModel<BodyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
@@ -61,7 +61,7 @@ namespace Parameters.BodyOptionality.Models
 
         internal static BodyModel DeserializeBodyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -77,7 +77,7 @@ namespace Parameters.BodyOptionality.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -86,9 +86,9 @@ namespace Parameters.BodyOptionality.Models
             return new BodyModel(name, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<BodyModel>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BodyModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
@@ -97,9 +97,9 @@ namespace Parameters.BodyOptionality.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BodyModel IModel<BodyModel>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BodyModel IPersistableModel<BodyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BodyModel)} does not support '{options.Format}' format.");
@@ -109,14 +109,14 @@ namespace Parameters.BodyOptionality.Models
             return DeserializeBodyModel(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BodyModel>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BodyModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static BodyModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBodyModel(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeBodyModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

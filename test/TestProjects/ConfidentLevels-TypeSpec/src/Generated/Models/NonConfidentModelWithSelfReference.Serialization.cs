@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class NonConfidentModelWithSelfReference : IUtf8JsonSerializable, IJsonModel<NonConfidentModelWithSelfReference>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonConfidentModelWithSelfReference>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonConfidentModelWithSelfReference>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<NonConfidentModelWithSelfReference>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<NonConfidentModelWithSelfReference>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<NonConfidentModelWithSelfReference>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NonConfidentModelWithSelfReference>)} interface");
             }
@@ -45,7 +45,7 @@ namespace ConfidentLevelsInTsp.Models
                 JsonSerializer.Serialize(writer, document.RootElement);
             }
 #endif
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        NonConfidentModelWithSelfReference IJsonModel<NonConfidentModelWithSelfReference>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        NonConfidentModelWithSelfReference IJsonModel<NonConfidentModelWithSelfReference>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NonConfidentModelWithSelfReference)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static NonConfidentModelWithSelfReference DeserializeNonConfidentModelWithSelfReference(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -110,7 +110,7 @@ namespace ConfidentLevelsInTsp.Models
                     unionProperty = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -119,9 +119,9 @@ namespace ConfidentLevelsInTsp.Models
             return new NonConfidentModelWithSelfReference(name, selfReference, unionProperty, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<NonConfidentModelWithSelfReference>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<NonConfidentModelWithSelfReference>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NonConfidentModelWithSelfReference)} does not support '{options.Format}' format.");
@@ -130,9 +130,9 @@ namespace ConfidentLevelsInTsp.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        NonConfidentModelWithSelfReference IModel<NonConfidentModelWithSelfReference>.Read(BinaryData data, ModelReaderWriterOptions options)
+        NonConfidentModelWithSelfReference IPersistableModel<NonConfidentModelWithSelfReference>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(NonConfidentModelWithSelfReference)} does not support '{options.Format}' format.");
@@ -142,14 +142,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeNonConfidentModelWithSelfReference(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<NonConfidentModelWithSelfReference>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<NonConfidentModelWithSelfReference>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static NonConfidentModelWithSelfReference FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNonConfidentModelWithSelfReference(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeNonConfidentModelWithSelfReference(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

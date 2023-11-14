@@ -16,11 +16,11 @@ namespace paging.Models
 {
     internal partial class OdataProductResult : IUtf8JsonSerializable, IJsonModel<OdataProductResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OdataProductResult>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OdataProductResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<OdataProductResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<OdataProductResult>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<OdataProductResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OdataProductResult>)} interface");
             }
@@ -41,7 +41,7 @@ namespace paging.Models
                 writer.WritePropertyName("odata.nextLink"u8);
                 writer.WriteStringValue(OdataNextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace paging.Models
             writer.WriteEndObject();
         }
 
-        OdataProductResult IJsonModel<OdataProductResult>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        OdataProductResult IJsonModel<OdataProductResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OdataProductResult)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace paging.Models
 
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace paging.Models
                     odataNextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,9 +113,9 @@ namespace paging.Models
             return new OdataProductResult(Optional.ToList(values), odataNextLink.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<OdataProductResult>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<OdataProductResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OdataProductResult)} does not support '{options.Format}' format.");
@@ -124,9 +124,9 @@ namespace paging.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        OdataProductResult IModel<OdataProductResult>.Read(BinaryData data, ModelReaderWriterOptions options)
+        OdataProductResult IPersistableModel<OdataProductResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(OdataProductResult)} does not support '{options.Format}' format.");
@@ -136,6 +136,6 @@ namespace paging.Models
             return DeserializeOdataProductResult(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<OdataProductResult>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<OdataProductResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

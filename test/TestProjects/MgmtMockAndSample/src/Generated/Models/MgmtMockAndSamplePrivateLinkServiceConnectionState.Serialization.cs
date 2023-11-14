@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class MgmtMockAndSamplePrivateLinkServiceConnectionState : IUtf8JsonSerializable, IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("actionsRequired"u8);
                 writer.WriteStringValue(ActionsRequired.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        MgmtMockAndSamplePrivateLinkServiceConnectionState IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtMockAndSamplePrivateLinkServiceConnectionState IJsonModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkServiceConnectionState)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtMockAndSample.Models
 
         internal static MgmtMockAndSamplePrivateLinkServiceConnectionState DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace MgmtMockAndSample.Models
                     actionsRequired = new ActionsRequired(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -118,9 +118,9 @@ namespace MgmtMockAndSample.Models
             return new MgmtMockAndSamplePrivateLinkServiceConnectionState(Optional.ToNullable(status), description.Value, Optional.ToNullable(actionsRequired), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkServiceConnectionState)} does not support '{options.Format}' format.");
@@ -129,9 +129,9 @@ namespace MgmtMockAndSample.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtMockAndSamplePrivateLinkServiceConnectionState IModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtMockAndSamplePrivateLinkServiceConnectionState IPersistableModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtMockAndSamplePrivateLinkServiceConnectionState)} does not support '{options.Format}' format.");
@@ -141,6 +141,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtMockAndSamplePrivateLinkServiceConnectionState>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

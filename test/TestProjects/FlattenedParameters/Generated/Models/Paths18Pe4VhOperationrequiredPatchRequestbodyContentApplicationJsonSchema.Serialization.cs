@@ -16,11 +16,11 @@ namespace FlattenedParameters.Models
 {
     internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>)} interface");
             }
@@ -36,7 +36,7 @@ namespace FlattenedParameters.Models
                 writer.WriteStringValue(NonRequired);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace FlattenedParameters.Models
             writer.WriteEndObject();
         }
 
-        Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema IJsonModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace FlattenedParameters.Models
 
         internal static Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -102,7 +102,7 @@ namespace FlattenedParameters.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -111,9 +111,9 @@ namespace FlattenedParameters.Models
             return new Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(required, nonRequired.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support '{options.Format}' format.");
@@ -122,9 +122,9 @@ namespace FlattenedParameters.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema IModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema IPersistableModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema)} does not support '{options.Format}' format.");
@@ -134,6 +134,6 @@ namespace FlattenedParameters.Models
             return DeserializePaths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class TxtRecord : IUtf8JsonSerializable, IJsonModel<TxtRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TxtRecord>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TxtRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<TxtRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<TxtRecord>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<TxtRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TxtRecord>)} interface");
             }
@@ -36,7 +36,7 @@ namespace MgmtExpandResourceTypes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteEndObject();
         }
 
-        TxtRecord IJsonModel<TxtRecord>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TxtRecord IJsonModel<TxtRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TxtRecord)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static TxtRecord DeserializeTxtRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace MgmtExpandResourceTypes.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace MgmtExpandResourceTypes.Models
             return new TxtRecord(Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<TxtRecord>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TxtRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TxtRecord)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace MgmtExpandResourceTypes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        TxtRecord IModel<TxtRecord>.Read(BinaryData data, ModelReaderWriterOptions options)
+        TxtRecord IPersistableModel<TxtRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(TxtRecord)} does not support '{options.Format}' format.");
@@ -125,6 +125,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeTxtRecord(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<TxtRecord>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<TxtRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithGuidProperty : IXmlSerializable, IModel<ModelWithGuidProperty>
+    public partial class ModelWithGuidProperty : IXmlSerializable, IPersistableModel<ModelWithGuidProperty>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -39,10 +39,10 @@ namespace TypeSchemaMapping.Models
             return new ModelWithGuidProperty(modelProperty, default);
         }
 
-        BinaryData IModel<ModelWithGuidProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithGuidProperty>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ModelWithGuidProperty>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -62,9 +62,9 @@ namespace TypeSchemaMapping.Models
             }
         }
 
-        ModelWithGuidProperty IModel<ModelWithGuidProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithGuidProperty IPersistableModel<ModelWithGuidProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithGuidProperty)} does not support '{options.Format}' format.");
@@ -73,6 +73,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithGuidProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ModelWithGuidProperty>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

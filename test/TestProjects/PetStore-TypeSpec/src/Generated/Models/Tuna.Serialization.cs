@@ -17,11 +17,11 @@ namespace PetStore.Models
 {
     public partial class Tuna : IUtf8JsonSerializable, IJsonModel<Tuna>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Tuna>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Tuna>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<Tuna>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<Tuna>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<Tuna>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Tuna>)} interface");
             }
@@ -33,7 +33,7 @@ namespace PetStore.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("size"u8);
             writer.WriteNumberValue(Size);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,9 +51,9 @@ namespace PetStore.Models
             writer.WriteEndObject();
         }
 
-        Tuna IJsonModel<Tuna>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        Tuna IJsonModel<Tuna>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Tuna)} does not support '{options.Format}' format.");
@@ -65,7 +65,7 @@ namespace PetStore.Models
 
         internal static Tuna DeserializeTuna(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -93,7 +93,7 @@ namespace PetStore.Models
                     size = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -102,9 +102,9 @@ namespace PetStore.Models
             return new Tuna(kind, size, serializedAdditionalRawData, fat);
         }
 
-        BinaryData IModel<Tuna>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<Tuna>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Tuna)} does not support '{options.Format}' format.");
@@ -113,9 +113,9 @@ namespace PetStore.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        Tuna IModel<Tuna>.Read(BinaryData data, ModelReaderWriterOptions options)
+        Tuna IPersistableModel<Tuna>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(Tuna)} does not support '{options.Format}' format.");
@@ -125,14 +125,14 @@ namespace PetStore.Models
             return DeserializeTuna(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<Tuna>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<Tuna>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Tuna FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTuna(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeTuna(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

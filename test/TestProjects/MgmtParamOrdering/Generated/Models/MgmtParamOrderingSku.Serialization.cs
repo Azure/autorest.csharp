@@ -16,11 +16,11 @@ namespace MgmtParamOrdering.Models
 {
     public partial class MgmtParamOrderingSku : IUtf8JsonSerializable, IJsonModel<MgmtParamOrderingSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtParamOrderingSku>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtParamOrderingSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MgmtParamOrderingSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MgmtParamOrderingSku>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MgmtParamOrderingSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtParamOrderingSku>)} interface");
             }
@@ -41,7 +41,7 @@ namespace MgmtParamOrdering.Models
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,9 +59,9 @@ namespace MgmtParamOrdering.Models
             writer.WriteEndObject();
         }
 
-        MgmtParamOrderingSku IJsonModel<MgmtParamOrderingSku>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MgmtParamOrderingSku IJsonModel<MgmtParamOrderingSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtParamOrderingSku)} does not support '{options.Format}' format.");
@@ -73,7 +73,7 @@ namespace MgmtParamOrdering.Models
 
         internal static MgmtParamOrderingSku DeserializeMgmtParamOrderingSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -105,7 +105,7 @@ namespace MgmtParamOrdering.Models
                     capacity = property.Value.GetInt64();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -114,9 +114,9 @@ namespace MgmtParamOrdering.Models
             return new MgmtParamOrderingSku(name.Value, tier.Value, Optional.ToNullable(capacity), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MgmtParamOrderingSku>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MgmtParamOrderingSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtParamOrderingSku)} does not support '{options.Format}' format.");
@@ -125,9 +125,9 @@ namespace MgmtParamOrdering.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MgmtParamOrderingSku IModel<MgmtParamOrderingSku>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MgmtParamOrderingSku IPersistableModel<MgmtParamOrderingSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MgmtParamOrderingSku)} does not support '{options.Format}' format.");
@@ -137,6 +137,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeMgmtParamOrderingSku(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MgmtParamOrderingSku>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MgmtParamOrderingSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

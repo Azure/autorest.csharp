@@ -16,17 +16,17 @@ namespace ModelShapes.Models
 {
     public partial class MixedModelWithReadonlyProperty : IUtf8JsonSerializable, IJsonModel<MixedModelWithReadonlyProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedModelWithReadonlyProperty>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedModelWithReadonlyProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<MixedModelWithReadonlyProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<MixedModelWithReadonlyProperty>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<MixedModelWithReadonlyProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MixedModelWithReadonlyProperty>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ReadonlyProperty))
                 {
@@ -34,7 +34,7 @@ namespace ModelShapes.Models
                     writer.WriteObjectValue(ReadonlyProperty);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsCollectionDefined(ReadonlyListProperty))
                 {
@@ -47,7 +47,7 @@ namespace ModelShapes.Models
                     writer.WriteEndArray();
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -65,9 +65,9 @@ namespace ModelShapes.Models
             writer.WriteEndObject();
         }
 
-        MixedModelWithReadonlyProperty IJsonModel<MixedModelWithReadonlyProperty>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        MixedModelWithReadonlyProperty IJsonModel<MixedModelWithReadonlyProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{options.Format}' format.");
@@ -79,7 +79,7 @@ namespace ModelShapes.Models
 
         internal static MixedModelWithReadonlyProperty DeserializeMixedModelWithReadonlyProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,7 +114,7 @@ namespace ModelShapes.Models
                     readonlyListProperty = array;
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -123,9 +123,9 @@ namespace ModelShapes.Models
             return new MixedModelWithReadonlyProperty(readonlyProperty.Value, Optional.ToList(readonlyListProperty), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<MixedModelWithReadonlyProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<MixedModelWithReadonlyProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{options.Format}' format.");
@@ -134,9 +134,9 @@ namespace ModelShapes.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        MixedModelWithReadonlyProperty IModel<MixedModelWithReadonlyProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        MixedModelWithReadonlyProperty IPersistableModel<MixedModelWithReadonlyProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(MixedModelWithReadonlyProperty)} does not support '{options.Format}' format.");
@@ -146,6 +146,6 @@ namespace ModelShapes.Models
             return DeserializeMixedModelWithReadonlyProperty(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<MixedModelWithReadonlyProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<MixedModelWithReadonlyProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

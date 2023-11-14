@@ -17,11 +17,11 @@ namespace MgmtPropertyChooser.Models
 {
     public partial class VirtualMachinePatch : IUtf8JsonSerializable, IJsonModel<VirtualMachinePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachinePatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachinePatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<VirtualMachinePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<VirtualMachinePatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachinePatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachinePatch>)} interface");
             }
@@ -60,7 +60,7 @@ namespace MgmtPropertyChooser.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -73,7 +73,7 @@ namespace MgmtPropertyChooser.Models
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(VmId))
                 {
@@ -87,7 +87,7 @@ namespace MgmtPropertyChooser.Models
                 writer.WriteStringValue(ExtensionsTimeBudget);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -105,9 +105,9 @@ namespace MgmtPropertyChooser.Models
             writer.WriteEndObject();
         }
 
-        VirtualMachinePatch IJsonModel<VirtualMachinePatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        VirtualMachinePatch IJsonModel<VirtualMachinePatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachinePatch)} does not support '{options.Format}' format.");
@@ -119,7 +119,7 @@ namespace MgmtPropertyChooser.Models
 
         internal static VirtualMachinePatch DeserializeVirtualMachinePatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -215,7 +215,7 @@ namespace MgmtPropertyChooser.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -224,9 +224,9 @@ namespace MgmtPropertyChooser.Models
             return new VirtualMachinePatch(Optional.ToDictionary(tags), serializedAdditionalRawData, plan, identity, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
         }
 
-        BinaryData IModel<VirtualMachinePatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<VirtualMachinePatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachinePatch)} does not support '{options.Format}' format.");
@@ -235,9 +235,9 @@ namespace MgmtPropertyChooser.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        VirtualMachinePatch IModel<VirtualMachinePatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        VirtualMachinePatch IPersistableModel<VirtualMachinePatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(VirtualMachinePatch)} does not support '{options.Format}' format.");
@@ -247,6 +247,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeVirtualMachinePatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<VirtualMachinePatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<VirtualMachinePatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

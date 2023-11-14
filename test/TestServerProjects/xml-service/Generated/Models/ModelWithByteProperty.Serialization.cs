@@ -15,7 +15,7 @@ using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ModelWithByteProperty : IXmlSerializable, IModel<ModelWithByteProperty>
+    public partial class ModelWithByteProperty : IXmlSerializable, IPersistableModel<ModelWithByteProperty>
     {
         void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
@@ -39,10 +39,10 @@ namespace xml_service.Models
             return new ModelWithByteProperty(bytes, default);
         }
 
-        BinaryData IModel<ModelWithByteProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ModelWithByteProperty>.Write(ModelReaderWriterOptions options)
         {
             bool implementsJson = this is IJsonModel<ModelWithByteProperty>;
-            bool isValid = options.Format == ModelReaderWriterFormat.Json && implementsJson || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
@@ -62,9 +62,9 @@ namespace xml_service.Models
             }
         }
 
-        ModelWithByteProperty IModel<ModelWithByteProperty>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ModelWithByteProperty IPersistableModel<ModelWithByteProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ModelWithByteProperty)} does not support '{options.Format}' format.");
@@ -73,6 +73,6 @@ namespace xml_service.Models
             return DeserializeModelWithByteProperty(XElement.Load(data.ToStream()), options);
         }
 
-        ModelReaderWriterFormat IModel<ModelWithByteProperty>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Xml;
+        string IPersistableModel<ModelWithByteProperty>.GetWireFormat(ModelReaderWriterOptions options) => "X";
     }
 }

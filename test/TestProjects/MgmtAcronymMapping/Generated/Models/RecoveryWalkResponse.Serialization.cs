@@ -16,17 +16,17 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class RecoveryWalkResponse : IUtf8JsonSerializable, IJsonModel<RecoveryWalkResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecoveryWalkResponse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecoveryWalkResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RecoveryWalkResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RecoveryWalkResponse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RecoveryWalkResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RecoveryWalkResponse>)} interface");
             }
 
             writer.WriteStartObject();
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(WalkPerformed))
                 {
@@ -34,7 +34,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteBooleanValue(WalkPerformed.Value);
                 }
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 if (Optional.IsDefined(NextPlatformUpdateDomain))
                 {
@@ -42,7 +42,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,9 +60,9 @@ namespace MgmtAcronymMapping.Models
             writer.WriteEndObject();
         }
 
-        RecoveryWalkResponse IJsonModel<RecoveryWalkResponse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RecoveryWalkResponse IJsonModel<RecoveryWalkResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RecoveryWalkResponse)} does not support '{options.Format}' format.");
@@ -74,7 +74,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static RecoveryWalkResponse DeserializeRecoveryWalkResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -104,7 +104,7 @@ namespace MgmtAcronymMapping.Models
                     nextPlatformUpdateDomain = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,9 +113,9 @@ namespace MgmtAcronymMapping.Models
             return new RecoveryWalkResponse(Optional.ToNullable(walkPerformed), Optional.ToNullable(nextPlatformUpdateDomain), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<RecoveryWalkResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RecoveryWalkResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RecoveryWalkResponse)} does not support '{options.Format}' format.");
@@ -124,9 +124,9 @@ namespace MgmtAcronymMapping.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RecoveryWalkResponse IModel<RecoveryWalkResponse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RecoveryWalkResponse IPersistableModel<RecoveryWalkResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RecoveryWalkResponse)} does not support '{options.Format}' format.");
@@ -136,6 +136,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeRecoveryWalkResponse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RecoveryWalkResponse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RecoveryWalkResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

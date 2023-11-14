@@ -16,11 +16,11 @@ namespace xml_service.Models
 {
     public partial class JsonOutput : IUtf8JsonSerializable, IJsonModel<JsonOutput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonOutput>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonOutput>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<JsonOutput>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<JsonOutput>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<JsonOutput>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JsonOutput>)} interface");
             }
@@ -31,7 +31,7 @@ namespace xml_service.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,9 +49,9 @@ namespace xml_service.Models
             writer.WriteEndObject();
         }
 
-        JsonOutput IJsonModel<JsonOutput>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        JsonOutput IJsonModel<JsonOutput>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonOutput)} does not support '{options.Format}' format.");
@@ -63,7 +63,7 @@ namespace xml_service.Models
 
         internal static JsonOutput DeserializeJsonOutput(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -83,7 +83,7 @@ namespace xml_service.Models
                     id = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -92,9 +92,9 @@ namespace xml_service.Models
             return new JsonOutput(Optional.ToNullable(id), serializedAdditionalRawData);
         }
 
-        BinaryData IModel<JsonOutput>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<JsonOutput>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonOutput)} does not support '{options.Format}' format.");
@@ -103,9 +103,9 @@ namespace xml_service.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        JsonOutput IModel<JsonOutput>.Read(BinaryData data, ModelReaderWriterOptions options)
+        JsonOutput IPersistableModel<JsonOutput>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(JsonOutput)} does not support '{options.Format}' format.");
@@ -115,6 +115,6 @@ namespace xml_service.Models
             return DeserializeJsonOutput(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<JsonOutput>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<JsonOutput>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

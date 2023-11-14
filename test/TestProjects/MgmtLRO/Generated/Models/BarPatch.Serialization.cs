@@ -16,11 +16,11 @@ namespace MgmtLRO.Models
 {
     public partial class BarPatch : IUtf8JsonSerializable, IJsonModel<BarPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarPatch>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<BarPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<BarPatch>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<BarPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BarPatch>)} interface");
             }
@@ -45,7 +45,7 @@ namespace MgmtLRO.Models
                 writer.WriteStringValue(Buzz.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,9 +63,9 @@ namespace MgmtLRO.Models
             writer.WriteEndObject();
         }
 
-        BarPatch IJsonModel<BarPatch>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        BarPatch IJsonModel<BarPatch>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BarPatch)} does not support '{options.Format}' format.");
@@ -77,7 +77,7 @@ namespace MgmtLRO.Models
 
         internal static BarPatch DeserializeBarPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,7 +124,7 @@ namespace MgmtLRO.Models
                     }
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -133,9 +133,9 @@ namespace MgmtLRO.Models
             return new BarPatch(Optional.ToDictionary(tags), serializedAdditionalRawData, Optional.ToNullable(buzz));
         }
 
-        BinaryData IModel<BarPatch>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<BarPatch>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BarPatch)} does not support '{options.Format}' format.");
@@ -144,9 +144,9 @@ namespace MgmtLRO.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        BarPatch IModel<BarPatch>.Read(BinaryData data, ModelReaderWriterOptions options)
+        BarPatch IPersistableModel<BarPatch>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(BarPatch)} does not support '{options.Format}' format.");
@@ -156,6 +156,6 @@ namespace MgmtLRO.Models
             return DeserializeBarPatch(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<BarPatch>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<BarPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

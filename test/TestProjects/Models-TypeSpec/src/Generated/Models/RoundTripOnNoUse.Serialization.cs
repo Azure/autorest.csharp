@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripOnNoUse : IUtf8JsonSerializable, IJsonModel<RoundTripOnNoUse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOnNoUse>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOnNoUse>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<RoundTripOnNoUse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<RoundTripOnNoUse>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<RoundTripOnNoUse>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripOnNoUse>)} interface");
             }
@@ -36,7 +36,7 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndArray();
             writer.WritePropertyName("baseModelProp"u8);
             writer.WriteStringValue(BaseModelProp);
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,9 +54,9 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        RoundTripOnNoUse IJsonModel<RoundTripOnNoUse>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        RoundTripOnNoUse IJsonModel<RoundTripOnNoUse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{options.Format}' format.");
@@ -68,7 +68,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripOnNoUse DeserializeRoundTripOnNoUse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -95,7 +95,7 @@ namespace ModelsTypeSpec.Models
                     baseModelProp = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -104,9 +104,9 @@ namespace ModelsTypeSpec.Models
             return new RoundTripOnNoUse(baseModelProp, serializedAdditionalRawData, requiredList);
         }
 
-        BinaryData IModel<RoundTripOnNoUse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<RoundTripOnNoUse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{options.Format}' format.");
@@ -115,9 +115,9 @@ namespace ModelsTypeSpec.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        RoundTripOnNoUse IModel<RoundTripOnNoUse>.Read(BinaryData data, ModelReaderWriterOptions options)
+        RoundTripOnNoUse IPersistableModel<RoundTripOnNoUse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(RoundTripOnNoUse)} does not support '{options.Format}' format.");
@@ -127,14 +127,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripOnNoUse(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<RoundTripOnNoUse>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<RoundTripOnNoUse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new RoundTripOnNoUse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripOnNoUse(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeRoundTripOnNoUse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

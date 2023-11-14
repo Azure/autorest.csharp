@@ -16,11 +16,11 @@ namespace validation.Models
 {
     public partial class ConstantProduct : IUtf8JsonSerializable, IJsonModel<ConstantProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConstantProduct>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConstantProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<ConstantProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<ConstantProduct>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<ConstantProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ConstantProduct>)} interface");
             }
@@ -30,7 +30,7 @@ namespace validation.Models
             writer.WriteStringValue(ConstProperty.ToString());
             writer.WritePropertyName("constProperty2"u8);
             writer.WriteStringValue(ConstProperty2.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -48,9 +48,9 @@ namespace validation.Models
             writer.WriteEndObject();
         }
 
-        ConstantProduct IJsonModel<ConstantProduct>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        ConstantProduct IJsonModel<ConstantProduct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConstantProduct)} does not support '{options.Format}' format.");
@@ -62,7 +62,7 @@ namespace validation.Models
 
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -84,7 +84,7 @@ namespace validation.Models
                     constProperty2 = new ConstantProductConstProperty2(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -93,9 +93,9 @@ namespace validation.Models
             return new ConstantProduct(constProperty, constProperty2, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<ConstantProduct>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<ConstantProduct>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConstantProduct)} does not support '{options.Format}' format.");
@@ -104,9 +104,9 @@ namespace validation.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        ConstantProduct IModel<ConstantProduct>.Read(BinaryData data, ModelReaderWriterOptions options)
+        ConstantProduct IPersistableModel<ConstantProduct>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(ConstantProduct)} does not support '{options.Format}' format.");
@@ -116,6 +116,6 @@ namespace validation.Models
             return DeserializeConstantProduct(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<ConstantProduct>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<ConstantProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }

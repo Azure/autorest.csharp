@@ -17,11 +17,11 @@ namespace Pagination.Models
 {
     public partial class LedgerEntry : IUtf8JsonSerializable, IJsonModel<LedgerEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LedgerEntry>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LedgerEntry>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<LedgerEntry>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<LedgerEntry>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<LedgerEntry>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LedgerEntry>)} interface");
             }
@@ -29,17 +29,17 @@ namespace Pagination.Models
             writer.WriteStartObject();
             writer.WritePropertyName("contents"u8);
             writer.WriteStringValue(Contents);
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("collectionId"u8);
                 writer.WriteStringValue(CollectionId);
             }
-            if (options.Format == ModelReaderWriterFormat.Json)
+            if (options.Format == "J")
             {
                 writer.WritePropertyName("transactionId"u8);
                 writer.WriteStringValue(TransactionId);
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -57,9 +57,9 @@ namespace Pagination.Models
             writer.WriteEndObject();
         }
 
-        LedgerEntry IJsonModel<LedgerEntry>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        LedgerEntry IJsonModel<LedgerEntry>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LedgerEntry)} does not support '{options.Format}' format.");
@@ -71,7 +71,7 @@ namespace Pagination.Models
 
         internal static LedgerEntry DeserializeLedgerEntry(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,7 +99,7 @@ namespace Pagination.Models
                     transactionId = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,9 +108,9 @@ namespace Pagination.Models
             return new LedgerEntry(contents, collectionId, transactionId, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<LedgerEntry>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<LedgerEntry>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LedgerEntry)} does not support '{options.Format}' format.");
@@ -119,9 +119,9 @@ namespace Pagination.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        LedgerEntry IModel<LedgerEntry>.Read(BinaryData data, ModelReaderWriterOptions options)
+        LedgerEntry IPersistableModel<LedgerEntry>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(LedgerEntry)} does not support '{options.Format}' format.");
@@ -131,14 +131,14 @@ namespace Pagination.Models
             return DeserializeLedgerEntry(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<LedgerEntry>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<LedgerEntry>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static LedgerEntry FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeLedgerEntry(document.RootElement, ModelReaderWriterOptions.DefaultWireOptions);
+            return DeserializeLedgerEntry(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

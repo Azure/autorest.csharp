@@ -16,11 +16,11 @@ namespace MgmtScopeResource.Models
 {
     public partial class WhatIfChange : IUtf8JsonSerializable, IJsonModel<WhatIfChange>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WhatIfChange>)this).Write(writer, ModelReaderWriterOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WhatIfChange>)this).Write(writer, ModelReaderWriterOptions.Wire);
 
         void IJsonModel<WhatIfChange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != ModelReaderWriterFormat.Wire || ((IModel<WhatIfChange>)this).GetWireFormat(options) != ModelReaderWriterFormat.Json) && options.Format != ModelReaderWriterFormat.Json)
+            if ((options.Format != "W" || ((IPersistableModel<WhatIfChange>)this).GetWireFormat(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WhatIfChange>)} interface");
             }
@@ -59,7 +59,7 @@ namespace MgmtScopeResource.Models
                 }
 #endif
             }
-            if (_serializedAdditionalRawData != null && options.Format == ModelReaderWriterFormat.Json)
+            if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -77,9 +77,9 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        WhatIfChange IJsonModel<WhatIfChange>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        WhatIfChange IJsonModel<WhatIfChange>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WhatIfChange)} does not support '{options.Format}' format.");
@@ -91,7 +91,7 @@ namespace MgmtScopeResource.Models
 
         internal static WhatIfChange DeserializeWhatIfChange(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.DefaultWireOptions;
+            options ??= ModelReaderWriterOptions.Wire;
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -139,7 +139,7 @@ namespace MgmtScopeResource.Models
                     after = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == ModelReaderWriterFormat.Json)
+                if (options.Format == "J")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -148,9 +148,9 @@ namespace MgmtScopeResource.Models
             return new WhatIfChange(resourceId, changeType, unsupportedReason.Value, before.Value, after.Value, serializedAdditionalRawData);
         }
 
-        BinaryData IModel<WhatIfChange>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<WhatIfChange>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WhatIfChange)} does not support '{options.Format}' format.");
@@ -159,9 +159,9 @@ namespace MgmtScopeResource.Models
             return ModelReaderWriter.Write(this, options);
         }
 
-        WhatIfChange IModel<WhatIfChange>.Read(BinaryData data, ModelReaderWriterOptions options)
+        WhatIfChange IPersistableModel<WhatIfChange>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == ModelReaderWriterFormat.Json || options.Format == ModelReaderWriterFormat.Wire;
+            bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
                 throw new FormatException($"The model {nameof(WhatIfChange)} does not support '{options.Format}' format.");
@@ -171,6 +171,6 @@ namespace MgmtScopeResource.Models
             return DeserializeWhatIfChange(document.RootElement, options);
         }
 
-        ModelReaderWriterFormat IModel<WhatIfChange>.GetWireFormat(ModelReaderWriterOptions options) => ModelReaderWriterFormat.Json;
+        string IPersistableModel<WhatIfChange>.GetWireFormat(ModelReaderWriterOptions options) => "J";
     }
 }
