@@ -24,7 +24,6 @@ namespace FirstTestTypeSpec
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { }, new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
     }
 }
