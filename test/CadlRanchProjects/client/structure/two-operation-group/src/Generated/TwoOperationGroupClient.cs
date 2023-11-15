@@ -52,28 +52,24 @@ namespace Client.Structure.Service.TwoOperationGroup
 
         /// <summary> Initializes a new instance of Group1. </summary>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Group1 GetGroup1Client(string client, string apiVersion = "1.0.0")
+        public virtual Group1 GetGroup1Client(string client)
         {
             Argument.AssertNotNullOrEmpty(client, nameof(client));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Group1(ClientDiagnostics, _pipeline, _endpoint, client, apiVersion);
+            return new Group1(ClientDiagnostics, _pipeline, _endpoint, client);
         }
 
         /// <summary> Initializes a new instance of Group2. </summary>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="apiVersion"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="client"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Group2 GetGroup2Client(string client, string apiVersion = "1.0.0")
+        public virtual Group2 GetGroup2Client(string client)
         {
             Argument.AssertNotNullOrEmpty(client, nameof(client));
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Group2(ClientDiagnostics, _pipeline, _endpoint, client, apiVersion);
+            return new Group2(ClientDiagnostics, _pipeline, _endpoint, client);
         }
     }
 }

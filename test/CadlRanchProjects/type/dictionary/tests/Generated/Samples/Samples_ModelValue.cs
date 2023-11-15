@@ -24,7 +24,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_ShortVersion()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = client.GetModelValue(null);
 
@@ -36,7 +36,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_ShortVersion_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = await client.GetModelValueAsync(null);
 
@@ -48,7 +48,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_ShortVersion_Convenience()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetModelValue();
         }
@@ -57,7 +57,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_ShortVersion_Convenience_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetModelValueAsync();
         }
@@ -66,7 +66,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_AllParameters()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = client.GetModelValue(null);
 
@@ -79,7 +79,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_AllParameters_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = await client.GetModelValueAsync(null);
 
@@ -92,7 +92,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModelValue_AllParameters_Convenience()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response<IReadOnlyDictionary<string, InnerModel>> response = client.GetModelValue();
         }
@@ -101,7 +101,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModelValue_AllParameters_Convenience_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response<IReadOnlyDictionary<string, InnerModel>> response = await client.GetModelValueAsync();
         }
@@ -110,7 +110,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -128,7 +128,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -146,7 +146,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = client.Put(new Dictionary<string, InnerModel>
             {
@@ -158,7 +158,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, InnerModel>
             {
@@ -170,7 +170,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -189,7 +189,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -208,7 +208,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = client.Put(new Dictionary<string, InnerModel>
             {
@@ -226,7 +226,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            ModelValue client = new DictionaryClient().GetModelValueClient(apiVersion: "1.0.0");
+            ModelValue client = new DictionaryClient().GetModelValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, InnerModel>
             {

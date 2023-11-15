@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,24 +44,19 @@ namespace Parameters.CollectionFormat
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Query. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Query GetQueryClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Query _cachedQuery;
+        private Header _cachedHeader;
 
-            return new Query(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Query. </summary>
+        public virtual Query GetQueryClient()
+        {
+            return Volatile.Read(ref _cachedQuery) ?? Interlocked.CompareExchange(ref _cachedQuery, new Query(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedQuery;
         }
 
         /// <summary> Initializes a new instance of Header. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Header GetHeaderClient(string apiVersion = "1.0.0")
+        public virtual Header GetHeaderClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Header(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedHeader) ?? Interlocked.CompareExchange(ref _cachedHeader, new Header(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedHeader;
         }
     }
 }

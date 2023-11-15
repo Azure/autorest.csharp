@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetByte_ShortVersion()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = client.GetByte(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetByte_ShortVersion_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = await client.GetByteAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetByte_ShortVersion_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetByte();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetByte_ShortVersion_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetByteAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetByte_AllParameters()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = client.GetByte(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetByte_AllParameters_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response response = await client.GetByteAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetByte_AllParameters_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetByte();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetByte_AllParameters_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetByteAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Bytes client = new ValueTypesClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new ValueTypesClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);

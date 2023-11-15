@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownInt_ShortVersion()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response response = client.GetUnknownInt(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownInt_ShortVersion_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response response = await client.GetUnknownIntAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownInt_ShortVersion_Convenience()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response<UnknownIntProperty> response = client.GetUnknownInt();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownInt_ShortVersion_Convenience_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownInt_AllParameters()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response response = client.GetUnknownInt(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownInt_AllParameters_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response response = await client.GetUnknownIntAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownInt_AllParameters_Convenience()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response<UnknownIntProperty> response = client.GetUnknownInt();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownInt_AllParameters_Convenience_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             Response<UnknownIntProperty> response = await client.GetUnknownIntAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            UnknownInt client = new ValueTypesClient().GetUnknownIntClient(apiVersion: "1.0.0");
+            UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
             UnknownIntProperty body = new UnknownIntProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);

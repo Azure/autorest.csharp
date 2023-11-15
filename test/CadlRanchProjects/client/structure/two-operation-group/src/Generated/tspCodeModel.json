@@ -126,42 +126,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "17",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "18",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "19",
-        "Type": {
-         "$id": "20",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -179,7 +148,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "22",
+     "$id": "18",
      "Name": "three",
      "ResourceName": "Group1",
      "Parameters": [
@@ -190,11 +159,11 @@
        "$ref": "13"
       },
       {
-       "$id": "23",
+       "$id": "19",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "24",
+        "$id": "20",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -209,20 +178,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "25",
+        "$id": "21",
         "Type": {
-         "$ref": "24"
+         "$ref": "20"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "26",
+       "$id": "22",
        "StatusCodes": [
         204
        ],
@@ -240,7 +206,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "27",
+     "$id": "23",
      "Name": "four",
      "ResourceName": "Group1",
      "Parameters": [
@@ -251,11 +217,11 @@
        "$ref": "13"
       },
       {
-       "$id": "28",
+       "$id": "24",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -270,20 +236,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "26",
         "Type": {
-         "$ref": "29"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -302,18 +265,18 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "28"
    },
    "Creatable": false,
    "Parent": "TwoOperationGroupClient"
   },
   {
-   "$id": "33",
+   "$id": "29",
    "Name": "Group2",
    "Description": "",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "30",
      "Name": "two",
      "ResourceName": "Group2",
      "Parameters": [
@@ -324,11 +287,11 @@
        "$ref": "13"
       },
       {
-       "$id": "35",
+       "$id": "31",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "36",
+        "$id": "32",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -343,20 +306,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "37",
+        "$id": "33",
         "Type": {
-         "$ref": "36"
+         "$ref": "32"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "38",
+       "$id": "34",
        "StatusCodes": [
         204
        ],
@@ -374,7 +334,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "39",
+     "$id": "35",
      "Name": "five",
      "ResourceName": "Group2",
      "Parameters": [
@@ -385,11 +345,11 @@
        "$ref": "13"
       },
       {
-       "$id": "40",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "41",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -404,20 +364,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "38",
         "Type": {
-         "$ref": "41"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "43",
+       "$id": "39",
        "StatusCodes": [
         204
        ],
@@ -435,7 +392,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "44",
+     "$id": "40",
      "Name": "six",
      "ResourceName": "Group2",
      "Parameters": [
@@ -446,11 +403,11 @@
        "$ref": "13"
       },
       {
-       "$id": "45",
+       "$id": "41",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "42",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -465,20 +422,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "43",
         "Type": {
-         "$ref": "46"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "44",
        "StatusCodes": [
         204
        ],
@@ -497,7 +451,7 @@
     }
    ],
    "Protocol": {
-    "$id": "49"
+    "$id": "45"
    },
    "Creatable": false,
    "Parent": "TwoOperationGroupClient"

@@ -125,61 +125,30 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "16",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "17",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "18",
-        "Type": {
-         "$id": "19",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "20",
+       "$id": "16",
        "StatusCodes": [
         204
        ],
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "21",
+         "$id": "17",
          "Name": "Repeatability-Result",
          "NameInResponse": "repeatabilityResult",
          "Description": "Indicates whether the repeatable request was accepted or rejected.",
          "Type": {
-          "$id": "22",
+          "$id": "18",
           "Name": "Union",
           "UnionItemTypes": [
            {
-            "$id": "23",
+            "$id": "19",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "24",
+             "$id": "20",
              "Name": "String",
              "Kind": "String",
              "IsNullable": false
@@ -188,10 +157,10 @@
             "IsNullable": false
            },
            {
-            "$id": "25",
+            "$id": "21",
             "Name": "Literal",
             "LiteralValueType": {
-             "$id": "26",
+             "$id": "22",
              "Name": "String",
              "Kind": "String",
              "IsNullable": false
@@ -217,7 +186,7 @@
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "23"
    },
    "Creatable": true
   }

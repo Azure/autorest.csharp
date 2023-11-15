@@ -206,42 +206,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "27",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "28",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "29",
-        "Type": {
-         "$id": "30",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -259,7 +228,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "32",
+     "$id": "28",
      "Name": "invalid",
      "ResourceName": "OAuth2",
      "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
@@ -268,11 +237,11 @@
        "$ref": "20"
       },
       {
-       "$id": "33",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "30",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -287,20 +256,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "31",
         "Type": {
-         "$ref": "34"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "27"
       }
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -309,7 +275,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "37",
+       "$id": "33",
        "StatusCodes": [
         403
        ],
@@ -331,15 +297,15 @@
     }
    ],
    "Protocol": {
-    "$id": "38"
+    "$id": "34"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "39",
+  "$id": "35",
   "OAuth2": {
-   "$id": "40",
+   "$id": "36",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

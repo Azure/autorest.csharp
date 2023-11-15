@@ -21,7 +21,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SameAsModel_ShortVersion()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -36,7 +36,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SameAsModel_ShortVersion_Async()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -51,7 +51,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SameAsModel_ShortVersion_Convenience()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = client.SameAsModel(body);
@@ -61,7 +61,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SameAsModel_ShortVersion_Convenience_Async()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = await client.SameAsModelAsync(body);
@@ -71,7 +71,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SameAsModel_AllParameters()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -86,7 +86,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SameAsModel_AllParameters_Async()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -101,7 +101,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SameAsModel_AllParameters_Convenience()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = client.SameAsModel(body);
@@ -111,7 +111,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SameAsModel_AllParameters_Convenience_Async()
         {
-            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient(apiVersion: "1.0.0");
+            ModelProperties client = new SpecialWordsClient().GetModelPropertiesClient();
 
             SameAsModel body = new SameAsModel("<SameAsModel>");
             Response response = await client.SameAsModelAsync(body);

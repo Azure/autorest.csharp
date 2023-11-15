@@ -420,42 +420,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "49",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "50",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "51",
-        "Type": {
-         "$id": "52",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "53",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
@@ -476,7 +445,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "54",
+     "$id": "50",
      "Name": "publicDecoratorInPublic",
      "ResourceName": "PublicOperation",
      "Accessibility": "public",
@@ -485,11 +454,11 @@
        "$ref": "40"
       },
       {
-       "$id": "55",
+       "$id": "51",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "56",
+        "$id": "52",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -505,11 +474,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "57",
+       "$id": "53",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "54",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -524,20 +493,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "55",
         "Type": {
-         "$ref": "58"
+         "$ref": "54"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "56",
        "StatusCodes": [
         200
        ],
@@ -559,18 +525,18 @@
     }
    ],
    "Protocol": {
-    "$id": "61"
+    "$id": "57"
    },
    "Creatable": false,
    "Parent": "AccessClient"
   },
   {
-   "$id": "62",
+   "$id": "58",
    "Name": "InternalOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "63",
+     "$id": "59",
      "Name": "noDecoratorInInternal",
      "ResourceName": "InternalOperation",
      "Accessibility": "internal",
@@ -579,11 +545,11 @@
        "$ref": "40"
       },
       {
-       "$id": "64",
+       "$id": "60",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "65",
+        "$id": "61",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -599,11 +565,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "66",
+       "$id": "62",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "67",
+        "$id": "63",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -618,20 +584,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "68",
+        "$id": "64",
         "Type": {
-         "$ref": "67"
+         "$ref": "63"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "69",
+       "$id": "65",
        "StatusCodes": [
         200
        ],
@@ -652,7 +615,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "70",
+     "$id": "66",
      "Name": "internalDecoratorInInternal",
      "ResourceName": "InternalOperation",
      "Accessibility": "internal",
@@ -661,11 +624,11 @@
        "$ref": "40"
       },
       {
-       "$id": "71",
+       "$id": "67",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "72",
+        "$id": "68",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -681,11 +644,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "73",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "70",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -700,20 +663,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "71",
         "Type": {
-         "$ref": "74"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
@@ -734,7 +694,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "77",
+     "$id": "73",
      "Name": "publicDecoratorInInternal",
      "ResourceName": "InternalOperation",
      "Accessibility": "internal",
@@ -743,11 +703,11 @@
        "$ref": "40"
       },
       {
-       "$id": "78",
+       "$id": "74",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "79",
+        "$id": "75",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -763,11 +723,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "80",
+       "$id": "76",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "81",
+        "$id": "77",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -782,20 +742,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "82",
+        "$id": "78",
         "Type": {
-         "$ref": "81"
+         "$ref": "77"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "83",
+       "$id": "79",
        "StatusCodes": [
         200
        ],
@@ -817,18 +774,18 @@
     }
    ],
    "Protocol": {
-    "$id": "84"
+    "$id": "80"
    },
    "Creatable": false,
    "Parent": "AccessClient"
   },
   {
-   "$id": "85",
+   "$id": "81",
    "Name": "SharedModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "86",
+     "$id": "82",
      "Name": "public",
      "ResourceName": "SharedModelInOperation",
      "Accessibility": "public",
@@ -837,11 +794,11 @@
        "$ref": "40"
       },
       {
-       "$id": "87",
+       "$id": "83",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "88",
+        "$id": "84",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -857,11 +814,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "89",
+       "$id": "85",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "90",
+        "$id": "86",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -876,20 +833,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "91",
+        "$id": "87",
         "Type": {
-         "$ref": "90"
+         "$ref": "86"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "92",
+       "$id": "88",
        "StatusCodes": [
         200
        ],
@@ -910,7 +864,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "93",
+     "$id": "89",
      "Name": "internal",
      "ResourceName": "SharedModelInOperation",
      "Accessibility": "internal",
@@ -919,11 +873,11 @@
        "$ref": "40"
       },
       {
-       "$id": "94",
+       "$id": "90",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "95",
+        "$id": "91",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -939,11 +893,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "96",
+       "$id": "92",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "97",
+        "$id": "93",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -958,20 +912,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "98",
+        "$id": "94",
         "Type": {
-         "$ref": "97"
+         "$ref": "93"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "99",
+       "$id": "95",
        "StatusCodes": [
         200
        ],
@@ -993,18 +944,18 @@
     }
    ],
    "Protocol": {
-    "$id": "100"
+    "$id": "96"
    },
    "Creatable": false,
    "Parent": "AccessClient"
   },
   {
-   "$id": "101",
+   "$id": "97",
    "Name": "RelativeModelInOperation",
    "Description": "",
    "Operations": [
     {
-     "$id": "102",
+     "$id": "98",
      "Name": "operation",
      "ResourceName": "RelativeModelInOperation",
      "Description": "Expected query parameter: name=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"inner\":\n  {\n    \"name\": <any string>\n  }\n}\n```",
@@ -1014,11 +965,11 @@
        "$ref": "40"
       },
       {
-       "$id": "103",
+       "$id": "99",
        "Name": "name",
        "NameInRequest": "name",
        "Type": {
-        "$id": "104",
+        "$id": "100",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1034,11 +985,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "105",
+       "$id": "101",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "106",
+        "$id": "102",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1053,20 +1004,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "107",
+        "$id": "103",
         "Type": {
-         "$ref": "106"
+         "$ref": "102"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "108",
+       "$id": "104",
        "StatusCodes": [
         200
        ],
@@ -1087,7 +1035,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "109",
+     "$id": "105",
      "Name": "discriminator",
      "ResourceName": "RelativeModelInOperation",
      "Description": "Expected query parameter: kind=<any string>\nExpected response body:\n```json\n{\n  \"name\": <any string>,\n  \"kind\": \"real\"\n}\n```",
@@ -1097,11 +1045,11 @@
        "$ref": "40"
       },
       {
-       "$id": "110",
+       "$id": "106",
        "Name": "kind",
        "NameInRequest": "kind",
        "Type": {
-        "$id": "111",
+        "$id": "107",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1117,11 +1065,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "112",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "113",
+        "$id": "109",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1136,20 +1084,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "114",
+        "$id": "110",
         "Type": {
-         "$ref": "113"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "49"
       }
      ],
      "Responses": [
       {
-       "$id": "115",
+       "$id": "111",
        "StatusCodes": [
         200
        ],
@@ -1171,7 +1116,7 @@
     }
    ],
    "Protocol": {
-    "$id": "116"
+    "$id": "112"
    },
    "Creatable": false,
    "Parent": "AccessClient"

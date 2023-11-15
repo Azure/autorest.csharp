@@ -21,7 +21,6 @@ namespace Parameters.BodyOptionality
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -46,7 +45,6 @@ namespace Parameters.BodyOptionality
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             _endpoint = endpoint;
-            _apiVersion = options.Version;
         }
 
         /// <param name="body"> The BodyModel to use. </param>
@@ -266,7 +264,7 @@ namespace Parameters.BodyOptionality
         /// <summary> Initializes a new instance of OptionalExplicit. </summary>
         public virtual OptionalExplicit GetOptionalExplicitClient()
         {
-            return Volatile.Read(ref _cachedOptionalExplicit) ?? Interlocked.CompareExchange(ref _cachedOptionalExplicit, new OptionalExplicit(ClientDiagnostics, _pipeline, _endpoint, _apiVersion), null) ?? _cachedOptionalExplicit;
+            return Volatile.Read(ref _cachedOptionalExplicit) ?? Interlocked.CompareExchange(ref _cachedOptionalExplicit, new OptionalExplicit(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedOptionalExplicit;
         }
 
         internal HttpMessage CreateRequiredExplicitRequest(RequestContent content, RequestContext context)
@@ -277,7 +275,6 @@ namespace Parameters.BodyOptionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/required-explicit", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -293,7 +290,6 @@ namespace Parameters.BodyOptionality
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/body-optionality/required-implicit", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");

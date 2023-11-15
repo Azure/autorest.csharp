@@ -21,7 +21,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_ShortVersion()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -32,7 +32,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_ShortVersion_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -43,7 +43,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -54,7 +54,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -65,7 +65,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601_ShortVersion()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -76,7 +76,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_ShortVersion_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -87,7 +87,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601_AllParameters()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -98,7 +98,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601_AllParameters_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
 
@@ -109,7 +109,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601Array_ShortVersion()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Iso8601Array(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 
@@ -120,7 +120,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601Array_ShortVersion_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.Iso8601ArrayAsync(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 
@@ -131,7 +131,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Iso8601Array_AllParameters()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Iso8601Array(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 
@@ -142,7 +142,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Iso8601Array_AllParameters_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.Iso8601ArrayAsync(new TimeSpan[] { XmlConvert.ToTimeSpan("PT1H23M45S") });
 
@@ -153,7 +153,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds_ShortVersion()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
 
@@ -164,7 +164,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_ShortVersion_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
 
@@ -175,7 +175,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Int32Seconds_AllParameters()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
 
@@ -186,7 +186,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Int32Seconds_AllParameters_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
 
@@ -197,7 +197,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds_ShortVersion()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
 
@@ -208,7 +208,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_ShortVersion_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
 
@@ -219,7 +219,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_FloatSeconds_AllParameters()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
 
@@ -230,7 +230,7 @@ namespace Encode.Duration.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_FloatSeconds_AllParameters_Async()
         {
-            Header client = new DurationClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new DurationClient().GetHeaderClient();
 
             Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
 

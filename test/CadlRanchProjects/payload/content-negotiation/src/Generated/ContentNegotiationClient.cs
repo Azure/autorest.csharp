@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,24 +44,19 @@ namespace Payload.ContentNegotiation
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of SameBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual SameBody GetSameBodyClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private SameBody _cachedSameBody;
+        private DifferentBody _cachedDifferentBody;
 
-            return new SameBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of SameBody. </summary>
+        public virtual SameBody GetSameBodyClient()
+        {
+            return Volatile.Read(ref _cachedSameBody) ?? Interlocked.CompareExchange(ref _cachedSameBody, new SameBody(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedSameBody;
         }
 
         /// <summary> Initializes a new instance of DifferentBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual DifferentBody GetDifferentBodyClient(string apiVersion = "1.0.0")
+        public virtual DifferentBody GetDifferentBodyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new DifferentBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedDifferentBody) ?? Interlocked.CompareExchange(ref _cachedDifferentBody, new DifferentBody(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedDifferentBody;
         }
     }
 }

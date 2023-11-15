@@ -21,7 +21,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_ShortVersion()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.Default(null);
 
@@ -33,7 +33,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_ShortVersion_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.DefaultAsync(null);
 
@@ -45,7 +45,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_ShortVersion_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.Default();
         }
@@ -54,7 +54,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_ShortVersion_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.DefaultAsync();
         }
@@ -63,7 +63,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.Default(null);
 
@@ -75,7 +75,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.DefaultAsync(null);
 
@@ -87,7 +87,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.Default();
         }
@@ -96,7 +96,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.DefaultAsync();
         }
@@ -105,7 +105,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OctetStream_ShortVersion()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.OctetStream(null);
 
@@ -117,7 +117,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OctetStream_ShortVersion_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.OctetStreamAsync(null);
 
@@ -129,7 +129,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OctetStream_ShortVersion_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.OctetStream();
         }
@@ -138,7 +138,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OctetStream_ShortVersion_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.OctetStreamAsync();
         }
@@ -147,7 +147,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OctetStream_AllParameters()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.OctetStream(null);
 
@@ -159,7 +159,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OctetStream_AllParameters_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.OctetStreamAsync(null);
 
@@ -171,7 +171,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_OctetStream_AllParameters_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.OctetStream();
         }
@@ -180,7 +180,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_OctetStream_AllParameters_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.OctetStreamAsync();
         }
@@ -189,7 +189,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomContentType_ShortVersion()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.CustomContentType(null);
 
@@ -201,7 +201,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomContentType_ShortVersion_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.CustomContentTypeAsync(null);
 
@@ -213,7 +213,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomContentType_ShortVersion_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.CustomContentType();
         }
@@ -222,7 +222,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomContentType_ShortVersion_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.CustomContentTypeAsync();
         }
@@ -231,7 +231,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomContentType_AllParameters()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.CustomContentType(null);
 
@@ -243,7 +243,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomContentType_AllParameters_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.CustomContentTypeAsync(null);
 
@@ -255,7 +255,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CustomContentType_AllParameters_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.CustomContentType();
         }
@@ -264,7 +264,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CustomContentType_AllParameters_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.CustomContentTypeAsync();
         }
@@ -273,7 +273,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_ShortVersion()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.Base64(null);
 
@@ -285,7 +285,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_ShortVersion_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.Base64Async(null);
 
@@ -297,7 +297,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_ShortVersion_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.Base64();
         }
@@ -306,7 +306,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_ShortVersion_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.Base64Async();
         }
@@ -315,7 +315,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_AllParameters()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.Base64(null);
 
@@ -327,7 +327,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_AllParameters_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.Base64Async(null);
 
@@ -339,7 +339,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_AllParameters_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.Base64();
         }
@@ -348,7 +348,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_AllParameters_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.Base64Async();
         }
@@ -357,7 +357,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_ShortVersion()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.Base64url(null);
 
@@ -369,7 +369,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_ShortVersion_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.Base64urlAsync(null);
 
@@ -381,7 +381,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_ShortVersion_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.Base64url();
         }
@@ -390,7 +390,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_ShortVersion_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.Base64urlAsync();
         }
@@ -399,7 +399,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_AllParameters()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = client.Base64url(null);
 
@@ -411,7 +411,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_AllParameters_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response response = await client.Base64urlAsync(null);
 
@@ -423,7 +423,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_AllParameters_Convenience()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = client.Base64url();
         }
@@ -432,7 +432,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_AllParameters_Convenience_Async()
         {
-            ResponseBody client = new BytesClient().GetResponseBodyClient(apiVersion: "1.0.0");
+            ResponseBody client = new BytesClient().GetResponseBodyClient();
 
             Response<BinaryData> response = await client.Base64urlAsync();
         }

@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetEnumAsync.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response<EnumProperty> response = await client.GetEnumAsync();
 ]]></code>
 This sample shows how to call GetEnumAsync with all parameters.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response<EnumProperty> response = await client.GetEnumAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<EnumProperty> response = await client.GetEnumAsync();
       <example>
 This sample shows how to call GetEnum.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response<EnumProperty> response = client.GetEnum();
 ]]></code>
 This sample shows how to call GetEnum with all parameters.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response<EnumProperty> response = client.GetEnum();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<EnumProperty> response = client.GetEnum();
       <example>
 This sample shows how to call GetEnumAsync and parse the result.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response response = await client.GetEnumAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetEnumAsync with all parameters and parse the result.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response response = await client.GetEnumAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call GetEnum and parse the result.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response response = client.GetEnum(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.GetProperty("property").ToString());
 ]]></code>
 This sample shows how to call GetEnum with all parameters and parse the result.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 Response response = client.GetEnum(null);
 
@@ -77,14 +77,14 @@ Console.WriteLine(result.GetProperty("property").ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
 Response response = await client.PutAsync(body);
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
 Response response = await client.PutAsync(body);
@@ -94,14 +94,14 @@ Response response = await client.PutAsync(body);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
 Response response = client.Put(body);
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 EnumProperty body = new EnumProperty(FixedInnerEnum.ValueOne);
 Response response = client.Put(body);
@@ -111,7 +111,7 @@ Response response = client.Put(body);
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -138,7 +138,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -150,7 +150,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Enum client = new ValueTypesClient().GetEnumClient(apiVersion: "1.0.0");
+Enum client = new ValueTypesClient().GetEnumClient();
 
 using RequestContent content = RequestContent.Create(new
 {

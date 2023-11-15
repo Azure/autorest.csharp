@@ -20,7 +20,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAnd_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAnd("<and>");
 
@@ -31,7 +31,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAnd_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAndAsync("<and>");
 
@@ -42,7 +42,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAnd_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAnd("<and>");
 
@@ -53,7 +53,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAnd_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAndAsync("<and>");
 
@@ -64,7 +64,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAs_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAs("<as>");
 
@@ -75,7 +75,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAs_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAsAsync("<as>");
 
@@ -86,7 +86,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAs_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAs("<as>");
 
@@ -97,7 +97,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAs_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAsAsync("<as>");
 
@@ -108,7 +108,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAssert_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAssert("<assert>");
 
@@ -119,7 +119,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAssert_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAssertAsync("<assert>");
 
@@ -130,7 +130,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAssert_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAssert("<assert>");
 
@@ -141,7 +141,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAssert_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAssertAsync("<assert>");
 
@@ -152,7 +152,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAsync_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAsync("<async>");
 
@@ -163,7 +163,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAsync_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAsyncAsync("<async>");
 
@@ -174,7 +174,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAsync_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAsync("<async>");
 
@@ -185,7 +185,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAsync_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAsyncAsync("<async>");
 
@@ -196,7 +196,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAwait_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAwait("<await>");
 
@@ -207,7 +207,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAwait_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAwaitAsync("<await>");
 
@@ -218,7 +218,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithAwait_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithAwait("<await>");
 
@@ -229,7 +229,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithAwait_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithAwaitAsync("<await>");
 
@@ -240,7 +240,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithBreak_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithBreak("<break>");
 
@@ -251,7 +251,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithBreak_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithBreakAsync("<break>");
 
@@ -262,7 +262,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithBreak_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithBreak("<break>");
 
@@ -273,7 +273,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithBreak_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithBreakAsync("<break>");
 
@@ -284,7 +284,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithClass_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithClass("<class>");
 
@@ -295,7 +295,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithClass_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithClassAsync("<class>");
 
@@ -306,7 +306,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithClass_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithClass("<class>");
 
@@ -317,7 +317,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithClass_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithClassAsync("<class>");
 
@@ -328,7 +328,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithConstructor_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithConstructor("<constructor>");
 
@@ -339,7 +339,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithConstructor_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithConstructorAsync("<constructor>");
 
@@ -350,7 +350,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithConstructor_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithConstructor("<constructor>");
 
@@ -361,7 +361,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithConstructor_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithConstructorAsync("<constructor>");
 
@@ -372,7 +372,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithContinue_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithContinue("<continue>");
 
@@ -383,7 +383,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithContinue_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithContinueAsync("<continue>");
 
@@ -394,7 +394,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithContinue_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithContinue("<continue>");
 
@@ -405,7 +405,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithContinue_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithContinueAsync("<continue>");
 
@@ -416,7 +416,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithDef_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithDef("<def>");
 
@@ -427,7 +427,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithDef_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithDefAsync("<def>");
 
@@ -438,7 +438,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithDef_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithDef("<def>");
 
@@ -449,7 +449,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithDef_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithDefAsync("<def>");
 
@@ -460,7 +460,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithDel_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithDel("<del>");
 
@@ -471,7 +471,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithDel_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithDelAsync("<del>");
 
@@ -482,7 +482,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithDel_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithDel("<del>");
 
@@ -493,7 +493,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithDel_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithDelAsync("<del>");
 
@@ -504,7 +504,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithElif_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithElif("<elif>");
 
@@ -515,7 +515,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithElif_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithElifAsync("<elif>");
 
@@ -526,7 +526,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithElif_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithElif("<elif>");
 
@@ -537,7 +537,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithElif_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithElifAsync("<elif>");
 
@@ -548,7 +548,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithElse_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithElse("<else>");
 
@@ -559,7 +559,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithElse_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithElseAsync("<else>");
 
@@ -570,7 +570,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithElse_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithElse("<else>");
 
@@ -581,7 +581,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithElse_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithElseAsync("<else>");
 
@@ -592,7 +592,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithExcept_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithExcept("<except>");
 
@@ -603,7 +603,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithExcept_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithExceptAsync("<except>");
 
@@ -614,7 +614,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithExcept_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithExcept("<except>");
 
@@ -625,7 +625,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithExcept_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithExceptAsync("<except>");
 
@@ -636,7 +636,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithExec_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithExec("<exec>");
 
@@ -647,7 +647,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithExec_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithExecAsync("<exec>");
 
@@ -658,7 +658,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithExec_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithExec("<exec>");
 
@@ -669,7 +669,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithExec_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithExecAsync("<exec>");
 
@@ -680,7 +680,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithFinally_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithFinally("<finally>");
 
@@ -691,7 +691,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithFinally_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithFinallyAsync("<finally>");
 
@@ -702,7 +702,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithFinally_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithFinally("<finally>");
 
@@ -713,7 +713,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithFinally_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithFinallyAsync("<finally>");
 
@@ -724,7 +724,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithFor_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithFor("<for>");
 
@@ -735,7 +735,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithFor_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithForAsync("<for>");
 
@@ -746,7 +746,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithFor_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithFor("<for>");
 
@@ -757,7 +757,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithFor_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithForAsync("<for>");
 
@@ -768,7 +768,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithFrom_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithFrom("<from>");
 
@@ -779,7 +779,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithFrom_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithFromAsync("<from>");
 
@@ -790,7 +790,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithFrom_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithFrom("<from>");
 
@@ -801,7 +801,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithFrom_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithFromAsync("<from>");
 
@@ -812,7 +812,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithGlobal_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithGlobal("<global>");
 
@@ -823,7 +823,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithGlobal_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithGlobalAsync("<global>");
 
@@ -834,7 +834,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithGlobal_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithGlobal("<global>");
 
@@ -845,7 +845,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithGlobal_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithGlobalAsync("<global>");
 
@@ -856,7 +856,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithIf_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithIf("<if>");
 
@@ -867,7 +867,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithIf_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithIfAsync("<if>");
 
@@ -878,7 +878,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithIf_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithIf("<if>");
 
@@ -889,7 +889,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithIf_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithIfAsync("<if>");
 
@@ -900,7 +900,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithImport_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithImport("<import>");
 
@@ -911,7 +911,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithImport_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithImportAsync("<import>");
 
@@ -922,7 +922,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithImport_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithImport("<import>");
 
@@ -933,7 +933,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithImport_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithImportAsync("<import>");
 
@@ -944,7 +944,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithIn_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithIn("<in>");
 
@@ -955,7 +955,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithIn_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithInAsync("<in>");
 
@@ -966,7 +966,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithIn_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithIn("<in>");
 
@@ -977,7 +977,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithIn_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithInAsync("<in>");
 
@@ -988,7 +988,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithIs_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithIs("<is>");
 
@@ -999,7 +999,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithIs_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithIsAsync("<is>");
 
@@ -1010,7 +1010,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithIs_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithIs("<is>");
 
@@ -1021,7 +1021,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithIs_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithIsAsync("<is>");
 
@@ -1032,7 +1032,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithLambda_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithLambda("<lambda>");
 
@@ -1043,7 +1043,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithLambda_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithLambdaAsync("<lambda>");
 
@@ -1054,7 +1054,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithLambda_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithLambda("<lambda>");
 
@@ -1065,7 +1065,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithLambda_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithLambdaAsync("<lambda>");
 
@@ -1076,7 +1076,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithNot_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithNot("<not>");
 
@@ -1087,7 +1087,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithNot_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithNotAsync("<not>");
 
@@ -1098,7 +1098,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithNot_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithNot("<not>");
 
@@ -1109,7 +1109,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithNot_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithNotAsync("<not>");
 
@@ -1120,7 +1120,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithOr_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithOr("<or>");
 
@@ -1131,7 +1131,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithOr_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithOrAsync("<or>");
 
@@ -1142,7 +1142,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithOr_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithOr("<or>");
 
@@ -1153,7 +1153,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithOr_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithOrAsync("<or>");
 
@@ -1164,7 +1164,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithPass_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithPass("<pass>");
 
@@ -1175,7 +1175,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithPass_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithPassAsync("<pass>");
 
@@ -1186,7 +1186,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithPass_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithPass("<pass>");
 
@@ -1197,7 +1197,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithPass_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithPassAsync("<pass>");
 
@@ -1208,7 +1208,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithRaise_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithRaise("<raise>");
 
@@ -1219,7 +1219,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithRaise_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithRaiseAsync("<raise>");
 
@@ -1230,7 +1230,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithRaise_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithRaise("<raise>");
 
@@ -1241,7 +1241,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithRaise_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithRaiseAsync("<raise>");
 
@@ -1252,7 +1252,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithReturn_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithReturn("<return>");
 
@@ -1263,7 +1263,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithReturn_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithReturnAsync("<return>");
 
@@ -1274,7 +1274,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithReturn_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithReturn("<return>");
 
@@ -1285,7 +1285,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithReturn_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithReturnAsync("<return>");
 
@@ -1296,7 +1296,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithTry_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithTry("<try>");
 
@@ -1307,7 +1307,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithTry_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithTryAsync("<try>");
 
@@ -1318,7 +1318,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithTry_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithTry("<try>");
 
@@ -1329,7 +1329,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithTry_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithTryAsync("<try>");
 
@@ -1340,7 +1340,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithWhile_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithWhile("<while>");
 
@@ -1351,7 +1351,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithWhile_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithWhileAsync("<while>");
 
@@ -1362,7 +1362,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithWhile_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithWhile("<while>");
 
@@ -1373,7 +1373,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithWhile_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithWhileAsync("<while>");
 
@@ -1384,7 +1384,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithWith_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithWith("<with>");
 
@@ -1395,7 +1395,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithWith_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithWithAsync("<with>");
 
@@ -1406,7 +1406,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithWith_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithWith("<with>");
 
@@ -1417,7 +1417,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithWith_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithWithAsync("<with>");
 
@@ -1428,7 +1428,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithYield_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithYield("<yield>");
 
@@ -1439,7 +1439,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithYield_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithYieldAsync("<yield>");
 
@@ -1450,7 +1450,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithYield_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithYield("<yield>");
 
@@ -1461,7 +1461,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithYield_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithYieldAsync("<yield>");
 
@@ -1472,7 +1472,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithCancellationToken_ShortVersion()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithCancellationToken("<cancellationToken>");
 
@@ -1483,7 +1483,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithCancellationToken_ShortVersion_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithCancellationTokenAsync("<cancellationToken>");
 
@@ -1494,7 +1494,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_WithCancellationToken_AllParameters()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = client.WithCancellationToken("<cancellationToken>");
 
@@ -1505,7 +1505,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_WithCancellationToken_AllParameters_Async()
         {
-            Parameters client = new SpecialWordsClient().GetParametersClient(apiVersion: "1.0.0");
+            Parameters client = new SpecialWordsClient().GetParametersClient();
 
             Response response = await client.WithCancellationTokenAsync("<cancellationToken>");
 

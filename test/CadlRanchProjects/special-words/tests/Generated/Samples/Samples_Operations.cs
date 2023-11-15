@@ -20,7 +20,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_And_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.And();
 
@@ -31,7 +31,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_And_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AndAsync();
 
@@ -42,7 +42,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_And_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.And();
 
@@ -53,7 +53,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_And_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AndAsync();
 
@@ -64,7 +64,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_As_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.As();
 
@@ -75,7 +75,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_As_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AsAsync();
 
@@ -86,7 +86,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_As_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.As();
 
@@ -97,7 +97,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_As_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AsAsync();
 
@@ -108,7 +108,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Assert_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Assert();
 
@@ -119,7 +119,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Assert_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AssertAsync();
 
@@ -130,7 +130,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Assert_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Assert();
 
@@ -141,7 +141,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Assert_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AssertAsync();
 
@@ -152,7 +152,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Async_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Async();
 
@@ -163,7 +163,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Async_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AsyncAsync();
 
@@ -174,7 +174,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Async_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Async();
 
@@ -185,7 +185,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Async_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AsyncAsync();
 
@@ -196,7 +196,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Await_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Await();
 
@@ -207,7 +207,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Await_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AwaitAsync();
 
@@ -218,7 +218,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Await_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Await();
 
@@ -229,7 +229,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Await_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.AwaitAsync();
 
@@ -240,7 +240,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Break_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Break();
 
@@ -251,7 +251,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Break_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.BreakAsync();
 
@@ -262,7 +262,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Break_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Break();
 
@@ -273,7 +273,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Break_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.BreakAsync();
 
@@ -284,7 +284,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Class_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Class();
 
@@ -295,7 +295,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Class_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ClassAsync();
 
@@ -306,7 +306,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Class_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Class();
 
@@ -317,7 +317,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Class_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ClassAsync();
 
@@ -328,7 +328,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Constructor_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Constructor();
 
@@ -339,7 +339,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Constructor_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ConstructorAsync();
 
@@ -350,7 +350,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Constructor_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Constructor();
 
@@ -361,7 +361,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Constructor_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ConstructorAsync();
 
@@ -372,7 +372,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Continue_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Continue();
 
@@ -383,7 +383,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Continue_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ContinueAsync();
 
@@ -394,7 +394,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Continue_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Continue();
 
@@ -405,7 +405,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Continue_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ContinueAsync();
 
@@ -416,7 +416,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Def_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Def();
 
@@ -427,7 +427,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Def_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.DefAsync();
 
@@ -438,7 +438,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Def_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Def();
 
@@ -449,7 +449,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Def_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.DefAsync();
 
@@ -460,7 +460,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Del_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Del();
 
@@ -471,7 +471,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Del_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.DelAsync();
 
@@ -482,7 +482,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Del_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Del();
 
@@ -493,7 +493,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Del_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.DelAsync();
 
@@ -504,7 +504,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Elif_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Elif();
 
@@ -515,7 +515,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Elif_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ElifAsync();
 
@@ -526,7 +526,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Elif_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Elif();
 
@@ -537,7 +537,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Elif_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ElifAsync();
 
@@ -548,7 +548,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Else_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Else();
 
@@ -559,7 +559,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Else_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ElseAsync();
 
@@ -570,7 +570,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Else_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Else();
 
@@ -581,7 +581,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Else_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ElseAsync();
 
@@ -592,7 +592,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Except_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Except();
 
@@ -603,7 +603,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Except_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ExceptAsync();
 
@@ -614,7 +614,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Except_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Except();
 
@@ -625,7 +625,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Except_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ExceptAsync();
 
@@ -636,7 +636,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Exec_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Exec();
 
@@ -647,7 +647,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Exec_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ExecAsync();
 
@@ -658,7 +658,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Exec_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Exec();
 
@@ -669,7 +669,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Exec_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ExecAsync();
 
@@ -680,7 +680,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Finally_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Finally();
 
@@ -691,7 +691,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Finally_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.FinallyAsync();
 
@@ -702,7 +702,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Finally_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Finally();
 
@@ -713,7 +713,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Finally_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.FinallyAsync();
 
@@ -724,7 +724,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_For_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.For();
 
@@ -735,7 +735,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_For_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ForAsync();
 
@@ -746,7 +746,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_For_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.For();
 
@@ -757,7 +757,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_For_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ForAsync();
 
@@ -768,7 +768,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_From_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.From();
 
@@ -779,7 +779,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_From_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.FromAsync();
 
@@ -790,7 +790,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_From_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.From();
 
@@ -801,7 +801,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_From_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.FromAsync();
 
@@ -812,7 +812,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Global_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Global();
 
@@ -823,7 +823,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Global_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.GlobalAsync();
 
@@ -834,7 +834,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Global_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Global();
 
@@ -845,7 +845,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Global_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.GlobalAsync();
 
@@ -856,7 +856,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_If_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.If();
 
@@ -867,7 +867,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_If_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.IfAsync();
 
@@ -878,7 +878,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_If_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.If();
 
@@ -889,7 +889,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_If_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.IfAsync();
 
@@ -900,7 +900,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Import_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Import();
 
@@ -911,7 +911,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Import_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ImportAsync();
 
@@ -922,7 +922,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Import_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Import();
 
@@ -933,7 +933,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Import_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ImportAsync();
 
@@ -944,7 +944,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_In_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.In();
 
@@ -955,7 +955,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_In_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.InAsync();
 
@@ -966,7 +966,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_In_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.In();
 
@@ -977,7 +977,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_In_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.InAsync();
 
@@ -988,7 +988,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Is_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Is();
 
@@ -999,7 +999,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Is_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.IsAsync();
 
@@ -1010,7 +1010,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Is_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Is();
 
@@ -1021,7 +1021,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Is_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.IsAsync();
 
@@ -1032,7 +1032,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Lambda_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Lambda();
 
@@ -1043,7 +1043,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Lambda_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.LambdaAsync();
 
@@ -1054,7 +1054,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Lambda_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Lambda();
 
@@ -1065,7 +1065,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Lambda_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.LambdaAsync();
 
@@ -1076,7 +1076,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Not_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Not();
 
@@ -1087,7 +1087,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Not_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.NotAsync();
 
@@ -1098,7 +1098,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Not_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Not();
 
@@ -1109,7 +1109,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Not_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.NotAsync();
 
@@ -1120,7 +1120,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Or_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Or();
 
@@ -1131,7 +1131,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Or_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.OrAsync();
 
@@ -1142,7 +1142,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Or_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Or();
 
@@ -1153,7 +1153,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Or_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.OrAsync();
 
@@ -1164,7 +1164,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Pass_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Pass();
 
@@ -1175,7 +1175,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Pass_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.PassAsync();
 
@@ -1186,7 +1186,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Pass_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Pass();
 
@@ -1197,7 +1197,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Pass_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.PassAsync();
 
@@ -1208,7 +1208,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Raise_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Raise();
 
@@ -1219,7 +1219,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Raise_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.RaiseAsync();
 
@@ -1230,7 +1230,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Raise_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Raise();
 
@@ -1241,7 +1241,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Raise_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.RaiseAsync();
 
@@ -1252,7 +1252,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Return_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Return();
 
@@ -1263,7 +1263,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Return_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ReturnAsync();
 
@@ -1274,7 +1274,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Return_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Return();
 
@@ -1285,7 +1285,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Return_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.ReturnAsync();
 
@@ -1296,7 +1296,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Try_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Try();
 
@@ -1307,7 +1307,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Try_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.TryAsync();
 
@@ -1318,7 +1318,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Try_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Try();
 
@@ -1329,7 +1329,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Try_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.TryAsync();
 
@@ -1340,7 +1340,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_While_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.While();
 
@@ -1351,7 +1351,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_While_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.WhileAsync();
 
@@ -1362,7 +1362,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_While_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.While();
 
@@ -1373,7 +1373,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_While_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.WhileAsync();
 
@@ -1384,7 +1384,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_With_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.With();
 
@@ -1395,7 +1395,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_With_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.WithAsync();
 
@@ -1406,7 +1406,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_With_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.With();
 
@@ -1417,7 +1417,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_With_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.WithAsync();
 
@@ -1428,7 +1428,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Yield_ShortVersion()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Yield();
 
@@ -1439,7 +1439,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Yield_ShortVersion_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.YieldAsync();
 
@@ -1450,7 +1450,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Yield_AllParameters()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = client.Yield();
 
@@ -1461,7 +1461,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Yield_AllParameters_Async()
         {
-            Operations client = new SpecialWordsClient().GetOperationsClient(apiVersion: "1.0.0");
+            Operations client = new SpecialWordsClient().GetOperationsClient();
 
             Response response = await client.YieldAsync();
 

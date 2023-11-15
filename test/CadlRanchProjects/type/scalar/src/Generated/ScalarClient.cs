@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,34 +44,26 @@ namespace _Type.Scalar
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual String GetStringClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private String _cachedString;
+        private Boolean _cachedBoolean;
+        private Unknown _cachedUnknown;
 
-            return new String(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of String. </summary>
+        public virtual String GetStringClient()
+        {
+            return Volatile.Read(ref _cachedString) ?? Interlocked.CompareExchange(ref _cachedString, new String(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedString;
         }
 
         /// <summary> Initializes a new instance of Boolean. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Boolean GetBooleanClient(string apiVersion = "1.0.0")
+        public virtual Boolean GetBooleanClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Boolean(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedBoolean) ?? Interlocked.CompareExchange(ref _cachedBoolean, new Boolean(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBoolean;
         }
 
         /// <summary> Initializes a new instance of Unknown. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Unknown GetUnknownClient(string apiVersion = "1.0.0")
+        public virtual Unknown GetUnknownClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Unknown(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedUnknown) ?? Interlocked.CompareExchange(ref _cachedUnknown, new Unknown(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnknown;
         }
     }
 }

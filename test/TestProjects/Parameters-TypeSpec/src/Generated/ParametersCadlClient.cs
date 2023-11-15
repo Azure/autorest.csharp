@@ -20,7 +20,6 @@ namespace ParametersCadl
     public partial class ParametersCadlClient
     {
         private readonly HttpPipeline _pipeline;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -41,7 +40,6 @@ namespace ParametersCadl
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _apiVersion = options.Version;
         }
 
         /// <param name="start"> The Int32 to use. </param>
@@ -248,7 +246,6 @@ namespace ParametersCadl
             {
                 uri.AppendQuery("end", end.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -266,7 +263,6 @@ namespace ParametersCadl
             {
                 uri.AppendQuery("start", start.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

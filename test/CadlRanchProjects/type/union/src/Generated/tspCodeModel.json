@@ -372,42 +372,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "45",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "46",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "47",
-        "Type": {
-         "$id": "48",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
@@ -428,7 +397,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "50",
+     "$id": "46",
      "Name": "sendIntArray",
      "ResourceName": "Union",
      "Parameters": [
@@ -436,7 +405,7 @@
        "$ref": "34"
       },
       {
-       "$id": "51",
+       "$id": "47",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -453,11 +422,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "52",
+       "$id": "48",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "53",
+        "$id": "49",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -472,19 +441,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "50",
         "Type": {
-         "$ref": "53"
+         "$ref": "49"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "55",
+       "$id": "51",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "56",
+        "$id": "52",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -499,20 +468,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "57",
+        "$id": "53",
         "Type": {
-         "$ref": "56"
+         "$ref": "52"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "58",
+       "$id": "54",
        "StatusCodes": [
         200
        ],
@@ -533,7 +499,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "59",
+     "$id": "55",
      "Name": "sendFirstNamedUnionValue",
      "ResourceName": "Union",
      "Parameters": [
@@ -541,7 +507,7 @@
        "$ref": "34"
       },
       {
-       "$id": "60",
+       "$id": "56",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -558,11 +524,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "61",
+       "$id": "57",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "62",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -577,19 +543,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "59",
         "Type": {
-         "$ref": "62"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "64",
+       "$id": "60",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "65",
+        "$id": "61",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -604,20 +570,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "62",
         "Type": {
-         "$ref": "65"
+         "$ref": "61"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "67",
+       "$id": "63",
        "StatusCodes": [
         200
        ],
@@ -638,7 +601,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "68",
+     "$id": "64",
      "Name": "sendSecondNamedUnionValue",
      "ResourceName": "Union",
      "Parameters": [
@@ -646,7 +609,7 @@
        "$ref": "34"
       },
       {
-       "$id": "69",
+       "$id": "65",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -663,11 +626,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "70",
+       "$id": "66",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "71",
+        "$id": "67",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -682,19 +645,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "72",
+        "$id": "68",
         "Type": {
-         "$ref": "71"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "73",
+       "$id": "69",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "74",
+        "$id": "70",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -709,20 +672,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "75",
+        "$id": "71",
         "Type": {
-         "$ref": "74"
+         "$ref": "70"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "76",
+       "$id": "72",
        "StatusCodes": [
         200
        ],
@@ -743,7 +703,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "77",
+     "$id": "73",
      "Name": "receiveString",
      "ResourceName": "Union",
      "Parameters": [
@@ -751,11 +711,11 @@
        "$ref": "34"
       },
       {
-       "$id": "78",
+       "$id": "74",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "79",
+        "$id": "75",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -770,20 +730,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "80",
+        "$id": "76",
         "Type": {
-         "$ref": "79"
+         "$ref": "75"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "81",
+       "$id": "77",
        "StatusCodes": [
         200
        ],
@@ -804,7 +761,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "82",
+     "$id": "78",
      "Name": "receiveIntArray",
      "ResourceName": "Union",
      "Parameters": [
@@ -812,11 +769,11 @@
        "$ref": "34"
       },
       {
-       "$id": "83",
+       "$id": "79",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "84",
+        "$id": "80",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -831,20 +788,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "81",
         "Type": {
-         "$ref": "84"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "82",
        "StatusCodes": [
         200
        ],
@@ -865,7 +819,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "87",
+     "$id": "83",
      "Name": "receiveFirstNamedUnionValue",
      "ResourceName": "Union",
      "Parameters": [
@@ -873,11 +827,11 @@
        "$ref": "34"
       },
       {
-       "$id": "88",
+       "$id": "84",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "89",
+        "$id": "85",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -892,20 +846,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "90",
+        "$id": "86",
         "Type": {
-         "$ref": "89"
+         "$ref": "85"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "91",
+       "$id": "87",
        "StatusCodes": [
         200
        ],
@@ -926,7 +877,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "92",
+     "$id": "88",
      "Name": "receiveSecondNamedUnionValue",
      "ResourceName": "Union",
      "Parameters": [
@@ -934,11 +885,11 @@
        "$ref": "34"
       },
       {
-       "$id": "93",
+       "$id": "89",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
+        "$id": "90",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -953,20 +904,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "91",
         "Type": {
-         "$ref": "94"
+         "$ref": "90"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "92",
        "StatusCodes": [
         200
        ],
@@ -988,7 +936,7 @@
     }
    ],
    "Protocol": {
-    "$id": "97"
+    "$id": "93"
    },
    "Creatable": true
   }

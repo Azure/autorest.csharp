@@ -23,7 +23,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_ShortVersion()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = client.GetAll(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_ShortVersion_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_ShortVersion_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetAll();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_ShortVersion_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetAllAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = client.GetAll(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetAll();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetAllAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_ShortVersion()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = client.GetDefault(null);
 
@@ -119,7 +119,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_ShortVersion_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -131,7 +131,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_ShortVersion_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetDefault();
         }
@@ -140,7 +140,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_ShortVersion_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetDefaultAsync();
         }
@@ -149,7 +149,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = client.GetDefault(null);
 
@@ -161,7 +161,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -173,7 +173,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = client.GetDefault();
         }
@@ -182,7 +182,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             Response<BytesProperty> response = await client.GetDefaultAsync();
         }
@@ -191,7 +191,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_ShortVersion()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
@@ -203,7 +203,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_ShortVersion_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
@@ -215,7 +215,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_ShortVersion_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty();
             Response response = client.PutAll(body);
@@ -225,7 +225,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_ShortVersion_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty();
             Response response = await client.PutAllAsync(body);
@@ -235,7 +235,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -250,7 +250,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -265,7 +265,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty
             {
@@ -278,7 +278,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty
             {
@@ -291,7 +291,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_ShortVersion()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
@@ -303,7 +303,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_ShortVersion_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
@@ -315,7 +315,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_ShortVersion_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty();
             Response response = client.PutDefault(body);
@@ -325,7 +325,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_ShortVersion_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty();
             Response response = await client.PutDefaultAsync(body);
@@ -335,7 +335,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -350,7 +350,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -365,7 +365,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters_Convenience()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty
             {
@@ -378,7 +378,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Convenience_Async()
         {
-            Bytes client = new OptionalClient().GetBytesClient(apiVersion: "1.0.0");
+            Bytes client = new OptionalClient().GetBytesClient();
 
             BytesProperty body = new BytesProperty
             {
