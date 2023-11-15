@@ -8,7 +8,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal record ModelReaderWriterOptionsExpression(ValueExpression Untyped) : TypedValueExpression<ModelReaderWriterOptions>(Untyped)
     {
-        public static ModelReaderWriterOptionsExpression DefaultWireOptions => new(new MemberExpression(typeof(ModelReaderWriterOptions), nameof(ModelReaderWriterOptions.Wire)));
+        public static ModelReaderWriterOptionsExpression Wire => new(new MemberExpression(typeof(ModelReaderWriterOptions), nameof(ModelReaderWriterOptions.Wire)));
 
         public ValueExpression Format => new MemberExpression(this, nameof(ModelReaderWriterOptions.Format));
     }

@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(Configuration.ApiTypes.IUtf8JsonSerializableWriteName, null, null, MethodSignatureModifiers.None, null, null, new[] { utf8JsonWriterParameter }, ExplicitInterface: Configuration.ApiTypes.IUtf8JsonSerializableType),
-                This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriterParameter, ModelReaderWriterOptionsExpression.DefaultWireOptions)
+                This.CastTo(jsonModelInterface).Invoke(nameof(IJsonModel<object>.Write), utf8JsonWriterParameter, ModelReaderWriterOptionsExpression.Wire)
             );
 
             // void IJsonModel<T>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
@@ -629,7 +629,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(JsonElementExpression jsonElement, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
         {
             // fallback to Default options if it is null
-            yield return AssignIfNull(options, ModelReaderWriterOptionsExpression.DefaultWireOptions);
+            yield return AssignIfNull(options, ModelReaderWriterOptionsExpression.Wire);
 
             yield return EmptyLine;
 

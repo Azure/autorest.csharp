@@ -138,7 +138,7 @@ namespace OpenAI.Models
         internal static CreateModerationResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateModerationResponse(document.RootElement);
+            return DeserializeCreateModerationResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

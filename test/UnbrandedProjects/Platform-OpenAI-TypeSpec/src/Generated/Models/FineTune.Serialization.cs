@@ -267,7 +267,7 @@ namespace OpenAI.Models
         internal static FineTune FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFineTune(document.RootElement);
+            return DeserializeFineTune(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

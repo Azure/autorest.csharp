@@ -138,7 +138,7 @@ namespace OpenAI.Models
         internal static ListPaginatedFineTuningJobsResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListPaginatedFineTuningJobsResponse(document.RootElement);
+            return DeserializeListPaginatedFineTuningJobsResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

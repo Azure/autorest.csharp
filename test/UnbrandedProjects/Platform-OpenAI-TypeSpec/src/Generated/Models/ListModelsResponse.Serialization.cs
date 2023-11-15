@@ -130,7 +130,7 @@ namespace OpenAI.Models
         internal static ListModelsResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListModelsResponse(document.RootElement);
+            return DeserializeListModelsResponse(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

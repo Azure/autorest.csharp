@@ -176,7 +176,7 @@ namespace OpenAI.Models
         internal static CreateImageVariationRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateImageVariationRequest(document.RootElement);
+            return DeserializeCreateImageVariationRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

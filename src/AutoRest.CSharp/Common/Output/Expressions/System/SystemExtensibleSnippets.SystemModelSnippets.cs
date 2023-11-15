@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
                     new MethodBodyStatement[]
                     {
                         Snippets.UsingVar("document", JsonDocumentExpression.Parse(new PipelineResponseExpression(result).Content), out var document),
-                        Snippets.Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
+                        Snippets.Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement, ModelReaderWriterOptionsExpression.Wire))
                     }
                 );
             }

@@ -181,7 +181,7 @@ namespace OpenAI.Models
         internal static CreateFineTuningJobRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateFineTuningJobRequest(document.RootElement);
+            return DeserializeCreateFineTuningJobRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

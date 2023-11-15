@@ -126,7 +126,7 @@ namespace OpenAI.Models
         internal static FineTuningJobHyperparameters FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFineTuningJobHyperparameters(document.RootElement);
+            return DeserializeFineTuningJobHyperparameters(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

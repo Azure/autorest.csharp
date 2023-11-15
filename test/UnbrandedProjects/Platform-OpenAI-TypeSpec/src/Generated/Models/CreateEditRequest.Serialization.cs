@@ -212,7 +212,7 @@ namespace OpenAI.Models
         internal static CreateEditRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateEditRequest(document.RootElement);
+            return DeserializeCreateEditRequest(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

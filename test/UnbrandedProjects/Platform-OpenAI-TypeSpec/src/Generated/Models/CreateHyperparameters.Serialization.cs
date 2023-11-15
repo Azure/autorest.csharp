@@ -126,7 +126,7 @@ namespace OpenAI.Models
         internal static CreateHyperparameters FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateHyperparameters(document.RootElement);
+            return DeserializeCreateHyperparameters(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

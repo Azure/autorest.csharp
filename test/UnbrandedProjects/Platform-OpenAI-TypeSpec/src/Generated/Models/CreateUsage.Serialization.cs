@@ -120,7 +120,7 @@ namespace OpenAI.Models
         internal static CreateUsage FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateUsage(document.RootElement);
+            return DeserializeCreateUsage(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

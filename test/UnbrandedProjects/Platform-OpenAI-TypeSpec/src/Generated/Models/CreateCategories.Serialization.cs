@@ -192,7 +192,7 @@ namespace OpenAI.Models
         internal static CreateCategories FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateCategories(document.RootElement);
+            return DeserializeCreateCategories(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
