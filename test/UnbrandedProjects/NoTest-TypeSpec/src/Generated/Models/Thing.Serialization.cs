@@ -290,7 +290,7 @@ namespace NoTestTypeSpec.Models
         internal static Thing FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeThing(document.RootElement);
+            return DeserializeThing(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
