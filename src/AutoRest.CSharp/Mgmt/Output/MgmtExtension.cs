@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -194,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             $"The resource parameters to use in these operations.",
             typeof(ArmResource),
             null,
-            ValidationType.None,
+            ValidationType.AssertNotNull,
             null);
 
         public MgmtMockableExtension MockableExtension => Cache[ArmCoreType];
