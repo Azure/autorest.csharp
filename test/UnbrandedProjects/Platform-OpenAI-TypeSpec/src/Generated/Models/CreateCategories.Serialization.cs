@@ -188,11 +188,11 @@ namespace OpenAI.Models
         string IPersistableModel<CreateCategories>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static CreateCategories FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static CreateCategories FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateCategories(document.RootElement, ModelReaderWriterOptions.Wire);
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCreateCategories(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

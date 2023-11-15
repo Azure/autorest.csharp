@@ -122,11 +122,11 @@ namespace OpenAI.Models
         string IPersistableModel<FineTuningJobHyperparameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static FineTuningJobHyperparameters FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static FineTuningJobHyperparameters FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFineTuningJobHyperparameters(document.RootElement, ModelReaderWriterOptions.Wire);
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeFineTuningJobHyperparameters(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

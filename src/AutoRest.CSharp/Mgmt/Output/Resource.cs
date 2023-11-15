@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -520,7 +520,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var methodBody = new MethodBodyStatement[]
             {
                 Var(resourceId, new FormattableStringExpression(formatBuilder.ToString(), signature.Parameters.Select(p => (ValueExpression)p).ToArray())),
-                Return(Snippets.New.ResourceIdentifier(resourceId))
+                Return(Snippets.New.Instance(typeof(ResourceIdentifier), resourceId))
             };
             return new Method(signature, methodBody);
         }
@@ -531,7 +531,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return Snippets.New.ResourceIdentifier(id);
+                return Snippets.New.Instance(typeof(ResourceIdentifier), id);
             }
             else
             {

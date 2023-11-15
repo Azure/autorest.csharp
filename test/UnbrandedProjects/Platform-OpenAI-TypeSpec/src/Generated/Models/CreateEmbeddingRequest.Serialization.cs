@@ -134,11 +134,11 @@ namespace OpenAI.Models
         string IPersistableModel<CreateEmbeddingRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static CreateEmbeddingRequest FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static CreateEmbeddingRequest FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateEmbeddingRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCreateEmbeddingRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

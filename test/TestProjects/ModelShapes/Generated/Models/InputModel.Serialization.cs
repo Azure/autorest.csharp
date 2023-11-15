@@ -178,22 +178,28 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
-            writer.WritePropertyName("vector"u8);
-            writer.WriteStartArray();
-            foreach (var item in Vector.Span)
+            if (Optional.IsDefined(Vector))
             {
-                writer.WriteNumberValue(item);
-            }
-            writer.WriteEndArray();
-            if (options.Format == "J")
-            {
-                writer.WritePropertyName("vectorReadOnly"u8);
+                writer.WritePropertyName("vector"u8);
                 writer.WriteStartArray();
-                foreach (var item in VectorReadOnly.Span)
+                foreach (var item in Vector.Span)
                 {
                     writer.WriteNumberValue(item);
                 }
                 writer.WriteEndArray();
+            }
+            if (options.Format == "J")
+            {
+                if (Optional.IsDefined(VectorReadOnly))
+                {
+                    writer.WritePropertyName("vectorReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorReadOnly.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
             }
             if (options.Format == "J")
             {
@@ -212,27 +218,13 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (VectorNullable != null)
+            if (Optional.IsDefined(VectorNullable))
             {
-                writer.WritePropertyName("vectorNullable"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorNullable.Value.Span)
+                if (VectorNullable != null)
                 {
-                    writer.WriteNumberValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteNull("vectorNullable");
-            }
-            if (options.Format == "J")
-            {
-                if (VectorReadOnlyNullable != null)
-                {
-                    writer.WritePropertyName("vectorReadOnlyNullable"u8);
+                    writer.WritePropertyName("vectorNullable"u8);
                     writer.WriteStartArray();
-                    foreach (var item in VectorReadOnlyNullable.Value.Span)
+                    foreach (var item in VectorNullable.Value.Span)
                     {
                         writer.WriteNumberValue(item);
                     }
@@ -240,7 +232,27 @@ namespace ModelShapes.Models
                 }
                 else
                 {
-                    writer.WriteNull("vectorReadOnlyNullable");
+                    writer.WriteNull("vectorNullable");
+                }
+            }
+            if (options.Format == "J")
+            {
+                if (Optional.IsDefined(VectorReadOnlyNullable))
+                {
+                    if (VectorReadOnlyNullable != null)
+                    {
+                        writer.WritePropertyName("vectorReadOnlyNullable"u8);
+                        writer.WriteStartArray();
+                        foreach (var item in VectorReadOnlyNullable.Value.Span)
+                        {
+                            writer.WriteNumberValue(item);
+                        }
+                        writer.WriteEndArray();
+                    }
+                    else
+                    {
+                        writer.WriteNull("vectorReadOnlyNullable");
+                    }
                 }
             }
             if (options.Format == "J")

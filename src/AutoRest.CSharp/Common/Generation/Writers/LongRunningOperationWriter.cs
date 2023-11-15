@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (operation.ResultSerialization != null)
             {
-                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, null, $"{responseVariable}", resultType);
+                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, null, $"{responseVariable}.{Configuration.ApiTypes.ContentStreamName}", resultType);
             }
             else
             {

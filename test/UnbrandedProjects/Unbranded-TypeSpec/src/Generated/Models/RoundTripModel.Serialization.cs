@@ -585,11 +585,16 @@ namespace UnbrandedTypeSpec.Models
         string IPersistableModel<RoundTripModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static RoundTripModel FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static RoundTripModel FromResponse(PipelineResponse response)
         {
+<<<<<<< HEAD
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeRoundTripModel(document.RootElement, ModelReaderWriterOptions.Wire);
+=======
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeRoundTripModel(document.RootElement);
+>>>>>>> origin/feature/v3
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

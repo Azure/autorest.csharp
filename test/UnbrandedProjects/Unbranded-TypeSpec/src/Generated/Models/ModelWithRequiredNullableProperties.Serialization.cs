@@ -160,11 +160,16 @@ namespace UnbrandedTypeSpec.Models
         string IPersistableModel<ModelWithRequiredNullableProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ModelWithRequiredNullableProperties FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static ModelWithRequiredNullableProperties FromResponse(PipelineResponse response)
         {
+<<<<<<< HEAD
             using var document = JsonDocument.Parse(result.Content);
             return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelReaderWriterOptions.Wire);
+=======
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement);
+>>>>>>> origin/feature/v3
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

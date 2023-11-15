@@ -457,9 +457,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildMethods()
         {
-            yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
-
-            yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+            yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
+            yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

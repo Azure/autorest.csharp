@@ -195,11 +195,11 @@ namespace OpenAI.Models
         string IPersistableModel<CreateImageEditRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static CreateImageEditRequest FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static CreateImageEditRequest FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeCreateImageEditRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeCreateImageEditRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

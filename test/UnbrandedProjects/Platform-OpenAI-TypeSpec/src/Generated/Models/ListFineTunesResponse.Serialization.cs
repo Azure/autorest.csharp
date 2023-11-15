@@ -126,11 +126,11 @@ namespace OpenAI.Models
         string IPersistableModel<ListFineTunesResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ListFineTunesResponse FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static ListFineTunesResponse FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeListFineTunesResponse(document.RootElement, ModelReaderWriterOptions.Wire);
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeListFineTunesResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

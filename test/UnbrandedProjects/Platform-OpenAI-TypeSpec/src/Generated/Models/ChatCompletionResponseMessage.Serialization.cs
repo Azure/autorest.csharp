@@ -143,11 +143,11 @@ namespace OpenAI.Models
         string IPersistableModel<ChatCompletionResponseMessage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ChatCompletionResponseMessage FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static ChatCompletionResponseMessage FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeChatCompletionResponseMessage(document.RootElement, ModelReaderWriterOptions.Wire);
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeChatCompletionResponseMessage(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
