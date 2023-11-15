@@ -364,42 +364,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "45",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "46",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "47",
-        "Type": {
-         "$id": "48",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2021-03-25"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "49",
+       "$id": "45",
        "StatusCodes": [
         200
        ],
@@ -417,7 +386,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "50",
+     "$id": "46",
      "Name": "read",
      "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
@@ -426,12 +395,12 @@
        "$ref": "38"
       },
       {
-       "$id": "51",
+       "$id": "47",
        "Name": "petId",
        "NameInRequest": "petId",
        "Description": "The id of pet.",
        "Type": {
-        "$id": "52",
+        "$id": "48",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -447,11 +416,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "53",
+       "$id": "49",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "54",
+        "$id": "50",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -466,20 +435,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "55",
+        "$id": "51",
         "Type": {
-         "$ref": "54"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "56",
+       "$id": "52",
        "StatusCodes": [
         200
        ],
@@ -491,7 +457,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "57",
+       "$id": "53",
        "StatusCodes": [
         304
        ],
@@ -512,7 +478,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "58",
+     "$id": "54",
      "Name": "create",
      "ResourceName": "Pets",
      "Parameters": [
@@ -520,7 +486,7 @@
        "$ref": "38"
       },
       {
-       "$id": "59",
+       "$id": "55",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -537,11 +503,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "60",
+       "$id": "56",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "61",
+        "$id": "57",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -556,19 +522,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "58",
         "Type": {
-         "$ref": "61"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "63",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
+        "$id": "60",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -583,20 +549,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "61",
         "Type": {
-         "$ref": "64"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
@@ -620,7 +583,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "67",
+     "$id": "63",
      "Name": "getPetByKind",
      "ResourceName": "Pets",
      "Parameters": [
@@ -628,7 +591,7 @@
        "$ref": "38"
       },
       {
-       "$id": "68",
+       "$id": "64",
        "Name": "kind",
        "NameInRequest": "kind",
        "Type": {
@@ -645,11 +608,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "69",
+       "$id": "65",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "70",
+        "$id": "66",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -664,20 +627,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "71",
+        "$id": "67",
         "Type": {
-         "$ref": "70"
+         "$ref": "66"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "72",
+       "$id": "68",
        "StatusCodes": [
         200
        ],
@@ -698,7 +658,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "73",
+     "$id": "69",
      "Name": "GetFirstPet",
      "ResourceName": "Pets",
      "Parameters": [
@@ -706,11 +666,11 @@
        "$ref": "38"
       },
       {
-       "$id": "74",
+       "$id": "70",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "75",
+        "$id": "71",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -726,11 +686,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "72",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "77",
+        "$id": "73",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -745,20 +705,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "78",
+        "$id": "74",
         "Type": {
-         "$ref": "77"
+         "$ref": "73"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "79",
+       "$id": "75",
        "StatusCodes": [
         200
        ],
@@ -779,7 +736,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "80",
+     "$id": "76",
      "Name": "getFish",
      "ResourceName": "Pets",
      "Parameters": [
@@ -787,11 +744,11 @@
        "$ref": "38"
       },
       {
-       "$id": "81",
+       "$id": "77",
        "Name": "kind",
        "NameInRequest": "kind",
        "Type": {
-        "$id": "82",
+        "$id": "78",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -807,11 +764,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "83",
+       "$id": "79",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "84",
+        "$id": "80",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -826,20 +783,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "85",
+        "$id": "81",
         "Type": {
-         "$ref": "84"
+         "$ref": "80"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "45"
       }
      ],
      "Responses": [
       {
-       "$id": "86",
+       "$id": "82",
        "StatusCodes": [
         200
        ],
@@ -861,7 +815,7 @@
     }
    ],
    "Protocol": {
-    "$id": "87"
+    "$id": "83"
    },
    "Creatable": true
   }

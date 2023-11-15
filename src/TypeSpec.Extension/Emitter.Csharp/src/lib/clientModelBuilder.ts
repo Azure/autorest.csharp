@@ -216,8 +216,6 @@ export function createModelForService(
                 ) {
                     op.Parameters[apiVersionIndex] = apiVersionParam;
                 }
-            } else {
-                op.Parameters.push(apiVersionParam);
             }
         }
     }
