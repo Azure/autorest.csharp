@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
@@ -15,24 +16,26 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtExtensionBuilder
     {
         private readonly MgmtOutputLibrary _library;
+        private readonly SourceInputModel? _sourceInputModel;
 
-        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtMockableExtension> MockableExtensions, MgmtOutputLibrary Library)
+        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtMockableExtension> MockableExtensions, MgmtOutputLibrary Library, SourceInputModel? SourceInputModel)
         {
             private IEnumerable<MgmtExtension>? _extensions;
             public IEnumerable<MgmtExtension> Extensions => _extensions ??= ExtensionDict.Values;
 
             private MgmtExtensionWrapper? _extensionWrapper;
-            public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, MockableExtensions, Library);
+            public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, MockableExtensions, Library, SourceInputModel);
         }
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<InputOperation>> _extensionOperations;
         private readonly IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> _armResourceExtensionOperations;
 
-        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<InputOperation>> extensionOperations, Dictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, MgmtOutputLibrary library)
+        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<InputOperation>> extensionOperations, Dictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
         {
             _extensionOperations = extensionOperations;
             _armResourceExtensionOperations = armResourceExtensionOperations;
             _library = library;
+            _sourceInputModel = sourceInputModel;
         }
 
         public MgmtExtensionWrapper ExtensionWrapper => ExtensionInfo.ExtensionWrapper;
@@ -57,13 +60,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
-                var extension = new MgmtExtension(operations, mockingExtensions, type, _library);
+                var extension = new MgmtExtension(operations, mockingExtensions, type, _library, _sourceInputModel);
                 extensionDict.Add(type, extension);
             }
             // add ArmResourceExtension methods
-            var armResourceExtension = new ArmResourceExtension(_armResourceExtensionOperations, mockingExtensions, _library);
+            var armResourceExtension = new ArmResourceExtension(_armResourceExtensionOperations, mockingExtensions, _library, _sourceInputModel);
             // add ArmClientExtension methods (which is also the TenantResource extension methods)
-            var armClientExtension = new ArmClientExtension(_armResourceExtensionOperations, mockingExtensions, armResourceExtension, _library);
+            var armClientExtension = new ArmClientExtension(_armResourceExtensionOperations, mockingExtensions, armResourceExtension, _library, _sourceInputModel);
             extensionDict.Add(typeof(ArmResource), armResourceExtension);
             extensionDict.Add(typeof(ArmClient), armClientExtension);
 
@@ -85,12 +88,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
                 extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
                 var extensionClient = resourceType.Equals(typeof(ArmClient)) ?
-                    new MgmtMockableArmClient(resourceType, operations, extensionForChildResources, _library) :
-                    new MgmtMockableExtension(resourceType, operations, extensionForChildResources, _library);
+                    new MgmtMockableArmClient(resourceType, operations, extensionForChildResources, _library, _sourceInputModel) :
+                    new MgmtMockableExtension(resourceType, operations, extensionForChildResources, _library, _sourceInputModel);
                 mockingExtensions.Add(extensionClient);
             }
 
-            return new(extensionDict, mockingExtensions, _library);
+            return new(extensionDict, mockingExtensions, _library, _sourceInputModel);
         }
 
         private struct CSharpTypeNameComparer : IComparer<CSharpType>

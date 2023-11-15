@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -15,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class LongRunningInterimOperation
     {
-        public LongRunningInterimOperation(CSharpType returnType, Resource? resource, string methodName, MgmtOutputLibrary library)
+        public LongRunningInterimOperation(CSharpType returnType, Resource? resource, string methodName, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
         {
             ReturnType = returnType;
             BaseClassType = new CSharpType(typeof(ArmOperation<>), returnType);
@@ -23,13 +24,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             StateLockType = new CSharpType(typeof(AsyncLockWithValue<>), returnType);
             ValueTaskType = new CSharpType(typeof(ValueTask<>), returnType);
             ResponseType = new CSharpType(Configuration.ApiTypes.ResponseOfTType, returnType);
-            var trimmedNamespace = MgmtContext.Context.DefaultNamespace.Split('.').Last();
+            var trimmedNamespace = Configuration.Namespace.Split('.').Last();
             OperationType = $"{trimmedNamespace}ArmOperation<{returnType.Name}>";
             var resourceName = resource != null ? resource.ResourceName : $"{trimmedNamespace}Extensions";
             TypeName = $"{resourceName}{methodName}Operation";
             var targetType = new InputModelType(
                 TypeName,
-                MgmtContext.Context.DefaultNamespace,
+                Configuration.Namespace,
                 null,
                 null,
                 null,
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 null,
                 null,
                 false);
-            InterimType = new CSharpType(new MgmtObjectType(targetType, library.TypeFactory), MgmtContext.Context.DefaultNamespace, TypeName);
+            InterimType = new CSharpType(new MgmtObjectType(library, targetType, library.TypeFactory, sourceInputModel), Configuration.Namespace, TypeName);
         }
 
         public CSharpType ReturnType { get; }

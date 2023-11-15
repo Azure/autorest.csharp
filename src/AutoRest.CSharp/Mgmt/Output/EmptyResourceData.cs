@@ -3,12 +3,15 @@
 
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class EmptyResourceData : ResourceData
     {
-        public EmptyResourceData(InputModelType inputModel, TypeFactory typeFactory, string? newName = null) : base(inputModel, typeFactory, newName)
+        public EmptyResourceData(MgmtOutputLibrary library, InputModelType inputModel, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = null)
+            : base(library, inputModel, typeFactory, sourceInputModel, newName)
         { }
 
         // we never need anything in the empty resource data

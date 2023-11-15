@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
@@ -18,8 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyList<Resource>? _resources;
         private readonly MgmtOutputLibrary _library;
 
-        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, IReadOnlyList<InputOperation> operations, string clientName, MgmtOutputLibrary library)
-            : base(new ClientMethodsBuilder(inputClient.Operations, library, MgmtContext.Context.SourceInputModel, library.TypeFactory), clientParameters, restClientParameters, clientName, MgmtContext.Context.DefaultNamespace, inputClient.Key, MgmtContext.Context.SourceInputModel)
+        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, IReadOnlyList<InputOperation> operations, string clientName, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : base(new ClientMethodsBuilder(inputClient.Operations, library, sourceInputModel, library.TypeFactory), clientParameters, restClientParameters, clientName, Configuration.Namespace, inputClient.Key, sourceInputModel)
         {
             _library = library;
             _operations = operations;

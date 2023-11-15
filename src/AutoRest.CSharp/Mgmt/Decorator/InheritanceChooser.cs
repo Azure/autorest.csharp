@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(inputModel, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetExactMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, SourceInputModel? sourceInputModel)
         {
             if (_valueCache.TryGetValue(originalType.InputModel, out var result))
                 return result;
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 List<PropertyInfo> parentProperties = GetParentPropertiesToCompare(parentType, properties);
                 if (PropertyMatchDetection.IsEqual(parentType, originalType, parentProperties, properties.ToList()))
                 {
-                    result = GetCSharpType(parentType);
+                    result = GetCSharpType(parentType, sourceInputModel);
                     _valueCache.TryAdd(originalType.InputModel, result);
                     return result;
                 }
@@ -44,21 +44,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties, SourceInputModel? sourceInputModel)
         {
             foreach (System.Type parentType in ReferenceClassFinder.GetReferenceClassCollection())
             {
                 if (IsSuperset(parentType, originalType, properties))
                 {
-                    return GetCSharpType(parentType);
+                    return GetCSharpType(parentType, sourceInputModel);
                 }
             }
             return null;
         }
 
-        private static CSharpType GetCSharpType(Type parentType)
+        private static CSharpType GetCSharpType(Type parentType, SourceInputModel? sourceInputModel)
         {
-            return CSharpType.FromSystemType(MgmtContext.Context, parentType);
+            return CSharpType.FromSystemType(sourceInputModel, parentType);
         }
 
         private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)

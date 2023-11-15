@@ -8,10 +8,9 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Models;
 
@@ -27,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static readonly Type _resourceIdentifierType = typeof(Azure.Core.ResourceIdentifier);
         private static readonly Type _resourceTypeType = typeof(Azure.Core.ResourceType);
 
-        public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType, BuildContext context)
+        public static ObjectTypeProperty? GetExactMatchForReferenceType(ObjectTypeProperty originalType, Type frameworkType)
         {
             return FindSimpleReplacements(originalType, frameworkType);
         }
@@ -37,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(inputType, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, SourceInputModel? sourceInputModel)
         {
             if (_valueCache.TryGetValue(typeToReplace.InputModel, out var result))
                 return result;
@@ -54,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                     if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace, replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
-                        result = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
+                        result = CSharpType.FromSystemType(sourceInputModel, replacementType);
                         _valueCache.TryAdd(typeToReplace.InputModel, result);
                         return result;
                     }

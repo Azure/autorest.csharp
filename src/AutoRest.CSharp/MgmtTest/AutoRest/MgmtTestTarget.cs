@@ -31,9 +31,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
             CodeModelTransformer.Transform(codeModel);
-            var codeModelConverter = new CodeModelConverter(codeModel, MgmtContext.SchemaUsageProvider);
+            var codeModelConverter = new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel));
             var input = codeModelConverter.CreateNamespace();
-            var outputLibrary = new MgmtOutputLibrary(input);
+            var outputLibrary = new MgmtOutputLibrary(input, sourceInputModel);
             MgmtTestOutputLibrary? library = new MgmtTestOutputLibrary(input, outputLibrary);
             if (sourceInputModel == null)
             {

@@ -3,10 +3,9 @@
 
 using System;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -16,7 +15,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public MgmtReferenceType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default) : base(inputModelType, typeFactory, name, nameSpace)
+        public MgmtReferenceType(MgmtOutputLibrary library, InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default)
+            : base(library, inputModelType, typeFactory, sourceInputModel, name, nameSpace)
         {
         }
 
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             if (objectTypeProperty.ValueType != null && objectTypeProperty.ValueType.IsFrameworkType)
             {
-                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType, MgmtContext.Context);
+                var newProperty = ReferenceTypePropertyChooser.GetExactMatchForReferenceType(objectTypeProperty, objectTypeProperty.ValueType.FrameworkType);
                 if (newProperty != null)
                 {
                     string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);

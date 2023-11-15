@@ -560,7 +560,7 @@ namespace AutoRest.CSharp.Common.Input
             AnySchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
             AnyObjectSchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
 
-            _ => new CodeModelType(schema, false)
+            _ => throw new InvalidCastException($"Unknown schema type {schema.GetType()}")
         };
 
         private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)

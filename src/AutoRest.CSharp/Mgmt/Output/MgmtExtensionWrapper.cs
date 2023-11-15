@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 
@@ -26,10 +28,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockingExtensions, MgmtOutputLibrary library) : base(MgmtContext.RPName, library)
+        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockingExtensions, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : base(ClientBuilder.GetRPName(Configuration.Namespace), library, sourceInputModel)
         {
             DefaultName = $"{ResourceName}Extensions";
-            Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
+            Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {Configuration.Namespace}.";
             Extensions = extensions;
             MockingExtensions = mockingExtensions;
         }

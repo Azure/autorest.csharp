@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -19,7 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Output;
 /// </summary>
 internal class PartialResource : Resource
 {
-    protected internal PartialResource(OperationSet operationSet, IEnumerable<InputOperation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType, EmptyResourceData resourceData, MgmtOutputLibrary library) : base(operationSet, operations, defaultName, resourceType, resourceData, ResourcePosition, library)
+    protected internal PartialResource(OperationSet operationSet, IEnumerable<InputOperation> operations, string defaultName, string originalResourceName, ResourceTypeSegment resourceType, EmptyResourceData resourceData, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+        : base(operationSet, operations, defaultName, resourceType, resourceData, ResourcePosition, library, sourceInputModel)
     {
         OriginalResourceName = originalResourceName;
     }
@@ -34,7 +36,7 @@ internal class PartialResource : Resource
         var an = ResourceName.StartsWithVowel() ? "an" : "a";
         List<FormattableString> lines = new List<FormattableString>();
 
-        lines.Add($"A class extending from the {OriginalResourceName.AddResourceSuffixToResourceName()} in {MgmtContext.DefaultNamespace} along with the instance operations that can be performed on it.");
+        lines.Add($"A class extending from the {OriginalResourceName.AddResourceSuffixToResourceName()} in {Configuration.Namespace} along with the instance operations that can be performed on it.");
         lines.Add($"You can only construct {an} <see cref=\"{Type}\" /> from a <see cref=\"{typeof(ResourceIdentifier)}\" /> with a resource type of {ResourceType}.");
 
         return FormattableStringHelpers.Join(lines, "\r\n");

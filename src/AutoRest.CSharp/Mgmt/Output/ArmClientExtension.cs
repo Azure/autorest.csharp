@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -25,14 +26,14 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private readonly List<MgmtExtension> _extensions;
         private readonly ArmResourceExtension _armResourceExtensionForChildResources;
-        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients, ArmResourceExtension armResourceExtensionForChildResources, MgmtOutputLibrary library)
-            : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmClient), library, RequestPath.Tenant)
+        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients, ArmResourceExtension armResourceExtensionForChildResources, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmClient), library, sourceInputModel, RequestPath.Tenant)
         {
             _armResourceExtensionForChildResources = armResourceExtensionForChildResources;
             _extensions = new();
             foreach (var (parentRequestPath, operations) in armResourceExtensionOperations)
             {
-                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), library, parentRequestPath));
+                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), library, sourceInputModel, parentRequestPath));
             }
         }
 

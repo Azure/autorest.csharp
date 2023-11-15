@@ -5,6 +5,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 
@@ -26,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="typeToReplace">Type to check</param>
         /// <returns>Matched external type or null if not found</returns>
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, SourceInputModel? sourceInputModel)
         {
             if (_valueCache.TryGetValue(typeToReplace.InputModel, out var result))
                 return result;
@@ -35,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {
-                    var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
+                    var csharpType = CSharpType.FromSystemType(sourceInputModel, replacementType);
                     _valueCache.TryAdd(typeToReplace.InputModel, csharpType);
                     return csharpType;
                 }

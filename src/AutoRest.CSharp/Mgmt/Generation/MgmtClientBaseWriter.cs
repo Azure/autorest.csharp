@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             This = provider;
             FileName = This.Type.Name;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
-            LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
+            LibraryArmOperation = $"{Configuration.Namespace.Split('.').Last()}ArmOperation";
             _armResources = armResources;
         }
 

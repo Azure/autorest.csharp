@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -24,8 +25,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<InputOperation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, MgmtOutputLibrary library, RequestPath? contextualPath = null)
-            : base(armCoreType.Name, library)
+        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, MgmtOutputLibrary library, SourceInputModel? sourceInputModel, RequestPath? contextualPath = null)
+            : base(armCoreType.Name, library, sourceInputModel)
         {
             _allRawOperations = allRawOperations;
             _mockingExtensions = mockingExtensions; // this property is populated later
@@ -35,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath ?? RequestPath.GetContextualPath(armCoreType);
             ArmCoreNamespace = ArmCoreType.Namespace!;
-            ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
+            ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != Configuration.Namespace ? base.ChildResources : Enumerable.Empty<Resource>();
             ExtensionParameter = new Parameter(
                 VariableName,
                 $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
@@ -101,6 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         ContextualPath,
                         operationName,
                         _library,
+                        _sourceInputModel,
                         propertyBagName: ResourceName),
                     new(new MemberExpression(ExtensionParameter, "Id")),
                     _library,

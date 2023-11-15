@@ -5,7 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -21,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private readonly IEnumerable<MgmtClientOperation> _operations;
         private readonly MgmtExtension? _extensionForChildResources;
 
-        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library)
-            : base(resourceType.Name, library)
+        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : base(resourceType.Name, library, sourceInputModel)
         {
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
@@ -32,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         internal static string GetMockableExtensionDefaultName(string resourceName)
-            => $"Mockable{MgmtContext.RPName}{resourceName}";
+            => $"Mockable{ClientBuilder.GetRPName(Configuration.Namespace)}{resourceName}";
 
         public override bool IsInitializedByProperties => true;
 

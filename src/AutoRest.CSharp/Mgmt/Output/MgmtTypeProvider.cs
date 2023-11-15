@@ -23,6 +23,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Humanizer.Localisation;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -36,7 +37,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected bool IsArmCore { get; }
 
-        protected MgmtTypeProvider(string resourceName, MgmtOutputLibrary library) : base(MgmtContext.Context)
+        protected MgmtTypeProvider(string resourceName, MgmtOutputLibrary library, SourceInputModel? sourceInputModel) : base(Configuration.Namespace, sourceInputModel)
         {
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;

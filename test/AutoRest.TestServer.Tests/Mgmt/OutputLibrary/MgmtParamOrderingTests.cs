@@ -3,7 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -22,9 +21,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("DedicatedHostResource", "DedicatedHostGroupResource")]
         public void TestParent(string resourceName, string parentName)
         {
-            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            var resource = _library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.IsNotNull(resource);
-            var parents = resource.GetParents();
+            var parents = resource.GetParents(_library);
             Assert.IsTrue(parents.Any(r => r.Type.Name == parentName));
         }
 
@@ -39,10 +38,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("AvailabilitySets", "Delete", new[] { "subscriptionId", "resourceGroupName", "availabilitySetName" })]
         public void ValidateOperationParameterList(string operationGroupName, string methodName, string[] parameterList)
         {
-            var method = MgmtContext.CodeModel.OperationGroups.Single(p => p.Key.Equals(operationGroupName))
-                .Operations.Single(o => o.CSharpName().Equals(methodName));
+            var method = _inputNamespace.Clients.Single(p => p.Key.Equals(operationGroupName))
+                .Operations.Single(o => o.CleanName.Equals(methodName));
 
-            Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.In == HttpParameterIn.Path).Select(p => p.CSharpName())));
+            Assert.IsTrue(parameterList.SequenceEqual(method.Parameters.Where(p => p.Location == CSharp.Common.Input.RequestLocation.Path).Select(p => p.CSharpName())));
         }
 
         [TestCase(typeof(VirtualMachineScaleSetCollection), "CreateOrUpdate", true, new[] { "vmScaleSetName", "data", "quick" }, new[] { true, true, false })]

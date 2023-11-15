@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Report;
@@ -49,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 if (_schemasToChange.Contains(serializedName))
                 {
                     string oriName = schema.Language.Default.Name;
-                    string prefix = MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : MgmtContext.RPName;
+                    string prefix = Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : ClientBuilder.GetRPName(Configuration.Namespace);
                     string suffix = serializedName.Equals("Resource") ? "Data" : string.Empty;
                     schema.Language.Default.SerializedName ??= schema.Language.Default.Name;
                     schema.Language.Default.Name = prefix + serializedName + suffix;

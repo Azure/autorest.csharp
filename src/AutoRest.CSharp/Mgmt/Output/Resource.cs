@@ -14,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -84,8 +85,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <param name="resourceData">The corresponding resource data model</param>
         /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
-        protected internal Resource(OperationSet operationSet, IEnumerable<InputOperation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position, MgmtOutputLibrary library)
-            : base(resourceName, library)
+        protected internal Resource(OperationSet operationSet, IEnumerable<InputOperation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : base(resourceName, library, sourceInputModel)
         {
             _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
             OperationSet = operationSet;
@@ -138,8 +139,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
 
-        public Resource(OperationSet operationSet, IEnumerable<InputOperation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, MgmtOutputLibrary library)
-            : this(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition, library)
+        public Resource(OperationSet operationSet, IEnumerable<InputOperation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : this(operationSet, operations, resourceName, resourceType, resourceData, ResourcePosition, library, sourceInputModel)
         { }
 
         private static IEnumerable<InputOperation> GetClientOperations(OperationSet operationSet, IEnumerable<InputOperation> operations)
@@ -161,6 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     contextualPath,
                     operationName,
                     _library,
+                    _sourceInputModel,
                     isLongRunning,
                     throwIfNull,
                     Type.Name);
@@ -402,6 +404,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     contextualPath,
                     methodName,
                     _library,
+                    _sourceInputModel,
                     propertyBagName: Type.Name);
 
                 if (result.TryGetValue(key, out var list))

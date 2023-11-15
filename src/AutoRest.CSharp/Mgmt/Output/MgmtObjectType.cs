@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
@@ -18,8 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default, string? newName = default)
-            : base(inputModelType, typeFactory, MgmtContext.Context, newName)
+        public MgmtObjectType(MgmtOutputLibrary library, InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default, string? newName = default)
+            : base(library, inputModelType, typeFactory, sourceInputModel, newName)
         {
             _typeFactory = typeFactory;
             _defaultName = name;
@@ -31,7 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= GetDefaultName(InputModel, IsResourceType);
         private string? _defaultNamespace;
-        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(MgmtContext.Context, InputModel, IsResourceType);
+        protected override string DefaultNamespace => _defaultNamespace ??= GetDefaultNamespace(InputModel, IsResourceType);
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
@@ -41,9 +42,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return isResourceType ? name + "Data" : name;
         }
 
-        private static string GetDefaultNamespace(BuildContext context, InputModelType inputModelType, bool isResourceType)
+        private static string GetDefaultNamespace(InputModelType inputModelType, bool isResourceType)
         {
-            return isResourceType ? context.DefaultNamespace : GetDefaultNamespace(inputModelType.Namespace, context);
+            return isResourceType ? Configuration.Namespace : GetDefaultNamespace(inputModelType.Namespace);
         }
 
         private HashSet<string> GetParentPropertyNames()
@@ -127,7 +128,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var argType = objectTypeProperty.ValueType.Arguments[i];
                     if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
                     {
-                        var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
+                        var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace, _sourceInputModel);
                         if (match != null)
                         {
                             string fullSerializedName = GetFullSerializedName(objectTypeProperty, i);
@@ -146,7 +147,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 ObjectTypeProperty propertyType = objectTypeProperty;
                 if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
                 {
-                    var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
+                    var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace, _sourceInputModel);
                     if (match != null)
                     {
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
@@ -209,7 +210,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     {
                         // we cannot directly return the FrameworkType here, we need to wrap it inside the SystemObjectType
                         // in order to let the constructor builder have the ability to get base constructor
-                        return CSharpType.FromSystemType(MgmtContext.Context, existingBaseType.FrameworkType);
+                        return CSharpType.FromSystemType(_sourceInputModel, existingBaseType.FrameworkType);
                     }
                 }
                 // if we did not find that type, this means the customization code is referencing something unrecognized
@@ -237,7 +238,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
-                var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
+                var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties, _sourceInputModel);
                 if (match != null)
                 {
                     string fullSerializedName = GetFullSerializedName();
@@ -250,7 +251,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             // try superset match because our superset match is checking the proper superset
-            var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
+            var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties, _sourceInputModel);
             if (supersetBaseType != null)
             {
                 string fullSerializedName = GetFullSerializedName();

@@ -10,7 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private readonly SourceInputModel? _sourceInputModel;
         private readonly MgmtOutputLibrary _library;
         private static readonly string[] NullableResponseMethodNames = { "GetIfExists" };
 
@@ -113,9 +114,10 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public InputType? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunning?.FinalResponse.BodyType : null;
 
-        public MgmtRestOperation(InputOperation operation, RequestPath requestPath, RequestPath contextualPath, string operationName, MgmtOutputLibrary library, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
+        public MgmtRestOperation(InputOperation operation, RequestPath requestPath, RequestPath contextualPath, string operationName, MgmtOutputLibrary library, SourceInputModel? sourceInputModel, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
         {
             _library = library;
+            _sourceInputModel = sourceInputModel;
             var restClient = library.GetRestClient(operation);
             var method = library.GetRestClientPublicMethodSignature(operation);
 
@@ -186,7 +188,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (!_library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
                 MgmtReturnType.TryCastResource(out var resourceBeingReturned);
-                operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
+                operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!, _sourceInputModel);
                 _library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
             return operationSource;
@@ -471,7 +473,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             _propertyBagSelectedParams = parameters;
             var clientName = _propertyBagName == null ?
-                MgmtContext.Context.DefaultNamespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}Extensions" : _propertyBagName;
+                Configuration.Namespace.Equals(typeof(ArmClient).Namespace) ? "Arm" : $"{Configuration.Namespace.Split('.').Last()}Extensions" : _propertyBagName;
 
             var propertyBagName = $"{clientName}{OperationName}";
             if (Configuration.MgmtConfiguration.RenamePropertyBag.TryGetValue(Operation.Name, out string? modelName))
@@ -486,7 +488,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
 
-            var propertyBag = new MgmtPropertyBag(propertyBagName, _library.GetOperationMethods(Operation).Operation, parameters, _library.TypeFactory);
+            var propertyBag = new MgmtPropertyBag(propertyBagName, _library.GetOperationMethods(Operation).Operation, parameters, _library.TypeFactory, _sourceInputModel);
             var schemaObject = propertyBag.PackModel;
             var existingModels = _library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
             if (existingModels != null)

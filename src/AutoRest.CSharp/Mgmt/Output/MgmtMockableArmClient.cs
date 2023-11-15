@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -23,7 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtMockableArmClient : MgmtMockableExtension
     {
-        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library) : base(resourceType, operations, extensionForChildResources, library)
+        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
+            : base(resourceType, operations, extensionForChildResources, library, sourceInputModel)
         {
         }
 

@@ -14,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class SchemaObjectType : SerializableObjectType
     {
-        private readonly BuildContext? _context;
+        private readonly MgmtOutputLibrary _library;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly InputModelTypeUsage _usage;
@@ -38,14 +39,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        protected SchemaObjectType(InputModelType inputModel, TypeFactory typeFactory, BuildContext context, string? newName = default)
-            : base(context.DefaultNamespace, context.SourceInputModel)
+        protected SchemaObjectType(MgmtOutputLibrary library, InputModelType inputModel, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default)
+            : base(Configuration.Namespace, sourceInputModel)
         {
+            _library = library;
             DefaultName = (newName ?? inputModel.Name).ToCleanName();
-            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, context.DefaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, Configuration.Namespace);
             InputModel = inputModel;
 
-            _context = context;
             _typeFactory = typeFactory;
             _serializationBuilder = new SerializationBuilder();
             _usage = inputModel.Usage;
@@ -54,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = inputModel.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
+            _sourceTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
             if (_sourceTypeMapping?.Usage != null)
@@ -665,16 +666,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            var library = _context?.BaseLibrary;
-
-            if (library is null)
-                return null;
 
             var defaultDerivedType = InputModel.BaseModel;
             if (defaultDerivedType is null)
                 return null;
 
-            return library.FindTypeProviderForInputType(defaultDerivedType) as SerializableObjectType;
+            return _library.FindTypeProviderForInputType(defaultDerivedType) as SerializableObjectType;
         }
 
         private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager;
 using NUnit.Framework;
@@ -26,8 +26,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
     [Parallelizable(ParallelScope.None)]
     internal abstract class OutputLibraryTestBase
     {
-        private string _projectName;
-        private string? _subFolder;
+        protected internal MgmtOutputLibrary _library;
+        protected internal InputNamespace _inputNamespace;
+        private readonly string _projectName;
+        private readonly string? _subFolder;
 
         public OutputLibraryTestBase(string projectName, string subFolder = null)
         {
@@ -53,8 +55,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            var inputNamespace = new CodeModelConverter(model, new SchemaUsageProvider(model)).CreateNamespace();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(model, sourceInputModel));
+            _inputNamespace = new CodeModelConverter(model, new SchemaUsageProvider(model)).CreateNamespace();
+            _library = new MgmtOutputLibrary(_inputNamespace, null);
         }
 
         [Test]
@@ -65,14 +67,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 return;
             }
 
-            foreach (var mgmtObject in MgmtContext.Library.Models.OfType<MgmtObjectType>())
+            foreach (var mgmtObject in _library.Models.OfType<MgmtObjectType>())
             {
-                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject) == null)
+                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, null) == null)
                 {
                     ValidateModelRequiredCtorParams(mgmtObject.InputModel, mgmtObject.Type.Name);
                 }
             }
-            foreach (var resourceData in MgmtContext.Library.ResourceData)
+            foreach (var resourceData in _library.ResourceData)
             {
                 ValidateModelRequiredCtorParams(resourceData.InputModel, resourceData.Type.Name);
             }
@@ -127,21 +129,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateResourceDataCount()
         {
-            var count = MgmtContext.Library.ResourceTypeMap.Count;
+            var count = _library.ResourceTypeMap.Count;
 
-            Assert.AreEqual(count, MgmtContext.Library.ResourceData.Count(), "Did not find the expected resourceData count");
+            Assert.AreEqual(count, _library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
         [TestCase("Delete")]
         [TestCase("DeleteAsync")]
         public void ValidateDeleteMethodAsLRO(string methodName)
         {
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var resource in _library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
                 Console.WriteLine(name);
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
-                Assert.NotNull(generatedResourceType, $"class {name} is not found in {MgmtContext.RPName}");
+                Assert.NotNull(generatedResourceType, $"class {name} is not found in {ClientBuilder.GetRPName(Configuration.Namespace)}");
                 if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
                     continue;
@@ -164,7 +166,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("GetAsync")]
         public void ValidateGetOverloadMethod(string methodName)
         {
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var resource in _library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
@@ -184,7 +186,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void ValidateEnumerable()
         {
-            foreach (var collection in MgmtContext.Library.ResourceCollections)
+            foreach (var collection in _library.ResourceCollections)
             {
                 // skip this if this collection is in the list-exception configuration
                 if (Configuration.MgmtConfiguration.ListException.Contains(collection.RequestPath))

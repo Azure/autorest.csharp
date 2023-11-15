@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             CodeModelTransformer.Transform(codeModel);
             var schemaUsageProvider = new SchemaUsageProvider(codeModel);
             var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
-            var library = new MgmtOutputLibrary(inputNamespace);
+            var library = new MgmtOutputLibrary(inputNamespace, sourceInputModel);
             var addedFilenames = new HashSet<string>();
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;

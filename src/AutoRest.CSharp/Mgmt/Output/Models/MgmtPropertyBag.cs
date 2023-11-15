@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -15,13 +16,15 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
     internal class MgmtPropertyBag : PropertyBag
     {
         private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
 
-        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep, TypeFactory typeFactory)
+        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
             : base(name)
         {
             _operation = operation;
             _paramsToKeep = paramsToKeep;
             _typeFactory = typeFactory;
+            _sourceInputModel = sourceInputModel;
         }
 
         private readonly InputOperation _operation;
@@ -42,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 var property = new InputModelProperty(parameter.Name, parameter.Name, description, inputParameter!.Type, parameter.DefaultValue == null ? null : inputParameter.DefaultValue, parameter.DefaultValue == null, false, false);
                 properties.Add(property);
             }
-            var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
+            var defaultNamespace = $"{Configuration.Namespace}.Models";
             var propertyBagModel = new InputModelType(
                 packModelName,
                 defaultNamespace,
@@ -60,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             {
                 IsPropertyBag = true
             };
-            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, _typeFactory);
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, _sourceInputModel, _typeFactory);
         }
 
         protected override bool EnsureShouldValidateParameter()
