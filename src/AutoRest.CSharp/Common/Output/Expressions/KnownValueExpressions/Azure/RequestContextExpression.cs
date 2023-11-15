@@ -5,7 +5,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record RequestContextExpression(ValueExpression Untyped) : TypedValueExpression<RequestContext>(Untyped)
     {

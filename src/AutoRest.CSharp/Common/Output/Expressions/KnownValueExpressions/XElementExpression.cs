@@ -3,8 +3,7 @@
 
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models;
-using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
@@ -14,16 +13,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public StringExpression Value => new(Property(nameof(XElement.Value)));
 
         public XAttributeExpression Attribute(string name)
-            => new(Invoke(nameof(XElement.Attribute), Snippets.Literal(name)));
+            => new(Invoke(nameof(XElement.Attribute), Literal(name)));
 
-        public ValueExpression GetBytesFromBase64Value(string? format)
-            => InvokeExtension(typeof(XElementExtensions), nameof(XElementExtensions.GetBytesFromBase64Value), Snippets.Literal(format));
-        public ValueExpression GetDateTimeOffsetValue(string? format)
-            => InvokeExtension(typeof(XElementExtensions), nameof(XElementExtensions.GetDateTimeOffsetValue), Snippets.Literal(format));
-        public ValueExpression GetObjectValue(string? format)
-            => InvokeExtension(typeof(XElementExtensions), nameof(XElementExtensions.GetObjectValue), Snippets.Literal(format));
-        public ValueExpression GetTimeSpanValue(string? format)
-            => InvokeExtension(typeof(XElementExtensions), nameof(XElementExtensions.GetTimeSpanValue), Snippets.Literal(format));
+        public ValueExpression GetBytesFromBase64Value(string? format) => Extensible.XElement.GetBytesFromBase64Value(this, format);
+        public ValueExpression GetDateTimeOffsetValue(string? format) => Extensible.XElement.GetDateTimeOffsetValue(this, format);
+        public ValueExpression GetObjectValue(string? format) => Extensible.XElement.GetObjectValue(this, format);
+        public ValueExpression GetTimeSpanValue(string? format) => Extensible.XElement.GetTimeSpanValue(this, format);
     }
 
     internal sealed record XAttributeExpression(ValueExpression Untyped) : TypedValueExpression<XAttribute>(Untyped)
