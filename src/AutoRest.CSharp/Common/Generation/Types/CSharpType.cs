@@ -33,20 +33,6 @@ namespace AutoRest.CSharp.Generation.Types
         {
         }
 
-        /// <summary>
-        /// Constructs a CSharpType for a literal type.
-        /// </summary>
-        /// <param name="type">The type to convert.</param>
-        /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
-        /// <param name="literalValue">The value of the literal.</param>
-        public CSharpType(Type type, bool isNullable, Constant? literalValue) : this(
-            type,
-            isNullable)
-        {
-            IsLiteral = true;
-            Literal = literalValue;
-        }
-
         public CSharpType(Type type, Type? serializeAs) : this(
             type.IsGenericType ? type.GetGenericTypeDefinition() : type,
             type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
@@ -113,8 +99,8 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
-        public bool IsLiteral { get; }
-        public Constant? Literal { get; }
+        public bool IsLiteral { get; init; }
+        public Constant? Literal { get; init; }
         public bool IsUnion { get; }
         public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
@@ -267,7 +253,11 @@ namespace AutoRest.CSharp.Generation.Types
                     literal = null;
                 }
 
-                type = new CSharpType(type.FrameworkType, type.IsNullable, literal);
+                type = new CSharpType(type.FrameworkType, type.IsNullable)
+                {
+                    IsLiteral = true,
+                    Literal = literal
+                };
             }
 
             return type;
