@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType => CreateType(literalType.LiteralValueType, literalType.Value, true),
+            InputLiteralType literalType => CreateType(literalType.LiteralValueType, literalType.Value),
             InputUnionType unionType => new CSharpType(typeof(BinaryData), unionType.UnionItemTypes.Select(u => CreateType(u)).ToArray(), unionType.IsNullable),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
@@ -95,26 +95,12 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="inputType">The input type to create a CSharpType from.</param>
         /// <param name="literalValue">The literal value of the InputType, if any.</param>
-        /// <param name="isLiteral">Flag that is used to determine if the constructed type is from a literal type.</param>
         /// <returns></returns>
-        public CSharpType CreateType(InputType inputType, object literalValue, bool isLiteral)
+        public CSharpType CreateType(InputType inputType, object literalValue)
         {
             CSharpType type = CreateType(inputType);
 
-            if (type.IsFrameworkType)
-            {
-                Constant? literal;
-                try
-                {
-                    literal = new Constant(literalValue, type);
-                }
-                catch
-                {
-                    literal = null;
-                }
-
-                type = new CSharpType(type.FrameworkType, type.IsNullable, isLiteral, literal);
-            }
+            type = CSharpType.FromLiteral(type, literalValue);
 
             return type;
         }

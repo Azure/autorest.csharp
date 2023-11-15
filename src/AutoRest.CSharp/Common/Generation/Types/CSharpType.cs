@@ -38,13 +38,11 @@ namespace AutoRest.CSharp.Generation.Types
         /// </summary>
         /// <param name="type">The type to convert.</param>
         /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
-        /// <param name="isLiteral">Flag used to determine if a type is a literal.</param>
         /// <param name="literalValue">The value of the literal.</param>
-        public CSharpType(Type type, bool isNullable, bool isLiteral, Constant? literalValue) : this(
+        public CSharpType(Type type, bool isNullable, Constant? literalValue) : this(
             type,
             isNullable)
         {
-            IsLiteral = isLiteral;
             Literal = literalValue;
         }
 
@@ -114,7 +112,6 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
-        public bool IsLiteral { get; }
         public Constant? Literal { get; }
         public bool IsUnion { get; }
         public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
@@ -244,6 +241,34 @@ namespace AutoRest.CSharp.Generation.Types
                 type.IsEnum,
                 false,
                 genericTypes.ToArray());
+        }
+
+        /// <summary>
+        /// This function is used to create a new CSharpType instance with a literal value.
+        /// If the type is a framework type, the CSharpType will be created with the literal value Constant
+        /// object.
+        /// </summary>
+        /// <param name="type">The original type to create a new CSharpType instance from.</param>
+        /// <param name="literalValue">The literal value of the type, if any.</param>
+        /// <returns>An instance of CSharpType with a literal value property.</returns>
+        internal static CSharpType FromLiteral(CSharpType type, object literalValue)
+        {
+            if (type.IsFrameworkType)
+            {
+                Constant? literal;
+                try
+                {
+                    literal = new Constant(literalValue, type);
+                }
+                catch
+                {
+                    literal = null;
+                }
+
+                type = new CSharpType(type.FrameworkType, type.IsNullable, literal);
+            }
+
+            return type;
         }
 
         internal static CSharpType FromSystemType(BuildContext context, Type type)
