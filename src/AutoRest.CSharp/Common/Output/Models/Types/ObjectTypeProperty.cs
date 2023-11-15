@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     FormattableString description = $"<description><see cref=\"{item}\"/></description>";
 
-                    if (item.Literal?.Value != null)
+                    if (item.IsLiteral && item.Literal?.Value != null)
                     {
                         var literalValue = item.Literal.Value.Value;
                         if (item.FrameworkType == typeof(string))

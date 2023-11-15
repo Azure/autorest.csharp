@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Generation.Types
         /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType => CreateType(literalType.LiteralValueType, literalType.Value),
+            InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
             InputUnionType unionType => new CSharpType(typeof(BinaryData), unionType.UnionItemTypes.Select(u => CreateType(u)).ToArray(), unionType.IsNullable),
             InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
@@ -87,23 +87,6 @@ namespace AutoRest.CSharp.Generation.Types
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };
-
-        /// <summary>
-        /// This function is used to create a CSharpType from an InputType.
-        /// If the InputType is a framework type, the CSharpType will be created with the literal value Constant
-        /// object.
-        /// </summary>
-        /// <param name="inputType">The input type to create a CSharpType from.</param>
-        /// <param name="literalValue">The literal value of the InputType, if any.</param>
-        /// <returns></returns>
-        public CSharpType CreateType(InputType inputType, object literalValue)
-        {
-            CSharpType type = CreateType(inputType);
-
-            type = CSharpType.FromLiteral(type, literalValue);
-
-            return type;
-        }
 
         public CSharpType CreateType(Schema schema, bool isNullable, string? formatOverride = default, Property? property = default) => CreateType(schema, formatOverride ?? schema.Extensions?.Format, isNullable, property);
 

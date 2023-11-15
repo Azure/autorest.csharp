@@ -43,6 +43,7 @@ namespace AutoRest.CSharp.Generation.Types
             type,
             isNullable)
         {
+            IsLiteral = true;
             Literal = literalValue;
         }
 
@@ -112,6 +113,7 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
+        public bool IsLiteral { get; }
         public Constant? Literal { get; }
         public bool IsUnion { get; }
         public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
