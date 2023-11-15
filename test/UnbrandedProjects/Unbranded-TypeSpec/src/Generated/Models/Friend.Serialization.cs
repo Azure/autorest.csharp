@@ -111,13 +111,8 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static Friend FromResponse(PipelineResponse response)
         {
-<<<<<<< HEAD
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeFriend(document.RootElement, ModelReaderWriterOptions.Wire);
-=======
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement);
->>>>>>> origin/feature/v3
+            return DeserializeFriend(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

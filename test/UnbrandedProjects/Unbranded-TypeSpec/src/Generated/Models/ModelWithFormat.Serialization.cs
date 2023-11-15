@@ -116,10 +116,10 @@ namespace UnbrandedTypeSpec.Models
         string IPersistableModel<ModelWithFormat>.GetWireFormat(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static ModelWithFormat FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static ModelWithFormat FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
+            using var document = JsonDocument.Parse(response.Content);
             return DeserializeModelWithFormat(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 

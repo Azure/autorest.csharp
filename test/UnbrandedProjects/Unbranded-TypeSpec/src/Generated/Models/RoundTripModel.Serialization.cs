@@ -588,13 +588,8 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static RoundTripModel FromResponse(PipelineResponse response)
         {
-<<<<<<< HEAD
-            using var document = JsonDocument.Parse(result.Content);
-            return DeserializeRoundTripModel(document.RootElement, ModelReaderWriterOptions.Wire);
-=======
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripModel(document.RootElement);
->>>>>>> origin/feature/v3
+            return DeserializeRoundTripModel(document.RootElement, ModelReaderWriterOptions.Wire);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>
