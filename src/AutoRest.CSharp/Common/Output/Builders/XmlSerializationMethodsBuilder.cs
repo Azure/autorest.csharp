@@ -7,7 +7,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Base;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -90,7 +89,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             => serialization switch
             {
                 XmlArraySerialization array => SerializeArray(xmlWriter, array, new EnumerableExpression(TypeFactory.GetElementType(array.Type), expression)).AsStatement(),
-                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(TypeFactory.GetElementType(dictionary.Type), expression)),
+                XmlDictionarySerialization dictionary => SerializeDictionary(xmlWriter, dictionary, new DictionaryExpression(dictionary.Type.Arguments[0], dictionary.Type.Arguments[1], expression)),
                 XmlElementValueSerialization value => SerializeElement(xmlWriter, value, expression),
                 _ => throw new NotSupportedException()
             };
@@ -223,11 +222,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return Return(New.Instance(objectSerialization.Type, parameters));
         }
 
-        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, BaseResponseExpression response)
+        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, StreamExpression stream)
         {
             return new[]
             {
-                Var("document", XDocumentExpression.Load(response.ContentStream, LoadOptions.PreserveWhitespace), out var document),
+                Var("document", XDocumentExpression.Load(stream, LoadOptions.PreserveWhitespace), out var document),
                 BuildDeserialization(serialization, variable, document)
             };
         }
@@ -250,7 +249,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement BuildDeserializationForXContainer(XmlElementSerialization serialization, XElementExpression element, out ValueExpression deserializedContainer)
         {
-            var deserialization = new MethodBodyStatement();
+            var deserialization = EmptyStatement;
             switch (serialization)
             {
                 case XmlArraySerialization arraySerialization:
@@ -276,7 +275,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("array", New.List(arraySerialization.Type), out var array),
+                Var("array", New.List(arraySerialization.Type.Arguments[0]), out var array),
                 new ForeachStatement("e", container.Elements(arraySerialization.ValueSerialization.Name), out var child)
                 {
                     BuildDeserializationForXContainer(arraySerialization.ValueSerialization, new XElementExpression(child), out var deserializedChild),
@@ -290,7 +289,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             deserializationStatement = new MethodBodyStatement[]
             {
-                Var("dictionary", New.Dictionary(dictionarySerialization.Type), out var dictionary),
+                Var("dictionary", New.Dictionary(dictionarySerialization.Type.Arguments[0], dictionarySerialization.Type.Arguments[1]), out var dictionary),
                 new ForeachStatement("e", container.Elements(), out var element)
                 {
                     BuildDeserializationForXContainer(dictionarySerialization.ValueSerialization, new XElementExpression(element), out var deserializedElement),
@@ -323,7 +322,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
+                    return New.Instance(typeof(ResourceIdentifier), value.CastTo(typeof(string)));
                 }
 
                 if (frameworkType == typeof(SystemData))

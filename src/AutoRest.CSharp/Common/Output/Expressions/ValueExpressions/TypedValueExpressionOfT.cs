@@ -10,7 +10,7 @@ using AutoRest.CSharp.Output.Models;
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 {
 #pragma warning disable SA1649 // File name should match first type name
-    internal abstract record TypedValueExpression<T>(ValueExpression Untyped) : TypedValueExpression(typeof(T), Untyped)
+    internal abstract record TypedValueExpression<T>(ValueExpression Untyped) : TypedValueExpression(typeof(T), ValidateType(Untyped, typeof(T)))
 #pragma warning restore SA1649 // File name should match first type name
     {
         protected static MemberExpression StaticProperty(string name) => new(typeof(T), name);
@@ -53,5 +53,34 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
 
         protected InvokeStaticMethodExpression InvokeExtension(CSharpType extensionType, string methodName, IEnumerable<ValueExpression> arguments, bool async)
             => new(extensionType, methodName, arguments.Prepend(Untyped).ToArray(), CallAsAsync: async, CallAsExtension: true);
+
+        private static ValueExpression ValidateType(ValueExpression untyped, Type type)
+        {
+#if DEBUG
+            if (untyped is not TypedValueExpression typed)
+            {
+                return untyped;
+            }
+
+            if (typed.Type.IsFrameworkType)
+            {
+                if (typed.Type.FrameworkType.IsGenericTypeDefinition && type.IsGenericType)
+                {
+                    if (typed.Type.FrameworkType.MakeGenericType(type.GetGenericArguments()).IsAssignableTo(type))
+                    {
+                        return typed.Untyped;
+                    }
+                }
+                else if (typed.Type.FrameworkType.IsAssignableTo(type))
+                {
+                    return typed.Untyped;
+                }
+            }
+
+            throw new InvalidOperationException($"Expression with return type {typed.Type.ToStringForDocs()} is cast to type {type}");
+#else
+            return untyped;
+#endif
+        }
     }
 }

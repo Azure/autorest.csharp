@@ -6,7 +6,7 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record FormUrlEncodedContentExpression(ValueExpression Untyped) : TypedValueExpression<FormUrlEncodedContent>(Untyped)
     {
