@@ -9,9 +9,15 @@ using System.Text.Json;
 using System.Threading;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -22,6 +28,7 @@ using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -297,46 +304,42 @@ namespace AutoRest.CSharp.Generation.Writers
                 // write whatever we need to convert the parameters
                 converter(_writer);
 
-                var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
+                var response = new VariableReference(clientMethod.ProtocolMethodSignature.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
                 _writer
-                    .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
+                    .Append($"{response.Type} {response.Declaration:D} = ")
                     .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                     .LineRaw(";");
 
-                string rawResponseVariable = Configuration.ApiTypes.GetRawResponseString(responseVariable.ActualName);
-
                 var responseType = convenienceMethod.ResponseType;
-                if (responseType == null)
+                if (responseType is null)
                 {
-                    _writer.Line($"return {responseVariable:I};");
+                    _writer.WriteMethodBodyStatement(Return(response));
                 }
-                else if (TypeFactory.IsReadOnlyList(responseType) || TypeFactory.IsReadOnlyDictionary(responseType))
+                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
                 {
-                    ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
                 }
-                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType })
+                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
                 {
-                    string declaredTypeName = enumType.Declaration.Name;
-                    if (enumType.IsExtensible)
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
+                }
+                else if (TypeFactory.IsCollectionType(responseType))
+                {
+                    var firstResponseBodyType = clientMethod.ResponseBodyType!;
+                    var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
+                    var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
+                    var value = new VariableReference(responseType, "value");
+
+                    _writer.WriteMethodBodyStatement(new[]
                     {
-                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}(new {declaredTypeName}({rawResponseVariable}.Content.ToObjectFromJson<{enumType.ValueType}>()), {rawResponseVariable});");
-                    }
-                    else
-                    {
-                        _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({rawResponseVariable}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {rawResponseVariable});");
-                    }
+                        new DeclareVariableStatement(value.Type, value.Declaration, Default),
+                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false),
+                        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
+                    });
                 }
-                else if (responseType.IsFrameworkType && responseType.FrameworkType == typeof(BinaryData))
+                else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseVariable:I}.Content, {responseVariable:I});");
-                }
-                else if (responseType.IsFrameworkType)
-                {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({rawResponseVariable}.Content.ToObjectFromJson<{responseType}>(), {rawResponseVariable});");
-                }
-                else
-                {
-                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({responseType}.{Configuration.ApiTypes.FromResponseName}({rawResponseVariable}), {rawResponseVariable});");
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryDate(responseType.FrameworkType, response)));
                 }
             }
             _writer.Line();
@@ -450,26 +453,20 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                 {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    writer
-                        .Line($"using {Configuration.ApiTypes.HttpMessageType} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});")
-                        .WriteEnableHttpRedirectIfNecessary(clientMethod.RequestMethod, messageVariable);
-
-                    writer.UseNamespace(Configuration.ApiTypes.PipelineExtensionsType.Namespace!);
-                    var methodName = headAsBoolean ? Configuration.ApiTypes.GetProcessHeadAsBoolMessageName(async) : Configuration.ApiTypes.GetProcessMessageName(async);
-
-                    FormattableString paramString = headAsBoolean
-                        ? (FormattableString)$"{messageVariable}, {fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
-                        : (FormattableString)$"{messageVariable}, {KnownParameters.RequestContext.Name:I}";
-
-                    if (headAsBoolean && !Configuration.IsBranded)
+                    var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
+                    if (headAsBoolean)
                     {
-                        writer.Append($"var {Configuration.ApiTypes.ResponseParameterName} = ").WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString).Line($";");
-                        writer.Line($"return {Configuration.ApiTypes.ResponseType}.{Configuration.ApiTypes.FromValueName}({Configuration.ApiTypes.ResponseParameterName}.Value, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}());");
+                        writer.WriteMethodBodyStatement(new[]
+                        {
+                            Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
+                            Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async)
+                        });
                     }
                     else
                     {
-                        writer.Append(Configuration.ApiTypes.ProtocolReturnStartString).WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString).Line(Configuration.ApiTypes.ProtocolReturnEndString);
+                        writer.WriteMethodBodyStatement(Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message));
+                        writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
+                        writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)));
                     }
                 }
             }

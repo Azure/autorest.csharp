@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using Autorest.CSharp.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 

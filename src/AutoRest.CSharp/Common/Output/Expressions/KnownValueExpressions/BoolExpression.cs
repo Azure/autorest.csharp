@@ -7,8 +7,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {
     internal sealed record BoolExpression(ValueExpression Untyped) : TypedValueExpression<bool>(Untyped)
     {
-        public BoolExpression Not() => new(new UnaryOperatorExpression("!", this, false));
-
         public BoolExpression Or(ValueExpression other) => new(new BinaryOperatorExpression(" || ", this, other));
 
         public BoolExpression And(ValueExpression other) => new(new BinaryOperatorExpression(" && ", this, other));

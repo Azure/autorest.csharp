@@ -221,7 +221,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             if (sample.IsResponseStream)
             {
-                return BuildResponseForStream(sample, resultVar);
+                return BuildResponseForStream(resultVar);
             }
             else
             {
@@ -229,12 +229,12 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildResponseForStream(DpgOperationSample sample, VariableReference resultVar)
+        private IEnumerable<MethodBodyStatement> BuildResponseForStream(VariableReference resultVar)
         {
             var contentStreamExpression = new StreamExpression(resultVar.Property(Configuration.ApiTypes.ContentStreamName));
             yield return new IfStatement(NotEqual(contentStreamExpression, Null))
             {
-                UsingDeclare("outFileStream", new StreamExpression(new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>"))), out var streamVariable),
+                UsingDeclare("outFileStream", InvokeFileOpenWrite("<filepath>"), out var streamVariable),
                 contentStreamExpression.CopyTo(streamVariable)
             };
         }
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             if (sample.ResultType != null)
             {
                 var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
-                yield return Declare(resultVar, new TypeReference(typeof(JsonDocument)).InvokeStatic(nameof(JsonDocument.Parse), streamVar).Property(nameof(JsonDocument.RootElement)));
+                yield return Declare(resultVar, JsonDocumentExpression.Parse(new StreamExpression(streamVar)).RootElement);
 
                 var responseParsingStatements = new List<MethodBodyStatement>();
                 BuildResponseParseStatements(sample.IsAllParametersUsed, sample.ResultType, resultVar, responseParsingStatements, new HashSet<InputType>());
