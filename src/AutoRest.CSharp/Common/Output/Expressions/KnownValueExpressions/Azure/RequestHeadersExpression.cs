@@ -7,7 +7,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record RequestHeadersExpression(ValueExpression Untyped) : TypedValueExpression<RequestHeaders>(Untyped)
     {

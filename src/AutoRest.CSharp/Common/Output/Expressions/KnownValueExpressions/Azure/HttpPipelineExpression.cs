@@ -8,7 +8,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
+namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure
 {
     internal sealed record HttpPipelineExpression(ValueExpression Untyped) : TypedValueExpression<HttpPipeline>(Untyped)
     {
@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public HttpMessageExpression CreateMessage(RequestContextExpression requestContext) => new(Invoke(nameof(HttpPipeline.CreateMessage), requestContext));
         public HttpMessageExpression CreateMessage(RequestContextExpression requestContext, ValueExpression responseClassifier) => new(Invoke(nameof(HttpPipeline.CreateMessage), requestContext, responseClassifier));
 
-        public ValueExpression ProcessMessage(HttpMessageExpression message, RequestContextExpression? requestContext, CancellationTokenExpression? cancellationToken, bool async)
+        public TypedValueExpression ProcessMessage(HttpMessageExpression message, RequestContextExpression? requestContext, CancellationTokenExpression? cancellationToken, bool async)
         {
             var arguments = new List<ValueExpression>
             {
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             }
 
             var methodName = async ? nameof(HttpPipelineExtensions.ProcessMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessage);
-            return InvokeExtension(typeof(HttpPipelineExtensions), methodName, arguments, async);
+            return new ResponseExpression(InvokeExtension(typeof(HttpPipelineExtensions), methodName, arguments, async));
         }
 
         public ValueExpression ProcessHeadAsBoolMessage(HttpMessageExpression message, ValueExpression clientDiagnostics, RequestContextExpression? requestContext, bool async)

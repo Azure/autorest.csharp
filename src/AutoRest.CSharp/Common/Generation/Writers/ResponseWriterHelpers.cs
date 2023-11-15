@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case ObjectResponseBody objectResponseBody:
                     writer.Line($"{responseBody.Type} {valueVariable:D} = default;");
-                    writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, new VariableReference(responseBody.Type, valueVariable), responseVariable, objectResponseBody.Type);
+                    writer.WriteDeserializationForMethods(objectResponseBody.Serialization, async, new VariableReference(responseBody.Type, valueVariable), $"{responseVariable}.{Configuration.ApiTypes.ContentStreamName}", objectResponseBody.Type);
                     value = new Reference(valueVariable.ActualName, responseBody.Type);
                     break;
                 case StreamResponseBody _:
@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case StringResponseBody _:
                     var streamReaderVariable = new CodeWriterDeclaration("streamReader");
-                    writer.Line($"{typeof(StreamReader)} {streamReaderVariable:D} = new {typeof(StreamReader)}({responseVariable}.ContentStream);");
+                    writer.Line($"{typeof(StreamReader)} {streamReaderVariable:D} = new {typeof(StreamReader)}({responseVariable}.{Configuration.ApiTypes.ContentStreamName});");
                     writer.Append($"{returnType} {valueVariable:D} = ");
                     if (async)
                     {

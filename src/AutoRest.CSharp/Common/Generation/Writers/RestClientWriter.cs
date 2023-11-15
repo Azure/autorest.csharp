@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -110,7 +111,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer
                 .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                .WriteEnableHttpRedirectIfNecessary(operation, messageVariable)
+                .WriteEnableHttpRedirectIfNecessary(operation, new VariableReference(Configuration.ApiTypes.HttpMessageType, messageVariable))
                 .WriteMethodCall(async, $"{pipelineName}.SendAsync", $"{pipelineName}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
         }
 

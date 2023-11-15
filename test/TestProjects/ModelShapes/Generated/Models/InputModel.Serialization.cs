@@ -167,13 +167,16 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
-            writer.WritePropertyName("vector"u8);
-            writer.WriteStartArray();
-            foreach (var item in Vector.Span)
+            if (Optional.IsDefined(Vector))
             {
-                writer.WriteNumberValue(item);
+                writer.WritePropertyName("vector"u8);
+                writer.WriteStartArray();
+                foreach (var item in Vector.Span)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
             writer.WritePropertyName("vectorRequired"u8);
             writer.WriteStartArray();
             foreach (var item in VectorRequired.Span)
@@ -181,19 +184,22 @@ namespace ModelShapes.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (VectorNullable != null)
+            if (Optional.IsDefined(VectorNullable))
             {
-                writer.WritePropertyName("vectorNullable"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorNullable.Value.Span)
+                if (VectorNullable != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteNull("vectorNullable");
+                else
+                {
+                    writer.WriteNull("vectorNullable");
+                }
             }
             if (VectorRequiredNullable != null)
             {

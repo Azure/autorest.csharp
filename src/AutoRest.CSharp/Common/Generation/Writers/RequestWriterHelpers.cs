@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -68,7 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.Line(Configuration.ApiTypes.GetSetMethodString(request.ActualName, method.Method));
 
-                writer.Line($"var {uri:D} = new {Configuration.ApiTypes.GetRequestUriBuiilderExpression().Type}();");
+                writer.Line($"var {uri:D} = new {Configuration.ApiTypes.RequestUriType}();");
                 foreach (var segment in clientMethod.Request.PathSegments)
                 {
                     var value = GetFieldReference(fields, segment.Value);
@@ -257,22 +256,22 @@ namespace AutoRest.CSharp.Generation.Writers
         private static MethodBodyStatement GetRequestContentForSerialization(CodeWriterDeclaration request, ObjectSerialization serialization, FormattableString value)
         {
             var valueExpression = new FormattableStringToExpression(value);
-            var requestExpression = new RequestExpression(new VariableReference(typeof(Request), request));
+            var requestExpression = new VariableReference(typeof(Request), request);
 
             return serialization switch
             {
                 JsonSerialization jsonSerialization => new[]
                 {
-                    Var("content", New.Utf8JsonRequestContent(), out var utf8JsonContent),
-                    JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, valueExpression),
-                    Assign(requestExpression.Content, utf8JsonContent)
+                    Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out var utf8JsonContent, out var writer),
+                    JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, valueExpression),
+                    Assign(requestExpression.Property(nameof(Request.Content)), utf8JsonContent)
                 },
 
                 XmlElementSerialization xmlSerialization => new[]
                 {
-                    Var("content", New.XmlWriterContent(), out var xmlWriterContent),
-                    XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, valueExpression),
-                    Assign(requestExpression.Content, xmlWriterContent)
+                    Extensible.RestOperations.DeclareContentWithXmlWriter(out var utf8JsonContent, out var writer),
+                    XmlSerializationMethodsBuilder.SerializeExpression(writer, xmlSerialization, valueExpression),
+                    Assign(requestExpression.Property(nameof(Request.Content)), utf8JsonContent)
                 },
 
                 _ => throw new NotImplementedException()

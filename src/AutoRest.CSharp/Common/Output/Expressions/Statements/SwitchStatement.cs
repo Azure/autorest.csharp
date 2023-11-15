@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 
@@ -18,6 +19,6 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Statements
 
         public void Add(SwitchCase statement) => _cases.Add(statement);
         public IEnumerator<SwitchCase> GetEnumerator() => _cases.GetEnumerator();
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => ((System.Collections.IEnumerable)_cases).GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_cases).GetEnumerator();
     }
 }
