@@ -43,11 +43,12 @@ namespace AutoRest.CSharp.Common.Output.Builders.Azure
                 statements.Add(Assign(message.BufferResponse, False));
             }
 
+            var uriBuilder = new VariableReference(typeof(RawRequestUriBuilder), "uri");
             statements.Add(Assign(request.Method, new MemberExpression(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
-            statements.Add(Var("uri", New.RawRequestUriBuilder(), out RawRequestUriBuilderExpression uriBuilder));
+            statements.Add(Var(uriBuilder, New.Instance(typeof(RawRequestUriBuilder))));
 
             createMessageStatement = statements;
-            return new AzureCreateMessageMethodBuilder(fields, requestParts, message, request, uriBuilder);
+            return new AzureCreateMessageMethodBuilder(fields, requestParts, message, request, new RawRequestUriBuilderExpression(uriBuilder));
         }
 
         private readonly ClientFields _fields;

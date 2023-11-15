@@ -322,7 +322,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
+                    return New.Instance(typeof(ResourceIdentifier), value.CastTo(typeof(string)));
                 }
 
                 if (frameworkType == typeof(SystemData))

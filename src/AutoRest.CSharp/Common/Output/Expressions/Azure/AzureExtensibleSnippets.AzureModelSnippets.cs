@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.Azure
 
             public override Method BuildFromOperationResponseMethod(SerializableObjectType type, MethodSignatureModifiers modifiers)
             {
-                var fromResponse = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, ValidationType.None, null);
+                var fromResponse = new Parameter("response", $"The response to deserialize the model from.", typeof(Response), null, Validation.None, null);
                 return new Method
                 (
                     new MethodSignature(Configuration.ApiTypes.FromResponseName, null, $"Deserializes the model from a raw response.", modifiers, type.Type, null, new[] { fromResponse }),

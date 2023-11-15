@@ -12,7 +12,6 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -226,7 +225,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (operation.ResultSerialization != null)
             {
-                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, null, $"{responseVariable}.{Configuration.ApiTypes.ContentStreamName}", resultType);
+                writer.WriteDeserializationForMethods(operation.ResultSerialization, async, new ResponseExpression(responseVariable).ContentStream, resultType);
             }
             else
             {

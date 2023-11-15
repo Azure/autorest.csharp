@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Input
 
         public string FromResponseName => "FromResponse";
         public abstract string ResponseParameterName { get; }
-
+        public abstract string ContentStreamName { get; }
         public abstract string GetRawResponseName { get; }
 
         public Type GetResponseOfT<T>() => ResponseOfTType.MakeGenericType(typeof(T));
