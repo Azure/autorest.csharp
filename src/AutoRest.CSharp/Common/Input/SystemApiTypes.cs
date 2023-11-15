@@ -18,11 +18,11 @@ namespace AutoRest.CSharp.Common.Input
     {
         public override Type ResponseType => typeof(Result);
         public override Type ResponseOfTType => typeof(Result<>);
-        public override string FromResponseName => "FromResponse";
         public override string ResponseParameterName => "result";
         public override string GetRawResponseName => nameof(Result<object>.GetRawResponse);
 
         public override Type HttpPipelineType => typeof(MessagePipeline);
+        public override Type PipelineExtensionsType => typeof(PipelineProtocolExtensions);
         public override string HttpPipelineCreateMessageName => nameof(MessagePipeline.CreateMessage);
 
         public override Type HttpMessageType => typeof(PipelineMessage);

@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -17,7 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
             => new(new TypeReference(serializableObjectType.Type), $"Deserialize{serializableObjectType.Declaration.Name}");
 
         public static SerializableObjectTypeExpression FromResponse(SerializableObjectType serializableObjectType, ResponseExpression response)
-            => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, "FromResponse", new[] { response }));
+            => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, Configuration.ApiTypes.FromResponseName, new[] { response }));
 
         public static SerializableObjectTypeExpression Deserialize(SerializableObjectType serializableObjectType, ValueExpression element)
             => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, $"Deserialize{serializableObjectType.Declaration.Name}", new[] { element }));

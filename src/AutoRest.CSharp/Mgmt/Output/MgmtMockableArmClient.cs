@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             if (scopeTypes is null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))
             {
-                return new MethodBodyStatement();
+                return EmptyStatement;
             }
 
             var resourceTypeVariable = new ResourceIdentifierExpression(_scopeParameter).ResourceType;

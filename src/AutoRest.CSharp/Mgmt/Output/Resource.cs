@@ -522,7 +522,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var methodBody = new MethodBodyStatement[]
             {
                 Var(resourceId, new FormattableStringExpression(formatBuilder.ToString(), signature.Parameters.Select(p => (ValueExpression)p).ToArray())),
-                Return(Snippets.New.ResourceIdentifier(resourceId))
+                Return(Snippets.New.Instance(typeof(ResourceIdentifier), resourceId))
             };
             return new Method(signature, methodBody);
         }

@@ -93,13 +93,20 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(VectorOptional))
             {
-                writer.WritePropertyName("vectorOptional"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorOptional.Value.Span)
+                if (VectorOptional != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorOptional"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptional.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
+                else
+                {
+                    writer.WriteNull("vectorOptional");
+                }
             }
             if (VectorNullable != null)
             {
