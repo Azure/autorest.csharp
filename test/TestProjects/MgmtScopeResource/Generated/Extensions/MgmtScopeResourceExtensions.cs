@@ -60,6 +60,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmClient client, ResourceIdentifier scope)
         {
@@ -87,7 +88,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
@@ -116,7 +117,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
@@ -133,6 +134,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
@@ -148,6 +150,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
         {
@@ -175,7 +178,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
@@ -204,7 +207,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
@@ -233,6 +236,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static AsyncPageable<ResourceLinkResource> GetAllAsync(this ArmClient client, ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetAllAsync(scope, filter, cancellationToken);
@@ -259,6 +263,7 @@ namespace MgmtScopeResource
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static Pageable<ResourceLinkResource> GetAll(this ArmClient client, ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetAll(scope, filter, cancellationToken);
@@ -287,6 +292,7 @@ namespace MgmtScopeResource
         /// <param name="top"> May be used to limit the number of results to the most recent N marketplaces. </param>
         /// <param name="skiptoken"> Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static AsyncPageable<Marketplace> GetMarketplacesAsync(this ArmClient client, ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetMarketplacesAsync(scope, filter, top, skiptoken, cancellationToken);
@@ -315,6 +321,7 @@ namespace MgmtScopeResource
         /// <param name="top"> May be used to limit the number of results to the most recent N marketplaces. </param>
         /// <param name="skiptoken"> Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static Pageable<Marketplace> GetMarketplaces(this ArmClient client, ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetMarketplaces(scope, filter, top, skiptoken, cancellationToken);
@@ -330,6 +337,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
         public static FakePolicyAssignmentResource GetFakePolicyAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
@@ -346,6 +354,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
         public static DeploymentExtendedResource GetDeploymentExtendedResource(this ArmClient client, ResourceIdentifier id)
         {
@@ -362,6 +371,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
         public static ResourceLinkResource GetResourceLinkResource(this ArmClient client, ResourceIdentifier id)
         {
@@ -378,6 +388,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
         {
@@ -394,6 +405,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
         public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
@@ -408,6 +420,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> is null. </exception>
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
@@ -434,7 +447,7 @@ namespace MgmtScopeResource
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
@@ -462,7 +475,7 @@ namespace MgmtScopeResource
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> or <paramref name="policyAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
@@ -478,6 +491,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> is null. </exception>
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
@@ -492,6 +506,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> is null. </exception>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
         {
@@ -518,7 +533,7 @@ namespace MgmtScopeResource
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> or <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
@@ -546,7 +561,7 @@ namespace MgmtScopeResource
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> or <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
@@ -562,6 +577,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="managementGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroupResource managementGroupResource)
         {
@@ -588,7 +604,7 @@ namespace MgmtScopeResource
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="managementGroupResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -616,7 +632,7 @@ namespace MgmtScopeResource
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="managementGroupResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -632,6 +648,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroupResource resourceGroupResource)
         {
@@ -658,7 +675,7 @@ namespace MgmtScopeResource
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -686,7 +703,7 @@ namespace MgmtScopeResource
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -702,6 +719,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this SubscriptionResource subscriptionResource)
         {
@@ -728,7 +746,7 @@ namespace MgmtScopeResource
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -756,7 +774,7 @@ namespace MgmtScopeResource
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -784,6 +802,7 @@ namespace MgmtScopeResource
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
@@ -810,6 +829,7 @@ namespace MgmtScopeResource
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
@@ -824,6 +844,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> is null. </exception>
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this TenantResource tenantResource)
         {
@@ -850,7 +871,7 @@ namespace MgmtScopeResource
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -878,7 +899,7 @@ namespace MgmtScopeResource
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
@@ -895,7 +916,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="scope"/> is null. </exception>
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource, string scope)
         {
@@ -922,7 +943,7 @@ namespace MgmtScopeResource
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="scope"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
@@ -949,7 +970,7 @@ namespace MgmtScopeResource
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="scope"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
@@ -976,7 +997,7 @@ namespace MgmtScopeResource
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
         public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
             return await GetMockableMgmtScopeResourceTenantResource(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
@@ -1002,7 +1023,7 @@ namespace MgmtScopeResource
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceTenantResource(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
@@ -45,5 +46,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", $"Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), ValidationType.None, null) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
 
         public static readonly Parameter Response = new("response", $"Response returned from backend service", ResponseType, null, ValidationType.None, null);
+
+        public static readonly Parameter ArmClient = new(
+            Name: "client",
+            Description: $"The client parameters to use in these operations.",
+            Type: typeof(ArmClient),
+            DefaultValue: null,
+            Validation: ValidationType.None,
+            Initializer: null);
     }
 }

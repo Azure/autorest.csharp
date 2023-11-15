@@ -90,9 +90,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
                 MockableExtension.Type,
                 null,
-                new[] { ArmClientParameter });
+                new[] { KnownParameters.ArmClient });
 
-            var extensionVariable = (ValueExpression)ArmClientParameter;
+            var extensionVariable = (ValueExpression)KnownParameters.ArmClient;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
             var body = Snippets.Return(
                 extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),
