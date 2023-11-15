@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -44,7 +45,8 @@ namespace AutoRest.CSharp.Output.Models
                 .ToDictionary(ci => ci.Name);
             AssignParentClients(inputClients, clientInfosByName);
             var topLevelClientInfos = SetHierarchy(clientInfosByName);
-            var clientOptions = CreateClientOptions(topLevelClientInfos);
+            var parametersInClientOptions = new List<Parameter>();
+            var clientOptions = CreateClientOptions(topLevelClientInfos, parametersInClientOptions);
 
             SetRequestsToClients(clientInfosByName.Values);
 
@@ -59,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
                 CreateModels(models, library.TypeFactory);
                 CreateEnums(enums, models, library.TypeFactory);
             }
-            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
+            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions, parametersInClientOptions);
 
             return library;
         }
@@ -459,7 +461,7 @@ namespace AutoRest.CSharp.Output.Models
             return parameters;
         }
 
-        private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
+        private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos, List<Parameter> parametersInClientOptions)
         {
             var clientName = topLevelClientInfos.Count == 1
                 ? topLevelClientInfos[0].Name
@@ -477,7 +479,10 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException("Multiple API versions are not supported in the unbranded path.");
                 apiVersions = null;
             }
-            return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
+            return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel)
+            {
+                AdditionalProperties = parametersInClientOptions
+            };
         }
 
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
@@ -626,9 +631,9 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, List<Parameter> parametersInClientOptions)
         {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
+            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null, parametersInClientOptions);
 
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
@@ -638,7 +643,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, List<Parameter> parametersInClientOptions)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -673,9 +678,9 @@ namespace AutoRest.CSharp.Output.Models
                     SubClients = subClients
                 };
 
-                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, parametersInClientOptions));
 
-                clientOptions.AddAdditionalProperty(client.GetOptionalParametersInOptions());
+                parametersInClientOptions.AddRange(client.GetOptionalParametersInOptions());
 
                 yield return client;
             }
