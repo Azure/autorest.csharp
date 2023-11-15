@@ -26,18 +26,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
-        public static ResourceWriter GetWriter(Resource resource) => resource switch
+        public static ResourceWriter GetWriter(Resource resource, IEnumerable<Resource> armResources) => resource switch
         {
-            PartialResource partialResource => new PartialResourceWriter(partialResource),
-            _ => new ResourceWriter(resource)
+            PartialResource partialResource => new PartialResourceWriter(partialResource, armResources),
+            _ => new ResourceWriter(resource, armResources)
         };
 
         private Resource This { get; }
 
-        protected ResourceWriter(Resource resource) : this(new CodeWriter(), resource)
+        protected ResourceWriter(Resource resource, IEnumerable<Resource> armResources) : this(new CodeWriter(), resource, armResources)
         { }
 
-        protected ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
+        protected ResourceWriter(CodeWriter writer, Resource resource, IEnumerable<Resource> armResources) : base(writer, resource, armResources)
         {
             This = resource;
             _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);

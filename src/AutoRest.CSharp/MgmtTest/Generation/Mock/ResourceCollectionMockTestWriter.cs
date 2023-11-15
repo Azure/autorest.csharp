@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Diagnostics;
-using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ResourceCollectionMockTestWriter : MgmtMockTestBaseWriter<ResourceCollection>
     {
-        public ResourceCollectionMockTestWriter(MgmtMockTestProvider<ResourceCollection> resourceCollectionTest) : base(resourceCollectionTest)
+        public ResourceCollectionMockTestWriter(MgmtMockTestProvider<ResourceCollection> resourceCollectionTest, TypeFactory typeFactory) : base(resourceCollectionTest, typeFactory)
         {
         }
 
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             {
                 if (parameterValues.TryGetValue(extraParameter.Name, out var value))
                 {
-                    _writer.AppendExampleParameterValue(extraParameter, value);
+                    _writer.AppendExampleParameterValue(_typeFactory, extraParameter, value);
                     _writer.AppendRaw(",");
                 }
             }

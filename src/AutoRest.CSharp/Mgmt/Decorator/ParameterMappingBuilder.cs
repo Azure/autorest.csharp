@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -28,14 +29,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="requestPath">The contextual path, which is usually the path creating a resource</param>
         /// <param name="idVariable">The reference to the Id variable</param>
         /// <returns></returns>
-        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, ResourceIdentifierExpression idVariable)
+        public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, ResourceIdentifierExpression idVariable, MgmtOutputLibrary library)
         {
             var stack = new Stack<ContextualParameterMapping>();
-            BuildContextualParameterMappingHierarchy(requestPath, stack, idVariable, idVariable);
+            BuildContextualParameterMappingHierarchy(requestPath, stack, idVariable, idVariable, library);
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, ResourceIdentifierExpression idVariable, ResourceIdentifierExpression invocation)
+        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, ResourceIdentifierExpression idVariable, ResourceIdentifierExpression invocation, MgmtOutputLibrary library)
         {
             // Check if the current path is a scope parameter
             if (current.IsRawParameterizedScope())
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // RequestPath of tenant does not have any parameter in it (actually it does not have anything), we take this as an exit
             if (current == RequestPath.Tenant)
                 return;
-            var parent = current.ParentRequestPath();
+            var parent = current.ParentRequestPath(library);
             // Subscription and ManagementGroup are not terminal states - tenant is their parent
             if (current == RequestPath.Subscription)
             {
@@ -145,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
             // recursively get the parameters of its parent
-            BuildContextualParameterMappingHierarchy(parent, parameterMappingStack, idVariable, invocation);
+            BuildContextualParameterMappingHierarchy(parent, parameterMappingStack, idVariable, invocation, library);
         }
 
         /// <summary>

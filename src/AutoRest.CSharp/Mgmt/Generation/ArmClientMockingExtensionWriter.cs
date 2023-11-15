@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -20,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private readonly Parameter _scopeParameter;
         private MgmtMockableArmClient This { get; }
 
-        public ArmClientMockingExtensionWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
+        public ArmClientMockingExtensionWriter(MgmtMockableArmClient extensionClient, IEnumerable<Resource> armResources) : base(extensionClient, armResources)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(

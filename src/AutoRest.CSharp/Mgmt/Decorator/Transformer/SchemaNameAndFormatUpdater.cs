@@ -19,11 +19,11 @@ internal static class SchemaNameAndFormatUpdater
     private const char NameFormatSeparator = '|';
     private const string EmptyName = "-";
 
-    public static void ApplyRenameMapping()
+    public static void ApplyRenameMapping(CodeModel codeModel)
     {
         var renameTargets = GetRenameAndReformatTargets().ToList();
         // apply them one by one
-        foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+        foreach (var schema in codeModel.AllSchemas)
         {
             ApplyRenameTargets(schema, renameTargets);
         }
@@ -34,7 +34,7 @@ internal static class SchemaNameAndFormatUpdater
             parameterRenameTargets.Add(operationId, GetParameterRenameTargets(values));
         }
 
-        foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+        foreach (var operationGroup in codeModel.OperationGroups)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -211,14 +211,14 @@ internal static class SchemaNameAndFormatUpdater
         }
     }
 
-    public static void UpdateAcronyms()
+    public static void UpdateAcronyms(CodeModel codeModel)
     {
         if (Configuration.MgmtConfiguration.AcronymMapping.Count == 0)
             return;
         // first transform all the name of schemas, properties
-        UpdateAcronyms(MgmtContext.CodeModel.AllSchemas);
+        UpdateAcronyms(codeModel.AllSchemas);
         // transform all the parameter names
-        UpdateAcronyms(MgmtContext.CodeModel.OperationGroups);
+        UpdateAcronyms(codeModel.OperationGroups);
     }
 
     private static void ApplyNewName(Languages language, RenameAndReformatTarget rrt, string targetFullSerializedName)

@@ -36,6 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
+        protected internal IEnumerable<Resource> _armResources;
         protected const string EndpointProperty = "Endpoint";
         protected delegate void WriteMethodDelegate(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync);
         private string LibraryArmOperation { get; }
@@ -53,13 +54,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public string FileName { get; }
 
-        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider)
+        protected MgmtClientBaseWriter(CodeWriter writer, MgmtTypeProvider provider, IEnumerable<Resource> armResources)
         {
             _writer = writer;
             This = provider;
             FileName = This.Type.Name;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
             LibraryArmOperation = $"{MgmtContext.Context.DefaultNamespace.Split('.').Last()}ArmOperation";
+            _armResources = armResources;
         }
 
         public virtual void Write()
@@ -370,7 +372,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 throw new NotImplementedException($"ResourceType that contains variables are not supported yet");
 
             // find the corresponding class of this resource type. If we find only one, use the constant inside that class. If we have multiple, use the hard-coded magic string
-            var candidates = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType == resourceType);
+            var candidates = _armResources.Where(resource => resource.ResourceType == resourceType);
             if (candidates.Count() == 1)
             {
                 return $"{candidates.First().Type}.ResourceType";

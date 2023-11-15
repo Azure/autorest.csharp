@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtMockableArmClient : MgmtMockableExtension
     {
-        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources) : base(resourceType, operations, extensionForChildResources)
+        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library) : base(resourceType, operations, extensionForChildResources, library)
         {
         }
 
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override FormattableString BranchIdVariableName => $"scope";
 
-        public override bool IsEmpty => !ClientOperations.Any() && !MgmtContext.Library.ArmResources.Any();
+        public override bool IsEmpty => !ClientOperations.Any() && !_library.ArmResources.Any();
 
         protected override Method BuildGetSingletonResourceMethod(Resource resource)
         {
@@ -116,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<Method> BuildArmResourceMethods()
         {
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var resource in _library.ArmResources)
             {
                 yield return BuildArmResourceMethod(resource);
             }

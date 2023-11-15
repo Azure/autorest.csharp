@@ -5,29 +5,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal abstract class MgmtMockTestBaseWriter<TProvider> : MgmtTestWriterBase<MgmtMockTestProvider<TProvider>> where TProvider : MgmtTypeProvider
     {
-        protected MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> provider) : base(provider)
+
+        protected MgmtMockTestBaseWriter(MgmtMockTestProvider<TProvider> provider, TypeFactory typeFactory) : base(provider, typeFactory)
         {
         }
 
-        protected MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> provider) : base(writer, provider)
+        protected MgmtMockTestBaseWriter(CodeWriter writer, MgmtMockTestProvider<TProvider> provider, TypeFactory typeFactory) : base(writer, provider, typeFactory)
         {
         }
 
@@ -126,12 +122,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
             {
                 if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
-                    _writer.AppendExampleParameterValue(parameter, parameterValue);
+                    _writer.AppendExampleParameterValue(_typeFactory, parameter, parameterValue);
                     _writer.AppendRaw(",");
                 }
                 else if (parameter.IsPropertyBag)
                 {
-                    _writer.AppendExamplePropertyBagParamValue(parameter, testCase.PropertyBagParamValueMapping);
+                    _writer.AppendExamplePropertyBagParamValue(_typeFactory, parameter, testCase.PropertyBagParamValueMapping);
                     _writer.AppendRaw(",");
                 }
             }

@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Models
     /// </summary>
     internal record MgmtRestOperation
     {
+        private readonly MgmtOutputLibrary _library;
         private static readonly string[] NullableResponseMethodNames = { "GetIfExists" };
 
         private bool? _isLongRunning;
@@ -112,10 +113,11 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public InputType? FinalResponseSchema => Operation.IsLongRunning ? Operation.LongRunning?.FinalResponse.BodyType : null;
 
-        public MgmtRestOperation(InputOperation operation, RequestPath requestPath, RequestPath contextualPath, string operationName, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
+        public MgmtRestOperation(InputOperation operation, RequestPath requestPath, RequestPath contextualPath, string operationName, MgmtOutputLibrary library, bool? isLongRunning = null, bool throwIfNull = false, string? propertyBagName = null)
         {
-            var restClient = MgmtContext.Library.GetRestClient(operation);
-            var method = MgmtContext.Library.GetRestClientPublicMethodSignature(operation);
+            _library = library;
+            var restClient = library.GetRestClient(operation);
+            var method = library.GetRestClientPublicMethodSignature(operation);
 
             _propertyBagName = propertyBagName;
             _isLongRunning = isLongRunning;
@@ -130,9 +132,9 @@ namespace AutoRest.CSharp.Mgmt.Models
             RequestPath = requestPath;
             ContextualPath = contextualPath;
             OperationName = operationName;
-            Resource = GetResourceMatch(restClient, method, requestPath);
+            Resource = GetResourceMatch(restClient, method, requestPath, library);
             FinalStateVia = operation.IsLongRunning ? operation.LongRunning?.FinalStateVia : null;
-            OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : MgmtContext.Library.GetOperationMethods(operation).ResponseType;
+            OriginalReturnType = operation.IsLongRunning ? GetFinalResponse() : library.GetOperationMethods(operation).ResponseType;
             OperationSource = GetOperationSource();
             InterimOperation = GetInterimOperation();
         }
@@ -161,6 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             OriginalReturnType = other.OriginalReturnType;
             OperationSource = other.OperationSource;
             InterimOperation = other.InterimOperation;
+            _library = other._library;
 
             //modify some of the values
             OperationName = operationNameOverride;
@@ -180,11 +183,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (IsFakeLongRunningOperation)
                 return null;
 
-            if (!MgmtContext.Library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
+            if (!_library.CSharpTypeToOperationSource.TryGetValue(MgmtReturnType, out var operationSource))
             {
                 MgmtReturnType.TryCastResource(out var resourceBeingReturned);
                 operationSource = new OperationSource(MgmtReturnType, resourceBeingReturned, FinalResponseSchema!);
-                MgmtContext.Library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
+                _library.CSharpTypeToOperationSource.Add(MgmtReturnType, operationSource);
             }
             return operationSource;
         }
@@ -217,7 +220,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             try
             {
-                return finalSchema is InputModelType inputModel ? MgmtContext.Library.ResolveModel(inputModel) : new TypeFactory(MgmtContext.Library).CreateType(finalSchema);
+                return finalSchema is InputModelType inputModel ? _library.ResolveModel(inputModel) : _library.TypeFactory.CreateType(finalSchema);
             }
             catch (Exception ex)
             {
@@ -280,7 +283,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             None
         }
 
-        private Resource? GetResourceMatch(MgmtRestClient restClient, MethodSignature method, RequestPath requestPath)
+        private Resource? GetResourceMatch(MgmtRestClient restClient, MethodSignature method, RequestPath requestPath, MgmtOutputLibrary library)
         {
             if (restClient.Resources.Count == 1)
                 return restClient.Resources[0];
@@ -288,7 +291,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             Dictionary<ResourceMatchType, HashSet<Resource>> matches = new Dictionary<ResourceMatchType, HashSet<Resource>>();
             foreach (var resource in restClient.Resources)
             {
-                var match = GetMatchType(Operation.HttpMethod, resource.RequestPath, requestPath, Operation.IsListMethod(out _));
+                var match = GetMatchType(Operation.HttpMethod, resource.RequestPath, requestPath, Operation.IsListMethod(_library, out _));
                 if (match == ResourceMatchType.None)
                     continue;
                 if (match == ResourceMatchType.Exact)
@@ -304,7 +307,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             FormattableString errorText = $"{restClient.Type.Name}.{method.Name}";
             foreach (ResourceMatchType? matchType in Enum.GetValues(typeof(ResourceMatchType)))
             {
-                var resource = GetMatch(matchType!.Value, matches, errorText);
+                var resource = GetMatch(matchType!.Value, matches, errorText, library);
 
                 if (resource is not null)
                     return resource;
@@ -312,7 +315,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             return null;
         }
 
-        private Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, FormattableString error)
+        private Resource? GetMatch(ResourceMatchType matchType, Dictionary<ResourceMatchType, HashSet<Resource>> matches, FormattableString error, MgmtOutputLibrary library)
         {
             if (!matches.TryGetValue(matchType, out var matchTypeMatches))
                 return null;
@@ -325,21 +328,21 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchType == ResourceMatchType.CheckName)
                 return null;
 
-            var parent = first.GetParents().First();
-            if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, out bool areAllSingleton) && areAllSingleton)
+            var parent = first.GetParents(library).First();
+            if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, library, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
 
             //this throw catches anything we do not expect if it ever fires it means our logic is either incomplete or we need a directive to adjust the request paths
             throw new InvalidOperationException($"Found more than 1 candidate for {error}, results were ({string.Join(',', matchTypeMatches.Select(r => r.Type.Name))})");
         }
 
-        private bool AllMatchesSameParent(HashSet<Resource> matches, MgmtTypeProvider parent, out bool areAllSingleton)
+        private bool AllMatchesSameParent(HashSet<Resource> matches, MgmtTypeProvider parent, MgmtOutputLibrary library, out bool areAllSingleton)
         {
             areAllSingleton = true;
             foreach (var resource in matches)
             {
                 areAllSingleton &= resource.IsSingleton;
-                var current = resource.GetParents().FirstOrDefault();
+                var current = resource.GetParents(library).FirstOrDefault();
                 if (current is null)
                     return false;
                 if (!current.Equals(parent))
@@ -483,9 +486,9 @@ namespace AutoRest.CSharp.Mgmt.Models
                 }
             }
 
-            var propertyBag = new MgmtPropertyBag(propertyBagName, MgmtContext.Library.GetOperationMethods(Operation).Operation, parameters);
+            var propertyBag = new MgmtPropertyBag(propertyBagName, _library.GetOperationMethods(Operation).Operation, parameters, _library.TypeFactory);
             var schemaObject = propertyBag.PackModel;
-            var existingModels = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
+            var existingModels = _library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
             if (existingModels != null)
             {
                 // sometimes we might have two or more property bag models with same name but different properties
@@ -495,7 +498,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                     throw new InvalidOperationException($"Another property bag model named {schemaObject.Type.Name} already exists, please use configuration `rename-property-bag` to rename the property bag model corresponding to the operation {Operation.Name}.");
                 }
             }
-            MgmtContext.Library.PropertyBagModels.Add(schemaObject);
+            _library.PropertyBagModels.Add(schemaObject);
             return _propertyBagParameter = propertyBag.PackParameter;
         }
 
@@ -573,7 +576,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (Resource is not null && Resource.ResourceData.Type.Equals(originalType))
                 return Resource.Type;
 
-            var foundResources = MgmtContext.Library.FindResources(data).ToList();
+            var foundResources = _library.FindResources(data).ToList();
             return foundResources.Count switch
             {
                 0 => throw new InvalidOperationException($"No resource corresponding to {originalType?.Name} is found"),
@@ -582,10 +585,10 @@ namespace AutoRest.CSharp.Mgmt.Models
             };
         }
 
-        private static PagingMethod? GetPagingMethod(InputOperation operation)
+        private PagingMethod? GetPagingMethod(InputOperation operation)
         {
-            var methods = MgmtContext.Library.GetOperationMethods(operation);
-            return operation.IsListMethod(out var itemType, out var valuePropertyName, out var nextLinkPropertyName)
+            var methods = _library.GetOperationMethods(operation);
+            return operation.IsListMethod(_library, out var itemType, out var valuePropertyName, out var nextLinkPropertyName)
                 ? new PagingMethod(methods.CreateRequest.Signature.Name, methods.CreateNextPageMessageSignature?.Name, nextLinkPropertyName, valuePropertyName, itemType)
                 : null;
         }

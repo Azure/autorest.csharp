@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
@@ -16,12 +18,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        public static MgmtExtensionWriter GetWriter(MgmtExtension extension) => GetWriter(new CodeWriter(), extension);
+        public static MgmtExtensionWriter GetWriter(MgmtExtension extension, IEnumerable<Resource> armResources) => GetWriter(new CodeWriter(), extension, armResources);
 
-        public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension) => extension switch
+        public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension, IEnumerable<Resource> armResources) => extension switch
         {
-            ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension),
-            _ => new MgmtExtensionWriter(writer, extension)
+            ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension, armResources),
+            _ => new MgmtExtensionWriter(writer, extension, armResources)
         };
 
         protected override bool SkipParameterValidation => true;
@@ -29,12 +31,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtension extensions) : this(new CodeWriter(), extensions)
+        public MgmtExtensionWriter(MgmtExtension extensions, IEnumerable<Resource> armResources) : this(new CodeWriter(), extensions, armResources)
         {
             This = extensions;
         }
 
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions) : base(writer, extensions)
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions, IEnumerable<Resource> armResources) : base(writer, extensions, armResources)
         {
             This = extensions;
         }

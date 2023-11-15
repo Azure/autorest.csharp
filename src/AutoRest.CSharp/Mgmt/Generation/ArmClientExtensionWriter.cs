@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -16,11 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private ArmClientExtension This { get; }
 
-        public ArmClientExtensionWriter(ArmClientExtension extension) : this(new CodeWriter(), extension)
-        {
-        }
-
-        public ArmClientExtensionWriter(CodeWriter writer, ArmClientExtension extension) : base(writer, extension)
+        public ArmClientExtensionWriter(CodeWriter writer, ArmClientExtension extension, IEnumerable<Resource> armResources) : base(writer, extension, armResources)
         {
             This = extension;
         }

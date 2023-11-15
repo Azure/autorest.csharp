@@ -19,7 +19,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Humanizer.Inflections;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
@@ -62,8 +61,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<InputOperation, RestClientOperationMethods> OperationMethods { get; }
 
-        private Dictionary<Schema, TypeProvider> AllSchemaMap { get; }
-
         private Dictionary<InputType, TypeProvider> AllInputTypeMap { get; }
 
         public CachedDictionary<InputType, TypeProvider> ResourceTypeMap { get; }
@@ -92,20 +89,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public TypeFactory TypeFactory { get; }
 
-        public MgmtOutputLibrary(CodeModel codeModel, SchemaUsageProvider schemaUsageProvider)
+        public MgmtOutputLibrary(InputNamespace inputNamespace)
         {
             TypeFactory = new TypeFactory(this);
-            CodeModelTransformer.Transform();
-
-            var codeModelConverter = new CodeModelConverter(codeModel, schemaUsageProvider);
-            _input = codeModelConverter.CreateNamespace();
+            _input = inputNamespace;
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataTypeNameToOperationSets = DecorateOperationSets();
             //_schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
 
-            AllSchemaMap = InitializeModels(codeModel);
             AllInputTypeMap = InitializeModels();
 
             // others are populated later
@@ -378,7 +371,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            return new MgmtExtensionBuilder(extensionOperations, armResourceOperations);
+            return new MgmtExtensionBuilder(extensionOperations, armResourceOperations, this);
         }
 
         private bool ShouldGenerateChildrenForType(Type armCoreType)
@@ -564,14 +557,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void BuildResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<InputOperation> operations, RequestPath originalResourcePath, ResourceData resourceData)
         {
-            var isSingleton = operationSet.IsSingletonResource();
+            var isSingleton = operationSet.IsSingletonResource(this);
             // we calculate the resource type of the resource
             var resourcePaths = originalResourcePath.Expand();
             foreach (var resourcePath in resourcePaths)
             {
                 var resourceType = resourcePath.GetResourceType();
-                var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
-                var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
+                var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData, this);
+                var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource, this);
                 resource.ResourceCollection = collection;
 
                 result.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
@@ -581,7 +574,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<InputOperation> operations, RequestPath originalResourcePath, EmptyResourceData emptyResourceData)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData);
+            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData, this);
             result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), emptyResourceData, resource, null));
         }
 
@@ -663,7 +656,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             while (pathToWalk.Count > 2)
             {
-                pathToWalk = pathToWalk.ParentRequestPath();
+                pathToWalk = pathToWalk.ParentRequestPath(this);
                 if (RawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
                 {
                     return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
@@ -725,7 +718,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     continue;
                 foreach (var operation in operationSet)
                 {
-                    var parentRequestPath = operation.ParentRequestPath(_input);
+                    var parentRequestPath = operation.ParentRequestPath(_input, this);
                     if (childOperations.TryGetValue(parentRequestPath, out var list))
                         list.Add(operation);
                     else
@@ -760,22 +753,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
         public override CSharpType ResolveModel(InputModelType model) => _schemaOrNameToModels[model].Type;
-
-        public override CSharpType FindTypeForSchema(Schema schema) => FindTypeProviderForSchema(schema).Type;
-
-        public TypeProvider FindTypeProviderForSchema(Schema schema)
-        {
-            TypeProvider? result;
-            if (AllSchemaMap is null)
-            {
-                result = ResourceDataSchemaNameToOperationSets.ContainsKey(schema.Name) ? BuildResourceData(schema) : BuildModel(schema);
-            }
-            else if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
-            {
-                throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
-            }
-            return result;
-        }
 
         public override TypeProvider FindTypeProviderForInputType(InputType inputType)
         {

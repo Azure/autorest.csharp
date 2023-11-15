@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure.Core;
@@ -11,11 +12,11 @@ internal class PartialResourceWriter : ResourceWriter
 {
     private PartialResource This { get; }
 
-    internal PartialResourceWriter(PartialResource resource) : this(new CodeWriter(), resource)
+    internal PartialResourceWriter(PartialResource resource, IEnumerable<Resource> armResources) : this(new CodeWriter(), resource, armResources)
     {
     }
 
-    protected PartialResourceWriter(CodeWriter writer, PartialResource resource) : base(writer, resource)
+    protected PartialResourceWriter(CodeWriter writer, PartialResource resource, IEnumerable<Resource> armResources) : base(writer, resource, armResources)
     {
         This = resource;
     }

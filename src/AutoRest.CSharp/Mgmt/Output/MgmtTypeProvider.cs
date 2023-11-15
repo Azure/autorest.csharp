@@ -32,9 +32,11 @@ namespace AutoRest.CSharp.Mgmt.Output
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
+        protected internal readonly MgmtOutputLibrary _library;
+
         protected bool IsArmCore { get; }
 
-        protected MgmtTypeProvider(string resourceName) : base(MgmtContext.Context)
+        protected MgmtTypeProvider(string resourceName, MgmtOutputLibrary library) : base(MgmtContext.Context)
         {
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
@@ -42,6 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             ArmClientProperty = new MemberExpression(null, "Client"); // this refers to ArmResource.Client which is protected internal therefore we have to hardcode in plain string here instead of using nameof
             IdProperty = new MemberExpression(null, nameof(ArmResource.Id));
             MethodModifiers = Public | Virtual;
+            _library = library;
         }
 
         protected ValueExpression ArmClientProperty { get; init; }
@@ -236,7 +239,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <summary>
         /// The collection of <see cref="Resource"/> that is a child of this generated class.
         /// </summary>
-        public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.GetParents().Contains(this));
+        public virtual IEnumerable<Resource> ChildResources => _childResources ??= _library.ArmResources.Where(resource => resource.GetParents(_library).Contains(this));
 
         protected string GetOperationName(InputOperation operation, string clientResourceName)
         {
@@ -260,7 +263,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (operation.TryGetConfigOperationName(out var name))
                 return name;
 
-            var ogKey = MgmtContext.Library.GetRestClient(operation).Key;
+            var ogKey = _library.GetRestClient(operation).Key;
             var singularOGKey = ogKey.LastWordToSingular();
             if (ogKey == clientResourceName || singularOGKey == clientResourceName)
             {
@@ -268,7 +271,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             var resourceName = string.Empty;
-            if (operation.IsListMethod(out _))
+            if (operation.IsListMethod(_library, out _))
             {
                 resourceName = ogKey.IsNullOrEmpty() ? string.Empty : singularOGKey.ResourceNameToPlural();
                 var opName = operation.MgmtCSharpName(!resourceName.IsNullOrEmpty());

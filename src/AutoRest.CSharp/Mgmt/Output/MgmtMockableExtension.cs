@@ -21,8 +21,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private readonly IEnumerable<MgmtClientOperation> _operations;
         private readonly MgmtExtension? _extensionForChildResources;
 
-        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
-            : base(resourceType.Name)
+        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library)
+            : base(resourceType.Name, library)
         {
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var (_, operations) in operationDict)
             {
-                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariable)!;
+                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariable, _library)!;
             }
         }
 

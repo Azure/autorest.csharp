@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using YamlDotNet.Serialization;
@@ -12,33 +13,33 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class ResourceItem : TransformableItem
     {
-        public ResourceItem(Resource resource, TransformSection transformSection)
+        public ResourceItem(Resource resource, TransformSection transformSection, MgmtOutputLibrary library)
             :base(resource.ResourceName, transformSection)
         {
-            this.Name = resource.ResourceName;
-            this.ContextPaths =
+            Name = resource.ResourceName;
+            ContextPaths =
                 resource.AllOperations.SelectMany(cop => cop.Select(rop => rop.ContextualPath.ToString())).Distinct().ToList();
-            this.RequestPath = resource.RequestPath.ToString();
-            this.isScopedResource = resource.RequestPath.GetScopePath().IsParameterizedScope();
+            RequestPath = resource.RequestPath.ToString();
+            isScopedResource = resource.RequestPath.GetScopePath().IsParameterizedScope();
             if (isScopedResource)
             {
                 var scopeTypes = resource.RequestPath.GetParameterizedScopeResourceTypes();
                 if (scopeTypes != null && scopeTypes.Length > 0)
-                    this.ScopeResourceTypes = scopeTypes.Select(st => st.ToString() ?? "<null>").ToList();
+                    ScopeResourceTypes = scopeTypes.Select(st => st.ToString() ?? "<null>").ToList();
             }
-            this.ResourceType = resource.ResourceType.ToString() ?? "";
-            this.IsSingleton = resource.IsSingleton;
+            ResourceType = resource.ResourceType.ToString() ?? "";
+            IsSingleton = resource.IsSingleton;
             if (resource.SingletonResourceIdSuffix != null)
-                this.SingletonSuffix = resource.SingletonResourceIdSuffix.ToString();
-            this.Operations = resource.AllOperations
+                SingletonSuffix = resource.SingletonResourceIdSuffix.ToString();
+            Operations = resource.AllOperations
                 .GroupBy(op => op.MethodSignature.Name)
                 .OrderBy(g => g.Key)
                 .ToDictionary(
                     g => g.Key,
                     g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
             // assume there is no circle in resource hirachy. TODO: handle it if it's not true
-            this.ChildResources = resource.ChildResources.Select(r => r.ResourceName).ToList();
-            this.ParentResources = resource.GetParents().Select(r => r.ResourceName).ToList();
+            ChildResources = resource.ChildResources.Select(r => r.ResourceName).ToList();
+            ParentResources = resource.GetParents(library).Select(r => r.ResourceName).ToList();
         }
 
         [YamlIgnore]

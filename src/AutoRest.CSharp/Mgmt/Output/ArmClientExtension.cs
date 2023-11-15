@@ -25,18 +25,18 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private readonly List<MgmtExtension> _extensions;
         private readonly ArmResourceExtension _armResourceExtensionForChildResources;
-        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients, ArmResourceExtension armResourceExtensionForChildResources)
-            : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmClient), RequestPath.Tenant)
+        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients, ArmResourceExtension armResourceExtensionForChildResources, MgmtOutputLibrary library)
+            : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmClient), library, RequestPath.Tenant)
         {
             _armResourceExtensionForChildResources = armResourceExtensionForChildResources;
             _extensions = new();
             foreach (var (parentRequestPath, operations) in armResourceExtensionOperations)
             {
-                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), parentRequestPath));
+                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), library, parentRequestPath));
             }
         }
 
-        public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any() && base.IsEmpty;
+        public override bool IsEmpty => !_library.ArmResources.Any() && base.IsEmpty;
 
         protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
 
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
                     var scopeTypes = ResourceTypeBuilder.GetScopeTypeStrings(scopeResourceTypes);
                     var parameterOverride = clientOperation.MethodParameters.Skip(1).Prepend(GetScopeParameter(scopeTypes)).Prepend(ExtensionParameter).ToArray();
-                    var newOp = MgmtClientOperation.FromClientOperation(clientOperation, IdVariable, extensionParameter: extensionParamToUse, parameterOverride: parameterOverride);
+                    var newOp = MgmtClientOperation.FromClientOperation(clientOperation, IdVariable, _library, extensionParameter: extensionParamToUse, parameterOverride: parameterOverride);
                     yield return newOp;
                 }
             }
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<Method> BuildArmResourceMethods()
         {
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var resource in _library.ArmResources)
             {
                 yield return BuildArmResourceMethod(resource);
             }

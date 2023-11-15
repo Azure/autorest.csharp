@@ -2,13 +2,10 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -20,11 +17,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     /// </summary>
     internal static class DuplicateSchemaResolver
     {
-        public static void ResolveDuplicates()
+        public static void ResolveDuplicates(CodeModel codeModel)
         {
             // step 1: categorize the schema by their names
             var schemaNameDict = new Dictionary<string, HashSet<Schema>>();
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 schemaNameDict.AddInList(schema.Name, schema);
             }
@@ -32,11 +29,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             // step 2: collapse the schemas with the same name
             foreach (var schemas in schemaNameDict.Values.Where(l => l.Count > 1))
             {
-                CollapseMultipleSchemas(schemas);
+                CollapseMultipleSchemas(codeModel, schemas);
             }
         }
 
-        private static void CollapseMultipleSchemas(HashSet<Schema> schemas)
+        private static void CollapseMultipleSchemas(CodeModel codeModel, HashSet<Schema> schemas)
         {
             // for simplicity, if the list has any ObjectSchema, we just throw exception. We should never use this to combine schemas - maybe we could add the support in the future? If needed.
             if (schemas.Any(schema => schema is not ChoiceSchema && schema is not SealedChoiceSchema))
@@ -44,10 +41,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             // now all things in the list should be Choices or SealedChoices
             var collapsedSchema = CollapseChoices(schemas);
             // now we need to update everything which is referencing the schemas in the list to the new schema
-            ReplaceSchemas(schemas, collapsedSchema);
+            ReplaceSchemas(codeModel, schemas, collapsedSchema);
         }
 
-        private static void ReplaceSchemas(HashSet<Schema> schemas, Schema replaceSchema)
+        private static void ReplaceSchemas(CodeModel codeModel, HashSet<Schema> schemas, Schema replaceSchema)
         {
             // remove the things that should be replaced by the replaceSchmea
             foreach (var schema in schemas)
@@ -57,17 +54,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 switch (schema)
                 {
                     case ChoiceSchema choiceSchema:
-                        MgmtContext.CodeModel.Schemas.Choices.Remove(choiceSchema);
+                        codeModel.Schemas.Choices.Remove(choiceSchema);
                         break;
                     case SealedChoiceSchema sealedChoiceSchema:
-                        MgmtContext.CodeModel.Schemas.SealedChoices.Remove(sealedChoiceSchema);
+                        codeModel.Schemas.SealedChoices.Remove(sealedChoiceSchema);
                         break;
                     default:
                         throw new InvalidOperationException("This will never happen");
                 }
             }
             // we have to iterate everything on the code model
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 // only change things in ObjectSchema because we only change ChoiceSchema and SealedChoiceSchema
                 // they could only appear as properties of ObjectSchemas
@@ -82,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
 
             // we also have to iterate all operations
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {

@@ -26,8 +26,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(OperationSet operationSet, IEnumerable<InputOperation> operations, Resource resource)
-            : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
+        public ResourceCollection(OperationSet operationSet, IEnumerable<InputOperation> operations, Resource resource, MgmtOutputLibrary library)
+            : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition, library)
         {
             Resource = resource;
         }
@@ -95,13 +95,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (op is null)
                 return result;
 
-            var method = MgmtContext.Library.GetRestClientPublicMethodSignature(op);
+            var method = _library.GetRestClientPublicMethodSignature(op);
             // calculate the ResourceType from the RequestPath of this resource
             var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
             // iterate over all the reference segments in the diff of this GetAll operation
             var candidatesOfParameters = new List<Parameter>(method.Parameters);
 
-            var opRequestPath = op.GetRequestPath(ResourceType);
+            var opRequestPath = op.GetRequestPath(_library, ResourceType);
             foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(OperationSet, opRequestPath)))
             {
                 var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected override RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.ParentRequestPath(ResourceType);
+            var contextualPath = operationSet.ParentRequestPath(ResourceType, _library);
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -217,7 +217,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parents = Resource.GetParents();
+            var parents = Resource.GetParents(_library);
             var parentTypes = parents.Select(parent => parent.TypeAsResource).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
@@ -249,14 +249,16 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Exists",
                         typeof(bool),
                         $"Checks to see if the resource exists in azure."),
-                    IdVariable));
+                    IdVariable
+                    , _library));
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "GetIfExists",
                         getMgmtRestOperation.MgmtReturnType,
                         $"Tries to get details for this resource from the service."),
-                    IdVariable));
+                    IdVariable
+                    , _library));
             }
 
             return result;

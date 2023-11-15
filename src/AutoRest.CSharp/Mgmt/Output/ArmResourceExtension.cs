@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using Azure.ResourceManager;
 
@@ -12,12 +13,12 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ArmResourceExtension : MgmtExtension
     {
         private readonly List<MgmtExtension> _extensions;
-        public ArmResourceExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients) : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmResource), RequestPath.Any)
+        public ArmResourceExtension(IReadOnlyDictionary<RequestPath, IEnumerable<InputOperation>> armResourceExtensionOperations, IEnumerable<MgmtMockableExtension> extensionClients, MgmtOutputLibrary library) : base(Enumerable.Empty<InputOperation>(), extensionClients, typeof(ArmResource), library, RequestPath.Any)
         {
             _extensions = new();
             foreach (var (parentRequestPath, operations) in armResourceExtensionOperations)
             {
-                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), parentRequestPath));
+                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), _library, parentRequestPath));
             }
         }
 

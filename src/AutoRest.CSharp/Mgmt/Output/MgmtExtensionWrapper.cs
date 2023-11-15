@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockingExtensions) : base(MgmtContext.RPName)
+        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockingExtensions, MgmtOutputLibrary library) : base(MgmtContext.RPName, library)
         {
             DefaultName = $"{ResourceName}Extensions";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";

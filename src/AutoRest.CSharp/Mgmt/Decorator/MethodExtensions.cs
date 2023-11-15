@@ -32,13 +32,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="valuePropertyName"></param>
         /// <param name="nextLinkPropertyName"></param>
         /// <returns></returns>
-        internal static bool IsListMethod(this InputOperation operation, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName, out string? nextLinkPropertyName)
+        internal static bool IsListMethod(this InputOperation operation, MgmtOutputLibrary library, [MaybeNullWhen(false)] out CSharpType itemType, [MaybeNullWhen(false)] out string valuePropertyName, out string? nextLinkPropertyName)
         {
             itemType = null;
             valuePropertyName = null;
             nextLinkPropertyName = null;
 
-            var methods = MgmtContext.Library.GetOperationMethods(operation);
+            var methods = library.GetOperationMethods(operation);
             var returnType = methods.ResponseType;
             if (returnType == null)
             {
@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="operation"></param>
         /// <param name="itemType">The type of the item in the collection</param>
         /// <returns></returns>
-        public static bool IsListMethod(this InputOperation operation, [MaybeNullWhen(false)] out CSharpType itemType) => IsListMethod(operation, out itemType, out _, out _);
+        public static bool IsListMethod(this InputOperation operation, MgmtOutputLibrary library, [MaybeNullWhen(false)] out CSharpType itemType) => IsListMethod(operation, library, out itemType, out _, out _);
 
         private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject, string pagingItemName)
         {

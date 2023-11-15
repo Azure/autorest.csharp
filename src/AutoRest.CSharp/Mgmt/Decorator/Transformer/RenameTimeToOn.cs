@@ -21,9 +21,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             {"Modification", "Modified"},
         };
 
-        public static void Update()
+        public static void Update(CodeModel codeModel)
         {
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;

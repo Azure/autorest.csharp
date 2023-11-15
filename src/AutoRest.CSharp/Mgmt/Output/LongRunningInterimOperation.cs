@@ -7,7 +7,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -16,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class LongRunningInterimOperation
     {
-        public LongRunningInterimOperation(CSharpType returnType, Resource? resource, string methodName)
+        public LongRunningInterimOperation(CSharpType returnType, Resource? resource, string methodName, MgmtOutputLibrary library)
         {
             ReturnType = returnType;
             BaseClassType = new CSharpType(typeof(ArmOperation<>), returnType);
@@ -42,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 null,
                 null,
                 false);
-            InterimType = new CSharpType(new MgmtObjectType(targetType, MgmtContext.Library.TypeFactory), MgmtContext.Context.DefaultNamespace, TypeName);
+            InterimType = new CSharpType(new MgmtObjectType(targetType, library.TypeFactory), MgmtContext.Context.DefaultNamespace, TypeName);
         }
 
         public CSharpType ReturnType { get; }

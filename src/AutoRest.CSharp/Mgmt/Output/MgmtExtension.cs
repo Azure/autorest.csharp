@@ -7,7 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -16,7 +15,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -26,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<InputOperation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, RequestPath? contextualPath = null)
-            : base(armCoreType.Name)
+        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, MgmtOutputLibrary library, RequestPath? contextualPath = null)
+            : base(armCoreType.Name, library)
         {
             _allRawOperations = allRawOperations;
             _mockingExtensions = mockingExtensions; // this property is populated later
@@ -99,11 +97,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         operation,
-                        operation.GetRequestPath(),
+                        operation.GetRequestPath(_library),
                         ContextualPath,
                         operationName,
+                        _library,
                         propertyBagName: ResourceName),
                     new(new MemberExpression(ExtensionParameter, "Id")),
+                    _library,
                     extensionParamToUse);
             });
         }
@@ -114,9 +114,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (operation.IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
+            if (operation.IsListMethod(_library, out var itemType) && itemType.TryCastResourceData(out var data))
             {
-                var requestPath = operation.GetRequestPath();
+                var requestPath = operation.GetRequestPath(_library);
                 // we need to find the correct resource type that links with this resource data
                 var resource = FindResourceFromResourceData(data, requestPath);
                 if (resource != null)
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Resource? FindResourceFromResourceData(ResourceData data, RequestPath requestPath)
         {
             // we need to find the correct resource type that links with this resource data
-            var candidates = MgmtContext.Library.FindResources(data);
+            var candidates = _library.FindResources(data);
 
             // return null when there is no match
             if (!candidates.Any())

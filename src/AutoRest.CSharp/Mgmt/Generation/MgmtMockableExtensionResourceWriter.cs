@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
@@ -11,17 +12,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtMockableExtensionResourceWriter : MgmtClientBaseWriter
     {
-        public static MgmtMockableExtensionResourceWriter GetWriter(MgmtMockableExtension extensionClient) => extensionClient switch
+        public static MgmtMockableExtensionResourceWriter GetWriter(MgmtMockableExtension extensionClient, IEnumerable<Resource> armResources) => extensionClient switch
         {
-            MgmtMockableArmClient armClientExtensionClient => new ArmClientMockingExtensionWriter(armClientExtensionClient),
-            _ => new MgmtMockableExtensionResourceWriter(extensionClient)
+            MgmtMockableArmClient armClientExtensionClient => new ArmClientMockingExtensionWriter(armClientExtensionClient, armResources),
+            _ => new MgmtMockableExtensionResourceWriter(extensionClient, armResources)
         };
 
         protected override bool UseField => false;
 
         private MgmtMockableExtension This { get; }
 
-        public MgmtMockableExtensionResourceWriter(MgmtMockableExtension extensions) : base(new CodeWriter(), extensions)
+        public MgmtMockableExtensionResourceWriter(MgmtMockableExtension extensions, IEnumerable<Resource> armResources) : base(new CodeWriter(), extensions, armResources)
         {
             This = extensions;
         }

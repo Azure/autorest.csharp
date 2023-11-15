@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -13,7 +14,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ExtensionMockTestWriter : MgmtMockTestBaseWriter<MgmtExtension>
     {
-        public ExtensionMockTestWriter(CodeWriter writer, MgmtMockTestProvider<MgmtExtension> extensionTest) : base(writer, extensionTest)
+        public ExtensionMockTestWriter(CodeWriter writer, MgmtMockTestProvider<MgmtExtension> extensionTest, TypeFactory typeFactory) : base(writer, extensionTest, typeFactory)
         {
         }
 

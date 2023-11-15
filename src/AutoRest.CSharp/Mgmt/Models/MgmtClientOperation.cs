@@ -9,6 +9,7 @@ using System.Text;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -30,24 +31,25 @@ namespace AutoRest.CSharp.Mgmt.Models
     {
         private const int PropertyBagThreshold = 5;
         private readonly Parameter? _extensionParameter;
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        private readonly MgmtOutputLibrary _library;
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, MgmtOutputLibrary library, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.OperationName).ToArray(), idVariable, extensionParameter, isConvenientOperation);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.OperationName).ToArray(), idVariable, extensionParameter, library, isConvenientOperation);
             }
 
             return null;
         }
 
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, ResourceIdentifierExpression idVariable, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, ResourceIdentifierExpression idVariable, MgmtOutputLibrary library, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariable, extensionParameter, isConvenientOperation);
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariable, extensionParameter, library, isConvenientOperation);
         }
 
-        public static MgmtClientOperation FromClientOperation(MgmtClientOperation other, ResourceIdentifierExpression idVariable, Parameter? extensionParameter = null, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+        public static MgmtClientOperation FromClientOperation(MgmtClientOperation other, ResourceIdentifierExpression idVariable, MgmtOutputLibrary library, Parameter? extensionParameter = null, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
         {
-            return new MgmtClientOperation(other._operations, idVariable, extensionParameter, isConvenientOperation, parameterOverride);
+            return new MgmtClientOperation(other._operations, idVariable, extensionParameter, library, isConvenientOperation, parameterOverride);
         }
 
         internal ResourceIdentifierExpression IdVariable { get; }
@@ -67,16 +69,17 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter, bool isConvenientOperation = false)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter, MgmtOutputLibrary library, bool isConvenientOperation = false)
         {
             _operations = operations;
             _extensionParameter = extensionParameter;
             IdVariable = idVariable;
             IsConvenientOperation = isConvenientOperation;
+            _library = library;
         }
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
-            : this(operations, idVariable, extensionParameter, isConvenientOperation)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, ResourceIdentifierExpression idVariable, Parameter? extensionParameter, MgmtOutputLibrary library, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+            : this(operations, idVariable, extensionParameter, library, isConvenientOperation)
         {
             _methodParameters = parameterOverride;
         }
@@ -193,7 +196,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var contextualPath in OperationMappings.Keys)
             {
                 var adjustedPath = Resource is not null ? contextualPath.ApplyHint(Resource.ResourceType) : contextualPath;
-                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariable).Concat(contextParams).ToList());
+                contextualParameterMappings.Add(contextualPath, adjustedPath.BuildContextualParameters(IdVariable, _library).Concat(contextParams).ToList());
             }
 
             var parameterMappings = new Dictionary<RequestPath, IReadOnlyList<ParameterMapping>>();

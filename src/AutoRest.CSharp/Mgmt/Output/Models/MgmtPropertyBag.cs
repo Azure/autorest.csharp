@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -13,11 +14,14 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
 {
     internal class MgmtPropertyBag : PropertyBag
     {
-        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
+        private readonly TypeFactory _typeFactory;
+
+        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep, TypeFactory typeFactory)
             : base(name)
         {
             _operation = operation;
             _paramsToKeep = paramsToKeep;
+            _typeFactory = typeFactory;
         }
 
         private readonly InputOperation _operation;
@@ -56,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             {
                 IsPropertyBag = true
             };
-            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory);
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, _typeFactory);
         }
 
         protected override bool EnsureShouldValidateParameter()

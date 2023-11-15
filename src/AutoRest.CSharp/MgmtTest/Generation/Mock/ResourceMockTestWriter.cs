@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
@@ -10,7 +11,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
     internal class ResourceMockTestWriter : MgmtMockTestBaseWriter<Resource>
     {
-        public ResourceMockTestWriter(MgmtMockTestProvider<Resource> resourceMockTest) : base(resourceMockTest)
+        public ResourceMockTestWriter(MgmtMockTestProvider<Resource> resourceMockTest, TypeFactory typeFactory) : base(resourceMockTest, typeFactory)
         {
         }
 

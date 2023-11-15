@@ -22,8 +22,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultNamespace = defaultNamespace;
         }
 
-        public OutputLibrary? BaseLibrary { get; protected set; }
-
         public CodeModel CodeModel { get; }
         public SchemaUsageProvider SchemaUsageProvider { get; }
         public string DefaultNamespace { get; }

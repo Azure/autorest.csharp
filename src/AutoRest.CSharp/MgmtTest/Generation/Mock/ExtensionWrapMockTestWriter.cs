@@ -2,10 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Linq;
-using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Mock;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
@@ -13,7 +11,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
     internal class ExtensionWrapMockTestWriter : MgmtMockTestBaseWriter<MgmtExtensionWrapper>
     {
         private IEnumerable<MgmtMockTestProvider<MgmtExtension>> _extensionTests;
-        public ExtensionWrapMockTestWriter(MgmtMockTestProvider<MgmtExtensionWrapper> testWrapper, IEnumerable<MgmtMockTestProvider<MgmtExtension>> extensionTests) : base(testWrapper)
+        public ExtensionWrapMockTestWriter(MgmtMockTestProvider<MgmtExtensionWrapper> testWrapper, IEnumerable<MgmtMockTestProvider<MgmtExtension>> extensionTests, TypeFactory typeFactory) : base(testWrapper, typeFactory)
         {
             _extensionTests = extensionTests;
         }
@@ -22,7 +20,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         {
             foreach (var extensionTest in _extensionTests)
             {
-                var extensionWriter = new ExtensionMockTestWriter(_writer, extensionTest);
+                var extensionWriter = new ExtensionMockTestWriter(_writer, extensionTest, _typeFactory);
                 extensionWriter.Write();
             }
 

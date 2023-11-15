@@ -3,7 +3,6 @@
 
 using System;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
@@ -11,9 +10,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     {
         private static readonly char LowerCaseI = 'i';
 
-        public static void UpdateSuffix()
+        public static void UpdateSuffix(CodeModel codeModel)
         {
-            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
+            foreach (var schema in codeModel.AllSchemas)
             {
                 if (schema is not ObjectSchema objSchema)
                     continue;

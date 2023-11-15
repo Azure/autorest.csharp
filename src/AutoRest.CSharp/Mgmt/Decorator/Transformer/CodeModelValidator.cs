@@ -10,14 +10,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class CodeModelValidator
     {
-        public static void Validate()
+        public static void Validate(CodeModel codeModel)
         {
-            VerifyApiVersions();
+            VerifyApiVersions(codeModel);
         }
 
-        private static void VerifyApiVersions()
+        private static void VerifyApiVersions(CodeModel codeModel)
         {
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            foreach (var operationGroup in codeModel.OperationGroups)
             {
                 VerifyApiVersionsWithinOperationGroup(operationGroup);
             }

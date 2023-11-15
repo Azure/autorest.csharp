@@ -62,8 +62,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
+            CodeModelTransformer.Transform(codeModel);
+            var schemaUsageProvider = new SchemaUsageProvider(codeModel);
+            var inputNamespace = new CodeModelConverter(codeModel, schemaUsageProvider).CreateNamespace();
+            var library = new MgmtOutputLibrary(inputNamespace);
             var addedFilenames = new HashSet<string>();
-            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
             var serializeWriter = new SerializationWriter();
             var isArmCore = Configuration.MgmtConfiguration.IsArmCore;
 
@@ -75,7 +78,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"ProviderConstants.cs", utilCodeWriter.ToString());
             }
 
-            foreach (var model in MgmtContext.Library.Models)
+            foreach (var model in library.Models)
             {
                 if (ShouldSkipModelGeneration(model))
                     continue;
@@ -101,7 +104,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else if (model is EnumType et)
                 {
-                    var inputType = MgmtContext.Library.InputTypeMap.First(map => map.Value == model).Key;
+                    var inputType = library.InputTypeMap.First(map => map.Value == model).Key;
                     var choices = inputType switch
                     {
                         InputEnumType sc => sc.AllowedValues,
@@ -130,7 +133,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
-            foreach (var client in MgmtContext.Library.RestClients)
+            foreach (var client in library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
                 new MgmtRestClientWriter().WriteClient(restCodeWriter, client);
@@ -138,18 +141,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"RestOperations/{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
+            foreach (var resourceCollection in library.ResourceCollections)
             {
-                var writer = new ResourceCollectionWriter(resourceCollection);
+                var writer = new ResourceCollectionWriter(resourceCollection, library.ArmResources);
                 writer.Write();
 
-                var ri = new ResourceItem(resourceCollection, MgmtReport.Instance.TransformSection);
+                var ri = new ResourceItem(resourceCollection, MgmtReport.Instance.TransformSection, library);
                 MgmtReport.Instance.ResourceCollectionSection.Add(ri.Name, ri);
 
                 AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
             }
 
-            foreach (var model in MgmtContext.Library.ResourceData)
+            foreach (var model in library.ResourceData)
             {
                 if (model is EmptyResourceData)
                     continue;
@@ -174,19 +177,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
-            foreach (var resource in MgmtContext.Library.ArmResources)
+            foreach (var resource in library.ArmResources)
             {
-                var writer = ResourceWriter.GetWriter(resource);
+                var writer = ResourceWriter.GetWriter(resource, library.ArmResources);
                 writer.Write();
 
-                var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection);
+                var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection, library);
                 MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
             // write extension class
-            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.MockableExtensions);
+            WriteExtensions(project, isArmCore, library.ExtensionWrapper, library.Extensions, library.MockableExtensions, library.ArmResources);
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -195,27 +198,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             lroWriter.Write();
             AddGeneratedFile(project, lroWriter.Filename, lroWriter.ToString());
 
-            foreach (var interimOperation in MgmtContext.Library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
+            foreach (var interimOperation in library.InterimOperations.Distinct(LongRunningInterimOperation.LongRunningInterimOperationComparer))
             {
                 var writer = new MgmtLongRunningInterimOperationWriter(interimOperation);
                 writer.Write();
                 AddGeneratedFile(project, $"LongRunningOperation/{interimOperation.TypeName}.cs", writer.ToString());
             }
 
-            foreach (var operationSource in MgmtContext.Library.OperationSources)
+            foreach (var operationSource in library.OperationSources)
             {
                 var writer = new OperationSourceWriter(operationSource);
                 writer.Write();
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.Type.Name}.cs", writer.ToString());
             }
 
-            foreach (var model in MgmtContext.Library.PropertyBagModels)
+            foreach (var model in library.PropertyBagModels)
             {
                 var name = model.Type.Name;
                 WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
-            var modelFactoryProvider = MgmtContext.Library.ModelFactory;
+            var modelFactoryProvider = library.ModelFactory;
             if (modelFactoryProvider is not null && modelFactoryProvider.Methods.Any())
             {
                 var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
@@ -230,7 +233,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions)
+        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions, IEnumerable<Resource> armResources)
         {
             if (isArmCore)
             {
@@ -240,7 +243,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (!extension.IsEmpty)
                     {
                         MgmtReport.Instance.ExtensionSection.Add(extension.ResourceName, new ExtensionItem(extension, MgmtReport.Instance.TransformSection));
-                        WriteExtensionFile(project, MgmtExtensionWriter.GetWriter(extension));
+                        WriteExtensionFile(project, MgmtExtensionWriter.GetWriter(extension, armResources));
                     }
                 }
             }
@@ -248,7 +251,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 // for other packages (not ArmCore), we write extension wrapper (a big class that contains all the extension methods) and do not write the individual extension classes
                 if (!extensionWrapper.IsEmpty)
-                    WriteExtensionFile(project, new MgmtExtensionWrapperWriter(extensionWrapper));
+                    WriteExtensionFile(project, new MgmtExtensionWrapperWriter(extensionWrapper, armResources));
 
                 // and we write ExtensionClients
                 foreach (var mockableExtension in mockableExtensions)
@@ -256,7 +259,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (!mockableExtension.IsEmpty)
                     {
                         MgmtReport.Instance.ExtensionSection.Add(mockableExtension.ResourceName, new ExtensionItem(mockableExtension, MgmtReport.Instance.TransformSection));
-                        WriteExtensionFile(project, MgmtMockableExtensionResourceWriter.GetWriter(mockableExtension));
+                        WriteExtensionFile(project, MgmtMockableExtensionResourceWriter.GetWriter(mockableExtension, armResources));
                     }
                 }
             }
