@@ -51,8 +51,6 @@
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20230309.1",
         "@azure-tools/typespec-azure-core": "0.36.0",
-        "@azure-tools/typespec-client-generator-core": "0.36.0",
-        "@azure-tools/typespec-azure-resource-manager": "0.36.0",
         "@typespec/compiler": "0.50.0",
         "@typespec/eslint-config-typespec": "0.50.0",
         "@typespec/eslint-plugin": "0.50.0",
@@ -64,5 +62,9 @@
         "js-yaml": "^4.1.0",
         "json-serialize-refs": "0.1.0-0",
         "winston": "^3.8.2"
+    },
+    "peerDependencies": {
+        "@azure-tools/typespec-azure-resource-manager": "0.36.0",
+        "@azure-tools/typespec-client-generator-core": "0.36.0"
     }
 }
