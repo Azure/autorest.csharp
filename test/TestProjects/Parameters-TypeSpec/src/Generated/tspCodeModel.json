@@ -107,42 +107,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "14",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "15",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "16",
-        "Type": {
-         "$id": "17",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2022-05-15-preview"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "14",
        "StatusCodes": [
         200
        ],
@@ -163,16 +132,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "15",
      "Name": "Operation2",
      "ResourceName": "ParameterOrders",
      "Parameters": [
       {
-       "$id": "20",
+       "$id": "16",
        "Name": "start",
        "NameInRequest": "start",
        "Type": {
-        "$id": "21",
+        "$id": "17",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -188,11 +157,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "22",
+       "$id": "18",
        "Name": "end",
        "NameInRequest": "end",
        "Type": {
-        "$id": "23",
+        "$id": "19",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -208,11 +177,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "20",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "21",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -227,20 +196,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "22",
         "Type": {
-         "$ref": "25"
+         "$ref": "21"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "14"
       }
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "23",
        "StatusCodes": [
         200
        ],
@@ -262,7 +228,7 @@
     }
    ],
    "Protocol": {
-    "$id": "28"
+    "$id": "24"
    },
    "Creatable": true
   }

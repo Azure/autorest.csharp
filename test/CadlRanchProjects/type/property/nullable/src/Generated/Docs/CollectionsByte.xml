@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetNonNullAsync.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = await client.GetNonNullAsync();
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = await client.GetNonNullAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<CollectionsByteProperty> response = await client.GetNonNullAsync();
       <example>
 This sample shows how to call GetNonNull.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = client.GetNonNull();
 ]]></code>
 This sample shows how to call GetNonNull with all parameters.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = client.GetNonNull();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<CollectionsByteProperty> response = client.GetNonNull();
       <example>
 This sample shows how to call GetNonNullAsync and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = await client.GetNonNullAsync(null);
 
@@ -45,7 +45,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
 ]]></code>
 This sample shows how to call GetNonNullAsync with all parameters and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = await client.GetNonNullAsync(null);
 
@@ -58,7 +58,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
       <example>
 This sample shows how to call GetNonNull and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = client.GetNonNull(null);
 
@@ -68,7 +68,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
 ]]></code>
 This sample shows how to call GetNonNull with all parameters and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = client.GetNonNull(null);
 
@@ -81,13 +81,13 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
       <example>
 This sample shows how to call GetNullAsync.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = await client.GetNullAsync();
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = await client.GetNullAsync();
 ]]></code></example>
@@ -96,13 +96,13 @@ Response<CollectionsByteProperty> response = await client.GetNullAsync();
       <example>
 This sample shows how to call GetNull.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = client.GetNull();
 ]]></code>
 This sample shows how to call GetNull with all parameters.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response<CollectionsByteProperty> response = client.GetNull();
 ]]></code></example>
@@ -111,7 +111,7 @@ Response<CollectionsByteProperty> response = client.GetNull();
       <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = await client.GetNullAsync(null);
 
@@ -121,7 +121,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
 ]]></code>
 This sample shows how to call GetNullAsync with all parameters and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = await client.GetNullAsync(null);
 
@@ -134,7 +134,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
       <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = client.GetNull(null);
 
@@ -144,7 +144,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
 ]]></code>
 This sample shows how to call GetNull with all parameters and parse the result.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 Response response = client.GetNull(null);
 
@@ -157,7 +157,7 @@ Console.WriteLine(result.GetProperty("nullableProperty")[0].ToString());
       <example>
 This sample shows how to call PatchNonNullAsync.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -173,7 +173,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNullAsync with all request content.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -192,7 +192,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PatchNonNull.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -208,7 +208,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNonNull with all request content.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -227,7 +227,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PatchNullAsync.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -243,7 +243,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNullAsync with all request content.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -262,7 +262,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call PatchNull.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {
@@ -278,7 +278,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PatchNull with all request content.
 <code><![CDATA[
-CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
 using RequestContent content = RequestContent.Create(new
 {

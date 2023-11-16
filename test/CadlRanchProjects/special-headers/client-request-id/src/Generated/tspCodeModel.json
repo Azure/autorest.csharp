@@ -96,42 +96,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "13",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "14",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "15",
-        "Type": {
-         "$id": "16",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "13",
        "StatusCodes": [
         204
        ],
@@ -150,7 +119,7 @@
     }
    ],
    "Protocol": {
-    "$id": "18"
+    "$id": "14"
    },
    "Creatable": true
   }

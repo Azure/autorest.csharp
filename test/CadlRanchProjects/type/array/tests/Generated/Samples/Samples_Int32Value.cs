@@ -23,7 +23,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_ShortVersion()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = client.GetInt32Value(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_ShortVersion_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = await client.GetInt32ValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_ShortVersion_Convenience()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response<IReadOnlyList<int>> response = client.GetInt32Value();
         }
@@ -56,7 +56,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_ShortVersion_Convenience_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response<IReadOnlyList<int>> response = await client.GetInt32ValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_AllParameters()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = client.GetInt32Value(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = await client.GetInt32ValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_AllParameters_Convenience()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response<IReadOnlyList<int>> response = client.GetInt32Value();
         }
@@ -98,7 +98,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Convenience_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response<IReadOnlyList<int>> response = await client.GetInt32ValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -122,7 +122,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -137,7 +137,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = client.Put(new int[] { 1234 });
         }
@@ -146,7 +146,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = await client.PutAsync(new int[] { 1234 });
         }
@@ -155,7 +155,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -170,7 +170,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -185,7 +185,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = client.Put(new int[] { 1234 });
         }
@@ -194,7 +194,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Int32Value client = new ArrayClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new ArrayClient().GetInt32ValueClient();
 
             Response response = await client.PutAsync(new int[] { 1234 });
         }

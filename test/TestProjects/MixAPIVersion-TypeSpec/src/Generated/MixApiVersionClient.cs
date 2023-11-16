@@ -321,7 +321,6 @@ namespace MixApiVersion
             uri.Reset(_endpoint);
             uri.AppendPath("/pets/", false);
             uri.AppendPath(petId, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

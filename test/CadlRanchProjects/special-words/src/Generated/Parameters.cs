@@ -19,7 +19,6 @@ namespace SpecialWords
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -36,13 +35,11 @@ namespace SpecialWords
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal Parameters(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal Parameters(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
@@ -2434,7 +2431,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/and", false);
             uri.AppendQuery("and", and, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2449,7 +2445,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/as", false);
             uri.AppendQuery("as", @as, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2464,7 +2459,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/assert", false);
             uri.AppendQuery("assert", assert, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2479,7 +2473,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/async", false);
             uri.AppendQuery("async", @async, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2494,7 +2487,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/await", false);
             uri.AppendQuery("await", @await, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2509,7 +2501,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/break", false);
             uri.AppendQuery("break", @break, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2524,7 +2515,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/class", false);
             uri.AppendQuery("class", @class, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2539,7 +2529,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/constructor", false);
             uri.AppendQuery("constructor", constructor, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2554,7 +2543,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/continue", false);
             uri.AppendQuery("continue", @continue, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2569,7 +2557,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/def", false);
             uri.AppendQuery("def", def, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2584,7 +2571,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/del", false);
             uri.AppendQuery("del", del, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2599,7 +2585,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/elif", false);
             uri.AppendQuery("elif", elif, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2614,7 +2599,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/else", false);
             uri.AppendQuery("else", @else, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2629,7 +2613,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/except", false);
             uri.AppendQuery("except", except, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2644,7 +2627,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/exec", false);
             uri.AppendQuery("exec", exec, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2659,7 +2641,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/finally", false);
             uri.AppendQuery("finally", @finally, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2674,7 +2655,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/for", false);
             uri.AppendQuery("for", @for, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2689,7 +2669,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/from", false);
             uri.AppendQuery("from", @from, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2704,7 +2683,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/global", false);
             uri.AppendQuery("global", @global, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2719,7 +2697,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/if", false);
             uri.AppendQuery("if", @if, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2734,7 +2711,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/import", false);
             uri.AppendQuery("import", import, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2749,7 +2725,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/in", false);
             uri.AppendQuery("in", @in, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2764,7 +2739,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/is", false);
             uri.AppendQuery("is", @is, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2779,7 +2753,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/lambda", false);
             uri.AppendQuery("lambda", lambda, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2794,7 +2767,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/not", false);
             uri.AppendQuery("not", not, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2809,7 +2781,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/or", false);
             uri.AppendQuery("or", or, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2824,7 +2795,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/pass", false);
             uri.AppendQuery("pass", pass, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2839,7 +2809,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/raise", false);
             uri.AppendQuery("raise", raise, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2854,7 +2823,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/return", false);
             uri.AppendQuery("return", @return, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2869,7 +2837,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/try", false);
             uri.AppendQuery("try", @try, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2884,7 +2851,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/while", false);
             uri.AppendQuery("while", @while, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2899,7 +2865,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/with", false);
             uri.AppendQuery("with", with, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2914,7 +2879,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/yield", false);
             uri.AppendQuery("yield", @yield, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -2929,7 +2893,6 @@ namespace SpecialWords
             uri.Reset(_endpoint);
             uri.AppendPath("/special-words/parameters/cancellationToken", false);
             uri.AppendQuery("cancellationToken", cancellationToken, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

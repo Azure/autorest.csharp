@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,54 +44,40 @@ namespace Encode.Bytes
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Query. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Query GetQueryClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private Query _cachedQuery;
+        private Property _cachedProperty;
+        private Header _cachedHeader;
+        private RequestBody _cachedRequestBody;
+        private ResponseBody _cachedResponseBody;
 
-            return new Query(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of Query. </summary>
+        public virtual Query GetQueryClient()
+        {
+            return Volatile.Read(ref _cachedQuery) ?? Interlocked.CompareExchange(ref _cachedQuery, new Query(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedQuery;
         }
 
         /// <summary> Initializes a new instance of Property. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Property GetPropertyClient(string apiVersion = "1.0.0")
+        public virtual Property GetPropertyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Property(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedProperty) ?? Interlocked.CompareExchange(ref _cachedProperty, new Property(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedProperty;
         }
 
         /// <summary> Initializes a new instance of Header. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Header GetHeaderClient(string apiVersion = "1.0.0")
+        public virtual Header GetHeaderClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new Header(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedHeader) ?? Interlocked.CompareExchange(ref _cachedHeader, new Header(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedHeader;
         }
 
         /// <summary> Initializes a new instance of RequestBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual RequestBody GetRequestBodyClient(string apiVersion = "1.0.0")
+        public virtual RequestBody GetRequestBodyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new RequestBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedRequestBody) ?? Interlocked.CompareExchange(ref _cachedRequestBody, new RequestBody(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedRequestBody;
         }
 
         /// <summary> Initializes a new instance of ResponseBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual ResponseBody GetResponseBodyClient(string apiVersion = "1.0.0")
+        public virtual ResponseBody GetResponseBodyClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new ResponseBody(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedResponseBody) ?? Interlocked.CompareExchange(ref _cachedResponseBody, new ResponseBody(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedResponseBody;
         }
     }
 }

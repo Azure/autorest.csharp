@@ -23,7 +23,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_ShortVersion()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = client.GetNonNull(null);
 
@@ -36,7 +36,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_ShortVersion_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -49,7 +49,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_ShortVersion_Convenience()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = client.GetNonNull();
         }
@@ -58,7 +58,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_ShortVersion_Convenience_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = await client.GetNonNullAsync();
         }
@@ -67,7 +67,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_AllParameters()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = client.GetNonNull(null);
 
@@ -80,7 +80,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_AllParameters_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = await client.GetNonNullAsync(null);
 
@@ -93,7 +93,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNonNull_AllParameters_Convenience()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = client.GetNonNull();
         }
@@ -102,7 +102,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNonNull_AllParameters_Convenience_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = await client.GetNonNullAsync();
         }
@@ -111,7 +111,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_ShortVersion()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = client.GetNull(null);
 
@@ -124,7 +124,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_ShortVersion_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = await client.GetNullAsync(null);
 
@@ -137,7 +137,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_ShortVersion_Convenience()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = client.GetNull();
         }
@@ -146,7 +146,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_ShortVersion_Convenience_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = await client.GetNullAsync();
         }
@@ -155,7 +155,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_AllParameters()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = client.GetNull(null);
 
@@ -168,7 +168,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_AllParameters_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response response = await client.GetNullAsync(null);
 
@@ -181,7 +181,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetNull_AllParameters_Convenience()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = client.GetNull();
         }
@@ -190,7 +190,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetNull_AllParameters_Convenience_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             Response<CollectionsByteProperty> response = await client.GetNullAsync();
         }
@@ -199,7 +199,7 @@ namespace _Type.Property.Nullable.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull_ShortVersion()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -218,7 +218,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_ShortVersion_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -237,7 +237,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNonNull_AllParameters()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -256,7 +256,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNonNull_AllParameters_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -275,7 +275,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull_ShortVersion()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -294,7 +294,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_ShortVersion_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -313,7 +313,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public void Example_PatchNull_AllParameters()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -332,7 +332,7 @@ new object()
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PatchNull_AllParameters_Async()
         {
-            CollectionsByte client = new NullableClient().GetCollectionsByteClient(apiVersion: "1.0.0");
+            CollectionsByte client = new NullableClient().GetCollectionsByteClient();
 
             using RequestContent content = RequestContent.Create(new
             {

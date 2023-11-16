@@ -23,7 +23,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt64Value_ShortVersion()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = client.GetInt64Value(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt64Value_ShortVersion_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = await client.GetInt64ValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt64Value_ShortVersion_Convenience()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response<IReadOnlyList<long>> response = client.GetInt64Value();
         }
@@ -56,7 +56,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt64Value_ShortVersion_Convenience_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response<IReadOnlyList<long>> response = await client.GetInt64ValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt64Value_AllParameters()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = client.GetInt64Value(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt64Value_AllParameters_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = await client.GetInt64ValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt64Value_AllParameters_Convenience()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response<IReadOnlyList<long>> response = client.GetInt64Value();
         }
@@ -98,7 +98,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt64Value_AllParameters_Convenience_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response<IReadOnlyList<long>> response = await client.GetInt64ValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -122,7 +122,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -137,7 +137,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = client.Put(new long[] { 1234L });
         }
@@ -146,7 +146,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = await client.PutAsync(new long[] { 1234L });
         }
@@ -155,7 +155,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -170,7 +170,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             using RequestContent content = RequestContent.Create(new object[]
             {
@@ -185,7 +185,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = client.Put(new long[] { 1234L });
         }
@@ -194,7 +194,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Int64Value client = new ArrayClient().GetInt64ValueClient(apiVersion: "1.0.0");
+            Int64Value client = new ArrayClient().GetInt64ValueClient();
 
             Response response = await client.PutAsync(new long[] { 1234L });
         }

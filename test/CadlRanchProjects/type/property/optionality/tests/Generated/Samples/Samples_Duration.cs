@@ -24,7 +24,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_ShortVersion()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = client.GetAll(null);
 
@@ -36,7 +36,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_ShortVersion_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -48,7 +48,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_ShortVersion_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = client.GetAll();
         }
@@ -57,7 +57,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_ShortVersion_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = await client.GetAllAsync();
         }
@@ -66,7 +66,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = client.GetAll(null);
 
@@ -78,7 +78,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = await client.GetAllAsync(null);
 
@@ -90,7 +90,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAll_AllParameters_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = client.GetAll();
         }
@@ -99,7 +99,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAll_AllParameters_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = await client.GetAllAsync();
         }
@@ -108,7 +108,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_ShortVersion()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = client.GetDefault(null);
 
@@ -120,7 +120,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_ShortVersion_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -132,7 +132,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_ShortVersion_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = client.GetDefault();
         }
@@ -141,7 +141,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_ShortVersion_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = await client.GetDefaultAsync();
         }
@@ -150,7 +150,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = client.GetDefault(null);
 
@@ -162,7 +162,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response response = await client.GetDefaultAsync(null);
 
@@ -174,7 +174,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDefault_AllParameters_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = client.GetDefault();
         }
@@ -183,7 +183,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDefault_AllParameters_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             Response<DurationProperty> response = await client.GetDefaultAsync();
         }
@@ -192,7 +192,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_ShortVersion()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutAll(content);
@@ -204,7 +204,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_ShortVersion_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutAllAsync(content);
@@ -216,7 +216,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_ShortVersion_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty();
             Response response = client.PutAll(body);
@@ -226,7 +226,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_ShortVersion_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty();
             Response response = await client.PutAllAsync(body);
@@ -236,7 +236,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -251,7 +251,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -266,7 +266,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutAll_AllParameters_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty
             {
@@ -279,7 +279,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutAll_AllParameters_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty
             {
@@ -292,7 +292,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_ShortVersion()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = client.PutDefault(content);
@@ -304,7 +304,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_ShortVersion_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new object());
             Response response = await client.PutDefaultAsync(content);
@@ -316,7 +316,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_ShortVersion_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty();
             Response response = client.PutDefault(body);
@@ -326,7 +326,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_ShortVersion_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty();
             Response response = await client.PutDefaultAsync(body);
@@ -336,7 +336,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -351,7 +351,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -366,7 +366,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PutDefault_AllParameters_Convenience()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty
             {
@@ -379,7 +379,7 @@ namespace _Type.Property.Optionality.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PutDefault_AllParameters_Convenience_Async()
         {
-            Duration client = new OptionalClient().GetDurationClient(apiVersion: "1.0.0");
+            Duration client = new OptionalClient().GetDurationClient();
 
             DurationProperty body = new DurationProperty
             {

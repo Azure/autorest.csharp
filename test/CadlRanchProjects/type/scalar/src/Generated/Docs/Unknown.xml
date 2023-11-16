@@ -5,13 +5,13 @@
       <example>
 This sample shows how to call GetUnknownAsync.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response<BinaryData> response = await client.GetUnknownAsync();
 ]]></code>
 This sample shows how to call GetUnknownAsync with all parameters.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response<BinaryData> response = await client.GetUnknownAsync();
 ]]></code></example>
@@ -20,13 +20,13 @@ Response<BinaryData> response = await client.GetUnknownAsync();
       <example>
 This sample shows how to call GetUnknown.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response<BinaryData> response = client.GetUnknown();
 ]]></code>
 This sample shows how to call GetUnknown with all parameters.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response<BinaryData> response = client.GetUnknown();
 ]]></code></example>
@@ -35,7 +35,7 @@ Response<BinaryData> response = client.GetUnknown();
       <example>
 This sample shows how to call GetUnknownAsync and parse the result.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = await client.GetUnknownAsync(null);
 
@@ -44,7 +44,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetUnknownAsync with all parameters and parse the result.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = await client.GetUnknownAsync(null);
 
@@ -56,7 +56,7 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call GetUnknown and parse the result.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = client.GetUnknown(null);
 
@@ -65,7 +65,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call GetUnknown with all parameters and parse the result.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = client.GetUnknown(null);
 
@@ -77,13 +77,13 @@ Console.WriteLine(result.ToString());
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object()));
 ]]></code>
 This sample shows how to call PutAsync with all parameters.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object()));
 ]]></code></example>
@@ -92,13 +92,13 @@ Response response = await client.PutAsync(BinaryData.FromObjectAsJson(new object
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
 ]]></code>
 This sample shows how to call Put with all parameters.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
 ]]></code></example>
@@ -107,7 +107,7 @@ Response response = client.Put(BinaryData.FromObjectAsJson(new object()));
       <example>
 This sample shows how to call PutAsync.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -116,7 +116,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAsync with all request content.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = await client.PutAsync(content);
@@ -128,7 +128,7 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);
@@ -137,7 +137,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call Put with all request content.
 <code><![CDATA[
-Unknown client = new ScalarClient().GetUnknownClient(apiVersion: "1.0.0");
+Unknown client = new ScalarClient().GetUnknownClient();
 
 using RequestContent content = RequestContent.Create(new object());
 Response response = client.Put(content);

@@ -22,7 +22,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoDecoratorInPublic_ShortVersion()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = client.NoDecoratorInPublic("<name>", null);
 
@@ -34,7 +34,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_ShortVersion_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", null);
 
@@ -46,7 +46,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoDecoratorInPublic_ShortVersion_Convenience()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<NoDecoratorModelInPublic> response = client.NoDecoratorInPublic("<name>");
         }
@@ -55,7 +55,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_ShortVersion_Convenience_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<NoDecoratorModelInPublic> response = await client.NoDecoratorInPublicAsync("<name>");
         }
@@ -64,7 +64,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoDecoratorInPublic_AllParameters()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = client.NoDecoratorInPublic("<name>", null);
 
@@ -76,7 +76,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_AllParameters_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", null);
 
@@ -88,7 +88,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoDecoratorInPublic_AllParameters_Convenience()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<NoDecoratorModelInPublic> response = client.NoDecoratorInPublic("<name>");
         }
@@ -97,7 +97,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_AllParameters_Convenience_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<NoDecoratorModelInPublic> response = await client.NoDecoratorInPublicAsync("<name>");
         }
@@ -106,7 +106,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicDecoratorInPublic_ShortVersion()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = client.PublicDecoratorInPublic("<name>", null);
 
@@ -118,7 +118,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_ShortVersion_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
 
@@ -130,7 +130,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicDecoratorInPublic_ShortVersion_Convenience()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<PublicDecoratorModelInPublic> response = client.PublicDecoratorInPublic("<name>");
         }
@@ -139,7 +139,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_ShortVersion_Convenience_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<PublicDecoratorModelInPublic> response = await client.PublicDecoratorInPublicAsync("<name>");
         }
@@ -148,7 +148,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicDecoratorInPublic_AllParameters()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = client.PublicDecoratorInPublic("<name>", null);
 
@@ -160,7 +160,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_AllParameters_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", null);
 
@@ -172,7 +172,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicDecoratorInPublic_AllParameters_Convenience()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<PublicDecoratorModelInPublic> response = client.PublicDecoratorInPublic("<name>");
         }
@@ -181,7 +181,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_AllParameters_Convenience_Async()
         {
-            PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
+            PublicOperation client = new AccessClient().GetPublicOperationClient();
 
             Response<PublicDecoratorModelInPublic> response = await client.PublicDecoratorInPublicAsync("<name>");
         }

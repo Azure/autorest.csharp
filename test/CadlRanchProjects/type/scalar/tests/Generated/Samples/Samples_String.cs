@@ -22,7 +22,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetString_ShortVersion()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = client.GetString(null);
 
@@ -34,7 +34,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetString_ShortVersion_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = await client.GetStringAsync(null);
 
@@ -46,7 +46,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetString_ShortVersion_Convenience()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response<string> response = client.GetString();
         }
@@ -55,7 +55,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetString_ShortVersion_Convenience_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response<string> response = await client.GetStringAsync();
         }
@@ -64,7 +64,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetString_AllParameters()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = client.GetString(null);
 
@@ -76,7 +76,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetString_AllParameters_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = await client.GetStringAsync(null);
 
@@ -88,7 +88,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetString_AllParameters_Convenience()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response<string> response = client.GetString();
         }
@@ -97,7 +97,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetString_AllParameters_Convenience_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response<string> response = await client.GetStringAsync();
         }
@@ -106,7 +106,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Put(content);
@@ -118,7 +118,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.PutAsync(content);
@@ -130,7 +130,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = client.Put("<body>");
         }
@@ -139,7 +139,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = await client.PutAsync("<body>");
         }
@@ -148,7 +148,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = client.Put(content);
@@ -160,7 +160,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             using RequestContent content = RequestContent.Create("<body>");
             Response response = await client.PutAsync(content);
@@ -172,7 +172,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = client.Put("<body>");
         }
@@ -181,7 +181,7 @@ namespace _Type.Scalar.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            String client = new ScalarClient().GetStringClient(apiVersion: "1.0.0");
+            String client = new ScalarClient().GetStringClient();
 
             Response response = await client.PutAsync("<body>");
         }

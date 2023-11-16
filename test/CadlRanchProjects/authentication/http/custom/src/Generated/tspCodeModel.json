@@ -100,42 +100,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "14",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "15",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "16",
-        "Type": {
-         "$id": "17",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "18",
+       "$id": "14",
        "StatusCodes": [
         204
        ],
@@ -153,7 +122,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "19",
+     "$id": "15",
      "Name": "invalid",
      "ResourceName": "Custom",
      "Description": "Check whether client is authenticated.",
@@ -162,11 +131,11 @@
        "$ref": "7"
       },
       {
-       "$id": "20",
+       "$id": "16",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "21",
+        "$id": "17",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -181,20 +150,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "18",
         "Type": {
-         "$ref": "21"
+         "$ref": "17"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "14"
       }
      ],
      "Responses": [
       {
-       "$id": "23",
+       "$id": "19",
        "StatusCodes": [
         204
        ],
@@ -203,7 +169,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "24",
+       "$id": "20",
        "StatusCodes": [
         403
        ],
@@ -225,15 +191,15 @@
     }
    ],
    "Protocol": {
-    "$id": "25"
+    "$id": "21"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "26",
+  "$id": "22",
   "ApiKey": {
-   "$id": "27",
+   "$id": "23",
    "Name": "Authorization",
    "Prefix": "SharedAccessKey"
   }

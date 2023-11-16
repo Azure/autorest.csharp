@@ -22,7 +22,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_ShortVersion()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -37,7 +37,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_ShortVersion_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -52,7 +52,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_ShortVersion_Convenience()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = client.SpreadAsRequestBody(bodyParameter);
@@ -62,7 +62,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_ShortVersion_Convenience_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);
@@ -72,7 +72,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -87,7 +87,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -102,7 +102,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SpreadAsRequestBody_AllParameters_Convenience()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = client.SpreadAsRequestBody(bodyParameter);
@@ -112,7 +112,7 @@ namespace Parameters.Spread.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SpreadAsRequestBody_AllParameters_Convenience_Async()
         {
-            Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
+            Model client = new SpreadClient().GetModelClient();
 
             BodyParameter bodyParameter = new BodyParameter("<name>");
             Response response = await client.SpreadAsRequestBodyAsync(bodyParameter);

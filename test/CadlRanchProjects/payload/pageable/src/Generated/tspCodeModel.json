@@ -162,42 +162,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "21",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "22",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "23",
-        "Type": {
-         "$id": "24",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "25",
+       "$id": "21",
        "StatusCodes": [
         200
        ],
@@ -215,7 +184,7 @@
      "Path": "/payload/pageable",
      "BufferResponse": true,
      "Paging": {
-      "$id": "26",
+      "$id": "22",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -224,7 +193,7 @@
     }
    ],
    "Protocol": {
-    "$id": "27"
+    "$id": "23"
    },
    "Creatable": true
   }

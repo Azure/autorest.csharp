@@ -97,42 +97,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "13",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "14",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "15",
-        "Type": {
-         "$id": "16",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "17",
+       "$id": "13",
        "StatusCodes": [
         204
        ],
@@ -150,7 +119,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "18",
+     "$id": "14",
      "Name": "postIfNoneMatch",
      "ResourceName": "ConditionalRequest",
      "Description": "Check when only If-None-Match in header is defined.",
@@ -159,12 +128,12 @@
        "$ref": "4"
       },
       {
-       "$id": "19",
+       "$id": "15",
        "Name": "ifNoneMatch",
        "NameInRequest": "If-None-Match",
        "Description": "The request should only proceed if no entity matches this string.",
        "Type": {
-        "$id": "20",
+        "$id": "16",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -180,11 +149,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "21",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "18",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -199,20 +168,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "19",
         "Type": {
-         "$ref": "22"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "13"
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "20",
        "StatusCodes": [
         204
        ],
@@ -231,7 +197,7 @@
     }
    ],
    "Protocol": {
-    "$id": "25"
+    "$id": "21"
    },
    "Creatable": true
   }

@@ -116,42 +116,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "15",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "16",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "17",
-        "Type": {
-         "$id": "18",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "19",
+       "$id": "15",
        "StatusCodes": [
         204
        ],
@@ -169,7 +138,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "20",
+     "$id": "16",
      "Name": "renamedThree",
      "ResourceName": "ClientA",
      "Parameters": [
@@ -180,11 +149,11 @@
        "$ref": "11"
       },
       {
-       "$id": "21",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "22",
+        "$id": "18",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -199,20 +168,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "23",
+        "$id": "19",
         "Type": {
-         "$ref": "22"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "24",
+       "$id": "20",
        "StatusCodes": [
         204
        ],
@@ -230,7 +196,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "25",
+     "$id": "21",
      "Name": "renamedFive",
      "ResourceName": "ClientA",
      "Parameters": [
@@ -241,11 +207,11 @@
        "$ref": "11"
       },
       {
-       "$id": "26",
+       "$id": "22",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "27",
+        "$id": "23",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -260,20 +226,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "28",
+        "$id": "24",
         "Type": {
-         "$ref": "27"
+         "$ref": "23"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "29",
+       "$id": "25",
        "StatusCodes": [
         204
        ],
@@ -292,17 +255,17 @@
     }
    ],
    "Protocol": {
-    "$id": "30"
+    "$id": "26"
    },
    "Creatable": true
   },
   {
-   "$id": "31",
+   "$id": "27",
    "Name": "ClientBClient",
    "Description": "",
    "Operations": [
     {
-     "$id": "32",
+     "$id": "28",
      "Name": "renamedTwo",
      "ResourceName": "ClientB",
      "Parameters": [
@@ -313,11 +276,11 @@
        "$ref": "11"
       },
       {
-       "$id": "33",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "34",
+        "$id": "30",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -332,20 +295,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "31",
         "Type": {
-         "$ref": "34"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "36",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -363,7 +323,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "37",
+     "$id": "33",
      "Name": "renamedFour",
      "ResourceName": "ClientB",
      "Parameters": [
@@ -374,11 +334,11 @@
        "$ref": "11"
       },
       {
-       "$id": "38",
+       "$id": "34",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "39",
+        "$id": "35",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -393,20 +353,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "36",
         "Type": {
-         "$ref": "39"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "41",
+       "$id": "37",
        "StatusCodes": [
         204
        ],
@@ -424,7 +381,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "42",
+     "$id": "38",
      "Name": "renamedSix",
      "ResourceName": "ClientB",
      "Parameters": [
@@ -435,11 +392,11 @@
        "$ref": "11"
       },
       {
-       "$id": "43",
+       "$id": "39",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "40",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -454,20 +411,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "41",
         "Type": {
-         "$ref": "44"
+         "$ref": "40"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "15"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "42",
        "StatusCodes": [
         204
        ],
@@ -486,7 +440,7 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "43"
    },
    "Creatable": true
   }

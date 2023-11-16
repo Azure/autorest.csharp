@@ -406,9 +406,6 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "33"
       }
      ],
      "Responses": [

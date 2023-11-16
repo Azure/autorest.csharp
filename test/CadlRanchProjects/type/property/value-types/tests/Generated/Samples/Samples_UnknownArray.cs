@@ -23,7 +23,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownArray_ShortVersion()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response response = client.GetUnknownArray(null);
 
@@ -35,7 +35,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownArray_ShortVersion_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response response = await client.GetUnknownArrayAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownArray_ShortVersion_Convenience()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response<UnknownArrayProperty> response = client.GetUnknownArray();
         }
@@ -56,7 +56,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownArray_ShortVersion_Convenience_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownArray_AllParameters()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response response = client.GetUnknownArray(null);
 
@@ -77,7 +77,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownArray_AllParameters_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response response = await client.GetUnknownArrayAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownArray_AllParameters_Convenience()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response<UnknownArrayProperty> response = client.GetUnknownArray();
         }
@@ -98,7 +98,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownArray_AllParameters_Convenience_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             Response<UnknownArrayProperty> response = await client.GetUnknownArrayAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);
@@ -157,7 +157,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -172,7 +172,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -187,7 +187,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = client.Put(body);
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient(apiVersion: "1.0.0");
+            UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
             UnknownArrayProperty body = new UnknownArrayProperty(BinaryData.FromObjectAsJson(new object()));
             Response response = await client.PutAsync(body);

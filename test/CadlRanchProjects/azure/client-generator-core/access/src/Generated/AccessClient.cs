@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -43,44 +44,33 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of PublicOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual PublicOperation GetPublicOperationClient(string apiVersion = "1.0.0")
-        {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+        private PublicOperation _cachedPublicOperation;
+        private InternalOperation _cachedInternalOperation;
+        private SharedModelInOperation _cachedSharedModelInOperation;
+        private RelativeModelInOperation _cachedRelativeModelInOperation;
 
-            return new PublicOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        /// <summary> Initializes a new instance of PublicOperation. </summary>
+        public virtual PublicOperation GetPublicOperationClient()
+        {
+            return Volatile.Read(ref _cachedPublicOperation) ?? Interlocked.CompareExchange(ref _cachedPublicOperation, new PublicOperation(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedPublicOperation;
         }
 
         /// <summary> Initializes a new instance of InternalOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual InternalOperation GetInternalOperationClient(string apiVersion = "1.0.0")
+        public virtual InternalOperation GetInternalOperationClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new InternalOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedInternalOperation) ?? Interlocked.CompareExchange(ref _cachedInternalOperation, new InternalOperation(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedInternalOperation;
         }
 
         /// <summary> Initializes a new instance of SharedModelInOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual SharedModelInOperation GetSharedModelInOperationClient(string apiVersion = "1.0.0")
+        public virtual SharedModelInOperation GetSharedModelInOperationClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new SharedModelInOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedSharedModelInOperation) ?? Interlocked.CompareExchange(ref _cachedSharedModelInOperation, new SharedModelInOperation(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedSharedModelInOperation;
         }
 
         /// <summary> Initializes a new instance of RelativeModelInOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual RelativeModelInOperation GetRelativeModelInOperationClient(string apiVersion = "1.0.0")
+        public virtual RelativeModelInOperation GetRelativeModelInOperationClient()
         {
-            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
-
-            return new RelativeModelInOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return Volatile.Read(ref _cachedRelativeModelInOperation) ?? Interlocked.CompareExchange(ref _cachedRelativeModelInOperation, new RelativeModelInOperation(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedRelativeModelInOperation;
         }
     }
 }

@@ -143,42 +143,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "18",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "19",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$id": "21",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "22",
+       "$id": "18",
        "StatusCodes": [
         204
        ],
@@ -199,7 +168,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "23",
+     "$id": "19",
      "Name": "requiredImplicit",
      "ResourceName": "BodyOptionality",
      "Parameters": [
@@ -207,7 +176,7 @@
        "$ref": "7"
       },
       {
-       "$id": "24",
+       "$id": "20",
        "Name": "BodyModel",
        "NameInRequest": "BodyModel",
        "Type": {
@@ -224,11 +193,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "25",
+       "$id": "21",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "26",
+        "$id": "22",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -243,19 +212,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "23",
         "Type": {
-         "$ref": "26"
+         "$ref": "22"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "28",
+       "$id": "24",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "29",
+        "$id": "25",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -270,20 +239,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "30",
+        "$id": "26",
         "Type": {
-         "$ref": "29"
+         "$ref": "25"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "18"
       }
      ],
      "Responses": [
       {
-       "$id": "31",
+       "$id": "27",
        "StatusCodes": [
         204
        ],
@@ -305,17 +271,17 @@
     }
    ],
    "Protocol": {
-    "$id": "32"
+    "$id": "28"
    },
    "Creatable": true
   },
   {
-   "$id": "33",
+   "$id": "29",
    "Name": "OptionalExplicit",
    "Description": "",
    "Operations": [
     {
-     "$id": "34",
+     "$id": "30",
      "Name": "set",
      "ResourceName": "OptionalExplicit",
      "Parameters": [
@@ -323,7 +289,7 @@
        "$ref": "7"
       },
       {
-       "$id": "35",
+       "$id": "31",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -340,11 +306,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "36",
+       "$id": "32",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "37",
+        "$id": "33",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -359,19 +325,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "38",
+        "$id": "34",
         "Type": {
-         "$ref": "37"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "39",
+       "$id": "35",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "40",
+        "$id": "36",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -386,20 +352,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "41",
+        "$id": "37",
         "Type": {
-         "$ref": "40"
+         "$ref": "36"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "18"
       }
      ],
      "Responses": [
       {
-       "$id": "42",
+       "$id": "38",
        "StatusCodes": [
         204
        ],
@@ -420,7 +383,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "43",
+     "$id": "39",
      "Name": "omit",
      "ResourceName": "OptionalExplicit",
      "Parameters": [
@@ -428,7 +391,7 @@
        "$ref": "7"
       },
       {
-       "$id": "44",
+       "$id": "40",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -445,11 +408,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "41",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "46",
+        "$id": "42",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -464,19 +427,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "43",
         "Type": {
-         "$ref": "46"
+         "$ref": "42"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "48",
+       "$id": "44",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "49",
+        "$id": "45",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -491,20 +454,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "46",
         "Type": {
-         "$ref": "49"
+         "$ref": "45"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "18"
       }
      ],
      "Responses": [
       {
-       "$id": "51",
+       "$id": "47",
        "StatusCodes": [
         204
        ],
@@ -526,7 +486,7 @@
     }
    ],
    "Protocol": {
-    "$id": "52"
+    "$id": "48"
    },
    "Creatable": false,
    "Parent": "BodyOptionalityClient"

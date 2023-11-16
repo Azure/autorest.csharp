@@ -23,7 +23,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_ShortVersion()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = client.GetInt32Value(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_ShortVersion_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = await client.GetInt32ValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_ShortVersion_Convenience()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response<IReadOnlyDictionary<string, int>> response = client.GetInt32Value();
         }
@@ -56,7 +56,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_ShortVersion_Convenience_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response<IReadOnlyDictionary<string, int>> response = await client.GetInt32ValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_AllParameters()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = client.GetInt32Value(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = await client.GetInt32ValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetInt32Value_AllParameters_Convenience()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response<IReadOnlyDictionary<string, int>> response = client.GetInt32Value();
         }
@@ -98,7 +98,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetInt32Value_AllParameters_Convenience_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response<IReadOnlyDictionary<string, int>> response = await client.GetInt32ValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = client.Put(new Dictionary<string, int>
             {
@@ -149,7 +149,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, int>
             {
@@ -161,7 +161,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -176,7 +176,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -191,7 +191,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = client.Put(new Dictionary<string, int>
             {
@@ -203,7 +203,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            Int32Value client = new DictionaryClient().GetInt32ValueClient(apiVersion: "1.0.0");
+            Int32Value client = new DictionaryClient().GetInt32ValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, int>
             {

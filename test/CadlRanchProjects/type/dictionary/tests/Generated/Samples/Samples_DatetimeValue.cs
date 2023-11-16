@@ -23,7 +23,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_ShortVersion()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = client.GetDatetimeValue(null);
 
@@ -35,7 +35,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_ShortVersion_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = await client.GetDatetimeValueAsync(null);
 
@@ -47,7 +47,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_ShortVersion_Convenience()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
         }
@@ -56,7 +56,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_ShortVersion_Convenience_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
         }
@@ -65,7 +65,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_AllParameters()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = client.GetDatetimeValue(null);
 
@@ -77,7 +77,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_AllParameters_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = await client.GetDatetimeValueAsync(null);
 
@@ -89,7 +89,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue_AllParameters_Convenience()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response<IReadOnlyDictionary<string, DateTimeOffset>> response = client.GetDatetimeValue();
         }
@@ -98,7 +98,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_AllParameters_Convenience_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response<IReadOnlyDictionary<string, DateTimeOffset>> response = await client.GetDatetimeValueAsync();
         }
@@ -107,7 +107,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -122,7 +122,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -137,7 +137,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = client.Put(new Dictionary<string, DateTimeOffset>
             {
@@ -149,7 +149,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
             {
@@ -161,7 +161,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -176,7 +176,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -191,7 +191,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = client.Put(new Dictionary<string, DateTimeOffset>
             {
@@ -203,7 +203,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+            DatetimeValue client = new DictionaryClient().GetDatetimeValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, DateTimeOffset>
             {

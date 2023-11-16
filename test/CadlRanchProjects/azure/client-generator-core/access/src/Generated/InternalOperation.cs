@@ -21,7 +21,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
-        private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -38,13 +37,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
-        internal InternalOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal InternalOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
             _endpoint = endpoint;
-            _apiVersion = apiVersion;
         }
 
         /// <param name="name"> The String to use. </param>
@@ -356,7 +353,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/client-generator-core/access/internalOperation/noDecoratorInInternal", false);
             uri.AppendQuery("name", name, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -371,7 +367,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal", false);
             uri.AppendQuery("name", name, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -386,7 +381,6 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             uri.Reset(_endpoint);
             uri.AppendPath("/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal", false);
             uri.AppendQuery("name", name, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

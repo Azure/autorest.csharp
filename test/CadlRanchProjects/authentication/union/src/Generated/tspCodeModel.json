@@ -183,42 +183,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "24",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "25",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "26",
-        "Type": {
-         "$id": "27",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "28",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -236,7 +205,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "29",
+     "$id": "25",
      "Name": "validToken",
      "ResourceName": "Union",
      "Description": "Check whether client is authenticated",
@@ -245,11 +214,11 @@
        "$ref": "17"
       },
       {
-       "$id": "30",
+       "$id": "26",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "31",
+        "$id": "27",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -264,20 +233,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "32",
+        "$id": "28",
         "Type": {
-         "$ref": "31"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "24"
       }
      ],
      "Responses": [
       {
-       "$id": "33",
+       "$id": "29",
        "StatusCodes": [
         204
        ],
@@ -296,19 +262,19 @@
     }
    ],
    "Protocol": {
-    "$id": "34"
+    "$id": "30"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "35",
+  "$id": "31",
   "ApiKey": {
-   "$id": "36",
+   "$id": "32",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "37",
+   "$id": "33",
    "Scopes": [
     "https://security.microsoft.com/.default"
    ]

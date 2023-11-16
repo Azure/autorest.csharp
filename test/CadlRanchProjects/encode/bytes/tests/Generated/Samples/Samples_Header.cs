@@ -20,7 +20,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_ShortVersion()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
 
@@ -31,7 +31,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_ShortVersion_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
 
@@ -42,7 +42,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Default_AllParameters()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
 
@@ -53,7 +53,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Default_AllParameters_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
 
@@ -64,7 +64,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_ShortVersion()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
 
@@ -75,7 +75,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_ShortVersion_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
 
@@ -86,7 +86,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64_AllParameters()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
 
@@ -97,7 +97,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64_AllParameters_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
 
@@ -108,7 +108,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_ShortVersion()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
 
@@ -119,7 +119,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_ShortVersion_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
 
@@ -130,7 +130,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64url_AllParameters()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
 
@@ -141,7 +141,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64url_AllParameters_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
 
@@ -152,7 +152,7 @@ namespace Encode.Bytes.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64urlArray_ShortVersion()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Base64urlArray(new BinaryData[]
             {
@@ -166,7 +166,7 @@ BinaryData.FromObjectAsJson(new object())
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64urlArray_ShortVersion_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.Base64urlArrayAsync(new BinaryData[]
             {
@@ -180,7 +180,7 @@ BinaryData.FromObjectAsJson(new object())
         [Ignore("Only validating compilation of examples")]
         public void Example_Base64urlArray_AllParameters()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = client.Base64urlArray(new BinaryData[]
             {
@@ -194,7 +194,7 @@ BinaryData.FromObjectAsJson(new object())
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Base64urlArray_AllParameters_Async()
         {
-            Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
+            Header client = new BytesClient().GetHeaderClient();
 
             Response response = await client.Base64urlArrayAsync(new BinaryData[]
             {

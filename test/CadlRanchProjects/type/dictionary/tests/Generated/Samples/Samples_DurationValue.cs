@@ -24,7 +24,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDurationValue_ShortVersion()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = client.GetDurationValue(null);
 
@@ -36,7 +36,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_ShortVersion_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = await client.GetDurationValueAsync(null);
 
@@ -48,7 +48,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDurationValue_ShortVersion_Convenience()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
         }
@@ -57,7 +57,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_ShortVersion_Convenience_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
         }
@@ -66,7 +66,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDurationValue_AllParameters()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = client.GetDurationValue(null);
 
@@ -78,7 +78,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_AllParameters_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = await client.GetDurationValueAsync(null);
 
@@ -90,7 +90,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDurationValue_AllParameters_Convenience()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response<IReadOnlyDictionary<string, TimeSpan>> response = client.GetDurationValue();
         }
@@ -99,7 +99,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_AllParameters_Convenience_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response<IReadOnlyDictionary<string, TimeSpan>> response = await client.GetDurationValueAsync();
         }
@@ -108,7 +108,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -123,7 +123,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -138,7 +138,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_ShortVersion_Convenience()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = client.Put(new Dictionary<string, TimeSpan>
             {
@@ -150,7 +150,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_ShortVersion_Convenience_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
             {
@@ -162,7 +162,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -177,7 +177,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             using RequestContent content = RequestContent.Create(new
             {
@@ -192,7 +192,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Put_AllParameters_Convenience()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = client.Put(new Dictionary<string, TimeSpan>
             {
@@ -204,7 +204,7 @@ namespace _Type._Dictionary.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Convenience_Async()
         {
-            DurationValue client = new DictionaryClient().GetDurationValueClient(apiVersion: "1.0.0");
+            DurationValue client = new DictionaryClient().GetDurationValueClient();
 
             Response response = await client.PutAsync(new Dictionary<string, TimeSpan>
             {
