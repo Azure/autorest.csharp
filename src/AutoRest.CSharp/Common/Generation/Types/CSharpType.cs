@@ -173,29 +173,6 @@ namespace AutoRest.CSharp.Generation.Types
             return name != null;
         }
 
-        public string ToStringForDocs()
-        {
-            var sb = new StringBuilder(TryGetCSharpFriendlyName(out var keywordName) ? keywordName : Name);
-            if (IsNullable && IsValueType)
-            {
-                sb.Append("?");
-            }
-
-            if (Arguments.Any())
-            {
-                sb.Append("{");
-                foreach (var argument in Arguments)
-                {
-                    sb.Append(argument.ToStringForDocs()).Append(",");
-                }
-
-                sb.Remove(sb.Length - 1, 1);
-                sb.Append("}");
-            }
-
-            return sb.ToString();
-        }
-
         internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));

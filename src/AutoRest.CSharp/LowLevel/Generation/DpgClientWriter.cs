@@ -603,7 +603,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
 
             var sampleProvider = _library.GetSampleForClient(_client);
-            // do not write this part when there is no sample providerPara
+            // do not write this part when there is no sample provider
             if (sampleProvider == null)
                 return;
 
