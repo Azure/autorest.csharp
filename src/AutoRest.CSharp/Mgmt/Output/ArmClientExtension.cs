@@ -98,14 +98,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var extensionVariable = (ValueExpression)KnownParameters.ArmClient;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
-            var body = new MethodBodyStatement[]
-            {
-                new ParameterValidationBlock(signature.Parameters),
-                Snippets.Return(
+            var body = Snippets.Return(
                     extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),
                     new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable))
-                    ))
-            };
+                    ));
             return new(signature, body);
         }
 

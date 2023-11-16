@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         public static MgmtMockableExtensionWriter GetWriter(MgmtMockableExtension extensionClient) => extensionClient switch
         {
-            MgmtMockableArmClient armClientExtensionClient => new ArmClientMockingExtensionWriter(armClientExtensionClient),
+            MgmtMockableArmClient armClientExtensionClient => new MockableArmClientWriter(armClientExtensionClient),
             _ => new MgmtMockableExtensionWriter(extensionClient)
         };
 

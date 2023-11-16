@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -14,12 +13,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class ArmClientMockingExtensionWriter : MgmtMockableExtensionWriter
+    internal sealed class MockableArmClientWriter : MgmtMockableExtensionWriter
     {
         private readonly Parameter _scopeParameter;
         private MgmtMockableArmClient This { get; }
 
-        public ArmClientMockingExtensionWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
+        public MockableArmClientWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(

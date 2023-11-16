@@ -181,15 +181,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var extensionVariable = (ValueExpression)_generalExtensionParameter;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
-            var body = new MethodBodyStatement[]
-            {
-                new ParameterValidationBlock(signature.Parameters),
-                Snippets.Return(
+            var body = Snippets.Return(
                     extensionVariable.Invoke(
                         nameof(ArmResource.GetCachedClient),
                         new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
-                    ))
-            };
+                    ));
 
             return new(signature, body);
         }
@@ -225,7 +221,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var callMethodOnMockingExtension = callFactoryMethod.Invoke(signatureOnMockingExtension);
 
-            var methodBody = Snippets.Return(callMethodOnMockingExtension);
+            var methodBody = new MethodBodyStatement[]
+            {
+                new ParameterValidationBlock(new[] { signature.Parameters[0] }), // we only write validation of the first extension parameter
+                Snippets.Return(callMethodOnMockingExtension)
+            };
 
             return new(signature, methodBody);
         }

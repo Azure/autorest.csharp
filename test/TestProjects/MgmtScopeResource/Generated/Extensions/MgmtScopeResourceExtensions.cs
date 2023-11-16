@@ -23,43 +23,31 @@ namespace MgmtScopeResource
     {
         private static MockableMgmtScopeResourceArmClient GetMockableMgmtScopeResourceArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtScopeResourceArmClient(client0));
         }
 
         private static MockableMgmtScopeResourceArmResource GetMockableMgmtScopeResourceArmResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceArmResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceManagementGroupResource GetMockableMgmtScopeResourceManagementGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceManagementGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceResourceGroupResource GetMockableMgmtScopeResourceResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceResourceGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceSubscriptionResource GetMockableMgmtScopeResourceSubscriptionResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceSubscriptionResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceTenantResource GetMockableMgmtScopeResourceTenantResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceTenantResource(client, resource.Id));
         }
 
@@ -76,6 +64,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmClient client, ResourceIdentifier scope)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignments(scope);
         }
 
@@ -105,6 +95,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return await GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignmentAsync(scope, policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -134,6 +126,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmClient client, ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignment(scope, policyAssignmentName, cancellationToken);
         }
 
@@ -150,6 +144,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatus(scope);
         }
 
@@ -166,6 +162,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignments(scope);
         }
 
@@ -195,6 +193,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return await GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignmentAsync(scope, guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -224,6 +224,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignment(scope, guestConfigurationAssignmentName, cancellationToken);
         }
 
@@ -251,6 +253,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static AsyncPageable<ResourceLinkResource> GetAllAsync(this ArmClient client, ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetAllAsync(scope, filter, cancellationToken);
         }
 
@@ -278,6 +282,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static Pageable<ResourceLinkResource> GetAll(this ArmClient client, ResourceIdentifier scope, Filter? filter = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetAll(scope, filter, cancellationToken);
         }
 
@@ -307,6 +313,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static AsyncPageable<Marketplace> GetMarketplacesAsync(this ArmClient client, ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetMarketplacesAsync(scope, filter, top, skiptoken, cancellationToken);
         }
 
@@ -336,6 +344,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         public static Pageable<Marketplace> GetMarketplaces(this ArmClient client, ResourceIdentifier scope, string filter = null, int? top = null, string skiptoken = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetMarketplaces(scope, filter, top, skiptoken, cancellationToken);
         }
 
@@ -353,6 +363,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
         public static FakePolicyAssignmentResource GetFakePolicyAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignmentResource(id);
         }
 
@@ -370,6 +382,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
         public static DeploymentExtendedResource GetDeploymentExtendedResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetDeploymentExtendedResource(id);
         }
 
@@ -387,6 +401,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
         public static ResourceLinkResource GetResourceLinkResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetResourceLinkResource(id);
         }
 
@@ -404,6 +420,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatusResource(id);
         }
 
@@ -421,6 +439,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
         public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignmentResource(id);
         }
 
@@ -436,6 +456,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return GetMockableMgmtScopeResourceArmResource(armResource).GetFakePolicyAssignments();
         }
 
@@ -464,6 +486,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return await GetMockableMgmtScopeResourceArmResource(armResource).GetFakePolicyAssignmentAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -492,6 +516,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return GetMockableMgmtScopeResourceArmResource(armResource).GetFakePolicyAssignment(policyAssignmentName, cancellationToken);
         }
 
@@ -507,6 +533,8 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return GetMockableMgmtScopeResourceArmResource(armResource).GetVMInsightsOnboardingStatus();
         }
 
@@ -522,6 +550,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return GetMockableMgmtScopeResourceArmResource(armResource).GetGuestConfigurationAssignments();
         }
 
@@ -550,6 +580,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return await GetMockableMgmtScopeResourceArmResource(armResource).GetGuestConfigurationAssignmentAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -578,6 +610,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
             return GetMockableMgmtScopeResourceArmResource(armResource).GetGuestConfigurationAssignment(guestConfigurationAssignmentName, cancellationToken);
         }
 
@@ -593,6 +627,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroupResource managementGroupResource)
         {
+            Argument.AssertNotNull(managementGroupResource, nameof(managementGroupResource));
+
             return GetMockableMgmtScopeResourceManagementGroupResource(managementGroupResource).GetDeploymentExtendeds();
         }
 
@@ -621,6 +657,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(managementGroupResource, nameof(managementGroupResource));
+
             return await GetMockableMgmtScopeResourceManagementGroupResource(managementGroupResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -649,6 +687,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ManagementGroupResource managementGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(managementGroupResource, nameof(managementGroupResource));
+
             return GetMockableMgmtScopeResourceManagementGroupResource(managementGroupResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
@@ -664,6 +704,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtScopeResourceResourceGroupResource(resourceGroupResource).GetDeploymentExtendeds();
         }
 
@@ -692,6 +734,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtScopeResourceResourceGroupResource(resourceGroupResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -720,6 +764,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this ResourceGroupResource resourceGroupResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtScopeResourceResourceGroupResource(resourceGroupResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
@@ -735,6 +781,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this SubscriptionResource subscriptionResource)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetDeploymentExtendeds();
         }
 
@@ -763,6 +811,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return await GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -791,6 +841,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this SubscriptionResource subscriptionResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
@@ -818,6 +870,8 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
         }
 
@@ -845,6 +899,8 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetResourceLinks(filter, cancellationToken);
         }
 
@@ -860,6 +916,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this TenantResource tenantResource)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetDeploymentExtendeds();
         }
 
@@ -888,6 +946,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return await GetMockableMgmtScopeResourceTenantResource(tenantResource).GetDeploymentExtendedAsync(deploymentName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -916,6 +976,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<DeploymentExtendedResource> GetDeploymentExtended(this TenantResource tenantResource, string deploymentName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetDeploymentExtended(deploymentName, cancellationToken);
         }
 
@@ -932,6 +994,8 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource, string scope)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetResourceLinks(scope);
         }
 
@@ -959,6 +1023,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return await GetMockableMgmtScopeResourceTenantResource(tenantResource).GetResourceLinkAsync(scope, cancellationToken).ConfigureAwait(false);
         }
 
@@ -986,6 +1052,8 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<ResourceLinkResource> GetResourceLink(this TenantResource tenantResource, string scope, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return GetMockableMgmtScopeResourceTenantResource(tenantResource).GetResourceLink(scope, cancellationToken);
         }
 
@@ -1012,6 +1080,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
         public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return await GetMockableMgmtScopeResourceTenantResource(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1038,6 +1108,8 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
             return GetMockableMgmtScopeResourceTenantResource(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
