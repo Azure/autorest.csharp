@@ -13,8 +13,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UrlPathItemGetAll() => TestStatus(async (host) =>
         {
-            var options = new AutoRestUrlTestServiceClientOptions();
-            options.GlobalStringQuery = "globalStringQuery";
+            var options = new AutoRestUrlTestServiceClientOptions()
+            {
+                GlobalStringQuery = "globalStringQuery"
+            };
             return await new PathItemsClient(globalStringPath: "globalStringPath",
                     credential: Key,
                     endpoint: host,
@@ -29,8 +31,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host) =>
         {
-            var options = new AutoRestUrlTestServiceClientOptions();
-            options.GlobalStringQuery = "globalStringQuery";
+            var options = new AutoRestUrlTestServiceClientOptions()
+            {
+                GlobalStringQuery = "globalStringQuery"
+            };
             return await new PathItemsClient(globalStringPath: "globalStringPath",
                     credential: Key,
                     endpoint: host,
@@ -46,8 +50,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host) =>
         {
-            var options = new AutoRestUrlTestServiceClientOptions();
-            options.GlobalStringQuery = null;
+            var options = new AutoRestUrlTestServiceClientOptions()
+            {
+                GlobalStringQuery = null
+            };
             return await new PathItemsClient(globalStringPath: "globalStringPath",
                         endpoint: host,
                         credential: Key,
@@ -62,8 +68,10 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host) =>
         {
-            var options = new AutoRestUrlTestServiceClientOptions();
-            options.GlobalStringQuery = null;
+            var options = new AutoRestUrlTestServiceClientOptions()
+            {
+                GlobalStringQuery = null
+            };
             return await new PathItemsClient(
                         globalStringPath: "globalStringPath",
                         endpoint: host,

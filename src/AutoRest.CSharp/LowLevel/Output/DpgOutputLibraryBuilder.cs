@@ -481,7 +481,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel)
             {
-                AdditionalProperties = parametersInClientOptions
+                AdditionalParameters = parametersInClientOptions
             };
         }
 

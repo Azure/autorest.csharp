@@ -52,17 +52,17 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (clientOptions.AdditionalProperties != null && !Configuration.KeepOptionalClientParametersInConstructor)
+                    if (!Configuration.KeepOptionalClientParametersInConstructor)
                     {
                         if (clientOptions.ApiVersions is not null)
                         {
                             writer.Line();
                         }
 
-                        foreach (var property in clientOptions.AdditionalProperties)
+                        foreach (var parameter in clientOptions.AdditionalParameters)
                         {
-                            writer.WriteXmlDocumentationSummary(property.Description);
-                            writer.Line($"public {property.Type} {property.Name.FirstCharToUpperCase()} {{ get; set; }}");
+                            writer.WriteXmlDocumentationSummary(parameter.Description);
+                            writer.Line($"public {parameter.Type} {parameter.Name.FirstCharToUpperCase()} {{ get; set; }}");
                             writer.Line();
                         }
                     }
