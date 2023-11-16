@@ -14,7 +14,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class ArmClientMockingExtensionWriter : MgmtMockableExtensionResourceWriter
+    internal sealed class ArmClientMockingExtensionWriter : MgmtMockableExtensionWriter
     {
         private readonly Parameter _scopeParameter;
         private MgmtMockableArmClient This { get; }

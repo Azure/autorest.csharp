@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
@@ -179,11 +180,15 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var extensionVariable = (ValueExpression)_generalExtensionParameter;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
-            var body = Snippets.Return(
-                extensionVariable.Invoke(
-                    nameof(ArmResource.GetCachedClient),
-                    new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
-                ));
+            var body = new MethodBodyStatement[]
+            {
+
+                Snippets.Return(
+                    extensionVariable.Invoke(
+                        nameof(ArmResource.GetCachedClient),
+                        new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
+                    ))
+            };
 
             return new(signature, body);
         }
