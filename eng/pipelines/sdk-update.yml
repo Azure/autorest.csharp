@@ -122,7 +122,7 @@ stages:
             displayName: 'Publish @autorest/csharp'
             inputs:
               command: 'publish'
-              workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
+              workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net7.0'
               publishRegistry: 'useFeed'
               publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
           - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.AutorestCSharpVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
