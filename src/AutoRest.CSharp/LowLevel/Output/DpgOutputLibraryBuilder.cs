@@ -679,7 +679,7 @@ namespace AutoRest.CSharp.Output.Models
                 };
 
                 subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client, parametersInClientOptions));
-
+                // parametersInClientOptions is assigned to ClientOptionsTypeProvider.AdditionalProperties before, which makes sure AdditionalProperties is readonly and won't change after ClientOptionsTypeProvider is built.
                 parametersInClientOptions.AddRange(client.GetOptionalParametersInOptions());
 
                 yield return client;
