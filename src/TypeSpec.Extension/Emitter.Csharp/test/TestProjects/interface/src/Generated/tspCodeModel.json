@@ -125,42 +125,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "17",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "18",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "19",
-        "Type": {
-         "$id": "20",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "17",
        "StatusCodes": [
         200
        ],
@@ -181,7 +150,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "22",
+     "$id": "18",
      "Name": "setDogs",
      "ResourceName": "dogs",
      "Description": "Illustrate grouping operations on subclient.",
@@ -190,7 +159,7 @@
        "$ref": "10"
       },
       {
-       "$id": "23",
+       "$id": "19",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -207,11 +176,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "20",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "25",
+        "$id": "21",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -226,19 +195,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "22",
         "Type": {
-         "$ref": "25"
+         "$ref": "21"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "27",
+       "$id": "23",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "28",
+        "$id": "24",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -253,20 +222,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "25",
         "Type": {
-         "$ref": "28"
+         "$ref": "24"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "30",
+       "$id": "26",
        "StatusCodes": [
         200
        ],
@@ -290,7 +256,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "31",
+     "$id": "27",
      "Name": "getCats",
      "ResourceName": "cats",
      "Description": "Illustrate grouping operations on subclient.",
@@ -299,11 +265,11 @@
        "$ref": "10"
       },
       {
-       "$id": "32",
+       "$id": "28",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "33",
+        "$id": "29",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -318,20 +284,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "34",
+        "$id": "30",
         "Type": {
-         "$ref": "33"
+         "$ref": "29"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "35",
+       "$id": "31",
        "StatusCodes": [
         200
        ],
@@ -352,7 +315,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "36",
+     "$id": "32",
      "Name": "setCats",
      "ResourceName": "cats",
      "Description": "Illustrate grouping operations on subclient.",
@@ -361,7 +324,7 @@
        "$ref": "10"
       },
       {
-       "$id": "37",
+       "$id": "33",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -378,11 +341,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "38",
+       "$id": "34",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "39",
+        "$id": "35",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -397,19 +360,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "40",
+        "$id": "36",
         "Type": {
-         "$ref": "39"
+         "$ref": "35"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "41",
+       "$id": "37",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "42",
+        "$id": "38",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -424,20 +387,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "39",
         "Type": {
-         "$ref": "42"
+         "$ref": "38"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "17"
       }
      ],
      "Responses": [
       {
-       "$id": "44",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
@@ -462,7 +422,7 @@
     }
    ],
    "Protocol": {
-    "$id": "45"
+    "$id": "41"
    },
    "Creatable": true
   }

@@ -218,42 +218,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "28",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "29",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "30",
-        "Type": {
-         "$id": "31",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "1.0.0"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "32",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
@@ -272,19 +241,19 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "29"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "34",
+  "$id": "30",
   "ApiKey": {
-   "$id": "35",
+   "$id": "31",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "36",
+   "$id": "32",
    "Scopes": [
     "https://api.example.com/.default"
    ]

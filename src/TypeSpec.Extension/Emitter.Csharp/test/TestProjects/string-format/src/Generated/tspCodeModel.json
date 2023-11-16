@@ -73,42 +73,11 @@
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "10",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "11",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "12",
-        "Type": {
-         "$id": "13",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2015-06-18"
-       }
       }
      ],
      "Responses": [
       {
-       "$id": "14",
+       "$id": "10",
        "StatusCodes": [
         204
        ],
@@ -126,17 +95,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "15",
+     "$id": "11",
      "Name": "getUri",
      "ResourceName": "stringFormat",
      "Description": "path paramter is string with uri format",
      "Parameters": [
       {
-       "$id": "16",
+       "$id": "12",
        "Name": "uri",
        "NameInRequest": "uri",
        "Type": {
-        "$id": "17",
+        "$id": "13",
         "Name": "string",
         "Kind": "Uri",
         "IsNullable": false
@@ -152,11 +121,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "18",
+       "$id": "14",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "19",
+        "$id": "15",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -171,20 +140,17 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "20",
+        "$id": "16",
         "Type": {
-         "$ref": "19"
+         "$ref": "15"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$ref": "10"
       }
      ],
      "Responses": [
       {
-       "$id": "21",
+       "$id": "17",
        "StatusCodes": [
         204
        ],
@@ -203,7 +169,7 @@
     }
    ],
    "Protocol": {
-    "$id": "22"
+    "$id": "18"
    },
    "Creatable": true
   }
