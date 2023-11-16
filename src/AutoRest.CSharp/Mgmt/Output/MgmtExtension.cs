@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -182,7 +183,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
             var body = new MethodBodyStatement[]
             {
-
+                new ParameterValidationBlock(signature.Parameters),
                 Snippets.Return(
                     extensionVariable.Invoke(
                         nameof(ArmResource.GetCachedClient),

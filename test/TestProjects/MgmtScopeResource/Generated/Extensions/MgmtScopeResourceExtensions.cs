@@ -23,31 +23,43 @@ namespace MgmtScopeResource
     {
         private static MockableMgmtScopeResourceArmClient GetMockableMgmtScopeResourceArmClient(ArmClient client)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return client.GetCachedClient(client0 => new MockableMgmtScopeResourceArmClient(client0));
         }
 
         private static MockableMgmtScopeResourceArmResource GetMockableMgmtScopeResourceArmResource(ArmResource resource)
         {
+            Argument.AssertNotNull(resource, nameof(resource));
+
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceArmResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceManagementGroupResource GetMockableMgmtScopeResourceManagementGroupResource(ArmResource resource)
         {
+            Argument.AssertNotNull(resource, nameof(resource));
+
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceManagementGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceResourceGroupResource GetMockableMgmtScopeResourceResourceGroupResource(ArmResource resource)
         {
+            Argument.AssertNotNull(resource, nameof(resource));
+
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceResourceGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceSubscriptionResource GetMockableMgmtScopeResourceSubscriptionResource(ArmResource resource)
         {
+            Argument.AssertNotNull(resource, nameof(resource));
+
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceSubscriptionResource(client, resource.Id));
         }
 
         private static MockableMgmtScopeResourceTenantResource GetMockableMgmtScopeResourceTenantResource(ArmResource resource)
         {
+            Argument.AssertNotNull(resource, nameof(resource));
+
             return resource.GetCachedClient(client => new MockableMgmtScopeResourceTenantResource(client, resource.Id));
         }
 
