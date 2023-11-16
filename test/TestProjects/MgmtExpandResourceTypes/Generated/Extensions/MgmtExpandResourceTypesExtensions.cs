@@ -22,22 +22,16 @@ namespace MgmtExpandResourceTypes
     {
         private static MockableMgmtExpandResourceTypesArmClient GetMockableMgmtExpandResourceTypesArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtExpandResourceTypesArmClient(client0));
         }
 
         private static MockableMgmtExpandResourceTypesResourceGroupResource GetMockableMgmtExpandResourceTypesResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtExpandResourceTypesResourceGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtExpandResourceTypesSubscriptionResource GetMockableMgmtExpandResourceTypesSubscriptionResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtExpandResourceTypesSubscriptionResource(client, resource.Id));
         }
 
@@ -55,6 +49,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
         public static RecordSetAResource GetRecordSetAResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetAResource(id);
         }
 
@@ -72,6 +68,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
         public static RecordSetAaaaResource GetRecordSetAaaaResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetAaaaResource(id);
         }
 
@@ -89,6 +87,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
         public static RecordSetCaaResource GetRecordSetCaaResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetCaaResource(id);
         }
 
@@ -106,6 +106,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
         public static RecordSetCNameResource GetRecordSetCNameResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetCNameResource(id);
         }
 
@@ -123,6 +125,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
         public static RecordSetMxResource GetRecordSetMxResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetMxResource(id);
         }
 
@@ -140,6 +144,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
         public static RecordSetNsResource GetRecordSetNsResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetNsResource(id);
         }
 
@@ -157,6 +163,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
         public static RecordSetPtrResource GetRecordSetPtrResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetPtrResource(id);
         }
 
@@ -174,6 +182,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
         public static RecordSetSoaResource GetRecordSetSoaResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetSoaResource(id);
         }
 
@@ -191,6 +201,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
         public static RecordSetSrvResource GetRecordSetSrvResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetSrvResource(id);
         }
 
@@ -208,6 +220,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
         public static RecordSetTxtResource GetRecordSetTxtResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetTxtResource(id);
         }
 
@@ -225,6 +239,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
         public static ZoneResource GetZoneResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetZoneResource(id);
         }
 
@@ -240,6 +256,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
         public static ZoneCollection GetZones(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExpandResourceTypesResourceGroupResource(resourceGroupResource).GetZones();
         }
 
@@ -268,6 +286,8 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public static async Task<Response<ZoneResource>> GetZoneAsync(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExpandResourceTypesResourceGroupResource(resourceGroupResource).GetZoneAsync(zoneName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -296,6 +316,8 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public static Response<ZoneResource> GetZone(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExpandResourceTypesResourceGroupResource(resourceGroupResource).GetZone(zoneName, cancellationToken);
         }
 
@@ -323,6 +345,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
         }
 
@@ -350,6 +374,8 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
         }
 
@@ -376,6 +402,8 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="content"/> is null. </exception>
         public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this SubscriptionResource subscriptionResource, DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return await GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -402,6 +430,8 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="content"/> is null. </exception>
         public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this SubscriptionResource subscriptionResource, DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
         }
     }

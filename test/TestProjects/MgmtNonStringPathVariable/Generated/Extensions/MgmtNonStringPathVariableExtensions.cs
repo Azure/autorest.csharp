@@ -22,15 +22,11 @@ namespace MgmtNonStringPathVariable
     {
         private static MockableMgmtNonStringPathVariableArmClient GetMockableMgmtNonStringPathVariableArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtNonStringPathVariableArmClient(client0));
         }
 
         private static MockableMgmtNonStringPathVariableResourceGroupResource GetMockableMgmtNonStringPathVariableResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtNonStringPathVariableResourceGroupResource(client, resource.Id));
         }
 
@@ -48,6 +44,8 @@ namespace MgmtNonStringPathVariable
         /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
         public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtNonStringPathVariableArmClient(client).GetFakeResource(id);
         }
 
@@ -65,6 +63,8 @@ namespace MgmtNonStringPathVariable
         /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtNonStringPathVariableArmClient(client).GetBarResource(id);
         }
 
@@ -80,6 +80,8 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtNonStringPathVariableResourceGroupResource(resourceGroupResource).GetFakes();
         }
 
@@ -108,6 +110,8 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroupResource resourceGroupResource, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtNonStringPathVariableResourceGroupResource(resourceGroupResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -136,6 +140,8 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static Response<FakeResource> GetFake(this ResourceGroupResource resourceGroupResource, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtNonStringPathVariableResourceGroupResource(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
@@ -151,6 +157,8 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtNonStringPathVariableResourceGroupResource(resourceGroupResource).GetBars();
         }
 
@@ -178,6 +186,8 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, int barName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtNonStringPathVariableResourceGroupResource(resourceGroupResource).GetBarAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -205,6 +215,8 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, int barName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtNonStringPathVariableResourceGroupResource(resourceGroupResource).GetBar(barName, cancellationToken);
         }
     }

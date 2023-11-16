@@ -21,22 +21,16 @@ namespace MgmtPartialResource
     {
         private static MockableMgmtPartialResourceArmClient GetMockableMgmtPartialResourceArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtPartialResourceArmClient(client0));
         }
 
         private static MockableMgmtPartialResourceResourceGroupResource GetMockableMgmtPartialResourceResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtPartialResourceResourceGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtPartialResourceSubscriptionResource GetMockableMgmtPartialResourceSubscriptionResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtPartialResourceSubscriptionResource(client, resource.Id));
         }
 
@@ -54,6 +48,8 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="PublicIPAddressResource" /> object. </returns>
         public static PublicIPAddressResource GetPublicIPAddressResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtPartialResourceArmClient(client).GetPublicIPAddressResource(id);
         }
 
@@ -71,6 +67,8 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource" /> object. </returns>
         public static ConfigurationProfileAssignmentResource GetConfigurationProfileAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtPartialResourceArmClient(client).GetConfigurationProfileAssignmentResource(id);
         }
 
@@ -88,6 +86,8 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="PartialVmssResource" /> object. </returns>
         public static PartialVmssResource GetPartialVmssResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtPartialResourceArmClient(client).GetPartialVmssResource(id);
         }
 
@@ -105,6 +105,8 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource" /> object. </returns>
         public static VirtualMachineMgmtPartialResource GetVirtualMachineMgmtPartialResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtPartialResourceArmClient(client).GetVirtualMachineMgmtPartialResource(id);
         }
 
@@ -120,6 +122,8 @@ namespace MgmtPartialResource
         /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
         public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtPartialResourceResourceGroupResource(resourceGroupResource).GetPublicIPAddresses();
         }
 
@@ -149,6 +153,8 @@ namespace MgmtPartialResource
         [ForwardsClientCalls]
         public static async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtPartialResourceResourceGroupResource(resourceGroupResource).GetPublicIPAddressAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -178,6 +184,8 @@ namespace MgmtPartialResource
         [ForwardsClientCalls]
         public static Response<PublicIPAddressResource> GetPublicIPAddress(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtPartialResourceResourceGroupResource(resourceGroupResource).GetPublicIPAddress(publicIpAddressName, expand, cancellationToken);
         }
 
@@ -204,6 +212,8 @@ namespace MgmtPartialResource
         /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtPartialResourceSubscriptionResource(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
         }
 
@@ -230,6 +240,8 @@ namespace MgmtPartialResource
         /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtPartialResourceSubscriptionResource(subscriptionResource).GetPublicIPAddresses(cancellationToken);
         }
     }

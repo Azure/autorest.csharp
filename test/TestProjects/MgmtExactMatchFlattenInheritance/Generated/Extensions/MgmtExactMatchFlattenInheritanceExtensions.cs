@@ -22,15 +22,11 @@ namespace MgmtExactMatchFlattenInheritance
     {
         private static MockableMgmtExactMatchFlattenInheritanceArmClient GetMockableMgmtExactMatchFlattenInheritanceArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtExactMatchFlattenInheritanceArmClient(client0));
         }
 
         private static MockableMgmtExactMatchFlattenInheritanceResourceGroupResource GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtExactMatchFlattenInheritanceResourceGroupResource(client, resource.Id));
         }
 
@@ -48,6 +44,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
         public static AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExactMatchFlattenInheritanceArmClient(client).GetAzureResourceFlattenModel1Resource(id);
         }
 
@@ -65,6 +63,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
         public static CustomModel2Resource GetCustomModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExactMatchFlattenInheritanceArmClient(client).GetCustomModel2Resource(id);
         }
 
@@ -82,6 +82,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
         public static CustomModel3Resource GetCustomModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtExactMatchFlattenInheritanceArmClient(client).GetCustomModel3Resource(id);
         }
 
@@ -97,6 +99,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
         public static AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel1s();
         }
 
@@ -125,6 +129,8 @@ namespace MgmtExactMatchFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<AzureResourceFlattenModel1Resource>> GetAzureResourceFlattenModel1Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel1Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -153,6 +159,8 @@ namespace MgmtExactMatchFlattenInheritance
         [ForwardsClientCalls]
         public static Response<AzureResourceFlattenModel1Resource> GetAzureResourceFlattenModel1(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel1(name, cancellationToken);
         }
 
@@ -168,6 +176,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
         public static CustomModel2Collection GetCustomModel2s(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2s();
         }
 
@@ -196,6 +206,8 @@ namespace MgmtExactMatchFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<CustomModel2Resource>> GetCustomModel2Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -224,6 +236,8 @@ namespace MgmtExactMatchFlattenInheritance
         [ForwardsClientCalls]
         public static Response<CustomModel2Resource> GetCustomModel2(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2(name, cancellationToken);
         }
 
@@ -239,6 +253,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
         public static CustomModel3Collection GetCustomModel3s(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel3s();
         }
 
@@ -267,6 +283,8 @@ namespace MgmtExactMatchFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<CustomModel3Resource>> GetCustomModel3Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel3Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -295,6 +313,8 @@ namespace MgmtExactMatchFlattenInheritance
         [ForwardsClientCalls]
         public static Response<CustomModel3Resource> GetCustomModel3(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel3(name, cancellationToken);
         }
 
@@ -321,6 +341,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel2sAsync(cancellationToken);
         }
 
@@ -347,6 +369,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel2s(cancellationToken);
         }
 
@@ -375,6 +399,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel2"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(this ResourceGroupResource resourceGroupResource, string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel2Async(name, azureResourceFlattenModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -403,6 +429,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel2"/> is null. </exception>
         public static Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(this ResourceGroupResource resourceGroupResource, string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel2(name, azureResourceFlattenModel2, cancellationToken);
         }
 
@@ -430,6 +458,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel2Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -457,6 +487,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel2(name, cancellationToken);
         }
 
@@ -483,6 +515,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel3sAsync(cancellationToken);
         }
 
@@ -509,6 +543,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel3s(cancellationToken);
         }
 
@@ -537,6 +573,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(this ResourceGroupResource resourceGroupResource, string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel3Async(name, azureResourceFlattenModel3, cancellationToken).ConfigureAwait(false);
         }
 
@@ -565,6 +603,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         public static Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(this ResourceGroupResource resourceGroupResource, string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel3(name, azureResourceFlattenModel3, cancellationToken);
         }
 
@@ -592,6 +632,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel3Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -619,6 +661,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel3(name, cancellationToken);
         }
 
@@ -645,6 +689,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel4sAsync(cancellationToken);
         }
 
@@ -671,6 +717,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel4s(cancellationToken);
         }
 
@@ -699,6 +747,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel4"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(this ResourceGroupResource resourceGroupResource, string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel4Async(name, azureResourceFlattenModel4, cancellationToken).ConfigureAwait(false);
         }
 
@@ -727,6 +777,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="name"/> or <paramref name="azureResourceFlattenModel4"/> is null. </exception>
         public static Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(this ResourceGroupResource resourceGroupResource, string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel4(name, azureResourceFlattenModel4, cancellationToken);
         }
 
@@ -754,6 +806,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel4Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -781,6 +835,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel4(name, cancellationToken);
         }
 
@@ -807,6 +863,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel5sAsync(cancellationToken);
         }
 
@@ -833,6 +891,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel5s(cancellationToken);
         }
 
@@ -861,6 +921,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(this ResourceGroupResource resourceGroupResource, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel5Async(name, foo, cancellationToken).ConfigureAwait(false);
         }
 
@@ -889,6 +951,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(this ResourceGroupResource resourceGroupResource, string name, int? foo = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).PutAzureResourceFlattenModel5(name, foo, cancellationToken);
         }
 
@@ -916,6 +980,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel5Async(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -943,6 +1009,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         public static Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel5(name, cancellationToken);
         }
     }

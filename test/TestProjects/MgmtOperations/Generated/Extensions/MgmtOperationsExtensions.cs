@@ -22,15 +22,11 @@ namespace MgmtOperations
     {
         private static MockableMgmtOperationsArmClient GetMockableMgmtOperationsArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtOperationsArmClient(client0));
         }
 
         private static MockableMgmtOperationsResourceGroupResource GetMockableMgmtOperationsResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtOperationsResourceGroupResource(client, resource.Id));
         }
 
@@ -48,6 +44,8 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetResource(id);
         }
 
@@ -65,6 +63,8 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
         public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetChildResource(id);
         }
 
@@ -82,6 +82,8 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
         public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetGrandChildResource(id);
         }
 
@@ -99,6 +101,8 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
         public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtOperationsArmClient(client).GetUnpatchableResource(id);
         }
 
@@ -114,6 +118,8 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetAvailabilitySets();
         }
 
@@ -143,6 +149,8 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -172,6 +180,8 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetAvailabilitySet(availabilitySetName, expand, cancellationToken);
         }
 
@@ -187,6 +197,8 @@ namespace MgmtOperations
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetUnpatchableResources();
         }
 
@@ -216,6 +228,8 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetUnpatchableResourceAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -245,6 +259,8 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static Response<UnpatchableResource> GetUnpatchableResource(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).GetUnpatchableResource(name, expand, cancellationToken);
         }
 
@@ -272,6 +288,8 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="availabilitySetUpdate"/> is null. </exception>
         public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
         }
 
@@ -299,6 +317,8 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="availabilitySetUpdate"/> is null. </exception>
         public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOperationsResourceGroupResource(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
         }
     }

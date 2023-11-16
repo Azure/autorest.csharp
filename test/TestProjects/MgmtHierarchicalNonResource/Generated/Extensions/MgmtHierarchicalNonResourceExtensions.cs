@@ -21,15 +21,11 @@ namespace MgmtHierarchicalNonResource
     {
         private static MockableMgmtHierarchicalNonResourceArmClient GetMockableMgmtHierarchicalNonResourceArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtHierarchicalNonResourceArmClient(client0));
         }
 
         private static MockableMgmtHierarchicalNonResourceSubscriptionResource GetMockableMgmtHierarchicalNonResourceSubscriptionResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtHierarchicalNonResourceSubscriptionResource(client, resource.Id));
         }
 
@@ -47,6 +43,8 @@ namespace MgmtHierarchicalNonResource
         /// <returns> Returns a <see cref="SharedGalleryResource" /> object. </returns>
         public static SharedGalleryResource GetSharedGalleryResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtHierarchicalNonResourceArmClient(client).GetSharedGalleryResource(id);
         }
 
@@ -64,6 +62,8 @@ namespace MgmtHierarchicalNonResource
         /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
         public static SharedGalleryCollection GetSharedGalleries(this SubscriptionResource subscriptionResource, string location)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtHierarchicalNonResourceSubscriptionResource(subscriptionResource).GetSharedGalleries(location);
         }
 
@@ -93,6 +93,8 @@ namespace MgmtHierarchicalNonResource
         [ForwardsClientCalls]
         public static async Task<Response<SharedGalleryResource>> GetSharedGalleryAsync(this SubscriptionResource subscriptionResource, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return await GetMockableMgmtHierarchicalNonResourceSubscriptionResource(subscriptionResource).GetSharedGalleryAsync(location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -122,6 +124,8 @@ namespace MgmtHierarchicalNonResource
         [ForwardsClientCalls]
         public static Response<SharedGalleryResource> GetSharedGallery(this SubscriptionResource subscriptionResource, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtHierarchicalNonResourceSubscriptionResource(subscriptionResource).GetSharedGallery(location, galleryUniqueName, cancellationToken);
         }
     }

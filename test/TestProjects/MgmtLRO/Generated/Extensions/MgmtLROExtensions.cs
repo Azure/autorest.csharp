@@ -21,15 +21,11 @@ namespace MgmtLRO
     {
         private static MockableMgmtLROArmClient GetMockableMgmtLROArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtLROArmClient(client0));
         }
 
         private static MockableMgmtLROResourceGroupResource GetMockableMgmtLROResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtLROResourceGroupResource(client, resource.Id));
         }
 
@@ -47,6 +43,8 @@ namespace MgmtLRO
         /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
         public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtLROArmClient(client).GetFakeResource(id);
         }
 
@@ -64,6 +62,8 @@ namespace MgmtLRO
         /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtLROArmClient(client).GetBarResource(id);
         }
 
@@ -79,6 +79,8 @@ namespace MgmtLRO
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetFakes();
         }
 
@@ -108,6 +110,8 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroupResource resourceGroupResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -137,6 +141,8 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static Response<FakeResource> GetFake(this ResourceGroupResource resourceGroupResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
@@ -152,6 +158,8 @@ namespace MgmtLRO
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetBars();
         }
 
@@ -180,6 +188,8 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, string barName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetBarAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -208,6 +218,8 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, string barName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtLROResourceGroupResource(resourceGroupResource).GetBar(barName, cancellationToken);
         }
     }

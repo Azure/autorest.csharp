@@ -22,22 +22,16 @@ namespace MgmtParamOrdering
     {
         private static MockableMgmtParamOrderingArmClient GetMockableMgmtParamOrderingArmClient(ArmClient client)
         {
-            Argument.AssertNotNull(client, nameof(client));
-
             return client.GetCachedClient(client0 => new MockableMgmtParamOrderingArmClient(client0));
         }
 
         private static MockableMgmtParamOrderingResourceGroupResource GetMockableMgmtParamOrderingResourceGroupResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtParamOrderingResourceGroupResource(client, resource.Id));
         }
 
         private static MockableMgmtParamOrderingSubscriptionResource GetMockableMgmtParamOrderingSubscriptionResource(ArmResource resource)
         {
-            Argument.AssertNotNull(resource, nameof(resource));
-
             return resource.GetCachedClient(client => new MockableMgmtParamOrderingSubscriptionResource(client, resource.Id));
         }
 
@@ -55,6 +49,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetAvailabilitySetResource(id);
         }
 
@@ -72,6 +68,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetDedicatedHostGroupResource(id);
         }
 
@@ -89,6 +87,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetDedicatedHostResource(id);
         }
 
@@ -106,6 +106,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetVirtualMachineExtensionImageResource(id);
         }
 
@@ -123,6 +125,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetEnvironmentContainerResource(id);
         }
 
@@ -140,6 +144,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="WorkspaceResource" /> object. </returns>
         public static WorkspaceResource GetWorkspaceResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetWorkspaceResource(id);
         }
 
@@ -157,6 +163,8 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtParamOrderingArmClient(client).GetVirtualMachineScaleSetResource(id);
         }
 
@@ -172,6 +180,8 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetAvailabilitySets();
         }
 
@@ -200,6 +210,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -228,6 +240,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetAvailabilitySet(availabilitySetName, cancellationToken);
         }
 
@@ -243,6 +257,8 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetDedicatedHostGroups();
         }
 
@@ -272,6 +288,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetDedicatedHostGroupAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -301,6 +319,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetDedicatedHostGroup(hostGroupName, expand, cancellationToken);
         }
 
@@ -316,6 +336,8 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
         public static WorkspaceCollection GetWorkspaces(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetWorkspaces();
         }
 
@@ -344,6 +366,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<WorkspaceResource>> GetWorkspaceAsync(this ResourceGroupResource resourceGroupResource, string workspaceName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetWorkspaceAsync(workspaceName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -372,6 +396,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<WorkspaceResource> GetWorkspace(this ResourceGroupResource resourceGroupResource, string workspaceName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetWorkspace(workspaceName, cancellationToken);
         }
 
@@ -387,6 +413,8 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSets();
         }
 
@@ -416,6 +444,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
@@ -445,6 +475,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtParamOrderingResourceGroupResource(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, expand, cancellationToken);
         }
 
@@ -463,6 +495,8 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
         public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
@@ -494,6 +528,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineExtensionImageResource>> GetVirtualMachineExtensionImageAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return await GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImageAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
         }
 
@@ -525,6 +561,8 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<VirtualMachineExtensionImageResource> GetVirtualMachineExtensionImage(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImage(location, publisherName, type, version, cancellationToken);
         }
 
@@ -552,6 +590,8 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
@@ -579,6 +619,8 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
         }
     }
