@@ -152,6 +152,11 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override int GetHashCode() => HashCode.Combine(_implementation, _type, ((System.Collections.IStructuralEquatable)Arguments).GetHashCode(EqualityComparer<CSharpType>.Default));
 
+        public CSharpType GetGenericTypeDefinition()
+            => _type is null
+                ? new(_implementation!, Namespace, Name, IsValueType, IsEnum, IsNullable, Array.Empty<CSharpType>())
+                : new(_type, IsNullable, _type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray());
+
         public bool IsGenericType => Arguments.Length > 0;
 
         public CSharpType WithNullable(bool isNullable) =>

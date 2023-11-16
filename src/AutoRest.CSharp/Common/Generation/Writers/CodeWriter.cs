@@ -325,6 +325,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AppendType(CSharpType type, bool isDeclaration)
         {
+            if (_writingXmlDocumentation && type.IsGenericType)
+            {
+                // XmlDoc ignores generic arguments, so we are replacing type with its definition
+                type = type.GetGenericTypeDefinition();
+            }
+
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
