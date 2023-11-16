@@ -484,7 +484,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var signature = new MethodSignature(
                 Name: "CreateResourceIdentifier",
                 null,
-                Description: $"Generate the resource identifier of a <see cref=\"{Type.ToStringForDocs()}\"/> instance.",
+                Description: $"Generate the resource identifier of a <see cref=\"{Type}\"/> instance.",
                 Modifiers: Public | Static,
                 ReturnType: typeof(ResourceIdentifier),
                 ReturnDescription: null,

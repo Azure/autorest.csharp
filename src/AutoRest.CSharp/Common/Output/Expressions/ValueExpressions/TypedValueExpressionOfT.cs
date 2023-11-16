@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
                 }
             }
 
-            throw new InvalidOperationException($"Expression with return type {typed.Type.ToStringForDocs()} is cast to type {type}");
+            throw new InvalidOperationException($"Expression with return type {typed.Type.Name} is cast to type {type.Name}");
 #else
             return untyped;
 #endif

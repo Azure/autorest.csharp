@@ -227,7 +227,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected FormattableString BuildMockingExtraDescription(MethodSignature signatureOnMockingExtension)
         {
-            var methodRef = signatureOnMockingExtension.ToStringForDocs();
+            var methodRef = signatureOnMockingExtension.GetCRef();
             return $@"<item>
 <term>Mocking</term>
 <description>To mock this method, please mock <see cref=""{MockableExtension.Type}.{methodRef}""/> instead.</description>

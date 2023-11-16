@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var builder = new StringBuilder();
             builder.Append(methodSignature.Name).Append("(");
             // all methods here should be extension methods, therefore we skip the first parameter which is the extension method parameter "this" and in this context, it is actually myself
-            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.ToString()));
+            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.Name));
             builder.Append(")");
 
             return builder.ToString();

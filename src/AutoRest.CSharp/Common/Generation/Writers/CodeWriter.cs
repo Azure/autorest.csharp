@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class CodeWriter
     {
-        private readonly bool _appendTypeNameOnly;
         private const int DefaultLength = 1024;
         private static readonly string _newLine = "\n";
         private static readonly string _braceNewLine = "{\n";
@@ -28,10 +27,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private char[] _builder;
         private int _length;
+        private bool _writingXmlDocumentation;
 
-        public CodeWriter(bool appendTypeNameOnly = false)
+        public CodeWriter()
         {
-            _appendTypeNameOnly = appendTypeNameOnly;
             _builder = ArrayPool<char>.Shared.Rent(DefaultLength);
 
             _scopes = new Stack<CodeWriterScope>();
@@ -115,19 +114,13 @@ namespace AutoRest.CSharp.Generation.Writers
             const string literalFormatString = ":L";
             const string declarationFormatString = ":D"; // :D :)
             const string identifierFormatString = ":I";
-            foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(formattableString.Format))
+            foreach ((var span, bool isLiteral, int index) in StringExtensions.GetPathParts(formattableString.Format))
             {
                 if (isLiteral)
                 {
                     AppendRaw(span);
                     continue;
                 }
-
-                var formatSeparatorIndex = span.IndexOf(':');
-
-                int index = int.Parse(formatSeparatorIndex == -1
-                    ? span
-                    : span.Slice(0, formatSeparatorIndex));
 
                 var argument = formattableString.GetArgument(index);
                 var isDeclaration = span.EndsWith(declarationFormatString);
@@ -145,7 +138,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         Append(fs);
                         break;
                     case Type t:
-                        AppendType(new CSharpType(t));
+                        AppendType(new CSharpType(t), false);
                         break;
                     case CSharpType t:
                         AppendType(t, isDeclaration);
@@ -211,6 +204,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var startTagStart = _length;
             Append(startTag);
+            _writingXmlDocumentation = true;
 
             var contentStart = _length;
             if (content.Format.Length > 0)
@@ -219,6 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             var contentEnd = _length;
 
+            _writingXmlDocumentation = false;
             Append(endTag);
 
             if (contentStart == contentEnd)
@@ -328,7 +323,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private void AppendType(CSharpType type, bool isDeclaration = false)
+        private void AppendType(CSharpType type, bool isDeclaration)
         {
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
@@ -337,10 +332,6 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (isDeclaration && !type.IsFrameworkType)
             {
                 AppendRaw(type.Implementation.Declaration.Name);
-            }
-            else if (_appendTypeNameOnly)
-            {
-                AppendRaw(type.Name);
             }
             else
             {
@@ -354,17 +345,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (type.Arguments.Any())
             {
-                AppendRaw("<");
+                AppendRaw(_writingXmlDocumentation ? "{" : "<");
                 foreach (var typeArgument in type.Arguments)
                 {
-                    AppendType(typeArgument);
-                    AppendRaw(", ");
+                    AppendType(typeArgument, false);
+                    AppendRaw(_writingXmlDocumentation ? "," : ", ");
                 }
                 RemoveTrailingComma();
-                AppendRaw(">");
+                AppendRaw(_writingXmlDocumentation ? "}" : ">");
             }
 
-            if (!isDeclaration && type.IsNullable && type.IsValueType)
+            if (!isDeclaration && type is { IsNullable: true, IsValueType: true })
             {
                 AppendRaw("?");
             }
@@ -402,8 +393,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        private Span<char> WrittenText => _builder.AsSpan(0, _length);
-        private Span<char> PreviousLine
+        public ReadOnlySpan<char> WrittenText => _builder.AsSpan(0, _length);
+
+        private ReadOnlySpan<char> PreviousLine
         {
             get
             {
@@ -426,7 +418,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private Span<char> CurrentLine
+        private ReadOnlySpan<char> CurrentLine
         {
             get
             {
@@ -527,6 +519,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public virtual CodeWriter Declaration(CodeWriterDeclaration declaration)
         {
+            if (_writingXmlDocumentation)
+            {
+                throw new InvalidOperationException("Can't declare variables inside documentation.");
+            }
+
             declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
             _scopes.Peek().Declarations.Add(declaration);
             return Declaration(declaration.ActualName);
