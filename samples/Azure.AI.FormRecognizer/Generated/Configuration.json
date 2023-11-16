@@ -3,8 +3,8 @@
   "namespace": "Azure.AI.FormRecognizer",
   "library-name": "AzureAIFormRecognizer",
   "shared-source-folders": [
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net7.0\\Azure.Core.Shared"
   ],
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true
