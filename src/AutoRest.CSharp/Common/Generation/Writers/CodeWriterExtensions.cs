@@ -361,12 +361,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteMethodBodyStatement(validationStatement);
 
             return writer;
-            //return parameter.Validation switch
-            //{
-            //    ValidationType.AssertNotNullOrEmpty => writer.Line($"{Configuration.ApiTypes.ArgumentType}.{Configuration.ApiTypes.AssertNotNullOrEmptyName}({parameter.Name:I}, nameof({parameter.Name:I}));"),
-            //    ValidationType.AssertNotNull => writer.Line($"{Configuration.ApiTypes.ArgumentType}.{Configuration.ApiTypes.AssertNotNullName}({parameter.Name:I}, nameof({parameter.Name:I}));"),
-            //    _ => writer
-            //};
         }
 
         public static CodeWriter WriteParameterNullChecks(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
