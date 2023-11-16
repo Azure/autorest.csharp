@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (parameter is { IsOptionalInSignature: true, IsEndpoint: false } && !Configuration.KeepOptionalClientParametersInConstructor)
                         {
-                            _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.{parameter.Name.FirstCharToUpperCase()};");
+                            _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.{parameter.Name.ToCleanName()};");
                         }
                         else
                         {

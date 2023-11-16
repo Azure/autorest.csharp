@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         foreach (var parameter in clientOptions.AdditionalParameters)
                         {
                             writer.WriteXmlDocumentationSummary(parameter.Description);
-                            writer.Line($"public {parameter.Type} {parameter.Name.FirstCharToUpperCase()} {{ get; set; }}");
+                            writer.Line($"public {parameter.Type} {parameter.Name.ToCleanName()} {{ get; set; }}");
                             writer.Line();
                         }
                     }
