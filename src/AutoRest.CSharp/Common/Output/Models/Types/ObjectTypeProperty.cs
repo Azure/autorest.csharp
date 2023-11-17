@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (CSharpType item in unionItems)
             {
-                FormattableString description = $"<description><see cref=\"{item}\"/></description>";
+                FormattableString description;
 
                 if (item.IsLiteral && item.Literal?.Value != null)
                 {
@@ -194,46 +194,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                         description = $"<description>{literalValue}</description>";
                     }
                 }
-                else if (TypeFactory.IsCollectionType(item) || TypeFactory.IsArray(item))
+                else
                 {
-                    // construct the description for the collection type
-                    description = ConstructTypeStringForCollection(item);
+                    description = $"<description>{item:C}</description>";
                 }
 
                 values.Add(description);
             }
 
             return values.Distinct().ToList();
-        }
-
-        /// <summary>
-        /// Constructs the type string for a collection property. If the property is a list, the description
-        /// will include details about the element type.
-        /// </summary>
-        /// <param name="propertyType">The collection property.</param>
-        /// <returns>The constructed type FormattedString for the property.</returns>
-        public static FormattableString ConstructTypeStringForCollection(CSharpType propertyType)
-        {
-            FormattableString additionalDescriptionForListType = $"";
-            FormattableString constructedDescription;
-
-            if (TypeFactory.IsList(propertyType) || TypeFactory.IsArray(propertyType))
-            {
-                // For lists, get the element type and construct the description for it
-                CSharpType elementType = TypeFactory.GetElementType(propertyType);
-                additionalDescriptionForListType = ConstructDetailsForListType(elementType, true);
-            }
-
-            if (additionalDescriptionForListType.IsNullOrEmpty())
-            {
-                constructedDescription = $"<description><see cref=\"{propertyType}\"/></description>";
-            }
-            else
-            {
-                constructedDescription = $"<description><see cref=\"{propertyType}\"/> Where <c>T</c> is of type {additionalDescriptionForListType}</description>";
-            }
-
-            return constructedDescription;
         }
 
         /// <summary>
@@ -245,38 +214,38 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// <returns>A constructed FormattedString representing the description of the list type.</returns>
         public static FormattableString ConstructDetailsForListType(CSharpType? input, bool isBaseElement)
         {
-            FormattableString typeDescription = $"";
-
-            if (input != null)
+            if (input == null)
             {
-                string itemName = input.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : input.Name;
-                CSharpType? elementType = null;
+                return $"";
+            }
+
+            string itemName = input.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : input.Name;
+            CSharpType? elementType = null;
+            FormattableString typeDescription = $"{itemName}";
+
+            if (isBaseElement)
+            {
+                typeDescription = $"<see cref=\"{input}\"/>";
+            }
+
+            if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
+            {
+                elementType = TypeFactory.GetElementType(input);
                 typeDescription = $"{itemName}";
+            }
+            else if (TypeFactory.IsDictionary(input))
+            {
+                typeDescription = $"{itemName}{{TKey, TValue}}";
+            }
+
+            // validate if the item contains an element type
+            if (elementType != null)
+            {
+                typeDescription = $"{typeDescription}{{{ConstructDetailsForListType(elementType, false)}}}";
 
                 if (isBaseElement)
                 {
-                    typeDescription = $"<see cref=\"{input}\"/>";
-                }
-
-                if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
-                {
-                    elementType = TypeFactory.GetElementType(input);
-                    typeDescription = $"{itemName}";
-                }
-                else if (TypeFactory.IsDictionary(input))
-                {
-                    typeDescription = $"{itemName}{{TKey, TValue}}";
-                }
-
-                // validate if the item contains an element type
-                if (elementType != null)
-                {
-                    typeDescription = $"{typeDescription}{{{ConstructDetailsForListType(elementType, false)}}}";
-
-                    if (isBaseElement)
-                    {
-                        typeDescription = $"<c>{typeDescription}</c>";
-                    }
+                    typeDescription = $"<c>{typeDescription}</c>";
                 }
             }
 
@@ -461,8 +430,8 @@ Examples:
                 }
                 else if (TypeFactory.IsDictionary(valueType))
                 {
-                    var objectTypes = valueType.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is ObjectType);
-                    if (objectTypes.Count() > 0)
+                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType }).ToList();
+                    if (objectTypes.Any())
                     {
                         var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator()).ToArray();
                         updatedDescription = subDescription.Join("");

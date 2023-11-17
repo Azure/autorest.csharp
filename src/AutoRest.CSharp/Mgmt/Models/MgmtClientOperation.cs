@@ -131,9 +131,10 @@ namespace AutoRest.CSharp.Mgmt.Models
                 var mockingExtensionTypeName = MgmtMockableExtension.GetMockableExtensionDefaultName(extendType.Name);
 
                 // construct the cref name
+                FormattableString methodSignature = $"{mockingExtensionTypeName}.{Name}({MethodParameters.Skip(1).GetTypesFormattable(MethodParameters.Count - 1)})";
                 mockingInformation = $@"<item>
 <term>Mocking</term>
-<description>To mock this method, please mock <see cref=""{mockingExtensionTypeName}.{Name}({MethodParameters.Skip(1).GetTypesFormattable(MethodParameters.Count - 1)})""/> instead.</description>
+<description>To mock this method, please mock {methodSignature:C} instead.</description>
 </item>";
             }
 

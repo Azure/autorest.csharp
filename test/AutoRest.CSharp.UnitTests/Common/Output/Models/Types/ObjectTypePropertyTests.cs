@@ -89,26 +89,6 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             Assert.AreEqual(expectedResult.ToString(), result.ToString());
         }
 
-        // Validates that the type description summary string is constructed correctly for a given dictionary type
-        [Test]
-        public void TestConstructTypeStringForCollection_DictionaryType()
-        {
-            bool isNullable = false;
-            InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
-            InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
-            InputType type = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
-
-            CSharpType cSharpType = typeFactory.CreateType(type);
-
-            FormattableString result = ObjectTypeProperty.ConstructTypeStringForCollection(cSharpType);
-            FormattableString expectedResult = $"<description><see cref=\"global::System.Collections.Generic.IDictionary<string, int>\"/></description>";
-
-            bool areStringsEqual = string.Compare(result.ToString(), expectedResult.ToString(), CultureInfo.CurrentCulture,
-                CompareOptions.IgnoreSymbols) == 0;
-
-            Assert.True(areStringsEqual);
-        }
-
         // Validates that the summary description string is constructed correctly for several types
         [Test]
         public void TestGetUnionTypesDescriptions()
@@ -134,7 +114,7 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             var dateTime = new DateTimeOffset();
             InputLiteralType dateTimeLiteralType = new InputLiteralType("InputLiteralType", dateTimeLiteralValueType, dateTime, isNullable);
 
-            IList<CSharpType> unionItems = new List<CSharpType>()
+            var unionItems = new List<CSharpType>
             {
                 typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Boolean, false)),
                 typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Int32, false)),

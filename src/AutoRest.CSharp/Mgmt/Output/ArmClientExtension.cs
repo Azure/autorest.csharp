@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 description,
                 MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
                 resource.Type,
-                $"Returns a <see cref=\"{resource.Type.Name}\" /> object.",
+                $"Returns a {resource.Type:C} object.",
                 parameters);
 
             if (IsArmCore)

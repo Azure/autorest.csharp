@@ -682,7 +682,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     $"<item>",
                     $"<description>",
-                    $"Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.",
+                    $"Please try the simpler {convenienceDocRef:C} convenience overload with strongly typed models first.",
                     $"</description>",
                     $"</item>"
                 });
@@ -712,19 +712,19 @@ namespace AutoRest.CSharp.Generation.Writers
             if (clientMethod.PagingInfo != null && clientMethod.LongRunning != null)
             {
                 CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
-                text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
+                text = $"The {typeof(Operation<>):C} from the service that will contain a {pageableType:C} containing a list of {typeof(BinaryData):C} objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
             else if (clientMethod.PagingInfo != null)
             {
-                text = $"The <see cref=\"{returnType.Name}{{T}}\"/> from the service containing a list of <see cref=\"{returnType.Arguments[0]}\"/> objects. Details of the body schema for each item in the collection are in the Remarks section below.";
+                text = $"The {returnType.GetGenericTypeDefinition():C} from the service containing a list of {returnType.Arguments[0]:C} objects. Details of the body schema for each item in the collection are in the Remarks section below.";
             }
             else if (clientMethod.LongRunning != null)
             {
-                text = (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
+                text = $"The {typeof(Operation):C} representing an asynchronous operation on the service.";
             }
             else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse()) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
             {
-                text = (FormattableString)$"The response returned from the service.";
+                text = $"The response returned from the service.";
             }
             else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse(typeof(bool))) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetResponseOfT<bool>()))
             {

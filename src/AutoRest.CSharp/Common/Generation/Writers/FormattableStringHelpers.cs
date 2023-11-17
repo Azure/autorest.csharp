@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -32,6 +33,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString Join(this ICollection<FormattableString> fss, string separator, string? lastSeparator = null)
             => fss.Count == 1 ? fss.First() : Join(fss, fss.Count, static fs => fs, separator, lastSeparator, null);
+
+        public static FormattableString GetClientTypesFormattable(this IReadOnlyList<LowLevelClient> clients)
+            => Join(clients, clients.Count, static c => c.Type, ", ", null, 'C');
 
         public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetLiteralsFormattable(parameters.Select(p => p.Name), parameters.Count);

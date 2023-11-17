@@ -114,6 +114,7 @@ namespace AutoRest.CSharp.Generation.Writers
             const string literalFormatString = ":L";
             const string declarationFormatString = ":D"; // :D :)
             const string identifierFormatString = ":I";
+            const string crefFormatString = ":C"; // wraps content into "see cref" tag, available only in xmlDoc
             foreach ((var span, bool isLiteral, int index) in StringExtensions.GetPathParts(formattableString.Format))
             {
                 if (isLiteral)
@@ -126,6 +127,31 @@ namespace AutoRest.CSharp.Generation.Writers
                 var isDeclaration = span.EndsWith(declarationFormatString);
                 var isIdentifier = span.EndsWith(identifierFormatString);
                 var isLiteralFormat = span.EndsWith(literalFormatString);
+                var isCref = span.EndsWith(crefFormatString);
+
+                if (isCref)
+                {
+                    if (!_writingXmlDocumentation)
+                    {
+                        throw new InvalidOperationException($"':C' formatter can be used only inside XmlDoc");
+                    }
+
+                    switch (argument)
+                    {
+                        case Type t:
+                            AppendTypeForCRef(new CSharpType(t));
+                            break;
+                        case CSharpType t:
+                            AppendTypeForCRef(t);
+                            break;
+                        default:
+                            Append($"<see cref=\"{argument}\"/>");
+                            break;
+                    }
+
+                    continue;
+                }
+
                 switch (argument)
                 {
                     case IEnumerable<FormattableString> fss:
@@ -138,10 +164,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         Append(fs);
                         break;
                     case Type t:
-                        AppendType(new CSharpType(t), false);
+                        AppendType(new CSharpType(t), false, false);
                         break;
                     case CSharpType t:
-                        AppendType(t, isDeclaration);
+                        AppendType(t, isDeclaration, false);
                         break;
                     case CodeWriterDeclaration declaration when isDeclaration:
                         Declaration(declaration);
@@ -323,19 +349,68 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        private void AppendType(CSharpType type, bool isDeclaration)
+        private void AppendTypeForCRef(CSharpType type)
         {
-            if (_writingXmlDocumentation && type.IsGenericType)
+            // Because of the limitations of type cref in XmlDoc
+            // we add "?" nullability operator after `cref` block
+
+            var isNullable = type is { IsNullable: true, IsValueType: true };
+            var arguments = type.IsGenericType ? type.Arguments : null;
+
+            type = type.WithNullable(false);
+            if (type.IsGenericType)
             {
-                // XmlDoc ignores generic arguments, so we are replacing type with its definition
                 type = type.GetGenericTypeDefinition();
             }
 
+            AppendRaw($"<see cref=\"");
+            AppendType(type, false, false);
+            AppendRaw($"\"/>");
+
+            if (isNullable)
+            {
+                AppendRaw("?");
+            }
+
+            if (arguments is not null)
+            {
+                for (int i = 0; i < arguments.Length; i++)
+                {
+                    if (arguments[i] is { IsFrameworkType: true, FrameworkType.IsGenericParameter: true })
+                    {
+                        continue;
+                    }
+
+                    AppendRaw(" Where <c>");
+                    AppendType(type.Arguments[i], false, false);
+                    AppendRaw("</c> is of type ");
+
+                    // If argument type is non-generic, we can provide "see cref" for it
+                    // Otherwise, just write its name
+                    if (arguments[i].IsGenericType)
+                    {
+                        AppendRaw("<c>");
+                        AppendType(arguments[i], false, true);
+                        AppendRaw("</c>");
+                    }
+                    else
+                    {
+                        AppendTypeForCRef(arguments[i]);
+                    }
+
+                    AppendRaw(", ");
+                }
+                RemoveTrailingComma();
+            }
+        }
+
+        private void AppendType(CSharpType type, bool isDeclaration, bool writeTypeNameOnly)
+        {
             if (type.TryGetCSharpFriendlyName(out var keywordName))
             {
                 AppendRaw(keywordName);
             }
-            else if (isDeclaration && !type.IsFrameworkType)
+            else if (writeTypeNameOnly || isDeclaration && !type.IsFrameworkType)
             {
                 AppendRaw(type.Implementation.Declaration.Name);
             }
@@ -354,7 +429,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 AppendRaw(_writingXmlDocumentation ? "{" : "<");
                 foreach (var typeArgument in type.Arguments)
                 {
-                    AppendType(typeArgument, false);
+                    AppendType(typeArgument, false, writeTypeNameOnly);
                     AppendRaw(_writingXmlDocumentation ? "," : ", ");
                 }
                 RemoveTrailingComma();
