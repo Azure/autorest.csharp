@@ -22,7 +22,7 @@
         "clean": "rimraf ./dist ./temp",
         "build": "tsc -p .",
         "watch": "tsc -p . --watch",
-        "pack": "npx webpack",
+        "pack": "webpack",
         "lint-typespec-library": "tsp compile . --warn-as-error --import @typespec/library-linter --no-emit",
         "test": "mocha dist/test/**/*.js",
         "test-official": "c8 mocha --forbid-only dist/test/**/*.js",
@@ -60,7 +60,8 @@
         "mocha": "~9.2.0",
         "prettier": "~3.0.3",
         "rimraf": "~3.0.2",
-        "typescript": "~5.1.5"
+        "typescript": "~5.1.5",
+        "webpack": "^5.89.0"
     },
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20230309.1",
