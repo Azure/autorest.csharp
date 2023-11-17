@@ -41,6 +41,7 @@
         "@typespec/eslint-config-typespec": "0.50.0",
         "@typespec/eslint-plugin": "0.50.0",
         "@typespec/http": "0.50.0",
+        "@typespec/library-linter": "0.50.0",
         "@typespec/rest": "0.50.0",
         "@typespec/versioning": "0.50.0",
         "@types/lodash.isequal": "^4.5.6",
