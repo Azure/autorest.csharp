@@ -11,14 +11,14 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter to copy an existing custom model from the source resource to a target resource referenced by the resource ID. </summary>
-    public partial class CopyRequest
+    public partial class CopyContent
     {
-        /// <summary> Initializes a new instance of CopyRequest. </summary>
+        /// <summary> Initializes a new instance of CopyContent. </summary>
         /// <param name="targetResourceId"> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </param>
         /// <param name="targetResourceRegion"> Location of the target Azure resource. A valid Azure region name supported by Cognitive Services. </param>
         /// <param name="copyAuthorization"> Entity that encodes claims to authorize the copy request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="targetResourceId"/>, <paramref name="targetResourceRegion"/> or <paramref name="copyAuthorization"/> is null. </exception>
-        public CopyRequest(string targetResourceId, string targetResourceRegion, CopyAuthorizationResult copyAuthorization)
+        public CopyContent(string targetResourceId, string targetResourceRegion, CopyAuthorizationResult copyAuthorization)
         {
             Argument.AssertNotNull(targetResourceId, nameof(targetResourceId));
             Argument.AssertNotNull(targetResourceRegion, nameof(targetResourceRegion));

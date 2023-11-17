@@ -37,7 +37,7 @@ namespace Azure.AI.FormRecognizer
             _endpoint = endpoint ?? throw new ArgumentNullException(nameof(endpoint));
         }
 
-        internal HttpMessage CreateTrainCustomModelAsyncRequest(TrainRequest trainRequest)
+        internal HttpMessage CreateTrainCustomModelAsyncRequest(TrainContent trainRequest)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -60,7 +60,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trainRequest"/> is null. </exception>
         /// <remarks> Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored. </remarks>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerTrainCustomModelAsyncHeaders>> TrainCustomModelAsyncAsync(TrainRequest trainRequest, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerTrainCustomModelAsyncHeaders>> TrainCustomModelAsyncAsync(TrainContent trainRequest, CancellationToken cancellationToken = default)
         {
             if (trainRequest == null)
             {
@@ -84,7 +84,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trainRequest"/> is null. </exception>
         /// <remarks> Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored. </remarks>
-        public ResponseWithHeaders<AzureAIFormRecognizerTrainCustomModelAsyncHeaders> TrainCustomModelAsync(TrainRequest trainRequest, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerTrainCustomModelAsyncHeaders> TrainCustomModelAsync(TrainContent trainRequest, CancellationToken cancellationToken = default)
         {
             if (trainRequest == null)
             {
@@ -414,7 +414,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateCopyCustomModelRequest(Guid modelId, CopyRequest copyRequest)
+        internal HttpMessage CreateCopyCustomModelRequest(Guid modelId, CopyContent copyRequest)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -440,7 +440,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="copyRequest"/> is null. </exception>
         /// <remarks> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </remarks>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerCopyCustomModelHeaders>> CopyCustomModelAsync(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerCopyCustomModelHeaders>> CopyCustomModelAsync(Guid modelId, CopyContent copyRequest, CancellationToken cancellationToken = default)
         {
             if (copyRequest == null)
             {
@@ -465,7 +465,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="copyRequest"/> is null. </exception>
         /// <remarks> Copy custom model stored in this resource (the source) to user specified target Form Recognizer resource. </remarks>
-        public ResponseWithHeaders<AzureAIFormRecognizerCopyCustomModelHeaders> CopyCustomModel(Guid modelId, CopyRequest copyRequest, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerCopyCustomModelHeaders> CopyCustomModel(Guid modelId, CopyContent copyRequest, CancellationToken cancellationToken = default)
         {
             if (copyRequest == null)
             {
