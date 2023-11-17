@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtConstants;
@@ -17,11 +17,11 @@ namespace MgmtConstants.Models
 {
     internal partial class OptionalMachineListResult : IUtf8JsonSerializable, IJsonModel<OptionalMachineListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachineListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachineListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OptionalMachineListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OptionalMachineListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OptionalMachineListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OptionalMachineListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtConstants.Models
 
         internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtConstants.Models
             return DeserializeOptionalMachineListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<OptionalMachineListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OptionalMachineListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

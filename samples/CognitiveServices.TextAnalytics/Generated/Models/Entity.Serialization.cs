@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class Entity : IUtf8JsonSerializable, IJsonModel<Entity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Entity>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Entity>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Entity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Entity>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Entity>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Entity>)} interface");
             }
@@ -73,7 +73,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static Entity DeserializeEntity(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -151,6 +151,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeEntity(document.RootElement, options);
         }
 
-        string IPersistableModel<Entity>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Entity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

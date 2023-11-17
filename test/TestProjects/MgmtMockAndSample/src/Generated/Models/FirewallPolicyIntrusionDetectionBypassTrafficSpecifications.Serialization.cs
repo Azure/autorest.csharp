@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications : IUtf8JsonSerializable, IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>)} interface");
             }
@@ -123,7 +123,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -262,6 +262,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(document.RootElement, options);
         }
 
-        string IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FirewallPolicyIntrusionDetectionBypassTrafficSpecifications>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

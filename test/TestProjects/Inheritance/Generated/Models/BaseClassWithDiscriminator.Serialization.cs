@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
@@ -17,11 +17,11 @@ namespace Inheritance.Models
 {
     public partial class BaseClassWithDiscriminator : IUtf8JsonSerializable, IJsonModel<BaseClassWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithDiscriminator>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithDiscriminator>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BaseClassWithDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithDiscriminator>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithDiscriminator>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseClassWithDiscriminator>)} interface");
             }
@@ -121,7 +121,7 @@ namespace Inheritance.Models
 
         internal static BaseClassWithDiscriminator DeserializeBaseClassWithDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -293,6 +293,6 @@ namespace Inheritance.Models
             return DeserializeBaseClassWithDiscriminator(document.RootElement, options);
         }
 
-        string IPersistableModel<BaseClassWithDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BaseClassWithDiscriminator>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

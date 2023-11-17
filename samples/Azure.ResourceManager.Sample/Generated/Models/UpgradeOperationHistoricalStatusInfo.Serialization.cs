@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class UpgradeOperationHistoricalStatusInfo : IUtf8JsonSerializable, IJsonModel<UpgradeOperationHistoricalStatusInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradeOperationHistoricalStatusInfo>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UpgradeOperationHistoricalStatusInfo>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UpgradeOperationHistoricalStatusInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UpgradeOperationHistoricalStatusInfo>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UpgradeOperationHistoricalStatusInfo>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UpgradeOperationHistoricalStatusInfo>)} interface");
             }
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static UpgradeOperationHistoricalStatusInfo DeserializeUpgradeOperationHistoricalStatusInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -150,6 +150,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeUpgradeOperationHistoricalStatusInfo(document.RootElement, options);
         }
 
-        string IPersistableModel<UpgradeOperationHistoricalStatusInfo>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UpgradeOperationHistoricalStatusInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtListMethods
 {
     public partial class TenantParentData : IUtf8JsonSerializable, IJsonModel<TenantParentData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TenantParentData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TenantParentData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TenantParentData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TenantParentData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TenantParentData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TenantParentData>)} interface");
             }
@@ -100,7 +100,7 @@ namespace MgmtListMethods
 
         internal static TenantParentData DeserializeTenantParentData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,6 +197,6 @@ namespace MgmtListMethods
             return DeserializeTenantParentData(document.RootElement, options);
         }
 
-        string IPersistableModel<TenantParentData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TenantParentData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

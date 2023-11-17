@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class LinkedEntity : IUtf8JsonSerializable, IJsonModel<LinkedEntity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LinkedEntity>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LinkedEntity>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LinkedEntity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LinkedEntity>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LinkedEntity>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LinkedEntity>)} interface");
             }
@@ -78,7 +78,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -161,6 +161,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeLinkedEntity(document.RootElement, options);
         }
 
-        string IPersistableModel<LinkedEntity>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LinkedEntity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

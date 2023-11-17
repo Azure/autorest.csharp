@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class VirtualMachineHealthStatus : IUtf8JsonSerializable, IJsonModel<VirtualMachineHealthStatus>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineHealthStatus>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineHealthStatus>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineHealthStatus>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineHealthStatus>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineHealthStatus>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineHealthStatus>)} interface");
             }
@@ -66,7 +66,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static VirtualMachineHealthStatus DeserializeVirtualMachineHealthStatus(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,6 +118,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineHealthStatus(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineHealthStatus>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineHealthStatus>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

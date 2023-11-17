@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
     [PersistableModelProxy(typeof(UnknownAbstractModel))]
     public partial class AbstractModel : IUtf8JsonSerializable, IJsonModel<AbstractModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AbstractModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AbstractModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AbstractModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AbstractModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AbstractModel>)} interface");
             }
@@ -60,7 +60,7 @@ namespace TypeSchemaMapping.Models
 
         internal static AbstractModel DeserializeAbstractModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,6 +99,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeAbstractModel(document.RootElement, options);
         }
 
-        string IPersistableModel<AbstractModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AbstractModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

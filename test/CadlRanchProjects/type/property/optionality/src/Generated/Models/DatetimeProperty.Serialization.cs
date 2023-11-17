@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Property.Optionality.Models
 {
     public partial class DatetimeProperty : IUtf8JsonSerializable, IJsonModel<DatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DatetimeProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DatetimeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DatetimeProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DatetimeProperty>)} interface");
             }
@@ -64,7 +64,7 @@ namespace _Type.Property.Optionality.Models
 
         internal static DatetimeProperty DeserializeDatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,14 +116,14 @@ namespace _Type.Property.Optionality.Models
             return DeserializeDatetimeProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<DatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DatetimeProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDatetimeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeDatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

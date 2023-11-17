@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Authentication.ApiKey.Models
 {
     public partial class InvalidAuth : IUtf8JsonSerializable, IJsonModel<InvalidAuth>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InvalidAuth>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InvalidAuth>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<InvalidAuth>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InvalidAuth>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<InvalidAuth>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InvalidAuth>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Authentication.ApiKey.Models
 
         internal static InvalidAuth DeserializeInvalidAuth(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Authentication.ApiKey.Models
             return DeserializeInvalidAuth(document.RootElement, options);
         }
 
-        string IPersistableModel<InvalidAuth>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<InvalidAuth>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InvalidAuth FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInvalidAuth(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeInvalidAuth(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

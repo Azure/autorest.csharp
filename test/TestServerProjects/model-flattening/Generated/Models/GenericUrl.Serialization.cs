@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace model_flattening.Models
 {
     internal partial class GenericUrl : IUtf8JsonSerializable, IJsonModel<GenericUrl>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GenericUrl>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<GenericUrl>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<GenericUrl>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<GenericUrl>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<GenericUrl>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<GenericUrl>)} interface");
             }
@@ -63,7 +63,7 @@ namespace model_flattening.Models
 
         internal static GenericUrl DeserializeGenericUrl(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace model_flattening.Models
             return DeserializeGenericUrl(document.RootElement, options);
         }
 
-        string IPersistableModel<GenericUrl>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<GenericUrl>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class LanguageBatchInput : IUtf8JsonSerializable, IJsonModel<LanguageBatchInput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageBatchInput>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageBatchInput>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LanguageBatchInput>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LanguageBatchInput>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LanguageBatchInput>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LanguageBatchInput>)} interface");
             }
@@ -65,7 +65,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static LanguageBatchInput DeserializeLanguageBatchInput(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,6 +118,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeLanguageBatchInput(document.RootElement, options);
         }
 
-        string IPersistableModel<LanguageBatchInput>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LanguageBatchInput>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

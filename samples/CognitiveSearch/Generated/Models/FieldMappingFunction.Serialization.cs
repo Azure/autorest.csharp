@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class FieldMappingFunction : IUtf8JsonSerializable, IJsonModel<FieldMappingFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FieldMappingFunction>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FieldMappingFunction>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FieldMappingFunction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FieldMappingFunction>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FieldMappingFunction>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FieldMappingFunction>)} interface");
             }
@@ -76,7 +76,7 @@ namespace CognitiveSearch.Models
 
         internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -146,6 +146,6 @@ namespace CognitiveSearch.Models
             return DeserializeFieldMappingFunction(document.RootElement, options);
         }
 
-        string IPersistableModel<FieldMappingFunction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FieldMappingFunction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

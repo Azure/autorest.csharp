@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ImmutabilityPolicyProperties : IUtf8JsonSerializable, IJsonModel<ImmutabilityPolicyProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutabilityPolicyProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImmutabilityPolicyProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ImmutabilityPolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ImmutabilityPolicyProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ImmutabilityPolicyProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImmutabilityPolicyProperties>)} interface");
             }
@@ -106,7 +106,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -225,6 +225,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeImmutabilityPolicyProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<ImmutabilityPolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ImmutabilityPolicyProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

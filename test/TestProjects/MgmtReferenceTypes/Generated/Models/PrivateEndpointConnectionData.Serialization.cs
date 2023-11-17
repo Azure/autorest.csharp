@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -18,11 +18,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(PrivateEndpointConnectionDataConverter))]
     public partial class PrivateEndpointConnectionData : IUtf8JsonSerializable, IJsonModel<PrivateEndpointConnectionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpointConnectionData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateEndpointConnectionData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PrivateEndpointConnectionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PrivateEndpointConnectionData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PrivateEndpointConnectionData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PrivateEndpointConnectionData>)} interface");
             }
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static PrivateEndpointConnectionData DeserializePrivateEndpointConnectionData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -194,7 +194,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateEndpointConnectionData(document.RootElement, options);
         }
 
-        string IPersistableModel<PrivateEndpointConnectionData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PrivateEndpointConnectionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class PrivateEndpointConnectionDataConverter : JsonConverter<PrivateEndpointConnectionData>
         {

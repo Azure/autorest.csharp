@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Goblinshark : IUtf8JsonSerializable, IJsonModel<Goblinshark>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Goblinshark>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Goblinshark>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Goblinshark>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Goblinshark>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Goblinshark>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Goblinshark>)} interface");
             }
@@ -94,7 +94,7 @@ namespace body_complex.Models
 
         internal static Goblinshark DeserializeGoblinshark(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -205,6 +205,6 @@ namespace body_complex.Models
             return DeserializeGoblinshark(document.RootElement, options);
         }
 
-        string IPersistableModel<Goblinshark>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Goblinshark>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

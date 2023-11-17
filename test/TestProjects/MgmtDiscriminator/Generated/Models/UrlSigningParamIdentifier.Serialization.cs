@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class UrlSigningParamIdentifier : IUtf8JsonSerializable, IJsonModel<UrlSigningParamIdentifier>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlSigningParamIdentifier>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlSigningParamIdentifier>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UrlSigningParamIdentifier>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UrlSigningParamIdentifier>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UrlSigningParamIdentifier>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UrlSigningParamIdentifier>)} interface");
             }
@@ -62,7 +62,7 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlSigningParamIdentifier DeserializeUrlSigningParamIdentifier(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlSigningParamIdentifier(document.RootElement, options);
         }
 
-        string IPersistableModel<UrlSigningParamIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UrlSigningParamIdentifier>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

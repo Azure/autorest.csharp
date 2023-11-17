@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtSingletonResource
 {
     public partial class BrakeData : IUtf8JsonSerializable, IJsonModel<BrakeData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BrakeData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BrakeData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BrakeData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BrakeData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BrakeData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BrakeData>)} interface");
             }
@@ -87,7 +87,7 @@ namespace MgmtSingletonResource
 
         internal static BrakeData DeserializeBrakeData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -167,6 +167,6 @@ namespace MgmtSingletonResource
             return DeserializeBrakeData(document.RootElement, options);
         }
 
-        string IPersistableModel<BrakeData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BrakeData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

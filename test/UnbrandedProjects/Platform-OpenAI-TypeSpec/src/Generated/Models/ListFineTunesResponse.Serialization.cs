@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class ListFineTunesResponse : IUtf8JsonWriteable, IJsonModel<ListFineTunesResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListFineTunesResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListFineTunesResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ListFineTunesResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ListFineTunesResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ListFineTunesResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListFineTunesResponse>)} interface");
             }
@@ -64,7 +64,7 @@ namespace OpenAI.Models
 
         internal static ListFineTunesResponse DeserializeListFineTunesResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -123,14 +123,14 @@ namespace OpenAI.Models
             return DeserializeListFineTunesResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<ListFineTunesResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ListFineTunesResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static ListFineTunesResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListFineTunesResponse(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeListFineTunesResponse(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

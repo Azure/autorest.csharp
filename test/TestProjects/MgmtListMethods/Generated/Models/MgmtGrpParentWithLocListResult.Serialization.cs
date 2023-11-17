@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtListMethods;
@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     internal partial class MgmtGrpParentWithLocListResult : IUtf8JsonSerializable, IJsonModel<MgmtGrpParentWithLocListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtGrpParentWithLocListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtGrpParentWithLocListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MgmtGrpParentWithLocListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MgmtGrpParentWithLocListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MgmtGrpParentWithLocListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtGrpParentWithLocListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtListMethods.Models
 
         internal static MgmtGrpParentWithLocListResult DeserializeMgmtGrpParentWithLocListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtListMethods.Models
             return DeserializeMgmtGrpParentWithLocListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<MgmtGrpParentWithLocListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MgmtGrpParentWithLocListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

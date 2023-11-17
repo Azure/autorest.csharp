@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineCaptureContent : IUtf8JsonSerializable, IJsonModel<VirtualMachineCaptureContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineCaptureContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineCaptureContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineCaptureContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineCaptureContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineCaptureContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineCaptureContent>)} interface");
             }
@@ -64,7 +64,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineCaptureContent DeserializeVirtualMachineCaptureContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,6 +124,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineCaptureContent(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineCaptureContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineCaptureContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtListMethods.Models
 {
     public partial class QuotaBaseProperties : IUtf8JsonSerializable, IJsonModel<QuotaBaseProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QuotaBaseProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<QuotaBaseProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<QuotaBaseProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<QuotaBaseProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<QuotaBaseProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<QuotaBaseProperties>)} interface");
             }
@@ -78,7 +78,7 @@ namespace MgmtListMethods.Models
 
         internal static QuotaBaseProperties DeserializeQuotaBaseProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -152,6 +152,6 @@ namespace MgmtListMethods.Models
             return DeserializeQuotaBaseProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<QuotaBaseProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<QuotaBaseProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

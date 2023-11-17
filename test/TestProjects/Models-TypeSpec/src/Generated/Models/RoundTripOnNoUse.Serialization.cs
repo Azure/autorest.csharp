@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class RoundTripOnNoUse : IUtf8JsonSerializable, IJsonModel<RoundTripOnNoUse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOnNoUse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoundTripOnNoUse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RoundTripOnNoUse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RoundTripOnNoUse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RoundTripOnNoUse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripOnNoUse>)} interface");
             }
@@ -68,7 +68,7 @@ namespace ModelsTypeSpec.Models
 
         internal static RoundTripOnNoUse DeserializeRoundTripOnNoUse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -127,14 +127,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeRoundTripOnNoUse(document.RootElement, options);
         }
 
-        string IPersistableModel<RoundTripOnNoUse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RoundTripOnNoUse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new RoundTripOnNoUse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripOnNoUse(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeRoundTripOnNoUse(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     internal partial class DateAfterCreation : IUtf8JsonSerializable, IJsonModel<DateAfterCreation>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DateAfterCreation>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DateAfterCreation>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DateAfterCreation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DateAfterCreation>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DateAfterCreation>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DateAfterCreation>)} interface");
             }
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static DateAfterCreation DeserializeDateAfterCreation(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,6 +108,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDateAfterCreation(document.RootElement, options);
         }
 
-        string IPersistableModel<DateAfterCreation>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DateAfterCreation>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

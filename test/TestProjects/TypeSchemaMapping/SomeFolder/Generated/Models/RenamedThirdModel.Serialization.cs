@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace CustomNamespace
 {
     internal partial class RenamedThirdModel : IUtf8JsonSerializable, IJsonModel<RenamedThirdModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedThirdModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedThirdModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RenamedThirdModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RenamedThirdModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RenamedThirdModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RenamedThirdModel>)} interface");
             }
@@ -69,7 +69,7 @@ namespace CustomNamespace
 
         internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,6 +131,6 @@ namespace CustomNamespace
             return DeserializeRenamedThirdModel(document.RootElement, options);
         }
 
-        string IPersistableModel<RenamedThirdModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RenamedThirdModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

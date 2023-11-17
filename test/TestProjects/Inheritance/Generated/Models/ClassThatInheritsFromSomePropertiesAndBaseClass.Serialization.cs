@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
@@ -17,11 +17,11 @@ namespace Inheritance.Models
 {
     public partial class ClassThatInheritsFromSomePropertiesAndBaseClass : IUtf8JsonSerializable, IJsonModel<ClassThatInheritsFromSomePropertiesAndBaseClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromSomePropertiesAndBaseClass>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromSomePropertiesAndBaseClass>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ClassThatInheritsFromSomePropertiesAndBaseClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ClassThatInheritsFromSomePropertiesAndBaseClass>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ClassThatInheritsFromSomePropertiesAndBaseClass>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ClassThatInheritsFromSomePropertiesAndBaseClass>)} interface");
             }
@@ -129,7 +129,7 @@ namespace Inheritance.Models
 
         internal static ClassThatInheritsFromSomePropertiesAndBaseClass DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -299,6 +299,6 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(document.RootElement, options);
         }
 
-        string IPersistableModel<ClassThatInheritsFromSomePropertiesAndBaseClass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ClassThatInheritsFromSomePropertiesAndBaseClass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Inheritance.Models
 {
     internal partial class UnknownBaseClassWithEnumDiscriminator : IUtf8JsonSerializable, IJsonModel<BaseClassWithEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithEnumDiscriminator>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BaseClassWithEnumDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithEnumDiscriminator>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithEnumDiscriminator>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseClassWithEnumDiscriminator>)} interface");
             }
@@ -60,7 +60,7 @@ namespace Inheritance.Models
 
         internal static UnknownBaseClassWithEnumDiscriminator DeserializeUnknownBaseClassWithEnumDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,6 +108,6 @@ namespace Inheritance.Models
             return DeserializeUnknownBaseClassWithEnumDiscriminator(document.RootElement, options);
         }
 
-        string IPersistableModel<BaseClassWithEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BaseClassWithEnumDiscriminator>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace SpreadTypeSpec.Models
 {
     internal partial class SpreadAliasWithOptionalPropsRequest : IUtf8JsonSerializable, IJsonModel<SpreadAliasWithOptionalPropsRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadAliasWithOptionalPropsRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadAliasWithOptionalPropsRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SpreadAliasWithOptionalPropsRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SpreadAliasWithOptionalPropsRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SpreadAliasWithOptionalPropsRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadAliasWithOptionalPropsRequest>)} interface");
             }
@@ -88,7 +88,7 @@ namespace SpreadTypeSpec.Models
 
         internal static SpreadAliasWithOptionalPropsRequest DeserializeSpreadAliasWithOptionalPropsRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -178,14 +178,14 @@ namespace SpreadTypeSpec.Models
             return DeserializeSpreadAliasWithOptionalPropsRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<SpreadAliasWithOptionalPropsRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SpreadAliasWithOptionalPropsRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SpreadAliasWithOptionalPropsRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadAliasWithOptionalPropsRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeSpreadAliasWithOptionalPropsRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

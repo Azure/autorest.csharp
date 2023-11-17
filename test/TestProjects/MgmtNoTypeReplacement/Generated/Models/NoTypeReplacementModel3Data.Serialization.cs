@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace MgmtNoTypeReplacement
 {
     public partial class NoTypeReplacementModel3Data : IUtf8JsonSerializable, IJsonModel<NoTypeReplacementModel3Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoTypeReplacementModel3Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoTypeReplacementModel3Data>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NoTypeReplacementModel3Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NoTypeReplacementModel3Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NoTypeReplacementModel3Data>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NoTypeReplacementModel3Data>)} interface");
             }
@@ -88,7 +88,7 @@ namespace MgmtNoTypeReplacement
 
         internal static NoTypeReplacementModel3Data DeserializeNoTypeReplacementModel3Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -168,6 +168,6 @@ namespace MgmtNoTypeReplacement
             return DeserializeNoTypeReplacementModel3Data(document.RootElement, options);
         }
 
-        string IPersistableModel<NoTypeReplacementModel3Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NoTypeReplacementModel3Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

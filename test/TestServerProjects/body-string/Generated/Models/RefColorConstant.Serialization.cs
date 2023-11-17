@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_string.Models
 {
     public partial class RefColorConstant : IUtf8JsonSerializable, IJsonModel<RefColorConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RefColorConstant>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RefColorConstant>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RefColorConstant>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RefColorConstant>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RefColorConstant>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RefColorConstant>)} interface");
             }
@@ -65,7 +65,7 @@ namespace body_string.Models
 
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -119,6 +119,6 @@ namespace body_string.Models
             return DeserializeRefColorConstant(document.RootElement, options);
         }
 
-        string IPersistableModel<RefColorConstant>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RefColorConstant>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

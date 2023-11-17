@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class SharedGalleryImage : IUtf8JsonSerializable, IJsonModel<SharedGalleryImage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImage>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryImage>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SharedGalleryImage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SharedGalleryImage>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SharedGalleryImage>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SharedGalleryImage>)} interface");
             }
@@ -135,7 +135,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static SharedGalleryImage DeserializeSharedGalleryImage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -314,6 +314,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeSharedGalleryImage(document.RootElement, options);
         }
 
-        string IPersistableModel<SharedGalleryImage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SharedGalleryImage>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

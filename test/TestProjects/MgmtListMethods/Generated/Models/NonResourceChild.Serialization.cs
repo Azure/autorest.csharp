@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtListMethods.Models
 {
     public partial class NonResourceChild : IUtf8JsonSerializable, IJsonModel<NonResourceChild>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceChild>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceChild>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NonResourceChild>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NonResourceChild>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NonResourceChild>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NonResourceChild>)} interface");
             }
@@ -68,7 +68,7 @@ namespace MgmtListMethods.Models
 
         internal static NonResourceChild DeserializeNonResourceChild(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace MgmtListMethods.Models
             return DeserializeNonResourceChild(document.RootElement, options);
         }
 
-        string IPersistableModel<NonResourceChild>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NonResourceChild>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

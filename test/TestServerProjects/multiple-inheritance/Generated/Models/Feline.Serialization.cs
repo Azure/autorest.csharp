@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace multiple_inheritance.Models
 {
     public partial class Feline : IUtf8JsonSerializable, IJsonModel<Feline>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Feline>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Feline>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Feline>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Feline>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Feline>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Feline>)} interface");
             }
@@ -68,7 +68,7 @@ namespace multiple_inheritance.Models
 
         internal static Feline DeserializeFeline(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace multiple_inheritance.Models
             return DeserializeFeline(document.RootElement, options);
         }
 
-        string IPersistableModel<Feline>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Feline>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

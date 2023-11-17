@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtCustomizations;
@@ -17,11 +17,11 @@ namespace MgmtCustomizations.Models
 {
     internal partial class PetStoreListResult : IUtf8JsonSerializable, IJsonModel<PetStoreListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PetStoreListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PetStoreListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PetStoreListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetStoreListResult>)} interface");
             }
@@ -69,7 +69,7 @@ namespace MgmtCustomizations.Models
 
         internal static PetStoreListResult DeserializePetStoreListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace MgmtCustomizations.Models
             return DeserializePetStoreListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<PetStoreListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PetStoreListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -18,11 +18,11 @@ namespace MgmtExactMatchInheritance.Models
     [JsonConverter(typeof(SeparateClassConverter))]
     public partial class SeparateClass : IUtf8JsonSerializable, IJsonModel<SeparateClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SeparateClass>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SeparateClass>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SeparateClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SeparateClass>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SeparateClass>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SeparateClass>)} interface");
             }
@@ -70,7 +70,7 @@ namespace MgmtExactMatchInheritance.Models
 
         internal static SeparateClass DeserializeSeparateClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,7 +128,7 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeSeparateClass(document.RootElement, options);
         }
 
-        string IPersistableModel<SeparateClass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SeparateClass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class SeparateClassConverter : JsonConverter<SeparateClass>
         {

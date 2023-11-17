@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class DnsSettings : IUtf8JsonSerializable, IJsonModel<DnsSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DnsSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DnsSettings>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DnsSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DnsSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DnsSettings>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DnsSettings>)} interface");
             }
@@ -85,7 +85,7 @@ namespace MgmtMockAndSample.Models
 
         internal static DnsSettings DeserializeDnsSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -163,6 +163,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeDnsSettings(document.RootElement, options);
         }
 
-        string IPersistableModel<DnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DnsSettings>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

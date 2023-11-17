@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace SpecialWords
 {
     public partial class In : IUtf8JsonSerializable, IJsonModel<In>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<In>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<In>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<In>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<In>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<In>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<In>)} interface");
             }
@@ -61,7 +61,7 @@ namespace SpecialWords
 
         internal static In DeserializeIn(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace SpecialWords
             return DeserializeIn(document.RootElement, options);
         }
 
-        string IPersistableModel<In>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<In>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static In FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeIn(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeIn(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

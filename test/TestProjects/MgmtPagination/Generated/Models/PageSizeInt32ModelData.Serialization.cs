@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtPagination
 {
     public partial class PageSizeInt32ModelData : IUtf8JsonSerializable, IJsonModel<PageSizeInt32ModelData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeInt32ModelData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeInt32ModelData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PageSizeInt32ModelData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PageSizeInt32ModelData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PageSizeInt32ModelData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeInt32ModelData>)} interface");
             }
@@ -82,7 +82,7 @@ namespace MgmtPagination
 
         internal static PageSizeInt32ModelData DeserializePageSizeInt32ModelData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace MgmtPagination
             return DeserializePageSizeInt32ModelData(document.RootElement, options);
         }
 
-        string IPersistableModel<PageSizeInt32ModelData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PageSizeInt32ModelData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

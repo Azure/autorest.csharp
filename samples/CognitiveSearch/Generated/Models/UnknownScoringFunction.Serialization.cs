@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     internal partial class UnknownScoringFunction : IUtf8JsonSerializable, IJsonModel<ScoringFunction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScoringFunction>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ScoringFunction>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ScoringFunction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ScoringFunction>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ScoringFunction>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ScoringFunction>)} interface");
             }
@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownScoringFunction DeserializeUnknownScoringFunction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -139,6 +139,6 @@ namespace CognitiveSearch.Models
             return DeserializeUnknownScoringFunction(document.RootElement, options);
         }
 
-        string IPersistableModel<ScoringFunction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ScoringFunction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

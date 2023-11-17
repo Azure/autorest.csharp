@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ItemError : IUtf8JsonSerializable, IJsonModel<ItemError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ItemError>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ItemError>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ItemError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ItemError>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ItemError>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ItemError>)} interface");
             }
@@ -100,7 +100,7 @@ namespace CognitiveSearch.Models
 
         internal static ItemError DeserializeItemError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -178,6 +178,6 @@ namespace CognitiveSearch.Models
             return DeserializeItemError(document.RootElement, options);
         }
 
-        string IPersistableModel<ItemError>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ItemError>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

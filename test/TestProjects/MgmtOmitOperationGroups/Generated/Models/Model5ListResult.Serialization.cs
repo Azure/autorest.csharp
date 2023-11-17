@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtOmitOperationGroups.Models
 {
     internal partial class Model5ListResult : IUtf8JsonSerializable, IJsonModel<Model5ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model5ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model5ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Model5ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Model5ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Model5ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Model5ListResult>)} interface");
             }
@@ -79,7 +79,7 @@ namespace MgmtOmitOperationGroups.Models
 
         internal static Model5ListResult DeserializeModel5ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace MgmtOmitOperationGroups.Models
             return DeserializeModel5ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<Model5ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Model5ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

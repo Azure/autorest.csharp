@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtConstants.Models
 {
     public partial class ModelWithOptionalConstant : IUtf8JsonSerializable, IJsonModel<ModelWithOptionalConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithOptionalConstant>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithOptionalConstant>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelWithOptionalConstant>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithOptionalConstant>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithOptionalConstant>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithOptionalConstant>)} interface");
             }
@@ -78,7 +78,7 @@ namespace MgmtConstants.Models
 
         internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -160,6 +160,6 @@ namespace MgmtConstants.Models
             return DeserializeModelWithOptionalConstant(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelWithOptionalConstant>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelWithOptionalConstant>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

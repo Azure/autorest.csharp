@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,11 +17,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class ImagePatch : IUtf8JsonSerializable, IJsonModel<ImagePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePatch>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ImagePatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ImagePatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ImagePatch>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImagePatch>)} interface");
             }
@@ -96,7 +96,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static ImagePatch DeserializeImagePatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -201,6 +201,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeImagePatch(document.RootElement, options);
         }
 
-        string IPersistableModel<ImagePatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ImagePatch>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

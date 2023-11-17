@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtListMethods
 {
     public partial class TenantParentWithNonResChData : IUtf8JsonSerializable, IJsonModel<TenantParentWithNonResChData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TenantParentWithNonResChData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TenantParentWithNonResChData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TenantParentWithNonResChData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TenantParentWithNonResChData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TenantParentWithNonResChData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TenantParentWithNonResChData>)} interface");
             }
@@ -100,7 +100,7 @@ namespace MgmtListMethods
 
         internal static TenantParentWithNonResChData DeserializeTenantParentWithNonResChData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,6 +197,6 @@ namespace MgmtListMethods
             return DeserializeTenantParentWithNonResChData(document.RootElement, options);
         }
 
-        string IPersistableModel<TenantParentWithNonResChData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TenantParentWithNonResChData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

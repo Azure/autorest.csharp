@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtPropertyChooser.Models
 {
     public partial class IdentityWithNoSystemIdentity : IUtf8JsonSerializable, IJsonModel<IdentityWithNoSystemIdentity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithNoSystemIdentity>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithNoSystemIdentity>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IdentityWithNoSystemIdentity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IdentityWithNoSystemIdentity>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IdentityWithNoSystemIdentity>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IdentityWithNoSystemIdentity>)} interface");
             }
@@ -75,7 +75,7 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithNoSystemIdentity DeserializeIdentityWithNoSystemIdentity(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithNoSystemIdentity(document.RootElement, options);
         }
 
-        string IPersistableModel<IdentityWithNoSystemIdentity>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IdentityWithNoSystemIdentity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

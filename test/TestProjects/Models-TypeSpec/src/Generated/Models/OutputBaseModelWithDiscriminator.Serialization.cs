@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
     [PersistableModelProxy(typeof(UnknownOutputBaseModelWithDiscriminator))]
     public partial class OutputBaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModel<OutputBaseModelWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputBaseModelWithDiscriminator>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputBaseModelWithDiscriminator>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OutputBaseModelWithDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OutputBaseModelWithDiscriminator>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OutputBaseModelWithDiscriminator>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OutputBaseModelWithDiscriminator>)} interface");
             }
@@ -61,7 +61,7 @@ namespace ModelsTypeSpec.Models
 
         internal static OutputBaseModelWithDiscriminator DeserializeOutputBaseModelWithDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -101,14 +101,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, options);
         }
 
-        string IPersistableModel<OutputBaseModelWithDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OutputBaseModelWithDiscriminator>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static OutputBaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeOutputBaseModelWithDiscriminator(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

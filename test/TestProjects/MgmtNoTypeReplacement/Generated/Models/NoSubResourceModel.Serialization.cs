@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtNoTypeReplacement.Models
 {
     internal partial class NoSubResourceModel : IUtf8JsonSerializable, IJsonModel<NoSubResourceModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoSubResourceModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NoSubResourceModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NoSubResourceModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NoSubResourceModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NoSubResourceModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NoSubResourceModel>)} interface");
             }
@@ -66,7 +66,7 @@ namespace MgmtNoTypeReplacement.Models
 
         internal static NoSubResourceModel DeserializeNoSubResourceModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,6 +114,6 @@ namespace MgmtNoTypeReplacement.Models
             return DeserializeNoSubResourceModel(document.RootElement, options);
         }
 
-        string IPersistableModel<NoSubResourceModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NoSubResourceModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

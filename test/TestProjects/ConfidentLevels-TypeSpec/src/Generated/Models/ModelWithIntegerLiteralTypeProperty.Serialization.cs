@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
 {
     public partial class ModelWithIntegerLiteralTypeProperty : IUtf8JsonSerializable, IJsonModel<ModelWithIntegerLiteralTypeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithIntegerLiteralTypeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithIntegerLiteralTypeProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelWithIntegerLiteralTypeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithIntegerLiteralTypeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithIntegerLiteralTypeProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithIntegerLiteralTypeProperty>)} interface");
             }
@@ -63,7 +63,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static ModelWithIntegerLiteralTypeProperty DeserializeModelWithIntegerLiteralTypeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,14 +117,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelWithIntegerLiteralTypeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelWithIntegerLiteralTypeProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithIntegerLiteralTypeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

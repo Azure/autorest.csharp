@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace multiple_inheritance.Models
 {
     public partial class Horse : IUtf8JsonSerializable, IJsonModel<Horse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Horse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Horse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Horse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Horse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Horse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Horse>)} interface");
             }
@@ -65,7 +65,7 @@ namespace multiple_inheritance.Models
 
         internal static Horse DeserializeHorse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -123,6 +123,6 @@ namespace multiple_inheritance.Models
             return DeserializeHorse(document.RootElement, options);
         }
 
-        string IPersistableModel<Horse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Horse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

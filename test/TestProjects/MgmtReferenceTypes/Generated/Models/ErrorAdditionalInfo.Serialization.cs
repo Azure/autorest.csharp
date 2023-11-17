@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(ErrorAdditionalInfoConverter))]
     public partial class ErrorAdditionalInfo : IUtf8JsonSerializable, IJsonModel<ErrorAdditionalInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorAdditionalInfo>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorAdditionalInfo>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ErrorAdditionalInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ErrorAdditionalInfo>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ErrorAdditionalInfo>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ErrorAdditionalInfo>)} interface");
             }
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ErrorAdditionalInfo DeserializeErrorAdditionalInfo(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeErrorAdditionalInfo(document.RootElement, options);
         }
 
-        string IPersistableModel<ErrorAdditionalInfo>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ErrorAdditionalInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class ErrorAdditionalInfoConverter : JsonConverter<ErrorAdditionalInfo>
         {

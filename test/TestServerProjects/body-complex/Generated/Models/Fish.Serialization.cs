@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
     [PersistableModelProxy(typeof(UnknownFish))]
     public partial class Fish : IUtf8JsonSerializable, IJsonModel<Fish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Fish>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Fish>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Fish>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Fish>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Fish>)} interface");
             }
@@ -77,7 +77,7 @@ namespace body_complex.Models
 
         internal static Fish DeserializeFish(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -121,6 +121,6 @@ namespace body_complex.Models
             return DeserializeFish(document.RootElement, options);
         }
 
-        string IPersistableModel<Fish>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Fish>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

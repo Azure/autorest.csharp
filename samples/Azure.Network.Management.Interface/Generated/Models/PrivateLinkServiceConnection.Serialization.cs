@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class PrivateLinkServiceConnection : IUtf8JsonSerializable, IJsonModel<PrivateLinkServiceConnection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkServiceConnection>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkServiceConnection>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PrivateLinkServiceConnection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PrivateLinkServiceConnection>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PrivateLinkServiceConnection>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PrivateLinkServiceConnection>)} interface");
             }
@@ -120,7 +120,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -245,6 +245,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializePrivateLinkServiceConnection(document.RootElement, options);
         }
 
-        string IPersistableModel<PrivateLinkServiceConnection>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PrivateLinkServiceConnection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace MgmtMockAndSample
 {
     public partial class DeletedManagedHsmData : IUtf8JsonSerializable, IJsonModel<DeletedManagedHsmData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedManagedHsmData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedManagedHsmData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeletedManagedHsmData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeletedManagedHsmData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeletedManagedHsmData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeletedManagedHsmData>)} interface");
             }
@@ -88,7 +88,7 @@ namespace MgmtMockAndSample
 
         internal static DeletedManagedHsmData DeserializeDeletedManagedHsmData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -168,6 +168,6 @@ namespace MgmtMockAndSample
             return DeserializeDeletedManagedHsmData(document.RootElement, options);
         }
 
-        string IPersistableModel<DeletedManagedHsmData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeletedManagedHsmData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

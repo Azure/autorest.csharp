@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace model_flattening.Models
 {
     public partial class FlattenedProduct : IUtf8JsonSerializable, IJsonModel<FlattenedProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FlattenedProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FlattenedProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FlattenedProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FlattenedProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FlattenedProduct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FlattenedProduct>)} interface");
             }
@@ -124,7 +124,7 @@ namespace model_flattening.Models
 
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -245,6 +245,6 @@ namespace model_flattening.Models
             return DeserializeFlattenedProduct(document.RootElement, options);
         }
 
-        string IPersistableModel<FlattenedProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FlattenedProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

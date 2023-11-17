@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class IndexerLimits : IUtf8JsonSerializable, IJsonModel<IndexerLimits>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerLimits>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerLimits>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IndexerLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IndexerLimits>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IndexerLimits>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IndexerLimits>)} interface");
             }
@@ -82,7 +82,7 @@ namespace CognitiveSearch.Models
 
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -154,6 +154,6 @@ namespace CognitiveSearch.Models
             return DeserializeIndexerLimits(document.RootElement, options);
         }
 
-        string IPersistableModel<IndexerLimits>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IndexerLimits>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

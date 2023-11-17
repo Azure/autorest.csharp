@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,11 +17,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyLogAnalyticsResources : IUtf8JsonSerializable, IJsonModel<FirewallPolicyLogAnalyticsResources>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyLogAnalyticsResources>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyLogAnalyticsResources>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FirewallPolicyLogAnalyticsResources>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyLogAnalyticsResources>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyLogAnalyticsResources>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyLogAnalyticsResources>)} interface");
             }
@@ -74,7 +74,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyLogAnalyticsResources DeserializeFirewallPolicyLogAnalyticsResources(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -141,6 +141,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyLogAnalyticsResources(document.RootElement, options);
         }
 
-        string IPersistableModel<FirewallPolicyLogAnalyticsResources>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FirewallPolicyLogAnalyticsResources>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtPagination
 {
     public partial class PageSizeFloatModelData : IUtf8JsonSerializable, IJsonModel<PageSizeFloatModelData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeFloatModelData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeFloatModelData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PageSizeFloatModelData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PageSizeFloatModelData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PageSizeFloatModelData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeFloatModelData>)} interface");
             }
@@ -82,7 +82,7 @@ namespace MgmtPagination
 
         internal static PageSizeFloatModelData DeserializePageSizeFloatModelData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace MgmtPagination
             return DeserializePageSizeFloatModelData(document.RootElement, options);
         }
 
-        string IPersistableModel<PageSizeFloatModelData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PageSizeFloatModelData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class ImagesResponse : IUtf8JsonWriteable, IJsonModel<ImagesResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagesResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagesResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ImagesResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ImagesResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ImagesResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImagesResponse>)} interface");
             }
@@ -64,7 +64,7 @@ namespace OpenAI.Models
 
         internal static ImagesResponse DeserializeImagesResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -123,14 +123,14 @@ namespace OpenAI.Models
             return DeserializeImagesResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<ImagesResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ImagesResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static ImagesResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeImagesResponse(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeImagesResponse(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

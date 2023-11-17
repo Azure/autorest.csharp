@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class FloatWrapper : IUtf8JsonSerializable, IJsonModel<FloatWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatWrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FloatWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FloatWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FloatWrapper>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FloatWrapper>)} interface");
             }
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static FloatWrapper DeserializeFloatWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeFloatWrapper(document.RootElement, options);
         }
 
-        string IPersistableModel<FloatWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FloatWrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

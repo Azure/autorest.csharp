@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtOperations.Models
 {
     public partial class TestAvailabilitySet : IUtf8JsonSerializable, IJsonModel<TestAvailabilitySet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TestAvailabilitySet>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TestAvailabilitySet>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TestAvailabilitySet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TestAvailabilitySet>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TestAvailabilitySet>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TestAvailabilitySet>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtOperations.Models
 
         internal static TestAvailabilitySet DeserializeTestAvailabilitySet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace MgmtOperations.Models
             return DeserializeTestAvailabilitySet(document.RootElement, options);
         }
 
-        string IPersistableModel<TestAvailabilitySet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TestAvailabilitySet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

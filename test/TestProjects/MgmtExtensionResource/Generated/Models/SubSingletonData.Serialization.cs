@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtExtensionResource
 {
     public partial class SubSingletonData : IUtf8JsonSerializable, IJsonModel<SubSingletonData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubSingletonData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubSingletonData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SubSingletonData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SubSingletonData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SubSingletonData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubSingletonData>)} interface");
             }
@@ -87,7 +87,7 @@ namespace MgmtExtensionResource
 
         internal static SubSingletonData DeserializeSubSingletonData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -163,6 +163,6 @@ namespace MgmtExtensionResource
             return DeserializeSubSingletonData(document.RootElement, options);
         }
 
-        string IPersistableModel<SubSingletonData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SubSingletonData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

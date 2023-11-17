@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class NetworkRule : IUtf8JsonSerializable, IJsonModel<NetworkRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkRule>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NetworkRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NetworkRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NetworkRule>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NetworkRule>)} interface");
             }
@@ -140,7 +140,7 @@ namespace MgmtMockAndSample.Models
 
         internal static NetworkRule DeserializeNetworkRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -305,6 +305,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeNetworkRule(document.RootElement, options);
         }
 
-        string IPersistableModel<NetworkRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NetworkRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class SmartSalmon : IUtf8JsonSerializable, IJsonModel<SmartSalmon>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmartSalmon>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmartSalmon>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SmartSalmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SmartSalmon>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SmartSalmon>)} interface");
             }
@@ -82,7 +82,7 @@ namespace body_complex.Models
 
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -176,6 +176,6 @@ namespace body_complex.Models
             return DeserializeSmartSalmon(document.RootElement, options);
         }
 
-        string IPersistableModel<SmartSalmon>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SmartSalmon>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

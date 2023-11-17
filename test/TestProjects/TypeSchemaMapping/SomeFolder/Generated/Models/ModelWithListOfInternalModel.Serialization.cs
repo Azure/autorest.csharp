@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithListOfInternalModel : IUtf8JsonSerializable, IJsonModel<ModelWithListOfInternalModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithListOfInternalModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithListOfInternalModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelWithListOfInternalModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithListOfInternalModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithListOfInternalModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithListOfInternalModel>)} interface");
             }
@@ -79,7 +79,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithListOfInternalModel DeserializeModelWithListOfInternalModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithListOfInternalModel(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelWithListOfInternalModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelWithListOfInternalModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

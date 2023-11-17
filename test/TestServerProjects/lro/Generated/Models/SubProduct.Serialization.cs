@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace lro.Models
 {
     public partial class SubProduct : IUtf8JsonSerializable, IJsonModel<SubProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SubProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SubProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SubProduct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubProduct>)} interface");
             }
@@ -82,7 +82,7 @@ namespace lro.Models
 
         internal static SubProduct DeserializeSubProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -158,6 +158,6 @@ namespace lro.Models
             return DeserializeSubProduct(document.RootElement, options);
         }
 
-        string IPersistableModel<SubProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SubProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

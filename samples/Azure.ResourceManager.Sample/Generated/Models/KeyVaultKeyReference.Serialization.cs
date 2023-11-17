@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class KeyVaultKeyReference : IUtf8JsonSerializable, IJsonModel<KeyVaultKeyReference>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyVaultKeyReference>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<KeyVaultKeyReference>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<KeyVaultKeyReference>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<KeyVaultKeyReference>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<KeyVaultKeyReference>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<KeyVaultKeyReference>)} interface");
             }
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static KeyVaultKeyReference DeserializeKeyVaultKeyReference(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,6 +117,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeKeyVaultKeyReference(document.RootElement, options);
         }
 
-        string IPersistableModel<KeyVaultKeyReference>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<KeyVaultKeyReference>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

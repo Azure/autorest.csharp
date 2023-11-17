@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
 {
     public partial class PublicModelWithInternalProperty : IUtf8JsonSerializable, IJsonModel<PublicModelWithInternalProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicModelWithInternalProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PublicModelWithInternalProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PublicModelWithInternalProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PublicModelWithInternalProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PublicModelWithInternalProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PublicModelWithInternalProperty>)} interface");
             }
@@ -68,7 +68,7 @@ namespace TypeSchemaMapping.Models
 
         internal static PublicModelWithInternalProperty DeserializePublicModelWithInternalProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,6 +122,6 @@ namespace TypeSchemaMapping.Models
             return DeserializePublicModelWithInternalProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<PublicModelWithInternalProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PublicModelWithInternalProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class Probe : IUtf8JsonSerializable, IJsonModel<Probe>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Probe>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Probe>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Probe>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Probe>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Probe>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Probe>)} interface");
             }
@@ -85,7 +85,7 @@ namespace MgmtMockAndSample.Models
 
         internal static Probe DeserializeProbe(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -183,6 +183,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeProbe(document.RootElement, options);
         }
 
-        string IPersistableModel<Probe>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Probe>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Parameters.Spread.Models
 {
     public partial class BodyParameter : IUtf8JsonSerializable, IJsonModel<BodyParameter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BodyParameter>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BodyParameter>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BodyParameter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BodyParameter>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BodyParameter>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BodyParameter>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Parameters.Spread.Models
 
         internal static BodyParameter DeserializeBodyParameter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Parameters.Spread.Models
             return DeserializeBodyParameter(document.RootElement, options);
         }
 
-        string IPersistableModel<BodyParameter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BodyParameter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static BodyParameter FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBodyParameter(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeBodyParameter(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

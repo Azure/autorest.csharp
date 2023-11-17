@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtOperations
 {
     public partial class UnpatchableResourceData : IUtf8JsonSerializable, IJsonModel<UnpatchableResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UnpatchableResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UnpatchableResourceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UnpatchableResourceData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnpatchableResourceData>)} interface");
             }
@@ -100,7 +100,7 @@ namespace MgmtOperations
 
         internal static UnpatchableResourceData DeserializeUnpatchableResourceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,6 +197,6 @@ namespace MgmtOperations
             return DeserializeUnpatchableResourceData(document.RootElement, options);
         }
 
-        string IPersistableModel<UnpatchableResourceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UnpatchableResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

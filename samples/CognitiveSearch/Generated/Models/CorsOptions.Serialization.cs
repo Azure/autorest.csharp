@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class CorsOptions : IUtf8JsonSerializable, IJsonModel<CorsOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsOptions>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CorsOptions>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CorsOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CorsOptions>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CorsOptions>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CorsOptions>)} interface");
             }
@@ -70,7 +70,7 @@ namespace CognitiveSearch.Models
 
         internal static CorsOptions DeserializeCorsOptions(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,6 +133,6 @@ namespace CognitiveSearch.Models
             return DeserializeCorsOptions(document.RootElement, options);
         }
 
-        string IPersistableModel<CorsOptions>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CorsOptions>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

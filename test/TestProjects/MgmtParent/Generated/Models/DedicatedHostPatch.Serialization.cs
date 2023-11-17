@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtParent.Models
 {
     public partial class DedicatedHostPatch : IUtf8JsonSerializable, IJsonModel<DedicatedHostPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostPatch>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DedicatedHostPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostPatch>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DedicatedHostPatch>)} interface");
             }
@@ -106,7 +106,7 @@ namespace MgmtParent.Models
 
         internal static DedicatedHostPatch DeserializeDedicatedHostPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -217,6 +217,6 @@ namespace MgmtParent.Models
             return DeserializeDedicatedHostPatch(document.RootElement, options);
         }
 
-        string IPersistableModel<DedicatedHostPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DedicatedHostPatch>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

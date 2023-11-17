@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace additionalProperties.Models
 {
     public partial class PetAPTrue : IUtf8JsonSerializable, IJsonModel<PetAPTrue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPTrue>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPTrue>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PetAPTrue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PetAPTrue>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PetAPTrue>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetAPTrue>)} interface");
             }
@@ -63,7 +63,7 @@ namespace additionalProperties.Models
 
         internal static PetAPTrue DeserializePetAPTrue(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,6 +124,6 @@ namespace additionalProperties.Models
             return DeserializePetAPTrue(document.RootElement, options);
         }
 
-        string IPersistableModel<PetAPTrue>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PetAPTrue>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

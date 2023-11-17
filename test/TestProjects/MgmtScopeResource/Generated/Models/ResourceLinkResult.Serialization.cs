@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtScopeResource;
@@ -17,11 +17,11 @@ namespace MgmtScopeResource.Models
 {
     internal partial class ResourceLinkResult : IUtf8JsonSerializable, IJsonModel<ResourceLinkResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceLinkResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceLinkResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ResourceLinkResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ResourceLinkResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ResourceLinkResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceLinkResult>)} interface");
             }
@@ -74,7 +74,7 @@ namespace MgmtScopeResource.Models
 
         internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,6 +133,6 @@ namespace MgmtScopeResource.Models
             return DeserializeResourceLinkResult(document.RootElement, options);
         }
 
-        string IPersistableModel<ResourceLinkResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ResourceLinkResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

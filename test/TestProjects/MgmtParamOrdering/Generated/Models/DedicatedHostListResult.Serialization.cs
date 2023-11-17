@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtParamOrdering;
@@ -17,11 +17,11 @@ namespace MgmtParamOrdering.Models
 {
     internal partial class DedicatedHostListResult : IUtf8JsonSerializable, IJsonModel<DedicatedHostListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DedicatedHostListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DedicatedHostListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DedicatedHostListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DedicatedHostListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtParamOrdering.Models
 
         internal static DedicatedHostListResult DeserializeDedicatedHostListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeDedicatedHostListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<DedicatedHostListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DedicatedHostListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

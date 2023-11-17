@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class RollingUpgradeRunningStatus : IUtf8JsonSerializable, IJsonModel<RollingUpgradeRunningStatus>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RollingUpgradeRunningStatus>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RollingUpgradeRunningStatus>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RollingUpgradeRunningStatus>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RollingUpgradeRunningStatus>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RollingUpgradeRunningStatus>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RollingUpgradeRunningStatus>)} interface");
             }
@@ -90,7 +90,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static RollingUpgradeRunningStatus DeserializeRollingUpgradeRunningStatus(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -172,6 +172,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeRollingUpgradeRunningStatus(document.RootElement, options);
         }
 
-        string IPersistableModel<RollingUpgradeRunningStatus>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RollingUpgradeRunningStatus>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

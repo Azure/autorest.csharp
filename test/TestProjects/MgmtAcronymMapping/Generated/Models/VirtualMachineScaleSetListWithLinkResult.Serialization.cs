@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtAcronymMapping;
@@ -17,11 +17,11 @@ namespace MgmtAcronymMapping.Models
 {
     internal partial class VirtualMachineScaleSetListWithLinkResult : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetListWithLinkResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetListWithLinkResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetListWithLinkResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineScaleSetListWithLinkResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetListWithLinkResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetListWithLinkResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetListWithLinkResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static VirtualMachineScaleSetListWithLinkResult DeserializeVirtualMachineScaleSetListWithLinkResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVirtualMachineScaleSetListWithLinkResult(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineScaleSetListWithLinkResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineScaleSetListWithLinkResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

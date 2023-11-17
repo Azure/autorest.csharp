@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class EncryptionKey : IUtf8JsonSerializable, IJsonModel<EncryptionKey>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionKey>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionKey>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<EncryptionKey>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<EncryptionKey>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<EncryptionKey>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EncryptionKey>)} interface");
             }
@@ -69,7 +69,7 @@ namespace CognitiveSearch.Models
 
         internal static EncryptionKey DeserializeEncryptionKey(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -139,6 +139,6 @@ namespace CognitiveSearch.Models
             return DeserializeEncryptionKey(document.RootElement, options);
         }
 
-        string IPersistableModel<EncryptionKey>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<EncryptionKey>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class ResourceRange : IUtf8JsonSerializable, IJsonModel<ResourceRange>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceRange>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceRange>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ResourceRange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ResourceRange>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ResourceRange>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceRange>)} interface");
             }
@@ -68,7 +68,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static ResourceRange DeserializeResourceRange(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeResourceRange(document.RootElement, options);
         }
 
-        string IPersistableModel<ResourceRange>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ResourceRange>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

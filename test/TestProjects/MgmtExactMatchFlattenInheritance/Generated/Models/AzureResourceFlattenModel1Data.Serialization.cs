@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtExactMatchFlattenInheritance
 {
     public partial class AzureResourceFlattenModel1Data : IUtf8JsonSerializable, IJsonModel<AzureResourceFlattenModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureResourceFlattenModel1Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AzureResourceFlattenModel1Data>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AzureResourceFlattenModel1Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AzureResourceFlattenModel1Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AzureResourceFlattenModel1Data>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AzureResourceFlattenModel1Data>)} interface");
             }
@@ -113,7 +113,7 @@ namespace MgmtExactMatchFlattenInheritance
 
         internal static AzureResourceFlattenModel1Data DeserializeAzureResourceFlattenModel1Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -238,6 +238,6 @@ namespace MgmtExactMatchFlattenInheritance
             return DeserializeAzureResourceFlattenModel1Data(document.RootElement, options);
         }
 
-        string IPersistableModel<AzureResourceFlattenModel1Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AzureResourceFlattenModel1Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineImage : IUtf8JsonSerializable, IJsonModel<VirtualMachineImage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineImage>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineImage>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineImage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineImage>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineImage>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineImage>)} interface");
             }
@@ -116,7 +116,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineImage DeserializeVirtualMachineImage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -268,6 +268,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineImage(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineImage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineImage>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

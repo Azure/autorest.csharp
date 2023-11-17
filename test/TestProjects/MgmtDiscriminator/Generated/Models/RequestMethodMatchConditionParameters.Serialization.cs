@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class RequestMethodMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<RequestMethodMatchConditionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestMethodMatchConditionParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestMethodMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RequestMethodMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RequestMethodMatchConditionParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RequestMethodMatchConditionParameters>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RequestMethodMatchConditionParameters>)} interface");
             }
@@ -87,7 +87,7 @@ namespace MgmtDiscriminator.Models
 
         internal static RequestMethodMatchConditionParameters DeserializeRequestMethodMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -181,6 +181,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeRequestMethodMatchConditionParameters(document.RootElement, options);
         }
 
-        string IPersistableModel<RequestMethodMatchConditionParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RequestMethodMatchConditionParameters>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

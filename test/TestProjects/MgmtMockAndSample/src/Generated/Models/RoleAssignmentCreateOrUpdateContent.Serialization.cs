@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class RoleAssignmentCreateOrUpdateContent : IUtf8JsonSerializable, IJsonModel<RoleAssignmentCreateOrUpdateContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoleAssignmentCreateOrUpdateContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RoleAssignmentCreateOrUpdateContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RoleAssignmentCreateOrUpdateContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RoleAssignmentCreateOrUpdateContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RoleAssignmentCreateOrUpdateContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoleAssignmentCreateOrUpdateContent>)} interface");
             }
@@ -76,7 +76,7 @@ namespace MgmtMockAndSample.Models
 
         internal static RoleAssignmentCreateOrUpdateContent DeserializeRoleAssignmentCreateOrUpdateContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -152,6 +152,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeRoleAssignmentCreateOrUpdateContent(document.RootElement, options);
         }
 
-        string IPersistableModel<RoleAssignmentCreateOrUpdateContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RoleAssignmentCreateOrUpdateContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

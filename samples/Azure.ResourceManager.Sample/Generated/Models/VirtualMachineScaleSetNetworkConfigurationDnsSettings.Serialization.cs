@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class VirtualMachineScaleSetNetworkConfigurationDnsSettings : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>)} interface");
             }
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetNetworkConfigurationDnsSettings DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -125,6 +125,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetNetworkConfigurationDnsSettings(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineScaleSetNetworkConfigurationDnsSettings>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

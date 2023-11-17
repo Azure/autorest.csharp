@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtExtensionResource.Models
 {
     public partial class ParameterDefinitionsValue : IUtf8JsonSerializable, IJsonModel<ParameterDefinitionsValue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParameterDefinitionsValue>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParameterDefinitionsValue>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ParameterDefinitionsValue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ParameterDefinitionsValue>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ParameterDefinitionsValue>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ParameterDefinitionsValue>)} interface");
             }
@@ -102,7 +102,7 @@ namespace MgmtExtensionResource.Models
 
         internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -196,6 +196,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeParameterDefinitionsValue(document.RootElement, options);
         }
 
-        string IPersistableModel<ParameterDefinitionsValue>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ParameterDefinitionsValue>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

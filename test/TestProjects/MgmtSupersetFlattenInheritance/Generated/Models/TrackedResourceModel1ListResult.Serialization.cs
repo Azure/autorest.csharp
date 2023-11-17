@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtSupersetFlattenInheritance;
@@ -17,11 +17,11 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     internal partial class TrackedResourceModel1ListResult : IUtf8JsonSerializable, IJsonModel<TrackedResourceModel1ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel1ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel1ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TrackedResourceModel1ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TrackedResourceModel1ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TrackedResourceModel1ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TrackedResourceModel1ListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static TrackedResourceModel1ListResult DeserializeTrackedResourceModel1ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeTrackedResourceModel1ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<TrackedResourceModel1ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TrackedResourceModel1ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

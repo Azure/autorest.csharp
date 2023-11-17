@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure;
@@ -18,11 +18,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(ErrorResponseConverter))]
     public partial class ErrorResponse : IUtf8JsonSerializable, IJsonModel<ErrorResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ErrorResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ErrorResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ErrorResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ErrorResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ErrorResponse>)} interface");
             }
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeErrorResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<ErrorResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ErrorResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class ErrorResponseConverter : JsonConverter<ErrorResponse>
         {

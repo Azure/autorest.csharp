@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateEditResponse : IUtf8JsonWriteable, IJsonModel<CreateEditResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEditResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEditResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateEditResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateEditResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateEditResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateEditResponse>)} interface");
             }
@@ -68,7 +68,7 @@ namespace OpenAI.Models
 
         internal static CreateEditResponse DeserializeCreateEditResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -139,14 +139,14 @@ namespace OpenAI.Models
             return DeserializeCreateEditResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateEditResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateEditResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateEditResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateEditResponse(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateEditResponse(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

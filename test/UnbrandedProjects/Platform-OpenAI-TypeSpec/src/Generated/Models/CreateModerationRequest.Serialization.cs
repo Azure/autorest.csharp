@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateModerationRequest : IUtf8JsonWriteable, IJsonModel<CreateModerationRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateModerationRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateModerationRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateModerationRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateModerationRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateModerationRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateModerationRequest>)} interface");
             }
@@ -69,7 +69,7 @@ namespace OpenAI.Models
 
         internal static CreateModerationRequest DeserializeCreateModerationRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -127,14 +127,14 @@ namespace OpenAI.Models
             return DeserializeCreateModerationRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateModerationRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateModerationRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateModerationRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateModerationRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateModerationRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

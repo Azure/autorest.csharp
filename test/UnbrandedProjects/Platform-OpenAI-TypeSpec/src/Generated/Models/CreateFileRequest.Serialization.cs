@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateFileRequest : IUtf8JsonWriteable, IJsonModel<CreateFileRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFileRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFileRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateFileRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateFileRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateFileRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateFileRequest>)} interface");
             }
@@ -59,7 +59,7 @@ namespace OpenAI.Models
 
         internal static CreateFileRequest DeserializeCreateFileRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -113,14 +113,14 @@ namespace OpenAI.Models
             return DeserializeCreateFileRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateFileRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateFileRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateFileRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateFileRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateFileRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

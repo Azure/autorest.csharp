@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Specs_.Azure.Core.Basic.Models
 {
     public partial class UserOrder : IUtf8JsonSerializable, IJsonModel<UserOrder>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserOrder>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserOrder>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UserOrder>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UserOrder>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UserOrder>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UserOrder>)} interface");
             }
@@ -68,7 +68,7 @@ namespace _Specs_.Azure.Core.Basic.Models
 
         internal static UserOrder DeserializeUserOrder(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,14 +128,14 @@ namespace _Specs_.Azure.Core.Basic.Models
             return DeserializeUserOrder(document.RootElement, options);
         }
 
-        string IPersistableModel<UserOrder>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UserOrder>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UserOrder FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserOrder(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeUserOrder(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

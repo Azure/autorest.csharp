@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -18,11 +18,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(PrivateLinkResourceListConverter))]
     public partial class PrivateLinkResourceList : IUtf8JsonSerializable, IJsonModel<PrivateLinkResourceList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkResourceList>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PrivateLinkResourceList>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PrivateLinkResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PrivateLinkResourceList>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PrivateLinkResourceList>)} interface");
             }
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializePrivateLinkResourceList(document.RootElement, options);
         }
 
-        string IPersistableModel<PrivateLinkResourceList>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PrivateLinkResourceList>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class PrivateLinkResourceListConverter : JsonConverter<PrivateLinkResourceList>
         {

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -84,6 +84,6 @@ namespace xml_service.Models
             return DeserializeError(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<Error>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<Error>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

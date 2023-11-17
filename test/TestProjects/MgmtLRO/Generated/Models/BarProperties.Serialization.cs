@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtLRO.Models
 {
     internal partial class BarProperties : IUtf8JsonSerializable, IJsonModel<BarProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BarProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BarProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BarProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BarProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BarProperties>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtLRO.Models
 
         internal static BarProperties DeserializeBarProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,6 +115,6 @@ namespace MgmtLRO.Models
             return DeserializeBarProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<BarProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BarProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

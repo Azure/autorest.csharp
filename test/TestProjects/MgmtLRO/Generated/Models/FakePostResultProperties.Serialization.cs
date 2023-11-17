@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtLRO.Models
 {
     internal partial class FakePostResultProperties : IUtf8JsonSerializable, IJsonModel<FakePostResultProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakePostResultProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakePostResultProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FakePostResultProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FakePostResultProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FakePostResultProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FakePostResultProperties>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtLRO.Models
 
         internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace MgmtLRO.Models
             return DeserializeFakePostResultProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<FakePostResultProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FakePostResultProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

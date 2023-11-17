@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace paging.Models
 {
     internal partial class OdataProductResult : IUtf8JsonSerializable, IJsonModel<OdataProductResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OdataProductResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OdataProductResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OdataProductResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OdataProductResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OdataProductResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OdataProductResult>)} interface");
             }
@@ -73,7 +73,7 @@ namespace paging.Models
 
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,6 +136,6 @@ namespace paging.Models
             return DeserializeOdataProductResult(document.RootElement, options);
         }
 
-        string IPersistableModel<OdataProductResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OdataProductResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

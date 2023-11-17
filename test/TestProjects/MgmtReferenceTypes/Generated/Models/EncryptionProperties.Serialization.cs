@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Fake.Models
     [JsonConverter(typeof(EncryptionPropertiesConverter))]
     public partial class EncryptionProperties : IUtf8JsonSerializable, IJsonModel<EncryptionProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<EncryptionProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<EncryptionProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<EncryptionProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EncryptionProperties>)} interface");
             }
@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Fake.Models
             return DeserializeEncryptionProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<EncryptionProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<EncryptionProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class EncryptionPropertiesConverter : JsonConverter<EncryptionProperties>
         {

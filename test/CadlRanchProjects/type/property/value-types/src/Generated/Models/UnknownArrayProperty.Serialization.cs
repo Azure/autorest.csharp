@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Property.ValueTypes.Models
 {
     public partial class UnknownArrayProperty : IUtf8JsonSerializable, IJsonModel<UnknownArrayProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownArrayProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnknownArrayProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UnknownArrayProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UnknownArrayProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UnknownArrayProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnknownArrayProperty>)} interface");
             }
@@ -68,7 +68,7 @@ namespace _Type.Property.ValueTypes.Models
 
         internal static UnknownArrayProperty DeserializeUnknownArrayProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,14 +116,14 @@ namespace _Type.Property.ValueTypes.Models
             return DeserializeUnknownArrayProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<UnknownArrayProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UnknownArrayProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnknownArrayProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownArrayProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeUnknownArrayProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

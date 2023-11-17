@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateCompletionResponse : IUtf8JsonWriteable, IJsonModel<CreateCompletionResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateCompletionResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateCompletionResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateCompletionResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateCompletionResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateCompletionResponse>)} interface");
             }
@@ -75,7 +75,7 @@ namespace OpenAI.Models
 
         internal static CreateCompletionResponse DeserializeCreateCompletionResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -162,14 +162,14 @@ namespace OpenAI.Models
             return DeserializeCreateCompletionResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateCompletionResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateCompletionResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateCompletionResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateCompletionResponse(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateCompletionResponse(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

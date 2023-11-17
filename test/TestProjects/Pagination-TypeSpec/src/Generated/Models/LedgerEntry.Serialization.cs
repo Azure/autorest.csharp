@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Pagination.Models
 {
     public partial class LedgerEntry : IUtf8JsonSerializable, IJsonModel<LedgerEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LedgerEntry>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LedgerEntry>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LedgerEntry>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LedgerEntry>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LedgerEntry>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LedgerEntry>)} interface");
             }
@@ -71,7 +71,7 @@ namespace Pagination.Models
 
         internal static LedgerEntry DeserializeLedgerEntry(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,14 +131,14 @@ namespace Pagination.Models
             return DeserializeLedgerEntry(document.RootElement, options);
         }
 
-        string IPersistableModel<LedgerEntry>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LedgerEntry>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static LedgerEntry FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeLedgerEntry(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeLedgerEntry(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtParent;
@@ -17,11 +17,11 @@ namespace MgmtParent.Models
 {
     internal partial class AvailabilitySetListResult : IUtf8JsonSerializable, IJsonModel<AvailabilitySetListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AvailabilitySetListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AvailabilitySetListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AvailabilitySetListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AvailabilitySetListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtParent.Models
 
         internal static AvailabilitySetListResult DeserializeAvailabilitySetListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtParent.Models
             return DeserializeAvailabilitySetListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<AvailabilitySetListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AvailabilitySetListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

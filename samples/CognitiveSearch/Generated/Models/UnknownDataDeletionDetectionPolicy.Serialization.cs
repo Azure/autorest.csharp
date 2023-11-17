@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     internal partial class UnknownDataDeletionDetectionPolicy : IUtf8JsonSerializable, IJsonModel<DataDeletionDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDeletionDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDeletionDetectionPolicy>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DataDeletionDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DataDeletionDetectionPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DataDeletionDetectionPolicy>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataDeletionDetectionPolicy>)} interface");
             }
@@ -60,7 +60,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownDataDeletionDetectionPolicy DeserializeUnknownDataDeletionDetectionPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,6 +108,6 @@ namespace CognitiveSearch.Models
             return DeserializeUnknownDataDeletionDetectionPolicy(document.RootElement, options);
         }
 
-        string IPersistableModel<DataDeletionDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DataDeletionDetectionPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class LanguageDetectionSkill : IUtf8JsonSerializable, IJsonModel<LanguageDetectionSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageDetectionSkill>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageDetectionSkill>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LanguageDetectionSkill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LanguageDetectionSkill>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LanguageDetectionSkill>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LanguageDetectionSkill>)} interface");
             }
@@ -89,7 +89,7 @@ namespace CognitiveSearch.Models
 
         internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -177,6 +177,6 @@ namespace CognitiveSearch.Models
             return DeserializeLanguageDetectionSkill(document.RootElement, options);
         }
 
-        string IPersistableModel<LanguageDetectionSkill>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LanguageDetectionSkill>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

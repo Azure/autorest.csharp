@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class DeletedShare : IUtf8JsonSerializable, IJsonModel<DeletedShare>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedShare>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedShare>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeletedShare>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeletedShare>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeletedShare>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeletedShare>)} interface");
             }
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static DeletedShare DeserializeDeletedShare(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeDeletedShare(document.RootElement, options);
         }
 
-        string IPersistableModel<DeletedShare>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeletedShare>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

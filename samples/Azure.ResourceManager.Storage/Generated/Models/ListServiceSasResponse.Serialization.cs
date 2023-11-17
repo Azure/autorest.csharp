@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ListServiceSasResponse : IUtf8JsonSerializable, IJsonModel<ListServiceSasResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListServiceSasResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListServiceSasResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ListServiceSasResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ListServiceSasResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ListServiceSasResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListServiceSasResponse>)} interface");
             }
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ListServiceSasResponse DeserializeListServiceSasResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,6 +114,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeListServiceSasResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<ListServiceSasResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ListServiceSasResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateTranscriptionRequest : IUtf8JsonWriteable, IJsonModel<CreateTranscriptionRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateTranscriptionRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateTranscriptionRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateTranscriptionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateTranscriptionRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateTranscriptionRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateTranscriptionRequest>)} interface");
             }
@@ -79,7 +79,7 @@ namespace OpenAI.Models
 
         internal static CreateTranscriptionRequest DeserializeCreateTranscriptionRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -165,14 +165,14 @@ namespace OpenAI.Models
             return DeserializeCreateTranscriptionRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateTranscriptionRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateTranscriptionRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateTranscriptionRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateTranscriptionRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateTranscriptionRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

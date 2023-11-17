@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -73,6 +73,6 @@ namespace xml_service.Models
             return DeserializeModelWithByteProperty(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<ModelWithByteProperty>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<ModelWithByteProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

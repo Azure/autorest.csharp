@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class Int32ValuesFacet : IUtf8JsonSerializable, IJsonModel<Int32ValuesFacet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Int32ValuesFacet>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Int32ValuesFacet>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Int32ValuesFacet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Int32ValuesFacet>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Int32ValuesFacet>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Int32ValuesFacet>)} interface");
             }
@@ -72,7 +72,7 @@ namespace ModelsTypeSpec.Models
 
         internal static Int32ValuesFacet DeserializeInt32ValuesFacet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,14 +143,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeInt32ValuesFacet(document.RootElement, options);
         }
 
-        string IPersistableModel<Int32ValuesFacet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Int32ValuesFacet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Int32ValuesFacet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInt32ValuesFacet(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeInt32ValuesFacet(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     public partial class Golden : IUtf8JsonSerializable, IJsonModel<Golden>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Golden>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Golden>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Golden>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Golden>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Golden>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Golden>)} interface");
             }
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 
         internal static Golden DeserializeGolden(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,14 +117,14 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             return DeserializeGolden(document.RootElement, options);
         }
 
-        string IPersistableModel<Golden>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Golden>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Golden FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeGolden(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeGolden(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

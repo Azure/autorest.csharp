@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -73,6 +73,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<ModelWithGuidProperty>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<ModelWithGuidProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtExpandResourceTypes;
@@ -17,11 +17,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     internal partial class RecordSetListResult : IUtf8JsonSerializable, IJsonModel<RecordSetListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecordSetListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RecordSetListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RecordSetListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RecordSetListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RecordSetListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RecordSetListResult>)} interface");
             }
@@ -77,7 +77,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static RecordSetListResult DeserializeRecordSetListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -140,6 +140,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeRecordSetListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<RecordSetListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RecordSetListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

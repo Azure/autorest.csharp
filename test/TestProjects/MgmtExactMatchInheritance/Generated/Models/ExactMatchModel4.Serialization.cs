@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtExactMatchInheritance.Models
 {
     public partial class ExactMatchModel4 : IUtf8JsonSerializable, IJsonModel<ExactMatchModel4>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel4>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel4>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ExactMatchModel4>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel4>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel4>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExactMatchModel4>)} interface");
             }
@@ -78,7 +78,7 @@ namespace MgmtExactMatchInheritance.Models
 
         internal static ExactMatchModel4 DeserializeExactMatchModel4(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -148,6 +148,6 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel4(document.RootElement, options);
         }
 
-        string IPersistableModel<ExactMatchModel4>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ExactMatchModel4>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

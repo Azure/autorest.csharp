@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateLastDetectionResult : IUtf8JsonSerializable, IJsonModel<UnivariateLastDetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateLastDetectionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateLastDetectionResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UnivariateLastDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UnivariateLastDetectionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UnivariateLastDetectionResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnivariateLastDetectionResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -180,14 +180,14 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateLastDetectionResult(document.RootElement, options);
         }
 
-        string IPersistableModel<UnivariateLastDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UnivariateLastDetectionResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnivariateLastDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateLastDetectionResult(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeUnivariateLastDetectionResult(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

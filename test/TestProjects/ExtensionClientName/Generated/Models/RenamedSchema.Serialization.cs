@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace ExtensionClientName.Models
 {
     public partial class RenamedSchema : IUtf8JsonSerializable, IJsonModel<RenamedSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedSchema>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RenamedSchema>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RenamedSchema>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RenamedSchema>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RenamedSchema>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RenamedSchema>)} interface");
             }
@@ -74,7 +74,7 @@ namespace ExtensionClientName.Models
 
         internal static RenamedSchema DeserializeRenamedSchema(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,6 +137,6 @@ namespace ExtensionClientName.Models
             return DeserializeRenamedSchema(document.RootElement, options);
         }
 
-        string IPersistableModel<RenamedSchema>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RenamedSchema>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Inheritance.Models
 {
     internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IJsonModel<BaseClassWithExtensibleEnumDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BaseClassWithExtensibleEnumDiscriminator>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseClassWithExtensibleEnumDiscriminator>)} interface");
             }
@@ -60,7 +60,7 @@ namespace Inheritance.Models
 
         internal static UnknownBaseClassWithExtensibleEnumDiscriminator DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,6 +108,6 @@ namespace Inheritance.Models
             return DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(document.RootElement, options);
         }
 
-        string IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BaseClassWithExtensibleEnumDiscriminator>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

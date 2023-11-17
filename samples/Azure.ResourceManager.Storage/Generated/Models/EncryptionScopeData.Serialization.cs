@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace Azure.ResourceManager.Storage
 {
     public partial class EncryptionScopeData : IUtf8JsonSerializable, IJsonModel<EncryptionScopeData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionScopeData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionScopeData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<EncryptionScopeData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<EncryptionScopeData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<EncryptionScopeData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EncryptionScopeData>)} interface");
             }
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Storage
 
         internal static EncryptionScopeData DeserializeEncryptionScopeData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -264,6 +264,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeEncryptionScopeData(document.RootElement, options);
         }
 
-        string IPersistableModel<EncryptionScopeData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<EncryptionScopeData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

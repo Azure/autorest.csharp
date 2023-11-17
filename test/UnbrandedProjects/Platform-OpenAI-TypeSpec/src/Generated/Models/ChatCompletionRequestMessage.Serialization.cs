@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class ChatCompletionRequestMessage : IUtf8JsonWriteable, IJsonModel<ChatCompletionRequestMessage>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ChatCompletionRequestMessage>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<ChatCompletionRequestMessage>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ChatCompletionRequestMessage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ChatCompletionRequestMessage>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ChatCompletionRequestMessage>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ChatCompletionRequestMessage>)} interface");
             }
@@ -76,7 +76,7 @@ namespace OpenAI.Models
 
         internal static ChatCompletionRequestMessage DeserializeChatCompletionRequestMessage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -151,14 +151,14 @@ namespace OpenAI.Models
             return DeserializeChatCompletionRequestMessage(document.RootElement, options);
         }
 
-        string IPersistableModel<ChatCompletionRequestMessage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ChatCompletionRequestMessage>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static ChatCompletionRequestMessage FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeChatCompletionRequestMessage(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeChatCompletionRequestMessage(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

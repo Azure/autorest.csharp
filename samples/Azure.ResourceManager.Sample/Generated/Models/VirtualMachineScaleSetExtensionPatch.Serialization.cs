@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class VirtualMachineScaleSetExtensionPatch : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetExtensionPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetExtensionPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetExtensionPatch>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineScaleSetExtensionPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetExtensionPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetExtensionPatch>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetExtensionPatch>)} interface");
             }
@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetExtensionPatch DeserializeVirtualMachineScaleSetExtensionPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -324,6 +324,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetExtensionPatch(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineScaleSetExtensionPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineScaleSetExtensionPatch>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

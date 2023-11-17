@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Encode.Duration.Models
 {
     public partial class DefaultDurationProperty : IUtf8JsonSerializable, IJsonModel<DefaultDurationProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DefaultDurationProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DefaultDurationProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DefaultDurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DefaultDurationProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DefaultDurationProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DefaultDurationProperty>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Encode.Duration.Models
 
         internal static DefaultDurationProperty DeserializeDefaultDurationProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Encode.Duration.Models
             return DeserializeDefaultDurationProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<DefaultDurationProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DefaultDurationProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DefaultDurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDefaultDurationProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeDefaultDurationProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

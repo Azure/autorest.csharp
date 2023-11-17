@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class StorageAccountCheckNameAvailabilityContent : IUtf8JsonSerializable, IJsonModel<StorageAccountCheckNameAvailabilityContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountCheckNameAvailabilityContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageAccountCheckNameAvailabilityContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<StorageAccountCheckNameAvailabilityContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<StorageAccountCheckNameAvailabilityContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<StorageAccountCheckNameAvailabilityContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageAccountCheckNameAvailabilityContent>)} interface");
             }
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StorageAccountCheckNameAvailabilityContent DeserializeStorageAccountCheckNameAvailabilityContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStorageAccountCheckNameAvailabilityContent(document.RootElement, options);
         }
 
-        string IPersistableModel<StorageAccountCheckNameAvailabilityContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<StorageAccountCheckNameAvailabilityContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     public partial class Eagle : IUtf8JsonSerializable, IJsonModel<Eagle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Eagle>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Eagle>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Eagle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Eagle>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Eagle>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Eagle>)} interface");
             }
@@ -89,7 +89,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         internal static Eagle DeserializeEagle(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -183,14 +183,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeEagle(document.RootElement, options);
         }
 
-        string IPersistableModel<Eagle>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Eagle>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Eagle FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeEagle(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeEagle(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

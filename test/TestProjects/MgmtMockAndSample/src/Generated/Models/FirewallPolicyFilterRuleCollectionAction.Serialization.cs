@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     internal partial class FirewallPolicyFilterRuleCollectionAction : IUtf8JsonSerializable, IJsonModel<FirewallPolicyFilterRuleCollectionAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyFilterRuleCollectionAction>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyFilterRuleCollectionAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FirewallPolicyFilterRuleCollectionAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyFilterRuleCollectionAction>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyFilterRuleCollectionAction>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyFilterRuleCollectionAction>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyFilterRuleCollectionAction DeserializeFirewallPolicyFilterRuleCollectionAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,6 +115,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyFilterRuleCollectionAction(document.RootElement, options);
         }
 
-        string IPersistableModel<FirewallPolicyFilterRuleCollectionAction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FirewallPolicyFilterRuleCollectionAction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class BlobRestoreRange : IUtf8JsonSerializable, IJsonModel<BlobRestoreRange>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobRestoreRange>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobRestoreRange>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BlobRestoreRange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BlobRestoreRange>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BlobRestoreRange>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BlobRestoreRange>)} interface");
             }
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static BlobRestoreRange DeserializeBlobRestoreRange(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobRestoreRange(document.RootElement, options);
         }
 
-        string IPersistableModel<BlobRestoreRange>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BlobRestoreRange>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     internal partial class WritableSubResourceModel2ListResult : IUtf8JsonSerializable, IJsonModel<WritableSubResourceModel2ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WritableSubResourceModel2ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WritableSubResourceModel2ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<WritableSubResourceModel2ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<WritableSubResourceModel2ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<WritableSubResourceModel2ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WritableSubResourceModel2ListResult>)} interface");
             }
@@ -79,7 +79,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static WritableSubResourceModel2ListResult DeserializeWritableSubResourceModel2ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeWritableSubResourceModel2ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<WritableSubResourceModel2ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<WritableSubResourceModel2ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

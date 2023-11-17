@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace AdditionalPropertiesEx.Models
 {
     public partial struct OutputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModel<OutputAdditionalPropertiesModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutputAdditionalPropertiesModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OutputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OutputAdditionalPropertiesModelStruct>)} interface");
             }
@@ -54,7 +54,7 @@ namespace AdditionalPropertiesEx.Models
 
         internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
@@ -95,12 +95,12 @@ namespace AdditionalPropertiesEx.Models
             return DeserializeOutputAdditionalPropertiesModelStruct(document.RootElement, options);
         }
 
-        string IPersistableModel<OutputAdditionalPropertiesModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OutputAdditionalPropertiesModelStruct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).Write(options);
 
         object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).Create(data, options);
 
-        string IPersistableModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetWireFormat(options);
+        string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<OutputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options);
     }
 }

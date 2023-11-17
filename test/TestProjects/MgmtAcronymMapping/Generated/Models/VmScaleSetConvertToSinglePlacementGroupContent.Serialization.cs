@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class VmScaleSetConvertToSinglePlacementGroupContent : IUtf8JsonSerializable, IJsonModel<VmScaleSetConvertToSinglePlacementGroupContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VmScaleSetConvertToSinglePlacementGroupContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VmScaleSetConvertToSinglePlacementGroupContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VmScaleSetConvertToSinglePlacementGroupContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VmScaleSetConvertToSinglePlacementGroupContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VmScaleSetConvertToSinglePlacementGroupContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VmScaleSetConvertToSinglePlacementGroupContent>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static VmScaleSetConvertToSinglePlacementGroupContent DeserializeVmScaleSetConvertToSinglePlacementGroupContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeVmScaleSetConvertToSinglePlacementGroupContent(document.RootElement, options);
         }
 
-        string IPersistableModel<VmScaleSetConvertToSinglePlacementGroupContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VmScaleSetConvertToSinglePlacementGroupContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

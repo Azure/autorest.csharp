@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     public partial class TrackedResourceModel2 : IUtf8JsonSerializable, IJsonModel<TrackedResourceModel2>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel2>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrackedResourceModel2>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TrackedResourceModel2>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TrackedResourceModel2>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TrackedResourceModel2>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TrackedResourceModel2>)} interface");
             }
@@ -113,7 +113,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -234,6 +234,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeTrackedResourceModel2(document.RootElement, options);
         }
 
-        string IPersistableModel<TrackedResourceModel2>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TrackedResourceModel2>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

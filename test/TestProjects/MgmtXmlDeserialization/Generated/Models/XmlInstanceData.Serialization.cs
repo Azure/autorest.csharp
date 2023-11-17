@@ -6,10 +6,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -66,11 +66,11 @@ namespace MgmtXmlDeserialization
             return new XmlInstanceData(id, name, resourceType, systemData, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlInstanceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlInstanceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<XmlInstanceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<XmlInstanceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<XmlInstanceData>)} interface");
             }
@@ -131,7 +131,7 @@ namespace MgmtXmlDeserialization
 
         internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -226,6 +226,6 @@ namespace MgmtXmlDeserialization
             }
         }
 
-        string IPersistableModel<XmlInstanceData>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<XmlInstanceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

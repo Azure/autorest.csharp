@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class StopwordsTokenFilter : IUtf8JsonSerializable, IJsonModel<StopwordsTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StopwordsTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StopwordsTokenFilter>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<StopwordsTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<StopwordsTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<StopwordsTokenFilter>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StopwordsTokenFilter>)} interface");
             }
@@ -87,7 +87,7 @@ namespace CognitiveSearch.Models
 
         internal static StopwordsTokenFilter DeserializeStopwordsTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -186,6 +186,6 @@ namespace CognitiveSearch.Models
             return DeserializeStopwordsTokenFilter(document.RootElement, options);
         }
 
-        string IPersistableModel<StopwordsTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<StopwordsTokenFilter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

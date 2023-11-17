@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class BooleanWrapper : IUtf8JsonSerializable, IJsonModel<BooleanWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BooleanWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BooleanWrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BooleanWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BooleanWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BooleanWrapper>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BooleanWrapper>)} interface");
             }
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeBooleanWrapper(document.RootElement, options);
         }
 
-        string IPersistableModel<BooleanWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BooleanWrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

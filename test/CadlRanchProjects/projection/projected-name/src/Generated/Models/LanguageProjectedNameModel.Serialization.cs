@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Projection.ProjectedName.Models
 {
     public partial class LanguageProjectedNameModel : IUtf8JsonSerializable, IJsonModel<LanguageProjectedNameModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageProjectedNameModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LanguageProjectedNameModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LanguageProjectedNameModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LanguageProjectedNameModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LanguageProjectedNameModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LanguageProjectedNameModel>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Projection.ProjectedName.Models
 
         internal static LanguageProjectedNameModel DeserializeLanguageProjectedNameModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Projection.ProjectedName.Models
             return DeserializeLanguageProjectedNameModel(document.RootElement, options);
         }
 
-        string IPersistableModel<LanguageProjectedNameModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LanguageProjectedNameModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static LanguageProjectedNameModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeLanguageProjectedNameModel(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeLanguageProjectedNameModel(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

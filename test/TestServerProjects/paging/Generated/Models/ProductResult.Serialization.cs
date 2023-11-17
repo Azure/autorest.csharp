@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace paging.Models
 {
     internal partial class ProductResult : IUtf8JsonSerializable, IJsonModel<ProductResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProductResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProductResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ProductResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ProductResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ProductResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProductResult>)} interface");
             }
@@ -73,7 +73,7 @@ namespace paging.Models
 
         internal static ProductResult DeserializeProductResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,6 +136,6 @@ namespace paging.Models
             return DeserializeProductResult(document.RootElement, options);
         }
 
-        string IPersistableModel<ProductResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProductResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

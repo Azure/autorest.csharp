@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -76,6 +76,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<SignedIdentifier>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<SignedIdentifier>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class ManagedHsmSku : IUtf8JsonSerializable, IJsonModel<ManagedHsmSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagedHsmSku>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ManagedHsmSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ManagedHsmSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ManagedHsmSku>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagedHsmSku>)} interface");
             }
@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Models
 
         internal static ManagedHsmSku DeserializeManagedHsmSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeManagedHsmSku(document.RootElement, options);
         }
 
-        string IPersistableModel<ManagedHsmSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ManagedHsmSku>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Storage;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     internal partial class StoragePrivateEndpointConnectionListResult : IUtf8JsonSerializable, IJsonModel<StoragePrivateEndpointConnectionListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StoragePrivateEndpointConnectionListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StoragePrivateEndpointConnectionListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<StoragePrivateEndpointConnectionListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<StoragePrivateEndpointConnectionListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<StoragePrivateEndpointConnectionListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StoragePrivateEndpointConnectionListResult>)} interface");
             }
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static StoragePrivateEndpointConnectionListResult DeserializeStoragePrivateEndpointConnectionListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeStoragePrivateEndpointConnectionListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<StoragePrivateEndpointConnectionListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<StoragePrivateEndpointConnectionListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class PatternTokenizer : IUtf8JsonSerializable, IJsonModel<PatternTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternTokenizer>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternTokenizer>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PatternTokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PatternTokenizer>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PatternTokenizer>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PatternTokenizer>)} interface");
             }
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
 
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -157,6 +157,6 @@ namespace CognitiveSearch.Models
             return DeserializePatternTokenizer(document.RootElement, options);
         }
 
-        string IPersistableModel<PatternTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PatternTokenizer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

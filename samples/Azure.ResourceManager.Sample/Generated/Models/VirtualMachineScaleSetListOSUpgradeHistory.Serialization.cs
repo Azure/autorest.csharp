@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class VirtualMachineScaleSetListOSUpgradeHistory : IUtf8JsonSerializable, IJsonModel<VirtualMachineScaleSetListOSUpgradeHistory>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetListOSUpgradeHistory>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineScaleSetListOSUpgradeHistory>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineScaleSetListOSUpgradeHistory>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetListOSUpgradeHistory>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetListOSUpgradeHistory>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetListOSUpgradeHistory>)} interface");
             }
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetListOSUpgradeHistory DeserializeVirtualMachineScaleSetListOSUpgradeHistory(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,6 +145,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineScaleSetListOSUpgradeHistory(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineScaleSetListOSUpgradeHistory>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineScaleSetListOSUpgradeHistory>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

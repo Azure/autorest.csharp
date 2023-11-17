@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtSupersetInheritance;
@@ -17,11 +17,11 @@ namespace MgmtSupersetInheritance.Models
 {
     internal partial class SupersetModel7ListResult : IUtf8JsonSerializable, IJsonModel<SupersetModel7ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel7ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel7ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SupersetModel7ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SupersetModel7ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SupersetModel7ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SupersetModel7ListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtSupersetInheritance.Models
 
         internal static SupersetModel7ListResult DeserializeSupersetModel7ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtSupersetInheritance.Models
             return DeserializeSupersetModel7ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<SupersetModel7ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SupersetModel7ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     internal partial class InternalDecoratorModelInInternal : IUtf8JsonSerializable, IJsonModel<InternalDecoratorModelInInternal>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InternalDecoratorModelInInternal>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InternalDecoratorModelInInternal>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<InternalDecoratorModelInInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InternalDecoratorModelInInternal>)} interface");
             }
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         internal static InternalDecoratorModelInInternal DeserializeInternalDecoratorModelInInternal(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return DeserializeInternalDecoratorModelInInternal(document.RootElement, options);
         }
 
-        string IPersistableModel<InternalDecoratorModelInInternal>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<InternalDecoratorModelInInternal>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InternalDecoratorModelInInternal FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInternalDecoratorModelInInternal(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeInternalDecoratorModelInInternal(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

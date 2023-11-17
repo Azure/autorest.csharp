@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtListMethods
 {
     public partial class MgmtGrpParentWithLocData : IUtf8JsonSerializable, IJsonModel<MgmtGrpParentWithLocData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtGrpParentWithLocData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtGrpParentWithLocData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MgmtGrpParentWithLocData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MgmtGrpParentWithLocData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MgmtGrpParentWithLocData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtGrpParentWithLocData>)} interface");
             }
@@ -100,7 +100,7 @@ namespace MgmtListMethods
 
         internal static MgmtGrpParentWithLocData DeserializeMgmtGrpParentWithLocData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,6 +197,6 @@ namespace MgmtListMethods
             return DeserializeMgmtGrpParentWithLocData(document.RootElement, options);
         }
 
-        string IPersistableModel<MgmtGrpParentWithLocData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MgmtGrpParentWithLocData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

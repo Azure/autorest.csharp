@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class EffectiveNetworkSecurityGroupAssociation : IUtf8JsonSerializable, IJsonModel<EffectiveNetworkSecurityGroupAssociation>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveNetworkSecurityGroupAssociation>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EffectiveNetworkSecurityGroupAssociation>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<EffectiveNetworkSecurityGroupAssociation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<EffectiveNetworkSecurityGroupAssociation>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<EffectiveNetworkSecurityGroupAssociation>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EffectiveNetworkSecurityGroupAssociation>)} interface");
             }
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static EffectiveNetworkSecurityGroupAssociation DeserializeEffectiveNetworkSecurityGroupAssociation(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeEffectiveNetworkSecurityGroupAssociation(document.RootElement, options);
         }
 
-        string IPersistableModel<EffectiveNetworkSecurityGroupAssociation>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<EffectiveNetworkSecurityGroupAssociation>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

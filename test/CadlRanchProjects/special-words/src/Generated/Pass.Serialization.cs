@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace SpecialWords
 {
     public partial class Pass : IUtf8JsonSerializable, IJsonModel<Pass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pass>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Pass>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Pass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Pass>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Pass>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Pass>)} interface");
             }
@@ -61,7 +61,7 @@ namespace SpecialWords
 
         internal static Pass DeserializePass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace SpecialWords
             return DeserializePass(document.RootElement, options);
         }
 
-        string IPersistableModel<Pass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Pass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Pass FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePass(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializePass(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

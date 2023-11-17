@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     internal partial class CnameRecord : IUtf8JsonSerializable, IJsonModel<CnameRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CnameRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CnameRecord>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CnameRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CnameRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CnameRecord>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CnameRecord>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static CnameRecord DeserializeCnameRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeCnameRecord(document.RootElement, options);
         }
 
-        string IPersistableModel<CnameRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CnameRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

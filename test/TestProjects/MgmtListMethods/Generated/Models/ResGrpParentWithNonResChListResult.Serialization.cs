@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtListMethods;
@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     internal partial class ResGrpParentWithNonResChListResult : IUtf8JsonSerializable, IJsonModel<ResGrpParentWithNonResChListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResGrpParentWithNonResChListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResGrpParentWithNonResChListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ResGrpParentWithNonResChListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ResGrpParentWithNonResChListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ResGrpParentWithNonResChListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResGrpParentWithNonResChListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtListMethods.Models
 
         internal static ResGrpParentWithNonResChListResult DeserializeResGrpParentWithNonResChListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtListMethods.Models
             return DeserializeResGrpParentWithNonResChListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<ResGrpParentWithNonResChListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ResGrpParentWithNonResChListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

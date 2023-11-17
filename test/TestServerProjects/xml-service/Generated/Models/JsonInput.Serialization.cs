@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace xml_service.Models
 {
     public partial class JsonInput : IUtf8JsonSerializable, IJsonModel<JsonInput>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonInput>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<JsonInput>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<JsonInput>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<JsonInput>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<JsonInput>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<JsonInput>)} interface");
             }
@@ -63,7 +63,7 @@ namespace xml_service.Models
 
         internal static JsonInput DeserializeJsonInput(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,6 +115,6 @@ namespace xml_service.Models
             return DeserializeJsonInput(document.RootElement, options);
         }
 
-        string IPersistableModel<JsonInput>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<JsonInput>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

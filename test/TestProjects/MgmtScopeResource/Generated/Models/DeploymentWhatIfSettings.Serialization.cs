@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtScopeResource.Models
 {
     internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable, IJsonModel<DeploymentWhatIfSettings>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentWhatIfSettings>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentWhatIfSettings>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeploymentWhatIfSettings>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeploymentWhatIfSettings>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentWhatIfSettings>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentWhatIfSettings>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtScopeResource.Models
 
         internal static DeploymentWhatIfSettings DeserializeDeploymentWhatIfSettings(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,6 +115,6 @@ namespace MgmtScopeResource.Models
             return DeserializeDeploymentWhatIfSettings(document.RootElement, options);
         }
 
-        string IPersistableModel<DeploymentWhatIfSettings>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeploymentWhatIfSettings>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

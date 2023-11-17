@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class Delegation : IUtf8JsonSerializable, IJsonModel<Delegation>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Delegation>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Delegation>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Delegation>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Delegation>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Delegation>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Delegation>)} interface");
             }
@@ -105,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Delegation DeserializeDelegation(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -208,6 +208,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeDelegation(document.RootElement, options);
         }
 
-        string IPersistableModel<Delegation>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Delegation>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

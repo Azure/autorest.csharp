@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -15,11 +15,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DataChangeDetectionPolicy : IUtf8JsonSerializable, IJsonModel<DataChangeDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataChangeDetectionPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataChangeDetectionPolicy>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DataChangeDetectionPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DataChangeDetectionPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DataChangeDetectionPolicy>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataChangeDetectionPolicy>)} interface");
             }
@@ -59,7 +59,7 @@ namespace CognitiveSearch.Models
 
         internal static DataChangeDetectionPolicy DeserializeDataChangeDetectionPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -99,6 +99,6 @@ namespace CognitiveSearch.Models
             return DeserializeDataChangeDetectionPolicy(document.RootElement, options);
         }
 
-        string IPersistableModel<DataChangeDetectionPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DataChangeDetectionPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

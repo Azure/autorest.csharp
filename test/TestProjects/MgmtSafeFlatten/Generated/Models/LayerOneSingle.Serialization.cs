@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtSafeFlatten.Models
 {
     internal partial class LayerOneSingle : IUtf8JsonSerializable, IJsonModel<LayerOneSingle>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerOneSingle>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LayerOneSingle>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LayerOneSingle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LayerOneSingle>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LayerOneSingle>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LayerOneSingle>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtSafeFlatten.Models
 
         internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,6 +115,6 @@ namespace MgmtSafeFlatten.Models
             return DeserializeLayerOneSingle(document.RootElement, options);
         }
 
-        string IPersistableModel<LayerOneSingle>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LayerOneSingle>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

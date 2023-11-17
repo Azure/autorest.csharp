@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Sample;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class VirtualMachineExtensionsListResult : IUtf8JsonSerializable, IJsonModel<VirtualMachineExtensionsListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineExtensionsListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VirtualMachineExtensionsListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VirtualMachineExtensionsListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineExtensionsListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineExtensionsListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineExtensionsListResult>)} interface");
             }
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineExtensionsListResult DeserializeVirtualMachineExtensionsListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeVirtualMachineExtensionsListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<VirtualMachineExtensionsListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VirtualMachineExtensionsListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

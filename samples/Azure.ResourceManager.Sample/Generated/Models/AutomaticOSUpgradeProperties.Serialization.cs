@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     internal partial class AutomaticOSUpgradeProperties : IUtf8JsonSerializable, IJsonModel<AutomaticOSUpgradeProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticOSUpgradeProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticOSUpgradeProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AutomaticOSUpgradeProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AutomaticOSUpgradeProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AutomaticOSUpgradeProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AutomaticOSUpgradeProperties>)} interface");
             }
@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static AutomaticOSUpgradeProperties DeserializeAutomaticOSUpgradeProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,6 +108,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeAutomaticOSUpgradeProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<AutomaticOSUpgradeProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AutomaticOSUpgradeProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

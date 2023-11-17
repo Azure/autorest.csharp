@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace FirstTestTypeSpec.Models
 {
     public partial class ModelWithRequiredNullableProperties : IUtf8JsonSerializable, IJsonModel<ModelWithRequiredNullableProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredNullableProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithRequiredNullableProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelWithRequiredNullableProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithRequiredNullableProperties>)} interface");
             }
@@ -86,7 +86,7 @@ namespace FirstTestTypeSpec.Models
 
         internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -161,14 +161,14 @@ namespace FirstTestTypeSpec.Models
             return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelWithRequiredNullableProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelWithRequiredNullableProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelWithRequiredNullableProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeModelWithRequiredNullableProperties(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

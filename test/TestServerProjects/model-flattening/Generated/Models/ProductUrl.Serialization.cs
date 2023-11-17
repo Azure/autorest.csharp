@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace model_flattening.Models
 {
     internal partial class ProductUrl : IUtf8JsonSerializable, IJsonModel<ProductUrl>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProductUrl>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProductUrl>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ProductUrl>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ProductUrl>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ProductUrl>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProductUrl>)} interface");
             }
@@ -68,7 +68,7 @@ namespace model_flattening.Models
 
         internal static ProductUrl DeserializeProductUrl(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,6 +122,6 @@ namespace model_flattening.Models
             return DeserializeProductUrl(document.RootElement, options);
         }
 
-        string IPersistableModel<ProductUrl>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProductUrl>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

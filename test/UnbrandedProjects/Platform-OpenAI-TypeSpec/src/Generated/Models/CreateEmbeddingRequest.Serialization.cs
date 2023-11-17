@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateEmbeddingRequest : IUtf8JsonWriteable, IJsonModel<CreateEmbeddingRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEmbeddingRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateEmbeddingRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateEmbeddingRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateEmbeddingRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateEmbeddingRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateEmbeddingRequest>)} interface");
             }
@@ -71,7 +71,7 @@ namespace OpenAI.Models
 
         internal static CreateEmbeddingRequest DeserializeCreateEmbeddingRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,14 +131,14 @@ namespace OpenAI.Models
             return DeserializeCreateEmbeddingRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateEmbeddingRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateEmbeddingRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateEmbeddingRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateEmbeddingRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateEmbeddingRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

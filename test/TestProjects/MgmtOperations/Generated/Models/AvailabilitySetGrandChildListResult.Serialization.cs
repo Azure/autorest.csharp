@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtOperations;
@@ -17,11 +17,11 @@ namespace MgmtOperations.Models
 {
     internal partial class AvailabilitySetGrandChildListResult : IUtf8JsonSerializable, IJsonModel<AvailabilitySetGrandChildListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetGrandChildListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AvailabilitySetGrandChildListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AvailabilitySetGrandChildListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AvailabilitySetGrandChildListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AvailabilitySetGrandChildListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AvailabilitySetGrandChildListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtOperations.Models
 
         internal static AvailabilitySetGrandChildListResult DeserializeAvailabilitySetGrandChildListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtOperations.Models
             return DeserializeAvailabilitySetGrandChildListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<AvailabilitySetGrandChildListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AvailabilitySetGrandChildListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

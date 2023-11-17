@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class NGramTokenizer : IUtf8JsonSerializable, IJsonModel<NGramTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NGramTokenizer>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NGramTokenizer>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NGramTokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NGramTokenizer>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NGramTokenizer>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NGramTokenizer>)} interface");
             }
@@ -82,7 +82,7 @@ namespace CognitiveSearch.Models
 
         internal static NGramTokenizer DeserializeNGramTokenizer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -171,6 +171,6 @@ namespace CognitiveSearch.Models
             return DeserializeNGramTokenizer(document.RootElement, options);
         }
 
-        string IPersistableModel<NGramTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NGramTokenizer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

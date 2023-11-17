@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource.Models
 {
     public partial class ImagePurchasePlan : IUtf8JsonSerializable, IJsonModel<ImagePurchasePlan>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePurchasePlan>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImagePurchasePlan>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ImagePurchasePlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ImagePurchasePlan>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ImagePurchasePlan>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImagePurchasePlan>)} interface");
             }
@@ -73,7 +73,7 @@ namespace MgmtHierarchicalNonResource.Models
 
         internal static ImagePurchasePlan DeserializeImagePurchasePlan(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -133,6 +133,6 @@ namespace MgmtHierarchicalNonResource.Models
             return DeserializeImagePurchasePlan(document.RootElement, options);
         }
 
-        string IPersistableModel<ImagePurchasePlan>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ImagePurchasePlan>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class AdditionalUnattendContent : IUtf8JsonSerializable, IJsonModel<AdditionalUnattendContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AdditionalUnattendContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AdditionalUnattendContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AdditionalUnattendContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AdditionalUnattendContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AdditionalUnattendContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AdditionalUnattendContent>)} interface");
             }
@@ -78,7 +78,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static AdditionalUnattendContent DeserializeAdditionalUnattendContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -160,6 +160,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAdditionalUnattendContent(document.RootElement, options);
         }
 
-        string IPersistableModel<AdditionalUnattendContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AdditionalUnattendContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

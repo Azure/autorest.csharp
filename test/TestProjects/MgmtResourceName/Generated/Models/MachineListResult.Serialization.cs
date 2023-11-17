@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtResourceName;
@@ -17,11 +17,11 @@ namespace MgmtResourceName.Models
 {
     internal partial class MachineListResult : IUtf8JsonSerializable, IJsonModel<MachineListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MachineListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MachineListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MachineListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MachineListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MachineListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MachineListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtResourceName.Models
 
         internal static MachineListResult DeserializeMachineListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtResourceName.Models
             return DeserializeMachineListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<MachineListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MachineListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

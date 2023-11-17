@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class IndexingResult : IUtf8JsonSerializable, IJsonModel<IndexingResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexingResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexingResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IndexingResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IndexingResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IndexingResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IndexingResult>)} interface");
             }
@@ -81,7 +81,7 @@ namespace CognitiveSearch.Models
 
         internal static IndexingResult DeserializeIndexingResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -147,6 +147,6 @@ namespace CognitiveSearch.Models
             return DeserializeIndexingResult(document.RootElement, options);
         }
 
-        string IPersistableModel<IndexingResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IndexingResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

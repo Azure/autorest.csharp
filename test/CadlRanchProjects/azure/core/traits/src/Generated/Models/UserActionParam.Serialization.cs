@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Specs_.Azure.Core.Traits.Models
 {
     public partial class UserActionParam : IUtf8JsonSerializable, IJsonModel<UserActionParam>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionParam>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UserActionParam>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UserActionParam>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UserActionParam>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UserActionParam>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UserActionParam>)} interface");
             }
@@ -61,7 +61,7 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         internal static UserActionParam DeserializeUserActionParam(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace _Specs_.Azure.Core.Traits.Models
             return DeserializeUserActionParam(document.RootElement, options);
         }
 
-        string IPersistableModel<UserActionParam>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UserActionParam>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UserActionParam FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserActionParam(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeUserActionParam(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

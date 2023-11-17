@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
@@ -16,11 +16,11 @@ namespace CustomNamespace
 {
     internal partial class CustomizedModel : IUtf8JsonSerializable, IJsonModel<CustomizedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomizedModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CustomizedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CustomizedModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CustomizedModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CustomizedModel>)} interface");
             }
@@ -93,6 +93,6 @@ namespace CustomNamespace
             return DeserializeCustomizedModel(document.RootElement, options);
         }
 
-        string IPersistableModel<CustomizedModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CustomizedModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

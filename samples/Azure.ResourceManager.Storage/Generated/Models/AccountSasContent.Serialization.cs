@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class AccountSasContent : IUtf8JsonSerializable, IJsonModel<AccountSasContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccountSasContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccountSasContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AccountSasContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AccountSasContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AccountSasContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AccountSasContent>)} interface");
             }
@@ -86,7 +86,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static AccountSasContent DeserializeAccountSasContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -184,6 +184,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeAccountSasContent(document.RootElement, options);
         }
 
-        string IPersistableModel<AccountSasContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AccountSasContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

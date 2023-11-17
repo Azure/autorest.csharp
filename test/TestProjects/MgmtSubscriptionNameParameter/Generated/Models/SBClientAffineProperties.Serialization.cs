@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtSubscriptionNameParameter.Models
 {
     public partial class SBClientAffineProperties : IUtf8JsonSerializable, IJsonModel<SBClientAffineProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBClientAffineProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBClientAffineProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SBClientAffineProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SBClientAffineProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SBClientAffineProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SBClientAffineProperties>)} interface");
             }
@@ -73,7 +73,7 @@ namespace MgmtSubscriptionNameParameter.Models
 
         internal static SBClientAffineProperties DeserializeSBClientAffineProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -141,6 +141,6 @@ namespace MgmtSubscriptionNameParameter.Models
             return DeserializeSBClientAffineProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<SBClientAffineProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SBClientAffineProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

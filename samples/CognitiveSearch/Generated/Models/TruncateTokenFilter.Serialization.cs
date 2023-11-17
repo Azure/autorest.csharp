@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class TruncateTokenFilter : IUtf8JsonSerializable, IJsonModel<TruncateTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TruncateTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TruncateTokenFilter>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TruncateTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TruncateTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TruncateTokenFilter>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TruncateTokenFilter>)} interface");
             }
@@ -67,7 +67,7 @@ namespace CognitiveSearch.Models
 
         internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -131,6 +131,6 @@ namespace CognitiveSearch.Models
             return DeserializeTruncateTokenFilter(document.RootElement, options);
         }
 
-        string IPersistableModel<TruncateTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TruncateTokenFilter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

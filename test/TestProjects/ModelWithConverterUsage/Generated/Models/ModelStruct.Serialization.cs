@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -18,11 +18,11 @@ namespace ModelWithConverterUsage.Models
     [JsonConverter(typeof(ModelStructConverter))]
     public partial struct ModelStruct : IUtf8JsonSerializable, IJsonModel<ModelStruct>, IJsonModel<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelStruct>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelStruct>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelStruct>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelStruct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelStruct>)} interface");
             }
@@ -69,7 +69,7 @@ namespace ModelWithConverterUsage.Models
 
         internal static ModelStruct DeserializeModelStruct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             Optional<string> modelProperty = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
@@ -113,13 +113,13 @@ namespace ModelWithConverterUsage.Models
             return DeserializeModelStruct(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelStruct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelStruct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options) => ((IPersistableModel<ModelStruct>)this).Write(options);
 
         object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options) => ((IPersistableModel<ModelStruct>)this).Create(data, options);
 
-        string IPersistableModel<object>.GetWireFormat(ModelReaderWriterOptions options) => ((IPersistableModel<ModelStruct>)this).GetWireFormat(options);
+        string IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options) => ((IPersistableModel<ModelStruct>)this).GetFormatFromOptions(options);
 
         internal partial class ModelStructConverter : JsonConverter<ModelStruct>
         {

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class IPRule : IUtf8JsonSerializable, IJsonModel<IPRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IPRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IPRule>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IPRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IPRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IPRule>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IPRule>)} interface");
             }
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static IPRule DeserializeIPRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -123,6 +123,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeIPRule(document.RootElement, options);
         }
 
-        string IPersistableModel<IPRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IPRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_dictionary.Models
 {
     internal partial class Error : IUtf8JsonSerializable, IJsonModel<Error>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Error>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Error>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Error>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Error>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Error>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Error>)} interface");
             }
@@ -68,7 +68,7 @@ namespace body_dictionary.Models
 
         internal static Error DeserializeError(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace body_dictionary.Models
             return DeserializeError(document.RootElement, options);
         }
 
-        string IPersistableModel<Error>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Error>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,10 +6,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -112,6 +112,6 @@ namespace xml_service.Models
             return DeserializeBlob(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<Blob>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<Blob>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

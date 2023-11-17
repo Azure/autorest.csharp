@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,11 +19,11 @@ namespace MgmtMockAndSample
 {
     public partial class MhsmPrivateEndpointConnectionData : IUtf8JsonSerializable, IJsonModel<MhsmPrivateEndpointConnectionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateEndpointConnectionData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateEndpointConnectionData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MhsmPrivateEndpointConnectionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MhsmPrivateEndpointConnectionData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MhsmPrivateEndpointConnectionData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MhsmPrivateEndpointConnectionData>)} interface");
             }
@@ -125,7 +125,7 @@ namespace MgmtMockAndSample
 
         internal static MhsmPrivateEndpointConnectionData DeserializeMhsmPrivateEndpointConnectionData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -274,6 +274,6 @@ namespace MgmtMockAndSample
             return DeserializeMhsmPrivateEndpointConnectionData(document.RootElement, options);
         }
 
-        string IPersistableModel<MhsmPrivateEndpointConnectionData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MhsmPrivateEndpointConnectionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

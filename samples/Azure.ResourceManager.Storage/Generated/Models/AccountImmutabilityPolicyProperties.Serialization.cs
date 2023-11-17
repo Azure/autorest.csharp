@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class AccountImmutabilityPolicyProperties : IUtf8JsonSerializable, IJsonModel<AccountImmutabilityPolicyProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccountImmutabilityPolicyProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccountImmutabilityPolicyProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AccountImmutabilityPolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AccountImmutabilityPolicyProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AccountImmutabilityPolicyProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AccountImmutabilityPolicyProperties>)} interface");
             }
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static AccountImmutabilityPolicyProperties DeserializeAccountImmutabilityPolicyProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,6 +145,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeAccountImmutabilityPolicyProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<AccountImmutabilityPolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AccountImmutabilityPolicyProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

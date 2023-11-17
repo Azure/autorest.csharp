@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class DeleteModelResponse : IUtf8JsonWriteable, IJsonModel<DeleteModelResponse>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeleteModelResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeleteModelResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeleteModelResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeleteModelResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeleteModelResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeleteModelResponse>)} interface");
             }
@@ -61,7 +61,7 @@ namespace OpenAI.Models
 
         internal static DeleteModelResponse DeserializeDeleteModelResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -121,14 +121,14 @@ namespace OpenAI.Models
             return DeserializeDeleteModelResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<DeleteModelResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeleteModelResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static DeleteModelResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDeleteModelResponse(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeDeleteModelResponse(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
@@ -17,11 +17,11 @@ namespace Inheritance.Models
 {
     public partial class ClassThatInheritsFromBaseClass : IUtf8JsonSerializable, IJsonModel<ClassThatInheritsFromBaseClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromBaseClass>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromBaseClass>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ClassThatInheritsFromBaseClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ClassThatInheritsFromBaseClass>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ClassThatInheritsFromBaseClass>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ClassThatInheritsFromBaseClass>)} interface");
             }
@@ -119,7 +119,7 @@ namespace Inheritance.Models
 
         internal static ClassThatInheritsFromBaseClass DeserializeClassThatInheritsFromBaseClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -277,6 +277,6 @@ namespace Inheritance.Models
             return DeserializeClassThatInheritsFromBaseClass(document.RootElement, options);
         }
 
-        string IPersistableModel<ClassThatInheritsFromBaseClass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ClassThatInheritsFromBaseClass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class EncryptionServices : IUtf8JsonSerializable, IJsonModel<EncryptionServices>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionServices>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionServices>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<EncryptionServices>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<EncryptionServices>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<EncryptionServices>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<EncryptionServices>)} interface");
             }
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static EncryptionServices DeserializeEncryptionServices(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -160,6 +160,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeEncryptionServices(document.RootElement, options);
         }
 
-        string IPersistableModel<EncryptionServices>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<EncryptionServices>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

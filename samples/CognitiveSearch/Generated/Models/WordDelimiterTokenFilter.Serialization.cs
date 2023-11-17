@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class WordDelimiterTokenFilter : IUtf8JsonSerializable, IJsonModel<WordDelimiterTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WordDelimiterTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WordDelimiterTokenFilter>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<WordDelimiterTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<WordDelimiterTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<WordDelimiterTokenFilter>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WordDelimiterTokenFilter>)} interface");
             }
@@ -117,7 +117,7 @@ namespace CognitiveSearch.Models
 
         internal static WordDelimiterTokenFilter DeserializeWordDelimiterTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -276,6 +276,6 @@ namespace CognitiveSearch.Models
             return DeserializeWordDelimiterTokenFilter(document.RootElement, options);
         }
 
-        string IPersistableModel<WordDelimiterTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<WordDelimiterTokenFilter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

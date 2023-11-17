@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtPagination;
@@ -17,11 +17,11 @@ namespace MgmtPagination.Models
 {
     internal partial class PageSizeInt32ModelListResult : IUtf8JsonSerializable, IJsonModel<PageSizeInt32ModelListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeInt32ModelListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeInt32ModelListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PageSizeInt32ModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PageSizeInt32ModelListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PageSizeInt32ModelListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeInt32ModelListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtPagination.Models
 
         internal static PageSizeInt32ModelListResult DeserializePageSizeInt32ModelListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtPagination.Models
             return DeserializePageSizeInt32ModelListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<PageSizeInt32ModelListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PageSizeInt32ModelListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace model_flattening.Models
 {
     public partial class SimpleProduct : IUtf8JsonSerializable, IJsonModel<SimpleProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SimpleProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SimpleProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SimpleProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SimpleProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SimpleProduct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SimpleProduct>)} interface");
             }
@@ -91,7 +91,7 @@ namespace model_flattening.Models
 
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,6 +197,6 @@ namespace model_flattening.Models
             return DeserializeSimpleProduct(document.RootElement, options);
         }
 
-        string IPersistableModel<SimpleProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SimpleProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

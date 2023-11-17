@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class DiskInstanceView : IUtf8JsonSerializable, IJsonModel<DiskInstanceView>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskInstanceView>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DiskInstanceView>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DiskInstanceView>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DiskInstanceView>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DiskInstanceView>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DiskInstanceView>)} interface");
             }
@@ -83,7 +83,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DiskInstanceView DeserializeDiskInstanceView(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -161,6 +161,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDiskInstanceView(document.RootElement, options);
         }
 
-        string IPersistableModel<DiskInstanceView>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DiskInstanceView>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

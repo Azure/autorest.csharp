@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,11 +19,11 @@ namespace MgmtAcronymMapping
 {
     public partial class ImageData : IUtf8JsonSerializable, IJsonModel<ImageData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ImageData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ImageData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ImageData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ImageData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ImageData>)} interface");
             }
@@ -123,7 +123,7 @@ namespace MgmtAcronymMapping
 
         internal static ImageData DeserializeImageData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -262,6 +262,6 @@ namespace MgmtAcronymMapping
             return DeserializeImageData(document.RootElement, options);
         }
 
-        string IPersistableModel<ImageData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ImageData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

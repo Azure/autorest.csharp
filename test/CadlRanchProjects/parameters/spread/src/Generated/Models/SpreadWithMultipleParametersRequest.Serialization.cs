@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Parameters.Spread.Models
 {
     internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IJsonModel<SpreadWithMultipleParametersRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SpreadWithMultipleParametersRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SpreadWithMultipleParametersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadWithMultipleParametersRequest>)} interface");
             }
@@ -71,7 +71,7 @@ namespace Parameters.Spread.Models
 
         internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -149,14 +149,14 @@ namespace Parameters.Spread.Models
             return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<SpreadWithMultipleParametersRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SpreadWithMultipleParametersRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static SpreadWithMultipleParametersRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

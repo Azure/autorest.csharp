@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class VariableValues : IUtf8JsonSerializable, IJsonModel<VariableValues>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VariableValues>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VariableValues>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VariableValues>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VariableValues>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VariableValues>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VariableValues>)} interface");
             }
@@ -75,7 +75,7 @@ namespace AnomalyDetector.Models
 
         internal static VariableValues DeserializeVariableValues(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,14 +145,14 @@ namespace AnomalyDetector.Models
             return DeserializeVariableValues(document.RootElement, options);
         }
 
-        string IPersistableModel<VariableValues>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VariableValues>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static VariableValues FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeVariableValues(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeVariableValues(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

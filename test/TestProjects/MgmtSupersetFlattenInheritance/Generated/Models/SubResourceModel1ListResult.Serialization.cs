@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     internal partial class SubResourceModel1ListResult : IUtf8JsonSerializable, IJsonModel<SubResourceModel1ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResourceModel1ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResourceModel1ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SubResourceModel1ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SubResourceModel1ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SubResourceModel1ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubResourceModel1ListResult>)} interface");
             }
@@ -79,7 +79,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static SubResourceModel1ListResult DeserializeSubResourceModel1ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -142,6 +142,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeSubResourceModel1ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<SubResourceModel1ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SubResourceModel1ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

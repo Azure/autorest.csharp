@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class RestorePolicyProperties : IUtf8JsonSerializable, IJsonModel<RestorePolicyProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RestorePolicyProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RestorePolicyProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RestorePolicyProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RestorePolicyProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RestorePolicyProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RestorePolicyProperties>)} interface");
             }
@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static RestorePolicyProperties DeserializeRestorePolicyProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -159,6 +159,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeRestorePolicyProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<RestorePolicyProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RestorePolicyProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtListMethods;
@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     public partial class FakeConfigurationListResult : IUtf8JsonSerializable, IJsonModel<FakeConfigurationListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeConfigurationListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeConfigurationListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FakeConfigurationListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FakeConfigurationListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FakeConfigurationListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FakeConfigurationListResult>)} interface");
             }
@@ -69,7 +69,7 @@ namespace MgmtListMethods.Models
 
         internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace MgmtListMethods.Models
             return DeserializeFakeConfigurationListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<FakeConfigurationListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FakeConfigurationListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

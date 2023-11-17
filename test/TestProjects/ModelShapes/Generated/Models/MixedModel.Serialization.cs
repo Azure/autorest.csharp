@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace ModelShapes.Models
 {
     public partial class MixedModel : IUtf8JsonSerializable, IJsonModel<MixedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MixedModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MixedModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MixedModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MixedModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MixedModel>)} interface");
             }
@@ -331,7 +331,7 @@ namespace ModelShapes.Models
 
         internal static MixedModel DeserializeMixedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -711,6 +711,6 @@ namespace ModelShapes.Models
             return DeserializeMixedModel(document.RootElement, options);
         }
 
-        string IPersistableModel<MixedModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MixedModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

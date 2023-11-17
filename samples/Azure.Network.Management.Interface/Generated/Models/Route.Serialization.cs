@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class Route : IUtf8JsonSerializable, IJsonModel<Route>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Route>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Route>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Route>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Route>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Route>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Route>)} interface");
             }
@@ -102,7 +102,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Route DeserializeRoute(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -206,6 +206,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeRoute(document.RootElement, options);
         }
 
-        string IPersistableModel<Route>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Route>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

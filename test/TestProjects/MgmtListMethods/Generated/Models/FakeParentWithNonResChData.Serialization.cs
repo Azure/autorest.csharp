@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtListMethods
 {
     public partial class FakeParentWithNonResChData : IUtf8JsonSerializable, IJsonModel<FakeParentWithNonResChData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeParentWithNonResChData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FakeParentWithNonResChData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FakeParentWithNonResChData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FakeParentWithNonResChData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FakeParentWithNonResChData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FakeParentWithNonResChData>)} interface");
             }
@@ -100,7 +100,7 @@ namespace MgmtListMethods
 
         internal static FakeParentWithNonResChData DeserializeFakeParentWithNonResChData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -197,6 +197,6 @@ namespace MgmtListMethods
             return DeserializeFakeParentWithNonResChData(document.RootElement, options);
         }
 
-        string IPersistableModel<FakeParentWithNonResChData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FakeParentWithNonResChData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

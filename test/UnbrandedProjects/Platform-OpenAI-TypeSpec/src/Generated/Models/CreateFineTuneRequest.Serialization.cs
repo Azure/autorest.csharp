@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateFineTuneRequest : IUtf8JsonWriteable, IJsonModel<CreateFineTuneRequest>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFineTuneRequest>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateFineTuneRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateFineTuneRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateFineTuneRequest>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateFineTuneRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateFineTuneRequest>)} interface");
             }
@@ -187,7 +187,7 @@ namespace OpenAI.Models
 
         internal static CreateFineTuneRequest DeserializeCreateFineTuneRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -359,14 +359,14 @@ namespace OpenAI.Models
             return DeserializeCreateFineTuneRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateFineTuneRequest>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateFineTuneRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateFineTuneRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateFineTuneRequest(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateFineTuneRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

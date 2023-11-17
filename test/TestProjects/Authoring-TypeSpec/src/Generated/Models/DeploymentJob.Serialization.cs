@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AuthoringTypeSpec.Models
 {
     public partial class DeploymentJob : IUtf8JsonSerializable, IJsonModel<DeploymentJob>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentJob>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeploymentJob>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeploymentJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeploymentJob>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeploymentJob>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeploymentJob>)} interface");
             }
@@ -92,7 +92,7 @@ namespace AuthoringTypeSpec.Models
 
         internal static DeploymentJob DeserializeDeploymentJob(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -187,14 +187,14 @@ namespace AuthoringTypeSpec.Models
             return DeserializeDeploymentJob(document.RootElement, options);
         }
 
-        string IPersistableModel<DeploymentJob>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeploymentJob>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DeploymentJob FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDeploymentJob(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeDeploymentJob(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

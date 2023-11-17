@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyIntrusionDetection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyIntrusionDetection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetection>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyIntrusionDetection>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FirewallPolicyIntrusionDetection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyIntrusionDetection>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyIntrusionDetection>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyIntrusionDetection>)} interface");
             }
@@ -68,7 +68,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyIntrusionDetection DeserializeFirewallPolicyIntrusionDetection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyIntrusionDetection(document.RootElement, options);
         }
 
-        string IPersistableModel<FirewallPolicyIntrusionDetection>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FirewallPolicyIntrusionDetection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

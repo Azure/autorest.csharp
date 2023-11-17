@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtCollectionParent;
@@ -17,11 +17,11 @@ namespace MgmtCollectionParent.Models
 {
     internal partial class OrderResourceList : IUtf8JsonSerializable, IJsonModel<OrderResourceList>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceList>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceList>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OrderResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OrderResourceList>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OrderResourceList>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OrderResourceList>)} interface");
             }
@@ -77,7 +77,7 @@ namespace MgmtCollectionParent.Models
 
         internal static OrderResourceList DeserializeOrderResourceList(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -140,6 +140,6 @@ namespace MgmtCollectionParent.Models
             return DeserializeOrderResourceList(document.RootElement, options);
         }
 
-        string IPersistableModel<OrderResourceList>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OrderResourceList>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

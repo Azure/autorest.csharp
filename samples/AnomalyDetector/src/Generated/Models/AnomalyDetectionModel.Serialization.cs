@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class AnomalyDetectionModel : IUtf8JsonSerializable, IJsonModel<AnomalyDetectionModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnomalyDetectionModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AnomalyDetectionModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AnomalyDetectionModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AnomalyDetectionModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AnomalyDetectionModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AnomalyDetectionModel>)} interface");
             }
@@ -73,7 +73,7 @@ namespace AnomalyDetector.Models
 
         internal static AnomalyDetectionModel DeserializeAnomalyDetectionModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,14 +143,14 @@ namespace AnomalyDetector.Models
             return DeserializeAnomalyDetectionModel(document.RootElement, options);
         }
 
-        string IPersistableModel<AnomalyDetectionModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AnomalyDetectionModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static AnomalyDetectionModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnomalyDetectionModel(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeAnomalyDetectionModel(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

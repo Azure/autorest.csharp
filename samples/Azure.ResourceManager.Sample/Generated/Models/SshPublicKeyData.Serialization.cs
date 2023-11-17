@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class SshPublicKeyData : IUtf8JsonSerializable, IJsonModel<SshPublicKeyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeyData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SshPublicKeyData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SshPublicKeyData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SshPublicKeyData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SshPublicKeyData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SshPublicKeyData>)} interface");
             }
@@ -103,7 +103,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static SshPublicKeyData DeserializeSshPublicKeyData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -212,6 +212,6 @@ namespace Azure.ResourceManager.Sample
             return DeserializeSshPublicKeyData(document.RootElement, options);
         }
 
-        string IPersistableModel<SshPublicKeyData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SshPublicKeyData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

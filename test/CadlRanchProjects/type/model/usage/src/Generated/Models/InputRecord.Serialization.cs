@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Model.Usage.Models
 {
     public partial class InputRecord : IUtf8JsonSerializable, IJsonModel<InputRecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecord>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<InputRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InputRecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<InputRecord>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputRecord>)} interface");
             }
@@ -61,7 +61,7 @@ namespace _Type.Model.Usage.Models
 
         internal static InputRecord DeserializeInputRecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace _Type.Model.Usage.Models
             return DeserializeInputRecord(document.RootElement, options);
         }
 
-        string IPersistableModel<InputRecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<InputRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InputRecord FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputRecord(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeInputRecord(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

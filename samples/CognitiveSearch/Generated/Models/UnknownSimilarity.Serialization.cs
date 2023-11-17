@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     internal partial class UnknownSimilarity : IUtf8JsonSerializable, IJsonModel<Similarity>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Similarity>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Similarity>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Similarity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Similarity>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Similarity>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Similarity>)} interface");
             }
@@ -60,7 +60,7 @@ namespace CognitiveSearch.Models
 
         internal static UnknownSimilarity DeserializeUnknownSimilarity(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -108,6 +108,6 @@ namespace CognitiveSearch.Models
             return DeserializeUnknownSimilarity(document.RootElement, options);
         }
 
-        string IPersistableModel<Similarity>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Similarity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

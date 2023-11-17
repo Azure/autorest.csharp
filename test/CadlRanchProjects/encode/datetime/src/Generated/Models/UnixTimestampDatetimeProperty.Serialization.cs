@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Encode.Datetime.Models
 {
     public partial class UnixTimestampDatetimeProperty : IUtf8JsonSerializable, IJsonModel<UnixTimestampDatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnixTimestampDatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnixTimestampDatetimeProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UnixTimestampDatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UnixTimestampDatetimeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UnixTimestampDatetimeProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnixTimestampDatetimeProperty>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Encode.Datetime.Models
 
         internal static UnixTimestampDatetimeProperty DeserializeUnixTimestampDatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Encode.Datetime.Models
             return DeserializeUnixTimestampDatetimeProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<UnixTimestampDatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UnixTimestampDatetimeProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnixTimestampDatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

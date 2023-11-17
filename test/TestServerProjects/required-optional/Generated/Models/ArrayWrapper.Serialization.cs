@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace required_optional.Models
 {
     public partial class ArrayWrapper : IUtf8JsonSerializable, IJsonModel<ArrayWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ArrayWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ArrayWrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ArrayWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ArrayWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ArrayWrapper>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ArrayWrapper>)} interface");
             }
@@ -65,7 +65,7 @@ namespace required_optional.Models
 
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -118,6 +118,6 @@ namespace required_optional.Models
             return DeserializeArrayWrapper(document.RootElement, options);
         }
 
-        string IPersistableModel<ArrayWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ArrayWrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

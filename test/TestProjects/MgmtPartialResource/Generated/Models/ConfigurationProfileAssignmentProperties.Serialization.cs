@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtPartialResource.Models
 {
     public partial class ConfigurationProfileAssignmentProperties : IUtf8JsonSerializable, IJsonModel<ConfigurationProfileAssignmentProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConfigurationProfileAssignmentProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConfigurationProfileAssignmentProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ConfigurationProfileAssignmentProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ConfigurationProfileAssignmentProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ConfigurationProfileAssignmentProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ConfigurationProfileAssignmentProperties>)} interface");
             }
@@ -76,7 +76,7 @@ namespace MgmtPartialResource.Models
 
         internal static ConfigurationProfileAssignmentProperties DeserializeConfigurationProfileAssignmentProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,6 +136,6 @@ namespace MgmtPartialResource.Models
             return DeserializeConfigurationProfileAssignmentProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<ConfigurationProfileAssignmentProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ConfigurationProfileAssignmentProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

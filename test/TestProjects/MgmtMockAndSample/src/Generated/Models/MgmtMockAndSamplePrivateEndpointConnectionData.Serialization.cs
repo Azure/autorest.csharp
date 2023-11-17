@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,11 +19,11 @@ namespace MgmtMockAndSample
 {
     public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable, IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtMockAndSamplePrivateEndpointConnectionData>)} interface");
             }
@@ -129,7 +129,7 @@ namespace MgmtMockAndSample
 
         internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -272,6 +272,6 @@ namespace MgmtMockAndSample
             return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement, options);
         }
 
-        string IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MgmtMockAndSamplePrivateEndpointConnectionData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

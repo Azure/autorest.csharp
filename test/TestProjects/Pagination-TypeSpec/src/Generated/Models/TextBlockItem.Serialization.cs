@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Pagination.Models
 {
     public partial class TextBlockItem : IUtf8JsonSerializable, IJsonModel<TextBlockItem>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextBlockItem>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextBlockItem>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TextBlockItem>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TextBlockItem>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TextBlockItem>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TextBlockItem>)} interface");
             }
@@ -68,7 +68,7 @@ namespace Pagination.Models
 
         internal static TextBlockItem DeserializeTextBlockItem(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -128,14 +128,14 @@ namespace Pagination.Models
             return DeserializeTextBlockItem(document.RootElement, options);
         }
 
-        string IPersistableModel<TextBlockItem>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TextBlockItem>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static TextBlockItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTextBlockItem(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeTextBlockItem(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

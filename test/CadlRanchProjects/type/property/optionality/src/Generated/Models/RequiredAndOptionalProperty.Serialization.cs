@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Property.Optionality.Models
 {
     public partial class RequiredAndOptionalProperty : IUtf8JsonSerializable, IJsonModel<RequiredAndOptionalProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequiredAndOptionalProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequiredAndOptionalProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RequiredAndOptionalProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RequiredAndOptionalProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RequiredAndOptionalProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RequiredAndOptionalProperty>)} interface");
             }
@@ -66,7 +66,7 @@ namespace _Type.Property.Optionality.Models
 
         internal static RequiredAndOptionalProperty DeserializeRequiredAndOptionalProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -120,14 +120,14 @@ namespace _Type.Property.Optionality.Models
             return DeserializeRequiredAndOptionalProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<RequiredAndOptionalProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RequiredAndOptionalProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RequiredAndOptionalProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRequiredAndOptionalProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeRequiredAndOptionalProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

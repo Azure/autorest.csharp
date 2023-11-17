@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class MgmtMockAndSampleSku : IUtf8JsonSerializable, IJsonModel<MgmtMockAndSampleSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSampleSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtMockAndSampleSku>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MgmtMockAndSampleSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MgmtMockAndSampleSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MgmtMockAndSampleSku>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtMockAndSampleSku>)} interface");
             }
@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Models
 
         internal static MgmtMockAndSampleSku DeserializeMgmtMockAndSampleSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMgmtMockAndSampleSku(document.RootElement, options);
         }
 
-        string IPersistableModel<MgmtMockAndSampleSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MgmtMockAndSampleSku>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace CustomizationsInTsp.Models
 {
     internal partial class ModelToMakeInternal : IUtf8JsonSerializable, IJsonModel<ModelToMakeInternal>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToMakeInternal>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelToMakeInternal>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelToMakeInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelToMakeInternal>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelToMakeInternal>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelToMakeInternal>)} interface");
             }
@@ -61,7 +61,7 @@ namespace CustomizationsInTsp.Models
 
         internal static ModelToMakeInternal DeserializeModelToMakeInternal(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace CustomizationsInTsp.Models
             return DeserializeModelToMakeInternal(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelToMakeInternal>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelToMakeInternal>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ModelToMakeInternal FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToMakeInternal(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeModelToMakeInternal(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

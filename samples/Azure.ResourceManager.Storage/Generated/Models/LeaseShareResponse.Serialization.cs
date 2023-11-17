@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class LeaseShareResponse : IUtf8JsonSerializable, IJsonModel<LeaseShareResponse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LeaseShareResponse>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<LeaseShareResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<LeaseShareResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LeaseShareResponse>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<LeaseShareResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LeaseShareResponse>)} interface");
             }
@@ -68,7 +68,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static LeaseShareResponse DeserializeLeaseShareResponse(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,6 +122,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeLeaseShareResponse(document.RootElement, options);
         }
 
-        string IPersistableModel<LeaseShareResponse>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<LeaseShareResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

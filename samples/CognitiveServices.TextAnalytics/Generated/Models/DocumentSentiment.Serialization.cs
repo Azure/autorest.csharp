@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class DocumentSentiment : IUtf8JsonSerializable, IJsonModel<DocumentSentiment>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentSentiment>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentSentiment>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DocumentSentiment>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DocumentSentiment>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DocumentSentiment>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DocumentSentiment>)} interface");
             }
@@ -83,7 +83,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -175,6 +175,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeDocumentSentiment(document.RootElement, options);
         }
 
-        string IPersistableModel<DocumentSentiment>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DocumentSentiment>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

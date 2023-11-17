@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtExactMatchFlattenInheritance;
@@ -17,11 +17,11 @@ namespace MgmtExactMatchFlattenInheritance.Models
 {
     internal partial class CustomModel3ListResult : IUtf8JsonSerializable, IJsonModel<CustomModel3ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel3ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CustomModel3ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CustomModel3ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CustomModel3ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CustomModel3ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CustomModel3ListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
 
         internal static CustomModel3ListResult DeserializeCustomModel3ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return DeserializeCustomModel3ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<CustomModel3ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CustomModel3ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

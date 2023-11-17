@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class PatternReplaceCharFilter : IUtf8JsonSerializable, IJsonModel<PatternReplaceCharFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternReplaceCharFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PatternReplaceCharFilter>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PatternReplaceCharFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PatternReplaceCharFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PatternReplaceCharFilter>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PatternReplaceCharFilter>)} interface");
             }
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
 
         internal static PatternReplaceCharFilter DeserializePatternReplaceCharFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -132,6 +132,6 @@ namespace CognitiveSearch.Models
             return DeserializePatternReplaceCharFilter(document.RootElement, options);
         }
 
-        string IPersistableModel<PatternReplaceCharFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PatternReplaceCharFilter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

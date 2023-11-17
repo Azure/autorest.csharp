@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Encode.Duration.Models
 {
     public partial class ISO8601DurationProperty : IUtf8JsonSerializable, IJsonModel<ISO8601DurationProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ISO8601DurationProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ISO8601DurationProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ISO8601DurationProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ISO8601DurationProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ISO8601DurationProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ISO8601DurationProperty>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Encode.Duration.Models
 
         internal static ISO8601DurationProperty DeserializeISO8601DurationProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Encode.Duration.Models
             return DeserializeISO8601DurationProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<ISO8601DurationProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ISO8601DurationProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static ISO8601DurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeISO8601DurationProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeISO8601DurationProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

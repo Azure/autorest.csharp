@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMultipleParentResource.Models
 {
     public partial class TheParentPatch : IUtf8JsonSerializable, IJsonModel<TheParentPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TheParentPatch>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TheParentPatch>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TheParentPatch>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TheParentPatch>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TheParentPatch>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TheParentPatch>)} interface");
             }
@@ -110,7 +110,7 @@ namespace MgmtMultipleParentResource.Models
 
         internal static TheParentPatch DeserializeTheParentPatch(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -237,6 +237,6 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeTheParentPatch(document.RootElement, options);
         }
 
-        string IPersistableModel<TheParentPatch>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TheParentPatch>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

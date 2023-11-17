@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtHierarchicalNonResource
 {
     public partial class SharedGalleryData : IUtf8JsonSerializable, IJsonModel<SharedGalleryData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SharedGalleryData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SharedGalleryData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SharedGalleryData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SharedGalleryData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SharedGalleryData>)} interface");
             }
@@ -82,7 +82,7 @@ namespace MgmtHierarchicalNonResource
 
         internal static SharedGalleryData DeserializeSharedGalleryData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -154,6 +154,6 @@ namespace MgmtHierarchicalNonResource
             return DeserializeSharedGalleryData(document.RootElement, options);
         }
 
-        string IPersistableModel<SharedGalleryData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SharedGalleryData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

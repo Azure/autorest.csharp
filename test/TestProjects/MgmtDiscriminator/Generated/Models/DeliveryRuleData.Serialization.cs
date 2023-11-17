@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace MgmtDiscriminator
 {
     public partial class DeliveryRuleData : IUtf8JsonSerializable, IJsonModel<DeliveryRuleData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeliveryRuleData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeliveryRuleData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeliveryRuleData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeliveryRuleData>)} interface");
             }
@@ -88,7 +88,7 @@ namespace MgmtDiscriminator
 
         internal static DeliveryRuleData DeserializeDeliveryRuleData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -168,6 +168,6 @@ namespace MgmtDiscriminator
             return DeserializeDeliveryRuleData(document.RootElement, options);
         }
 
-        string IPersistableModel<DeliveryRuleData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeliveryRuleData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

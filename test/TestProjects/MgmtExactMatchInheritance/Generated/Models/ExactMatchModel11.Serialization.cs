@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -18,11 +18,11 @@ namespace MgmtExactMatchInheritance.Models
     [JsonConverter(typeof(ExactMatchModel11Converter))]
     public partial class ExactMatchModel11 : IUtf8JsonSerializable, IJsonModel<ExactMatchModel11>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel11>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExactMatchModel11>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ExactMatchModel11>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel11>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExactMatchModel11>)} interface");
             }
@@ -76,7 +76,7 @@ namespace MgmtExactMatchInheritance.Models
 
         internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -134,7 +134,7 @@ namespace MgmtExactMatchInheritance.Models
             return DeserializeExactMatchModel11(document.RootElement, options);
         }
 
-        string IPersistableModel<ExactMatchModel11>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ExactMatchModel11>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class ExactMatchModel11Converter : JsonConverter<ExactMatchModel11>
         {

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtOmitOperationGroups;
@@ -17,11 +17,11 @@ namespace MgmtOmitOperationGroups.Models
 {
     internal partial class Model2ListResult : IUtf8JsonSerializable, IJsonModel<Model2ListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model2ListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Model2ListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Model2ListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Model2ListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Model2ListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Model2ListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtOmitOperationGroups.Models
 
         internal static Model2ListResult DeserializeModel2ListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtOmitOperationGroups.Models
             return DeserializeModel2ListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<Model2ListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Model2ListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

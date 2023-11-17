@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Encode.Datetime.Models
 {
     public partial class Rfc7231DatetimeProperty : IUtf8JsonSerializable, IJsonModel<Rfc7231DatetimeProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc7231DatetimeProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Rfc7231DatetimeProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Rfc7231DatetimeProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Rfc7231DatetimeProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Rfc7231DatetimeProperty>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Encode.Datetime.Models
 
         internal static Rfc7231DatetimeProperty DeserializeRfc7231DatetimeProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Encode.Datetime.Models
             return DeserializeRfc7231DatetimeProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<Rfc7231DatetimeProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Rfc7231DatetimeProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static Rfc7231DatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRfc7231DatetimeProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeRfc7231DatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

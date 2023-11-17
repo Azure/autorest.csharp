@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Shark : IUtf8JsonSerializable, IJsonModel<Shark>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shark>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Shark>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Shark>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Shark>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Shark>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Shark>)} interface");
             }
@@ -84,7 +84,7 @@ namespace body_complex.Models
 
         internal static Shark DeserializeShark(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -184,6 +184,6 @@ namespace body_complex.Models
             return DeserializeShark(document.RootElement, options);
         }
 
-        string IPersistableModel<Shark>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Shark>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

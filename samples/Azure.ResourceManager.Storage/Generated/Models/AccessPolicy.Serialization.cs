@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class AccessPolicy : IUtf8JsonSerializable, IJsonModel<AccessPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccessPolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AccessPolicy>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AccessPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AccessPolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AccessPolicy>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AccessPolicy>)} interface");
             }
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -141,6 +141,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeAccessPolicy(document.RootElement, options);
         }
 
-        string IPersistableModel<AccessPolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AccessPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

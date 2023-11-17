@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtMultipleParentResource;
@@ -17,11 +17,11 @@ namespace MgmtMultipleParentResource.Models
 {
     internal partial class ChildBodiesListResult : IUtf8JsonSerializable, IJsonModel<ChildBodiesListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ChildBodiesListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ChildBodiesListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ChildBodiesListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ChildBodiesListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ChildBodiesListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ChildBodiesListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtMultipleParentResource.Models
 
         internal static ChildBodiesListResult DeserializeChildBodiesListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtMultipleParentResource.Models
             return DeserializeChildBodiesListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<ChildBodiesListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ChildBodiesListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

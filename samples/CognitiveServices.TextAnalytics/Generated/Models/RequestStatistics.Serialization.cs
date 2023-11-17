@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class RequestStatistics : IUtf8JsonSerializable, IJsonModel<RequestStatistics>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestStatistics>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RequestStatistics>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RequestStatistics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RequestStatistics>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RequestStatistics>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RequestStatistics>)} interface");
             }
@@ -66,7 +66,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static RequestStatistics DeserializeRequestStatistics(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -132,6 +132,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeRequestStatistics(document.RootElement, options);
         }
 
-        string IPersistableModel<RequestStatistics>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RequestStatistics>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

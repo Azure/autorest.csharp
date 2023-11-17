@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Payload.ContentNegotiation.Models
 {
     public partial class PngImageAsJson : IUtf8JsonSerializable, IJsonModel<PngImageAsJson>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PngImageAsJson>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PngImageAsJson>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PngImageAsJson>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PngImageAsJson>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PngImageAsJson>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PngImageAsJson>)} interface");
             }
@@ -61,7 +61,7 @@ namespace Payload.ContentNegotiation.Models
 
         internal static PngImageAsJson DeserializePngImageAsJson(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,14 +109,14 @@ namespace Payload.ContentNegotiation.Models
             return DeserializePngImageAsJson(document.RootElement, options);
         }
 
-        string IPersistableModel<PngImageAsJson>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PngImageAsJson>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static PngImageAsJson FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePngImageAsJson(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializePngImageAsJson(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

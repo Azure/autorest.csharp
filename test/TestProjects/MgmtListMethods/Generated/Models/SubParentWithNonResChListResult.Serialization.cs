@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtListMethods;
@@ -17,11 +17,11 @@ namespace MgmtListMethods.Models
 {
     internal partial class SubParentWithNonResChListResult : IUtf8JsonSerializable, IJsonModel<SubParentWithNonResChListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubParentWithNonResChListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubParentWithNonResChListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SubParentWithNonResChListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SubParentWithNonResChListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SubParentWithNonResChListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubParentWithNonResChListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtListMethods.Models
 
         internal static SubParentWithNonResChListResult DeserializeSubParentWithNonResChListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtListMethods.Models
             return DeserializeSubParentWithNonResChListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<SubParentWithNonResChListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SubParentWithNonResChListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

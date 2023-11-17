@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtResourceName
 {
     public partial class DisplayResourceData : IUtf8JsonSerializable, IJsonModel<DisplayResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DisplayResourceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DisplayResourceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DisplayResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DisplayResourceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DisplayResourceData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DisplayResourceData>)} interface");
             }
@@ -87,7 +87,7 @@ namespace MgmtResourceName
 
         internal static DisplayResourceData DeserializeDisplayResourceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -163,6 +163,6 @@ namespace MgmtResourceName
             return DeserializeDisplayResourceData(document.RootElement, options);
         }
 
-        string IPersistableModel<DisplayResourceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DisplayResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

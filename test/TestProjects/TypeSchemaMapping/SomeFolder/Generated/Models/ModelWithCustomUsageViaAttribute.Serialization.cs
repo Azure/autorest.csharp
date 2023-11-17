@@ -6,10 +6,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -41,11 +41,11 @@ namespace TypeSchemaMapping.Models
             return new ModelWithCustomUsageViaAttribute(modelProperty, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsageViaAttribute>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsageViaAttribute>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelWithCustomUsageViaAttribute>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithCustomUsageViaAttribute>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithCustomUsageViaAttribute>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithCustomUsageViaAttribute>)} interface");
             }
@@ -88,7 +88,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -161,6 +161,6 @@ namespace TypeSchemaMapping.Models
             }
         }
 
-        string IPersistableModel<ModelWithCustomUsageViaAttribute>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<ModelWithCustomUsageViaAttribute>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

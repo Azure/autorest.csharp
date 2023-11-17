@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtSupersetFlattenInheritance.Models
 {
     public partial class NonResourceModel1 : IUtf8JsonSerializable, IJsonModel<NonResourceModel1>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceModel1>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NonResourceModel1>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NonResourceModel1>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NonResourceModel1>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NonResourceModel1>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NonResourceModel1>)} interface");
             }
@@ -76,7 +76,7 @@ namespace MgmtSupersetFlattenInheritance.Models
 
         internal static NonResourceModel1 DeserializeNonResourceModel1(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -148,6 +148,6 @@ namespace MgmtSupersetFlattenInheritance.Models
             return DeserializeNonResourceModel1(document.RootElement, options);
         }
 
-        string IPersistableModel<NonResourceModel1>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NonResourceModel1>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

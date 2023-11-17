@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class InputFieldMappingEntry : IUtf8JsonSerializable, IJsonModel<InputFieldMappingEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputFieldMappingEntry>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputFieldMappingEntry>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<InputFieldMappingEntry>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InputFieldMappingEntry>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<InputFieldMappingEntry>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputFieldMappingEntry>)} interface");
             }
@@ -80,7 +80,7 @@ namespace CognitiveSearch.Models
 
         internal static InputFieldMappingEntry DeserializeInputFieldMappingEntry(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -155,6 +155,6 @@ namespace CognitiveSearch.Models
             return DeserializeInputFieldMappingEntry(document.RootElement, options);
         }
 
-        string IPersistableModel<InputFieldMappingEntry>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<InputFieldMappingEntry>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

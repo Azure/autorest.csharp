@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -18,11 +18,11 @@ namespace ModelWithConverterUsage.Models
     [JsonConverter(typeof(ModelClassConverter))]
     public partial class ModelClass : IUtf8JsonSerializable, IJsonModel<ModelClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelClass>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelClass>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelClass>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelClass>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelClass>)} interface");
             }
@@ -72,7 +72,7 @@ namespace ModelWithConverterUsage.Models
 
         internal static ModelClass DeserializeModelClass(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,7 +136,7 @@ namespace ModelWithConverterUsage.Models
             return DeserializeModelClass(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelClass>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelClass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class ModelClassConverter : JsonConverter<ModelClass>
         {

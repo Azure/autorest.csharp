@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class MultivariateLastDetectionResult : IUtf8JsonSerializable, IJsonModel<MultivariateLastDetectionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultivariateLastDetectionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultivariateLastDetectionResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MultivariateLastDetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MultivariateLastDetectionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MultivariateLastDetectionResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MultivariateLastDetectionResult>)} interface");
             }
@@ -79,7 +79,7 @@ namespace AnomalyDetector.Models
 
         internal static MultivariateLastDetectionResult DeserializeMultivariateLastDetectionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -151,14 +151,14 @@ namespace AnomalyDetector.Models
             return DeserializeMultivariateLastDetectionResult(document.RootElement, options);
         }
 
-        string IPersistableModel<MultivariateLastDetectionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MultivariateLastDetectionResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static MultivariateLastDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateLastDetectionResult(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeMultivariateLastDetectionResult(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

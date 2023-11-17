@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     public partial class Goose : IUtf8JsonSerializable, IJsonModel<Goose>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Goose>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Goose>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Goose>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Goose>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Goose>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Goose>)} interface");
             }
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 
         internal static Goose DeserializeGoose(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -117,14 +117,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             return DeserializeGoose(document.RootElement, options);
         }
 
-        string IPersistableModel<Goose>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Goose>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new Goose FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeGoose(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeGoose(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

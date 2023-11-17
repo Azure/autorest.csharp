@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ConfidentLevelsInTsp.Models
     [PersistableModelProxy(typeof(UnknownPollutedPet))]
     public partial class PollutedPet : IUtf8JsonSerializable, IJsonModel<PollutedPet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedPet>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PollutedPet>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PollutedPet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PollutedPet>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PollutedPet>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PollutedPet>)} interface");
             }
@@ -63,7 +63,7 @@ namespace ConfidentLevelsInTsp.Models
 
         internal static PollutedPet DeserializePollutedPet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -103,14 +103,14 @@ namespace ConfidentLevelsInTsp.Models
             return DeserializePollutedPet(document.RootElement, options);
         }
 
-        string IPersistableModel<PollutedPet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PollutedPet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static PollutedPet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializePollutedPet(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializePollutedPet(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

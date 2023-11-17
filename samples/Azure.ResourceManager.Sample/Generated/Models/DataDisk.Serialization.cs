@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Sample.Models
 {
     public partial class DataDisk : IUtf8JsonSerializable, IJsonModel<DataDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDisk>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DataDisk>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DataDisk>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DataDisk>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DataDisk>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DataDisk>)} interface");
             }
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DataDisk DeserializeDataDisk(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -268,6 +268,6 @@ namespace Azure.ResourceManager.Sample.Models
             return DeserializeDataDisk(document.RootElement, options);
         }
 
-        string IPersistableModel<DataDisk>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DataDisk>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

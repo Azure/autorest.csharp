@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace MgmtScopeResource
 {
     public partial class ResourceLinkData : IUtf8JsonSerializable, IJsonModel<ResourceLinkData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceLinkData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceLinkData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ResourceLinkData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ResourceLinkData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ResourceLinkData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceLinkData>)} interface");
             }
@@ -88,7 +88,7 @@ namespace MgmtScopeResource
 
         internal static ResourceLinkData DeserializeResourceLinkData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -168,6 +168,6 @@ namespace MgmtScopeResource
             return DeserializeResourceLinkData(document.RootElement, options);
         }
 
-        string IPersistableModel<ResourceLinkData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ResourceLinkData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

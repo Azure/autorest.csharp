@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace TypeSchemaMapping.Models
 {
     internal partial class ModelWithArrayOfEnum : IUtf8JsonSerializable, IJsonModel<ModelWithArrayOfEnum>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithArrayOfEnum>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithArrayOfEnum>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelWithArrayOfEnum>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithArrayOfEnum>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelWithArrayOfEnum>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithArrayOfEnum>)} interface");
             }
@@ -83,7 +83,7 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -162,6 +162,6 @@ namespace TypeSchemaMapping.Models
             return DeserializeModelWithArrayOfEnum(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelWithArrayOfEnum>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelWithArrayOfEnum>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

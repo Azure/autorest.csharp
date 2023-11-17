@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace model_flattening.Models
 {
     public partial class WrappedProduct : IUtf8JsonSerializable, IJsonModel<WrappedProduct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WrappedProduct>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WrappedProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<WrappedProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<WrappedProduct>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<WrappedProduct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WrappedProduct>)} interface");
             }
@@ -63,7 +63,7 @@ namespace model_flattening.Models
 
         internal static WrappedProduct DeserializeWrappedProduct(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace model_flattening.Models
             return DeserializeWrappedProduct(document.RootElement, options);
         }
 
-        string IPersistableModel<WrappedProduct>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<WrappedProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

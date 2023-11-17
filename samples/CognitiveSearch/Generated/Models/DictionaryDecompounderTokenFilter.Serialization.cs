@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class DictionaryDecompounderTokenFilter : IUtf8JsonSerializable, IJsonModel<DictionaryDecompounderTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DictionaryDecompounderTokenFilter>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DictionaryDecompounderTokenFilter>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DictionaryDecompounderTokenFilter>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DictionaryDecompounderTokenFilter>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DictionaryDecompounderTokenFilter>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DictionaryDecompounderTokenFilter>)} interface");
             }
@@ -89,7 +89,7 @@ namespace CognitiveSearch.Models
 
         internal static DictionaryDecompounderTokenFilter DeserializeDictionaryDecompounderTokenFilter(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -194,6 +194,6 @@ namespace CognitiveSearch.Models
             return DeserializeDictionaryDecompounderTokenFilter(document.RootElement, options);
         }
 
-        string IPersistableModel<DictionaryDecompounderTokenFilter>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DictionaryDecompounderTokenFilter>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

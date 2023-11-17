@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtExtensionResource.Models
 {
     public partial class ValidateSomethingContent : IUtf8JsonSerializable, IJsonModel<ValidateSomethingContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ValidateSomethingContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ValidateSomethingContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ValidateSomethingContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ValidateSomethingContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ValidateSomethingContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ValidateSomethingContent>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtExtensionResource.Models
 
         internal static ValidateSomethingContent DeserializeValidateSomethingContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace MgmtExtensionResource.Models
             return DeserializeValidateSomethingContent(document.RootElement, options);
         }
 
-        string IPersistableModel<ValidateSomethingContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ValidateSomethingContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

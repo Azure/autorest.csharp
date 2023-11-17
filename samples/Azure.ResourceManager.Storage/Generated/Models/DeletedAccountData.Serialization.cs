@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Storage
 {
     public partial class DeletedAccountData : IUtf8JsonSerializable, IJsonModel<DeletedAccountData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedAccountData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeletedAccountData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeletedAccountData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeletedAccountData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeletedAccountData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeletedAccountData>)} interface");
             }
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Storage
 
         internal static DeletedAccountData DeserializeDeletedAccountData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -241,6 +241,6 @@ namespace Azure.ResourceManager.Storage
             return DeserializeDeletedAccountData(document.RootElement, options);
         }
 
-        string IPersistableModel<DeletedAccountData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeletedAccountData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

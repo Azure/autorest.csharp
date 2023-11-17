@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class OutboundRule : IUtf8JsonSerializable, IJsonModel<OutboundRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutboundRule>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OutboundRule>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OutboundRule>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OutboundRule>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OutboundRule>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OutboundRule>)} interface");
             }
@@ -130,7 +130,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static OutboundRule DeserializeOutboundRule(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -283,6 +283,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeOutboundRule(document.RootElement, options);
         }
 
-        string IPersistableModel<OutboundRule>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OutboundRule>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

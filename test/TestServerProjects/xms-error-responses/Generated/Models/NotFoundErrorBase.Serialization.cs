@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace xms_error_responses.Models
 {
     internal partial class NotFoundErrorBase : IUtf8JsonSerializable, IJsonModel<NotFoundErrorBase>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NotFoundErrorBase>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NotFoundErrorBase>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NotFoundErrorBase>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NotFoundErrorBase>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NotFoundErrorBase>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NotFoundErrorBase>)} interface");
             }
@@ -70,7 +70,7 @@ namespace xms_error_responses.Models
 
         internal static NotFoundErrorBase DeserializeNotFoundErrorBase(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -138,6 +138,6 @@ namespace xms_error_responses.Models
             return DeserializeNotFoundErrorBase(document.RootElement, options);
         }
 
-        string IPersistableModel<NotFoundErrorBase>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NotFoundErrorBase>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

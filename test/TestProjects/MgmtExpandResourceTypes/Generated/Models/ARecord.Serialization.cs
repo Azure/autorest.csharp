@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtExpandResourceTypes.Models
 {
     public partial class ARecord : IUtf8JsonSerializable, IJsonModel<ARecord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ARecord>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ARecord>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ARecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ARecord>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ARecord>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ARecord>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static ARecord DeserializeARecord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace MgmtExpandResourceTypes.Models
             return DeserializeARecord(document.RootElement, options);
         }
 
-        string IPersistableModel<ARecord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ARecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

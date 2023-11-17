@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtOperations;
@@ -17,11 +17,11 @@ namespace MgmtOperations.Models
 {
     internal partial class UnpatchableResourceListResult : IUtf8JsonSerializable, IJsonModel<UnpatchableResourceListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnpatchableResourceListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UnpatchableResourceListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UnpatchableResourceListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UnpatchableResourceListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnpatchableResourceListResult>)} interface");
             }
@@ -69,7 +69,7 @@ namespace MgmtOperations.Models
 
         internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace MgmtOperations.Models
             return DeserializeUnpatchableResourceListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<UnpatchableResourceListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UnpatchableResourceListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

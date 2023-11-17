@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class InputRecursiveModel : IUtf8JsonSerializable, IJsonModel<InputRecursiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecursiveModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<InputRecursiveModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<InputRecursiveModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InputRecursiveModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<InputRecursiveModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputRecursiveModel>)} interface");
             }
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Models
 
         internal static InputRecursiveModel DeserializeInputRecursiveModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,14 +124,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeInputRecursiveModel(document.RootElement, options);
         }
 
-        string IPersistableModel<InputRecursiveModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<InputRecursiveModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static InputRecursiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputRecursiveModel(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeInputRecursiveModel(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

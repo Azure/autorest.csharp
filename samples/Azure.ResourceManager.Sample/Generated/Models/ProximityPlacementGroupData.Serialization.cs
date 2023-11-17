@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,11 +19,11 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class ProximityPlacementGroupData : IUtf8JsonSerializable, IJsonModel<ProximityPlacementGroupData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProximityPlacementGroupData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProximityPlacementGroupData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ProximityPlacementGroupData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ProximityPlacementGroupData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ProximityPlacementGroupData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProximityPlacementGroupData>)} interface");
             }
@@ -154,7 +154,7 @@ namespace Azure.ResourceManager.Sample
 
         internal static ProximityPlacementGroupData DeserializeProximityPlacementGroupData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -332,6 +332,6 @@ namespace Azure.ResourceManager.Sample
             return DeserializeProximityPlacementGroupData(document.RootElement, options);
         }
 
-        string IPersistableModel<ProximityPlacementGroupData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProximityPlacementGroupData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

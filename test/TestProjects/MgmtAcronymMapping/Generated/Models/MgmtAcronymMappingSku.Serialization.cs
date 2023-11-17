@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class MgmtAcronymMappingSku : IUtf8JsonSerializable, IJsonModel<MgmtAcronymMappingSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingSku>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingSku>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MgmtAcronymMappingSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MgmtAcronymMappingSku>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MgmtAcronymMappingSku>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtAcronymMappingSku>)} interface");
             }
@@ -73,7 +73,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static MgmtAcronymMappingSku DeserializeMgmtAcronymMappingSku(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,6 +137,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeMgmtAcronymMappingSku(document.RootElement, options);
         }
 
-        string IPersistableModel<MgmtAcronymMappingSku>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MgmtAcronymMappingSku>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

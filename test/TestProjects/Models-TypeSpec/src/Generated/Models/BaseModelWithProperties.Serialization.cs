@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace ModelsTypeSpec.Models
 {
     public partial class BaseModelWithProperties : IUtf8JsonSerializable, IJsonModel<BaseModelWithProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithProperties>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BaseModelWithProperties>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BaseModelWithProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BaseModelWithProperties>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BaseModelWithProperties>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BaseModelWithProperties>)} interface");
             }
@@ -64,7 +64,7 @@ namespace ModelsTypeSpec.Models
 
         internal static BaseModelWithProperties DeserializeBaseModelWithProperties(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -112,14 +112,14 @@ namespace ModelsTypeSpec.Models
             return DeserializeBaseModelWithProperties(document.RootElement, options);
         }
 
-        string IPersistableModel<BaseModelWithProperties>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BaseModelWithProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static BaseModelWithProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithProperties(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeBaseModelWithProperties(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

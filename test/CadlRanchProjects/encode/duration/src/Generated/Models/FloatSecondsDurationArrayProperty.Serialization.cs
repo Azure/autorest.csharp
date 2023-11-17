@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace Encode.Duration.Models
 {
     public partial class FloatSecondsDurationArrayProperty : IUtf8JsonSerializable, IJsonModel<FloatSecondsDurationArrayProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatSecondsDurationArrayProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FloatSecondsDurationArrayProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FloatSecondsDurationArrayProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FloatSecondsDurationArrayProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FloatSecondsDurationArrayProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FloatSecondsDurationArrayProperty>)} interface");
             }
@@ -66,7 +66,7 @@ namespace Encode.Duration.Models
 
         internal static FloatSecondsDurationArrayProperty DeserializeFloatSecondsDurationArrayProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -119,14 +119,14 @@ namespace Encode.Duration.Models
             return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<FloatSecondsDurationArrayProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FloatSecondsDurationArrayProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static FloatSecondsDurationArrayProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

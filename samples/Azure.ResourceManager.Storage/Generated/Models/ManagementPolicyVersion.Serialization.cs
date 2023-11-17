@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class ManagementPolicyVersion : IUtf8JsonSerializable, IJsonModel<ManagementPolicyVersion>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicyVersion>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ManagementPolicyVersion>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ManagementPolicyVersion>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ManagementPolicyVersion>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ManagementPolicyVersion>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ManagementPolicyVersion>)} interface");
             }
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static ManagementPolicyVersion DeserializeManagementPolicyVersion(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,6 +145,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeManagementPolicyVersion(document.RootElement, options);
         }
 
-        string IPersistableModel<ManagementPolicyVersion>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ManagementPolicyVersion>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

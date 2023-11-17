@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     internal partial class ExtremelyDeepSinglePropertyModel : IUtf8JsonSerializable, IJsonModel<ExtremelyDeepSinglePropertyModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtremelyDeepSinglePropertyModel>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ExtremelyDeepSinglePropertyModel>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ExtremelyDeepSinglePropertyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ExtremelyDeepSinglePropertyModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ExtremelyDeepSinglePropertyModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExtremelyDeepSinglePropertyModel>)} interface");
             }
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
 
         internal static ExtremelyDeepSinglePropertyModel DeserializeExtremelyDeepSinglePropertyModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -115,6 +115,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeExtremelyDeepSinglePropertyModel(document.RootElement, options);
         }
 
-        string IPersistableModel<ExtremelyDeepSinglePropertyModel>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ExtremelyDeepSinglePropertyModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

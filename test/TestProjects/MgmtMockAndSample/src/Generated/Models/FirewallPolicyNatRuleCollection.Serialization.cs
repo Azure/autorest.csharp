@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class FirewallPolicyNatRuleCollection : IUtf8JsonSerializable, IJsonModel<FirewallPolicyNatRuleCollection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyNatRuleCollection>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FirewallPolicyNatRuleCollection>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FirewallPolicyNatRuleCollection>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyNatRuleCollection>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyNatRuleCollection>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyNatRuleCollection>)} interface");
             }
@@ -85,7 +85,7 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyNatRuleCollection DeserializeFirewallPolicyNatRuleCollection(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -174,6 +174,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeFirewallPolicyNatRuleCollection(document.RootElement, options);
         }
 
-        string IPersistableModel<FirewallPolicyNatRuleCollection>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FirewallPolicyNatRuleCollection>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

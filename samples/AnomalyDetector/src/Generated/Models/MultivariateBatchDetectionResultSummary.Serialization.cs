@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class MultivariateBatchDetectionResultSummary : IUtf8JsonSerializable, IJsonModel<MultivariateBatchDetectionResultSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultivariateBatchDetectionResultSummary>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MultivariateBatchDetectionResultSummary>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MultivariateBatchDetectionResultSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MultivariateBatchDetectionResultSummary>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MultivariateBatchDetectionResultSummary>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MultivariateBatchDetectionResultSummary>)} interface");
             }
@@ -83,7 +83,7 @@ namespace AnomalyDetector.Models
 
         internal static MultivariateBatchDetectionResultSummary DeserializeMultivariateBatchDetectionResultSummary(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -167,14 +167,14 @@ namespace AnomalyDetector.Models
             return DeserializeMultivariateBatchDetectionResultSummary(document.RootElement, options);
         }
 
-        string IPersistableModel<MultivariateBatchDetectionResultSummary>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MultivariateBatchDetectionResultSummary>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static MultivariateBatchDetectionResultSummary FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateBatchDetectionResultSummary(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeMultivariateBatchDetectionResultSummary(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

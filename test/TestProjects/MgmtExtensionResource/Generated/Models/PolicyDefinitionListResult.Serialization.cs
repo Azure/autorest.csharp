@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtExtensionResource;
@@ -17,11 +17,11 @@ namespace MgmtExtensionResource.Models
 {
     internal partial class PolicyDefinitionListResult : IUtf8JsonSerializable, IJsonModel<PolicyDefinitionListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PolicyDefinitionListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PolicyDefinitionListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PolicyDefinitionListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PolicyDefinitionListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PolicyDefinitionListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PolicyDefinitionListResult>)} interface");
             }
@@ -74,7 +74,7 @@ namespace MgmtExtensionResource.Models
 
         internal static PolicyDefinitionListResult DeserializePolicyDefinitionListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,6 +137,6 @@ namespace MgmtExtensionResource.Models
             return DeserializePolicyDefinitionListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<PolicyDefinitionListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PolicyDefinitionListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

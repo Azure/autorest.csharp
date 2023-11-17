@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace MgmtResourceName
 {
     public partial class ProviderOperationData : IUtf8JsonSerializable, IJsonModel<ProviderOperationData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProviderOperationData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ProviderOperationData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ProviderOperationData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ProviderOperationData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ProviderOperationData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ProviderOperationData>)} interface");
             }
@@ -108,7 +108,7 @@ namespace MgmtResourceName
 
         internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -214,6 +214,6 @@ namespace MgmtResourceName
             return DeserializeProviderOperationData(document.RootElement, options);
         }
 
-        string IPersistableModel<ProviderOperationData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ProviderOperationData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

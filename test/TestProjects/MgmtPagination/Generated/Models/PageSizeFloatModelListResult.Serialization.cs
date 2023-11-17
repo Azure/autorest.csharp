@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtPagination;
@@ -17,11 +17,11 @@ namespace MgmtPagination.Models
 {
     internal partial class PageSizeFloatModelListResult : IUtf8JsonSerializable, IJsonModel<PageSizeFloatModelListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeFloatModelListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PageSizeFloatModelListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PageSizeFloatModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PageSizeFloatModelListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PageSizeFloatModelListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeFloatModelListResult>)} interface");
             }
@@ -80,7 +80,7 @@ namespace MgmtPagination.Models
 
         internal static PageSizeFloatModelListResult DeserializePageSizeFloatModelListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace MgmtPagination.Models
             return DeserializePageSizeFloatModelListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<PageSizeFloatModelListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PageSizeFloatModelListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -17,11 +17,11 @@ namespace AnomalyDetector.Models
 {
     public partial class UnivariateChangePointDetectionOptions : IUtf8JsonSerializable, IJsonModel<UnivariateChangePointDetectionOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateChangePointDetectionOptions>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnivariateChangePointDetectionOptions>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UnivariateChangePointDetectionOptions>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UnivariateChangePointDetectionOptions>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UnivariateChangePointDetectionOptions>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnivariateChangePointDetectionOptions>)} interface");
             }
@@ -88,7 +88,7 @@ namespace AnomalyDetector.Models
 
         internal static UnivariateChangePointDetectionOptions DeserializeUnivariateChangePointDetectionOptions(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -187,14 +187,14 @@ namespace AnomalyDetector.Models
             return DeserializeUnivariateChangePointDetectionOptions(document.RootElement, options);
         }
 
-        string IPersistableModel<UnivariateChangePointDetectionOptions>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UnivariateChangePointDetectionOptions>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnivariateChangePointDetectionOptions FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateChangePointDetectionOptions(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeUnivariateChangePointDetectionOptions(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

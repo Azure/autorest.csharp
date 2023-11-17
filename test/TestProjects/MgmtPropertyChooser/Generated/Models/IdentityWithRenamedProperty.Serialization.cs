@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtPropertyChooser.Models
 {
     public partial class IdentityWithRenamedProperty : IUtf8JsonSerializable, IJsonModel<IdentityWithRenamedProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithRenamedProperty>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IdentityWithRenamedProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IdentityWithRenamedProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IdentityWithRenamedProperty>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IdentityWithRenamedProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IdentityWithRenamedProperty>)} interface");
             }
@@ -91,7 +91,7 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithRenamedProperty DeserializeIdentityWithRenamedProperty(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -170,6 +170,6 @@ namespace MgmtPropertyChooser.Models
             return DeserializeIdentityWithRenamedProperty(document.RootElement, options);
         }
 
-        string IPersistableModel<IdentityWithRenamedProperty>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IdentityWithRenamedProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

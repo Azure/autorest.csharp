@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -95,6 +95,6 @@ namespace xml_service.Models
             return DeserializeBanana(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<Banana>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<Banana>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

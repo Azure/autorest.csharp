@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class MhsmPrivateLinkServiceConnectionState : IUtf8JsonSerializable, IJsonModel<MhsmPrivateLinkServiceConnectionState>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateLinkServiceConnectionState>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MhsmPrivateLinkServiceConnectionState>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MhsmPrivateLinkServiceConnectionState>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MhsmPrivateLinkServiceConnectionState>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MhsmPrivateLinkServiceConnectionState>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MhsmPrivateLinkServiceConnectionState>)} interface");
             }
@@ -73,7 +73,7 @@ namespace MgmtMockAndSample.Models
 
         internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -141,6 +141,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeMhsmPrivateLinkServiceConnectionState(document.RootElement, options);
         }
 
-        string IPersistableModel<MhsmPrivateLinkServiceConnectionState>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MhsmPrivateLinkServiceConnectionState>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

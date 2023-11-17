@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class UrlRewriteAction : IUtf8JsonSerializable, IJsonModel<UrlRewriteAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRewriteAction>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UrlRewriteAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<UrlRewriteAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UrlRewriteAction>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<UrlRewriteAction>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UrlRewriteAction>)} interface");
             }
@@ -70,7 +70,7 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRewriteAction DeserializeUrlRewriteAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeUrlRewriteAction(document.RootElement, options);
         }
 
-        string IPersistableModel<UrlRewriteAction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<UrlRewriteAction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class DatetimeWrapper : IUtf8JsonSerializable, IJsonModel<DatetimeWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DatetimeWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DatetimeWrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DatetimeWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DatetimeWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DatetimeWrapper>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DatetimeWrapper>)} interface");
             }
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeDatetimeWrapper(document.RootElement, options);
         }
 
-        string IPersistableModel<DatetimeWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DatetimeWrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

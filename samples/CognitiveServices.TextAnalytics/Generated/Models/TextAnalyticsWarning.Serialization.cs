@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class TextAnalyticsWarning : IUtf8JsonSerializable, IJsonModel<TextAnalyticsWarning>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextAnalyticsWarning>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextAnalyticsWarning>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TextAnalyticsWarning>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TextAnalyticsWarning>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TextAnalyticsWarning>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TextAnalyticsWarning>)} interface");
             }
@@ -67,7 +67,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -127,6 +127,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeTextAnalyticsWarning(document.RootElement, options);
         }
 
-        string IPersistableModel<TextAnalyticsWarning>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TextAnalyticsWarning>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

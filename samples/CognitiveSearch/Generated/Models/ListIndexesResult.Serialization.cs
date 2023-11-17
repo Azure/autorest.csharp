@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class ListIndexesResult : IUtf8JsonSerializable, IJsonModel<ListIndexesResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListIndexesResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ListIndexesResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ListIndexesResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ListIndexesResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ListIndexesResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListIndexesResult>)} interface");
             }
@@ -68,7 +68,7 @@ namespace CognitiveSearch.Models
 
         internal static ListIndexesResult DeserializeListIndexesResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -121,6 +121,6 @@ namespace CognitiveSearch.Models
             return DeserializeListIndexesResult(document.RootElement, options);
         }
 
-        string IPersistableModel<ListIndexesResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ListIndexesResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

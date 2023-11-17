@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace required_optional.Models
 {
     public partial class StringOptionalWrapper : IUtf8JsonSerializable, IJsonModel<StringOptionalWrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StringOptionalWrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StringOptionalWrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<StringOptionalWrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<StringOptionalWrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<StringOptionalWrapper>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StringOptionalWrapper>)} interface");
             }
@@ -63,7 +63,7 @@ namespace required_optional.Models
 
         internal static StringOptionalWrapper DeserializeStringOptionalWrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace required_optional.Models
             return DeserializeStringOptionalWrapper(document.RootElement, options);
         }
 
-        string IPersistableModel<StringOptionalWrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<StringOptionalWrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

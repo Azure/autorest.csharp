@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IJsonModel<MyBaseType>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyBaseType>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MyBaseType>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MyBaseType>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MyBaseType>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MyBaseType>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MyBaseType>)} interface");
             }
@@ -73,7 +73,7 @@ namespace body_complex.Models
 
         internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -145,6 +145,6 @@ namespace body_complex.Models
             return DeserializeUnknownMyBaseType(document.RootElement, options);
         }
 
-        string IPersistableModel<MyBaseType>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MyBaseType>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

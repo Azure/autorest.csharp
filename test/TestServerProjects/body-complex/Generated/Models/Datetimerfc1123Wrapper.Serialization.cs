@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace body_complex.Models
 {
     public partial class Datetimerfc1123Wrapper : IUtf8JsonSerializable, IJsonModel<Datetimerfc1123Wrapper>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Datetimerfc1123Wrapper>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Datetimerfc1123Wrapper>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Datetimerfc1123Wrapper>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Datetimerfc1123Wrapper>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Datetimerfc1123Wrapper>)} interface");
             }
@@ -68,7 +68,7 @@ namespace body_complex.Models
 
         internal static Datetimerfc1123Wrapper DeserializeDatetimerfc1123Wrapper(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace body_complex.Models
             return DeserializeDatetimerfc1123Wrapper(document.RootElement, options);
         }
 
-        string IPersistableModel<Datetimerfc1123Wrapper>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Datetimerfc1123Wrapper>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

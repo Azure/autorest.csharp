@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtSupersetFlattenInheritance
 {
     public partial class ResourceModel1Data : IUtf8JsonSerializable, IJsonModel<ResourceModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceModel1Data>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceModel1Data>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ResourceModel1Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ResourceModel1Data>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ResourceModel1Data>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceModel1Data>)} interface");
             }
@@ -87,7 +87,7 @@ namespace MgmtSupersetFlattenInheritance
 
         internal static ResourceModel1Data DeserializeResourceModel1Data(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -163,6 +163,6 @@ namespace MgmtSupersetFlattenInheritance
             return DeserializeResourceModel1Data(document.RootElement, options);
         }
 
-        string IPersistableModel<ResourceModel1Data>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ResourceModel1Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

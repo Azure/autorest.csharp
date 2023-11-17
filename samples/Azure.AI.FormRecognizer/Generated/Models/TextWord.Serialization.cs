@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
 {
     public partial class TextWord : IUtf8JsonSerializable, IJsonModel<TextWord>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextWord>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TextWord>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<TextWord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<TextWord>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<TextWord>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<TextWord>)} interface");
             }
@@ -72,7 +72,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         internal static TextWord DeserializeTextWord(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -141,6 +141,6 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeTextWord(document.RootElement, options);
         }
 
-        string IPersistableModel<TextWord>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TextWord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

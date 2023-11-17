@@ -3,21 +3,21 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Internal;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
-using System.Net.ClientModel.Internal;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
     public partial class CreateHyperparameters : IUtf8JsonWriteable, IJsonModel<CreateHyperparameters>
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateHyperparameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateHyperparameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<CreateHyperparameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateHyperparameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<CreateHyperparameters>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateHyperparameters>)} interface");
             }
@@ -67,7 +67,7 @@ namespace OpenAI.Models
 
         internal static CreateHyperparameters DeserializeCreateHyperparameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -119,14 +119,14 @@ namespace OpenAI.Models
             return DeserializeCreateHyperparameters(document.RootElement, options);
         }
 
-        string IPersistableModel<CreateHyperparameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CreateHyperparameters>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
         internal static CreateHyperparameters FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateHyperparameters(document.RootElement, ModelReaderWriterOptions.Wire);
+            return DeserializeCreateHyperparameters(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

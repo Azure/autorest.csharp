@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class NetworkSecurityGroup : IUtf8JsonSerializable, IJsonModel<NetworkSecurityGroup>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkSecurityGroup>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkSecurityGroup>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<NetworkSecurityGroup>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<NetworkSecurityGroup>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<NetworkSecurityGroup>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<NetworkSecurityGroup>)} interface");
             }
@@ -171,7 +171,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkSecurityGroup DeserializeNetworkSecurityGroup(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -346,6 +346,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeNetworkSecurityGroup(document.RootElement, options);
         }
 
-        string IPersistableModel<NetworkSecurityGroup>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<NetworkSecurityGroup>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.AI.FormRecognizer.Models
 {
     public partial class ModelsSummary : IUtf8JsonSerializable, IJsonModel<ModelsSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelsSummary>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelsSummary>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ModelsSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelsSummary>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ModelsSummary>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelsSummary>)} interface");
             }
@@ -64,7 +64,7 @@ namespace Azure.AI.FormRecognizer.Models
 
         internal static ModelsSummary DeserializeModelsSummary(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -124,6 +124,6 @@ namespace Azure.AI.FormRecognizer.Models
             return DeserializeModelsSummary(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelsSummary>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ModelsSummary>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

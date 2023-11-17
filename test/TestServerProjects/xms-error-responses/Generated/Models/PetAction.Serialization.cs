@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace xms_error_responses.Models
 {
     public partial class PetAction : IUtf8JsonSerializable, IJsonModel<PetAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAction>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAction>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<PetAction>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PetAction>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<PetAction>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PetAction>)} interface");
             }
@@ -63,7 +63,7 @@ namespace xms_error_responses.Models
 
         internal static PetAction DeserializePetAction(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -111,6 +111,6 @@ namespace xms_error_responses.Models
             return DeserializePetAction(document.RootElement, options);
         }
 
-        string IPersistableModel<PetAction>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<PetAction>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class VaultValidationResult : IUtf8JsonSerializable, IJsonModel<VaultValidationResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultValidationResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultValidationResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VaultValidationResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VaultValidationResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VaultValidationResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VaultValidationResult>)} interface");
             }
@@ -73,7 +73,7 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -136,6 +136,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultValidationResult(document.RootElement, options);
         }
 
-        string IPersistableModel<VaultValidationResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VaultValidationResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

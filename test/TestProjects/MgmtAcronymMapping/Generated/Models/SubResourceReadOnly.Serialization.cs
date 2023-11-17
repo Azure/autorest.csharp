@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class SubResourceReadOnly : IUtf8JsonSerializable, IJsonModel<SubResourceReadOnly>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResourceReadOnly>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SubResourceReadOnly>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SubResourceReadOnly>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SubResourceReadOnly>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SubResourceReadOnly>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SubResourceReadOnly>)} interface");
             }
@@ -66,7 +66,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static SubResourceReadOnly DeserializeSubResourceReadOnly(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -114,6 +114,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeSubResourceReadOnly(document.RootElement, options);
         }
 
-        string IPersistableModel<SubResourceReadOnly>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SubResourceReadOnly>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

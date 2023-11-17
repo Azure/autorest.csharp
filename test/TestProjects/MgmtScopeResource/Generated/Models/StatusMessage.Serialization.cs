@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtScopeResource.Models
 {
     public partial class StatusMessage : IUtf8JsonSerializable, IJsonModel<StatusMessage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StatusMessage>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StatusMessage>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<StatusMessage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<StatusMessage>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<StatusMessage>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StatusMessage>)} interface");
             }
@@ -68,7 +68,7 @@ namespace MgmtScopeResource.Models
 
         internal static StatusMessage DeserializeStatusMessage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace MgmtScopeResource.Models
             return DeserializeStatusMessage(document.RootElement, options);
         }
 
-        string IPersistableModel<StatusMessage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<StatusMessage>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

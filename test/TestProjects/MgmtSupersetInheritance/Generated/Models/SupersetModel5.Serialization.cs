@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,11 +17,11 @@ namespace MgmtSupersetInheritance.Models
 {
     public partial class SupersetModel5 : IUtf8JsonSerializable, IJsonModel<SupersetModel5>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel5>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SupersetModel5>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SupersetModel5>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SupersetModel5>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SupersetModel5>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SupersetModel5>)} interface");
             }
@@ -105,7 +105,7 @@ namespace MgmtSupersetInheritance.Models
 
         internal static SupersetModel5 DeserializeSupersetModel5(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -208,6 +208,6 @@ namespace MgmtSupersetInheritance.Models
             return DeserializeSupersetModel5(document.RootElement, options);
         }
 
-        string IPersistableModel<SupersetModel5>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SupersetModel5>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

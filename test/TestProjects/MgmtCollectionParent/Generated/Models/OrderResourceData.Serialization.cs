@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,11 +18,11 @@ namespace MgmtCollectionParent
 {
     public partial class OrderResourceData : IUtf8JsonSerializable, IJsonModel<OrderResourceData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceData>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OrderResourceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<OrderResourceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<OrderResourceData>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<OrderResourceData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<OrderResourceData>)} interface");
             }
@@ -120,7 +120,7 @@ namespace MgmtCollectionParent
 
         internal static OrderResourceData DeserializeOrderResourceData(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -242,6 +242,6 @@ namespace MgmtCollectionParent
             return DeserializeOrderResourceData(document.RootElement, options);
         }
 
-        string IPersistableModel<OrderResourceData>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<OrderResourceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

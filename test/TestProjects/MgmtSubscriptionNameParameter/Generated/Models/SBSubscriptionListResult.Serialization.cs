@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtSubscriptionNameParameter;
@@ -17,11 +17,11 @@ namespace MgmtSubscriptionNameParameter.Models
 {
     internal partial class SBSubscriptionListResult : IUtf8JsonSerializable, IJsonModel<SBSubscriptionListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBSubscriptionListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SBSubscriptionListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<SBSubscriptionListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SBSubscriptionListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SBSubscriptionListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SBSubscriptionListResult>)} interface");
             }
@@ -74,7 +74,7 @@ namespace MgmtSubscriptionNameParameter.Models
 
         internal static SBSubscriptionListResult DeserializeSBSubscriptionListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -137,6 +137,6 @@ namespace MgmtSubscriptionNameParameter.Models
             return DeserializeSBSubscriptionListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<SBSubscriptionListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SBSubscriptionListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

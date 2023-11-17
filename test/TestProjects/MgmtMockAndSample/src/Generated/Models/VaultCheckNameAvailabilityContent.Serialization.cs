@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtMockAndSample.Models
 {
     public partial class VaultCheckNameAvailabilityContent : IUtf8JsonSerializable, IJsonModel<VaultCheckNameAvailabilityContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultCheckNameAvailabilityContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<VaultCheckNameAvailabilityContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<VaultCheckNameAvailabilityContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VaultCheckNameAvailabilityContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<VaultCheckNameAvailabilityContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VaultCheckNameAvailabilityContent>)} interface");
             }
@@ -62,7 +62,7 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultCheckNameAvailabilityContent DeserializeVaultCheckNameAvailabilityContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -116,6 +116,6 @@ namespace MgmtMockAndSample.Models
             return DeserializeVaultCheckNameAvailabilityContent(document.RootElement, options);
         }
 
-        string IPersistableModel<VaultCheckNameAvailabilityContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<VaultCheckNameAvailabilityContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

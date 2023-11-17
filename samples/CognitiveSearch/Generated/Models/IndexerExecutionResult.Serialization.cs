@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class IndexerExecutionResult : IUtf8JsonSerializable, IJsonModel<IndexerExecutionResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerExecutionResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IndexerExecutionResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IndexerExecutionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IndexerExecutionResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IndexerExecutionResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IndexerExecutionResult>)} interface");
             }
@@ -133,7 +133,7 @@ namespace CognitiveSearch.Models
 
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -253,6 +253,6 @@ namespace CognitiveSearch.Models
             return DeserializeIndexerExecutionResult(document.RootElement, options);
         }
 
-        string IPersistableModel<IndexerExecutionResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IndexerExecutionResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

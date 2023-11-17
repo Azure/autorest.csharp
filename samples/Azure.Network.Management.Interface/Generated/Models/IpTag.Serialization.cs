@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class IpTag : IUtf8JsonSerializable, IJsonModel<IpTag>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IpTag>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<IpTag>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<IpTag>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IpTag>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<IpTag>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IpTag>)} interface");
             }
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IpTag DeserializeIpTag(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -122,6 +122,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeIpTag(document.RootElement, options);
         }
 
-        string IPersistableModel<IpTag>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<IpTag>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

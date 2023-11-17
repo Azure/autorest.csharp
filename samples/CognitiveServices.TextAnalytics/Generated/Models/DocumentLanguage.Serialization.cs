@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveServices.TextAnalytics.Models
 {
     public partial class DocumentLanguage : IUtf8JsonSerializable, IJsonModel<DocumentLanguage>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentLanguage>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DocumentLanguage>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DocumentLanguage>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DocumentLanguage>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DocumentLanguage>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DocumentLanguage>)} interface");
             }
@@ -74,7 +74,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
         internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -149,6 +149,6 @@ namespace CognitiveServices.TextAnalytics.Models
             return DeserializeDocumentLanguage(document.RootElement, options);
         }
 
-        string IPersistableModel<DocumentLanguage>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DocumentLanguage>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,8 +6,8 @@
 #nullable disable
 
 using System;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
     [PersistableModelProxy(typeof(UnknownDeliveryRuleCondition))]
     public partial class DeliveryRuleCondition : IUtf8JsonSerializable, IJsonModel<DeliveryRuleCondition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<DeliveryRuleCondition>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<DeliveryRuleCondition>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DeliveryRuleCondition>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<DeliveryRuleCondition>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DeliveryRuleCondition>)} interface");
             }
@@ -68,7 +68,7 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleCondition DeserializeDeliveryRuleCondition(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -109,6 +109,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeDeliveryRuleCondition(document.RootElement, options);
         }
 
-        string IPersistableModel<DeliveryRuleCondition>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<DeliveryRuleCondition>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtAcronymMapping.Models
 {
     public partial class AutomaticOSUpgradePolicy : IUtf8JsonSerializable, IJsonModel<AutomaticOSUpgradePolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticOSUpgradePolicy>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<AutomaticOSUpgradePolicy>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<AutomaticOSUpgradePolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<AutomaticOSUpgradePolicy>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<AutomaticOSUpgradePolicy>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<AutomaticOSUpgradePolicy>)} interface");
             }
@@ -68,7 +68,7 @@ namespace MgmtAcronymMapping.Models
 
         internal static AutomaticOSUpgradePolicy DeserializeAutomaticOSUpgradePolicy(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtAcronymMapping.Models
             return DeserializeAutomaticOSUpgradePolicy(document.RootElement, options);
         }
 
-        string IPersistableModel<AutomaticOSUpgradePolicy>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<AutomaticOSUpgradePolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

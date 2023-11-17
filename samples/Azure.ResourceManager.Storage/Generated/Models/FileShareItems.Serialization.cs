@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Storage;
@@ -17,11 +17,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     internal partial class FileShareItems : IUtf8JsonSerializable, IJsonModel<FileShareItems>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FileShareItems>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<FileShareItems>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<FileShareItems>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FileShareItems>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<FileShareItems>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FileShareItems>)} interface");
             }
@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static FileShareItems DeserializeFileShareItems(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -143,6 +143,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeFileShareItems(document.RootElement, options);
         }
 
-        string IPersistableModel<FileShareItems>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<FileShareItems>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

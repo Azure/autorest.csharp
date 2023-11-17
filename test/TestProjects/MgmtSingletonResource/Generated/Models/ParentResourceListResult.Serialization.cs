@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtSingletonResource;
@@ -17,11 +17,11 @@ namespace MgmtSingletonResource.Models
 {
     internal partial class ParentResourceListResult : IUtf8JsonSerializable, IJsonModel<ParentResourceListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParentResourceListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ParentResourceListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<ParentResourceListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ParentResourceListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<ParentResourceListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ParentResourceListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtSingletonResource.Models
 
         internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtSingletonResource.Models
             return DeserializeParentResourceListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<ParentResourceListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<ParentResourceListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

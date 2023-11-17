@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
 {
     public partial class MicrosoftLanguageStemmingTokenizer : IUtf8JsonSerializable, IJsonModel<MicrosoftLanguageStemmingTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MicrosoftLanguageStemmingTokenizer>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MicrosoftLanguageStemmingTokenizer>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<MicrosoftLanguageStemmingTokenizer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MicrosoftLanguageStemmingTokenizer>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<MicrosoftLanguageStemmingTokenizer>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MicrosoftLanguageStemmingTokenizer>)} interface");
             }
@@ -77,7 +77,7 @@ namespace CognitiveSearch.Models
 
         internal static MicrosoftLanguageStemmingTokenizer DeserializeMicrosoftLanguageStemmingTokenizer(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -161,6 +161,6 @@ namespace CognitiveSearch.Models
             return DeserializeMicrosoftLanguageStemmingTokenizer(document.RootElement, options);
         }
 
-        string IPersistableModel<MicrosoftLanguageStemmingTokenizer>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<MicrosoftLanguageStemmingTokenizer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,10 +6,10 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
@@ -109,6 +109,6 @@ namespace Azure.Storage.Tables.Models
             return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
         }
 
-        string IPersistableModel<StorageServiceProperties>.GetWireFormat(ModelReaderWriterOptions options) => "X";
+        string IPersistableModel<StorageServiceProperties>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

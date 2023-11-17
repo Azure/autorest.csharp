@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.Network.Management.Interface.Models
 {
     public partial class Subnet : IUtf8JsonSerializable, IJsonModel<Subnet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Subnet>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Subnet>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<Subnet>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Subnet>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<Subnet>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Subnet>)} interface");
             }
@@ -230,7 +230,7 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static Subnet DeserializeSubnet(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -501,6 +501,6 @@ namespace Azure.Network.Management.Interface.Models
             return DeserializeSubnet(document.RootElement, options);
         }
 
-        string IPersistableModel<Subnet>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<Subnet>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace MgmtDiscriminator.Models
 {
     public partial class RemoteAddressMatchConditionParameters : IUtf8JsonSerializable, IJsonModel<RemoteAddressMatchConditionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RemoteAddressMatchConditionParameters>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<RemoteAddressMatchConditionParameters>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<RemoteAddressMatchConditionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RemoteAddressMatchConditionParameters>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<RemoteAddressMatchConditionParameters>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RemoteAddressMatchConditionParameters>)} interface");
             }
@@ -87,7 +87,7 @@ namespace MgmtDiscriminator.Models
 
         internal static RemoteAddressMatchConditionParameters DeserializeRemoteAddressMatchConditionParameters(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -181,6 +181,6 @@ namespace MgmtDiscriminator.Models
             return DeserializeRemoteAddressMatchConditionParameters(document.RootElement, options);
         }
 
-        string IPersistableModel<RemoteAddressMatchConditionParameters>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<RemoteAddressMatchConditionParameters>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

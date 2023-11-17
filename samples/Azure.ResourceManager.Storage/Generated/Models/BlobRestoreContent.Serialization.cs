@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 
@@ -16,11 +16,11 @@ namespace Azure.ResourceManager.Storage.Models
 {
     public partial class BlobRestoreContent : IUtf8JsonSerializable, IJsonModel<BlobRestoreContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobRestoreContent>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<BlobRestoreContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<BlobRestoreContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<BlobRestoreContent>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<BlobRestoreContent>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<BlobRestoreContent>)} interface");
             }
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         internal static BlobRestoreContent DeserializeBlobRestoreContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -126,6 +126,6 @@ namespace Azure.ResourceManager.Storage.Models
             return DeserializeBlobRestoreContent(document.RootElement, options);
         }
 
-        string IPersistableModel<BlobRestoreContent>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<BlobRestoreContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

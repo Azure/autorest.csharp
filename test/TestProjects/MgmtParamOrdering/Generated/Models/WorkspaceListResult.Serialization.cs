@@ -6,9 +6,9 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Text.Json;
 using Azure.Core;
 using MgmtParamOrdering;
@@ -17,11 +17,11 @@ namespace MgmtParamOrdering.Models
 {
     internal partial class WorkspaceListResult : IUtf8JsonSerializable, IJsonModel<WorkspaceListResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WorkspaceListResult>)this).Write(writer, ModelReaderWriterOptions.Wire);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WorkspaceListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
         void IJsonModel<WorkspaceListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<WorkspaceListResult>)this).GetWireFormat(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<WorkspaceListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
                 throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<WorkspaceListResult>)} interface");
             }
@@ -71,7 +71,7 @@ namespace MgmtParamOrdering.Models
 
         internal static WorkspaceListResult DeserializeWorkspaceListResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -130,6 +130,6 @@ namespace MgmtParamOrdering.Models
             return DeserializeWorkspaceListResult(document.RootElement, options);
         }
 
-        string IPersistableModel<WorkspaceListResult>.GetWireFormat(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<WorkspaceListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }
