@@ -48,8 +48,6 @@
         "@typespec/versioning": "0.50.0",
         "@typespec/openapi": "0.50.0",
         "@typespec/openapi3": "0.50.0",
-        "@types/fs-extra": "^9.0.13",
-        "@types/js-yaml": "^4.0.5",
         "@types/lodash.isequal": "^4.5.6",
         "@types/mocha": "~9.1.0",
         "@types/node": "~18.13.0",
@@ -65,8 +63,6 @@
     },
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20230309.1",
-        "fs-extra": "^10.1.0",
-        "js-yaml": "^4.1.0",
         "json-serialize-refs": "0.1.0-0",
         "winston": "^3.8.2"
     },
