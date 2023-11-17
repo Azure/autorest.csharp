@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Utilities;
 
@@ -43,7 +42,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract FormattableString CreateDescription();
-        public abstract bool IncludeConverter { get; }
 
         public IEnumerable<ObjectType> EnumerateHierarchy()
         {

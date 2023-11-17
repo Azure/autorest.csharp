@@ -110,7 +110,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     if (parentPropertyName == null)
                         return false;
                     // we have a parentPropertyName
-                    parentProperty = parentDict[parentPropertyName];
+                    // add check to handle systemData
+                    if (parentDict.TryGetValue(parentPropertyName, out var value))
+                    {
+                        parentProperty = value;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {

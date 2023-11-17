@@ -159,7 +159,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case InputListType arraySchema:
                     return new JsonArraySerialization(type, BuildSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), true), type.IsNullable);
                 case InputDictionaryType dictionarySchema:
-                    return new JsonDictionarySerialization(type, BuildSerialization(dictionarySchema, TypeFactory.GetElementType(type), true), type.IsNullable);
+                    return new JsonDictionarySerialization(type, BuildSerialization(dictionarySchema.ValueType, TypeFactory.GetElementType(type), true), type.IsNullable);
                 default:
                     JsonSerializationOptions options = IsManagedServiceIdentityV3(inputType, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;
                     return new JsonValueSerialization(type, GetSerializationFormat(inputType), type.IsNullable || (isCollectionElement && !type.IsValueType), options);

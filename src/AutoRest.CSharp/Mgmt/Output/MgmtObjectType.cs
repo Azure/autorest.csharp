@@ -89,9 +89,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static bool HandleMgmtObjectType(SchemaObjectType objType)
         {
-            if (objType.Discriminator != null)
-                return false;
-
+            // TODO: this is cauing circular reference
+            //if (objType.Discriminator != null)
+            //    return false;
             if (objType.AdditionalPropertiesProperty != null)
                 return false;
 

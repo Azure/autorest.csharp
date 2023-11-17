@@ -314,13 +314,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ObjectTypeConstructor(
                 Type,
-                IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
+                IsAbstract ? Protected : _usage.HasFlag(InputModelTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
                 baseCtor);
         }
 
-        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
         protected bool SkipSerializerConstructor => !IncludeDeserializer;
         private CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -432,7 +431,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
         {
-            var name = BuilderHelpers.DisambiguateName(Type.Name, property.Type.Name);
+            var name = BuilderHelpers.DisambiguateName(Type.Name, property.Name);
             var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
 
             var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
@@ -529,10 +528,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var parent in InputModel.DerivedModels)
             {
-                if (parent is InputModelType objectParent)
-                {
-                    yield return objectParent;
-                }
+                yield return parent;
             }
         }
 
@@ -641,12 +637,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureIncludeSerializer()
         {
-            return _usage.HasFlag(SchemaTypeUsage.Input);
+            return _usage.HasFlag(InputModelTypeUsage.Input);
         }
 
         protected override bool EnsureIncludeDeserializer()
         {
-            return _usage.HasFlag(SchemaTypeUsage.Output);
+            return _usage.HasFlag(InputModelTypeUsage.Output);
         }
 
         protected override JsonObjectSerialization EnsureJsonSerialization()

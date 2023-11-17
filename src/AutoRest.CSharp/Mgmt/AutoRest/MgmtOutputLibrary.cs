@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         internal CachedDictionary<InputType, TypeProvider> InputTypeMap { get; }
 
-        private CachedDictionary<InputEnumType, EnumType> AllEnumMap { get; }
+        private Dictionary<InputEnumType, EnumType> AllEnumMap { get; }
 
         private CachedDictionary<RequestPath, HashSet<InputOperation>> ChildOperations { get; }
 
@@ -104,6 +104,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceDataTypeNameToOperationSets = DecorateOperationSets();
             //_schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
 
+            AllEnumMap = EnsureAllEnumMap();
             AllInputTypeMap = InitializeModels();
 
             // others are populated later
@@ -114,7 +115,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             OperationMethods = new CachedDictionary<InputOperation, RestClientOperationMethods>(EnsureRestClientMethods);
             ResourceTypeMap = new CachedDictionary<InputType, TypeProvider>(EnsureResourceSchemaMap);
             InputTypeMap = new CachedDictionary<InputType, TypeProvider>(EnsureSchemaMap);
-            AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
             ChildOperations = new CachedDictionary<RequestPath, HashSet<InputOperation>>(EnsureResourceChildOperations);
 
             // initialize the property bag collection
@@ -223,7 +223,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
                         string oriName = param.Name;
                         var newParamName = NormalizeParamNames.GetNewName(param.Name, inputModel.Name, ResourceDataTypeNameToOperationSets);
-                        _renamingMap.Add(param, newParamName);
+
+                        // TODO: handle the duplication later
+                        _renamingMap[param] = newParamName;
 
                         string fullSerializedName = operation.GetFullSerializedName(param);
                         MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
@@ -411,18 +413,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-        {
-            var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            foreach (var (inputType, typeProvider) in AllInputTypeMap)
-            {
-                if (inputType is InputEnumType enumType)
-                {
-                    dictionary.Add(enumType, (EnumType)typeProvider);
-                }
-            }
-
-            return dictionary;
-        }
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, Configuration.Namespace, "public", TypeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer);
 
         public IEnumerable<TypeProvider> Models => GetModels();
 
