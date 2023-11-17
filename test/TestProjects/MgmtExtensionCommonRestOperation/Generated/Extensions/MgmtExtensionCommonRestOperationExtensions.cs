@@ -44,7 +44,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TypeOneResource"/> object. </returns>
         public static TypeOneResource GetTypeOneResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExtensionCommonRestOperationArmClient(client).GetTypeOneResource(id);
@@ -60,7 +60,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TypeTwoResource"/> object. </returns>
         public static TypeTwoResource GetTypeTwoResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExtensionCommonRestOperationArmClient(client).GetTypeTwoResource(id);
@@ -225,7 +225,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TypeOneResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeOnesAsync(cancellationToken);
@@ -250,7 +250,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TypeOneResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeOnes(cancellationToken);
@@ -275,7 +275,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TypeTwoResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeTwosAsync(cancellationToken);
@@ -300,7 +300,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TypeTwoResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExtensionCommonRestOperationSubscriptionResource(subscriptionResource).GetTypeTwos(cancellationToken);

@@ -45,7 +45,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetAResource"/> object. </returns>
         public static RecordSetAResource GetRecordSetAResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetAResource(id);
@@ -61,7 +61,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetAaaaResource"/> object. </returns>
         public static RecordSetAaaaResource GetRecordSetAaaaResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetAaaaResource(id);
@@ -77,7 +77,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetCaaResource"/> object. </returns>
         public static RecordSetCaaResource GetRecordSetCaaResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetCaaResource(id);
@@ -93,7 +93,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetCNameResource"/> object. </returns>
         public static RecordSetCNameResource GetRecordSetCNameResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetCNameResource(id);
@@ -109,7 +109,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetMxResource"/> object. </returns>
         public static RecordSetMxResource GetRecordSetMxResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetMxResource(id);
@@ -125,7 +125,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetNsResource"/> object. </returns>
         public static RecordSetNsResource GetRecordSetNsResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetNsResource(id);
@@ -141,7 +141,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetPtrResource"/> object. </returns>
         public static RecordSetPtrResource GetRecordSetPtrResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetPtrResource(id);
@@ -157,7 +157,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetSoaResource"/> object. </returns>
         public static RecordSetSoaResource GetRecordSetSoaResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetSoaResource(id);
@@ -173,7 +173,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetSrvResource"/> object. </returns>
         public static RecordSetSrvResource GetRecordSetSrvResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetSrvResource(id);
@@ -189,7 +189,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetTxtResource"/> object. </returns>
         public static RecordSetTxtResource GetRecordSetTxtResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetRecordSetTxtResource(id);
@@ -205,7 +205,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ZoneResource"/> object. </returns>
         public static ZoneResource GetZoneResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExpandResourceTypesArmClient(client).GetZoneResource(id);
@@ -301,7 +301,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ZoneResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
@@ -327,7 +327,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ZoneResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExpandResourceTypesSubscriptionResource(subscriptionResource).GetZonesByDnszone(top, cancellationToken);

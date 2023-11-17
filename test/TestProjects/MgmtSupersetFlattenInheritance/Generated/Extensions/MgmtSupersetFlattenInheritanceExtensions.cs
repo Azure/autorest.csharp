@@ -40,7 +40,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResourceModel1Resource"/> object. </returns>
         public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSupersetFlattenInheritanceArmClient(client).GetResourceModel1Resource(id);
@@ -56,7 +56,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="TrackedResourceModel1Resource"/> object. </returns>
         public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSupersetFlattenInheritanceArmClient(client).GetTrackedResourceModel1Resource(id);
@@ -216,7 +216,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel1"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel1> GetCustomModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1sAsync(cancellationToken);
@@ -240,7 +240,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel1"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel1> GetCustomModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1s(cancellationToken);
@@ -370,7 +370,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel2> GetCustomModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2sAsync(cancellationToken);
@@ -394,7 +394,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel2> GetCustomModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2s(cancellationToken);
@@ -524,7 +524,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1sAsync(cancellationToken);
@@ -548,7 +548,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel1> GetSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1s(cancellationToken);
@@ -678,7 +678,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2sAsync(cancellationToken);
@@ -702,7 +702,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel2> GetSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2s(cancellationToken);
@@ -832,7 +832,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1sAsync(cancellationToken);
@@ -856,7 +856,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WritableSubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1s(cancellationToken);
@@ -986,7 +986,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2sAsync(cancellationToken);
@@ -1010,7 +1010,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WritableSubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2s(cancellationToken);
@@ -1140,7 +1140,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceModel2> GetResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2sAsync(cancellationToken);
@@ -1164,7 +1164,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceModel2> GetResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2s(cancellationToken);
@@ -1294,7 +1294,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TrackedResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2sAsync(cancellationToken);
@@ -1318,7 +1318,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TrackedResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2s(cancellationToken);

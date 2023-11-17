@@ -39,7 +39,7 @@ namespace MgmtSingletonResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CarResource" /> object. </returns>
+        /// <returns> Returns a <see cref="CarResource"/> object. </returns>
         public static CarResource GetCarResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSingletonResourceArmClient(client).GetCarResource(id);
@@ -55,7 +55,7 @@ namespace MgmtSingletonResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="IgnitionResource"/> object. </returns>
         public static IgnitionResource GetIgnitionResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSingletonResourceArmClient(client).GetIgnitionResource(id);
@@ -71,7 +71,7 @@ namespace MgmtSingletonResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BrakeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BrakeResource"/> object. </returns>
         public static BrakeResource GetBrakeResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSingletonResourceArmClient(client).GetBrakeResource(id);
@@ -87,7 +87,7 @@ namespace MgmtSingletonResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SingletonResource"/> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSingletonResourceArmClient(client).GetSingletonResource(id);
@@ -103,7 +103,7 @@ namespace MgmtSingletonResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ParentResource"/> object. </returns>
         public static ParentResource GetParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSingletonResourceArmClient(client).GetParentResource(id);

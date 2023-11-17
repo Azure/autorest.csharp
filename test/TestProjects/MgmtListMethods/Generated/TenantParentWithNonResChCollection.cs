@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="TenantParentWithNonResChResource" /> and their operations.
-    /// Each <see cref="TenantParentWithNonResChResource" /> in the collection will belong to the same instance of <see cref="TenantTestResource" />.
-    /// To get a <see cref="TenantParentWithNonResChCollection" /> instance call the GetTenantParentWithNonResChes method from an instance of <see cref="TenantTestResource" />.
+    /// A class representing a collection of <see cref="TenantParentWithNonResChResource"/> and their operations.
+    /// Each <see cref="TenantParentWithNonResChResource"/> in the collection will belong to the same instance of <see cref="TenantTestResource"/>.
+    /// To get a <see cref="TenantParentWithNonResChCollection"/> instance call the GetTenantParentWithNonResChes method from an instance of <see cref="TenantTestResource"/>.
     /// </summary>
     public partial class TenantParentWithNonResChCollection : ArmCollection, IEnumerable<TenantParentWithNonResChResource>, IAsyncEnumerable<TenantParentWithNonResChResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TenantParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TenantParentWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantParentWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
@@ -245,7 +245,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TenantParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TenantParentWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantParentWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);

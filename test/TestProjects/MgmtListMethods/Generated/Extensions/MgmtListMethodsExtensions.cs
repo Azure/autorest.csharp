@@ -56,7 +56,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeResource"/> object. </returns>
         public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeResource(id);
@@ -72,7 +72,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> object. </returns>
         public static FakeParentWithAncestorWithNonResChWithLocResource GetFakeParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeParentWithAncestorWithNonResChWithLocResource(id);
@@ -88,7 +88,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource"/> object. </returns>
         public static FakeParentWithAncestorWithNonResChResource GetFakeParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeParentWithAncestorWithNonResChResource(id);
@@ -104,7 +104,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource"/> object. </returns>
         public static FakeParentWithAncestorWithLocResource GetFakeParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeParentWithAncestorWithLocResource(id);
@@ -120,7 +120,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorResource"/> object. </returns>
         public static FakeParentWithAncestorResource GetFakeParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeParentWithAncestorResource(id);
@@ -136,7 +136,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithNonResChResource"/> object. </returns>
         public static FakeParentWithNonResChResource GetFakeParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeParentWithNonResChResource(id);
@@ -152,7 +152,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentResource"/> object. </returns>
         public static FakeParentResource GetFakeParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeParentResource(id);
@@ -168,7 +168,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> object. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLocResource GetResGrpParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetResGrpParentWithAncestorWithNonResChWithLocResource(id);
@@ -184,7 +184,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource"/> object. </returns>
         public static ResGrpParentWithAncestorWithNonResChResource GetResGrpParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetResGrpParentWithAncestorWithNonResChResource(id);
@@ -200,7 +200,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource"/> object. </returns>
         public static ResGrpParentWithAncestorWithLocResource GetResGrpParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetResGrpParentWithAncestorWithLocResource(id);
@@ -216,7 +216,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource"/> object. </returns>
         public static ResGrpParentWithAncestorResource GetResGrpParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetResGrpParentWithAncestorResource(id);
@@ -232,7 +232,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource"/> object. </returns>
         public static ResGrpParentWithNonResChResource GetResGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetResGrpParentWithNonResChResource(id);
@@ -248,7 +248,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentResource"/> object. </returns>
         public static ResGrpParentResource GetResGrpParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetResGrpParentResource(id);
@@ -264,7 +264,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource"/> object. </returns>
         public static SubParentWithNonResChWithLocResource GetSubParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetSubParentWithNonResChWithLocResource(id);
@@ -280,7 +280,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentWithNonResChResource"/> object. </returns>
         public static SubParentWithNonResChResource GetSubParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetSubParentWithNonResChResource(id);
@@ -296,7 +296,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentWithLocResource"/> object. </returns>
         public static SubParentWithLocResource GetSubParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetSubParentWithLocResource(id);
@@ -312,7 +312,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentResource"/> object. </returns>
         public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetSubParentResource(id);
@@ -328,7 +328,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource"/> object. </returns>
         public static MgmtGrpParentWithNonResChWithLocResource GetMgmtGrpParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetMgmtGrpParentWithNonResChWithLocResource(id);
@@ -344,7 +344,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource"/> object. </returns>
         public static MgmtGrpParentWithNonResChResource GetMgmtGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetMgmtGrpParentWithNonResChResource(id);
@@ -360,7 +360,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource"/> object. </returns>
         public static MgmtGrpParentWithLocResource GetMgmtGrpParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetMgmtGrpParentWithLocResource(id);
@@ -376,7 +376,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGroupParentResource"/> object. </returns>
         public static MgmtGroupParentResource GetMgmtGroupParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetMgmtGroupParentResource(id);
@@ -392,7 +392,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantTestResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantTestResource"/> object. </returns>
         public static TenantTestResource GetTenantTestResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetTenantTestResource(id);
@@ -408,7 +408,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource"/> object. </returns>
         public static TenantParentWithNonResChWithLocResource GetTenantParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetTenantParentWithNonResChWithLocResource(id);
@@ -424,7 +424,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentWithNonResChResource"/> object. </returns>
         public static TenantParentWithNonResChResource GetTenantParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetTenantParentWithNonResChResource(id);
@@ -440,7 +440,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentWithLocResource"/> object. </returns>
         public static TenantParentWithLocResource GetTenantParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetTenantParentWithLocResource(id);
@@ -456,7 +456,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentResource"/> object. </returns>
         public static TenantParentResource GetTenantParentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetTenantParentResource(id);
@@ -472,7 +472,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeConfigurationResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeConfigurationResource"/> object. </returns>
         public static FakeConfigurationResource GetFakeConfigurationResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtListMethodsArmClient(client).GetFakeConfigurationResource(id);
@@ -1549,7 +1549,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
@@ -1574,7 +1574,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLoc(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
@@ -1602,7 +1602,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
@@ -1630,7 +1630,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
@@ -1655,7 +1655,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
@@ -1680,7 +1680,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
@@ -1705,7 +1705,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
@@ -1730,7 +1730,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithLocs(cancellationToken);
@@ -1758,7 +1758,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocationAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
@@ -1786,7 +1786,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocation(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
@@ -1811,7 +1811,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestorsAsync(cancellationToken);
@@ -1836,7 +1836,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorResource> GetFakeParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetFakeParentWithAncestors(cancellationToken);
@@ -1862,7 +1862,7 @@ namespace MgmtListMethods
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
@@ -1888,7 +1888,7 @@ namespace MgmtListMethods
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
@@ -1914,7 +1914,7 @@ namespace MgmtListMethods
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
@@ -1940,7 +1940,7 @@ namespace MgmtListMethods
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
@@ -1965,7 +1965,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
@@ -1990,7 +1990,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithLocs(cancellationToken);
@@ -2018,7 +2018,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
@@ -2046,7 +2046,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
@@ -2071,7 +2071,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestorsAsync(cancellationToken);
@@ -2096,7 +2096,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).GetResGrpParentWithAncestors(cancellationToken);
@@ -2125,7 +2125,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="content"/> is null. </exception>
-        /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<UpdateWorkspaceQuotas> UpdateAllQuotaAsync(this SubscriptionResource subscriptionResource, string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).UpdateAllQuotaAsync(location, content, cancellationToken);
@@ -2154,7 +2154,7 @@ namespace MgmtListMethods
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="content"/> is null. </exception>
-        /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="UpdateWorkspaceQuotas"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<UpdateWorkspaceQuotas> UpdateAllQuota(this SubscriptionResource subscriptionResource, string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtListMethodsSubscriptionResource(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);

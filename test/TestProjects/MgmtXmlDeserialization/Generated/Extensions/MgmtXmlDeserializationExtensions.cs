@@ -39,7 +39,7 @@ namespace MgmtXmlDeserialization
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="XmlInstanceResource" /> object. </returns>
+        /// <returns> Returns a <see cref="XmlInstanceResource"/> object. </returns>
         public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtXmlDeserializationArmClient(client).GetXmlInstanceResource(id);

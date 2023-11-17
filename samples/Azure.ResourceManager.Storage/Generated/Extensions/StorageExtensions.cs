@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BlobServiceResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BlobServiceResource"/> object. </returns>
         public static BlobServiceResource GetBlobServiceResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetBlobServiceResource(id);
@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BlobContainerResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BlobContainerResource"/> object. </returns>
         public static BlobContainerResource GetBlobContainerResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetBlobContainerResource(id);
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ImmutabilityPolicyResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ImmutabilityPolicyResource"/> object. </returns>
         public static ImmutabilityPolicyResource GetImmutabilityPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetImmutabilityPolicyResource(id);
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FileServiceResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FileServiceResource"/> object. </returns>
         public static FileServiceResource GetFileServiceResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetFileServiceResource(id);
@@ -109,7 +109,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FileShareResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FileShareResource"/> object. </returns>
         public static FileShareResource GetFileShareResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetFileShareResource(id);
@@ -125,7 +125,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="StorageAccountResource" /> object. </returns>
+        /// <returns> Returns a <see cref="StorageAccountResource"/> object. </returns>
         public static StorageAccountResource GetStorageAccountResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetStorageAccountResource(id);
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedAccountResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DeletedAccountResource"/> object. </returns>
         public static DeletedAccountResource GetDeletedAccountResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetDeletedAccountResource(id);
@@ -157,7 +157,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagementPolicyResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ManagementPolicyResource"/> object. </returns>
         public static ManagementPolicyResource GetManagementPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetManagementPolicyResource(id);
@@ -173,7 +173,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BlobInventoryPolicyResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BlobInventoryPolicyResource"/> object. </returns>
         public static BlobInventoryPolicyResource GetBlobInventoryPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetBlobInventoryPolicyResource(id);
@@ -189,7 +189,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="StoragePrivateEndpointConnectionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="StoragePrivateEndpointConnectionResource"/> object. </returns>
         public static StoragePrivateEndpointConnectionResource GetStoragePrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetStoragePrivateEndpointConnectionResource(id);
@@ -205,7 +205,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ObjectReplicationPolicyResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ObjectReplicationPolicyResource"/> object. </returns>
         public static ObjectReplicationPolicyResource GetObjectReplicationPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetObjectReplicationPolicyResource(id);
@@ -221,7 +221,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="EncryptionScopeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="EncryptionScopeResource"/> object. </returns>
         public static EncryptionScopeResource GetEncryptionScopeResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableStorageArmClient(client).GetEncryptionScopeResource(id);
@@ -390,7 +390,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageSkuInformation"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<StorageSkuInformation> GetSkusAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableStorageSubscriptionResource(subscriptionResource).GetSkusAsync(cancellationToken);
@@ -415,7 +415,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageSkuInformation"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<StorageSkuInformation> GetSkus(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableStorageSubscriptionResource(subscriptionResource).GetSkus(cancellationToken);
@@ -440,7 +440,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageAccountResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<StorageAccountResource> GetStorageAccountsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableStorageSubscriptionResource(subscriptionResource).GetStorageAccountsAsync(cancellationToken);
@@ -465,7 +465,7 @@ namespace Azure.ResourceManager.Storage
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageAccountResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<StorageAccountResource> GetStorageAccounts(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableStorageSubscriptionResource(subscriptionResource).GetStorageAccounts(cancellationToken);
@@ -491,7 +491,7 @@ namespace Azure.ResourceManager.Storage
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageUsage"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<StorageUsage> GetUsagesByLocationAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             return GetMockableStorageSubscriptionResource(subscriptionResource).GetUsagesByLocationAsync(location, cancellationToken);
@@ -517,7 +517,7 @@ namespace Azure.ResourceManager.Storage
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageUsage"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<StorageUsage> GetUsagesByLocation(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             return GetMockableStorageSubscriptionResource(subscriptionResource).GetUsagesByLocation(location, cancellationToken);

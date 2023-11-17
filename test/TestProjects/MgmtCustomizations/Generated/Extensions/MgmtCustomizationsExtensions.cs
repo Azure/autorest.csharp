@@ -39,7 +39,7 @@ namespace MgmtCustomizations
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PetStoreResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PetStoreResource"/> object. </returns>
         public static PetStoreResource GetPetStoreResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtCustomizationsArmClient(client).GetPetStoreResource(id);

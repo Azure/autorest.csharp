@@ -45,7 +45,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AvailabilitySetResource"/> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetAvailabilitySetResource(id);
@@ -61,7 +61,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DedicatedHostGroupResource"/> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetDedicatedHostGroupResource(id);
@@ -77,7 +77,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DedicatedHostResource"/> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetDedicatedHostResource(id);
@@ -93,7 +93,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource"/> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetVirtualMachineExtensionImageResource(id);
@@ -109,7 +109,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
+        /// <returns> Returns a <see cref="EnvironmentContainerResource"/> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetEnvironmentContainerResource(id);
@@ -125,7 +125,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="WorkspaceResource" /> object. </returns>
+        /// <returns> Returns a <see cref="WorkspaceResource"/> object. </returns>
         public static WorkspaceResource GetWorkspaceResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetWorkspaceResource(id);
@@ -141,7 +141,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource"/> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtParamOrderingArmClient(client).GetVirtualMachineScaleSetResource(id);
@@ -531,7 +531,7 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AvailabilitySetResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
@@ -557,7 +557,7 @@ namespace MgmtParamOrdering
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AvailabilitySetResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtParamOrderingSubscriptionResource(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);

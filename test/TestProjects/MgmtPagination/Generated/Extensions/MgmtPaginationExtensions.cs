@@ -39,7 +39,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeIntegerModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeIntegerModelResource"/> object. </returns>
         public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeIntegerModelResource(id);
@@ -55,7 +55,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeInt64ModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeInt64ModelResource"/> object. </returns>
         public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeInt64ModelResource(id);
@@ -71,7 +71,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeInt32ModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeInt32ModelResource"/> object. </returns>
         public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeInt32ModelResource(id);
@@ -87,7 +87,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeNumericModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeNumericModelResource"/> object. </returns>
         public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeNumericModelResource(id);
@@ -103,7 +103,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeFloatModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeFloatModelResource"/> object. </returns>
         public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeFloatModelResource(id);
@@ -119,7 +119,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeDoubleModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeDoubleModelResource"/> object. </returns>
         public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeDoubleModelResource(id);
@@ -135,7 +135,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeDecimalModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeDecimalModelResource"/> object. </returns>
         public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeDecimalModelResource(id);
@@ -151,7 +151,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeStringModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeStringModelResource"/> object. </returns>
         public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPaginationArmClient(client).GetPageSizeStringModelResource(id);

@@ -40,7 +40,7 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AvailabilitySetResource"/> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetResource(id);
@@ -56,7 +56,7 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AvailabilitySetChildResource"/> object. </returns>
         public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetChildResource(id);
@@ -72,7 +72,7 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource"/> object. </returns>
         public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtOperationsArmClient(client).GetAvailabilitySetGrandChildResource(id);
@@ -88,7 +88,7 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
+        /// <returns> Returns a <see cref="UnpatchableResource"/> object. </returns>
         public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtOperationsArmClient(client).GetUnpatchableResource(id);

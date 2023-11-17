@@ -45,7 +45,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FooResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FooResource"/> object. </returns>
         public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPropertyBagArmClient(client).GetFooResource(id);
@@ -61,7 +61,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BarResource"/> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPropertyBagArmClient(client).GetBarResource(id);
@@ -224,7 +224,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
@@ -251,7 +251,7 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoos(filter, top, cancellationToken);
@@ -278,7 +278,7 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
@@ -305,7 +305,7 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBars(ifMatch, top, cancellationToken);

@@ -40,7 +40,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource"/> object. </returns>
         public static AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceArmClient(client).GetAzureResourceFlattenModel1Resource(id);
@@ -56,7 +56,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="CustomModel2Resource"/> object. </returns>
         public static CustomModel2Resource GetCustomModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceArmClient(client).GetCustomModel2Resource(id);
@@ -72,7 +72,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="CustomModel3Resource"/> object. </returns>
         public static CustomModel3Resource GetCustomModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceArmClient(client).GetCustomModel3Resource(id);
@@ -307,7 +307,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AzureResourceFlattenModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel2sAsync(cancellationToken);
@@ -332,7 +332,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AzureResourceFlattenModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel2s(cancellationToken);
@@ -467,7 +467,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AzureResourceFlattenModel3"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel3sAsync(cancellationToken);
@@ -492,7 +492,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AzureResourceFlattenModel3"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel3s(cancellationToken);
@@ -627,7 +627,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AzureResourceFlattenModel4"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel4sAsync(cancellationToken);
@@ -652,7 +652,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AzureResourceFlattenModel4"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel4s(cancellationToken);
@@ -787,7 +787,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AzureResourceFlattenModel5"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel5sAsync(cancellationToken);
@@ -812,7 +812,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AzureResourceFlattenModel5"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtExactMatchFlattenInheritanceResourceGroupResource(resourceGroupResource).GetAzureResourceFlattenModel5s(cancellationToken);

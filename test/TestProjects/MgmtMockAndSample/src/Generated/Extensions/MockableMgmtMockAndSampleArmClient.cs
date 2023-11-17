@@ -157,11 +157,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VaultResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VaultResource.CreateResourceIdentifier" /> to create a <see cref="VaultResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VaultResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VaultResource.CreateResourceIdentifier" /> to create a <see cref="VaultResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VaultResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VaultResource"/> object. </returns>
         public virtual VaultResource GetVaultResource(ResourceIdentifier id)
         {
             VaultResource.ValidateResourceId(id);
@@ -169,11 +169,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="DeletedVaultResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DeletedVaultResource.CreateResourceIdentifier" /> to create a <see cref="DeletedVaultResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DeletedVaultResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeletedVaultResource.CreateResourceIdentifier" /> to create a <see cref="DeletedVaultResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedVaultResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DeletedVaultResource"/> object. </returns>
         public virtual DeletedVaultResource GetDeletedVaultResource(ResourceIdentifier id)
         {
             DeletedVaultResource.ValidateResourceId(id);
@@ -181,11 +181,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> object. </returns>
         public virtual MgmtMockAndSamplePrivateEndpointConnectionResource GetMgmtMockAndSamplePrivateEndpointConnectionResource(ResourceIdentifier id)
         {
             MgmtMockAndSamplePrivateEndpointConnectionResource.ValidateResourceId(id);
@@ -193,11 +193,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource"/> object. </returns>
         public virtual VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(ResourceIdentifier id)
         {
             VirtualMachineExtensionImageResource.ValidateResourceId(id);
@@ -205,11 +205,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="DiskEncryptionSetResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DiskEncryptionSetResource.CreateResourceIdentifier" /> to create a <see cref="DiskEncryptionSetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DiskEncryptionSetResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DiskEncryptionSetResource.CreateResourceIdentifier" /> to create a <see cref="DiskEncryptionSetResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DiskEncryptionSetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DiskEncryptionSetResource"/> object. </returns>
         public virtual DiskEncryptionSetResource GetDiskEncryptionSetResource(ResourceIdentifier id)
         {
             DiskEncryptionSetResource.ValidateResourceId(id);
@@ -217,11 +217,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="ManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ManagedHsmResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="ManagedHsmResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagedHsmResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ManagedHsmResource"/> object. </returns>
         public virtual ManagedHsmResource GetManagedHsmResource(ResourceIdentifier id)
         {
             ManagedHsmResource.ValidateResourceId(id);
@@ -229,11 +229,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="DeletedManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DeletedManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="DeletedManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DeletedManagedHsmResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeletedManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="DeletedManagedHsmResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedManagedHsmResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DeletedManagedHsmResource"/> object. </returns>
         public virtual DeletedManagedHsmResource GetDeletedManagedHsmResource(ResourceIdentifier id)
         {
             DeletedManagedHsmResource.ValidateResourceId(id);
@@ -241,11 +241,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="MhsmPrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MhsmPrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="MhsmPrivateEndpointConnectionResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MhsmPrivateEndpointConnectionResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MhsmPrivateEndpointConnectionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MhsmPrivateEndpointConnectionResource"/> object. </returns>
         public virtual MhsmPrivateEndpointConnectionResource GetMhsmPrivateEndpointConnectionResource(ResourceIdentifier id)
         {
             MhsmPrivateEndpointConnectionResource.ValidateResourceId(id);
@@ -253,11 +253,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FirewallPolicyResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FirewallPolicyResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FirewallPolicyResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FirewallPolicyResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FirewallPolicyResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FirewallPolicyResource"/> object. </returns>
         public virtual FirewallPolicyResource GetFirewallPolicyResource(ResourceIdentifier id)
         {
             FirewallPolicyResource.ValidateResourceId(id);
@@ -265,11 +265,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FirewallPolicyRuleCollectionGroupResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyRuleCollectionGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FirewallPolicyRuleCollectionGroupResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyRuleCollectionGroupResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FirewallPolicyRuleCollectionGroupResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FirewallPolicyRuleCollectionGroupResource"/> object. </returns>
         public virtual FirewallPolicyRuleCollectionGroupResource GetFirewallPolicyRuleCollectionGroupResource(ResourceIdentifier id)
         {
             FirewallPolicyRuleCollectionGroupResource.ValidateResourceId(id);
@@ -277,11 +277,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RoleAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RoleAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="RoleAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RoleAssignmentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RoleAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="RoleAssignmentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RoleAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RoleAssignmentResource"/> object. </returns>
         public virtual RoleAssignmentResource GetRoleAssignmentResource(ResourceIdentifier id)
         {
             RoleAssignmentResource.ValidateResourceId(id);
@@ -289,11 +289,11 @@ namespace MgmtMockAndSample.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="GuestConfigurationAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="GuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="GuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="GuestConfigurationAssignmentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="GuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="GuestConfigurationAssignmentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource"/> object. </returns>
         public virtual GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(ResourceIdentifier id)
         {
             GuestConfigurationAssignmentResource.ValidateResourceId(id);

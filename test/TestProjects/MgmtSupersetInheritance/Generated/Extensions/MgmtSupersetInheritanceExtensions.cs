@@ -40,7 +40,7 @@ namespace MgmtSupersetInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel1Resource"/> object. </returns>
         public static SupersetModel1Resource GetSupersetModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel1Resource(id);
@@ -56,7 +56,7 @@ namespace MgmtSupersetInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel4Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel4Resource"/> object. </returns>
         public static SupersetModel4Resource GetSupersetModel4Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel4Resource(id);
@@ -72,7 +72,7 @@ namespace MgmtSupersetInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel6Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel6Resource"/> object. </returns>
         public static SupersetModel6Resource GetSupersetModel6Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel6Resource(id);
@@ -88,7 +88,7 @@ namespace MgmtSupersetInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel7Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel7Resource"/> object. </returns>
         public static SupersetModel7Resource GetSupersetModel7Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtSupersetInheritanceArmClient(client).GetSupersetModel7Resource(id);

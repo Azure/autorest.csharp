@@ -44,7 +44,7 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PublicIPAddressResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PublicIPAddressResource"/> object. </returns>
         public static PublicIPAddressResource GetPublicIPAddressResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPartialResourceArmClient(client).GetPublicIPAddressResource(id);
@@ -60,7 +60,7 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource"/> object. </returns>
         public static ConfigurationProfileAssignmentResource GetConfigurationProfileAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPartialResourceArmClient(client).GetConfigurationProfileAssignmentResource(id);
@@ -76,7 +76,7 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PartialVmssResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PartialVmssResource"/> object. </returns>
         public static PartialVmssResource GetPartialVmssResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPartialResourceArmClient(client).GetPartialVmssResource(id);
@@ -92,7 +92,7 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource"/> object. </returns>
         public static VirtualMachineMgmtPartialResource GetVirtualMachineMgmtPartialResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtPartialResourceArmClient(client).GetVirtualMachineMgmtPartialResource(id);
@@ -189,7 +189,7 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="PublicIPAddressResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtPartialResourceSubscriptionResource(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
@@ -214,7 +214,7 @@ namespace MgmtPartialResource
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="PublicIPAddressResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtPartialResourceSubscriptionResource(subscriptionResource).GetPublicIPAddresses(cancellationToken);

@@ -40,7 +40,7 @@ namespace MgmtOmitOperationGroups
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Model2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="Model2Resource"/> object. </returns>
         public static Model2Resource GetModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtOmitOperationGroupsArmClient(client).GetModel2Resource(id);
@@ -132,7 +132,7 @@ namespace MgmtOmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="Model5"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Model5> GetModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel5sAsync(cancellationToken);
@@ -156,7 +156,7 @@ namespace MgmtOmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="Model5"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Model5> GetModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel5s(cancellationToken);

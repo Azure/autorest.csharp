@@ -51,7 +51,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubSingletonResource"/> object. </returns>
         public static SubSingletonResource GetSubSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExtensionResourceArmClient(client).GetSubSingletonResource(id);
@@ -67,7 +67,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource"/> object. </returns>
         public static SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExtensionResourceArmClient(client).GetSubscriptionPolicyDefinitionResource(id);
@@ -83,7 +83,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource"/> object. </returns>
         public static BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExtensionResourceArmClient(client).GetBuiltInPolicyDefinitionResource(id);
@@ -99,7 +99,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource"/> object. </returns>
         public static ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtExtensionResourceArmClient(client).GetManagementGroupPolicyDefinitionResource(id);
@@ -183,7 +183,7 @@ namespace MgmtExtensionResource
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubSingletonResource"/> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
         {
             return GetMockableMgmtExtensionResourceSubscriptionResource(subscriptionResource).GetSubSingleton();

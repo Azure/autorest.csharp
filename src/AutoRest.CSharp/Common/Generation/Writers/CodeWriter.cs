@@ -410,9 +410,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 AppendRaw(keywordName);
             }
-            else if (writeTypeNameOnly || isDeclaration && !type.IsFrameworkType)
+            else if (isDeclaration && !type.IsFrameworkType)
             {
                 AppendRaw(type.Implementation.Declaration.Name);
+            }
+            else if (writeTypeNameOnly)
+            {
+                AppendRaw(type.Name);
             }
             else
             {

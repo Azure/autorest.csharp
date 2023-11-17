@@ -133,7 +133,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatus(scope);
@@ -330,7 +330,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakePolicyAssignmentResource"/> object. </returns>
         public static FakePolicyAssignmentResource GetFakePolicyAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetFakePolicyAssignmentResource(id);
@@ -346,7 +346,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DeploymentExtendedResource"/> object. </returns>
         public static DeploymentExtendedResource GetDeploymentExtendedResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetDeploymentExtendedResource(id);
@@ -362,7 +362,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResourceLinkResource"/> object. </returns>
         public static ResourceLinkResource GetResourceLinkResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetResourceLinkResource(id);
@@ -378,7 +378,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetVMInsightsOnboardingStatusResource(id);
@@ -394,7 +394,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource"/> object. </returns>
         public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtScopeResourceArmClient(client).GetGuestConfigurationAssignmentResource(id);
@@ -478,7 +478,7 @@ namespace MgmtScopeResource
         /// </item>
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
             return GetMockableMgmtScopeResourceArmResource(armResource).GetVMInsightsOnboardingStatus();
@@ -784,7 +784,7 @@ namespace MgmtScopeResource
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
@@ -810,7 +810,7 @@ namespace MgmtScopeResource
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtScopeResourceSubscriptionResource(subscriptionResource).GetResourceLinks(filter, cancellationToken);

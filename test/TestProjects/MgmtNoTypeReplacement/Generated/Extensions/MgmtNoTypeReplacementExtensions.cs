@@ -39,7 +39,7 @@ namespace MgmtNoTypeReplacement
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource"/> object. </returns>
         public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel1Resource(id);
@@ -55,7 +55,7 @@ namespace MgmtNoTypeReplacement
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource"/> object. </returns>
         public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel2Resource(id);
@@ -71,7 +71,7 @@ namespace MgmtNoTypeReplacement
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource"/> object. </returns>
         public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtNoTypeReplacementArmClient(client).GetNoTypeReplacementModel3Resource(id);

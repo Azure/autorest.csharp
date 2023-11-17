@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="TenantParentWithLocResource" /> and their operations.
-    /// Each <see cref="TenantParentWithLocResource" /> in the collection will belong to the same instance of <see cref="TenantTestResource" />.
-    /// To get a <see cref="TenantParentWithLocCollection" /> instance call the GetTenantParentWithLocs method from an instance of <see cref="TenantTestResource" />.
+    /// A class representing a collection of <see cref="TenantParentWithLocResource"/> and their operations.
+    /// Each <see cref="TenantParentWithLocResource"/> in the collection will belong to the same instance of <see cref="TenantTestResource"/>.
+    /// To get a <see cref="TenantParentWithLocCollection"/> instance call the GetTenantParentWithLocs method from an instance of <see cref="TenantTestResource"/>.
     /// </summary>
     public partial class TenantParentWithLocCollection : ArmCollection, IEnumerable<TenantParentWithLocResource>, IAsyncEnumerable<TenantParentWithLocResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TenantParentWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TenantParentWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantParentWithLocResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);
@@ -245,7 +245,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TenantParentWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TenantParentWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantParentWithLocResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithLocRestClient.CreateListRequest(Id.Name);

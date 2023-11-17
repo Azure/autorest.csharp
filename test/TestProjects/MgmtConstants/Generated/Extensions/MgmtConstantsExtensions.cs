@@ -45,7 +45,7 @@ namespace MgmtConstants
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="OptionalMachineResource" /> object. </returns>
+        /// <returns> Returns a <see cref="OptionalMachineResource"/> object. </returns>
         public static OptionalMachineResource GetOptionalMachineResource(this ArmClient client, ResourceIdentifier id)
         {
             return GetMockableMgmtConstantsArmClient(client).GetOptionalMachineResource(id);
@@ -143,7 +143,7 @@ namespace MgmtConstants
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="OptionalMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtConstantsSubscriptionResource(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
@@ -169,7 +169,7 @@ namespace MgmtConstants
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="OptionalMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OptionalMachineResource> GetOptionalMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return GetMockableMgmtConstantsSubscriptionResource(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
