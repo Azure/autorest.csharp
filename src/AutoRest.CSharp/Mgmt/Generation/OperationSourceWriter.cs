@@ -17,6 +17,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -63,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line();
                         using (_writer.WriteMethodDeclaration(_opSource.ArmClientCtor))
                         {
-                            _writer.Line($"{_opSource.ArmClientField.Name} = {MgmtTypeProvider.ArmClientParameter.Name};");
+                            _writer.Line($"{_opSource.ArmClientField.Name} = {KnownParameters.ArmClient.Name};");
                         }
                     }
 

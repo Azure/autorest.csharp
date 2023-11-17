@@ -8,6 +8,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions
 {
     internal abstract partial class ExtensibleSnippets
     {
+        public abstract ArgumentSnippets Argument { get; }
         public abstract JsonElementSnippets JsonElement { get; }
         public abstract ModelSnippets Model { get; }
         public abstract RestOperationsSnippets RestOperations { get; }
