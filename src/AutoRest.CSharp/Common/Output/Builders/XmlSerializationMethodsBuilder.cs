@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.ClientModel;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;

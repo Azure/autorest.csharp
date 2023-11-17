@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 
-using System.Net.ClientModel.Core;
+using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;

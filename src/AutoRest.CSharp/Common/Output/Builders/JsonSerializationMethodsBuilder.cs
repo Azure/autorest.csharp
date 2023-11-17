@@ -2,14 +2,14 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.ClientModel;
-using System.Net.ClientModel.Core;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             var typeOfT = iModelTInterface.Arguments[0];
             var options = new ModelReaderWriterOptionsExpression(optionsParameter);
-            // BinaryData IModel<T>.Write(ModelReaderWriterOptions options)
+            // BinaryData IPersistableModel<T>.Write(ModelReaderWriterOptions options)
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: iModelTInterface),
@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             );
 
-            // T IModel<T>.Read(BinaryData data, ModelReaderWriterOptions options)
+            // T IPersistableModel<T>.Read(BinaryData data, ModelReaderWriterOptions options)
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { dataParameter, optionsParameter }, ExplicitInterface: iModelTInterface),
@@ -146,38 +146,38 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
             );
 
-            // ModelReaderWriterFormat IModel<T>.GetWireFormat(ModelReaderWriterOptions options)
+            // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
             yield return new
             (
-                new MethodSignature(nameof(IPersistableModel<object>.GetWireFormat), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { optionsParameter }, ExplicitInterface: iModelTInterface),
+                new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { optionsParameter }, ExplicitInterface: iModelTInterface),
                 xml != null ? Serializations.XmlFormat : Serializations.JsonFormat
             );
 
-            // if the model is a struct, it needs to implement IModel<object> as well which leads to another 2 methods
+            // if the model is a struct, it needs to implement IPersistableModel<object> as well which leads to another 2 methods
             if (iModelObjectInterface is not null)
             {
-                // BinaryData IModel<object>.Write(ModelReaderWriterOptions options)
+                // BinaryData IPersistableModel<object>.Write(ModelReaderWriterOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { optionsParameter }, ExplicitInterface: iModelObjectInterface),
-                    // => (IModel<T>this).Write(options);
+                    // => (IPersistableModel<T>this).Write(options);
                     This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Write), optionsParameter)
                 );
 
-                // object IModel<object>.Read(BinaryData data, ModelReaderWriterOptions options)
+                // object IPersistableModel<object>.Create(BinaryData data, ModelReaderWriterOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeof(object), null, new[] { dataParameter, optionsParameter }, ExplicitInterface: iModelObjectInterface),
-                    // => (IModel<T>this).Read(options);
+                    // => (IPersistableModel<T>this).Read(options);
                     This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Create), dataParameter, optionsParameter)
                 );
 
-                // ModelReaderWriterFormat IModel<object>.GetWireFormat(ModelReaderWriterOptions options)
+                // ModelReaderWriterFormat IPersistableModel<object>.GetWireFormat(ModelReaderWriterOptions options)
                 yield return new
                 (
-                    new MethodSignature(nameof(IPersistableModel<object>.GetWireFormat), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { optionsParameter }, ExplicitInterface: iModelObjectInterface),
-                    // => (IModel<T>this).GetWireFormat(options);
-                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetWireFormat), optionsParameter)
+                    new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { optionsParameter }, ExplicitInterface: iModelObjectInterface),
+                    // => (IPersistableModel<T>this).GetWireFormat(options);
+                    This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), optionsParameter)
                 );
             }
 
@@ -330,17 +330,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private static MethodBodyStatement CheckFormat(ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
         {
             /*
-                if ((options.Format != "W" || ((IModel<InputRecursiveModel>)this).GetWireFormat(options) != "J") && options.Format != "J")
+                if ((options.Format != "W" || ((IPersistableModel<T>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
                 {
-                    throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<XmlModelForCombinedInterface>)} interface");
-                    // use this when it support JSON for wire $"Must use 'J' or 'W' format when calling the {nameof(IJsonModel<XmlModelForCombinedInterface>)} interface"
+                    throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<T>)} interface");
+                    // use this when it support JSON for wire $"Must use 'J' or 'W' format when calling the {nameof(IJsonModel<T>)} interface"
                 }
              */
-            // condition: (options.Format != "W" || ((IModel<InputRecursiveModel>)this).GetWireFormat(options) != "J") && options.Format != "J"
+            // condition: (options.Format != "W" || ((IPersistableModel<T>)this).GetFormatFromOptions(options) != "J") && options.Format != "J"
             var iModelInterface = serialization.IModelInterface;
             var condition = Or(
                     NotEqual(options.Format, Serializations.WireFormat),
-                    NotEqual(This.CastTo(iModelInterface).Invoke(nameof(IPersistableModel<object>.GetWireFormat), options), Serializations.JsonFormat))
+                    NotEqual(This.CastTo(iModelInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options), Serializations.JsonFormat))
                 .And(NotEqual(options.Format, Serializations.JsonFormat));
             return new IfStatement(condition)
             {

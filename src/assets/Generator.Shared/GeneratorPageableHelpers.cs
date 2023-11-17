@@ -4,8 +4,8 @@
 #nullable enable
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
-using System.Net.ClientModel;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;

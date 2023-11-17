@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Net.ClientModel.Core;
+using System.ClientModel.Primitives;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
