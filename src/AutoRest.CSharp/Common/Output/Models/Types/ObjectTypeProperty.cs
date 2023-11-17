@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -51,12 +52,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
             _baseParameterDescription = parameterDescription;
-            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, isReadOnly).ToString() : parameterDescription;
+            SerializationFormat = serializationFormat;
+            SerializationMapping = serializationMapping;
+            FormattedDescription = CreatePropertyDescription(parameterDescription, isReadOnly);
+            Description = FormattedDescription.ToString();
             IsFlattenedProperty = isFlattenedProperty;
             GetterModifiers = getterModifiers;
             SetterModifiers = setterModifiers;
-            SerializationFormat = serializationFormat;
-            SerializationMapping = serializationMapping;
         }
 
         public ObjectTypeProperty MarkFlatten()
@@ -140,8 +142,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsRequired { get; }
         public MemberDeclarationOptions Declaration { get; }
         public string Description { get; }
+        public FormattableString FormattedDescription { get; }
         private FormattableString? _propertyDescription;
-        public FormattableString PropertyDescription => _propertyDescription ??= $"{Description}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
+        public FormattableString PropertyDescription => _propertyDescription ??= $"{FormattedDescription}{CreateExtraPropertyDiscriminatorSummary(ValueType)}";
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private FormattableString? _parameterDescription;
@@ -165,6 +168,126 @@ namespace AutoRest.CSharp.Output.Models.Types
         public FieldModifiers? SetterModifiers { get; }
 
         public SourcePropertySerializationMapping? SerializationMapping { get; }
+
+        /// <summary>
+        /// This method attempts to retrieve the description for each of the union type items. For items that are lists,
+        /// the description will include details about the element type.
+        /// For items that are literals, the description will include the literal value.
+        /// </summary>
+        /// <param name="unionItems">the list of union type items.</param>
+        /// <returns>A list of FormattableString representing the description of each union item.
+        /// </returns>
+        public static IReadOnlyList<FormattableString> GetUnionTypesDescriptions(IList<CSharpType> unionItems)
+        {
+            var values = new List<FormattableString>();
+
+            foreach (CSharpType item in unionItems)
+            {
+                if (item != null)
+                {
+                    FormattableString description = $"<description><see cref=\"{item}\"/></description>";
+
+                    if (item.IsLiteral && item.Literal?.Value != null)
+                    {
+                        var literalValue = item.Literal.Value.Value;
+                        if (item.FrameworkType == typeof(string))
+                        {
+                            description = $"<description>{literalValue:L}</description>";
+                        }
+                        else
+                        {
+                            description = $"<description>{literalValue}</description>";
+                        }
+                    }
+                    else if (TypeFactory.IsCollectionType(item) || TypeFactory.IsArray(item))
+                    {
+                        // construct the description for the collection type
+                        description = ConstructTypeStringForCollection(item);
+                    }
+
+                    values.Add(description);
+                }
+            }
+
+            return values.Distinct().ToList();
+        }
+
+        /// <summary>
+        /// Constructs the type string for a collection property. If the property is a list, the description
+        /// will include details about the element type.
+        /// </summary>
+        /// <param name="prop">The collection property.</param>
+        /// <returns>The constructed type FormattedString for the property.</returns>
+        public static FormattableString ConstructTypeStringForCollection(CSharpType prop)
+        {
+            FormattableString additionalDescriptionForListType = $"";
+            FormattableString constructedDescription;
+
+            if (TypeFactory.IsList(prop) || TypeFactory.IsArray(prop))
+            {
+                // For lists, get the element type and construct the description for it
+                CSharpType elementType = TypeFactory.GetElementType(prop);
+                additionalDescriptionForListType = ConstructDetailsForListType(elementType, true);
+            }
+
+            if (!additionalDescriptionForListType.IsNullOrEmpty())
+            {
+                constructedDescription = $"<description><see cref=\"{prop:C}\"/> Where <c>T</c> is of type {additionalDescriptionForListType}</description>";
+            }
+            else
+            {
+                constructedDescription = $"<description><see cref=\"{prop:C}\"/></description>";
+            }
+
+            return constructedDescription;
+        }
+
+        /// <summary>
+        /// This method constructs the description for a list type. If the list type contains an element type,
+        /// then the description will include details about the element type.
+        /// </summary>
+        /// <param name="input">The input list type to construct the description for.</param>
+        /// <param name="isBaseElement">A value indicating whether the list type is the base element of the original list.</param>
+        /// <returns>A constructed FormattedString representing the description of the list type.</returns>
+        public static FormattableString ConstructDetailsForListType(CSharpType? input, bool isBaseElement)
+        {
+            FormattableString typeDescription = $"";
+
+            if (input != null)
+            {
+                string itemName = input.TryGetCSharpFriendlyName(out var keywordName) ? keywordName : input.Name;
+                CSharpType? elementType = null;
+                typeDescription = $"{itemName}";
+
+                if (isBaseElement)
+                {
+                    typeDescription = $"<see cref=\"{input}\"/>";
+                }
+
+                if (TypeFactory.IsList(input) || TypeFactory.IsArray(input))
+                {
+                    elementType = TypeFactory.GetElementType(input);
+                    typeDescription = $"{itemName}";
+                }
+                else if (TypeFactory.IsDictionary(input))
+                {
+                    typeDescription = $"{itemName}{{TKey, TValue}}";
+                }
+
+                // validate if the item contains an element type
+                if (elementType != null)
+                {
+                    typeDescription = $"{typeDescription}{{{ConstructDetailsForListType(elementType, false)}}}";
+
+                    if (isBaseElement)
+                    {
+                        typeDescription = $"<c>{typeDescription}</c>";
+                    }
+                }
+            }
+
+            return typeDescription;
+        }
 
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {
@@ -193,6 +316,141 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return extraDescription;
+        }
+
+        /// <summary>
+        /// This method is used to create the description for the property. It will append the extra description for the property if it is a binary data property.
+        /// </summary>
+        /// <param name="parameterDescription">The parameter description.</param>
+        /// <param name="isPropReadOnly">Flag to determine if a property is read only.</param>
+        /// <returns>The formatted property description string.</returns>
+        internal FormattableString CreatePropertyDescription(string parameterDescription, bool isPropReadOnly)
+        {
+            FormattableString description;
+            if (string.IsNullOrEmpty(parameterDescription))
+            {
+                description = CreateDefaultPropertyDescription(Declaration.Name, isPropReadOnly);
+            }
+            else
+            {
+                description = $"{parameterDescription}";
+            }
+
+            FormattableString binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type, SerializationFormat);
+            description = $"{description}{binaryDataExtraDescription}";
+
+            return description;
+        }
+
+        /// <summary>
+        /// This method will construct an additional description for properties that are binary data. For properties whose values are union types,
+        /// the description will include the types of values that are allowed.
+        /// </summary>
+        /// <param name="type">The CSharpType of the property.</param>
+        /// <param name="serializationFormat">The serialization format of the property.</param>
+        /// <returns>The formatted description string for the property.</returns>
+        private FormattableString CreateBinaryDataExtraDescription(CSharpType type, SerializationFormat serializationFormat)
+        {
+            if (type.IsFrameworkType)
+            {
+                string typeSpecificDesc;
+                IReadOnlyList<FormattableString> unionTypeDescriptions = Array.Empty<FormattableString>();
+                if (type.IsUnion || (ValueType != null && ValueType.IsUnion))
+                {
+                    // get the union types, if any
+                    IList<CSharpType>? items = type.IsUnion ? type.UnionItemTypes : ValueType?.UnionItemTypes;
+
+                    if (items != null && items.Count > 0)
+                    {
+                        unionTypeDescriptions = GetUnionTypesDescriptions(items);
+                    }
+                }
+
+                if (type.FrameworkType == typeof(BinaryData))
+                {
+                    typeSpecificDesc = "this property";
+                    return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
+                }
+                if (TypeFactory.IsList(type) &&
+                    type.Arguments[0].IsFrameworkType &&
+                    type.Arguments[0].FrameworkType == typeof(BinaryData))
+                {
+                    typeSpecificDesc = "the element of this property";
+                    return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
+                }
+                if (TypeFactory.IsDictionary(type) &&
+                    type.Arguments[1].IsFrameworkType &&
+                    type.Arguments[1].FrameworkType == typeof(BinaryData))
+                {
+                    typeSpecificDesc = "the value of this property";
+                    return ConstructBinaryDataDescription(typeSpecificDesc, serializationFormat, unionTypeDescriptions);
+                }
+            }
+            return $"";
+        }
+
+        private FormattableString ConstructBinaryDataDescription(string typeSpecificDesc, SerializationFormat serializationFormat, IReadOnlyList<FormattableString> unionTypeDescriptions)
+        {
+            FormattableString unionTypesAdditionalDescription = $"";
+
+            if (unionTypeDescriptions.Count > 0)
+            {
+                unionTypesAdditionalDescription = $"\n<remarks>\nSupported types:\n<list type=\"bullet\">\n";
+                foreach (FormattableString unionTypeDescription in unionTypeDescriptions)
+                {
+                    unionTypesAdditionalDescription = $"{unionTypesAdditionalDescription}<item>\n{unionTypeDescription}\n</item>\n";
+                }
+                unionTypesAdditionalDescription = $"{unionTypesAdditionalDescription}</list>\n</remarks>";
+            }
+            switch (serializationFormat)
+            {
+                case SerializationFormat.Bytes_Base64Url: //intentional fall through
+                case SerializationFormat.Bytes_Base64:
+                    return $@"
+<para>
+To assign a byte[] to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromBytes(byte[])""/>.
+The byte[] will be serialized to a Base64 encoded string.
+</para>
+<para>{unionTypesAdditionalDescription}
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromBytes(new byte[] {{ 1, 2, 3 }})</term>
+<description>Creates a payload of ""AQID"".</description>
+</item>
+</list>
+</para>";
+
+                default:
+                    return $@"
+<para>
+To assign an object to {typeSpecificDesc} use <see cref=""{typeof(BinaryData)}.FromObjectAsJson{{T}}(T, System.Text.Json.JsonSerializerOptions?)""/>.
+</para>
+<para>
+To assign an already formatted json string to this property use <see cref=""{typeof(BinaryData)}.FromString(string)""/>.
+</para>
+<para>{unionTypesAdditionalDescription}
+Examples:
+<list type=""bullet"">
+<item>
+<term>BinaryData.FromObjectAsJson(""foo"")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromString(""\""foo\"""")</term>
+<description>Creates a payload of ""foo"".</description>
+</item>
+<item>
+<term>BinaryData.FromObjectAsJson(new {{ key = ""value"" }})</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+<item>
+<term>BinaryData.FromString(""{{\""key\"": \""value\""}}"")</term>
+<description>Creates a payload of {{ ""key"": ""value"" }}.</description>
+</item>
+</list>
+</para>";
+            }
         }
 
         private static FormattableString CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)

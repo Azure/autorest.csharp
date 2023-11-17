@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -59,6 +60,21 @@ namespace AutoRest.CSharp.Generation.Types
             IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
+        /// <summary>
+        /// Constructs a CSharpType that represents a union type.
+        /// </summary>
+        /// <param name="type">The type to convert.</param>
+        /// <param name="unionItemTypes">The list of union item types.</param>
+        /// <param name="isNullable">Flag used to determine if a type is nullable.</param>
+        public CSharpType(Type type, CSharpType[] unionItemTypes, bool isNullable) : this(
+            type.IsGenericType ? type.GetGenericTypeDefinition() : type,
+            isNullable,
+            type.IsGenericType ? type.GetGenericArguments().Select(p => new CSharpType(p)).ToArray() : Array.Empty<CSharpType>())
+        {
+            IsUnion = true;
+            UnionItemTypes = unionItemTypes;
+        }
+
         public CSharpType(TypeProvider implementation, bool isValueType = false, bool isEnum = false, bool isNullable = false, CSharpType[]? arguments = default)
             : this(implementation, implementation.Declaration.Namespace, implementation.Declaration.Name, isValueType, isEnum, isNullable, arguments)
         {
@@ -83,6 +99,10 @@ namespace AutoRest.CSharp.Generation.Types
         public string Name { get; }
         public bool IsValueType { get; }
         public bool IsEnum { get; }
+        public bool IsLiteral { get; init; }
+        public Constant? Literal { get; init; }
+        public bool IsUnion { get; }
+        public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
@@ -216,6 +236,38 @@ namespace AutoRest.CSharp.Generation.Types
                 type.IsEnum,
                 false,
                 genericTypes.ToArray());
+        }
+
+        /// <summary>
+        /// This function is used to create a new CSharpType instance with a literal value.
+        /// If the type is a framework type, the CSharpType will be created with the literal value Constant
+        /// object.
+        /// </summary>
+        /// <param name="type">The original type to create a new CSharpType instance from.</param>
+        /// <param name="literalValue">The literal value of the type, if any.</param>
+        /// <returns>An instance of CSharpType with a literal value property.</returns>
+        internal static CSharpType FromLiteral(CSharpType type, object literalValue)
+        {
+            if (type.IsFrameworkType)
+            {
+                Constant? literal;
+                try
+                {
+                    literal = new Constant(literalValue, type);
+                }
+                catch
+                {
+                    literal = null;
+                }
+
+                type = new CSharpType(type.FrameworkType, type.IsNullable)
+                {
+                    IsLiteral = true,
+                    Literal = literal
+                };
+            }
+
+            return type;
         }
 
         internal static CSharpType FromSystemType(BuildContext context, Type type)
