@@ -18,6 +18,7 @@
     "@typespec/library-linter": "0.50.0",
     "@typespec/rest": "0.50.0",
     "@typespec/versioning": "0.50.0",
-    "@typespec/openapi": "0.50.0"
+    "@typespec/openapi": "0.50.0",
+    "@typespec/openapi3": "0.50.0"
   }
 }
