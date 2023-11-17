@@ -39,9 +39,12 @@ namespace MgmtDiscriminator
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
         public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtDiscriminatorArmClient(client).GetDeliveryRuleResource(id);
         }
 
@@ -53,9 +56,12 @@ namespace MgmtDiscriminator
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRules();
         }
 
@@ -79,11 +85,13 @@ namespace MgmtDiscriminator
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRuleAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
@@ -107,11 +115,13 @@ namespace MgmtDiscriminator
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
         }
     }
