@@ -381,7 +381,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         continue;
                     }
 
-                    AppendRaw(" Where <c>");
+                    AppendRaw(" where <c>");
                     AppendType(type.Arguments[i], false, false);
                     AppendRaw("</c> is of type ");
 
@@ -398,7 +398,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         AppendTypeForCRef(arguments[i]);
                     }
 
-                    AppendRaw(", ");
+                    AppendRaw(",");
                 }
                 RemoveTrailingComma();
             }
