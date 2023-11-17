@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.ClientModel;
+using System.ClientModel;
 using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
@@ -29,7 +29,7 @@ namespace CustomNamespace
 
         internal static CustomizedModel DeserializeCustomizedModel(JsonElement element, ModelReaderWriterOptions options = null)
         {
-            options ??= ModelReaderWriterOptions.Wire;
+            options ??= new ModelReaderWriterOptions("W");
 
             int? propertyRenamedAndTypeChanged = default;
             CustomFruitEnum fruit = default;
