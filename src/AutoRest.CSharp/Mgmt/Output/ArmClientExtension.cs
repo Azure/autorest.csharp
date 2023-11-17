@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using Azure.ResourceManager;
+using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -90,9 +91,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                 MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
                 MockableExtension.Type,
                 null,
-                new[] { ArmClientParameter });
+                new[]
+                {
+                    KnownParameters.ArmClient with { Validation = ValidationType.AssertNotNull }
+                });
 
-            var extensionVariable = (ValueExpression)ArmClientParameter;
+            var extensionVariable = (ValueExpression)KnownParameters.ArmClient;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
             var body = Snippets.Return(
                 extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),

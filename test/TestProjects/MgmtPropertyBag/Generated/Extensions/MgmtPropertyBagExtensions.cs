@@ -45,9 +45,12 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FooResource"/> object. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="FooResource" /> object. </returns>
         public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtPropertyBagArmClient(client).GetFooResource(id);
         }
 
@@ -61,9 +64,12 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BarResource"/> object. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtPropertyBagArmClient(client).GetBarResource(id);
         }
 
@@ -75,9 +81,12 @@ namespace MgmtPropertyBag
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFoos();
         }
 
@@ -101,10 +110,12 @@ namespace MgmtPropertyBag
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFooAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
@@ -128,10 +139,12 @@ namespace MgmtPropertyBag
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetFoo(options, cancellationToken);
         }
 
@@ -143,9 +156,12 @@ namespace MgmtPropertyBag
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBars();
         }
 
@@ -169,10 +185,12 @@ namespace MgmtPropertyBag
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBarAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
@@ -196,10 +214,12 @@ namespace MgmtPropertyBag
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtPropertyBagResourceGroupResource(resourceGroupResource).GetBar(options, cancellationToken);
         }
 
@@ -224,9 +244,12 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
 
@@ -251,9 +274,12 @@ namespace MgmtPropertyBag
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
 
@@ -278,9 +304,12 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
 
@@ -305,9 +334,12 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
             return GetMockableMgmtPropertyBagSubscriptionResource(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }
     }

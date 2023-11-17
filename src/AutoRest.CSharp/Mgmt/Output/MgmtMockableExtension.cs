@@ -10,6 +10,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -43,10 +44,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Summary: null,
                 Description: $"Initializes a new instance of the {Type:C} class.",
                 Modifiers: Internal,
-                Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
+                Parameters: new[] { KnownParameters.ArmClient, ResourceIdentifierParameter },
                 Initializer: new(
                     isBase: true,
-                    arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
+                    arguments: new[] { KnownParameters.ArmClient, ResourceIdentifierParameter }));
         }
 
         private string? _factoryMethodName;

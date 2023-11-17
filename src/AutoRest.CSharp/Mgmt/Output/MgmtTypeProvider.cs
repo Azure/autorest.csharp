@@ -51,15 +51,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual FormattableString IdParamDescription => $"The identifier of the resource that is the target of operations.";
         public Parameter ResourceIdentifierParameter => new(Name: "id", Description: IdParamDescription, Type: typeof(ResourceIdentifier), DefaultValue: null, ValidationType.None, null);
-        public static Parameter ArmClientParameter => new(Name: "client", Description: $"The client parameters to use in these operations.", Type: typeof(ArmClient), DefaultValue: null, ValidationType.None, null);
-
-        public static Parameter ScopeParameter => new(
-            Name: "scope",
-            Description: $"The scope to use",
-            Type: typeof(ResourceIdentifier),
-            DefaultValue: null,
-            Validation: ValidationType.None,
-            Initializer: null);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";

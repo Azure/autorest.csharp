@@ -39,9 +39,12 @@ namespace MgmtXmlDeserialization
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="XmlInstanceResource"/> object. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="XmlInstanceResource" /> object. </returns>
         public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtXmlDeserializationArmClient(client).GetXmlInstanceResource(id);
         }
 
@@ -53,9 +56,12 @@ namespace MgmtXmlDeserialization
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstances();
         }
 
@@ -79,11 +85,13 @@ namespace MgmtXmlDeserialization
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="xmlName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstanceAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -107,11 +115,13 @@ namespace MgmtXmlDeserialization
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="xmlName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<XmlInstanceResource> GetXmlInstance(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtXmlDeserializationResourceGroupResource(resourceGroupResource).GetXmlInstance(xmlName, cancellationToken);
         }
     }
