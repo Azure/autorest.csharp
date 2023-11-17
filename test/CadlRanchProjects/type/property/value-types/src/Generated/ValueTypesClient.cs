@@ -232,5 +232,75 @@ namespace _Type.Property.ValueTypes
 
             return new UnknownArray(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
+
+        /// <summary> Initializes a new instance of StringLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual StringLiteral GetStringLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new StringLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of IntLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual IntLiteral GetIntLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new IntLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of FloatLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual FloatLiteral GetFloatLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new FloatLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of BooleanLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual BooleanLiteral GetBooleanLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new BooleanLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of UnionStringLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnionStringLiteral GetUnionStringLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnionStringLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of UnionIntLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnionIntLiteral GetUnionIntLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnionIntLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of UnionFloatLiteral. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual UnionFloatLiteral GetUnionFloatLiteralClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new UnionFloatLiteral(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }
