@@ -102,7 +102,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             foreach (var param in resource.ResourceData.SerializationConstructor.Signature.Parameters.Skip(3))
                             {
                                 _writer.Line();
-                                _writer.Append($"\tdata.{param.Name.FirstCharToUpperCase()},");
+                                if (param.IsRawData)
+                                {
+                                    _writer.Append($"\tnew {typeof(Dictionary<string, BinaryData>)}()");
+                                }
+                                else
+                                {
+                                    _writer.Append($"\tdata.{param.Name.ToCleanName()},");
+                                }
                             }
                             _writer.RemoveTrailingComma();
                             _writer.Line($");");
