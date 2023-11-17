@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected internal Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
             : base(resourceName)
         {
-            _armClientCtorParameters = new[] { ArmClientParameter, ResourceIdentifierParameter };
+            _armClientCtorParameters = new[] { KnownParameters.ArmClient, ResourceIdentifierParameter };
             OperationSet = operationSet;
             ResourceType = resourceType;
             ResourceData = resourceData;
@@ -121,10 +121,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: Internal,
-                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                Parameters: new[] { KnownParameters.ArmClient, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+                    Arguments: new FormattableString[] { $"{KnownParameters.ArmClient.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);

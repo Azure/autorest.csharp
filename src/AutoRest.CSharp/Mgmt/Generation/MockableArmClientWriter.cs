@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -14,12 +13,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class ArmClientMockingExtensionWriter : MgmtMockableExtensionResourceWriter
+    internal sealed class MockableArmClientWriter : MgmtMockableExtensionWriter
     {
         private readonly Parameter _scopeParameter;
         private MgmtMockableArmClient This { get; }
 
-        public ArmClientMockingExtensionWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
+        public MockableArmClientWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(
@@ -27,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Description: $"The scope that the resource will apply against.",
                 Type: typeof(ResourceIdentifier),
                 DefaultValue: null,
-                Validation: ValidationType.None,
+                Validation: ValidationType.AssertNotNull,
                 Initializer: null);
         }
 
@@ -40,8 +39,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // for ArmClientExtensionClient, we write an extra ctor that only takes ArmClient as parameter
                 var ctor = armClientCtor with
                 {
-                    Parameters = new[] { MgmtTypeProvider.ArmClientParameter },
-                    Initializer = new(false, new FormattableString[] { $"{MgmtTypeProvider.ArmClientParameter.Name:I}", $"{typeof(ResourceIdentifier)}.{nameof(ResourceIdentifier.Root)}" })
+                    Parameters = new[] { KnownParameters.ArmClient },
+                    Initializer = new(false, new FormattableString[] { $"{KnownParameters.ArmClient.Name:I}", $"{typeof(ResourceIdentifier)}.{nameof(ResourceIdentifier.Root)}" })
                 };
 
                 using (_writer.WriteMethodDeclaration(ctor))
@@ -67,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var originalSignature = clientOperation.MethodSignature;
             var signature = originalSignature with
             {
-                Parameters = originalSignature.Parameters.Prepend(MgmtTypeProvider.ScopeParameter).ToArray()
+                Parameters = originalSignature.Parameters.Prepend(_scopeParameter).ToArray()
             };
             _writer.Line();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
