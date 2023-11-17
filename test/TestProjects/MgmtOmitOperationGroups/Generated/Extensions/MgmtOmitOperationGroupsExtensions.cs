@@ -40,9 +40,12 @@ namespace MgmtOmitOperationGroups
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> Returns a <see cref="Model2Resource" /> object. </returns>
         public static Model2Resource GetModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtOmitOperationGroupsArmClient(client).GetModel2Resource(id);
         }
 
@@ -54,9 +57,12 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public static Model2Collection GetModel2s(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel2s();
         }
 
@@ -79,11 +85,13 @@ namespace MgmtOmitOperationGroups
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="model2SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<Model2Resource>> GetModel2Async(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel2Async(model2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -106,11 +114,13 @@ namespace MgmtOmitOperationGroups
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="model2SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<Model2Resource> GetModel2(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel2(model2SName, cancellationToken);
         }
 
@@ -132,9 +142,12 @@ namespace MgmtOmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Model5> GetModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel5sAsync(cancellationToken);
         }
 
@@ -156,9 +169,12 @@ namespace MgmtOmitOperationGroups
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Model5> GetModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel5s(cancellationToken);
         }
 
@@ -183,9 +199,11 @@ namespace MgmtOmitOperationGroups
         /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public static async Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
         }
 
@@ -210,9 +228,11 @@ namespace MgmtOmitOperationGroups
         /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public static Response<Model5> CreateOrUpdateModel5(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
         }
 
@@ -236,9 +256,11 @@ namespace MgmtOmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="model5SName"/> is null. </exception>
         public static async Task<Response<Model5>> GetModel5Async(this ResourceGroupResource resourceGroupResource, string model5SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -262,9 +284,11 @@ namespace MgmtOmitOperationGroups
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="model5SName"/> is null. </exception>
         public static Response<Model5> GetModel5(this ResourceGroupResource resourceGroupResource, string model5SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtOmitOperationGroupsResourceGroupResource(resourceGroupResource).GetModel5(model5SName, cancellationToken);
         }
     }

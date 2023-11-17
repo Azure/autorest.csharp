@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     if (!mockableExtension.IsEmpty)
                     {
                         MgmtReport.Instance.ExtensionSection.Add(mockableExtension.ResourceName, new ExtensionItem(mockableExtension, MgmtReport.Instance.TransformSection));
-                        WriteExtensionFile(project, MgmtMockableExtensionResourceWriter.GetWriter(mockableExtension));
+                        WriteExtensionFile(project, MgmtMockableExtensionWriter.GetWriter(mockableExtension));
                     }
                 }
             }

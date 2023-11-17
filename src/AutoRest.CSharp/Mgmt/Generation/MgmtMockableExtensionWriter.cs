@@ -9,19 +9,19 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class MgmtMockableExtensionResourceWriter : MgmtClientBaseWriter
+    internal class MgmtMockableExtensionWriter : MgmtClientBaseWriter
     {
-        public static MgmtMockableExtensionResourceWriter GetWriter(MgmtMockableExtension extensionClient) => extensionClient switch
+        public static MgmtMockableExtensionWriter GetWriter(MgmtMockableExtension extensionClient) => extensionClient switch
         {
-            MgmtMockableArmClient armClientExtensionClient => new ArmClientMockableExtensionWriter(armClientExtensionClient),
-            _ => new MgmtMockableExtensionResourceWriter(extensionClient)
+            MgmtMockableArmClient armClientExtensionClient => new MockableArmClientWriter(armClientExtensionClient),
+            _ => new MgmtMockableExtensionWriter(extensionClient)
         };
 
         protected override bool UseField => false;
 
         private MgmtMockableExtension This { get; }
 
-        public MgmtMockableExtensionResourceWriter(MgmtMockableExtension extensions) : base(new CodeWriter(), extensions)
+        public MgmtMockableExtensionWriter(MgmtMockableExtension extensions) : base(new CodeWriter(), extensions)
         {
             This = extensions;
         }

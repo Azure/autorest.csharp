@@ -16,12 +16,12 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class ArmClientMockableExtensionWriter : MgmtMockableExtensionResourceWriter
+    internal sealed class MockableArmClientWriter : MgmtMockableExtensionWriter
     {
         private readonly Parameter _scopeParameter;
         private MgmtMockableArmClient This { get; }
 
-        public ArmClientMockableExtensionWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
+        public MockableArmClientWriter(MgmtMockableArmClient extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Description: $"The scope that the resource will apply against.",
                 Type: typeof(ResourceIdentifier),
                 DefaultValue: null,
-                Validation: ValidationType.None,
+                Validation: ValidationType.AssertNotNull,
                 Initializer: null);
         }
 
@@ -42,8 +42,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // for ArmClientExtensionClient, we write an extra ctor that only takes ArmClient as parameter
                 var ctor = armClientCtor with
                 {
-                    Parameters = new[] { MgmtTypeProvider.ArmClientParameter },
-                    Initializer = new(false, new ValueExpression[] { MgmtTypeProvider.ArmClientParameter, ResourceIdentifierExpression.Root })
+                    Parameters = new[] { KnownParameters.ArmClient },
+                    Initializer = new(false, new ValueExpression[] { KnownParameters.ArmClient, ResourceIdentifierExpression.Root })
                 };
 
                 using (_writer.WriteMethodDeclaration(ctor))
@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var originalSignature = clientOperation.MethodSignature;
             var signature = originalSignature with
             {
-                Parameters = originalSignature.Parameters.Prepend(MgmtTypeProvider.ScopeParameter).ToArray()
+                Parameters = originalSignature.Parameters.Prepend(_scopeParameter).ToArray()
             };
             _writer.Line();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
