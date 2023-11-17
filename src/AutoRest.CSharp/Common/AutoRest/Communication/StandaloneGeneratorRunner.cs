@@ -48,7 +48,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 var json = await File.ReadAllTextAsync(tspInputFile);
                 var rootNamespace = TypeSpecSerialization.Deserialize(json) ?? throw new InvalidOperationException($"Deserializing {tspInputFile} has failed.");
-                workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
+                // TSP file may contain duplicated models with base types. MergeDerivedModelsVisitor merges them into one.
+                workspace = await new CSharpGen().ExecuteAsync(MergeDerivedModelsVisitor.Visit(rootNamespace));
                 if (options.IsNewProject)
                 {
                     bool needAzureKeyAuth = rootNamespace.Auth?.ApiKey != null;

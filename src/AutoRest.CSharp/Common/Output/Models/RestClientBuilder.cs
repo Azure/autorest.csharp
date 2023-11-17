@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParametersByRequired(_parameters.Values);
         }
 
-        public static IEnumerable<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
+        public static IReadOnlyList<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
             operations
                 .SelectMany(op => op.Parameters)
                 .Where(p => p.Kind == InputOperationParameterKind.Client)

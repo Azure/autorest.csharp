@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -15,6 +16,7 @@ namespace AutoRest.CSharp.Common.Input
     {
         private readonly Dictionary<ServiceRequest, Func<InputOperation>> _operationsCache;
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
+        private readonly Dictionary<Schema, InputEnumType> _enumsCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
@@ -24,6 +26,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
+            _enumsCache = new Dictionary<Schema, InputEnumType>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
@@ -49,13 +52,19 @@ namespace AutoRest.CSharp.Common.Input
             => operationGroups.Select(CreateClient).ToList();
 
         public InputClient CreateClient(OperationGroup operationGroup)
-            => new(
+        {
+            var parameters = Array.Empty<InputParameter>();
+            return new(
                 Name: operationGroup.Language.Default.Name,
                 Description: operationGroup.Language.Default.Description,
-                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(), true, Array.Empty<InputParameter>(), null)
+                Operations: CreateOperations(operationGroup.Operations).Values.ToArray(),
+                Parameters: parameters,
+                Array.Empty<InputClientExample>(),
+                null)
             {
                 Key = operationGroup.Key,
             };
+        }
 
         public IReadOnlyDictionary<ServiceRequest, InputOperation> CreateOperations(IEnumerable<Operation> operations)
         {
@@ -84,6 +93,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputOperation CreateOperation(ServiceRequest serviceRequest, Operation operation, HttpRequest httpRequest)
         {
+            var parameters = CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList());
             var inputOperation = new InputOperation(
                 Name: operation.Language.Default.Name,
                 ResourceName: null,
@@ -91,7 +101,7 @@ namespace AutoRest.CSharp.Common.Input
                 Deprecated: operation.Deprecated?.Reason,
                 Description: operation.Language.Default.Description,
                 Accessibility: operation.Accessibility,
-                Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
+                Parameters: parameters,
                 Responses: operation.Responses.Select(CreateOperationResponse).ToList(),
                 HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
                 RequestBodyMediaType: GetBodyFormat((httpRequest as HttpWithBodyRequest)?.KnownMediaType),
@@ -101,9 +111,11 @@ namespace AutoRest.CSharp.Common.Input
                 RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
                 BufferResponse: operation.Extensions?.BufferResponse ?? true,
                 LongRunning: CreateLongRunning(operation),
-                Paging: CreateOperationPaging(operation),
+                Paging: CreateOperationPaging(serviceRequest, operation),
                 GenerateProtocolMethod: true,
-                GenerateConvenienceMethod: false)
+                GenerateConvenienceMethod: false,
+                KeepClientDefaultValue: Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId),
+                Examples: Array.Empty<InputOperationExample>())
             {
                 KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
             };
@@ -155,7 +167,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: header.CSharpName(),
             NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
             Description: header.Language.Default.Description,
-            Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache, true)
+            Type: CreateType(header.Schema, header.Extensions?.Format, _enumsCache, _modelsCache, true)
         );
 
         private OperationLongRunning? CreateLongRunning(Operation operation)
@@ -172,7 +184,7 @@ namespace AutoRest.CSharp.Common.Input
             );
         }
 
-        private OperationPaging? CreateOperationPaging(Operation operation)
+        private OperationPaging? CreateOperationPaging(ServiceRequest serviceRequest, Operation operation)
         {
             var paging = operation.Language.Default.Paging;
             if (paging == null)
@@ -181,19 +193,28 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             var nextLinkServiceRequest = paging.NextLinkOperation?.Requests.Single();
-            if (nextLinkServiceRequest == null || !_operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
+            if (nextLinkServiceRequest != null && nextLinkServiceRequest != serviceRequest && _operationsCache.TryGetValue(nextLinkServiceRequest, out var nextLinkOperationRef))
             {
-                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName);
+                return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, nextLinkOperationRef(), false);
             }
 
-            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName) { NextLinkOperationRef = nextLinkOperationRef };
+            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null, nextLinkServiceRequest == serviceRequest);
         }
 
         private IReadOnlyList<InputEnumType> CreateEnums(IEnumerable<ChoiceSchema> schemasChoices, IEnumerable<SealedChoiceSchema> schemasSealedChoices)
-            => schemasChoices.Select(c => CreateType(c, null, null))
-                .Concat(schemasSealedChoices.Select(c => CreateType(c, null, null)))
-                .OfType<InputEnumType>()
-                .ToList();
+        {
+            foreach (var choiceSchema in schemasChoices)
+            {
+                _enumsCache[choiceSchema] = CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
+            }
+
+            foreach (var sealedChoiceSchema in schemasSealedChoices)
+            {
+                _enumsCache[sealedChoiceSchema] = CreateEnumType(sealedChoiceSchema, sealedChoiceSchema.ChoiceType, sealedChoiceSchema.Choices, false);
+            }
+
+            return _enumsCache.Values.ToList();
+        }
 
         private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas, SchemaUsageProvider schemaUsages)
         {
@@ -261,7 +282,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: property.Language.Default.Name,
             SerializedName: property.SerializedName,
             Description: property.Language.Default.Description,
-            Type: CreateType(property.Schema, _modelsCache, property.IsNullable),
+            Type: CreateType(property.Schema, _enumsCache, _modelsCache, property.IsNullable),
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
             IsDiscriminator: property.IsDiscriminator ?? false
@@ -311,7 +332,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             { HttpResponse.KnownMediaType: KnownMediaType.Text } => InputPrimitiveType.String,
             BinaryResponse => InputPrimitiveType.Stream,
-            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, _modelsCache, schemaResponse.IsNullable),
+            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, _enumsCache, _modelsCache, schemaResponse.IsNullable),
             _ => null
         };
 
@@ -325,15 +346,15 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public InputType CreateType(RequestParameter requestParameter)
-            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
+            => CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, _enumsCache, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
 
-        private static InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
+        private static InputType CreateType(Schema schema, IReadOnlyDictionary<Schema, InputEnumType>? enumsCache, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => CreateType(schema, schema.Extensions?.Format, enumsCache, modelsCache, isNullable);
 
-        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, format, modelsCache) with { IsNullable = isNullable };
+        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<Schema, InputEnumType>? enumsCache, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => CreateType(schema, format, enumsCache, modelsCache) with { IsNullable = isNullable };
 
-        public static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
+        public static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<Schema, InputEnumType>? enumsCache, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
@@ -372,7 +393,7 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
             { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
 
-            ConstantSchema constantSchema => CreateLiteralType(constantSchema, format, modelsCache),
+            ConstantSchema constantSchema => CreateLiteralType(constantSchema, format, enumsCache, modelsCache),
 
             CredentialSchema => InputPrimitiveType.String,
             { Type: AllSchemaTypes.String } => InputPrimitiveType.String,
@@ -380,11 +401,14 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.Uuid } => InputPrimitiveType.Guid,
             { Type: AllSchemaTypes.Uri } => InputPrimitiveType.Uri,
 
+            ChoiceSchema choiceSchema when enumsCache is not null => enumsCache[choiceSchema],
+            SealedChoiceSchema choiceSchema when enumsCache is not null => enumsCache[choiceSchema],
+
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), false),
-            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false), false),
+            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, enumsCache, modelsCache, array.NullableItems ?? false), false),
+            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, enumsCache, modelsCache, dictionary.NullableItems ?? false), false),
             ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
 
             AnySchema when IsDPG => InputIntrinsicType.Unknown,
@@ -393,9 +417,9 @@ namespace AutoRest.CSharp.Common.Input
             _ => new CodeModelType(schema, false)
         };
 
-        private static InputLiteralType CreateLiteralType(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
+        private static InputLiteralType CreateLiteralType(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<Schema, InputEnumType>? enumsCache, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
         {
-            var valueType = CreateType(constantSchema.ValueType, format, modelsCache);
+            var valueType = CreateType(constantSchema.ValueType, format, enumsCache, modelsCache);
             // normalize the value, because the "value" coming from the code model is always a string
             var kind = valueType switch
             {
@@ -424,7 +448,7 @@ namespace AutoRest.CSharp.Common.Input
             Deprecated: schema.Deprecated?.Reason,
             Description: schema.CreateDescription(),
             Usage: InputModelTypeUsage.None,
-            EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
+            EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible,
             IsNullable: false
@@ -452,12 +476,12 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (parameter.ClientDefaultValue != null)
             {
-                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _enumsCache, _modelsCache, parameter.IsNullable));
             }
 
             if (parameter.Schema is ConstantSchema constantSchema)
             {
-                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
+                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _enumsCache, _modelsCache, constantSchema.Value.Value == null));
             }
 
             return null;

@@ -1,44 +1,49 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal class ExampleMockValueBuilder
+    internal class ExampleMockValueBuilder : InputNamespaceVisitor
     {
         public const string ShortVersionMockExampleKey = "ShortVersion";
         public const string MockExampleAllParameterKey = "AllParameters";
 
         private static readonly string EndpointMockValue = Configuration.ApiTypes.EndPointSampleValue;
+        private static readonly ExampleMockValueBuilder Instance = new();
 
-        private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
+        public static InputNamespace Visit(InputNamespace rootNamespace) => Instance.VisitNamespace(rootNamespace);
 
-        public static InputClientExample BuildClientExample(InputClient client, bool useAllParameters)
+        protected override InputClient VisitClient(InputClient sourceClient, IReadOnlyDictionary<InputType, InputType> typesMap)
         {
-            _cache.Clear();
-            var clientParameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in client.Parameters)
-            {
-                if (!useAllParameters && !parameter.IsRequired)
-                {
-                    continue;
-                }
-                var parameterExample = BuildParameterExample(parameter, useAllParameters);
-                clientParameterExamples.Add(parameterExample);
-            }
-
-            return new(client, clientParameterExamples);
+            return base.VisitClient(sourceClient with { Examples = BuildClientExamples(sourceClient.Parameters)}, typesMap);
         }
 
-        public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
+        protected override InputOperation VisitOperation(InputOperation sourceOperation, InputClient sourceClient, InputOperation? targetNextLinkOperation, IReadOnlyDictionary<InputType, InputType> typesMap)
         {
-            _cache.Clear();
+            return base.VisitOperation(sourceOperation with { Examples = BuildOperationExamples(sourceOperation.Parameters) }, sourceClient, targetNextLinkOperation, typesMap);
+        }
 
+        private static IReadOnlyList<InputClientExample> BuildClientExamples(IReadOnlyList<InputParameter> parameters)
+            => new InputClientExample[]
+            {
+                new(ShortVersionMockExampleKey, BuildParameterExamples(parameters, false)),
+                new(MockExampleAllParameterKey, BuildParameterExamples(parameters, true))
+            };
+
+        private static IReadOnlyList<InputOperationExample> BuildOperationExamples(IReadOnlyList<InputParameter> parameters)
+            => new InputOperationExample[]
+            {
+                new(ShortVersionMockExampleKey, BuildParameterExamples(parameters, false)),
+                new(MockExampleAllParameterKey, BuildParameterExamples(parameters, true))
+            };
+
+        private static IReadOnlyList<InputParameterExample> BuildParameterExamples(IReadOnlyList<InputParameter> parameters, bool useAllParameters)
+        {
             var parameterExamples = new List<InputParameterExample>();
-            foreach (var parameter in operation.Parameters)
+            foreach (var parameter in parameters)
             {
                 if (!useAllParameters && !parameter.IsRequired)
                 {
@@ -48,7 +53,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 parameterExamples.Add(parameterExample);
             }
 
-            return new(operation, parameterExamples);
+            return parameterExamples;
         }
 
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)

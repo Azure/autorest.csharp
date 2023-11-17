@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly string _namespaceName;
         private readonly string _clientName;
-        private readonly LowLevelClient? _client;
+        private readonly DpgClient? _client;
         private readonly ClientFields _fields;
         private readonly IReadOnlyDictionary<string, InputClientExample>? _clientParameterExamples;
         private readonly TypeFactory _typeFactory;
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
+        public OperationMethodChainBuilder(DpgClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
         {
             _client = client;
             _namespaceName = namespaceName;
@@ -80,11 +80,23 @@ namespace AutoRest.CSharp.Output.Models
             var nextLinkOperation = paging.NextLinkOperation;
             var nextLinkName = paging.NextLinkName;
 
-            RestClientMethod? nextPageMethod = nextLinkOperation != null
-                ? builders[nextLinkOperation]._restClientMethod
-                : nextLinkName != null
-                    ? RestClientBuilder.BuildNextPageMethod(_restClientMethod)
-                    : null;
+            RestClientMethod? nextPageMethod;
+            if (paging.SelfNextLink)
+            {
+                nextPageMethod = _restClientMethod;
+            }
+            else if (nextLinkOperation != null)
+            {
+                nextPageMethod = builders[nextLinkOperation]._restClientMethod;
+            }
+            else if (nextLinkName != null)
+            {
+                nextPageMethod = RestClientBuilder.BuildNextPageMethod(_restClientMethod);
+            }
+            else
+            {
+                nextPageMethod = null;
+            }
 
             _protocolMethodPaging = new ProtocolMethodPaging(nextPageMethod, nextLinkName, paging.ItemName ?? "value");
         }
@@ -136,7 +148,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                     continue; // skip the short example when we decide not to generate it
 
-                if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                if (Operation.Examples.FirstOrDefault(e => e.Key == exampleKey) is {} operationExample)
                 {
                     // add protocol method sample
                     samples.Add(new(
@@ -465,6 +477,8 @@ namespace AutoRest.CSharp.Output.Models
                         break;
                     case { Location: RequestLocation.Uri or RequestLocation.Path }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                        break;
+                    case { IsApiVersion: true } when !Configuration.IsBranded:
                         break;
                     case { IsApiVersion: true, DefaultValue: not null }:
                         optionalRequestParameters.Add(operationParameter);

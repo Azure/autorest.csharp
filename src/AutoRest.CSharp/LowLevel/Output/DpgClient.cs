@@ -21,7 +21,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class LowLevelClient : TypeProvider
+    internal class DpgClient : TypeProvider
     {
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
@@ -39,8 +39,8 @@ namespace AutoRest.CSharp.Output.Models
         public string Description { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
-        public IReadOnlyList<LowLevelClient> SubClients { get; init; }
-        public LowLevelClient? ParentClient;
+        public IReadOnlyList<DpgClient> SubClients { get; init; }
+        public DpgClient? ParentClient;
 
         public ClientOptionsTypeProvider ClientOptions { get; }
 
@@ -49,10 +49,10 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
-        private LowLevelClient? _topLevelClient;
-        public LowLevelClient TopLevelClient => _topLevelClient ??= GetTopLevelClient(this);
+        private DpgClient? _topLevelClient;
+        public DpgClient TopLevelClient => _topLevelClient ??= GetTopLevelClient(this);
 
-        private LowLevelClient GetTopLevelClient(LowLevelClient client)
+        private DpgClient GetTopLevelClient(DpgClient client)
         {
             if (client.ParentClient is null)
                 return client;
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models
             return GetTopLevelClient(client.ParentClient);
         }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
+        public DpgClient(string name, string ns, string description, string libraryName, DpgClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyList<InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -75,12 +75,12 @@ namespace AutoRest.CSharp.Output.Models
             //we should not overload the concept of parameters.  ApiVersion is never a parameter for a client and should be treated differently.
             //by adding it in the parameters we have to make sure we treat it differently in all places that loop over the parameter list.
             _clientParameters = Configuration.IsBranded ? clientParameters : clientParameters.Where(p => !p.IsApiVersion).ToArray();
-            _clientParameterExamples = examples;
+            _clientParameterExamples = examples.ToDictionary(e => e.Key);
             _authorization = authorization;
             _operations = operations;
             _sourceInputModel = sourceInputModel;
 
-            SubClients = Array.Empty<LowLevelClient>();
+            SubClients = Array.Empty<DpgClient>();
         }
 
         private IReadOnlyList<Parameter>? _parameters;
@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(DpgClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
             var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel, client?._clientParameterExamples));
             foreach (var (_, builder) in builders)

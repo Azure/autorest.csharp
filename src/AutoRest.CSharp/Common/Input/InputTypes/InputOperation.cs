@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -19,6 +18,7 @@ internal record InputOperation(
     string? Accessibility,
     IReadOnlyList<InputParameter> Parameters,
     IReadOnlyList<OperationResponse> Responses,
+    IReadOnlyList<InputOperationExample> Examples,
     RequestMethod HttpMethod,
     BodyMediaType RequestBodyMediaType,
     string Uri,
@@ -29,7 +29,8 @@ internal record InputOperation(
     OperationLongRunning? LongRunning,
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
-    bool GenerateConvenienceMethod)
+    bool GenerateConvenienceMethod,
+    bool KeepClientDefaultValue)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -40,6 +41,7 @@ internal record InputOperation(
         Accessibility: null,
         Parameters: Array.Empty<InputParameter>(),
         Responses: Array.Empty<OperationResponse>(),
+        Examples: Array.Empty<InputOperationExample>(),
         HttpMethod: RequestMethod.Get,
         RequestBodyMediaType: BodyMediaType.None,
         Uri: string.Empty,
@@ -50,58 +52,11 @@ internal record InputOperation(
         LongRunning: null,
         Paging: null,
         GenerateProtocolMethod: true,
-        GenerateConvenienceMethod: false)
+        GenerateConvenienceMethod: false,
+        KeepClientDefaultValue: false)
     { }
 
-    public static InputOperation RemoveApiVersionParam(InputOperation operation)
-    {
-        return new InputOperation(
-            operation.Name,
-            operation.ResourceName,
-            operation.Summary,
-            operation.Deprecated,
-            operation.Description,
-            operation.Accessibility,
-            operation.Parameters.Where(p => !p.IsApiVersion).ToList(),
-            operation.Responses,
-            operation.HttpMethod,
-            operation.RequestBodyMediaType,
-            operation.Uri,
-            operation.Path,
-            operation.ExternalDocsUrl,
-            operation.RequestMediaTypes,
-            operation.BufferResponse,
-            operation.LongRunning,
-            operation.Paging,
-            operation.GenerateProtocolMethod,
-            operation.GenerateConvenienceMethod);
-    }
+    public string CleanName => Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
 
-    private string? _cleanName;
-    public string CleanName
-    {
-        get
-        {
-            if (_cleanName == null)
-            {
-                _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
-            }
-
-            return _cleanName;
-        }
-    }
-
-    public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
-
-    private IReadOnlyDictionary<string, InputOperationExample>? _examples;
-    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
-
-    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
-    {
-        return new Dictionary<string, InputOperationExample>()
-        {
-            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false),
-            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
-        };
-    }
+    public string TrimmedPath => Path.Length == 1 ? Path : Path.TrimEnd('/');
 }

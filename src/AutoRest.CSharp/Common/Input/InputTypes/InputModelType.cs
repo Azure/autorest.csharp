@@ -20,7 +20,14 @@ namespace AutoRest.CSharp.Common.Input
 
         public bool IsAnonymousModel { get; init; } = false;
 
+        /// <summary>
+        /// Types provided as immediate parents in spec that aren't base model
+        /// </summary>
+        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
+
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
+
+        public InputModelType GetNotNullable() => IsNullable ? this with { IsNullable = false } : this;
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
 

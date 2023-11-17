@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -18,7 +19,6 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using Operation = AutoRest.CSharp.Input.Operation;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
@@ -143,7 +143,9 @@ namespace AutoRest.CSharp.Output.Models
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
                     GenerateProtocolMethod: true,
-                    GenerateConvenienceMethod: false);
+                    GenerateConvenienceMethod: false,
+                    KeepClientDefaultValue: false,
+                    Examples: Array.Empty<InputOperationExample>());
             }
             return new InputOperation();
         }
@@ -164,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models
                     Name: requestParameter.Language.Default.Name,
                     NameInRequest: requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name,
                     Description: requestParameter.Language.Default.Description,
-                    Type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
+                    Type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
                     Location: CodeModelConverter.GetRequestLocation(requestParameter),
                     DefaultValue: GetDefaultValue(requestParameter),
                     IsRequired: requestParameter.IsRequired,
@@ -186,17 +188,17 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (parameter.ClientDefaultValue != null)
             {
-                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null, null) with { IsNullable = parameter.IsNullable });
             }
 
             if (parameter.Schema is ConstantSchema constantSchema)
             {
-                return new InputConstant(Value: constantSchema.Value.Value, Type: CodeModelConverter.CreateType(constantSchema.ValueType, constantSchema.Extensions?.Format, null) with { IsNullable = constantSchema.Value.Value == null});
+                return new InputConstant(Value: constantSchema.Value.Value, Type: CodeModelConverter.CreateType(constantSchema.ValueType, constantSchema.Extensions?.Format, null, null) with { IsNullable = constantSchema.Value.Value == null});
             }
 
             if (!parameter.IsRequired)
             {
-                return new InputConstant(Value: null, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
+                return new InputConstant(Value: null, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null, null) with { IsNullable = parameter.IsNullable });
             }
 
             return null;
@@ -209,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return null;
             }
-            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName);
+            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName, null, false);
         }
 
         private Dictionary<RequestParameter, Parameter> GetOperationAllParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)

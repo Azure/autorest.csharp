@@ -20,8 +20,6 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class DpgOutputLibraryBuilder
     {
-        private const string MaxCountParameterName = "maxCount";
-
         private readonly InputNamespace _rootNamespace;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly string _defaultNamespace;
@@ -29,6 +27,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibraryBuilder(InputNamespace rootNamespace, SourceInputModel? sourceInputModel)
         {
+            rootNamespace = RenameInputsVisitor.Visit(rootNamespace);
+            rootNamespace = FixAnonymousTypesVisitor.Visit(rootNamespace);
+            rootNamespace = ReplaceStringUnionTypesWithEnums.Visit(rootNamespace);
+            rootNamespace = ExampleMockValueBuilder.Visit(rootNamespace);
+
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
             _defaultNamespace = Configuration.Namespace;
@@ -37,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations();
+            var inputClients = _rootNamespace.Clients;
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -50,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
-            var clients = new List<LowLevelClient>();
+            var clients = new List<DpgClient>();
 
             var library = new DpgOutputLibrary(_libraryName, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
@@ -70,297 +73,19 @@ namespace AutoRest.CSharp.Output.Models
             {
                 dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
-
-            List<(InputModelType, InputModelProperty, InputEnumType)> enumsToReplace = new List<(InputModelType, InputModelProperty, InputEnumType)>();
-            foreach (var model in models.Keys)
-            {
-                foreach (var property in model.Properties)
-                {
-                    if (property.Type is not InputUnionType union)
-                        continue;
-
-                    if (union.IsAllLiteralString() || union.IsAllLiteralStringPlusString())
-                    {
-                        string modelname = models[model].Type.Name;
-                        InputEnumType inputEnum = new InputEnumType(
-                            $"{modelname}{GetNameWithCorrectPluralization(union, property.Name)}",
-                            model.Namespace,
-                            model.Accessibility,
-                            null,
-                            $"Enum for {property.Name} in {modelname}",
-                            model.Usage,
-                            InputPrimitiveType.String,
-                            union.GetEnum(),
-                            true,
-                            union.IsNullable);
-                        enumsToReplace.Add((model, property, inputEnum));
-                        dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
-                    }
-                }
-            }
-
-            foreach (var (containingModel, property, enumType) in enumsToReplace)
-            {
-                models[containingModel] = models[containingModel].ReplaceProperty(property, enumType);
-            }
         }
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
-            Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
-
-            HashSet<string> createdNames = new HashSet<string>();
-            Dictionary<InputModelType, InputModelType> replacements = new Dictionary<InputModelType, InputModelType>();
+            var defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
             foreach (var model in _rootNamespace.Models)
             {
-                InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
-                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-
-                InputModelType? replacement = null;
-                if (model.IsAnonymousModel)
-                {
-                    var newName = GetAnonModelName(model, createdNames);
-                    if (newName is not null)
-                    {
-                        replacement = model.Update(newName, GetNewUsage(model));
-                        createdNames.Add(replacement.Name);
-                        replacements.Add(model, replacement);
-                    }
-                }
-
-                var typeProvider = new ModelTypeProvider(replacement ?? model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType);
-                models.Add(replacement ?? model, typeProvider);
-            }
-
-            foreach (var pair in replacements)
-            {
-                var modelsNeedingReplacement = GetAllReferences(pair.Key, models);
-                foreach (var (modelContainingEnum, property) in modelsNeedingReplacement)
-                {
-                    models[modelContainingEnum] = models[modelContainingEnum].ReplaceProperty(property, pair.Value);
-                }
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, defaultDerivedTypes);
+                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, model.DerivedModels.ToArray(), defaultDerivedType));
             }
         }
 
-        private InputModelTypeUsage GetNewUsage(InputModelType anonModel)
-        {
-            var containingType = GetFirstNonAnonContainingType(anonModel);
-            if (containingType is not null)
-                return containingType.Usage;
-
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            foreach (var client in _rootNamespace.Clients)
-            {
-                foreach (var operation in client.Operations)
-                {
-                    foreach (var parameter in operation.Parameters)
-                    {
-                        if (IsSameType(parameter.Type, anonModel))
-                        {
-                            usage |= InputModelTypeUsage.Input;
-                            break;
-                        }
-                    }
-                    foreach (var response in operation.Responses)
-                    {
-                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
-                            continue;
-
-                        if (IsSameType(responseType, anonModel))
-                        {
-                            usage |= InputModelTypeUsage.Output;
-                        }
-                    }
-
-                }
-            }
-            return usage;
-        }
-
-        private InputModelType? GetFirstNonAnonContainingType(InputModelType anonModel)
-        {
-            var containingType = _rootNamespace.Models.Where(m => m.GetProperty(anonModel) is not null).FirstOrDefault();
-            return containingType is not null && containingType.IsAnonymousModel ? GetFirstNonAnonContainingType(containingType) : containingType;
-        }
-
-        private Dictionary<InputModelType, InputModelProperty> GetAllReferences(InputModelType key, IDictionary<InputModelType, ModelTypeProvider> models)
-        {
-            var result = new Dictionary<InputModelType, InputModelProperty>();
-            foreach (var pair in models)
-            {
-                var property = pair.Value.GetProperty(key);
-                if (property is not null)
-                {
-                    result.Add(pair.Key, property);
-                }
-            }
-            return result;
-        }
-
-        private string? GetAnonModelName(InputModelType anonModel, HashSet<string> createdNames)
-        {
-            List<List<string>> names = new List<List<string>>();
-            //check operation parameters first
-            foreach (var client in _rootNamespace.Clients)
-            {
-                foreach (var operation in client.Operations)
-                {
-                    foreach (var parameter in operation.Parameters)
-                    {
-                        if (IsSameType(parameter.Type, anonModel))
-                        {
-                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(parameter.Type, parameter.Name).ToCleanName() });
-                        }
-                        else
-                        {
-                            FindMatchesRecursively(parameter.Type, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), parameter.Type.Name }, names);
-                        }
-                    }
-                    foreach (var response in operation.Responses)
-                    {
-                        if (response is null || response.BodyType is null || response.BodyType is not InputModelType responseType)
-                            continue;
-
-                        if (IsSameType(responseType, anonModel))
-                        {
-                            names.Add(new List<string> { operation.Name.ToCleanName(), GetNameWithCorrectPluralization(responseType, responseType.Name).ToCleanName() });
-                        }
-                        else
-                        {
-                            FindMatchesRecursively(responseType, anonModel, createdNames, new List<string>() { operation.Name.FirstCharToUpperCase(), responseType.Name }, names);
-                        }
-                    }
-                }
-            }
-
-            if (names.Count == 0)
-            {
-                foreach (var model in _rootNamespace.Models)
-                {
-                    foreach (var property in model.Properties)
-                    {
-                        if (IsSameType(property.Type, anonModel))
-                            return $"{model.Name.FirstCharToUpperCase()}{property.Name.FirstCharToUpperCase()}";
-                    }
-                }
-                return $"{_rootNamespace.Name}Model{anonModel.Name}";
-            }
-            if (names.Count == 1)
-            {
-                var newName = $"{names[0][0]}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                if (createdNames.Contains(newName))
-                {
-                    if (names[0].Count >= 2)
-                    {
-                        newName = $"{names[0][1].FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                    }
-                    else
-                    {
-                        newName = $"{names[0][0].FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                    }
-                }
-                return newName;
-            }
-            else
-            {
-                int smallest = int.MaxValue;
-                foreach (var list in names)
-                {
-                    smallest = Math.Min(smallest, list.Count);
-                }
-                int equalElements = 0;
-                for (int offset = 0; offset < smallest; offset++)
-                {
-                    string comparator = names[0][names[0].Count - 1 - offset];
-                    if (names.All(list => list[list.Count - 1 - offset] == comparator))
-                    {
-                        equalElements++;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                if (equalElements == 1)
-                {
-                    return $"{_rootNamespace.Name.FirstCharToUpperCase()}{names[0][names[0].Count - 1].FirstCharToUpperCase()}";
-                }
-                else
-                {
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = names[0].Count - equalElements; i < names[0].Count; i++)
-                    {
-                        sb.Append(names[0][i].FirstCharToUpperCase());
-                    }
-                    return sb.ToString();
-                }
-            }
-        }
-
-        private void FindMatchesRecursively(InputType type, InputModelType anonModel, HashSet<string> createdNames, List<string> current, List<List<string>> names)
-        {
-            InputModelType? model = GetInputModelType(type);
-
-            if (model is null)
-                return;
-
-            //check other model properties
-            foreach (var property in model.Properties)
-            {
-                if (IsSameType(property.Type, anonModel))
-                {
-                    names.Add(new List<string>(current) { GetNameWithCorrectPluralization(property.Type, property.Name).ToCleanName() });
-                }
-                else
-                {
-                    FindMatchesRecursively(property.Type, anonModel, createdNames, new List<string>(current) { GetTypeName(property.Type) }, names);
-                }
-            }
-        }
-
-        private string GetTypeName(InputType type) => type switch
-        {
-            InputListType listType => GetTypeName(listType.ElementType),
-            InputDictionaryType dictionaryType => GetTypeName(dictionaryType.ValueType),
-            _ => type.Name
-        };
-
-        private InputModelType? GetInputModelType(InputType type) => type switch
-        {
-            InputModelType model => model,
-            InputListType listType => GetInputModelType(listType.ElementType),
-            InputDictionaryType dictionaryType => GetInputModelType(dictionaryType.ValueType),
-            _ => null
-        };
-
-        private string GetNameWithCorrectPluralization(InputType type, string name)
-        {
-            //TODO: Probably needs special casing for ipThing to become IPThing
-            string result = name.FirstCharToUpperCase();
-            switch (type)
-            {
-                case InputListType:
-                case InputDictionaryType:
-                    return result.ToSingular();
-                default:
-                    return result;
-            }
-        }
-
-        private bool IsSameType(InputType type, InputModelType anonModel)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    return IsSameType(listType.ElementType, anonModel);
-                case InputDictionaryType dictionaryType:
-                    return IsSameType(dictionaryType.ValueType, anonModel);
-                default:
-                    return type.Equals(anonModel);
-            }
-        }
-
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, IReadOnlyList<InputModelType> derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
@@ -403,62 +128,6 @@ namespace AutoRest.CSharp.Output.Models
             return defaultDerivedType;
         }
 
-        private IEnumerable<InputClient> UpdateOperations()
-        {
-            var defaultName = _rootNamespace.Name.ReplaceLast("Client", "");
-            // this map of old/new InputOperation is to update the lazy initialization of `Paging.NextLinkOperation`
-            var operationsMap = new Dictionary<InputOperation, InputOperation>();
-            foreach (var client in _rootNamespace.Clients)
-            {
-                var clientName = client.Name.IsNullOrEmpty() ? defaultName : client.Name;
-                yield return client with { Operations = client.Operations.Select(op => UpdateOperation(op, clientName, operationsMap)).ToList() };
-            }
-        }
-
-        private static InputOperation UpdateOperation(InputOperation operation, string clientName, IDictionary<InputOperation, InputOperation> operationsMap)
-        {
-            InputOperation updatedOperation;
-            if (operation.Paging != null && !Configuration.DisablePaginationTopRenaming && !operation.Parameters.Any(p => p.Name.Equals(MaxCountParameterName, StringComparison.OrdinalIgnoreCase)))
-            {
-                updatedOperation = operation with
-                {
-                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
-                    Parameters = UpdateOperationParameters(operation.Parameters),
-                    // to update the lazy initialization of `Paging.NextLinkOperation`
-                    Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
-                };
-            }
-            else
-            {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
-            }
-            operationsMap.Add(operation, updatedOperation);
-
-            return updatedOperation;
-
-        }
-
-        private static string UpdateOperationName(InputOperation operation, string clientName)
-            => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
-
-        private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
-        {
-            var parameters = new List<InputParameter>(operationParameters.Count);
-            foreach (var parameter in operationParameters)
-            {
-                if (parameter.Name.Equals("top", StringComparison.OrdinalIgnoreCase))
-                {
-                    parameters.Add(parameter with { Name = MaxCountParameterName });
-                }
-                else
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
-        }
-
         private ClientOptionsTypeProvider CreateClientOptions(IReadOnlyList<ClientInfo> topLevelClientInfos)
         {
             var clientName = topLevelClientInfos.Count == 1
@@ -480,26 +149,25 @@ namespace AutoRest.CSharp.Output.Models
             return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
         }
 
-        private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
+        private static ClientInfo CreateClientInfo(InputClient inputClient, SourceInputModel? sourceInputModel, string rootNamespaceName)
         {
-            var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
+            var clientNamePrefix = ClientBuilder.GetClientPrefix(inputClient.Name, rootNamespaceName);
             var clientNamespace = Configuration.Namespace;
-            var clientDescription = ns.Description;
-            var operations = ns.Operations;
-            var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
+            var clientDescription = inputClient.Description;
+            var operations = inputClient.Operations;
+            var clientParameters = RestClientBuilder.GetParametersFromOperations(operations);
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
-            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
+            var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(inputClient.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(inputClient.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
 
-            INamedTypeSymbol? existingType;
-            if (sourceInputModel == null || (existingType = sourceInputModel.FindForType(clientNamespace, clientName)) == null)
+            if (sourceInputModel?.FindForType(clientNamespace, clientName) is not {} existingType)
             {
-                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters, ns.Examples);
+                return new ClientInfo(inputClient.Key, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters, inputClient.Examples);
             }
 
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
-            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters, ns.Examples);
+            return new ClientInfo(inputClient.Key, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters, inputClient.Examples);
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
@@ -526,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models
                 var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
                 var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
-                var clientExamples = infoForEndpoint?.Examples ?? new Dictionary<string, InputClientExample>();
+                var clientExamples = infoForEndpoint?.Examples ?? Array.Empty<InputClientExample>();
 
                 topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters, clientExamples);
             }
@@ -626,10 +294,9 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
+        private void CreateClients(List<DpgClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
         {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
-
+            var topLevelClients = CreateClients(topLevelClientInfos, clientOptions, null, typeFactory);
             // Simple implementation of breadth first traversal
             allClients.AddRange(topLevelClients);
             for (int i = 0; i < allClients.Count; i++)
@@ -638,7 +305,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
+        private IEnumerable<DpgClient> CreateClients(IEnumerable<ClientInfo> clientInfos, ClientOptionsTypeProvider clientOptions, DpgClient? parentClient, TypeFactory typeFactory)
         {
             foreach (var clientInfo in clientInfos)
             {
@@ -646,17 +313,9 @@ namespace AutoRest.CSharp.Output.Models
                     ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
                     : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
 
-                var subClients = new List<LowLevelClient>();
+                var subClients = new List<DpgClient>();
 
-                if (!Configuration.IsBranded)
-                {
-                    for (int i = 0; i < clientInfo.Requests.Count; i++)
-                    {
-                        clientInfo.Requests[i] = InputOperation.RemoveApiVersionParam(clientInfo.Requests[i]);
-                    }
-                }
-
-                var client = new LowLevelClient(
+                var client = new DpgClient(
                     clientInfo.Name,
                     clientInfo.Namespace,
                     description,
@@ -673,7 +332,7 @@ namespace AutoRest.CSharp.Output.Models
                     SubClients = subClients
                 };
 
-                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
+                subClients.AddRange(CreateClients(clientInfo.Children, clientOptions, client, typeFactory));
 
                 yield return client;
             }
@@ -688,26 +347,26 @@ namespace AutoRest.CSharp.Output.Models
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
 
-            private IReadOnlyDictionary<string, InputClientExample> _initialExamples;
-            private IReadOnlyDictionary<string, InputClientExample>? _examples;
-            public IReadOnlyDictionary<string, InputClientExample> Examples => _examples ??= EnsureExamples();
+            private readonly IReadOnlyList<InputClientExample> _initialExamples;
+            private IReadOnlyList<InputClientExample>? _examples;
+            public IReadOnlyList<InputClientExample> Examples => _examples ??= EnsureExamples();
 
-            private IReadOnlyDictionary<string, InputClientExample> EnsureExamples()
+            private IReadOnlyList<InputClientExample> EnsureExamples()
             {
                 // pick up all examples from child client infos here, since we might promote some parameters from child clients
-                var examples = new Dictionary<string, InputClientExample>();
-                foreach (var (key, example) in _initialExamples)
+                var examples = new List<InputClientExample>();
+                foreach (var example in _initialExamples)
                 {
                     var clientParameterExamples = new List<InputParameterExample>(example.ClientParameters);
                     foreach (var child in Children)
                     {
-                        if (child.Examples.TryGetValue(key, out var childExamples))
+                        if (child.Examples.FirstOrDefault(e => e.Key == example.Key) is {} childExamples)
                         {
                             clientParameterExamples.AddRange(childExamples.ClientParameters);
                         }
                     }
 
-                    examples.Add(key, new(example.Client, clientParameterExamples));
+                    examples.Add(example with {ClientParameters = clientParameterExamples});
                 }
 
                 return examples;
@@ -733,12 +392,12 @@ namespace AutoRest.CSharp.Output.Models
             public IList<ClientInfo> Children { get; }
             public IList<InputOperation> Requests { get; }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyDictionary<string, InputClientExample> examples)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyList<InputClientExample> examples)
                 : this(operationGroupKey, clientName, clientNamespace, clientDescription, null, operations, clientParameters, resourceParameters, examples)
             {
             }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyDictionary<string, InputClientExample> examples)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyList<InputClientExample> examples)
             {
                 OperationGroupKey = operationGroupKey;
                 Name = clientName;
@@ -753,7 +412,7 @@ namespace AutoRest.CSharp.Output.Models
                 _initialExamples = examples;
             }
 
-            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters, IReadOnlyDictionary<string, InputClientExample> examples)
+            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters, IReadOnlyList<InputClientExample> examples)
             {
                 OperationGroupKey = string.Empty;
                 Name = clientName;

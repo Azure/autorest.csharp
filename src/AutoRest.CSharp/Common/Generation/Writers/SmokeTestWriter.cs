@@ -14,10 +14,10 @@ namespace AutoRest.CSharp.Common.Generation.Writers
     internal class SmokeTestWriter
     {
         private readonly CodeWriter _writer;
-        private readonly LowLevelClient _client;
+        private readonly DpgClient _client;
         private readonly DpgClientSampleProvider _sampleProvider;
 
-        public SmokeTestWriter(LowLevelClient client, DpgClientSampleProvider sampleProvider)
+        public SmokeTestWriter(DpgClient client, DpgClientSampleProvider sampleProvider)
         {
             _writer = new CodeWriter();
             _client = client;

@@ -1039,7 +1039,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<object> response = client.ReturnsAnonymousModel();
+            Response<ReturnsAnonymousModelResponseType> response = client.ReturnsAnonymousModel();
         }
 
         [Test]
@@ -1049,7 +1049,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<object> response = await client.ReturnsAnonymousModelAsync();
+            Response<ReturnsAnonymousModelResponseType> response = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]
@@ -1085,7 +1085,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<object> response = client.ReturnsAnonymousModel();
+            Response<ReturnsAnonymousModelResponseType> response = client.ReturnsAnonymousModel();
         }
 
         [Test]
@@ -1095,7 +1095,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<object> response = await client.ReturnsAnonymousModelAsync();
+            Response<ReturnsAnonymousModelResponseType> response = await client.ReturnsAnonymousModelAsync();
         }
 
         [Test]

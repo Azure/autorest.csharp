@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 {
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
+        public DpgOperationSample(DpgClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
             _client = client;
             _method = method;
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         protected internal readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         protected internal readonly InputOperationExample _inputOperationExample;
-        protected internal readonly LowLevelClient _client;
+        protected internal readonly DpgClient _client;
         protected internal readonly LowLevelClientMethod _method;
         private readonly MethodSignature _operationMethodSignature;
         public bool IsAllParametersUsed { get; }
@@ -374,7 +374,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         }
 
         // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370
-        public static bool ShouldGenerateShortVersion(LowLevelClient client, LowLevelClientMethod method)
+        public static bool ShouldGenerateShortVersion(DpgClient client, LowLevelClientMethod method)
         {
             if (method.ConvenienceMethod is not null)
             {
@@ -405,7 +405,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return true;
         }
 
-        public static bool ShouldGenerateSample(LowLevelClient client, MethodSignature protocolMethodSignature)
+        public static bool ShouldGenerateSample(DpgClient client, MethodSignature protocolMethodSignature)
         {
             return protocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                 !protocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
