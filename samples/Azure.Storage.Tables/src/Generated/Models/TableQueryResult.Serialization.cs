@@ -11,9 +11,9 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableQueryResponse
+    public partial class TableQueryResult
     {
-        internal static TableQueryResponse DeserializeTableQueryResponse(JsonElement element)
+        internal static TableQueryResult DeserializeTableQueryResult(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -43,7 +43,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableQueryResponse(odataMetadata.Value, Optional.ToList(value));
+            return new TableQueryResult(odataMetadata.Value, Optional.ToList(value));
         }
     }
 }
