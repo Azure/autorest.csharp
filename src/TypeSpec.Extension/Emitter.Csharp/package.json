@@ -35,10 +35,10 @@
         "dist/src/**"
     ],
     "devDependencies": {
-        "@azure-tools/typespec-azure-resource-manager": "0.36.0",
+        "@azure-tools/typespec-azure-resource-manager": "0.36.1",
         "@azure-tools/typespec-client-generator-core": "0.36.0",
         "@azure-tools/typespec-azure-core": "0.36.0",
-        "@azure-tools/typespec-autorest": "0.36.0",
+        "@azure-tools/typespec-autorest": "0.36.1",
         "@typespec/compiler": "0.50.0",
         "@typespec/eslint-config-typespec": "0.50.0",
         "@typespec/eslint-plugin": "0.50.0",
