@@ -3,7 +3,6 @@
 
 using System.Threading;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
 {

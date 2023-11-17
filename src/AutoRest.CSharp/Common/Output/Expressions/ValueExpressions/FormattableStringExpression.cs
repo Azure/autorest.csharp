@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Utilities;
 
@@ -41,7 +42,9 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
             }
 
             if (count != args.Count)
-                throw new System.IndexOutOfRangeException($"The count of arguments in format {format} does not match with the arguments provided");
+            {
+                throw new IndexOutOfRangeException($"The count of arguments in format {format} does not match with the arguments provided");
+            }
         }
     }
 }
