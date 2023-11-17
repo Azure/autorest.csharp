@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Union.Models
@@ -13,7 +14,7 @@ namespace _Type.Union.Models
     /// <summary> The first one of the unioned model type. </summary>
     internal partial class Model1 : BaseModel
     {
-        /// <summary> Initializes a new instance of Model1. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model1"/>. </summary>
         /// <param name="name"></param>
         /// <param name="prop1"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -22,6 +23,20 @@ namespace _Type.Union.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Prop1 = prop1;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Model1"/>. </summary>
+        /// <param name="name"></param>
+        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
+        /// <param name="prop1"></param>
+        internal Model1(string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int prop1) : base(name, serializedAdditionalRawData)
+        {
+            Prop1 = prop1;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Model1"/> for deserialization. </summary>
+        internal Model1()
+        {
         }
 
         /// <summary> Gets or sets the prop 1. </summary>
