@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 httpMessage.Response.Status,
                 _successResponses!
                     .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, httpMessage, headers, async), AddScope: r.Type is not null))
-                    .Append(SwitchCase.Default(Throw(New.RequestFailedException(httpMessage.Response))))
+                    .Append(SwitchCase.Default(Throw(New.Instance(typeof(RequestFailedException), httpMessage.Response))))
                     .ToArray()
             );
 
@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 {
                     new(new[]{new FormattableStringToExpression($"int s when s >= 200 && s < 300")}, BuildHeadAsBooleanSwitchCaseStatement(response, True), AddScope: true),
                     new(new[]{new FormattableStringToExpression($"int s when s >= 400 && s < 500")}, BuildHeadAsBooleanSwitchCaseStatement(response, False), AddScope: true),
-                    SwitchCase.Default(Throw(New.RequestFailedException(response)))
+                    SwitchCase.Default(Throw(New.Instance(typeof(RequestFailedException), response)))
                 };
             }
 
@@ -257,7 +257,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     response.Status,
                     _successResponses
                         .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, response, async), AddScope: r.Type is not null))
-                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(response))))
+                        .Append(SwitchCase.Default(Throw(New.Instance(typeof(RequestFailedException), response))))
                         .ToArray()
                 );
             }
@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     response.Status,
                     _successResponses
                         .Select(r => new SwitchCase(r.StatusCodes.Select(Int).ToList(), BuildStatusCodeSwitchCaseStatement(r.Type, r.Serialization, response, headers, async), AddScope: r.Type is not null))
-                        .Append(SwitchCase.Default(Throw(New.RequestFailedException(response))))
+                        .Append(SwitchCase.Default(Throw(New.Instance(typeof(RequestFailedException), response))))
                         .ToArray()
                 )
             };
@@ -284,12 +284,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return null;
             }
 
-            if (library is not MgmtOutputLibrary mpgLibrary || !mpgLibrary.TryGetResourceData(operation.Path, out var resourceData))
+            if (library is not MgmtOutputLibrary mpgLibrary || !mpgLibrary.TryGetResourceData(operation.TrimmedPath, out var resourceData))
             {
                 return null;
             }
 
-            var operationSet = mpgLibrary.GetOperationSet(operation.Path);
+            var operationSet = mpgLibrary.GetOperationSet(operation.TrimmedPath);
             return operationSet.IsResource() ? resourceData.Type : null;
         }
 

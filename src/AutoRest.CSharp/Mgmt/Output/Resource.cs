@@ -531,7 +531,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var methodBody = new MethodBodyStatement[]
             {
                 Var(resourceId, new FormattableStringExpression(formatBuilder.ToString(), signature.Parameters.Select(p => (ValueExpression)p).ToArray())),
-                Return(Snippets.New.ResourceIdentifier(resourceId))
+                Return(Snippets.New.Instance(typeof(ResourceIdentifier), resourceId))
             };
             return new Method(signature, methodBody);
         }
@@ -541,7 +541,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return Snippets.New.ResourceIdentifier(new MemberExpression(resourceDataParameter, "Id"));
+                return Snippets.New.Instance(typeof(ResourceIdentifier), new MemberExpression(resourceDataParameter, "Id"));
             }
             else
             {

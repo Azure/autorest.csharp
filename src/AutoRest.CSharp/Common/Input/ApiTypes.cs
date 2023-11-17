@@ -16,9 +16,9 @@ namespace AutoRest.CSharp.Common.Input
         public abstract Type ResponseType { get; }
         public abstract Type ResponseOfTType { get; }
 
-        public abstract string FromResponseName { get; }
+        public string FromResponseName => "FromResponse";
         public abstract string ResponseParameterName { get; }
-
+        public abstract string ContentStreamName { get; }
         public abstract string GetRawResponseName { get; }
 
         public Type GetResponseOfT<T>() => ResponseOfTType.MakeGenericType(typeof(T));
@@ -61,7 +61,6 @@ namespace AutoRest.CSharp.Common.Input
         public abstract FormattableString GetHttpPipelineClassifierString(string pipelineField, string optionsVariable, FormattableString perCallPolicies, FormattableString perRetryPolicies);
 
         public abstract Type HttpPipelinePolicyType { get; }
-
         public abstract string HttpMessageRequestName { get; }
 
         public abstract Type RequestContentType { get; }

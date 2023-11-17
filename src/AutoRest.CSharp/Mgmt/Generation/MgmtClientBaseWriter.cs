@@ -571,7 +571,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.WriteMethodBodyStatement(new IfStatement(Equal(response.Value, Null), AddBraces: false)
                     {
-                        Throw(Snippets.New.RequestFailedException(response.GetRawResponse()))
+                        Throw(Snippets.New.Instance(typeof(RequestFailedException), response.GetRawResponse()))
                     });
                 }
                 var realReturnType = operation.MgmtReturnType;

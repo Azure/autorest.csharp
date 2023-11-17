@@ -572,9 +572,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private void CreateMultipartConvenienceParameters(IReadOnlyList<InputParameter> sortedInputParameters, Parameter protocolBodyParameter)
         {
-            var boundary = Guid.NewGuid().ToString();
             var conversionStatements = new List<MethodBodyStatement>
             {
+                Var("boundary", GuidExpression.NewGuid().InvokeToString(), out var boundary),
                 Var("content", New.MultipartFormDataContent(boundary), out var multipartContent)
             };
 
@@ -608,7 +608,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _requestPartsBuilder.AddContentTypeHeaderPart(KnownParameters.ContentType);
             AddCreateMessageParameter(KnownParameters.ContentType);
             _protocolParameters.Add(KnownParameters.ContentType);
-            _arguments[KnownParameters.ContentType] = Literal($"multipart/form-data; boundary={boundary}");
+            _arguments[KnownParameters.ContentType] = new FormattableStringExpression("multipart/form-data; boundary={0}", new[]{boundary});
         }
 
         private void CreateFormUrlEncodedConvenienceParameters(IReadOnlyList<InputParameter> sortedInputParameters, Parameter protocolBodyParameter)
@@ -702,13 +702,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return;
             }
 
-            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart)
+            // [TODO]: Remove Configuration.Generation1ConvenienceClient condition when multipart support design in DPG is finalized
+            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart && Configuration.Generation1ConvenienceClient)
             {
                 CreateMultipartConvenienceParameters(sortedInputParameters, protocolBodyParameter);
                 return;
             }
 
-            if (_operation.RequestBodyMediaType is BodyMediaType.Form)
+            // [TODO]: Remove Configuration.Generation1ConvenienceClient condition when multipart support design in DPG is finalized
+            if (_operation.RequestBodyMediaType is BodyMediaType.Form && Configuration.Generation1ConvenienceClient)
             {
                 CreateFormUrlEncodedConvenienceParameters(sortedInputParameters, protocolBodyParameter);
                 return;
@@ -734,7 +736,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private void AddContentTypeRequestParameter(InputParameter inputParameter)
         {
-            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart)
+            // [TODO]: Remove Configuration.Generation1ConvenienceClient condition when multipart support design in DPG is finalized
+            if (_operation.RequestBodyMediaType is BodyMediaType.Multipart && Configuration.Generation1ConvenienceClient)
             {
                 // ContentType parameter has been added with body parameter
                 return;
@@ -989,10 +992,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var jsonSerialization = SerializationBuilder.BuildJsonSerialization(inputParameter.Type, value.Type);
             conversions = new[]
             {
-                Var("content", New.Utf8JsonRequestContent(), out Utf8JsonRequestContentExpression utf8JsonContent),
-                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonContent.JsonWriter, jsonSerialization, value),
+                Extensible.RestOperations.DeclareContentWithUtf8JsonWriter(out content, out var writer),
+                JsonSerializationMethodsBuilder.SerializeExpression(writer, jsonSerialization, value),
             };
-            content = utf8JsonContent;
         }
 
         private static void CreateConversionToXmlWriterRequestContent(InputParameter inputParameter, TypedValueExpression value, out TypedValueExpression content, out MethodBodyStatement conversions)
@@ -1000,10 +1002,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var xmlSerialization = SerializationBuilder.BuildXmlSerialization(inputParameter.Type, value.Type);
             conversions = new[]
             {
-                Var("content", New.XmlWriterContent(), out XmlWriterContentExpression xmlWriterContent),
-                XmlSerializationMethodsBuilder.SerializeExpression(xmlWriterContent.XmlWriter, xmlSerialization, value),
+                Extensible.RestOperations.DeclareContentWithXmlWriter(out content, out var writer),
+                XmlSerializationMethodsBuilder.SerializeExpression(writer, xmlSerialization, value),
             };
-            content = xmlWriterContent;
         }
 
         private void GetConversionsForFlattenedParameter(IReadOnlyDictionary<InputParameter, Parameter> parameters, out TypedValueExpression content, out MethodBodyStatement conversion)

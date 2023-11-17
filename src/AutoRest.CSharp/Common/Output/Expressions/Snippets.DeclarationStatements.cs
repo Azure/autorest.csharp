@@ -111,14 +111,14 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, OperationExpression value, out OperationExpression variable)
             => Var(name, value, d => new OperationExpression(d), out variable);
 
-        public static DeclarationStatement Var(string name, RawRequestUriBuilderExpression value, out RawRequestUriBuilderExpression variable)
-            => Var(name, value, d => new RawRequestUriBuilderExpression(d), out variable);
-
         public static DeclarationStatement Var(string name, RequestExpression value, out RequestExpression variable)
             => Var(name, value, d => new RequestExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, ResponseExpression value, out ResponseExpression variable)
             => Var(name, value, d => new ResponseExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, StringExpression value, out StringExpression variable)
+            => Var(name, value, d => new StringExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
             => Var(name, value, d => new Utf8JsonRequestContentExpression(d), out variable);

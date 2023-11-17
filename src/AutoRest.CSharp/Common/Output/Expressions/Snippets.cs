@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static ExtensibleSnippets Extensible => Configuration.ApiTypes.ExtensibleSnippets;
 
+        public static MethodBodyStatement EmptyStatement { get; } = new();
         public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => statements.ToArray();
 
         public static ValueExpression Dash { get; } = new KeywordExpression("_", null);
@@ -93,8 +94,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
             => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
 
-        public static AssignValueStatement AssignIfNull<T>(T variable, T expression) where T : ValueExpression => new(variable, expression, "??=");
-
+        public static AssignValueIfNullStatement AssignIfNull<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
         public static AssignValueStatement Assign<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
