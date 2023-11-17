@@ -34,9 +34,24 @@
     "files": [
         "dist/src/**"
     ],
+    "dependencies": {
+        "@autorest/csharp": "3.0.0-beta.20230309.1",
+        "json-serialize-refs": "0.1.0-0",
+        "winston": "^3.8.2"
+    },
+    "peerDependencies": {
+        "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
+        "@azure-tools/typespec-client-generator-core": ">=0.36.0 <1.0.0",
+        "@typespec/compiler": ">=0.50.0 <1.0.0",
+        "@typespec/eslint-config-typespec": ">=0.50.0 <1.0.0",
+        "@typespec/eslint-plugin": ">=0.50.0 <1.0.0",
+        "@typespec/http": ">=0.50.0 <1.0.0",
+        "@typespec/rest": ">=0.50.0 <1.0.0",
+        "@typespec/versioning": ">=0.50.0 <1.0.0"
+    },
     "devDependencies": {
-        "@azure-tools/typespec-client-generator-core": "0.36.0",
         "@azure-tools/typespec-azure-core": "0.36.0",
+        "@azure-tools/typespec-client-generator-core": "0.36.0",
         "@typespec/compiler": "0.50.0",
         "@typespec/eslint-config-typespec": "0.50.0",
         "@typespec/eslint-plugin": "0.50.0",
@@ -56,20 +71,5 @@
         "rimraf": "~3.0.2",
         "typescript": "~5.1.5",
         "webpack": "^5.89.0"
-    },
-    "dependencies": {
-        "@autorest/csharp": "3.0.0-beta.20230309.1",
-        "json-serialize-refs": "0.1.0-0",
-        "winston": "^3.8.2"
-    },
-    "peerDependencies": {
-        "@azure-tools/typespec-azure-core": ">=0.36.0 <1.0.0",
-        "@azure-tools/typespec-client-generator-core": ">=0.36.0 <1.0.0",
-        "@typespec/compiler": ">=0.50.0 <1.0.0",
-        "@typespec/eslint-config-typespec": ">=0.50.0 <1.0.0",
-        "@typespec/eslint-plugin": ">=0.50.0 <1.0.0",
-        "@typespec/http": ">=0.50.0 <1.0.0",
-        "@typespec/rest": ">=0.50.0 <1.0.0",
-        "@typespec/versioning": ">=0.50.0 <1.0.0"
     }
 }
