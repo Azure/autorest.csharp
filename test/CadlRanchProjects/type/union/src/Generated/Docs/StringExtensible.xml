@@ -7,13 +7,13 @@ This sample shows how to call GetStringExtensibleAsync.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringExtensibleAsync();
+Response<GetStringExtensibleResponseType> response = await client.GetStringExtensibleAsync();
 ]]></code>
 This sample shows how to call GetStringExtensibleAsync with all parameters.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringExtensibleAsync();
+Response<GetStringExtensibleResponseType> response = await client.GetStringExtensibleAsync();
 ]]></code></example>
     </member>
     <member name="GetStringExtensible(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetStringExtensible.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringExtensible();
+Response<GetStringExtensibleResponseType> response = client.GetStringExtensible();
 ]]></code>
 This sample shows how to call GetStringExtensible with all parameters.
 <code><![CDATA[
 StringExtensible client = new UnionClient().GetStringExtensibleClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringExtensible();
+Response<GetStringExtensibleResponseType> response = client.GetStringExtensible();
 ]]></code></example>
     </member>
     <member name="GetStringExtensibleAsync(RequestContext)">

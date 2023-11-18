@@ -7,13 +7,13 @@ This sample shows how to call GetStringExtensibleNamedAsync.
 <code><![CDATA[
 StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringExtensibleNamedAsync();
+Response<GetStringExtensibleNamedResponseType> response = await client.GetStringExtensibleNamedAsync();
 ]]></code>
 This sample shows how to call GetStringExtensibleNamedAsync with all parameters.
 <code><![CDATA[
 StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringExtensibleNamedAsync();
+Response<GetStringExtensibleNamedResponseType> response = await client.GetStringExtensibleNamedAsync();
 ]]></code></example>
     </member>
     <member name="GetStringExtensibleNamed(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetStringExtensibleNamed.
 <code><![CDATA[
 StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringExtensibleNamed();
+Response<GetStringExtensibleNamedResponseType> response = client.GetStringExtensibleNamed();
 ]]></code>
 This sample shows how to call GetStringExtensibleNamed with all parameters.
 <code><![CDATA[
 StringExtensibleNamed client = new UnionClient().GetStringExtensibleNamedClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringExtensibleNamed();
+Response<GetStringExtensibleNamedResponseType> response = client.GetStringExtensibleNamed();
 ]]></code></example>
     </member>
     <member name="GetStringExtensibleNamedAsync(RequestContext)">

@@ -7,13 +7,13 @@ This sample shows how to call GetMixedLiteralAsync.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetMixedLiteralAsync();
+Response<GetMixedLiteralResponseType> response = await client.GetMixedLiteralAsync();
 ]]></code>
 This sample shows how to call GetMixedLiteralAsync with all parameters.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetMixedLiteralAsync();
+Response<GetMixedLiteralResponseType> response = await client.GetMixedLiteralAsync();
 ]]></code></example>
     </member>
     <member name="GetMixedLiteral(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetMixedLiteral.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetMixedLiteral();
+Response<GetMixedLiteralResponseType> response = client.GetMixedLiteral();
 ]]></code>
 This sample shows how to call GetMixedLiteral with all parameters.
 <code><![CDATA[
 MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetMixedLiteral();
+Response<GetMixedLiteralResponseType> response = client.GetMixedLiteral();
 ]]></code></example>
     </member>
     <member name="GetMixedLiteralAsync(RequestContext)">

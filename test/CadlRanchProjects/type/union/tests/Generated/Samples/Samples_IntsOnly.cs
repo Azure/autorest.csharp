@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetIntsOnly();
+            Response<GetIntsOnlyResponseType> response = client.GetIntsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetIntsOnlyAsync();
+            Response<GetIntsOnlyResponseType> response = await client.GetIntsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetIntsOnly();
+            Response<GetIntsOnlyResponseType> response = client.GetIntsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetIntsOnlyAsync();
+            Response<GetIntsOnlyResponseType> response = await client.GetIntsOnlyAsync();
         }
 
         [Test]

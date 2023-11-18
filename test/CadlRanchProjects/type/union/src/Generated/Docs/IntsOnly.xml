@@ -7,13 +7,13 @@ This sample shows how to call GetIntsOnlyAsync.
 <code><![CDATA[
 IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetIntsOnlyAsync();
+Response<GetIntsOnlyResponseType> response = await client.GetIntsOnlyAsync();
 ]]></code>
 This sample shows how to call GetIntsOnlyAsync with all parameters.
 <code><![CDATA[
 IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetIntsOnlyAsync();
+Response<GetIntsOnlyResponseType> response = await client.GetIntsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetIntsOnly(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetIntsOnly.
 <code><![CDATA[
 IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetIntsOnly();
+Response<GetIntsOnlyResponseType> response = client.GetIntsOnly();
 ]]></code>
 This sample shows how to call GetIntsOnly with all parameters.
 <code><![CDATA[
 IntsOnly client = new UnionClient().GetIntsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetIntsOnly();
+Response<GetIntsOnlyResponseType> response = client.GetIntsOnly();
 ]]></code></example>
     </member>
     <member name="GetIntsOnlyAsync(RequestContext)">

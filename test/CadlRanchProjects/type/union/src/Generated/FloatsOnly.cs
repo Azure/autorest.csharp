@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FloatsOnly.xml" path="doc/members/member[@name='GetFloatsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetFloatsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetFloatsOnlyResponseType>> GetFloatsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFloatsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetFloatsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/FloatsOnly.xml" path="doc/members/member[@name='GetFloatsOnly(CancellationToken)']/*" />
-        public virtual Response<object> GetFloatsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetFloatsOnlyResponseType> GetFloatsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFloatsOnly(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetFloatsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <summary>

@@ -7,13 +7,13 @@ This sample shows how to call GetMixedTypeAsync.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetMixedTypeAsync();
+Response<GetMixedTypeResponseType> response = await client.GetMixedTypeAsync();
 ]]></code>
 This sample shows how to call GetMixedTypeAsync with all parameters.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetMixedTypeAsync();
+Response<GetMixedTypeResponseType> response = await client.GetMixedTypeAsync();
 ]]></code></example>
     </member>
     <member name="GetMixedType(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetMixedType.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetMixedType();
+Response<GetMixedTypeResponseType> response = client.GetMixedType();
 ]]></code>
 This sample shows how to call GetMixedType with all parameters.
 <code><![CDATA[
 MixedTypes client = new UnionClient().GetMixedTypesClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetMixedType();
+Response<GetMixedTypeResponseType> response = client.GetMixedType();
 ]]></code></example>
     </member>
     <member name="GetMixedTypeAsync(RequestContext)">

@@ -7,13 +7,13 @@ This sample shows how to call GetFloatsOnlyAsync.
 <code><![CDATA[
 FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetFloatsOnlyAsync();
+Response<GetFloatsOnlyResponseType> response = await client.GetFloatsOnlyAsync();
 ]]></code>
 This sample shows how to call GetFloatsOnlyAsync with all parameters.
 <code><![CDATA[
 FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetFloatsOnlyAsync();
+Response<GetFloatsOnlyResponseType> response = await client.GetFloatsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetFloatsOnly(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetFloatsOnly.
 <code><![CDATA[
 FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetFloatsOnly();
+Response<GetFloatsOnlyResponseType> response = client.GetFloatsOnly();
 ]]></code>
 This sample shows how to call GetFloatsOnly with all parameters.
 <code><![CDATA[
 FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetFloatsOnly();
+Response<GetFloatsOnlyResponseType> response = client.GetFloatsOnly();
 ]]></code></example>
     </member>
     <member name="GetFloatsOnlyAsync(RequestContext)">

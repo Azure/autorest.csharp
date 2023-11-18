@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='GetStringExtensibleAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetStringExtensibleAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetStringExtensibleResponseType>> GetStringExtensibleAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringExtensibleAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringExtensibleResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensible.xml" path="doc/members/member[@name='GetStringExtensible(CancellationToken)']/*" />
-        public virtual Response<object> GetStringExtensible(CancellationToken cancellationToken = default)
+        public virtual Response<GetStringExtensibleResponseType> GetStringExtensible(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringExtensible(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringExtensibleResponseType.FromResponse(response), response);
         }
 
         /// <summary>

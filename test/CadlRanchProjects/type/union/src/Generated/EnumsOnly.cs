@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetEnumsOnlyResponseType>> GetEnumsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetEnumsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetEnumsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/EnumsOnly.xml" path="doc/members/member[@name='GetEnumsOnly(CancellationToken)']/*" />
-        public virtual Response<object> GetEnumsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetEnumsOnlyResponseType> GetEnumsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetEnumsOnly(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetEnumsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <summary>

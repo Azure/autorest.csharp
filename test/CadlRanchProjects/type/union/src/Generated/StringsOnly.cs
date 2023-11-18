@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetStringsOnlyResponseType>> GetStringsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringsOnly.xml" path="doc/members/member[@name='GetStringsOnly(CancellationToken)']/*" />
-        public virtual Response<object> GetStringsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetStringsOnlyResponseType> GetStringsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringsOnly(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <summary>

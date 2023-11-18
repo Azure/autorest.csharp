@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteralAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetMixedLiteralResponseType>> GetMixedLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedLiteralAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetMixedLiteralResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedLiterals.xml" path="doc/members/member[@name='GetMixedLiteral(CancellationToken)']/*" />
-        public virtual Response<object> GetMixedLiteral(CancellationToken cancellationToken = default)
+        public virtual Response<GetMixedLiteralResponseType> GetMixedLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedLiteral(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetMixedLiteralResponseType.FromResponse(response), response);
         }
 
         /// <summary>

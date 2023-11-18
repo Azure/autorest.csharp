@@ -55,7 +55,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetMixedLiteral();
+            Response<GetMixedLiteralResponseType> response = client.GetMixedLiteral();
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetMixedLiteralAsync();
+            Response<GetMixedLiteralResponseType> response = await client.GetMixedLiteralAsync();
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetMixedLiteral();
+            Response<GetMixedLiteralResponseType> response = client.GetMixedLiteral();
         }
 
         [Test]
@@ -112,7 +112,7 @@ namespace _Type.Union.Samples
         {
             MixedLiterals client = new UnionClient().GetMixedLiteralsClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetMixedLiteralAsync();
+            Response<GetMixedLiteralResponseType> response = await client.GetMixedLiteralAsync();
         }
 
         [Test]

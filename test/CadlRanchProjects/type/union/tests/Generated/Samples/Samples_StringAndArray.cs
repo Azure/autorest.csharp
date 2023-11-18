@@ -51,7 +51,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetStringAndArray();
+            Response<GetStringAndArrayResponseType> response = client.GetStringAndArray();
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetStringAndArrayAsync();
+            Response<GetStringAndArrayResponseType> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetStringAndArray();
+            Response<GetStringAndArrayResponseType> response = client.GetStringAndArray();
         }
 
         [Test]
@@ -104,7 +104,7 @@ namespace _Type.Union.Samples
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetStringAndArrayAsync();
+            Response<GetStringAndArrayResponseType> response = await client.GetStringAndArrayAsync();
         }
 
         [Test]

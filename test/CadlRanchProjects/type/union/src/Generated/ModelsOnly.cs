@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='GetModelsOnlyAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetModelsOnlyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetModelsOnlyResponseType>> GetModelsOnlyAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetModelsOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetModelsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ModelsOnly.xml" path="doc/members/member[@name='GetModelsOnly(CancellationToken)']/*" />
-        public virtual Response<object> GetModelsOnly(CancellationToken cancellationToken = default)
+        public virtual Response<GetModelsOnlyResponseType> GetModelsOnly(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetModelsOnly(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetModelsOnlyResponseType.FromResponse(response), response);
         }
 
         /// <summary>

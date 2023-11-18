@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetFloatsOnly();
+            Response<GetFloatsOnlyResponseType> response = client.GetFloatsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetFloatsOnlyAsync();
+            Response<GetFloatsOnlyResponseType> response = await client.GetFloatsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetFloatsOnly();
+            Response<GetFloatsOnlyResponseType> response = client.GetFloatsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetFloatsOnlyAsync();
+            Response<GetFloatsOnlyResponseType> response = await client.GetFloatsOnlyAsync();
         }
 
         [Test]

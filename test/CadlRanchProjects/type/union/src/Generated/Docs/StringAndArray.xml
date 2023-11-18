@@ -7,13 +7,13 @@ This sample shows how to call GetStringAndArrayAsync.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringAndArrayAsync();
+Response<GetStringAndArrayResponseType> response = await client.GetStringAndArrayAsync();
 ]]></code>
 This sample shows how to call GetStringAndArrayAsync with all parameters.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringAndArrayAsync();
+Response<GetStringAndArrayResponseType> response = await client.GetStringAndArrayAsync();
 ]]></code></example>
     </member>
     <member name="GetStringAndArray(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetStringAndArray.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringAndArray();
+Response<GetStringAndArrayResponseType> response = client.GetStringAndArray();
 ]]></code>
 This sample shows how to call GetStringAndArray with all parameters.
 <code><![CDATA[
 StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringAndArray();
+Response<GetStringAndArrayResponseType> response = client.GetStringAndArray();
 ]]></code></example>
     </member>
     <member name="GetStringAndArrayAsync(RequestContext)">

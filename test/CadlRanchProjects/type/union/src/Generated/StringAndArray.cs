@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='GetStringAndArrayAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetStringAndArrayAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetStringAndArrayResponseType>> GetStringAndArrayAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringAndArrayAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringAndArrayResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringAndArray.xml" path="doc/members/member[@name='GetStringAndArray(CancellationToken)']/*" />
-        public virtual Response<object> GetStringAndArray(CancellationToken cancellationToken = default)
+        public virtual Response<GetStringAndArrayResponseType> GetStringAndArray(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringAndArray(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringAndArrayResponseType.FromResponse(response), response);
         }
 
         /// <summary>

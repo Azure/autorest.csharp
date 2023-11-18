@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='GetStringExtensibleNamedAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetStringExtensibleNamedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetStringExtensibleNamedResponseType>> GetStringExtensibleNamedAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetStringExtensibleNamedAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringExtensibleNamedResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/StringExtensibleNamed.xml" path="doc/members/member[@name='GetStringExtensibleNamed(CancellationToken)']/*" />
-        public virtual Response<object> GetStringExtensibleNamed(CancellationToken cancellationToken = default)
+        public virtual Response<GetStringExtensibleNamedResponseType> GetStringExtensibleNamed(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetStringExtensibleNamed(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetStringExtensibleNamedResponseType.FromResponse(response), response);
         }
 
         /// <summary>

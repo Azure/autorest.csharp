@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetModelsOnly();
+            Response<GetModelsOnlyResponseType> response = client.GetModelsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetModelsOnlyAsync();
+            Response<GetModelsOnlyResponseType> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetModelsOnly();
+            Response<GetModelsOnlyResponseType> response = client.GetModelsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetModelsOnlyAsync();
+            Response<GetModelsOnlyResponseType> response = await client.GetModelsOnlyAsync();
         }
 
         [Test]

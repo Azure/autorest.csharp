@@ -12,5 +12,126 @@ namespace _Type.Union.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypeUnionModelFactory
     {
+        /// <summary> Initializes a new instance of GetStringsOnlyResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <returns> A new <see cref="Models.GetStringsOnlyResponseType"/> instance for mocking. </returns>
+        public static GetStringsOnlyResponseType GetStringsOnlyResponseType(GetStringsOnlyResponseTypeProp prop = default)
+        {
+            return new GetStringsOnlyResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetStringExtensibleResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <returns> A new <see cref="Models.GetStringExtensibleResponseType"/> instance for mocking. </returns>
+        public static GetStringExtensibleResponseType GetStringExtensibleResponseType(GetStringExtensibleResponseTypeProp prop = default)
+        {
+            return new GetStringExtensibleResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetStringExtensibleNamedResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <returns> A new <see cref="Models.GetStringExtensibleNamedResponseType"/> instance for mocking. </returns>
+        public static GetStringExtensibleNamedResponseType GetStringExtensibleNamedResponseType(GetStringExtensibleNamedResponseTypeProp prop = default)
+        {
+            return new GetStringExtensibleNamedResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetIntsOnlyResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetIntsOnlyResponseType"/> instance for mocking. </returns>
+        public static GetIntsOnlyResponseType GetIntsOnlyResponseType(BinaryData prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetIntsOnlyResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetFloatsOnlyResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetFloatsOnlyResponseType"/> instance for mocking. </returns>
+        public static GetFloatsOnlyResponseType GetFloatsOnlyResponseType(BinaryData prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetFloatsOnlyResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetModelsOnlyResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetModelsOnlyResponseType"/> instance for mocking. </returns>
+        public static GetModelsOnlyResponseType GetModelsOnlyResponseType(BinaryData prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetModelsOnlyResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetEnumsOnlyResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetEnumsOnlyResponseType"/> instance for mocking. </returns>
+        public static GetEnumsOnlyResponseType GetEnumsOnlyResponseType(EnumsOnlyCases prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetEnumsOnlyResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetStringAndArrayResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetStringAndArrayResponseType"/> instance for mocking. </returns>
+        public static GetStringAndArrayResponseType GetStringAndArrayResponseType(StringAndArrayCases prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetStringAndArrayResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetMixedLiteralResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetMixedLiteralResponseType"/> instance for mocking. </returns>
+        public static GetMixedLiteralResponseType GetMixedLiteralResponseType(MixedLiteralsCases prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetMixedLiteralResponseType(prop);
+        }
+
+        /// <summary> Initializes a new instance of GetMixedTypeResponseType. </summary>
+        /// <param name="prop"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="prop"/> is null. </exception>
+        /// <returns> A new <see cref="Models.GetMixedTypeResponseType"/> instance for mocking. </returns>
+        public static GetMixedTypeResponseType GetMixedTypeResponseType(MixedTypesCases prop = null)
+        {
+            if (prop == null)
+            {
+                throw new ArgumentNullException(nameof(prop));
+            }
+
+            return new GetMixedTypeResponseType(prop);
+        }
     }
 }

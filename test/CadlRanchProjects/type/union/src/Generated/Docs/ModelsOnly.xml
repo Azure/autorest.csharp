@@ -7,13 +7,13 @@ This sample shows how to call GetModelsOnlyAsync.
 <code><![CDATA[
 ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetModelsOnlyAsync();
+Response<GetModelsOnlyResponseType> response = await client.GetModelsOnlyAsync();
 ]]></code>
 This sample shows how to call GetModelsOnlyAsync with all parameters.
 <code><![CDATA[
 ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetModelsOnlyAsync();
+Response<GetModelsOnlyResponseType> response = await client.GetModelsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetModelsOnly(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetModelsOnly.
 <code><![CDATA[
 ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetModelsOnly();
+Response<GetModelsOnlyResponseType> response = client.GetModelsOnly();
 ]]></code>
 This sample shows how to call GetModelsOnly with all parameters.
 <code><![CDATA[
 ModelsOnly client = new UnionClient().GetModelsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetModelsOnly();
+Response<GetModelsOnlyResponseType> response = client.GetModelsOnly();
 ]]></code></example>
     </member>
     <member name="GetModelsOnlyAsync(RequestContext)">

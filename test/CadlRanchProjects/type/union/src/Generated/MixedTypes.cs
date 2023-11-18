@@ -49,20 +49,20 @@ namespace _Type.Union
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='GetMixedTypeAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<object>> GetMixedTypeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<GetMixedTypeResponseType>> GetMixedTypeAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMixedTypeAsync(context).ConfigureAwait(false);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetMixedTypeResponseType.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/MixedTypes.xml" path="doc/members/member[@name='GetMixedType(CancellationToken)']/*" />
-        public virtual Response<object> GetMixedType(CancellationToken cancellationToken = default)
+        public virtual Response<GetMixedTypeResponseType> GetMixedType(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMixedType(context);
-            return Response.FromValue(response.Content.ToObjectFromJson<object>(), response);
+            return Response.FromValue(GetMixedTypeResponseType.FromResponse(response), response);
         }
 
         /// <summary>

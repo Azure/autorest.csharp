@@ -7,13 +7,13 @@ This sample shows how to call GetStringsOnlyAsync.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringsOnlyAsync();
+Response<GetStringsOnlyResponseType> response = await client.GetStringsOnlyAsync();
 ]]></code>
 This sample shows how to call GetStringsOnlyAsync with all parameters.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = await client.GetStringsOnlyAsync();
+Response<GetStringsOnlyResponseType> response = await client.GetStringsOnlyAsync();
 ]]></code></example>
     </member>
     <member name="GetStringsOnly(CancellationToken)">
@@ -22,13 +22,13 @@ This sample shows how to call GetStringsOnly.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringsOnly();
+Response<GetStringsOnlyResponseType> response = client.GetStringsOnly();
 ]]></code>
 This sample shows how to call GetStringsOnly with all parameters.
 <code><![CDATA[
 StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-Response<object> response = client.GetStringsOnly();
+Response<GetStringsOnlyResponseType> response = client.GetStringsOnly();
 ]]></code></example>
     </member>
     <member name="GetStringsOnlyAsync(RequestContext)">

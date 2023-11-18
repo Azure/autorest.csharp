@@ -49,7 +49,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetStringsOnly();
+            Response<GetStringsOnlyResponseType> response = client.GetStringsOnly();
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetStringsOnlyAsync();
+            Response<GetStringsOnlyResponseType> response = await client.GetStringsOnlyAsync();
         }
 
         [Test]
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = client.GetStringsOnly();
+            Response<GetStringsOnlyResponseType> response = client.GetStringsOnly();
         }
 
         [Test]
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
         {
             StringsOnly client = new UnionClient().GetStringsOnlyClient(apiVersion: "1.0.0");
 
-            Response<object> response = await client.GetStringsOnlyAsync();
+            Response<GetStringsOnlyResponseType> response = await client.GetStringsOnlyAsync();
         }
 
         [Test]
