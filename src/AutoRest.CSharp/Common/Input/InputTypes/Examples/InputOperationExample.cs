@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
     /// <summary>
     /// Set of operation parameter sample values of a specific type
     /// </summary>
-    /// <param name="Key">Type of a sample. E.g.: short version sample, all parameters sample, etc.</param>
+    /// <param name="Key">Key of a sample. E.g.: "short version sample", "all parameters sample", etc.</param>
     /// <param name="Parameters">Sample values for operation-level parameters</param>
     internal record InputOperationExample(string Key, IReadOnlyList<InputParameterExample> Parameters);
 }
