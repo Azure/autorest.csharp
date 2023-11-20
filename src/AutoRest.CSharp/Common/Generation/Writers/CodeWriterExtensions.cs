@@ -118,7 +118,9 @@ namespace AutoRest.CSharp.Generation.Writers
             if (field.InitializationValue != null &&
                 (modifiers.HasFlag(FieldModifiers.Const) || modifiers.HasFlag(FieldModifiers.Static)))
             {
-                return writer.AppendRaw(" = ").Append(field.InitializationValue).Line($";");
+                writer.AppendRaw(" = ")
+                    .WriteValueExpression(field.InitializationValue);
+                return writer.Line($";");
             }
 
             return field.WriteAsProperty ? writer.Line() : writer.Line($";");

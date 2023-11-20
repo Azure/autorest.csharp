@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -179,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 originalType,
                 valueType,
                 declaration,
-                GetPropertyDefaultValue(originalType, inputModelProperty),
+                GetPropertyInitializationValue(originalType, inputModelProperty),
                 inputModelProperty.IsRequired,
                 SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 OptionalViaNullability: optionalViaNullability,
@@ -219,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Type: fieldType,
                 ValueType: valueType,
                 Declaration: declaration,
-                InitializationValue: GetPropertyDefaultValue(originalType, inputModelProperty),
+                InitializationValue: GetPropertyInitializationValue(originalType, inputModelProperty),
                 IsRequired: inputModelProperty.IsRequired,
                 SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 IsField: existingMember is IFieldSymbol,
@@ -248,11 +249,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return propertyType;
         }
 
-        private static FormattableString? GetPropertyDefaultValue(CSharpType propertyType, InputModelProperty inputModelProperty)
+        private static ValueExpression? GetPropertyInitializationValue(CSharpType propertyType, InputModelProperty inputModelProperty)
         {
             // if the default value is set somewhere else, we just return it.
             if (inputModelProperty.DefaultValue != null)
-                return inputModelProperty.DefaultValue;
+                return new FormattableStringToExpression(inputModelProperty.DefaultValue);
 
             // if it is not set, we check if this property is a literal type, and use the literal type as its default value.
             if (inputModelProperty.Type is not InputLiteralType literalType || !inputModelProperty.IsRequired)
@@ -264,7 +265,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         BuilderHelpers.ParseConstant(literalType.Value, propertyType) :
                         Constant.NewInstanceOf(propertyType);
 
-            return constant.GetConstantFormattable();
+            return new ConstantExpression(constant);
         }
     }
 }

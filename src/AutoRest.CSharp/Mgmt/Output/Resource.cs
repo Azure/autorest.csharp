@@ -4,10 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -144,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 FieldModifiers.Public | FieldModifiers.Static | FieldModifiers.ReadOnly,
                 typeof(ResourceType),
                 "ResourceType",
-                $"{ResourceType.ToString():L}");
+                Literal(ResourceType.ToString()));
         }
 
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)

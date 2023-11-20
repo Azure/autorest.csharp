@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -77,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public SerializationFormat SerializationFormat { get; }
 
-        public FormattableString? InitializationValue { get; }
+        public ValueExpression? InitializationValue { get; }
 
         private bool IsFlattenedProperty { get; }
 
