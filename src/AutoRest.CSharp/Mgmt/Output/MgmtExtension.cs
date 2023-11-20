@@ -232,10 +232,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected FormattableString BuildMockingExtraDescription(MethodSignature signatureOnMockingExtension)
         {
-            var methodRef = signatureOnMockingExtension.ToStringForDocs();
+            FormattableString methodRef = $"{MockableExtension.Type}.{signatureOnMockingExtension.GetCRef()}";
             return $@"<item>
 <term>Mocking</term>
-<description>To mock this method, please mock <see cref=""{MockableExtension.Type}.{methodRef}""/> instead.</description>
+<description>To mock this method, please mock {methodRef:C} instead.</description>
 </item>";
         }
 

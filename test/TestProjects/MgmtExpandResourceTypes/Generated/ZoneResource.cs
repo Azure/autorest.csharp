@@ -22,9 +22,9 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A Class representing a Zone along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ZoneResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetZoneResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetZone method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ZoneResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetZoneResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetZone method.
     /// </summary>
     public partial class ZoneResource : ArmResource
     {
@@ -49,7 +49,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ZoneResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ZoneResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ZoneResource(ArmClient client, ZoneData data) : this(client, data.Id)
@@ -827,7 +827,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetData> GetRecordSetsAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
@@ -851,7 +851,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetData> GetRecordSets(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
@@ -875,7 +875,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetData> GetAllRecordSetsAsync(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
@@ -899,7 +899,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetData> GetAllRecordSets(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);

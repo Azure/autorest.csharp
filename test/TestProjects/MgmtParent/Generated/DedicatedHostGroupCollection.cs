@@ -19,9 +19,9 @@ using MgmtParent.Models;
 namespace MgmtParent
 {
     /// <summary>
-    /// A class representing a collection of <see cref="DedicatedHostGroupResource" /> and their operations.
-    /// Each <see cref="DedicatedHostGroupResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="DedicatedHostGroupCollection" /> instance call the GetDedicatedHostGroups method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="DedicatedHostGroupResource"/> and their operations.
+    /// Each <see cref="DedicatedHostGroupResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="DedicatedHostGroupCollection"/> instance call the GetDedicatedHostGroups method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class DedicatedHostGroupCollection : ArmCollection
     {

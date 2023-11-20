@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtSupersetInheritance
 {
     /// <summary>
-    /// A class representing a collection of <see cref="SupersetModel4Resource" /> and their operations.
-    /// Each <see cref="SupersetModel4Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="SupersetModel4Collection" /> instance call the GetSupersetModel4s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="SupersetModel4Resource"/> and their operations.
+    /// Each <see cref="SupersetModel4Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="SupersetModel4Collection"/> instance call the GetSupersetModel4s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class SupersetModel4Collection : ArmCollection, IEnumerable<SupersetModel4Resource>, IAsyncEnumerable<SupersetModel4Resource>
     {
@@ -219,7 +219,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SupersetModel4Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SupersetModel4Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SupersetModel4Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel4RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SupersetModel4Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SupersetModel4Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SupersetModel4Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _supersetModel4RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

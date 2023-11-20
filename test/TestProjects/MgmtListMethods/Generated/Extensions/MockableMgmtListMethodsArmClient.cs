@@ -37,11 +37,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeResource"/> object. </returns>
         public virtual FakeResource GetFakeResource(ResourceIdentifier id)
         {
             FakeResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> object. </returns>
         public virtual FakeParentWithAncestorWithNonResChWithLocResource GetFakeParentWithAncestorWithNonResChWithLocResource(ResourceIdentifier id)
         {
             FakeParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource"/> object. </returns>
         public virtual FakeParentWithAncestorWithNonResChResource GetFakeParentWithAncestorWithNonResChResource(ResourceIdentifier id)
         {
             FakeParentWithAncestorWithNonResChResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeParentWithAncestorWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeParentWithAncestorWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource"/> object. </returns>
         public virtual FakeParentWithAncestorWithLocResource GetFakeParentWithAncestorWithLocResource(ResourceIdentifier id)
         {
             FakeParentWithAncestorWithLocResource.ValidateResourceId(id);
@@ -85,11 +85,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeParentWithAncestorResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeParentWithAncestorResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithAncestorResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithAncestorResource"/> object. </returns>
         public virtual FakeParentWithAncestorResource GetFakeParentWithAncestorResource(ResourceIdentifier id)
         {
             FakeParentWithAncestorResource.ValidateResourceId(id);
@@ -97,11 +97,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeParentWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentWithNonResChResource"/> object. </returns>
         public virtual FakeParentWithNonResChResource GetFakeParentWithNonResChResource(ResourceIdentifier id)
         {
             FakeParentWithNonResChResource.ValidateResourceId(id);
@@ -109,11 +109,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeParentResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeParentResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeParentResource"/> object. </returns>
         public virtual FakeParentResource GetFakeParentResource(ResourceIdentifier id)
         {
             FakeParentResource.ValidateResourceId(id);
@@ -121,11 +121,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> object. </returns>
         public virtual ResGrpParentWithAncestorWithNonResChWithLocResource GetResGrpParentWithAncestorWithNonResChWithLocResource(ResourceIdentifier id)
         {
             ResGrpParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
@@ -133,11 +133,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource"/> object. </returns>
         public virtual ResGrpParentWithAncestorWithNonResChResource GetResGrpParentWithAncestorWithNonResChResource(ResourceIdentifier id)
         {
             ResGrpParentWithAncestorWithNonResChResource.ValidateResourceId(id);
@@ -145,11 +145,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResGrpParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource"/> object. </returns>
         public virtual ResGrpParentWithAncestorWithLocResource GetResGrpParentWithAncestorWithLocResource(ResourceIdentifier id)
         {
             ResGrpParentWithAncestorWithLocResource.ValidateResourceId(id);
@@ -157,11 +157,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ResGrpParentWithAncestorResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResGrpParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ResGrpParentWithAncestorResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource"/> object. </returns>
         public virtual ResGrpParentWithAncestorResource GetResGrpParentWithAncestorResource(ResourceIdentifier id)
         {
             ResGrpParentWithAncestorResource.ValidateResourceId(id);
@@ -169,11 +169,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ResGrpParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ResGrpParentWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource"/> object. </returns>
         public virtual ResGrpParentWithNonResChResource GetResGrpParentWithNonResChResource(ResourceIdentifier id)
         {
             ResGrpParentWithNonResChResource.ValidateResourceId(id);
@@ -181,11 +181,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ResGrpParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResGrpParentResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ResGrpParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResGrpParentResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResGrpParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResGrpParentResource"/> object. </returns>
         public virtual ResGrpParentResource GetResGrpParentResource(ResourceIdentifier id)
         {
             ResGrpParentResource.ValidateResourceId(id);
@@ -193,11 +193,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubParentWithNonResChWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource"/> object. </returns>
         public virtual SubParentWithNonResChWithLocResource GetSubParentWithNonResChWithLocResource(ResourceIdentifier id)
         {
             SubParentWithNonResChWithLocResource.ValidateResourceId(id);
@@ -205,11 +205,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubParentWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentWithNonResChResource"/> object. </returns>
         public virtual SubParentWithNonResChResource GetSubParentWithNonResChResource(ResourceIdentifier id)
         {
             SubParentWithNonResChResource.ValidateResourceId(id);
@@ -217,11 +217,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubParentWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentWithLocResource"/> object. </returns>
         public virtual SubParentWithLocResource GetSubParentWithLocResource(ResourceIdentifier id)
         {
             SubParentWithLocResource.ValidateResourceId(id);
@@ -229,11 +229,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentResource"/> object. </returns>
         public virtual SubParentResource GetSubParentResource(ResourceIdentifier id)
         {
             SubParentResource.ValidateResourceId(id);
@@ -241,11 +241,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MgmtGrpParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource"/> object. </returns>
         public virtual MgmtGrpParentWithNonResChWithLocResource GetMgmtGrpParentWithNonResChWithLocResource(ResourceIdentifier id)
         {
             MgmtGrpParentWithNonResChWithLocResource.ValidateResourceId(id);
@@ -253,11 +253,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MgmtGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource"/> object. </returns>
         public virtual MgmtGrpParentWithNonResChResource GetMgmtGrpParentWithNonResChResource(ResourceIdentifier id)
         {
             MgmtGrpParentWithNonResChResource.ValidateResourceId(id);
@@ -265,11 +265,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="MgmtGrpParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MgmtGrpParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="MgmtGrpParentWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGrpParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource"/> object. </returns>
         public virtual MgmtGrpParentWithLocResource GetMgmtGrpParentWithLocResource(ResourceIdentifier id)
         {
             MgmtGrpParentWithLocResource.ValidateResourceId(id);
@@ -277,11 +277,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="MgmtGroupParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MgmtGroupParentResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGroupParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="MgmtGroupParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtGroupParentResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGroupParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtGroupParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="MgmtGroupParentResource"/> object. </returns>
         public virtual MgmtGroupParentResource GetMgmtGroupParentResource(ResourceIdentifier id)
         {
             MgmtGroupParentResource.ValidateResourceId(id);
@@ -289,11 +289,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TenantTestResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TenantTestResource.CreateResourceIdentifier" /> to create a <see cref="TenantTestResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TenantTestResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantTestResource.CreateResourceIdentifier" /> to create a <see cref="TenantTestResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantTestResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantTestResource"/> object. </returns>
         public virtual TenantTestResource GetTenantTestResource(ResourceIdentifier id)
         {
             TenantTestResource.ValidateResourceId(id);
@@ -301,11 +301,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TenantParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TenantParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TenantParentWithNonResChWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource"/> object. </returns>
         public virtual TenantParentWithNonResChWithLocResource GetTenantParentWithNonResChWithLocResource(ResourceIdentifier id)
         {
             TenantParentWithNonResChWithLocResource.ValidateResourceId(id);
@@ -313,11 +313,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TenantParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TenantParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TenantParentWithNonResChResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithNonResChResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentWithNonResChResource"/> object. </returns>
         public virtual TenantParentWithNonResChResource GetTenantParentWithNonResChResource(ResourceIdentifier id)
         {
             TenantParentWithNonResChResource.ValidateResourceId(id);
@@ -325,11 +325,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TenantParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TenantParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TenantParentWithLocResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithLocResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentWithLocResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentWithLocResource"/> object. </returns>
         public virtual TenantParentWithLocResource GetTenantParentWithLocResource(ResourceIdentifier id)
         {
             TenantParentWithLocResource.ValidateResourceId(id);
@@ -337,11 +337,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TenantParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TenantParentResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TenantParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TenantParentResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TenantParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TenantParentResource"/> object. </returns>
         public virtual TenantParentResource GetTenantParentResource(ResourceIdentifier id)
         {
             TenantParentResource.ValidateResourceId(id);
@@ -349,11 +349,11 @@ namespace MgmtListMethods.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FakeConfigurationResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeConfigurationResource.CreateResourceIdentifier" /> to create a <see cref="FakeConfigurationResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FakeConfigurationResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeConfigurationResource.CreateResourceIdentifier" /> to create a <see cref="FakeConfigurationResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeConfigurationResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakeConfigurationResource"/> object. </returns>
         public virtual FakeConfigurationResource GetFakeConfigurationResource(ResourceIdentifier id)
         {
             FakeConfigurationResource.ValidateResourceId(id);

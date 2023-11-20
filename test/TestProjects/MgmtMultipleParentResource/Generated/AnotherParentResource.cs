@@ -21,9 +21,9 @@ namespace MgmtMultipleParentResource
 {
     /// <summary>
     /// A Class representing an AnotherParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AnotherParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAnotherParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetAnotherParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AnotherParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAnotherParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetAnotherParent method.
     /// </summary>
     public partial class AnotherParentResource : ArmResource
     {
@@ -46,7 +46,7 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AnotherParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AnotherParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AnotherParentResource(ArmClient client, AnotherParentData data) : this(client, data.Id)

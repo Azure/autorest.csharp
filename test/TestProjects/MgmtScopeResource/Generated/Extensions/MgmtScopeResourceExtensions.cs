@@ -141,7 +141,7 @@ namespace MgmtScopeResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -360,7 +360,7 @@ namespace MgmtScopeResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="FakePolicyAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FakePolicyAssignmentResource"/> object. </returns>
         public static FakePolicyAssignmentResource GetFakePolicyAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -379,7 +379,7 @@ namespace MgmtScopeResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="DeploymentExtendedResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DeploymentExtendedResource"/> object. </returns>
         public static DeploymentExtendedResource GetDeploymentExtendedResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -398,7 +398,7 @@ namespace MgmtScopeResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ResourceLinkResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ResourceLinkResource"/> object. </returns>
         public static ResourceLinkResource GetResourceLinkResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -417,7 +417,7 @@ namespace MgmtScopeResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatusResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -436,7 +436,7 @@ namespace MgmtScopeResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource"/> object. </returns>
         public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -530,7 +530,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> is null. </exception>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
             Argument.AssertNotNull(armResource, nameof(armResource));
@@ -867,7 +867,7 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -896,7 +896,7 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));

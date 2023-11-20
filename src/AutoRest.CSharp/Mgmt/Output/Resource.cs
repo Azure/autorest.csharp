@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
               Type,
               null,
-              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Description: $"Initializes a new instance of the {Type:C} class.",
               Modifiers: Internal,
               Parameters: _armClientCtorParameters,
               Initializer: new(
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Type,
                 null,
-                Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
+                Description: $"Initializes a new instance of the {Type:C} class.",
                 Modifiers: Internal,
                 Parameters: new[] { KnownParameters.ArmClient, ResourceDataParameter },
                 Initializer: new(
@@ -449,8 +449,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
-            lines.Add($"If you have a <see cref=\"{typeof(ResourceIdentifier)}\" /> you can construct {an} <see cref=\"{Type}\" />");
-            lines.Add($"from an instance of <see cref=\"{typeof(ArmClient)}\" /> using the Get{DefaultName} method.");
+            lines.Add($"If you have a {typeof(ResourceIdentifier):C} you can construct {an} {Type:C}");
+            lines.Add($"from an instance of {typeof(ArmClient):C} using the Get{DefaultName} method.");
             // only append the following information when the parent of me is not myself, aka TenantResource
             if (parentDescription != null && !parents.Contains(this))
             {
@@ -463,7 +463,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected static FormattableString? CreateParentDescription(IReadOnlyList<CSharpType> parentTypes) => parentTypes.Count switch
         {
             0 => null,
-            _ => FormattableStringHelpers.Join(parentTypes.Select(type => (FormattableString)$"<see cref=\"{type}\" />").ToList(), ", ", " or "),
+            _ => FormattableStringHelpers.Join(parentTypes.Select(type => (FormattableString)$"{type:C}").ToList(), ", ", " or "),
         };
 
         private static CSharpType GetReferenceType(Reference reference)
@@ -484,7 +484,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var signature = new MethodSignature(
                 Name: "CreateResourceIdentifier",
                 null,
-                Description: $"Generate the resource identifier of a <see cref=\"{Type.ToStringForDocs()}\"/> instance.",
+                Description: $"Generate the resource identifier of a {Type:C} instance.",
                 Modifiers: Public | Static,
                 ReturnType: typeof(ResourceIdentifier),
                 ReturnDescription: null,

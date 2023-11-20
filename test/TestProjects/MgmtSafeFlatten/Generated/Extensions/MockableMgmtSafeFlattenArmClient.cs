@@ -37,11 +37,11 @@ namespace MgmtSafeFlatten.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TypeOneResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TypeOneResource.CreateResourceIdentifier" /> to create a <see cref="TypeOneResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TypeOneResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TypeOneResource.CreateResourceIdentifier" /> to create a <see cref="TypeOneResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TypeOneResource"/> object. </returns>
         public virtual TypeOneResource GetTypeOneResource(ResourceIdentifier id)
         {
             TypeOneResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtSafeFlatten.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TypeTwoResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TypeTwoResource.CreateResourceIdentifier" /> to create a <see cref="TypeTwoResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TypeTwoResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TypeTwoResource.CreateResourceIdentifier" /> to create a <see cref="TypeTwoResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TypeTwoResource"/> object. </returns>
         public virtual TypeTwoResource GetTypeTwoResource(ResourceIdentifier id)
         {
             TypeTwoResource.ValidateResourceId(id);

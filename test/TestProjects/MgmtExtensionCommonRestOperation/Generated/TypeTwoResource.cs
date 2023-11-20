@@ -20,9 +20,9 @@ namespace MgmtExtensionCommonRestOperation
 {
     /// <summary>
     /// A Class representing a TypeTwo along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TypeTwoResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTypeTwoResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetTypeTwo method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TypeTwoResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTypeTwoResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetTypeTwo method.
     /// </summary>
     public partial class TypeTwoResource : ArmResource
     {
@@ -45,7 +45,7 @@ namespace MgmtExtensionCommonRestOperation
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TypeTwoResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TypeTwoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TypeTwoResource(ArmClient client, TypeTwoData data) : this(client, data.Id)

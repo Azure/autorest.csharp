@@ -240,7 +240,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ExactMatchModel3"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -260,7 +260,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ExactMatchModel3"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ExactMatchModel3> GetExactMatchModel3s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ExactMatchModel3sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

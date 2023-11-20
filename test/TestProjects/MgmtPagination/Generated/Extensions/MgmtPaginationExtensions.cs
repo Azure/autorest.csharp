@@ -40,7 +40,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeIntegerModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeIntegerModelResource"/> object. </returns>
         public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -59,7 +59,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeInt64ModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeInt64ModelResource"/> object. </returns>
         public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -78,7 +78,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeInt32ModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeInt32ModelResource"/> object. </returns>
         public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -97,7 +97,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeNumericModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeNumericModelResource"/> object. </returns>
         public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -116,7 +116,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeFloatModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeFloatModelResource"/> object. </returns>
         public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -135,7 +135,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeDoubleModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeDoubleModelResource"/> object. </returns>
         public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -154,7 +154,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeDecimalModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeDecimalModelResource"/> object. </returns>
         public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -173,7 +173,7 @@ namespace MgmtPagination
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="PageSizeStringModelResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PageSizeStringModelResource"/> object. </returns>
         public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));

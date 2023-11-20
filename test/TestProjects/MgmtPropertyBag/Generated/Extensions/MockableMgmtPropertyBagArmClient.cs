@@ -37,11 +37,11 @@ namespace MgmtPropertyBag.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="FooResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FooResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FooResource"/> object. </returns>
         public virtual FooResource GetFooResource(ResourceIdentifier id)
         {
             FooResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtPropertyBag.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="BarResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BarResource"/> object. </returns>
         public virtual BarResource GetBarResource(ResourceIdentifier id)
         {
             BarResource.ValidateResourceId(id);

@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="TenantTestResource" /> and their operations.
-    /// Each <see cref="TenantTestResource" /> in the collection will belong to the same instance of <see cref="TenantResource" />.
-    /// To get a <see cref="TenantTestCollection" /> instance call the GetTenantTests method from an instance of <see cref="TenantResource" />.
+    /// A class representing a collection of <see cref="TenantTestResource"/> and their operations.
+    /// Each <see cref="TenantTestResource"/> in the collection will belong to the same instance of <see cref="TenantResource"/>.
+    /// To get a <see cref="TenantTestCollection"/> instance call the GetTenantTests method from an instance of <see cref="TenantResource"/>.
     /// </summary>
     public partial class TenantTestCollection : ArmCollection, IEnumerable<TenantTestResource>, IAsyncEnumerable<TenantTestResource>
     {
@@ -227,7 +227,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TenantTestResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TenantTestResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TenantTestResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantTestRestClient.CreateListRequest(optionalParam);
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TenantTestResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TenantTestResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TenantTestResource> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantTestRestClient.CreateListRequest(optionalParam);

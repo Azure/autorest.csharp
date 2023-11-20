@@ -37,11 +37,11 @@ namespace MgmtParent.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="AvailabilitySetResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AvailabilitySetResource"/> object. </returns>
         public virtual AvailabilitySetResource GetAvailabilitySetResource(ResourceIdentifier id)
         {
             AvailabilitySetResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtParent.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="DedicatedHostGroupResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DedicatedHostGroupResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DedicatedHostGroupResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DedicatedHostGroupResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroupResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DedicatedHostGroupResource"/> object. </returns>
         public virtual DedicatedHostGroupResource GetDedicatedHostGroupResource(ResourceIdentifier id)
         {
             DedicatedHostGroupResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtParent.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="DedicatedHostResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DedicatedHostResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DedicatedHostResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DedicatedHostResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DedicatedHostResource"/> object. </returns>
         public virtual DedicatedHostResource GetDedicatedHostResource(ResourceIdentifier id)
         {
             DedicatedHostResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtParent.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource"/> object. </returns>
         public virtual VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(ResourceIdentifier id)
         {
             VirtualMachineExtensionImageResource.ValidateResourceId(id);
