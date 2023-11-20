@@ -12,32 +12,5 @@ namespace _Type.Union.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypeUnionModelFactory
     {
-        /// <summary> Initializes a new instance of ModelWithSimpleUnionPropertyInResponse. </summary>
-        /// <param name="simpleUnion"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="simpleUnion"/> is null. </exception>
-        /// <returns> A new <see cref="Models.ModelWithSimpleUnionPropertyInResponse"/> instance for mocking. </returns>
-        public static ModelWithSimpleUnionPropertyInResponse ModelWithSimpleUnionPropertyInResponse(BinaryData simpleUnion = null)
-        {
-            if (simpleUnion == null)
-            {
-                throw new ArgumentNullException(nameof(simpleUnion));
-            }
-
-            return new ModelWithSimpleUnionPropertyInResponse(simpleUnion);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithNamedUnionPropertyInResponse. </summary>
-        /// <param name="namedUnion"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="namedUnion"/> is null. </exception>
-        /// <returns> A new <see cref="Models.ModelWithNamedUnionPropertyInResponse"/> instance for mocking. </returns>
-        public static ModelWithNamedUnionPropertyInResponse ModelWithNamedUnionPropertyInResponse(BinaryData namedUnion = null)
-        {
-            if (namedUnion == null)
-            {
-                throw new ArgumentNullException(nameof(namedUnion));
-            }
-
-            return new ModelWithNamedUnionPropertyInResponse(namedUnion);
-        }
     }
 }
