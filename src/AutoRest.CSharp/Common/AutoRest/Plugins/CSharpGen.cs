@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await AutoRestLogger.Fatal(e.ErrorText);
                 return false;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 try
                 {
@@ -144,8 +144,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     // Ignore any errors while trying to output crash information
                 }
-                await AutoRestLogger.Fatal($"Internal error in AutoRest.CSharp{ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
-                return false;
+
+                throw;
             }
 
             return true;

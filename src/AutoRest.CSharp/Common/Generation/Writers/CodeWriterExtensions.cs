@@ -670,6 +670,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
         {
+            if (property.Description != null)
+            {
+                writer.Line().WriteXmlDocumentationSummary(property.Description);
+            }
+
             var modifiers = property.Modifiers;
             writer.AppendRawIf("public ", modifiers.HasFlag(MethodSignatureModifiers.Public))
                 .AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
@@ -678,7 +683,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("static ", modifiers.HasFlag(MethodSignatureModifiers.Static))
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
-            writer.Append($"{property.PropertyType} {property.Declaration:D}");
+            writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
             bool isInline = property.Get.IsInline && (property.Set?.IsInline ?? true); // an absent setter indicates it is inline.
             if (!isInline)
             {

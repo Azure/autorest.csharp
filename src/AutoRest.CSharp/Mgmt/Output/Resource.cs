@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -143,6 +144,38 @@ namespace AutoRest.CSharp.Mgmt.Output
                 typeof(ResourceType),
                 "ResourceType",
                 Literal(ResourceType.ToString()));
+        }
+
+        private IReadOnlyList<PropertyDeclaration>? _properties;
+        public IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
+
+        protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
+        {
+            // HasData property
+            var hasDataProperty = new PropertyDeclaration(
+                description: $"Gets whether or not the current instance has data.",
+                modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                propertyType: typeof(bool),
+                name: "HasData",
+                get: new());
+
+            yield return hasDataProperty;
+
+            var dataProperty = new PropertyDeclaration(
+                description: $"Gets the data representing this Feature.",
+                modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                propertyType: ResourceData.Type,
+                name: "Data",
+                get: new(new MethodBodyStatement[]
+                {
+                    new IfStatement(Not(new BoolExpression(new VariableReference(hasDataProperty.PropertyType, hasDataProperty.Declaration))), AddBraces: false)
+                    {
+                        Throw(Snippets.New.Instance(typeof(InvalidOperationException), Literal("The current instance does not have data, you must call Get first.")))
+                    },
+                    Return(new MemberExpression(null, DataFieldName))
+                }));
+
+            yield return dataProperty;
         }
 
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)

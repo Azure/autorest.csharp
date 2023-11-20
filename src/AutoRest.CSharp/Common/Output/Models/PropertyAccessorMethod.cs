@@ -12,6 +12,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public MethodSignatureModifiers Modifiers { get; }
         public bool IsInline => BodyExpression == null && Body == null;
 
+        public PropertyAccessorMethod() : this(MethodSignatureModifiers.None)
+        { }
+
         public PropertyAccessorMethod(MethodSignatureModifiers modifiers)
         {
             Modifiers = modifiers;
@@ -22,7 +25,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             BodyExpression = expression;
         }
 
-        public PropertyAccessorMethod(ValueExpression expression) : this(MethodSignatureModifiers.None)
+        public PropertyAccessorMethod(ValueExpression expression) : this()
         {
             BodyExpression = expression;
         }
@@ -32,7 +35,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             Body = body;
         }
 
-        public PropertyAccessorMethod(MethodBodyStatement body) : this(MethodSignatureModifiers.None)
+        public PropertyAccessorMethod(MethodBodyStatement body) : this()
         {
             Body = body;
         }
