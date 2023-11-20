@@ -9,7 +9,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CSharpType ValueType, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, SerializationFormat SerializationFormat, bool IsField = false, bool WriteAsProperty = false, bool OptionalViaNullability = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null, SourcePropertySerializationMapping? SerializationMapping = null)
+    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CSharpType ValueType, CodeWriterDeclaration Declaration, FormattableString? InitializationValue, bool IsRequired, SerializationFormat SerializationFormat, bool IsField = false, bool WriteAsProperty = false, bool OptionalViaNullability = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null, SourcePropertySerializationMapping? SerializationMapping = null)
     {
         public string Name => Declaration.ActualName;
         public string Accessibility => (Modifiers & FieldModifiers.Public) > 0 ? "public" : "internal";
@@ -23,13 +23,24 @@ namespace AutoRest.CSharp.Output.Models
                   writeAsProperty: writeAsProperty)
         { }
 
+        public FieldDeclaration(FormattableString description, FieldModifiers modifiers, CSharpType type, string name, FormattableString? initializationValue = null)
+            : this(Description: description,
+                  Modifiers: modifiers,
+                  Type: type,
+                  ValueType: type,
+                  Declaration: new CodeWriterDeclaration(name),
+                  IsRequired: false,
+                  InitializationValue: initializationValue,
+                  SerializationFormat: SerializationFormat.Default)
+        { }
+
         public FieldDeclaration(FieldModifiers modifiers, CSharpType type, string name, FormattableString? defaultValue, SerializationFormat serializationFormat, bool writeAsProperty = false)
             : this(Description: null,
                   Modifiers: modifiers,
                   Type: type,
                   ValueType: type,
                   Declaration: new CodeWriterDeclaration(name),
-                  DefaultValue: defaultValue,
+                  InitializationValue: defaultValue,
                   IsRequired: false,
                   SerializationFormat: serializationFormat,
                   IsField: false,
@@ -44,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models
                   Type: type,
                   ValueType: type,
                   Declaration: new CodeWriterDeclaration(name),
-                  DefaultValue: null,
+                  InitializationValue: null,
                   IsRequired: false,
                   SerializationFormat: serializationFormat,
                   IsField: false,

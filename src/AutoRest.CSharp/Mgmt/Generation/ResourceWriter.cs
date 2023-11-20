@@ -56,10 +56,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteProperties()
         {
-            _writer.WriteXmlDocumentationSummary($"Gets the resource type for the operations");
-
-            _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
-            _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Gets whether or not the current instance has data.");
             _writer.Line($"public virtual bool HasData {{ get; }}");
             _writer.Line();

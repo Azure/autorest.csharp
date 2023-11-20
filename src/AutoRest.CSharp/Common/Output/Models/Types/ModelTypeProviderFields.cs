@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Type: fieldType,
                 ValueType: valueType,
                 Declaration: declaration,
-                DefaultValue: GetPropertyDefaultValue(originalType, inputModelProperty),
+                InitializationValue: GetPropertyDefaultValue(originalType, inputModelProperty),
                 IsRequired: inputModelProperty.IsRequired,
                 SerializationBuilder.GetSerializationFormat(inputModelProperty.Type, valueType),
                 IsField: existingMember is IFieldSymbol,

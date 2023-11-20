@@ -135,7 +135,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
         {
+            // the resource data private field
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+
+            // the resource type public field
+            yield return new FieldDeclaration(
+                $"Gets the resource type for the operations",
+                FieldModifiers.Public | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                typeof(ResourceType),
+                "ResourceType",
+                $"{ResourceType.ToString():L}");
         }
 
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)
