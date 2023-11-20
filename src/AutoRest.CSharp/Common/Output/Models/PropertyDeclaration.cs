@@ -2,12 +2,27 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Models
 {
-    internal record PropertyDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType PropertyType, string Name, ValueExpression? InitializationValue, FieldModifiers? Get = null, FieldModifiers? Set = null)
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
+    internal record PropertyDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType PropertyType, CodeWriterDeclaration Declaration, PropertyAccessorMethod Get, PropertyAccessorMethod? Set = null, ValueExpression? InitializationValue = null)
     {
+        public PropertyDeclaration(FormattableString? description, FieldModifiers modifiers, CSharpType propertyType, string name, PropertyAccessorMethod get, PropertyAccessorMethod? set = null, ValueExpression? initializationValue = null) : this(description, modifiers, propertyType, new CodeWriterDeclaration(name), get, set, initializationValue)
+        {
+            Declaration.SetActualName(name);
+        }
+
+        private string GetDebuggerDisplay()
+        {
+            using var writer = new DebuggerCodeWriter();
+            writer.WriteProperty(this);
+            return writer.ToString();
+        }
     }
 }

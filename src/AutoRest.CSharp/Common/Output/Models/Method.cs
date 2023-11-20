@@ -7,11 +7,9 @@ using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
-    internal class Method
+    internal class Method : MethodBase
     {
         public MethodSignatureBase Signature { get; }
-        public MethodBodyStatement? Body { get; }
-        public ValueExpression? BodyExpression { get; }
 
         public Method(MethodSignatureBase signature, MethodBodyStatement body)
         {

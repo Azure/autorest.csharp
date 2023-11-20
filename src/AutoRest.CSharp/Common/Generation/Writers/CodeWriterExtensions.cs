@@ -5,10 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -150,7 +148,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            if (methodBase.Attributes is {} attributes)
+            if (methodBase.Attributes is { } attributes)
             {
                 foreach (var attribute in attributes)
                 {
@@ -237,7 +235,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints})
+            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints })
             {
                 writer.Line();
                 foreach (var (argument, constraint) in constraints)
@@ -648,14 +646,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteMethod(this CodeWriter writer, Method method)
         {
-            if (method.Body is {} body)
+            if (method.Body is { } body)
             {
                 using (writer.WriteMethodDeclaration(method.Signature))
                 {
                     writer.WriteMethodBodyStatement(body);
                 }
             }
-            else if (method.BodyExpression is {} expression)
+            else if (method.BodyExpression is { } expression)
             {
                 using (writer.WriteMethodDeclarationNoScope(method.Signature))
                 {
@@ -666,6 +664,84 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
+        }
+
+        public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
+        {
+            var modifiers = property.Modifiers;
+            writer.AppendRawIf("public ", modifiers.HasFlag(FieldModifiers.Public))
+                .AppendRawIf("protected ", modifiers.HasFlag(FieldModifiers.Protected))
+                .AppendRawIf("internal ", modifiers.HasFlag(FieldModifiers.Internal))
+                .AppendRawIf("private ", modifiers.HasFlag(FieldModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static)); // property does not support readonly and const
+
+            writer.Append($"{property.PropertyType} {property.Declaration:D}");
+            bool isInline = property.Get.IsInline && (property.Set?.IsInline ?? true); // an absent setter indicates it is inline.
+            if (!isInline)
+            {
+                writer.Line();
+            }
+            writer.AppendRaw("{");
+
+            // to validate the modifiers are consistent with the modifiers that are already on the property declaration is quite complicated, here we just assume the builder of PropertyDeclaration could handle it properly
+            // and if they did not, the compiler will complain on our generated code
+            if (property.Get is { } get)
+            {
+                // write the getter
+                if (!isInline)
+                {
+                    writer.Line();
+                }
+                WritePropertyAccessorMethod(writer, "get", get, isInline);
+
+            }
+
+            if (property.Set is { } set)
+            {
+                // write the setter
+                if (!isInline)
+                {
+                    writer.Line();
+                }
+                WritePropertyAccessorMethod(writer, "set", set, isInline);
+            }
+
+            writer.AppendRaw("}");
+
+            static void WritePropertyAccessorMethod(CodeWriter writer, string methodName, PropertyAccessorMethod method, bool isInline)
+            {
+                // write modifiers
+                // the property modifiers should never have public because the modifiers of accessor method must be more restrictive than the modifiers on the property, we just ignore it if we have it
+                var modifiers = method.Modifiers;
+                writer.AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
+                    .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
+                    .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private));
+
+                writer.AppendRaw(methodName);
+
+                if (method.BodyExpression is { } expression)
+                {
+                    writer.AppendRaw(" => ")
+                        .WriteValueExpression(expression);
+
+                    writer.AppendRaw(";");
+                    if (!isInline)
+                        writer.Line();
+                }
+                else if (method.Body is { } body)
+                {
+                    using (writer.AmbientScope())
+                    {
+                        writer.AppendRaw("{");
+                        writer.WriteMethodBodyStatement(body);
+                        writer.AppendRaw("}");
+                    }
+                }
+                else
+                {
+                    writer.AppendRaw(";");
+                }
+            }
         }
     }
 }
