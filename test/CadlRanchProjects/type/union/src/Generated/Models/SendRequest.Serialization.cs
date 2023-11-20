@@ -15,32 +15,20 @@ using Azure.Core;
 
 namespace _Type.Union.Models
 {
-<<<<<<< HEAD:test/CadlRanchProjects/type/union/src/Generated/Models/ModelWithNamedUnionProperty.Serialization.cs
-    public partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable, IJsonModel<ModelWithNamedUnionProperty>
-=======
-    internal partial class SendRequest : IUtf8JsonSerializable
->>>>>>> origin/feature/v3:test/CadlRanchProjects/type/union/src/Generated/Models/SendRequest.Serialization.cs
+    internal partial class SendRequest : IUtf8JsonSerializable, IJsonModel<SendRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithNamedUnionProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SendRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<ModelWithNamedUnionProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<SendRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelWithNamedUnionProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            if ((options.Format != "W" || ((IPersistableModel<SendRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelWithNamedUnionProperty>)} interface");
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SendRequest>)} interface");
             }
 
             writer.WriteStartObject();
-<<<<<<< HEAD:test/CadlRanchProjects/type/union/src/Generated/Models/ModelWithNamedUnionProperty.Serialization.cs
-            writer.WritePropertyName("namedUnion"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(NamedUnion);
-#else
-            using (JsonDocument document = JsonDocument.Parse(NamedUnion))
-            {
-                JsonSerializer.Serialize(writer, document.RootElement);
-            }
-#endif
+            writer.WritePropertyName("prop"u8);
+            writer.WriteStringValue(Prop.ToString());
             if (_serializedAdditionalRawData != null && options.Format == "J")
             {
                 foreach (var item in _serializedAdditionalRawData)
@@ -56,26 +44,22 @@ namespace _Type.Union.Models
 #endif
                 }
             }
-=======
-            writer.WritePropertyName("prop"u8);
-            writer.WriteStringValue(Prop.ToString());
->>>>>>> origin/feature/v3:test/CadlRanchProjects/type/union/src/Generated/Models/SendRequest.Serialization.cs
             writer.WriteEndObject();
         }
 
-        ModelWithNamedUnionProperty IJsonModel<ModelWithNamedUnionProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        SendRequest IJsonModel<SendRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
-                throw new FormatException($"The model {nameof(ModelWithNamedUnionProperty)} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(SendRequest)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelWithNamedUnionProperty(document.RootElement, options);
+            return DeserializeSendRequest(document.RootElement, options);
         }
 
-        internal static ModelWithNamedUnionProperty DeserializeModelWithNamedUnionProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static SendRequest DeserializeSendRequest(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -83,14 +67,14 @@ namespace _Type.Union.Models
             {
                 return null;
             }
-            BinaryData namedUnion = default;
+            SendRequestProp prop = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("namedUnion"u8))
+                if (property.NameEquals("prop"u8))
                 {
-                    namedUnion = BinaryData.FromString(property.Value.GetRawText());
+                    prop = new SendRequestProp(property.Value.GetString());
                     continue;
                 }
                 if (options.Format == "J")
@@ -99,40 +83,40 @@ namespace _Type.Union.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ModelWithNamedUnionProperty(namedUnion, serializedAdditionalRawData);
+            return new SendRequest(prop, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<ModelWithNamedUnionProperty>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<SendRequest>.Write(ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
-                throw new FormatException($"The model {nameof(ModelWithNamedUnionProperty)} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(SendRequest)} does not support '{options.Format}' format.");
             }
 
             return ModelReaderWriter.Write(this, options);
         }
 
-        ModelWithNamedUnionProperty IPersistableModel<ModelWithNamedUnionProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        SendRequest IPersistableModel<SendRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
             bool isValid = options.Format == "J" || options.Format == "W";
             if (!isValid)
             {
-                throw new FormatException($"The model {nameof(ModelWithNamedUnionProperty)} does not support '{options.Format}' format.");
+                throw new FormatException($"The model {nameof(SendRequest)} does not support '{options.Format}' format.");
             }
 
             using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelWithNamedUnionProperty(document.RootElement, options);
+            return DeserializeSendRequest(document.RootElement, options);
         }
 
-        string IPersistableModel<ModelWithNamedUnionProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<SendRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static ModelWithNamedUnionProperty FromResponse(Response response)
+        internal static SendRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithNamedUnionProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSendRequest(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

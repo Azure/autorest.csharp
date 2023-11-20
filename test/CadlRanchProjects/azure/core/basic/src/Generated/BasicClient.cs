@@ -747,7 +747,7 @@ namespace _Specs_.Azure.Core.Basic
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -778,7 +778,7 @@ namespace _Specs_.Azure.Core.Basic
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithParametersRequest(content, another, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithParametersNextPageRequest(nextLink, content, another, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithParameters", "value", "nextLink", context);
         }
 
         /// <summary> List with custom page model. </summary>
@@ -900,7 +900,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFirstItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetFirstItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetFirstItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetFirstItems", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -926,7 +926,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFirstItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetFirstItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetFirstItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetFirstItems", "value", "nextLink", context);
         }
 
         /// <summary> Two operations with two different page item types should be successfully generated. Should generate model for SecondItem. </summary>
@@ -974,7 +974,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSecondItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSecondItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetSecondItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetSecondItems", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -1000,7 +1000,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSecondItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSecondItemsNextPageRequest(nextLink, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetSecondItems", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetSecondItems", "value", "nextLink", context);
         }
 
         internal HttpMessage CreateCreateOrUpdateRequest(int id, RequestContent content, RequestContext context)

@@ -37,20 +37,20 @@ namespace _Specs_.Azure.Core.Basic.Models
             return new UserOrder(id, userId, detail, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of FirstItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FirstItem"/>. </summary>
         /// <param name="id"> The id of the item. </param>
         /// <returns> A new <see cref="Models.FirstItem"/> instance for mocking. </returns>
         public static FirstItem FirstItem(int id = default)
         {
-            return new FirstItem(id);
+            return new FirstItem(id, new Dictionary<string, BinaryData>());
         }
 
-        /// <summary> Initializes a new instance of SecondItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SecondItem"/>. </summary>
         /// <param name="name"> The name of the item. </param>
         /// <returns> A new <see cref="Models.SecondItem"/> instance for mocking. </returns>
         public static SecondItem SecondItem(string name = null)
         {
-            return new SecondItem(name);
+            return new SecondItem(name, new Dictionary<string, BinaryData>());
         }
     }
 }

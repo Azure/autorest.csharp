@@ -6,16 +6,26 @@
 #nullable disable
 
 using System;
+using System.ClientModel;
+using System.ClientModel.Primitives;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace _Type.Property.Optionality.Models
 {
-    public partial class UnionFloatLiteralProperty : IUtf8JsonSerializable
+    public partial class UnionFloatLiteralProperty : IUtf8JsonSerializable, IJsonModel<UnionFloatLiteralProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<UnionFloatLiteralProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
+
+        void IJsonModel<UnionFloatLiteralProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
+            if ((options.Format != "W" || ((IPersistableModel<UnionFloatLiteralProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            {
+                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UnionFloatLiteralProperty>)} interface");
+            }
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Property))
             {
@@ -29,16 +39,47 @@ namespace _Type.Property.Optionality.Models
                 }
 #endif
             }
+            if (_serializedAdditionalRawData != null && options.Format == "J")
+            {
+                foreach (var item in _serializedAdditionalRawData)
+                {
+                    writer.WritePropertyName(item.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item.Value);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
+                    {
+                        JsonSerializer.Serialize(writer, document.RootElement);
+                    }
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static UnionFloatLiteralProperty DeserializeUnionFloatLiteralProperty(JsonElement element)
+        UnionFloatLiteralProperty IJsonModel<UnionFloatLiteralProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
+            bool isValid = options.Format == "J" || options.Format == "W";
+            if (!isValid)
+            {
+                throw new FormatException($"The model {nameof(UnionFloatLiteralProperty)} does not support '{options.Format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnionFloatLiteralProperty(document.RootElement, options);
+        }
+
+        internal static UnionFloatLiteralProperty DeserializeUnionFloatLiteralProperty(JsonElement element, ModelReaderWriterOptions options = null)
+        {
+            options ??= new ModelReaderWriterOptions("W");
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<BinaryData> property = default;
+            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
+            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
@@ -50,16 +91,46 @@ namespace _Type.Property.Optionality.Models
                     property = BinaryData.FromString(property0.Value.GetRawText());
                     continue;
                 }
+                if (options.Format == "J")
+                {
+                    additionalPropertiesDictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
+                }
             }
-            return new UnionFloatLiteralProperty(property.Value);
+            serializedAdditionalRawData = additionalPropertiesDictionary;
+            return new UnionFloatLiteralProperty(property.Value, serializedAdditionalRawData);
         }
+
+        BinaryData IPersistableModel<UnionFloatLiteralProperty>.Write(ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == "J" || options.Format == "W";
+            if (!isValid)
+            {
+                throw new FormatException($"The model {nameof(UnionFloatLiteralProperty)} does not support '{options.Format}' format.");
+            }
+
+            return ModelReaderWriter.Write(this, options);
+        }
+
+        UnionFloatLiteralProperty IPersistableModel<UnionFloatLiteralProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
+        {
+            bool isValid = options.Format == "J" || options.Format == "W";
+            if (!isValid)
+            {
+                throw new FormatException($"The model {nameof(UnionFloatLiteralProperty)} does not support '{options.Format}' format.");
+            }
+
+            using JsonDocument document = JsonDocument.Parse(data);
+            return DeserializeUnionFloatLiteralProperty(document.RootElement, options);
+        }
+
+        string IPersistableModel<UnionFloatLiteralProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnionFloatLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnionFloatLiteralProperty(document.RootElement);
+            return DeserializeUnionFloatLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
