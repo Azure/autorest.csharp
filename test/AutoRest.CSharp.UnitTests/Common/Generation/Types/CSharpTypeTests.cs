@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Generation.Types.Tests
         {
             var actual = new CSharpType(input, isNullable).GetGenericTypeDefinition();
             Assert.AreEqual(new CSharpType(expected, isNullable), actual);
-            CollectionAssert.AreEqual(expected.GetGenericTypeDefinition().GetGenericArguments().Select(p => new CSharpType(p)), new CSharpType(input, isNullable).GetGenericTypeDefinition().Arguments);
+            CollectionAssert.AreEqual(new CSharpType(expected, isNullable).GetGenericTypeDefinition().Arguments, input.GetGenericTypeDefinition().GetGenericArguments().Select(p => new CSharpType(p)));
         }
 
         public void GetGenericTypeDefinitionForConstructedType()
