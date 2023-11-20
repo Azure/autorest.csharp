@@ -108,5 +108,21 @@ namespace AutoRest.CSharp.Generation.Types.Tests
             var cst2 = new CSharpType(type2);
             Assert.AreNotEqual(cst1.GetHashCode(), cst2.GetHashCode());
         }
+
+        [TestCase(typeof(IDictionary<int, string>), typeof(IDictionary<,>), false)]
+        [TestCase(typeof(IDictionary<int, IList<string>>), typeof(IDictionary<,>), false)]
+        [TestCase(typeof(KeyValuePair<int, string>), typeof(KeyValuePair<,>), false)]
+        [TestCase(typeof(KeyValuePair<int, string>), typeof(KeyValuePair<,>), true)]
+        public void GetGenericTypeDefinition(Type input, Type expected, bool isNullable)
+        {
+            var actual = new CSharpType(input, isNullable).GetGenericTypeDefinition();
+            Assert.AreEqual(new CSharpType(expected, isNullable), actual);
+        }
+
+        public void GetGenericTypeDefinitionForConstructedType()
+        {
+            var actual = new CSharpType(typeof(List<>), typeof(string)).GetGenericTypeDefinition();
+            Assert.AreEqual(new CSharpType(typeof(List<>)), actual);
+        }
     }
 }
