@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
@@ -19,8 +21,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(MgmtOutputLibrary library, InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default, string? newName = default)
-            : base(library, inputModelType, typeFactory, sourceInputModel, newName)
+        public MgmtObjectType(MgmtOutputLibrary library, InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default, string? newName = default, SerializableObjectType? defaultDerivedType = null)
+            : base(library, inputModelType, typeFactory, sourceInputModel, newName, defaultDerivedType)
         {
             _typeFactory = typeFactory;
             _defaultName = name;
@@ -285,7 +287,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var parentSchema = GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
             if (parentSchema == null)
             {
-                throw new InvalidOperationException($"Can't find parent object schema for property schema: '{Declaration.Name}.{property.Type.Name}'");
+                throw new InvalidOperationException($"Can't find parent object schema for property schema: '{Declaration.Name}.{property.CSharpName()}'");
             }
             else
             {

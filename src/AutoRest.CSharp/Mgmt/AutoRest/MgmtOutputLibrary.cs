@@ -251,11 +251,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         // Initialize ResourceData, Models and resource manager common types
         private Dictionary<InputType, TypeProvider> InitializeModels()
         {
-
+            var defaultDerivedTypes = new Dictionary<string, MgmtObjectType>();
             // first, construct resource data models
             foreach (var inputModel in _input.Models)
             {
-                var model = ResourceDataTypeNameToOperationSets.ContainsKey(inputModel.Name) ? BuildResourceData(inputModel) : BuildModel(inputModel);
+                var defaultDerivedType = GetDefaultDerivedType(inputModel, defaultDerivedTypes);
+                var model = ResourceDataTypeNameToOperationSets.ContainsKey(inputModel.Name) ? BuildResourceData(inputModel, defaultDerivedType) : BuildModel(inputModel, defaultDerivedType);
                 _schemaOrNameToModels.Add(inputModel, model);
             }
 
@@ -300,6 +301,57 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _schemaOrNameToModels;
+        }
+
+        private MgmtObjectType? GetDefaultDerivedType(InputModelType model, Dictionary<string, MgmtObjectType> defaultDerivedTypes)
+        {
+            //only want to create one instance of the default derived per polymorphic set
+            bool isBasePolyType = model.DiscriminatorPropertyName is not null;
+            bool isChildPolyType = model.DiscriminatorValue is not null;
+            if (!isBasePolyType && !isChildPolyType)
+            {
+                return null;
+            }
+
+            var actualBase = model;
+            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
+            {
+                actualBase = actualBase.BaseModel;
+            }
+
+            //We don't need to create default type if its an input only model
+            if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+                return null;
+
+            string defaultDerivedName = $"Unknown{actualBase.Name}";
+            if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out MgmtObjectType? defaultDerivedType))
+            {
+                //create the "Unknown" version
+                var unknownDerivedType = new InputModelType(
+                    defaultDerivedName,
+                    actualBase.Namespace,
+                    "internal",
+                    null,
+                    // [TODO]: Condition is added to minimize change
+                    Configuration.Generation1ConvenienceClient ? $"The {defaultDerivedName}" : $"Unknown version of {actualBase.Name}",
+                    Configuration.Generation1ConvenienceClient ? actualBase.Usage : InputModelTypeUsage.Output,
+                    Array.Empty<InputModelProperty>(),
+                    actualBase,
+                    Array.Empty<InputModelType>(),
+                    "Unknown", //TODO: do we need to support extensible enum / int values?
+                    null,
+                    null,
+                    false)
+                {
+                    IsUnknownDiscriminatorModel = true
+                };
+
+                defaultDerivedType = new MgmtObjectType(this, unknownDerivedType, TypeFactory, _sourceInputModel);
+                defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
+                _schemaOrNameToModels.Add(unknownDerivedType, defaultDerivedType);
+            }
+
+            return defaultDerivedType;
         }
 
         private IEnumerable<OperationSet>? _resourceOperationSets;
@@ -748,7 +800,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public override CSharpType ResolveEnum(InputEnumType enumType) => AllEnumMap[enumType].Type;
-        public override CSharpType ResolveModel(InputModelType model) => _schemaOrNameToModels[model].Type;
+        public override CSharpType ResolveModel(InputModelType model)
+        {
+            if (_schemaOrNameToModels.TryGetValue(model, out var value))
+            {
+                return value.Type;
+            }
+
+            // TODO: model has been turned in to a new instance somewhere, need to fix it later
+            return FindTypeByName(model.Name) ?? throw new InvalidOperationException($"Cannot find model {model.Name}");
+        }
 
         public override TypeProvider FindTypeProviderForInputType(InputType inputType)
         {
@@ -788,18 +849,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return ArmResources.Where(resource => resource.ResourceData == resourceData);
         }
 
-        private TypeProvider BuildModel(InputType inputType) => inputType switch
+        private TypeProvider BuildModel(InputType inputType, MgmtObjectType? defaultDerivedType = null) => inputType switch
         {
             InputEnumType enumType => new EnumType(enumType, TypeFactory, _sourceInputModel, GetNewName(inputType)),
             // TODO: handle this when regen resource manager
             // inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType) ? new MgmtReferenceType(inputModel, TypeFactory)
-            InputModelType inputModel => new MgmtObjectType(this, inputModel, TypeFactory, _sourceInputModel, newName: GetNewName(inputType)),
+            InputModelType inputModel => new MgmtObjectType(this, inputModel, TypeFactory, _sourceInputModel, newName: GetNewName(inputType), defaultDerivedType: defaultDerivedType),
             _ => throw new NotImplementedException($"Unhandled input type {inputType.GetType()} with name {inputType.Name}")
         };
 
         private string? GetNewName(object o) => _renamingMap.TryGetValue(o, out var name) ? name : null;
 
-        private TypeProvider BuildResourceData(InputType inputType)
+        private TypeProvider BuildResourceData(InputType inputType, MgmtObjectType? defaultDerivedType = null)
         {
             if (inputType is InputModelType inputModel)
             {
@@ -808,7 +869,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     return new EmptyResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName);
                 }
-                return new ResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName);
+                return new ResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName, defaultDerivedType: defaultDerivedType);
             }
             throw new NotImplementedException();
         }

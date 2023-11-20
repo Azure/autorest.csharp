@@ -16,7 +16,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -39,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        protected SchemaObjectType(MgmtOutputLibrary library, InputModelType inputModel, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default)
+        protected SchemaObjectType(MgmtOutputLibrary library, InputModelType inputModel, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default, SerializableObjectType? defaultDerivedType = null)
             : base(Configuration.Namespace, sourceInputModel)
         {
             _library = library;
@@ -67,6 +66,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             _supportedSerializationFormats = GetSupportedSerializationFormats(inputModel, _sourceTypeMapping);
+            _defaultDerivedType = inputModel.DerivedModels.Any() && inputModel.BaseModel is not null
+                ? this
+                : defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
         }
 
         internal InputModelType InputModel { get; }
@@ -78,8 +80,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private SerializableObjectType? _defaultDerivedType;
         private bool _hasCalculatedDefaultDerivedType;
-
-        public SerializableObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerivedType();
 
         // TODO: handle this while regen resource manager
         //public bool IsInheritableCommonType => InputModel is { Extensions: {} } && (InputModel.Extensions.MgmtReferenceType || InputModel.Extensions.MgmtTypeReferenceType);
@@ -431,7 +431,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected ObjectTypeProperty CreateProperty(InputModelProperty property)
         {
-            var name = BuilderHelpers.DisambiguateName(Type.Name, property.Name);
+            var name = BuilderHelpers.DisambiguateName(Type.Name, property.CSharpName());
             var existingMember = _sourceTypeMapping?.GetMemberByOriginalName(name);
 
             var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(existingMember);
@@ -526,7 +526,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             yield return InputModel;
 
-            foreach (var parent in InputModel.DerivedModels)
+            foreach (var parent in InputModel.CompositionModels)
             {
                 yield return parent;
             }

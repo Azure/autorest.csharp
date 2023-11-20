@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Common.Input
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsRequired: input.IsRequired,
-            GroupedBy: input.GroupedBy is {} groupedBy ? _parametersCache[groupedBy]() : null,
+            GroupedBy: input.GroupedBy is { } groupedBy ? _parametersCache[groupedBy]() : null,
             Kind: GetOperationParameterKind(input),
             IsApiVersion: input.IsApiVersion,
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
@@ -304,7 +304,6 @@ namespace AutoRest.CSharp.Common.Input
             var baseModelSchema = GetBaseModelSchema(schema);
             var compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
             var dictionarySchema = Configuration.AzureArm ? null : schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
-
             model = new InputModelType(
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
@@ -343,7 +342,7 @@ namespace AutoRest.CSharp.Common.Input
             };
 
         private static ObjectSchema? GetBaseModelSchema(ObjectSchema schema)
-            => schema.Parents?.Immediate is {} parents
+            => schema.Parents?.Immediate is { } parents
                 ? parents.OfType<ObjectSchema>().FirstOrDefault(s => s.Discriminator is not null) ?? parents.OfType<ObjectSchema>().FirstOrDefault()
                 : null;
 
@@ -374,7 +373,7 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputTypeSerialization GetSerialization(Schema schema, SchemaTypeUsage typeUsage)
         {
-            var formats = schema is ObjectSchema objectSchema ? objectSchema.SerializationFormats : new List<KnownMediaType> {KnownMediaType.Json, KnownMediaType.Xml};
+            var formats = schema is ObjectSchema objectSchema ? objectSchema.SerializationFormats : new List<KnownMediaType> { KnownMediaType.Json, KnownMediaType.Xml };
             if (Configuration.SkipSerializationFormatXml)
             {
                 formats.Remove(KnownMediaType.Xml);
@@ -479,12 +478,12 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (schema is ObjectSchema objectSchema && !Configuration.AzureArm && modelsCache != null)
             {
-                return modelsCache[objectSchema] with {IsNullable = isNullable};
+                return modelsCache[objectSchema] with { IsNullable = isNullable };
             }
 
             if (_enumsCache.TryGetValue(schema, out var enumType))
             {
-                return enumType with {IsNullable = isNullable};
+                return enumType with { IsNullable = isNullable };
             }
 
             var type = CreateType(schema, format, modelsCache);

@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -14,8 +15,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
-        public ResourceData(MgmtOutputLibrary library, InputModelType inputType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default, string? newName = default)
-            : base(library, inputType, typeFactory, sourceInputModel, name, nameSpace, newName)
+        public ResourceData(MgmtOutputLibrary library, InputModelType inputType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default, string? newName = default, SerializableObjectType? defaultDerivedType = null)
+            : base(library, inputType, typeFactory, sourceInputModel, name, nameSpace, newName, defaultDerivedType)
         {
             _clientPrefix = inputType.Name;
         }
