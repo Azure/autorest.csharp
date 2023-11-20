@@ -3,11 +3,21 @@
   "private": true,
   "description": "package.json intended for in-repo use only, package.json used for publishing is located in src/AutoRest.CSharp/package.json",
   "devDependencies": {
-    "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/cadl-ranch-mockapis": "file:test/CadlRanchMockApis",
+    "@azure-tools/typespec-autorest": "0.36.1",
+    "@azure-tools/typespec-azure-core": "0.36.0",
+    "@azure-tools/typespec-azure-resource-manager": "0.36.1",
+    "@azure-tools/typespec-client-generator-core": "0.36.0",
+    "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@microsoft.azure/autorest.testserver": "3.3.48",
-    "autorest": "3.6.3",
-    "@typespec/openapi": "^0.49.0",
-    "@typespec/openapi3": "^0.49.0"
+    "@typespec/compiler": "0.50.0",
+    "@typespec/eslint-config-typespec": "0.50.0",
+    "@typespec/eslint-plugin": "0.50.0",
+    "@typespec/http": "0.50.0",
+    "@typespec/openapi": "0.50.0",
+    "@typespec/openapi3": "0.50.0",
+    "@typespec/rest": "0.50.0",
+    "@typespec/versioning": "0.50.0",
+    "autorest": "3.6.3"
   }
 }

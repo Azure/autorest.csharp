@@ -82,7 +82,10 @@ export function createModelForService(
 ): CodeModel {
     const emitterOptions = resolveOptions(context);
     const program = context.program;
-    const sdkContext = createSdkContext(context);
+    const sdkContext = createSdkContext(
+        context,
+        "@azure-tools/typespec-csharp"
+    );
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();

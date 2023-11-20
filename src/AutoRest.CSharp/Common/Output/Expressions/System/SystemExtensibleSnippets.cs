@@ -7,6 +7,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.System
 {
     internal partial class SystemExtensibleSnippets : ExtensibleSnippets
     {
+        public override ArgumentSnippets Argument { get; } = new SystemArgumentSnippets();
         public override JsonElementSnippets JsonElement { get; } = new SystemJsonElementSnippets();
         public override XElementSnippets XElement => throw new NotImplementedException("XElement extensions aren't supported in unbranded yet.");
         public override XmlWriterSnippets XmlWriter => throw new NotImplementedException("XmlWriter extensions aren't supported in unbranded yet.");
