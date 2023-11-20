@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType GetGenericTypeDefinition()
             => _type is null
-                ? new(_implementation!, Namespace, Name, IsValueType, IsEnum, IsNullable, Array.Empty<CSharpType>())
+                ? throw new NotSupportedException($"{nameof(TypeProvider)} doesn't support generics.")
                 : new(_type, IsNullable);
 
         public bool IsGenericType => Arguments.Length > 0;
