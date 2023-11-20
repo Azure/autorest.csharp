@@ -39,6 +39,9 @@ namespace MgmtPagination
         private readonly PageSizeDecimalModelsRestOperations _pageSizeDecimalModelRestClient;
         private readonly PageSizeDecimalModelData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeDecimalModel";
+
         /// <summary> Initializes a new instance of the <see cref="PageSizeDecimalModelResource"/> class for mocking. </summary>
         protected PageSizeDecimalModelResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtPagination
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/pageSizeDecimalModel";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -39,6 +39,9 @@ namespace MgmtListMethods
         private readonly MgmtGroupParentsRestOperations _mgmtGroupParentRestClient;
         private readonly MgmtGroupParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGroupParents";
+
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentResource"/> class for mocking. </summary>
         protected MgmtGroupParentResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGroupParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

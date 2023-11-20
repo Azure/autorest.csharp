@@ -39,6 +39,9 @@ namespace MgmtListMethods
         private readonly FakeParentWithAncestorWithLocsRestOperations _fakeParentWithAncestorWithLocRestClient;
         private readonly FakeParentWithAncestorWithLocData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs";
+
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithLocResource"/> class for mocking. </summary>
         protected FakeParentWithAncestorWithLocResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

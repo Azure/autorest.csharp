@@ -38,6 +38,9 @@ namespace MgmtSingletonResource
         private readonly IgnitionsRestOperations _ignitionRestClient;
         private readonly IgnitionData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/cars/ignitions";
+
         /// <summary> Initializes a new instance of the <see cref="IgnitionResource"/> class for mocking. </summary>
         protected IgnitionResource()
         {
@@ -64,9 +67,6 @@ namespace MgmtSingletonResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/cars/ignitions";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

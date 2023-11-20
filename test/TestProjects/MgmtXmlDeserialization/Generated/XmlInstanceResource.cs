@@ -39,6 +39,9 @@ namespace MgmtXmlDeserialization
         private readonly XmlDeserializationRestOperations _xmlInstanceXmlDeserializationRestClient;
         private readonly XmlInstanceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.XmlDeserialization/xmls";
+
         /// <summary> Initializes a new instance of the <see cref="XmlInstanceResource"/> class for mocking. </summary>
         protected XmlInstanceResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtXmlDeserialization
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.XmlDeserialization/xmls";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

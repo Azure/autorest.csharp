@@ -41,6 +41,9 @@ namespace MgmtMultipleParentResource
         private readonly SubParentsRestOperations _subParentRestClient;
         private readonly SubParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/theParents/subParents";
+
         /// <summary> Initializes a new instance of the <see cref="SubParentResource"/> class for mocking. </summary>
         protected SubParentResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtMultipleParentResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/theParents/subParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

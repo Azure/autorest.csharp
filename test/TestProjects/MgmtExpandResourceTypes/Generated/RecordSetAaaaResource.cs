@@ -40,6 +40,9 @@ namespace MgmtExpandResourceTypes
         private readonly RecordSetsRestOperations _recordSetAaaaRecordSetsRestClient;
         private readonly RecordSetData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/AAAA";
+
         /// <summary> Initializes a new instance of the <see cref="RecordSetAaaaResource"/> class for mocking. </summary>
         protected RecordSetAaaaResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtExpandResourceTypes
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/AAAA";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

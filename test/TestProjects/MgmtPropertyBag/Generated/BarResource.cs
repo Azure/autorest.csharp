@@ -40,6 +40,9 @@ namespace MgmtPropertyBag
         private readonly BarsRestOperations _barRestClient;
         private readonly BarData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/bars";
+
         /// <summary> Initializes a new instance of the <see cref="BarResource"/> class for mocking. </summary>
         protected BarResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtPropertyBag
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/bars";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

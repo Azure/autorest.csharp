@@ -40,6 +40,9 @@ namespace MgmtCollectionParent
         private readonly ComputeManagementRestOperations _orderResourceRestClient;
         private readonly OrderResourceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.EdgeOrder/locations/orders";
+
         /// <summary> Initializes a new instance of the <see cref="OrderResource"/> class for mocking. </summary>
         protected OrderResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtCollectionParent
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.EdgeOrder/locations/orders";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

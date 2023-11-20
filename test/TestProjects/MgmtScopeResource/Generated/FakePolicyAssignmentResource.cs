@@ -37,6 +37,9 @@ namespace MgmtScopeResource
         private readonly FakePolicyAssignmentsRestOperations _fakePolicyAssignmentRestClient;
         private readonly FakePolicyAssignmentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyAssignments";
+
         /// <summary> Initializes a new instance of the <see cref="FakePolicyAssignmentResource"/> class for mocking. </summary>
         protected FakePolicyAssignmentResource()
         {
@@ -63,9 +66,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Authorization/policyAssignments";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

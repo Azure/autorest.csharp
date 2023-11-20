@@ -41,6 +41,9 @@ namespace MgmtListMethods
         private readonly MgmtGrpParentWithNonResChWithLocsRestOperations _mgmtGrpParentWithNonResChWithLocRestClient;
         private readonly MgmtGrpParentWithNonResChWithLocData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChWithLocs";
+
         /// <summary> Initializes a new instance of the <see cref="MgmtGrpParentWithNonResChWithLocResource"/> class for mocking. </summary>
         protected MgmtGrpParentWithNonResChWithLocResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGrpParentWithNonResChWithLocs";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

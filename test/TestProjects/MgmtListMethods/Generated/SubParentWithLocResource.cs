@@ -39,6 +39,9 @@ namespace MgmtListMethods
         private readonly SubParentWithLocsRestOperations _subParentWithLocRestClient;
         private readonly SubParentWithLocData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/subParentWithLocs";
+
         /// <summary> Initializes a new instance of the <see cref="SubParentWithLocResource"/> class for mocking. </summary>
         protected SubParentWithLocResource()
         {
@@ -65,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/subParentWithLocs";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

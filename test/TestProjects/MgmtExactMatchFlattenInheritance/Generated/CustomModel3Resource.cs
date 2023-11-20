@@ -39,6 +39,9 @@ namespace MgmtExactMatchFlattenInheritance
         private readonly CustomModel3SRestOperations _customModel3RestClient;
         private readonly CustomModel3Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel3s";
+
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Resource"/> class for mocking. </summary>
         protected CustomModel3Resource()
         {
@@ -65,9 +68,6 @@ namespace MgmtExactMatchFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel3s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

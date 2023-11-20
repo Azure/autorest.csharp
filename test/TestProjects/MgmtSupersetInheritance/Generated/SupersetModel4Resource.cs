@@ -40,6 +40,9 @@ namespace MgmtSupersetInheritance
         private readonly SupersetModel4SRestOperations _supersetModel4RestClient;
         private readonly SupersetModel4Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel4s";
+
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Resource"/> class for mocking. </summary>
         protected SupersetModel4Resource()
         {
@@ -66,9 +69,6 @@ namespace MgmtSupersetInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel4s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

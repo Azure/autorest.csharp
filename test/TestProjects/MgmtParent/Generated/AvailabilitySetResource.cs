@@ -41,6 +41,9 @@ namespace MgmtParent
         private readonly AvailabilitySetsRestOperations _availabilitySetRestClient;
         private readonly AvailabilitySetData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
+
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetResource"/> class for mocking. </summary>
         protected AvailabilitySetResource()
         {
@@ -67,9 +70,6 @@ namespace MgmtParent
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
