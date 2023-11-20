@@ -15,7 +15,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic, bool IsPageable, bool IsLongRunning, string? Deprecated)
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, IReadOnlyList<string>? RequestMediaTypes, Diagnostic? Diagnostic, bool IsPageable, bool IsLongRunning, string? Deprecated)
     {
         public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
         {
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (converter.ConvenienceSpread == null)
                     {
-                        var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type);
+                        var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type, RequestMediaTypes?.FirstOrDefault());
                         if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
                         {
                             contentInfo = new RequestContentParameterInfo(new CodeWriterDeclaration(KnownParameters.RequestContent.Name), $"{parameter:I}");
