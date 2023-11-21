@@ -353,16 +353,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value)
             };
 
-            // TODO -- refactor this to the CheckNotWireFormat method
-            if (additionalProperties.ShouldExcludeInWireSerialization)
-            {
-                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), Serializations.IsNotWireFormat(options.Format)))
+            return Serializations.WrapInCheckNotWire(
+                additionalProperties,
+                options.Format,
+                new IfStatement(NotEqual(additionalPropertiesExpression, Null))
                 {
                     statement
-                };
-            }
-
-            return statement;
+                });
         }
 
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)
@@ -792,7 +789,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return EmptyStatement;
         }
 
-        private static ValueExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
+        private static BoolExpression GetCheckEmptyPropertyValueExpression(JsonPropertyExpression jsonProperty, JsonPropertySerialization jsonPropertySerialization, bool shouldTreatEmptyStringAsNull)
         {
             var jsonElement = jsonProperty.Value;
             if (!shouldTreatEmptyStringAsNull)

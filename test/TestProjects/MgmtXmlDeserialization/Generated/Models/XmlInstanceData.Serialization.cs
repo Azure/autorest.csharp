@@ -41,14 +41,11 @@ namespace MgmtXmlDeserialization
                 writer.WriteValue(ResourceType);
                 writer.WriteEndElement();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WriteStartElement("systemData");
-                    writer.WriteValue(SystemData);
-                    writer.WriteEndElement();
-                }
+                writer.WriteStartElement("systemData");
+                writer.WriteValue(SystemData);
+                writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }
@@ -106,15 +103,12 @@ namespace MgmtXmlDeserialization
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

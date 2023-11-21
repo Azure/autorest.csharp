@@ -32,7 +32,7 @@ namespace Azure.Storage.Tables.Models
                 writer.WritePropertyName("TableName"u8);
                 writer.WriteStringValue(TableName);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

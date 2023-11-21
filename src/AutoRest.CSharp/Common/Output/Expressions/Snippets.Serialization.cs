@@ -23,15 +23,42 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static StringExpression JsonFormat = Literal("J");
             public static StringExpression XmlFormat = Literal("X");
 
-            public static BoolExpression IsNotWireFormat(ValueExpression format)
-                => NotEqual(format, WireFormat);
-
             public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression format, MethodBodyStatement statement)
             {
                 if (!serialization.ShouldExcludeInWireSerialization)
                     return statement;
 
-                return new IfStatement(IsNotWireFormat(format))
+                // we need to wrap a check `format != "W"` around the statement
+                // if the statement is not an IfStatement, we just create an IfStatement and return
+                // if the statement is an IfStatement, we could add the condition to its condition which should simplify the generated code.
+                /* it looks like, if we have
+                 *  if (outer)
+                 *  {
+                 *      if (inner) { DoSomething(); }
+                 *  }
+                 * we could always simplify this to:
+                 *  if (outer && inner)
+                 *  {
+                 *      DoSomething();
+                 *  }
+                 * these are exactly the same.
+                 * 1. When outer is false, inner is never calculated, and DoSomething will not be execute
+                 * 2. When outer is true, inner is calculated, and DoSomething will be execute when inner is true
+                 * These hold true for both snippets
+                 *
+                 * These statements are only true when it is a IfStatement. If the statement is IfElseStatement with an else branch, they are no longer equivalent.
+                 */
+
+                var isNotWireCondition = NotEqual(format, WireFormat);
+                if (statement is IfStatement ifStatement)
+                {
+                    return ifStatement with
+                    {
+                        Condition = And(isNotWireCondition, ifStatement.Condition)
+                    };
+                }
+
+                return new IfStatement(isNotWireCondition)
                 {
                     statement
                 };
