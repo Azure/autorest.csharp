@@ -34,13 +34,10 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
-                if (Optional.IsDefined(Status))
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteBooleanValue(Status.Value);
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
             }
             if (Optional.IsCollectionDefined(AdditionalProperties))
             {
@@ -53,7 +50,7 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

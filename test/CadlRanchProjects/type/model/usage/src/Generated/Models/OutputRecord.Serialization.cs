@@ -30,7 +30,7 @@ namespace _Type.Model.Usage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("requiredProp"u8);
             writer.WriteStringValue(RequiredProp);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

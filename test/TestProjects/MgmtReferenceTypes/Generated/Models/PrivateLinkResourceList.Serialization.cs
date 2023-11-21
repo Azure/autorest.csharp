@@ -29,18 +29,15 @@ namespace Azure.ResourceManager.Fake.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Value))
             {
-                if (Optional.IsCollectionDefined(Value))
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
                 {
-                    writer.WritePropertyName("value"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Value)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
         }

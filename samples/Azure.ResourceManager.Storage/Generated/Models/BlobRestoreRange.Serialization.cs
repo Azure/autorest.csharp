@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(StartRange);
             writer.WritePropertyName("endRange"u8);
             writer.WriteStringValue(EndRange);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

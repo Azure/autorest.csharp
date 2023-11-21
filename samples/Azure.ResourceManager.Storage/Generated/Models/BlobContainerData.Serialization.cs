@@ -30,13 +30,10 @@ namespace Azure.ResourceManager.Storage
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag.Value.ToString());
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
             }
             if (options.Format != "W")
             {
@@ -53,47 +50,32 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Version))
             {
-                if (Optional.IsDefined(Version))
-                {
-                    writer.WritePropertyName("version"u8);
-                    writer.WriteStringValue(Version);
-                }
+                writer.WritePropertyName("version"u8);
+                writer.WriteStringValue(Version);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Deleted))
             {
-                if (Optional.IsDefined(Deleted))
-                {
-                    writer.WritePropertyName("deleted"u8);
-                    writer.WriteBooleanValue(Deleted.Value);
-                }
+                writer.WritePropertyName("deleted"u8);
+                writer.WriteBooleanValue(Deleted.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DeletedOn))
             {
-                if (Optional.IsDefined(DeletedOn))
-                {
-                    writer.WritePropertyName("deletedTime"u8);
-                    writer.WriteStringValue(DeletedOn.Value, "O");
-                }
+                writer.WritePropertyName("deletedTime"u8);
+                writer.WriteStringValue(DeletedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RemainingRetentionDays))
             {
-                if (Optional.IsDefined(RemainingRetentionDays))
-                {
-                    writer.WritePropertyName("remainingRetentionDays"u8);
-                    writer.WriteNumberValue(RemainingRetentionDays.Value);
-                }
+                writer.WritePropertyName("remainingRetentionDays"u8);
+                writer.WriteNumberValue(RemainingRetentionDays.Value);
             }
             if (Optional.IsDefined(DefaultEncryptionScope))
             {
@@ -110,37 +92,25 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("publicAccess"u8);
                 writer.WriteStringValue(PublicAccess.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
-                if (Optional.IsDefined(LastModifiedOn))
-                {
-                    writer.WritePropertyName("lastModifiedTime"u8);
-                    writer.WriteStringValue(LastModifiedOn.Value, "O");
-                }
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LeaseStatus))
             {
-                if (Optional.IsDefined(LeaseStatus))
-                {
-                    writer.WritePropertyName("leaseStatus"u8);
-                    writer.WriteStringValue(LeaseStatus.Value.ToString());
-                }
+                writer.WritePropertyName("leaseStatus"u8);
+                writer.WriteStringValue(LeaseStatus.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LeaseState))
             {
-                if (Optional.IsDefined(LeaseState))
-                {
-                    writer.WritePropertyName("leaseState"u8);
-                    writer.WriteStringValue(LeaseState.Value.ToString());
-                }
+                writer.WritePropertyName("leaseState"u8);
+                writer.WriteStringValue(LeaseState.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LeaseDuration))
             {
-                if (Optional.IsDefined(LeaseDuration))
-                {
-                    writer.WritePropertyName("leaseDuration"u8);
-                    writer.WriteStringValue(LeaseDuration.Value.ToString());
-                }
+                writer.WritePropertyName("leaseDuration"u8);
+                writer.WriteStringValue(LeaseDuration.Value.ToString());
             }
             if (Optional.IsCollectionDefined(Metadata))
             {
@@ -153,37 +123,25 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ImmutabilityPolicy))
             {
-                if (Optional.IsDefined(ImmutabilityPolicy))
-                {
-                    writer.WritePropertyName("immutabilityPolicy"u8);
-                    writer.WriteObjectValue(ImmutabilityPolicy);
-                }
+                writer.WritePropertyName("immutabilityPolicy"u8);
+                writer.WriteObjectValue(ImmutabilityPolicy);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LegalHold))
             {
-                if (Optional.IsDefined(LegalHold))
-                {
-                    writer.WritePropertyName("legalHold"u8);
-                    writer.WriteObjectValue(LegalHold);
-                }
+                writer.WritePropertyName("legalHold"u8);
+                writer.WriteObjectValue(LegalHold);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HasLegalHold))
             {
-                if (Optional.IsDefined(HasLegalHold))
-                {
-                    writer.WritePropertyName("hasLegalHold"u8);
-                    writer.WriteBooleanValue(HasLegalHold.Value);
-                }
+                writer.WritePropertyName("hasLegalHold"u8);
+                writer.WriteBooleanValue(HasLegalHold.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HasImmutabilityPolicy))
             {
-                if (Optional.IsDefined(HasImmutabilityPolicy))
-                {
-                    writer.WritePropertyName("hasImmutabilityPolicy"u8);
-                    writer.WriteBooleanValue(HasImmutabilityPolicy.Value);
-                }
+                writer.WritePropertyName("hasImmutabilityPolicy"u8);
+                writer.WriteBooleanValue(HasImmutabilityPolicy.Value);
             }
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {
@@ -201,7 +159,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteBooleanValue(EnableNfsV3AllSquash.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

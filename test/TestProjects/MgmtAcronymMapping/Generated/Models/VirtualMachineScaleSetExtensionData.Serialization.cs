@@ -32,21 +32,15 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceType))
             {
-                if (Optional.IsDefined(ResourceType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(ResourceType);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
-                if (Optional.IsDefined(Id))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(Id);
-                }
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -104,13 +98,10 @@ namespace MgmtAcronymMapping
                 }
 #endif
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState);
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
             if (Optional.IsCollectionDefined(ProvisionAfterExtensions))
             {
@@ -123,7 +114,7 @@ namespace MgmtAcronymMapping
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

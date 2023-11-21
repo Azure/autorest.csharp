@@ -43,33 +43,27 @@ namespace _Azure.Lro.RpcLegacy.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Errors))
             {
-                if (Optional.IsCollectionDefined(Errors))
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
                 {
-                    writer.WritePropertyName("errors"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Errors)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Results))
             {
-                if (Optional.IsCollectionDefined(Results))
+                writer.WritePropertyName("results"u8);
+                writer.WriteStartArray();
+                foreach (var item in Results)
                 {
-                    writer.WritePropertyName("results"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Results)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

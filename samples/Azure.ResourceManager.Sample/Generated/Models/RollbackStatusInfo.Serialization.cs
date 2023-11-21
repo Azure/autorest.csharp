@@ -27,31 +27,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
             {
-                if (Optional.IsDefined(SuccessfullyRolledbackInstanceCount))
-                {
-                    writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
-                    writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
-                }
+                writer.WritePropertyName("successfullyRolledbackInstanceCount"u8);
+                writer.WriteNumberValue(SuccessfullyRolledbackInstanceCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(FailedRolledbackInstanceCount))
             {
-                if (Optional.IsDefined(FailedRolledbackInstanceCount))
-                {
-                    writer.WritePropertyName("failedRolledbackInstanceCount"u8);
-                    writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
-                }
+                writer.WritePropertyName("failedRolledbackInstanceCount"u8);
+                writer.WriteNumberValue(FailedRolledbackInstanceCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RollbackError))
             {
-                if (Optional.IsDefined(RollbackError))
-                {
-                    writer.WritePropertyName("rollbackError"u8);
-                    writer.WriteObjectValue(RollbackError);
-                }
+                writer.WritePropertyName("rollbackError"u8);
+                writer.WriteObjectValue(RollbackError);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

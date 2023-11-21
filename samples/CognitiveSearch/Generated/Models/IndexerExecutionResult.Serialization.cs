@@ -32,29 +32,20 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ErrorMessage))
             {
-                if (Optional.IsDefined(ErrorMessage))
-                {
-                    writer.WritePropertyName("errorMessage"u8);
-                    writer.WriteStringValue(ErrorMessage);
-                }
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartTime))
             {
-                if (Optional.IsDefined(StartTime))
-                {
-                    writer.WritePropertyName("startTime"u8);
-                    writer.WriteStringValue(StartTime.Value, "O");
-                }
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartTime.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(EndTime))
             {
-                if (Optional.IsDefined(EndTime))
-                {
-                    writer.WritePropertyName("endTime"u8);
-                    writer.WriteStringValue(EndTime.Value, "O");
-                }
+                writer.WritePropertyName("endTime"u8);
+                writer.WriteStringValue(EndTime.Value, "O");
             }
             if (options.Format != "W")
             {
@@ -86,23 +77,17 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("itemsFailed"u8);
                 writer.WriteNumberValue(FailedItemCount);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InitialTrackingState))
             {
-                if (Optional.IsDefined(InitialTrackingState))
-                {
-                    writer.WritePropertyName("initialTrackingState"u8);
-                    writer.WriteStringValue(InitialTrackingState);
-                }
+                writer.WritePropertyName("initialTrackingState"u8);
+                writer.WriteStringValue(InitialTrackingState);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(FinalTrackingState))
             {
-                if (Optional.IsDefined(FinalTrackingState))
-                {
-                    writer.WritePropertyName("finalTrackingState"u8);
-                    writer.WriteStringValue(FinalTrackingState);
-                }
+                writer.WritePropertyName("finalTrackingState"u8);
+                writer.WriteStringValue(FinalTrackingState);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

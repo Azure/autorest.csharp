@@ -31,7 +31,7 @@ namespace MgmtAcronymMapping.Models
             writer.WriteStringValue(ServiceName.ToString());
             writer.WritePropertyName("action"u8);
             writer.WriteStringValue(Action.ToString());
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

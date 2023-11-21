@@ -32,13 +32,10 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastResult))
             {
-                if (Optional.IsDefined(LastResult))
-                {
-                    writer.WritePropertyName("lastResult"u8);
-                    writer.WriteObjectValue(LastResult);
-                }
+                writer.WritePropertyName("lastResult"u8);
+                writer.WriteObjectValue(LastResult);
             }
             if (options.Format != "W")
             {
@@ -55,7 +52,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("limits"u8);
                 writer.WriteObjectValue(Limits);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

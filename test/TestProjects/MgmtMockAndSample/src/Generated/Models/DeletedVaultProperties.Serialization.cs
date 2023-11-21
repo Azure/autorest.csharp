@@ -27,61 +27,43 @@ namespace MgmtMockAndSample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VaultId))
             {
-                if (Optional.IsDefined(VaultId))
-                {
-                    writer.WritePropertyName("vaultId"u8);
-                    writer.WriteStringValue(VaultId);
-                }
+                writer.WritePropertyName("vaultId"u8);
+                writer.WriteStringValue(VaultId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Location))
             {
-                if (Optional.IsDefined(Location))
-                {
-                    writer.WritePropertyName("location"u8);
-                    writer.WriteStringValue(Location.Value);
-                }
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DeletedOn))
             {
-                if (Optional.IsDefined(DeletedOn))
-                {
-                    writer.WritePropertyName("deletionDate"u8);
-                    writer.WriteStringValue(DeletedOn.Value, "O");
-                }
+                writer.WritePropertyName("deletionDate"u8);
+                writer.WriteStringValue(DeletedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ScheduledPurgeOn))
             {
-                if (Optional.IsDefined(ScheduledPurgeOn))
-                {
-                    writer.WritePropertyName("scheduledPurgeDate"u8);
-                    writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
-                }
+                writer.WritePropertyName("scheduledPurgeDate"u8);
+                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Tags))
             {
-                if (Optional.IsCollectionDefined(Tags))
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
                 {
-                    writer.WritePropertyName("tags"u8);
-                    writer.WriteStartObject();
-                    foreach (var item in Tags)
-                    {
-                        writer.WritePropertyName(item.Key);
-                        writer.WriteStringValue(item.Value);
-                    }
-                    writer.WriteEndObject();
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
                 }
+                writer.WriteEndObject();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PurgeProtectionEnabled))
             {
-                if (Optional.IsDefined(PurgeProtectionEnabled))
-                {
-                    writer.WritePropertyName("purgeProtectionEnabled"u8);
-                    writer.WriteBooleanValue(PurgeProtectionEnabled.Value);
-                }
+                writer.WritePropertyName("purgeProtectionEnabled"u8);
+                writer.WriteBooleanValue(PurgeProtectionEnabled.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

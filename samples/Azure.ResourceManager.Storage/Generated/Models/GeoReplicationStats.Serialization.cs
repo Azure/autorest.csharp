@@ -27,31 +27,22 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
-                if (Optional.IsDefined(Status))
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteStringValue(Status.Value.ToString());
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastSyncOn))
             {
-                if (Optional.IsDefined(LastSyncOn))
-                {
-                    writer.WritePropertyName("lastSyncTime"u8);
-                    writer.WriteStringValue(LastSyncOn.Value, "O");
-                }
+                writer.WritePropertyName("lastSyncTime"u8);
+                writer.WriteStringValue(LastSyncOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CanFailover))
             {
-                if (Optional.IsDefined(CanFailover))
-                {
-                    writer.WritePropertyName("canFailover"u8);
-                    writer.WriteBooleanValue(CanFailover.Value);
-                }
+                writer.WritePropertyName("canFailover"u8);
+                writer.WriteBooleanValue(CanFailover.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

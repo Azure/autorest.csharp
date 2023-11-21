@@ -34,7 +34,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("b64_json"u8);
                 writer.WriteBase64StringValue(B64Json.ToArray(), "D");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -56,13 +56,10 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HsmPoolResourceId))
             {
-                if (Optional.IsDefined(HsmPoolResourceId))
-                {
-                    writer.WritePropertyName("hsmPoolResourceId"u8);
-                    writer.WriteStringValue(HsmPoolResourceId);
-                }
+                writer.WritePropertyName("hsmPoolResourceId"u8);
+                writer.WriteStringValue(HsmPoolResourceId);
             }
             if (Optional.IsCollectionDefined(Deployments))
             {
@@ -119,18 +116,15 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
             {
-                if (Optional.IsCollectionDefined(PrivateEndpointConnections))
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
                 {
-                    writer.WritePropertyName("privateEndpointConnections"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in PrivateEndpointConnections)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
@@ -152,7 +146,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("extremelyDeepStringProperty"u8);
                 writer.WriteObjectValue(ExtremelyDeepStringProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

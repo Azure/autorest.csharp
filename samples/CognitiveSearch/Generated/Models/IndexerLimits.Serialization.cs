@@ -27,31 +27,22 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MaxRunTime))
             {
-                if (Optional.IsDefined(MaxRunTime))
-                {
-                    writer.WritePropertyName("maxRunTime"u8);
-                    writer.WriteStringValue(MaxRunTime.Value, "P");
-                }
+                writer.WritePropertyName("maxRunTime"u8);
+                writer.WriteStringValue(MaxRunTime.Value, "P");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MaxDocumentExtractionSize))
             {
-                if (Optional.IsDefined(MaxDocumentExtractionSize))
-                {
-                    writer.WritePropertyName("maxDocumentExtractionSize"u8);
-                    writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
-                }
+                writer.WritePropertyName("maxDocumentExtractionSize"u8);
+                writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MaxDocumentContentCharactersToExtract))
             {
-                if (Optional.IsDefined(MaxDocumentContentCharactersToExtract))
-                {
-                    writer.WritePropertyName("maxDocumentContentCharactersToExtract"u8);
-                    writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
-                }
+                writer.WritePropertyName("maxDocumentContentCharactersToExtract"u8);
+                writer.WriteNumberValue(MaxDocumentContentCharactersToExtract.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

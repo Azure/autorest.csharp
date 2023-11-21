@@ -30,21 +30,15 @@ namespace Azure.ResourceManager.Storage
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Sku))
             {
-                if (Optional.IsDefined(Sku))
-                {
-                    writer.WritePropertyName("sku"u8);
-                    writer.WriteObjectValue(Sku);
-                }
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Kind))
             {
-                if (Optional.IsDefined(Kind))
-                {
-                    writer.WritePropertyName("kind"u8);
-                    writer.WriteStringValue(Kind.Value.ToString());
-                }
+                writer.WritePropertyName("kind"u8);
+                writer.WriteStringValue(Kind.Value.ToString());
             }
             if (Optional.IsDefined(Identity))
             {
@@ -85,135 +79,87 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToSerialString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PrimaryEndpoints))
             {
-                if (Optional.IsDefined(PrimaryEndpoints))
-                {
-                    writer.WritePropertyName("primaryEndpoints"u8);
-                    writer.WriteObjectValue(PrimaryEndpoints);
-                }
+                writer.WritePropertyName("primaryEndpoints"u8);
+                writer.WriteObjectValue(PrimaryEndpoints);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PrimaryLocation))
             {
-                if (Optional.IsDefined(PrimaryLocation))
-                {
-                    writer.WritePropertyName("primaryLocation"u8);
-                    writer.WriteStringValue(PrimaryLocation);
-                }
+                writer.WritePropertyName("primaryLocation"u8);
+                writer.WriteStringValue(PrimaryLocation);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StatusOfPrimary))
             {
-                if (Optional.IsDefined(StatusOfPrimary))
-                {
-                    writer.WritePropertyName("statusOfPrimary"u8);
-                    writer.WriteStringValue(StatusOfPrimary.Value.ToSerialString());
-                }
+                writer.WritePropertyName("statusOfPrimary"u8);
+                writer.WriteStringValue(StatusOfPrimary.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastGeoFailoverOn))
             {
-                if (Optional.IsDefined(LastGeoFailoverOn))
-                {
-                    writer.WritePropertyName("lastGeoFailoverTime"u8);
-                    writer.WriteStringValue(LastGeoFailoverOn.Value, "O");
-                }
+                writer.WritePropertyName("lastGeoFailoverTime"u8);
+                writer.WriteStringValue(LastGeoFailoverOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SecondaryLocation))
             {
-                if (Optional.IsDefined(SecondaryLocation))
-                {
-                    writer.WritePropertyName("secondaryLocation"u8);
-                    writer.WriteStringValue(SecondaryLocation);
-                }
+                writer.WritePropertyName("secondaryLocation"u8);
+                writer.WriteStringValue(SecondaryLocation);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StatusOfSecondary))
             {
-                if (Optional.IsDefined(StatusOfSecondary))
-                {
-                    writer.WritePropertyName("statusOfSecondary"u8);
-                    writer.WriteStringValue(StatusOfSecondary.Value.ToSerialString());
-                }
+                writer.WritePropertyName("statusOfSecondary"u8);
+                writer.WriteStringValue(StatusOfSecondary.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CreatedOn))
             {
-                if (Optional.IsDefined(CreatedOn))
-                {
-                    writer.WritePropertyName("creationTime"u8);
-                    writer.WriteStringValue(CreatedOn.Value, "O");
-                }
+                writer.WritePropertyName("creationTime"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CustomDomain))
             {
-                if (Optional.IsDefined(CustomDomain))
-                {
-                    writer.WritePropertyName("customDomain"u8);
-                    writer.WriteObjectValue(CustomDomain);
-                }
+                writer.WritePropertyName("customDomain"u8);
+                writer.WriteObjectValue(CustomDomain);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SasPolicy))
             {
-                if (Optional.IsDefined(SasPolicy))
-                {
-                    writer.WritePropertyName("sasPolicy"u8);
-                    writer.WriteObjectValue(SasPolicy);
-                }
+                writer.WritePropertyName("sasPolicy"u8);
+                writer.WriteObjectValue(SasPolicy);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(KeyPolicy))
             {
-                if (Optional.IsDefined(KeyPolicy))
-                {
-                    writer.WritePropertyName("keyPolicy"u8);
-                    writer.WriteObjectValue(KeyPolicy);
-                }
+                writer.WritePropertyName("keyPolicy"u8);
+                writer.WriteObjectValue(KeyPolicy);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(KeyCreationTime))
             {
-                if (Optional.IsDefined(KeyCreationTime))
-                {
-                    writer.WritePropertyName("keyCreationTime"u8);
-                    writer.WriteObjectValue(KeyCreationTime);
-                }
+                writer.WritePropertyName("keyCreationTime"u8);
+                writer.WriteObjectValue(KeyCreationTime);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SecondaryEndpoints))
             {
-                if (Optional.IsDefined(SecondaryEndpoints))
-                {
-                    writer.WritePropertyName("secondaryEndpoints"u8);
-                    writer.WriteObjectValue(SecondaryEndpoints);
-                }
+                writer.WritePropertyName("secondaryEndpoints"u8);
+                writer.WriteObjectValue(SecondaryEndpoints);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Encryption))
             {
-                if (Optional.IsDefined(Encryption))
-                {
-                    writer.WritePropertyName("encryption"u8);
-                    writer.WriteObjectValue(Encryption);
-                }
+                writer.WritePropertyName("encryption"u8);
+                writer.WriteObjectValue(Encryption);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AccessTier))
             {
-                if (Optional.IsDefined(AccessTier))
-                {
-                    writer.WritePropertyName("accessTier"u8);
-                    writer.WriteStringValue(AccessTier.Value.ToSerialString());
-                }
+                writer.WritePropertyName("accessTier"u8);
+                writer.WriteStringValue(AccessTier.Value.ToSerialString());
             }
             if (Optional.IsDefined(AzureFilesIdentityBasedAuthentication))
             {
@@ -225,65 +171,50 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("supportsHttpsTrafficOnly"u8);
                 writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NetworkRuleSet))
             {
-                if (Optional.IsDefined(NetworkRuleSet))
-                {
-                    writer.WritePropertyName("networkAcls"u8);
-                    writer.WriteObjectValue(NetworkRuleSet);
-                }
+                writer.WritePropertyName("networkAcls"u8);
+                writer.WriteObjectValue(NetworkRuleSet);
             }
             if (Optional.IsDefined(IsHnsEnabled))
             {
                 writer.WritePropertyName("isHnsEnabled"u8);
                 writer.WriteBooleanValue(IsHnsEnabled.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(GeoReplicationStats))
             {
-                if (Optional.IsDefined(GeoReplicationStats))
-                {
-                    writer.WritePropertyName("geoReplicationStats"u8);
-                    writer.WriteObjectValue(GeoReplicationStats);
-                }
+                writer.WritePropertyName("geoReplicationStats"u8);
+                writer.WriteObjectValue(GeoReplicationStats);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(FailoverInProgress))
             {
-                if (Optional.IsDefined(FailoverInProgress))
-                {
-                    writer.WritePropertyName("failoverInProgress"u8);
-                    writer.WriteBooleanValue(FailoverInProgress.Value);
-                }
+                writer.WritePropertyName("failoverInProgress"u8);
+                writer.WriteBooleanValue(FailoverInProgress.Value);
             }
             if (Optional.IsDefined(LargeFileSharesState))
             {
                 writer.WritePropertyName("largeFileSharesState"u8);
                 writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
             {
-                if (Optional.IsCollectionDefined(PrivateEndpointConnections))
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
                 {
-                    writer.WritePropertyName("privateEndpointConnections"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in PrivateEndpointConnections)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(RoutingPreference))
             {
                 writer.WritePropertyName("routingPreference"u8);
                 writer.WriteObjectValue(RoutingPreference);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(BlobRestoreStatus))
             {
-                if (Optional.IsDefined(BlobRestoreStatus))
-                {
-                    writer.WritePropertyName("blobRestoreStatus"u8);
-                    writer.WriteObjectValue(BlobRestoreStatus);
-                }
+                writer.WritePropertyName("blobRestoreStatus"u8);
+                writer.WriteObjectValue(BlobRestoreStatus);
             }
             if (Optional.IsDefined(AllowBlobPublicAccess))
             {
@@ -326,7 +257,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

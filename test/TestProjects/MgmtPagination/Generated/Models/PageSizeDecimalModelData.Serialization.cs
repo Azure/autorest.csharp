@@ -27,31 +27,22 @@ namespace MgmtPagination
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
-                if (Optional.IsDefined(Id))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(Id);
-                }
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
-                if (Optional.IsDefined(Name))
-                {
-                    writer.WritePropertyName("name"u8);
-                    writer.WriteStringValue(Name);
-                }
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceType))
             {
-                if (Optional.IsDefined(ResourceType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(ResourceType);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

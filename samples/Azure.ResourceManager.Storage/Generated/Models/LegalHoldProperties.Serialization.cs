@@ -27,13 +27,10 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HasLegalHold))
             {
-                if (Optional.IsDefined(HasLegalHold))
-                {
-                    writer.WritePropertyName("hasLegalHold"u8);
-                    writer.WriteBooleanValue(HasLegalHold.Value);
-                }
+                writer.WritePropertyName("hasLegalHold"u8);
+                writer.WriteBooleanValue(HasLegalHold.Value);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -50,7 +47,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("protectedAppendWritesHistory"u8);
                 writer.WriteObjectValue(ProtectedAppendWritesHistory);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

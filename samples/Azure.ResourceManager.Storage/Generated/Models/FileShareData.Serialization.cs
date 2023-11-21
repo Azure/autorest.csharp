@@ -30,13 +30,10 @@ namespace Azure.ResourceManager.Storage
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag.Value.ToString());
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
             }
             if (options.Format != "W")
             {
@@ -53,23 +50,17 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
-                if (Optional.IsDefined(LastModifiedOn))
-                {
-                    writer.WritePropertyName("lastModifiedTime"u8);
-                    writer.WriteStringValue(LastModifiedOn.Value, "O");
-                }
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
             if (Optional.IsCollectionDefined(Metadata))
             {
@@ -97,90 +88,60 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Version))
             {
-                if (Optional.IsDefined(Version))
-                {
-                    writer.WritePropertyName("version"u8);
-                    writer.WriteStringValue(Version);
-                }
+                writer.WritePropertyName("version"u8);
+                writer.WriteStringValue(Version);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Deleted))
             {
-                if (Optional.IsDefined(Deleted))
-                {
-                    writer.WritePropertyName("deleted"u8);
-                    writer.WriteBooleanValue(Deleted.Value);
-                }
+                writer.WritePropertyName("deleted"u8);
+                writer.WriteBooleanValue(Deleted.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DeletedOn))
             {
-                if (Optional.IsDefined(DeletedOn))
-                {
-                    writer.WritePropertyName("deletedTime"u8);
-                    writer.WriteStringValue(DeletedOn.Value, "O");
-                }
+                writer.WritePropertyName("deletedTime"u8);
+                writer.WriteStringValue(DeletedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RemainingRetentionDays))
             {
-                if (Optional.IsDefined(RemainingRetentionDays))
-                {
-                    writer.WritePropertyName("remainingRetentionDays"u8);
-                    writer.WriteNumberValue(RemainingRetentionDays.Value);
-                }
+                writer.WritePropertyName("remainingRetentionDays"u8);
+                writer.WriteNumberValue(RemainingRetentionDays.Value);
             }
             if (Optional.IsDefined(AccessTier))
             {
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AccessTierChangeOn))
             {
-                if (Optional.IsDefined(AccessTierChangeOn))
-                {
-                    writer.WritePropertyName("accessTierChangeTime"u8);
-                    writer.WriteStringValue(AccessTierChangeOn.Value, "O");
-                }
+                writer.WritePropertyName("accessTierChangeTime"u8);
+                writer.WriteStringValue(AccessTierChangeOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AccessTierStatus))
             {
-                if (Optional.IsDefined(AccessTierStatus))
-                {
-                    writer.WritePropertyName("accessTierStatus"u8);
-                    writer.WriteStringValue(AccessTierStatus);
-                }
+                writer.WritePropertyName("accessTierStatus"u8);
+                writer.WriteStringValue(AccessTierStatus);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ShareUsageBytes))
             {
-                if (Optional.IsDefined(ShareUsageBytes))
-                {
-                    writer.WritePropertyName("shareUsageBytes"u8);
-                    writer.WriteNumberValue(ShareUsageBytes.Value);
-                }
+                writer.WritePropertyName("shareUsageBytes"u8);
+                writer.WriteNumberValue(ShareUsageBytes.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LeaseStatus))
             {
-                if (Optional.IsDefined(LeaseStatus))
-                {
-                    writer.WritePropertyName("leaseStatus"u8);
-                    writer.WriteStringValue(LeaseStatus.Value.ToString());
-                }
+                writer.WritePropertyName("leaseStatus"u8);
+                writer.WriteStringValue(LeaseStatus.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LeaseState))
             {
-                if (Optional.IsDefined(LeaseState))
-                {
-                    writer.WritePropertyName("leaseState"u8);
-                    writer.WriteStringValue(LeaseState.Value.ToString());
-                }
+                writer.WritePropertyName("leaseState"u8);
+                writer.WriteStringValue(LeaseState.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LeaseDuration))
             {
-                if (Optional.IsDefined(LeaseDuration))
-                {
-                    writer.WritePropertyName("leaseDuration"u8);
-                    writer.WriteStringValue(LeaseDuration.Value.ToString());
-                }
+                writer.WritePropertyName("leaseDuration"u8);
+                writer.WriteStringValue(LeaseDuration.Value.ToString());
             }
             if (Optional.IsCollectionDefined(SignedIdentifiers))
             {
@@ -192,16 +153,13 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SnapshotOn))
             {
-                if (Optional.IsDefined(SnapshotOn))
-                {
-                    writer.WritePropertyName("snapshotTime"u8);
-                    writer.WriteStringValue(SnapshotOn.Value, "O");
-                }
+                writer.WritePropertyName("snapshotTime"u8);
+                writer.WriteStringValue(SnapshotOn.Value, "O");
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

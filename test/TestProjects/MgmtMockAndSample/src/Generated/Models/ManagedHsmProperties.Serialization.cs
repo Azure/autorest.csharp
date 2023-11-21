@@ -71,13 +71,10 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HsmUri))
             {
-                if (Optional.IsDefined(HsmUri))
-                {
-                    writer.WritePropertyName("hsmUri"u8);
-                    writer.WriteStringValue(HsmUri.AbsoluteUri);
-                }
+                writer.WritePropertyName("hsmUri"u8);
+                writer.WriteStringValue(HsmUri.AbsoluteUri);
             }
             if (Optional.IsDefined(EnableSoftDelete))
             {
@@ -99,54 +96,42 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StatusMessage))
             {
-                if (Optional.IsDefined(StatusMessage))
-                {
-                    writer.WritePropertyName("statusMessage"u8);
-                    writer.WriteStringValue(StatusMessage);
-                }
+                writer.WritePropertyName("statusMessage"u8);
+                writer.WriteStringValue(StatusMessage);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(NetworkAcls))
             {
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpointConnections))
             {
-                if (Optional.IsCollectionDefined(PrivateEndpointConnections))
+                writer.WritePropertyName("privateEndpointConnections"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpointConnections)
                 {
-                    writer.WritePropertyName("privateEndpointConnections"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in PrivateEndpointConnections)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ScheduledPurgeOn))
             {
-                if (Optional.IsDefined(ScheduledPurgeOn))
-                {
-                    writer.WritePropertyName("scheduledPurgeDate"u8);
-                    writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
-                }
+                writer.WritePropertyName("scheduledPurgeDate"u8);
+                writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

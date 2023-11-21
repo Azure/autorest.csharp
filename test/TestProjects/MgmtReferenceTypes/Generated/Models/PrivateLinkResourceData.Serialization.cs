@@ -45,49 +45,37 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(GroupId))
             {
-                if (Optional.IsDefined(GroupId))
-                {
-                    writer.WritePropertyName("groupId"u8);
-                    writer.WriteStringValue(GroupId);
-                }
+                writer.WritePropertyName("groupId"u8);
+                writer.WriteStringValue(GroupId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(RequiredMembers))
             {
-                if (Optional.IsCollectionDefined(RequiredMembers))
+                writer.WritePropertyName("requiredMembers"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredMembers)
                 {
-                    writer.WritePropertyName("requiredMembers"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in RequiredMembers)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(RequiredZoneNames))
             {
-                if (Optional.IsCollectionDefined(RequiredZoneNames))
+                writer.WritePropertyName("requiredZoneNames"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredZoneNames)
                 {
-                    writer.WritePropertyName("requiredZoneNames"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in RequiredZoneNames)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

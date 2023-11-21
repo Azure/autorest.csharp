@@ -34,13 +34,10 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
-                if (Optional.IsDefined(Status))
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteBooleanValue(Status.Value);
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteBooleanValue(Status.Value);
             }
             writer.WritePropertyName("@odata.location"u8);
             writer.WriteStringValue(OdataLocation);
@@ -55,10 +52,13 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
-            foreach (var item in MoreAdditionalProperties)
+            if (MoreAdditionalProperties != null)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value);
+                foreach (var item in MoreAdditionalProperties)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
             }
             writer.WriteEndObject();
         }

@@ -63,52 +63,37 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MaxNumberOfRecordSets))
             {
-                if (Optional.IsDefined(MaxNumberOfRecordSets))
-                {
-                    writer.WritePropertyName("maxNumberOfRecordSets"u8);
-                    writer.WriteNumberValue(MaxNumberOfRecordSets.Value);
-                }
+                writer.WritePropertyName("maxNumberOfRecordSets"u8);
+                writer.WriteNumberValue(MaxNumberOfRecordSets.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MaxNumberOfRecordsPerRecordSet))
             {
-                if (Optional.IsDefined(MaxNumberOfRecordsPerRecordSet))
-                {
-                    writer.WritePropertyName("maxNumberOfRecordsPerRecordSet"u8);
-                    writer.WriteNumberValue(MaxNumberOfRecordsPerRecordSet.Value);
-                }
+                writer.WritePropertyName("maxNumberOfRecordsPerRecordSet"u8);
+                writer.WriteNumberValue(MaxNumberOfRecordsPerRecordSet.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NumberOfRecordSets))
             {
-                if (Optional.IsDefined(NumberOfRecordSets))
-                {
-                    writer.WritePropertyName("numberOfRecordSets"u8);
-                    writer.WriteNumberValue(NumberOfRecordSets.Value);
-                }
+                writer.WritePropertyName("numberOfRecordSets"u8);
+                writer.WriteNumberValue(NumberOfRecordSets.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(NameServers))
             {
-                if (Optional.IsCollectionDefined(NameServers))
+                writer.WritePropertyName("nameServers"u8);
+                writer.WriteStartArray();
+                foreach (var item in NameServers)
                 {
-                    writer.WritePropertyName("nameServers"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in NameServers)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(ZoneType))
             {
@@ -151,7 +136,7 @@ namespace MgmtExpandResourceTypes
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

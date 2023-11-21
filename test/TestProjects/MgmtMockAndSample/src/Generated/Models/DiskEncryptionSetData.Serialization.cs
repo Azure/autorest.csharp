@@ -35,27 +35,21 @@ namespace MgmtMockAndSample
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Location))
             {
-                if (Optional.IsDefined(Location))
-                {
-                    writer.WritePropertyName("location"u8);
-                    writer.WriteStringValue(Location.Value);
-                }
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Tags))
             {
-                if (Optional.IsCollectionDefined(Tags))
+                writer.WritePropertyName("tags"u8);
+                writer.WriteStartObject();
+                foreach (var item in Tags)
                 {
-                    writer.WritePropertyName("tags"u8);
-                    writer.WriteStartObject();
-                    foreach (var item in Tags)
-                    {
-                        writer.WritePropertyName(item.Key);
-                        writer.WriteStringValue(item.Value);
-                    }
-                    writer.WriteEndObject();
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
                 }
+                writer.WriteEndObject();
             }
             if (options.Format != "W")
             {
@@ -72,13 +66,10 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -92,39 +83,30 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("activeKey"u8);
                 writer.WriteObjectValue(ActiveKey);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(PreviousKeys))
             {
-                if (Optional.IsCollectionDefined(PreviousKeys))
+                writer.WritePropertyName("previousKeys"u8);
+                writer.WriteStartArray();
+                foreach (var item in PreviousKeys)
                 {
-                    writer.WritePropertyName("previousKeys"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in PreviousKeys)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState);
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {
                 writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
                 writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastKeyRotationTimestamp))
             {
-                if (Optional.IsDefined(LastKeyRotationTimestamp))
-                {
-                    writer.WritePropertyName("lastKeyRotationTimestamp"u8);
-                    writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
-                }
+                writer.WritePropertyName("lastKeyRotationTimestamp"u8);
+                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
             }
             if (Optional.IsDefined(FederatedClientId))
             {
@@ -137,7 +119,7 @@ namespace MgmtMockAndSample
                 writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

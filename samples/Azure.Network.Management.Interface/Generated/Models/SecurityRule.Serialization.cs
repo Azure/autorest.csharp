@@ -32,13 +32,10 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag);
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             if (Optional.IsDefined(Id))
             {
@@ -152,16 +149,13 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("direction"u8);
                 writer.WriteStringValue(Direction.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -44,52 +44,40 @@ namespace MgmtCollectionParent
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(OrderItemIds))
             {
-                if (Optional.IsCollectionDefined(OrderItemIds))
+                writer.WritePropertyName("orderItemIds"u8);
+                writer.WriteStartArray();
+                foreach (var item in OrderItemIds)
                 {
-                    writer.WritePropertyName("orderItemIds"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in OrderItemIds)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CurrentStage))
             {
-                if (Optional.IsDefined(CurrentStage))
-                {
-                    writer.WritePropertyName("currentStage"u8);
-                    writer.WriteObjectValue(CurrentStage);
-                }
+                writer.WritePropertyName("currentStage"u8);
+                writer.WriteObjectValue(CurrentStage);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(OrderStageHistory))
             {
-                if (Optional.IsCollectionDefined(OrderStageHistory))
+                writer.WritePropertyName("orderStageHistory"u8);
+                writer.WriteStartArray();
+                foreach (var item in OrderStageHistory)
                 {
-                    writer.WritePropertyName("orderStageHistory"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in OrderStageHistory)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

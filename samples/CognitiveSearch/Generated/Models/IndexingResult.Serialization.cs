@@ -32,13 +32,10 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("key"u8);
                 writer.WriteStringValue(Key);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ErrorMessage))
             {
-                if (Optional.IsDefined(ErrorMessage))
-                {
-                    writer.WritePropertyName("errorMessage"u8);
-                    writer.WriteStringValue(ErrorMessage);
-                }
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
             }
             if (options.Format != "W")
             {
@@ -50,7 +47,7 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("statusCode"u8);
                 writer.WriteNumberValue(StatusCode);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

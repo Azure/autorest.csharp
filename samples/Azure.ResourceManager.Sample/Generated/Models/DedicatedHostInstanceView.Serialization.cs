@@ -27,13 +27,10 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AssetId))
             {
-                if (Optional.IsDefined(AssetId))
-                {
-                    writer.WritePropertyName("assetId"u8);
-                    writer.WriteStringValue(AssetId);
-                }
+                writer.WritePropertyName("assetId"u8);
+                writer.WriteStringValue(AssetId);
             }
             if (Optional.IsDefined(AvailableCapacity))
             {
@@ -50,7 +47,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

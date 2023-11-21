@@ -30,7 +30,7 @@ namespace _Type.Union.Models
             writer.WriteStartObject();
             writer.WritePropertyName("prop"u8);
             writer.WriteStringValue(Prop.ToString());
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

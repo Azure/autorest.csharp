@@ -37,41 +37,32 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(AppliedDnsServers))
             {
-                if (Optional.IsCollectionDefined(AppliedDnsServers))
+                writer.WritePropertyName("appliedDnsServers"u8);
+                writer.WriteStartArray();
+                foreach (var item in AppliedDnsServers)
                 {
-                    writer.WritePropertyName("appliedDnsServers"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in AppliedDnsServers)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(InternalDnsNameLabel))
             {
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InternalFqdn))
             {
-                if (Optional.IsDefined(InternalFqdn))
-                {
-                    writer.WritePropertyName("internalFqdn"u8);
-                    writer.WriteStringValue(InternalFqdn);
-                }
+                writer.WritePropertyName("internalFqdn"u8);
+                writer.WriteStringValue(InternalFqdn);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InternalDomainNameSuffix))
             {
-                if (Optional.IsDefined(InternalDomainNameSuffix))
-                {
-                    writer.WritePropertyName("internalDomainNameSuffix"u8);
-                    writer.WriteStringValue(InternalDomainNameSuffix);
-                }
+                writer.WritePropertyName("internalDomainNameSuffix"u8);
+                writer.WriteStringValue(InternalDomainNameSuffix);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

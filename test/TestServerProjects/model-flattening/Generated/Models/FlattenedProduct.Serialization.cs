@@ -27,21 +27,15 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
-                if (Optional.IsDefined(Id))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(Id);
-                }
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Type))
             {
-                if (Optional.IsDefined(Type))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(Type);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -59,13 +53,10 @@ namespace model_flattening.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
-                if (Optional.IsDefined(Name))
-                {
-                    writer.WritePropertyName("name"u8);
-                    writer.WriteStringValue(Name);
-                }
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -79,13 +70,10 @@ namespace model_flattening.Models
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(TypePropertiesType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
             {
-                if (Optional.IsDefined(ProvisioningStateValues))
-                {
-                    writer.WritePropertyName("provisioningStateValues"u8);
-                    writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningStateValues"u8);
+                writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
             }
             if (Optional.IsDefined(ProvisioningState))
             {
@@ -93,7 +81,7 @@ namespace model_flattening.Models
                 writer.WriteStringValue(ProvisioningState);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

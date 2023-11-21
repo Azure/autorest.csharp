@@ -30,52 +30,40 @@ namespace Azure.ResourceManager.Sample
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstanceId))
             {
-                if (Optional.IsDefined(InstanceId))
-                {
-                    writer.WritePropertyName("instanceId"u8);
-                    writer.WriteStringValue(InstanceId);
-                }
+                writer.WritePropertyName("instanceId"u8);
+                writer.WriteStringValue(InstanceId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Sku))
             {
-                if (Optional.IsDefined(Sku))
-                {
-                    writer.WritePropertyName("sku"u8);
-                    writer.WriteObjectValue(Sku);
-                }
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
             }
             if (Optional.IsDefined(Plan))
             {
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
             {
-                if (Optional.IsCollectionDefined(Resources))
+                writer.WritePropertyName("resources"u8);
+                writer.WriteStartArray();
+                foreach (var item in Resources)
                 {
-                    writer.WritePropertyName("resources"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Resources)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Zones))
             {
-                if (Optional.IsCollectionDefined(Zones))
+                writer.WritePropertyName("zones"u8);
+                writer.WriteStartArray();
+                foreach (var item in Zones)
                 {
-                    writer.WritePropertyName("zones"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Zones)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -105,39 +93,27 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LatestModelApplied))
             {
-                if (Optional.IsDefined(LatestModelApplied))
-                {
-                    writer.WritePropertyName("latestModelApplied"u8);
-                    writer.WriteBooleanValue(LatestModelApplied.Value);
-                }
+                writer.WritePropertyName("latestModelApplied"u8);
+                writer.WriteBooleanValue(LatestModelApplied.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VmId))
             {
-                if (Optional.IsDefined(VmId))
-                {
-                    writer.WritePropertyName("vmId"u8);
-                    writer.WriteStringValue(VmId);
-                }
+                writer.WritePropertyName("vmId"u8);
+                writer.WriteStringValue(VmId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
-                if (Optional.IsDefined(InstanceView))
-                {
-                    writer.WritePropertyName("instanceView"u8);
-                    writer.WriteObjectValue(InstanceView);
-                }
+                writer.WritePropertyName("instanceView"u8);
+                writer.WriteObjectValue(InstanceView);
             }
             if (Optional.IsDefined(HardwareProfile))
             {
@@ -184,26 +160,20 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState);
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
             if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ModelDefinitionApplied))
             {
-                if (Optional.IsDefined(ModelDefinitionApplied))
-                {
-                    writer.WritePropertyName("modelDefinitionApplied"u8);
-                    writer.WriteStringValue(ModelDefinitionApplied);
-                }
+                writer.WritePropertyName("modelDefinitionApplied"u8);
+                writer.WriteStringValue(ModelDefinitionApplied);
             }
             if (Optional.IsDefined(ProtectionPolicy))
             {
@@ -211,7 +181,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteObjectValue(ProtectionPolicy);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

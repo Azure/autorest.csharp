@@ -189,18 +189,15 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VectorReadOnly))
             {
-                if (Optional.IsDefined(VectorReadOnly))
+                writer.WritePropertyName("vectorReadOnly"u8);
+                writer.WriteStartArray();
+                foreach (var item in VectorReadOnly.Span)
                 {
-                    writer.WritePropertyName("vectorReadOnly"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VectorReadOnly.Span)
-                    {
-                        writer.WriteNumberValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteNumberValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (options.Format != "W")
             {
@@ -236,24 +233,21 @@ namespace ModelShapes.Models
                     writer.WriteNull("vectorNullable");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VectorReadOnlyNullable))
             {
-                if (Optional.IsDefined(VectorReadOnlyNullable))
+                if (VectorReadOnlyNullable != null)
                 {
-                    if (VectorReadOnlyNullable != null)
+                    writer.WritePropertyName("vectorReadOnlyNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorReadOnlyNullable.Value.Span)
                     {
-                        writer.WritePropertyName("vectorReadOnlyNullable"u8);
-                        writer.WriteStartArray();
-                        foreach (var item in VectorReadOnlyNullable.Value.Span)
-                        {
-                            writer.WriteNumberValue(item);
-                        }
-                        writer.WriteEndArray();
+                        writer.WriteNumberValue(item);
                     }
-                    else
-                    {
-                        writer.WriteNull("vectorReadOnlyNullable");
-                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorReadOnlyNullable");
                 }
             }
             if (options.Format != "W")
@@ -287,7 +281,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("vectorRequiredNullable");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

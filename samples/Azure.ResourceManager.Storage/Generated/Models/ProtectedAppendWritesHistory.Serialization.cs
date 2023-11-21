@@ -32,15 +32,12 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Timestamp))
             {
-                if (Optional.IsDefined(Timestamp))
-                {
-                    writer.WritePropertyName("timestamp"u8);
-                    writer.WriteStringValue(Timestamp.Value, "O");
-                }
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

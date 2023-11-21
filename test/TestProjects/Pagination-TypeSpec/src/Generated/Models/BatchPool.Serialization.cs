@@ -28,31 +28,22 @@ namespace Pagination.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
-                if (Optional.IsDefined(Id))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(Id);
-                }
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DisplayName))
             {
-                if (Optional.IsDefined(DisplayName))
-                {
-                    writer.WritePropertyName("displayName"u8);
-                    writer.WriteStringValue(DisplayName);
-                }
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Url))
             {
-                if (Optional.IsDefined(Url))
-                {
-                    writer.WritePropertyName("url"u8);
-                    writer.WriteStringValue(Url);
-                }
+                writer.WritePropertyName("url"u8);
+                writer.WriteStringValue(Url);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

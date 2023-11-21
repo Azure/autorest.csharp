@@ -30,7 +30,7 @@ namespace OpenAI.Models
             writer.WriteObjectValue(Categories);
             writer.WritePropertyName("category_scores"u8);
             writer.WriteObjectValue(CategoryScores);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

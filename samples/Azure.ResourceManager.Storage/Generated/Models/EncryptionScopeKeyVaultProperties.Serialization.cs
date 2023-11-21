@@ -32,23 +32,17 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("keyUri"u8);
                 writer.WriteStringValue(KeyUri.AbsoluteUri);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CurrentVersionedKeyIdentifier))
             {
-                if (Optional.IsDefined(CurrentVersionedKeyIdentifier))
-                {
-                    writer.WritePropertyName("currentVersionedKeyIdentifier"u8);
-                    writer.WriteStringValue(CurrentVersionedKeyIdentifier);
-                }
+                writer.WritePropertyName("currentVersionedKeyIdentifier"u8);
+                writer.WriteStringValue(CurrentVersionedKeyIdentifier);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastKeyRotationTimestamp))
             {
-                if (Optional.IsDefined(LastKeyRotationTimestamp))
-                {
-                    writer.WritePropertyName("lastKeyRotationTimestamp"u8);
-                    writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
-                }
+                writer.WritePropertyName("lastKeyRotationTimestamp"u8);
+                writer.WriteStringValue(LastKeyRotationTimestamp.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

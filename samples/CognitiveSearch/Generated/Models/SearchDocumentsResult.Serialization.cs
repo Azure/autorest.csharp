@@ -27,53 +27,41 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Count))
             {
-                if (Optional.IsDefined(Count))
-                {
-                    writer.WritePropertyName("@odata.count"u8);
-                    writer.WriteNumberValue(Count.Value);
-                }
+                writer.WritePropertyName("@odata.count"u8);
+                writer.WriteNumberValue(Count.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Coverage))
             {
-                if (Optional.IsDefined(Coverage))
-                {
-                    writer.WritePropertyName("@search.coverage"u8);
-                    writer.WriteNumberValue(Coverage.Value);
-                }
+                writer.WritePropertyName("@search.coverage"u8);
+                writer.WriteNumberValue(Coverage.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Facets))
             {
-                if (Optional.IsCollectionDefined(Facets))
+                writer.WritePropertyName("@search.facets"u8);
+                writer.WriteStartObject();
+                foreach (var item in Facets)
                 {
-                    writer.WritePropertyName("@search.facets"u8);
-                    writer.WriteStartObject();
-                    foreach (var item in Facets)
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
                     {
-                        writer.WritePropertyName(item.Key);
-                        if (item.Value == null)
-                        {
-                            writer.WriteNullValue();
-                            continue;
-                        }
-                        writer.WriteStartArray();
-                        foreach (var item0 in item.Value)
-                        {
-                            writer.WriteObjectValue(item0);
-                        }
-                        writer.WriteEndArray();
+                        writer.WriteNullValue();
+                        continue;
                     }
-                    writer.WriteEndObject();
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        writer.WriteObjectValue(item0);
+                    }
+                    writer.WriteEndArray();
                 }
+                writer.WriteEndObject();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NextPageParameters))
             {
-                if (Optional.IsDefined(NextPageParameters))
-                {
-                    writer.WritePropertyName("@search.nextPageParameters"u8);
-                    writer.WriteObjectValue(NextPageParameters);
-                }
+                writer.WritePropertyName("@search.nextPageParameters"u8);
+                writer.WriteObjectValue(NextPageParameters);
             }
             if (options.Format != "W")
             {
@@ -85,15 +73,12 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NextLink))
             {
-                if (Optional.IsDefined(NextLink))
-                {
-                    writer.WritePropertyName("@odata.nextLink"u8);
-                    writer.WriteStringValue(NextLink);
-                }
+                writer.WritePropertyName("@odata.nextLink"u8);
+                writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

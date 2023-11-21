@@ -63,13 +63,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -78,44 +75,35 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("proximityPlacementGroupType"u8);
                 writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
             {
-                if (Optional.IsCollectionDefined(VirtualMachines))
+                writer.WritePropertyName("virtualMachines"u8);
+                writer.WriteStartArray();
+                foreach (var item in VirtualMachines)
                 {
-                    writer.WritePropertyName("virtualMachines"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VirtualMachines)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachineScaleSets))
             {
-                if (Optional.IsCollectionDefined(VirtualMachineScaleSets))
+                writer.WritePropertyName("virtualMachineScaleSets"u8);
+                writer.WriteStartArray();
+                foreach (var item in VirtualMachineScaleSets)
                 {
-                    writer.WritePropertyName("virtualMachineScaleSets"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VirtualMachineScaleSets)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(AvailabilitySets))
             {
-                if (Optional.IsCollectionDefined(AvailabilitySets))
+                writer.WritePropertyName("availabilitySets"u8);
+                writer.WriteStartArray();
+                foreach (var item in AvailabilitySets)
                 {
-                    writer.WritePropertyName("availabilitySets"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in AvailabilitySets)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(ColocationStatus))
             {
@@ -123,7 +111,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteObjectValue(ColocationStatus);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

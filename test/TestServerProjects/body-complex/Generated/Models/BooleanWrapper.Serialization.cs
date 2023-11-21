@@ -37,7 +37,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("field_false"u8);
                 writer.WriteBooleanValue(FieldFalse.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

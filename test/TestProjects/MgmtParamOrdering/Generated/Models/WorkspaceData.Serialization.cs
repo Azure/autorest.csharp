@@ -57,23 +57,17 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(WorkspaceId))
             {
-                if (Optional.IsDefined(WorkspaceId))
-                {
-                    writer.WritePropertyName("workspaceId"u8);
-                    writer.WriteStringValue(WorkspaceId);
-                }
+                writer.WritePropertyName("workspaceId"u8);
+                writer.WriteStringValue(WorkspaceId);
             }
             if (Optional.IsDefined(Description))
             {
@@ -117,34 +111,25 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("discoveryUrl"u8);
                 writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(HbiWorkspace))
             {
                 writer.WritePropertyName("hbiWorkspace"u8);
                 writer.WriteBooleanValue(HbiWorkspace.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ServiceProvisionedResourceGroup))
             {
-                if (Optional.IsDefined(ServiceProvisionedResourceGroup))
-                {
-                    writer.WritePropertyName("serviceProvisionedResourceGroup"u8);
-                    writer.WriteStringValue(ServiceProvisionedResourceGroup);
-                }
+                writer.WritePropertyName("serviceProvisionedResourceGroup"u8);
+                writer.WriteStringValue(ServiceProvisionedResourceGroup);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PrivateLinkCount))
             {
-                if (Optional.IsDefined(PrivateLinkCount))
-                {
-                    writer.WritePropertyName("privateLinkCount"u8);
-                    writer.WriteNumberValue(PrivateLinkCount.Value);
-                }
+                writer.WritePropertyName("privateLinkCount"u8);
+                writer.WriteNumberValue(PrivateLinkCount.Value);
             }
             if (Optional.IsDefined(ImageBuildCompute))
             {
@@ -161,16 +146,13 @@ namespace MgmtParamOrdering
                 writer.WritePropertyName("primaryUserAssignedIdentity"u8);
                 writer.WriteStringValue(PrimaryUserAssignedIdentity);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
-                if (Optional.IsDefined(TenantId))
-                {
-                    writer.WritePropertyName("tenantId"u8);
-                    writer.WriteStringValue(TenantId.Value);
-                }
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

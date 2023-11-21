@@ -27,39 +27,27 @@ namespace MgmtCollectionParent.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StageStatus))
             {
-                if (Optional.IsDefined(StageStatus))
-                {
-                    writer.WritePropertyName("stageStatus"u8);
-                    writer.WriteStringValue(StageStatus.Value.ToString());
-                }
+                writer.WritePropertyName("stageStatus"u8);
+                writer.WriteStringValue(StageStatus.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StageName))
             {
-                if (Optional.IsDefined(StageName))
-                {
-                    writer.WritePropertyName("stageName"u8);
-                    writer.WriteStringValue(StageName.Value.ToString());
-                }
+                writer.WritePropertyName("stageName"u8);
+                writer.WriteStringValue(StageName.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DisplayName))
             {
-                if (Optional.IsDefined(DisplayName))
-                {
-                    writer.WritePropertyName("displayName"u8);
-                    writer.WriteStringValue(DisplayName);
-                }
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
-                if (Optional.IsDefined(StartOn))
-                {
-                    writer.WritePropertyName("startTime"u8);
-                    writer.WriteStringValue(StartOn.Value, "O");
-                }
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -32,15 +32,12 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("h"u8);
                 writer.WriteStringValue(H);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(I))
             {
-                if (Optional.IsDefined(I))
-                {
-                    writer.WritePropertyName("i"u8);
-                    writer.WriteStringValue(I);
-                }
+                writer.WritePropertyName("i"u8);
+                writer.WriteStringValue(I);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

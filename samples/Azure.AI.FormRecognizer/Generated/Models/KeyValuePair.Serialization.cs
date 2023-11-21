@@ -38,7 +38,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteObjectValue(Value);
             writer.WritePropertyName("confidence"u8);
             writer.WriteNumberValue(Confidence);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

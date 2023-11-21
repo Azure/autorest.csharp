@@ -27,34 +27,25 @@ namespace Azure.Network.Management.Interface.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag);
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
-                if (Optional.IsDefined(Name))
-                {
-                    writer.WritePropertyName("name"u8);
-                    writer.WriteStringValue(Name);
-                }
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Type))
             {
-                if (Optional.IsDefined(Type))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(Type);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -74,26 +65,20 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
             {
-                if (Optional.IsDefined(VirtualMachine))
-                {
-                    writer.WritePropertyName("virtualMachine"u8);
-                    writer.WriteObjectValue(VirtualMachine);
-                }
+                writer.WritePropertyName("virtualMachine"u8);
+                writer.WriteObjectValue(VirtualMachine);
             }
             if (Optional.IsDefined(NetworkSecurityGroup))
             {
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 writer.WriteObjectValue(NetworkSecurityGroup);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PrivateEndpoint))
             {
-                if (Optional.IsDefined(PrivateEndpoint))
-                {
-                    writer.WritePropertyName("privateEndpoint"u8);
-                    writer.WriteObjectValue(PrivateEndpoint);
-                }
+                writer.WritePropertyName("privateEndpoint"u8);
+                writer.WriteObjectValue(PrivateEndpoint);
             }
             if (Optional.IsCollectionDefined(IpConfigurations))
             {
@@ -105,39 +90,30 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(TapConfigurations))
             {
-                if (Optional.IsCollectionDefined(TapConfigurations))
+                writer.WritePropertyName("tapConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in TapConfigurations)
                 {
-                    writer.WritePropertyName("tapConfigurations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in TapConfigurations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(DnsSettings))
             {
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MacAddress))
             {
-                if (Optional.IsDefined(MacAddress))
-                {
-                    writer.WritePropertyName("macAddress"u8);
-                    writer.WriteStringValue(MacAddress);
-                }
+                writer.WritePropertyName("macAddress"u8);
+                writer.WriteStringValue(MacAddress);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Primary))
             {
-                if (Optional.IsDefined(Primary))
-                {
-                    writer.WritePropertyName("primary"u8);
-                    writer.WriteBooleanValue(Primary.Value);
-                }
+                writer.WritePropertyName("primary"u8);
+                writer.WriteBooleanValue(Primary.Value);
             }
             if (Optional.IsDefined(EnableAcceleratedNetworking))
             {
@@ -149,37 +125,28 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("enableIPForwarding"u8);
                 writer.WriteBooleanValue(EnableIPForwarding.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(HostedWorkloads))
             {
-                if (Optional.IsCollectionDefined(HostedWorkloads))
+                writer.WritePropertyName("hostedWorkloads"u8);
+                writer.WriteStartArray();
+                foreach (var item in HostedWorkloads)
                 {
-                    writer.WritePropertyName("hostedWorkloads"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in HostedWorkloads)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceGuid))
             {
-                if (Optional.IsDefined(ResourceGuid))
-                {
-                    writer.WritePropertyName("resourceGuid"u8);
-                    writer.WriteStringValue(ResourceGuid);
-                }
+                writer.WritePropertyName("resourceGuid"u8);
+                writer.WriteStringValue(ResourceGuid);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

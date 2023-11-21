@@ -39,7 +39,7 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WritePropertyName("useLabelFile"u8);
                 writer.WriteBooleanValue(UseLabelFile.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

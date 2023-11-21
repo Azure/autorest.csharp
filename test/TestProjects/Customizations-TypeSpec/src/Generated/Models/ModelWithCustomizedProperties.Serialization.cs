@@ -159,24 +159,21 @@ namespace CustomizationsInTsp.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VectorOptionalReadOnly))
             {
-                if (Optional.IsDefined(VectorOptionalReadOnly))
+                if (VectorOptionalReadOnly != null)
                 {
-                    if (VectorOptionalReadOnly != null)
+                    writer.WritePropertyName("vectorOptionalReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptionalReadOnly.Value.Span)
                     {
-                        writer.WritePropertyName("vectorOptionalReadOnly"u8);
-                        writer.WriteStartArray();
-                        foreach (var item in VectorOptionalReadOnly.Value.Span)
-                        {
-                            writer.WriteNumberValue(item);
-                        }
-                        writer.WriteEndArray();
+                        writer.WriteNumberValue(item);
                     }
-                    else
-                    {
-                        writer.WriteNull("vectorOptionalReadOnly");
-                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorOptionalReadOnly");
                 }
             }
             if (options.Format != "W")
@@ -196,27 +193,24 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorNullableReadOnly");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VectorOptionalNullableReadOnly))
             {
-                if (Optional.IsDefined(VectorOptionalNullableReadOnly))
+                if (VectorOptionalNullableReadOnly != null)
                 {
-                    if (VectorOptionalNullableReadOnly != null)
+                    writer.WritePropertyName("vectorOptionalNullableReadOnly"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptionalNullableReadOnly.Value.Span)
                     {
-                        writer.WritePropertyName("vectorOptionalNullableReadOnly"u8);
-                        writer.WriteStartArray();
-                        foreach (var item in VectorOptionalNullableReadOnly.Value.Span)
-                        {
-                            writer.WriteNumberValue(item);
-                        }
-                        writer.WriteEndArray();
+                        writer.WriteNumberValue(item);
                     }
-                    else
-                    {
-                        writer.WriteNull("vectorOptionalNullableReadOnly");
-                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("vectorOptionalNullableReadOnly");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

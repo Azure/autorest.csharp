@@ -27,33 +27,27 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RestrictionType))
             {
-                if (Optional.IsDefined(RestrictionType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(RestrictionType);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(RestrictionType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Values))
             {
-                if (Optional.IsCollectionDefined(Values))
+                writer.WritePropertyName("values"u8);
+                writer.WriteStartArray();
+                foreach (var item in Values)
                 {
-                    writer.WritePropertyName("values"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Values)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(ReasonCode))
             {
                 writer.WritePropertyName("reasonCode"u8);
                 writer.WriteStringValue(ReasonCode.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

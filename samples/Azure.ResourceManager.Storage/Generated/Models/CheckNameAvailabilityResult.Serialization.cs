@@ -27,31 +27,22 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NameAvailable))
             {
-                if (Optional.IsDefined(NameAvailable))
-                {
-                    writer.WritePropertyName("nameAvailable"u8);
-                    writer.WriteBooleanValue(NameAvailable.Value);
-                }
+                writer.WritePropertyName("nameAvailable"u8);
+                writer.WriteBooleanValue(NameAvailable.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Reason))
             {
-                if (Optional.IsDefined(Reason))
-                {
-                    writer.WritePropertyName("reason"u8);
-                    writer.WriteStringValue(Reason.Value.ToSerialString());
-                }
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Message))
             {
-                if (Optional.IsDefined(Message))
-                {
-                    writer.WritePropertyName("message"u8);
-                    writer.WriteStringValue(Message);
-                }
+                writer.WritePropertyName("message"u8);
+                writer.WriteStringValue(Message);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

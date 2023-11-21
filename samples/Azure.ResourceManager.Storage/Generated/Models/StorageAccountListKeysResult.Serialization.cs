@@ -27,20 +27,17 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Keys))
             {
-                if (Optional.IsCollectionDefined(Keys))
+                writer.WritePropertyName("keys"u8);
+                writer.WriteStartArray();
+                foreach (var item in Keys)
                 {
-                    writer.WritePropertyName("keys"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Keys)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

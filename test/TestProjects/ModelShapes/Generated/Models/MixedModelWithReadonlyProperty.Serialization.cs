@@ -27,28 +27,22 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ReadonlyProperty))
             {
-                if (Optional.IsDefined(ReadonlyProperty))
-                {
-                    writer.WritePropertyName("ReadonlyProperty"u8);
-                    writer.WriteObjectValue(ReadonlyProperty);
-                }
+                writer.WritePropertyName("ReadonlyProperty"u8);
+                writer.WriteObjectValue(ReadonlyProperty);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(ReadonlyListProperty))
             {
-                if (Optional.IsCollectionDefined(ReadonlyListProperty))
+                writer.WritePropertyName("ReadonlyListProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in ReadonlyListProperty)
                 {
-                    writer.WritePropertyName("ReadonlyListProperty"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ReadonlyListProperty)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

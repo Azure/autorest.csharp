@@ -35,18 +35,15 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
             {
-                if (Optional.IsCollectionDefined(Resources))
+                writer.WritePropertyName("resources"u8);
+                writer.WriteStartArray();
+                foreach (var item in Resources)
                 {
-                    writer.WritePropertyName("resources"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Resources)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(Identity))
             {
@@ -91,13 +88,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -176,34 +170,25 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState);
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
-                if (Optional.IsDefined(InstanceView))
-                {
-                    writer.WritePropertyName("instanceView"u8);
-                    writer.WriteObjectValue(InstanceView);
-                }
+                writer.WritePropertyName("instanceView"u8);
+                writer.WriteObjectValue(InstanceView);
             }
             if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VmId))
             {
-                if (Optional.IsDefined(VmId))
-                {
-                    writer.WritePropertyName("vmId"u8);
-                    writer.WriteStringValue(VmId);
-                }
+                writer.WritePropertyName("vmId"u8);
+                writer.WriteStringValue(VmId);
             }
             if (Optional.IsDefined(ExtensionsTimeBudget))
             {
@@ -211,7 +196,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStringValue(ExtensionsTimeBudget);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

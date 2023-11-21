@@ -89,13 +89,10 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NonRequiredReadonlyInt))
             {
-                if (Optional.IsDefined(NonRequiredReadonlyInt))
-                {
-                    writer.WritePropertyName("nonRequiredReadonlyInt"u8);
-                    writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
-                }
+                writer.WritePropertyName("nonRequiredReadonlyInt"u8);
+                writer.WriteNumberValue(NonRequiredReadonlyInt.Value);
             }
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
@@ -260,7 +257,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableStringList");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

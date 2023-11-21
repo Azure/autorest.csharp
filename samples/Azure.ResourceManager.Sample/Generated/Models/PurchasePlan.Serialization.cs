@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("product"u8);
             writer.WriteStringValue(Product);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

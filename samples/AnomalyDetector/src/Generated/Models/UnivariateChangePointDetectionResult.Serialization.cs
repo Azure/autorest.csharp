@@ -28,13 +28,10 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Period))
             {
-                if (Optional.IsDefined(Period))
-                {
-                    writer.WritePropertyName("period"u8);
-                    writer.WriteNumberValue(Period.Value);
-                }
+                writer.WritePropertyName("period"u8);
+                writer.WriteNumberValue(Period.Value);
             }
             if (Optional.IsCollectionDefined(IsChangePoint))
             {
@@ -56,7 +53,7 @@ namespace AnomalyDetector.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

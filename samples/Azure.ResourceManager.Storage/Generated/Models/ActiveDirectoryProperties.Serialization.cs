@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStringValue(DomainSid);
             writer.WritePropertyName("azureStorageSid"u8);
             writer.WriteStringValue(AzureStorageSid);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

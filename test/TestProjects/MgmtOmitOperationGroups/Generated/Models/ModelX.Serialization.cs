@@ -42,7 +42,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("e"u8);
                 writer.WriteStringValue(E);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

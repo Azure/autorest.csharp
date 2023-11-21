@@ -47,7 +47,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("classification_n_classes"u8);
                 writer.WriteNumberValue(ClassificationNClasses.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

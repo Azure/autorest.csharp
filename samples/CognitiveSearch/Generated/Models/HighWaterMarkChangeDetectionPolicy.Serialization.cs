@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(HighWaterMarkColumnName);
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

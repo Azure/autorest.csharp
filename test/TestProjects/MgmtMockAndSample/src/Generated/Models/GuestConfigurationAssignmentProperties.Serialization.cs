@@ -27,72 +27,57 @@ namespace MgmtMockAndSample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TargetResourceId))
             {
-                if (Optional.IsDefined(TargetResourceId))
+                if (TargetResourceId != null)
                 {
-                    if (TargetResourceId != null)
-                    {
-                        writer.WritePropertyName("targetResourceId"u8);
-                        writer.WriteStringValue(TargetResourceId);
-                    }
-                    else
-                    {
-                        writer.WriteNull("targetResourceId");
-                    }
+                    writer.WritePropertyName("targetResourceId"u8);
+                    writer.WriteStringValue(TargetResourceId);
+                }
+                else
+                {
+                    writer.WriteNull("targetResourceId");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ComplianceStatus))
             {
-                if (Optional.IsDefined(ComplianceStatus))
+                writer.WritePropertyName("complianceStatus"u8);
+                writer.WriteStringValue(ComplianceStatus.Value.ToString());
+            }
+            if (options.Format != "W" && Optional.IsDefined(LastComplianceStatusChecked))
+            {
+                if (LastComplianceStatusChecked != null)
                 {
-                    writer.WritePropertyName("complianceStatus"u8);
-                    writer.WriteStringValue(ComplianceStatus.Value.ToString());
+                    writer.WritePropertyName("lastComplianceStatusChecked"u8);
+                    writer.WriteStringValue(LastComplianceStatusChecked.Value, "O");
+                }
+                else
+                {
+                    writer.WriteNull("lastComplianceStatusChecked");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LatestReportId))
             {
-                if (Optional.IsDefined(LastComplianceStatusChecked))
+                if (LatestReportId != null)
                 {
-                    if (LastComplianceStatusChecked != null)
-                    {
-                        writer.WritePropertyName("lastComplianceStatusChecked"u8);
-                        writer.WriteStringValue(LastComplianceStatusChecked.Value, "O");
-                    }
-                    else
-                    {
-                        writer.WriteNull("lastComplianceStatusChecked");
-                    }
+                    writer.WritePropertyName("latestReportId"u8);
+                    writer.WriteStringValue(LatestReportId);
+                }
+                else
+                {
+                    writer.WriteNull("latestReportId");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ParameterHash))
             {
-                if (Optional.IsDefined(LatestReportId))
+                if (ParameterHash != null)
                 {
-                    if (LatestReportId != null)
-                    {
-                        writer.WritePropertyName("latestReportId"u8);
-                        writer.WriteStringValue(LatestReportId);
-                    }
-                    else
-                    {
-                        writer.WriteNull("latestReportId");
-                    }
+                    writer.WritePropertyName("parameterHash"u8);
+                    writer.WriteStringValue(ParameterHash);
                 }
-            }
-            if (options.Format != "W")
-            {
-                if (Optional.IsDefined(ParameterHash))
+                else
                 {
-                    if (ParameterHash != null)
-                    {
-                        writer.WritePropertyName("parameterHash"u8);
-                        writer.WriteStringValue(ParameterHash);
-                    }
-                    else
-                    {
-                        writer.WriteNull("parameterHash");
-                    }
+                    writer.WriteNull("parameterHash");
                 }
             }
             if (Optional.IsDefined(Context))
@@ -100,52 +85,43 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AssignmentHash))
             {
-                if (Optional.IsDefined(AssignmentHash))
+                if (AssignmentHash != null)
                 {
-                    if (AssignmentHash != null)
-                    {
-                        writer.WritePropertyName("assignmentHash"u8);
-                        writer.WriteStringValue(AssignmentHash);
-                    }
-                    else
-                    {
-                        writer.WriteNull("assignmentHash");
-                    }
+                    writer.WritePropertyName("assignmentHash"u8);
+                    writer.WriteStringValue(AssignmentHash);
+                }
+                else
+                {
+                    writer.WriteNull("assignmentHash");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
+                if (ProvisioningState != null)
                 {
-                    if (ProvisioningState != null)
-                    {
-                        writer.WritePropertyName("provisioningState"u8);
-                        writer.WriteStringValue(ProvisioningState.Value.ToString());
-                    }
-                    else
-                    {
-                        writer.WriteNull("provisioningState");
-                    }
+                    writer.WritePropertyName("provisioningState"u8);
+                    writer.WriteStringValue(ProvisioningState.Value.ToString());
+                }
+                else
+                {
+                    writer.WriteNull("provisioningState");
                 }
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceType))
             {
-                if (Optional.IsDefined(ResourceType))
+                if (ResourceType != null)
                 {
-                    if (ResourceType != null)
-                    {
-                        writer.WritePropertyName("resourceType"u8);
-                        writer.WriteStringValue(ResourceType.Value);
-                    }
-                    else
-                    {
-                        writer.WriteNull("resourceType");
-                    }
+                    writer.WritePropertyName("resourceType"u8);
+                    writer.WriteStringValue(ResourceType.Value);
+                }
+                else
+                {
+                    writer.WriteNull("resourceType");
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

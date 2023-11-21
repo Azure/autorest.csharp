@@ -44,7 +44,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

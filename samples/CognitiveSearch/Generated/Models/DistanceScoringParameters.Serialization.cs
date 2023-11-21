@@ -31,7 +31,7 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(ReferencePointParameter);
             writer.WritePropertyName("boostingDistance"u8);
             writer.WriteNumberValue(BoostingDistance);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

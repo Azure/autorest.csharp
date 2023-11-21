@@ -30,7 +30,7 @@ namespace Authentication.ApiKey.Models
             writer.WriteStartObject();
             writer.WritePropertyName("error"u8);
             writer.WriteStringValue(Error);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

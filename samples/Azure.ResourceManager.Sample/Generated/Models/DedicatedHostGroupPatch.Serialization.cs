@@ -56,26 +56,20 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Hosts))
             {
-                if (Optional.IsCollectionDefined(Hosts))
+                writer.WritePropertyName("hosts"u8);
+                writer.WriteStartArray();
+                foreach (var item in Hosts)
                 {
-                    writer.WritePropertyName("hosts"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Hosts)
-                    {
-                        JsonSerializer.Serialize(writer, item);
-                    }
-                    writer.WriteEndArray();
+                    JsonSerializer.Serialize(writer, item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
-                if (Optional.IsDefined(InstanceView))
-                {
-                    writer.WritePropertyName("instanceView"u8);
-                    writer.WriteObjectValue(InstanceView);
-                }
+                writer.WritePropertyName("instanceView"u8);
+                writer.WriteObjectValue(InstanceView);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
@@ -83,7 +77,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

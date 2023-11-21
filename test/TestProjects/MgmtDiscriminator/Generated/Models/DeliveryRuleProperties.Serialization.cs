@@ -63,15 +63,12 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Foo))
             {
-                if (Optional.IsDefined(Foo))
-                {
-                    writer.WritePropertyName("foo"u8);
-                    writer.WriteStringValue(Foo);
-                }
+                writer.WritePropertyName("foo"u8);
+                writer.WriteStringValue(Foo);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

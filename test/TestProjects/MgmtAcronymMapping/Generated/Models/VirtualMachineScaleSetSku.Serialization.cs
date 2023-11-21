@@ -27,31 +27,22 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceType))
             {
-                if (Optional.IsDefined(ResourceType))
-                {
-                    writer.WritePropertyName("resourceType"u8);
-                    writer.WriteStringValue(ResourceType);
-                }
+                writer.WritePropertyName("resourceType"u8);
+                writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Sku))
             {
-                if (Optional.IsDefined(Sku))
-                {
-                    writer.WritePropertyName("sku"u8);
-                    writer.WriteObjectValue(Sku);
-                }
+                writer.WritePropertyName("sku"u8);
+                writer.WriteObjectValue(Sku);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Capacity))
             {
-                if (Optional.IsDefined(Capacity))
-                {
-                    writer.WritePropertyName("capacity"u8);
-                    writer.WriteObjectValue(Capacity);
-                }
+                writer.WritePropertyName("capacity"u8);
+                writer.WriteObjectValue(Capacity);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

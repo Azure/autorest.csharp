@@ -27,13 +27,10 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Coverage))
             {
-                if (Optional.IsDefined(Coverage))
-                {
-                    writer.WritePropertyName("@search.coverage"u8);
-                    writer.WriteNumberValue(Coverage.Value);
-                }
+                writer.WritePropertyName("@search.coverage"u8);
+                writer.WriteNumberValue(Coverage.Value);
             }
             if (options.Format != "W")
             {
@@ -45,7 +42,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

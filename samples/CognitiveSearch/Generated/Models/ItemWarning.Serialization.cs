@@ -27,44 +27,32 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Key))
             {
-                if (Optional.IsDefined(Key))
-                {
-                    writer.WritePropertyName("key"u8);
-                    writer.WriteStringValue(Key);
-                }
+                writer.WritePropertyName("key"u8);
+                writer.WriteStringValue(Key);
             }
             if (options.Format != "W")
             {
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
-                if (Optional.IsDefined(Name))
-                {
-                    writer.WritePropertyName("name"u8);
-                    writer.WriteStringValue(Name);
-                }
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Details))
             {
-                if (Optional.IsDefined(Details))
-                {
-                    writer.WritePropertyName("details"u8);
-                    writer.WriteStringValue(Details);
-                }
+                writer.WritePropertyName("details"u8);
+                writer.WriteStringValue(Details);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DocumentationLink))
             {
-                if (Optional.IsDefined(DocumentationLink))
-                {
-                    writer.WritePropertyName("documentationLink"u8);
-                    writer.WriteStringValue(DocumentationLink);
-                }
+                writer.WritePropertyName("documentationLink"u8);
+                writer.WriteStringValue(DocumentationLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

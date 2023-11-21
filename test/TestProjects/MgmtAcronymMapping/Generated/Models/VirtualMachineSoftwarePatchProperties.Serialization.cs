@@ -27,92 +27,62 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PatchId))
             {
-                if (Optional.IsDefined(PatchId))
-                {
-                    writer.WritePropertyName("patchId"u8);
-                    writer.WriteStringValue(PatchId);
-                }
+                writer.WritePropertyName("patchId"u8);
+                writer.WriteStringValue(PatchId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
-                if (Optional.IsDefined(Name))
-                {
-                    writer.WritePropertyName("name"u8);
-                    writer.WriteStringValue(Name);
-                }
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Version))
             {
-                if (Optional.IsDefined(Version))
-                {
-                    writer.WritePropertyName("version"u8);
-                    writer.WriteStringValue(Version);
-                }
+                writer.WritePropertyName("version"u8);
+                writer.WriteStringValue(Version);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Kbid))
             {
-                if (Optional.IsDefined(Kbid))
-                {
-                    writer.WritePropertyName("kbid"u8);
-                    writer.WriteStringValue(Kbid);
-                }
+                writer.WritePropertyName("kbid"u8);
+                writer.WriteStringValue(Kbid);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Classifications))
             {
-                if (Optional.IsCollectionDefined(Classifications))
+                writer.WritePropertyName("classifications"u8);
+                writer.WriteStartArray();
+                foreach (var item in Classifications)
                 {
-                    writer.WritePropertyName("classifications"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Classifications)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RebootBehavior))
             {
-                if (Optional.IsDefined(RebootBehavior))
-                {
-                    writer.WritePropertyName("rebootBehavior"u8);
-                    writer.WriteStringValue(RebootBehavior.Value.ToString());
-                }
+                writer.WritePropertyName("rebootBehavior"u8);
+                writer.WriteStringValue(RebootBehavior.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ActivityId))
             {
-                if (Optional.IsDefined(ActivityId))
-                {
-                    writer.WritePropertyName("activityId"u8);
-                    writer.WriteStringValue(ActivityId);
-                }
+                writer.WritePropertyName("activityId"u8);
+                writer.WriteStringValue(ActivityId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PublishedOn))
             {
-                if (Optional.IsDefined(PublishedOn))
-                {
-                    writer.WritePropertyName("publishedDate"u8);
-                    writer.WriteStringValue(PublishedOn.Value, "O");
-                }
+                writer.WritePropertyName("publishedDate"u8);
+                writer.WriteStringValue(PublishedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
-                if (Optional.IsDefined(LastModifiedOn))
-                {
-                    writer.WritePropertyName("lastModifiedDateTime"u8);
-                    writer.WriteStringValue(LastModifiedOn.Value, "O");
-                }
+                writer.WritePropertyName("lastModifiedDateTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AssessmentState))
             {
-                if (Optional.IsDefined(AssessmentState))
-                {
-                    writer.WritePropertyName("assessmentState"u8);
-                    writer.WriteStringValue(AssessmentState.Value.ToString());
-                }
+                writer.WritePropertyName("assessmentState"u8);
+                writer.WriteStringValue(AssessmentState.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

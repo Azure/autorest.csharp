@@ -30,13 +30,10 @@ namespace MgmtMockAndSample
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag);
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             if (Optional.IsDefined(Identity))
             {
@@ -72,13 +69,10 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -97,57 +91,45 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("desiredStatusCode"u8);
                 writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(RuleCollectionGroups))
             {
-                if (Optional.IsCollectionDefined(RuleCollectionGroups))
+                writer.WritePropertyName("ruleCollectionGroups"u8);
+                writer.WriteStartArray();
+                foreach (var item in RuleCollectionGroups)
                 {
-                    writer.WritePropertyName("ruleCollectionGroups"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in RuleCollectionGroups)
-                    {
-                        JsonSerializer.Serialize(writer, item);
-                    }
-                    writer.WriteEndArray();
+                    JsonSerializer.Serialize(writer, item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(BasePolicy))
             {
                 writer.WritePropertyName("basePolicy"u8);
                 JsonSerializer.Serialize(writer, BasePolicy);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Firewalls))
             {
-                if (Optional.IsCollectionDefined(Firewalls))
+                writer.WritePropertyName("firewalls"u8);
+                writer.WriteStartArray();
+                foreach (var item in Firewalls)
                 {
-                    writer.WritePropertyName("firewalls"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Firewalls)
-                    {
-                        JsonSerializer.Serialize(writer, item);
-                    }
-                    writer.WriteEndArray();
+                    JsonSerializer.Serialize(writer, item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(ChildPolicies))
             {
-                if (Optional.IsCollectionDefined(ChildPolicies))
+                writer.WritePropertyName("childPolicies"u8);
+                writer.WriteStartArray();
+                foreach (var item in ChildPolicies)
                 {
-                    writer.WritePropertyName("childPolicies"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ChildPolicies)
-                    {
-                        JsonSerializer.Serialize(writer, item);
-                    }
-                    writer.WriteEndArray();
+                    JsonSerializer.Serialize(writer, item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(ThreatIntelWhitelist))
             {
@@ -185,7 +167,7 @@ namespace MgmtMockAndSample
                 writer.WriteObjectValue(Sku);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

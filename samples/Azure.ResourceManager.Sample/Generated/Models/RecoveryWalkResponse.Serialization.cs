@@ -27,23 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(WalkPerformed))
             {
-                if (Optional.IsDefined(WalkPerformed))
-                {
-                    writer.WritePropertyName("walkPerformed"u8);
-                    writer.WriteBooleanValue(WalkPerformed.Value);
-                }
+                writer.WritePropertyName("walkPerformed"u8);
+                writer.WriteBooleanValue(WalkPerformed.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NextPlatformUpdateDomain))
             {
-                if (Optional.IsDefined(NextPlatformUpdateDomain))
-                {
-                    writer.WritePropertyName("nextPlatformUpdateDomain"u8);
-                    writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
-                }
+                writer.WritePropertyName("nextPlatformUpdateDomain"u8);
+                writer.WriteNumberValue(NextPlatformUpdateDomain.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -28,28 +28,22 @@ namespace Azure.ResourceManager.Fake.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ErrorAdditionalInfoType))
             {
-                if (Optional.IsDefined(ErrorAdditionalInfoType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(ErrorAdditionalInfoType);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(ErrorAdditionalInfoType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Info))
             {
-                if (Optional.IsDefined(Info))
-                {
-                    writer.WritePropertyName("info"u8);
+                writer.WritePropertyName("info"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Info);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(Info))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(Info))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             writer.WriteEndObject();
         }

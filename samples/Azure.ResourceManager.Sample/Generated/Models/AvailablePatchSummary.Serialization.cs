@@ -27,71 +27,47 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
-                if (Optional.IsDefined(Status))
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteStringValue(Status.Value.ToString());
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AssessmentActivityId))
             {
-                if (Optional.IsDefined(AssessmentActivityId))
-                {
-                    writer.WritePropertyName("assessmentActivityId"u8);
-                    writer.WriteStringValue(AssessmentActivityId);
-                }
+                writer.WritePropertyName("assessmentActivityId"u8);
+                writer.WriteStringValue(AssessmentActivityId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RebootPending))
             {
-                if (Optional.IsDefined(RebootPending))
-                {
-                    writer.WritePropertyName("rebootPending"u8);
-                    writer.WriteBooleanValue(RebootPending.Value);
-                }
+                writer.WritePropertyName("rebootPending"u8);
+                writer.WriteBooleanValue(RebootPending.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CriticalAndSecurityPatchCount))
             {
-                if (Optional.IsDefined(CriticalAndSecurityPatchCount))
-                {
-                    writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
-                    writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
-                }
+                writer.WritePropertyName("criticalAndSecurityPatchCount"u8);
+                writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(OtherPatchCount))
             {
-                if (Optional.IsDefined(OtherPatchCount))
-                {
-                    writer.WritePropertyName("otherPatchCount"u8);
-                    writer.WriteNumberValue(OtherPatchCount.Value);
-                }
+                writer.WritePropertyName("otherPatchCount"u8);
+                writer.WriteNumberValue(OtherPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
-                if (Optional.IsDefined(StartOn))
-                {
-                    writer.WritePropertyName("startTime"u8);
-                    writer.WriteStringValue(StartOn.Value, "O");
-                }
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
-                if (Optional.IsDefined(LastModifiedOn))
-                {
-                    writer.WritePropertyName("lastModifiedTime"u8);
-                    writer.WriteStringValue(LastModifiedOn.Value, "O");
-                }
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
-                if (Optional.IsDefined(Error))
-                {
-                    writer.WritePropertyName("error"u8);
-                    writer.WriteObjectValue(Error);
-                }
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

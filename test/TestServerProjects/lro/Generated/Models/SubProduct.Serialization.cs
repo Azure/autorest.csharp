@@ -27,13 +27,10 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
-                if (Optional.IsDefined(Id))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(Id);
-                }
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -42,16 +39,13 @@ namespace lro.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningStateValues))
             {
-                if (Optional.IsDefined(ProvisioningStateValues))
-                {
-                    writer.WritePropertyName("provisioningStateValues"u8);
-                    writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningStateValues"u8);
+                writer.WriteStringValue(ProvisioningStateValues.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -60,13 +60,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -80,58 +77,43 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HostId))
             {
-                if (Optional.IsDefined(HostId))
-                {
-                    writer.WritePropertyName("hostId"u8);
-                    writer.WriteStringValue(HostId);
-                }
+                writer.WritePropertyName("hostId"u8);
+                writer.WriteStringValue(HostId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(VirtualMachines))
             {
-                if (Optional.IsCollectionDefined(VirtualMachines))
+                writer.WritePropertyName("virtualMachines"u8);
+                writer.WriteStartArray();
+                foreach (var item in VirtualMachines)
                 {
-                    writer.WritePropertyName("virtualMachines"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in VirtualMachines)
-                    {
-                        JsonSerializer.Serialize(writer, item);
-                    }
-                    writer.WriteEndArray();
+                    JsonSerializer.Serialize(writer, item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(LicenseType))
             {
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningOn))
             {
-                if (Optional.IsDefined(ProvisioningOn))
-                {
-                    writer.WritePropertyName("provisioningTime"u8);
-                    writer.WriteStringValue(ProvisioningOn.Value, "O");
-                }
+                writer.WritePropertyName("provisioningTime"u8);
+                writer.WriteStringValue(ProvisioningOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState);
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
-                if (Optional.IsDefined(InstanceView))
-                {
-                    writer.WritePropertyName("instanceView"u8);
-                    writer.WriteObjectValue(InstanceView);
-                }
+                writer.WritePropertyName("instanceView"u8);
+                writer.WriteObjectValue(InstanceView);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

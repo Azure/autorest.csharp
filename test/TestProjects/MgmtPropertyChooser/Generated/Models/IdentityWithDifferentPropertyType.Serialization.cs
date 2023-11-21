@@ -28,21 +28,15 @@ namespace MgmtPropertyChooser.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PrincipalId))
             {
-                if (Optional.IsDefined(PrincipalId))
-                {
-                    writer.WritePropertyName("principalId"u8);
-                    writer.WriteStringValue(PrincipalId);
-                }
+                writer.WritePropertyName("principalId"u8);
+                writer.WriteStringValue(PrincipalId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
-                if (Optional.IsDefined(TenantId))
-                {
-                    writer.WritePropertyName("tenantId"u8);
-                    writer.WriteNumberValue(TenantId.Value);
-                }
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteNumberValue(TenantId.Value);
             }
             if (Optional.IsDefined(ResourceIdentityType))
             {
@@ -60,7 +54,7 @@ namespace MgmtPropertyChooser.Models
                 }
                 writer.WriteEndObject();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

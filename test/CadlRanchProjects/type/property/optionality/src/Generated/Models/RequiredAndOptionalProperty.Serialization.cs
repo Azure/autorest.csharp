@@ -35,7 +35,7 @@ namespace _Type.Property.Optionality.Models
             }
             writer.WritePropertyName("requiredProperty"u8);
             writer.WriteNumberValue(RequiredProperty);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

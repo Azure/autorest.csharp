@@ -27,39 +27,27 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Minimum))
             {
-                if (Optional.IsDefined(Minimum))
-                {
-                    writer.WritePropertyName("minimum"u8);
-                    writer.WriteNumberValue(Minimum.Value);
-                }
+                writer.WritePropertyName("minimum"u8);
+                writer.WriteNumberValue(Minimum.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Maximum))
             {
-                if (Optional.IsDefined(Maximum))
-                {
-                    writer.WritePropertyName("maximum"u8);
-                    writer.WriteNumberValue(Maximum.Value);
-                }
+                writer.WritePropertyName("maximum"u8);
+                writer.WriteNumberValue(Maximum.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DefaultCapacity))
             {
-                if (Optional.IsDefined(DefaultCapacity))
-                {
-                    writer.WritePropertyName("defaultCapacity"u8);
-                    writer.WriteNumberValue(DefaultCapacity.Value);
-                }
+                writer.WritePropertyName("defaultCapacity"u8);
+                writer.WriteNumberValue(DefaultCapacity.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ScaleType))
             {
-                if (Optional.IsDefined(ScaleType))
-                {
-                    writer.WritePropertyName("scaleType"u8);
-                    writer.WriteStringValue(ScaleType.Value.ToSerialString());
-                }
+                writer.WritePropertyName("scaleType"u8);
+                writer.WriteStringValue(ScaleType.Value.ToSerialString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

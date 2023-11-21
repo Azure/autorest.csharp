@@ -92,26 +92,20 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VmHealth))
             {
-                if (Optional.IsDefined(VmHealth))
-                {
-                    writer.WritePropertyName("vmHealth"u8);
-                    writer.WriteObjectValue(VmHealth);
-                }
+                writer.WritePropertyName("vmHealth"u8);
+                writer.WriteObjectValue(VmHealth);
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AssignedHost))
             {
-                if (Optional.IsDefined(AssignedHost))
-                {
-                    writer.WritePropertyName("assignedHost"u8);
-                    writer.WriteStringValue(AssignedHost);
-                }
+                writer.WritePropertyName("assignedHost"u8);
+                writer.WriteStringValue(AssignedHost);
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -128,7 +122,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("patchStatus"u8);
                 writer.WriteObjectValue(PatchStatus);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

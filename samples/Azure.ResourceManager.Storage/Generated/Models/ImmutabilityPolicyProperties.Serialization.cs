@@ -28,26 +28,20 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag.Value.ToString());
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(UpdateHistory))
             {
-                if (Optional.IsCollectionDefined(UpdateHistory))
+                writer.WritePropertyName("updateHistory"u8);
+                writer.WriteStartArray();
+                foreach (var item in UpdateHistory)
                 {
-                    writer.WritePropertyName("updateHistory"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in UpdateHistory)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -56,13 +50,10 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(State))
             {
-                if (Optional.IsDefined(State))
-                {
-                    writer.WritePropertyName("state"u8);
-                    writer.WriteStringValue(State.Value.ToString());
-                }
+                writer.WritePropertyName("state"u8);
+                writer.WriteStringValue(State.Value.ToString());
             }
             if (Optional.IsDefined(AllowProtectedAppendWrites))
             {
@@ -75,7 +66,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

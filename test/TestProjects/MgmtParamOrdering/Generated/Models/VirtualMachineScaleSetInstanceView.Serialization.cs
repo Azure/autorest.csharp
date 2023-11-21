@@ -27,15 +27,12 @@ namespace MgmtParamOrdering.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
             {
-                if (Optional.IsDefined(VirtualMachine))
-                {
-                    writer.WritePropertyName("virtualMachine"u8);
-                    writer.WriteStringValue(VirtualMachine);
-                }
+                writer.WritePropertyName("virtualMachine"u8);
+                writer.WriteStringValue(VirtualMachine);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -29,15 +29,12 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Tier))
             {
-                if (Optional.IsDefined(Tier))
-                {
-                    writer.WritePropertyName("tier"u8);
-                    writer.WriteStringValue(Tier.Value.ToSerialString());
-                }
+                writer.WritePropertyName("tier"u8);
+                writer.WriteStringValue(Tier.Value.ToSerialString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

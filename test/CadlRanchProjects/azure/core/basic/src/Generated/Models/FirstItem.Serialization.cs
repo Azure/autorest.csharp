@@ -33,7 +33,7 @@ namespace _Specs_.Azure.Core.Basic.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

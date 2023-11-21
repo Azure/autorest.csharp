@@ -27,23 +27,17 @@ namespace MgmtMockAndSample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Authorization))
             {
-                if (Optional.IsDefined(Authorization))
-                {
-                    writer.WritePropertyName("authorization"u8);
-                    writer.WriteObjectValue(Authorization);
-                }
+                writer.WritePropertyName("authorization"u8);
+                writer.WriteObjectValue(Authorization);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
-                if (Optional.IsDefined(TenantId))
-                {
-                    writer.WritePropertyName("tenantId"u8);
-                    writer.WriteStringValue(TenantId.Value);
-                }
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

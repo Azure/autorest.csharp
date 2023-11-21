@@ -27,34 +27,25 @@ namespace Azure.Network.Management.Interface.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag);
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Name))
             {
-                if (Optional.IsDefined(Name))
-                {
-                    writer.WritePropertyName("name"u8);
-                    writer.WriteStringValue(Name);
-                }
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Type))
             {
-                if (Optional.IsDefined(Type))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(Type);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Location))
             {
@@ -84,63 +75,48 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(DefaultSecurityRules))
             {
-                if (Optional.IsCollectionDefined(DefaultSecurityRules))
+                writer.WritePropertyName("defaultSecurityRules"u8);
+                writer.WriteStartArray();
+                foreach (var item in DefaultSecurityRules)
                 {
-                    writer.WritePropertyName("defaultSecurityRules"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in DefaultSecurityRules)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(NetworkInterfaces))
             {
-                if (Optional.IsCollectionDefined(NetworkInterfaces))
+                writer.WritePropertyName("networkInterfaces"u8);
+                writer.WriteStartArray();
+                foreach (var item in NetworkInterfaces)
                 {
-                    writer.WritePropertyName("networkInterfaces"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in NetworkInterfaces)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Subnets))
             {
-                if (Optional.IsCollectionDefined(Subnets))
+                writer.WritePropertyName("subnets"u8);
+                writer.WriteStartArray();
+                foreach (var item in Subnets)
                 {
-                    writer.WritePropertyName("subnets"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Subnets)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceGuid))
             {
-                if (Optional.IsDefined(ResourceGuid))
-                {
-                    writer.WritePropertyName("resourceGuid"u8);
-                    writer.WriteStringValue(ResourceGuid);
-                }
+                writer.WritePropertyName("resourceGuid"u8);
+                writer.WriteStringValue(ResourceGuid);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

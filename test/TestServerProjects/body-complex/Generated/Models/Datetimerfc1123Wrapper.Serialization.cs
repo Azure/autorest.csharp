@@ -37,7 +37,7 @@ namespace body_complex.Models
                 writer.WritePropertyName("now"u8);
                 writer.WriteStringValue(Now.Value, "R");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

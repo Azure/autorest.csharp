@@ -27,53 +27,35 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Blob))
             {
-                if (Optional.IsDefined(Blob))
-                {
-                    writer.WritePropertyName("blob"u8);
-                    writer.WriteStringValue(Blob);
-                }
+                writer.WritePropertyName("blob"u8);
+                writer.WriteStringValue(Blob);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Queue))
             {
-                if (Optional.IsDefined(Queue))
-                {
-                    writer.WritePropertyName("queue"u8);
-                    writer.WriteStringValue(Queue);
-                }
+                writer.WritePropertyName("queue"u8);
+                writer.WriteStringValue(Queue);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Table))
             {
-                if (Optional.IsDefined(Table))
-                {
-                    writer.WritePropertyName("table"u8);
-                    writer.WriteStringValue(Table);
-                }
+                writer.WritePropertyName("table"u8);
+                writer.WriteStringValue(Table);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(File))
             {
-                if (Optional.IsDefined(File))
-                {
-                    writer.WritePropertyName("file"u8);
-                    writer.WriteStringValue(File);
-                }
+                writer.WritePropertyName("file"u8);
+                writer.WriteStringValue(File);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Web))
             {
-                if (Optional.IsDefined(Web))
-                {
-                    writer.WritePropertyName("web"u8);
-                    writer.WriteStringValue(Web);
-                }
+                writer.WritePropertyName("web"u8);
+                writer.WriteStringValue(Web);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Dfs))
             {
-                if (Optional.IsDefined(Dfs))
-                {
-                    writer.WritePropertyName("dfs"u8);
-                    writer.WriteStringValue(Dfs);
-                }
+                writer.WritePropertyName("dfs"u8);
+                writer.WriteStringValue(Dfs);
             }
             if (Optional.IsDefined(MicrosoftEndpoints))
             {
@@ -85,7 +67,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("internetEndpoints"u8);
                 writer.WriteObjectValue(InternetEndpoints);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

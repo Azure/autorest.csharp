@@ -27,31 +27,22 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Properties))
             {
-                if (Optional.IsDefined(Properties))
-                {
-                    writer.WritePropertyName("properties"u8);
-                    writer.WriteObjectValue(Properties);
-                }
+                writer.WritePropertyName("properties"u8);
+                writer.WriteObjectValue(Properties);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
             {
-                if (Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Location))
             {
-                if (Optional.IsDefined(Location))
-                {
-                    writer.WritePropertyName("location"u8);
-                    writer.WriteStringValue(Location.Value);
-                }
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

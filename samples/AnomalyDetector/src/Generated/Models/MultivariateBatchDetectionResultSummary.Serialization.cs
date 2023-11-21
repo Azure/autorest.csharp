@@ -52,7 +52,7 @@ namespace AnomalyDetector.Models
             }
             writer.WritePropertyName("setupInfo"u8);
             writer.WriteObjectValue(SetupInfo);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

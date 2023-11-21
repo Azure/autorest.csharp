@@ -27,26 +27,20 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VirtualMachine))
             {
-                if (Optional.IsDefined(VirtualMachine))
-                {
-                    writer.WritePropertyName("virtualMachine"u8);
-                    writer.WriteObjectValue(VirtualMachine);
-                }
+                writer.WritePropertyName("virtualMachine"u8);
+                writer.WriteObjectValue(VirtualMachine);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Extensions))
             {
-                if (Optional.IsCollectionDefined(Extensions))
+                writer.WritePropertyName("extensions"u8);
+                writer.WriteStartArray();
+                foreach (var item in Extensions)
                 {
-                    writer.WritePropertyName("extensions"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Extensions)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(Statuses))
             {
@@ -58,20 +52,17 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(OrchestrationServices))
             {
-                if (Optional.IsCollectionDefined(OrchestrationServices))
+                writer.WritePropertyName("orchestrationServices"u8);
+                writer.WriteStartArray();
+                foreach (var item in OrchestrationServices)
                 {
-                    writer.WritePropertyName("orchestrationServices"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in OrchestrationServices)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

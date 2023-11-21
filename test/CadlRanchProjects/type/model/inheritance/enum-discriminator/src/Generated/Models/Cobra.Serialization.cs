@@ -32,7 +32,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WritePropertyName("length"u8);
             writer.WriteNumberValue(Length);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -32,7 +32,7 @@ namespace _Azure.Lro.Standard.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("resourceUri"u8);
             writer.WriteStringValue(ResourceUri);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

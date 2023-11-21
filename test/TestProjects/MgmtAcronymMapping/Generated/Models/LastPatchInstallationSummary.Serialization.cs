@@ -27,111 +27,72 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
-                if (Optional.IsDefined(Status))
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteStringValue(Status.Value.ToString());
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstallationActivityId))
             {
-                if (Optional.IsDefined(InstallationActivityId))
-                {
-                    writer.WritePropertyName("installationActivityId"u8);
-                    writer.WriteStringValue(InstallationActivityId);
-                }
+                writer.WritePropertyName("installationActivityId"u8);
+                writer.WriteStringValue(InstallationActivityId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MaintenanceWindowExceeded))
             {
-                if (Optional.IsDefined(MaintenanceWindowExceeded))
-                {
-                    writer.WritePropertyName("maintenanceWindowExceeded"u8);
-                    writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
-                }
+                writer.WritePropertyName("maintenanceWindowExceeded"u8);
+                writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RebootStatus))
             {
-                if (Optional.IsDefined(RebootStatus))
-                {
-                    writer.WritePropertyName("rebootStatus"u8);
-                    writer.WriteStringValue(RebootStatus.Value.ToString());
-                }
+                writer.WritePropertyName("rebootStatus"u8);
+                writer.WriteStringValue(RebootStatus.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(NotSelectedPatchCount))
             {
-                if (Optional.IsDefined(NotSelectedPatchCount))
-                {
-                    writer.WritePropertyName("notSelectedPatchCount"u8);
-                    writer.WriteNumberValue(NotSelectedPatchCount.Value);
-                }
+                writer.WritePropertyName("notSelectedPatchCount"u8);
+                writer.WriteNumberValue(NotSelectedPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ExcludedPatchCount))
             {
-                if (Optional.IsDefined(ExcludedPatchCount))
-                {
-                    writer.WritePropertyName("excludedPatchCount"u8);
-                    writer.WriteNumberValue(ExcludedPatchCount.Value);
-                }
+                writer.WritePropertyName("excludedPatchCount"u8);
+                writer.WriteNumberValue(ExcludedPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PendingPatchCount))
             {
-                if (Optional.IsDefined(PendingPatchCount))
-                {
-                    writer.WritePropertyName("pendingPatchCount"u8);
-                    writer.WriteNumberValue(PendingPatchCount.Value);
-                }
+                writer.WritePropertyName("pendingPatchCount"u8);
+                writer.WriteNumberValue(PendingPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstalledPatchCount))
             {
-                if (Optional.IsDefined(InstalledPatchCount))
-                {
-                    writer.WritePropertyName("installedPatchCount"u8);
-                    writer.WriteNumberValue(InstalledPatchCount.Value);
-                }
+                writer.WritePropertyName("installedPatchCount"u8);
+                writer.WriteNumberValue(InstalledPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(FailedPatchCount))
             {
-                if (Optional.IsDefined(FailedPatchCount))
-                {
-                    writer.WritePropertyName("failedPatchCount"u8);
-                    writer.WriteNumberValue(FailedPatchCount.Value);
-                }
+                writer.WritePropertyName("failedPatchCount"u8);
+                writer.WriteNumberValue(FailedPatchCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
-                if (Optional.IsDefined(StartOn))
-                {
-                    writer.WritePropertyName("startTime"u8);
-                    writer.WriteStringValue(StartOn.Value, "O");
-                }
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastModifiedOn))
             {
-                if (Optional.IsDefined(LastModifiedOn))
-                {
-                    writer.WritePropertyName("lastModifiedTime"u8);
-                    writer.WriteStringValue(LastModifiedOn.Value, "O");
-                }
+                writer.WritePropertyName("lastModifiedTime"u8);
+                writer.WriteStringValue(LastModifiedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartedBy))
             {
-                if (Optional.IsDefined(StartedBy))
-                {
-                    writer.WritePropertyName("startedBy"u8);
-                    writer.WriteStringValue(StartedBy);
-                }
+                writer.WritePropertyName("startedBy"u8);
+                writer.WriteStringValue(StartedBy);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
-                if (Optional.IsDefined(Error))
-                {
-                    writer.WritePropertyName("error"u8);
-                    writer.WriteObjectValue(Error);
-                }
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

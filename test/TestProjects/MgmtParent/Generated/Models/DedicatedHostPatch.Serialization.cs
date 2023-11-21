@@ -50,32 +50,23 @@ namespace MgmtParent.Models
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(HostId))
             {
-                if (Optional.IsDefined(HostId))
-                {
-                    writer.WritePropertyName("hostId"u8);
-                    writer.WriteStringValue(HostId);
-                }
+                writer.WritePropertyName("hostId"u8);
+                writer.WriteStringValue(HostId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningOn))
             {
-                if (Optional.IsDefined(ProvisioningOn))
-                {
-                    writer.WritePropertyName("provisioningTime"u8);
-                    writer.WriteStringValue(ProvisioningOn.Value, "O");
-                }
+                writer.WritePropertyName("provisioningTime"u8);
+                writer.WriteStringValue(ProvisioningOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState);
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

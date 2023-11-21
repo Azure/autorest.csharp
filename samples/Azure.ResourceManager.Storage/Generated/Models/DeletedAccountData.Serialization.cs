@@ -43,58 +43,40 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StorageAccountResourceId))
             {
-                if (Optional.IsDefined(StorageAccountResourceId))
-                {
-                    writer.WritePropertyName("storageAccountResourceId"u8);
-                    writer.WriteStringValue(StorageAccountResourceId);
-                }
+                writer.WritePropertyName("storageAccountResourceId"u8);
+                writer.WriteStringValue(StorageAccountResourceId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Location))
             {
-                if (Optional.IsDefined(Location))
-                {
-                    writer.WritePropertyName("location"u8);
-                    writer.WriteStringValue(Location.Value);
-                }
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RestoreReference))
             {
-                if (Optional.IsDefined(RestoreReference))
-                {
-                    writer.WritePropertyName("restoreReference"u8);
-                    writer.WriteStringValue(RestoreReference);
-                }
+                writer.WritePropertyName("restoreReference"u8);
+                writer.WriteStringValue(RestoreReference);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CreationTime))
             {
-                if (Optional.IsDefined(CreationTime))
-                {
-                    writer.WritePropertyName("creationTime"u8);
-                    writer.WriteStringValue(CreationTime);
-                }
+                writer.WritePropertyName("creationTime"u8);
+                writer.WriteStringValue(CreationTime);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(DeletionTime))
             {
-                if (Optional.IsDefined(DeletionTime))
-                {
-                    writer.WritePropertyName("deletionTime"u8);
-                    writer.WriteStringValue(DeletionTime);
-                }
+                writer.WritePropertyName("deletionTime"u8);
+                writer.WriteStringValue(DeletionTime);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

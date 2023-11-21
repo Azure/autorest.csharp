@@ -33,7 +33,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Neutral);
             writer.WritePropertyName("negative"u8);
             writer.WriteNumberValue(Negative);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

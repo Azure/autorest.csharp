@@ -32,34 +32,34 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@search.score"u8);
                 writer.WriteNumberValue(Score);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Highlights))
             {
-                if (Optional.IsCollectionDefined(Highlights))
+                writer.WritePropertyName("@search.highlights"u8);
+                writer.WriteStartObject();
+                foreach (var item in Highlights)
                 {
-                    writer.WritePropertyName("@search.highlights"u8);
-                    writer.WriteStartObject();
-                    foreach (var item in Highlights)
+                    writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
                     {
-                        writer.WritePropertyName(item.Key);
-                        if (item.Value == null)
-                        {
-                            writer.WriteNullValue();
-                            continue;
-                        }
-                        writer.WriteStartArray();
-                        foreach (var item0 in item.Value)
-                        {
-                            writer.WriteStringValue(item0);
-                        }
-                        writer.WriteEndArray();
+                        writer.WriteNullValue();
+                        continue;
                     }
-                    writer.WriteEndObject();
+                    writer.WriteStartArray();
+                    foreach (var item0 in item.Value)
+                    {
+                        writer.WriteStringValue(item0);
+                    }
+                    writer.WriteEndArray();
                 }
+                writer.WriteEndObject();
             }
-            foreach (var item in AdditionalProperties)
+            if (AdditionalProperties != null)
             {
-                writer.WritePropertyName(item.Key);
-                writer.WriteObjectValue(item.Value);
+                foreach (var item in AdditionalProperties)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
             }
             writer.WriteEndObject();
         }

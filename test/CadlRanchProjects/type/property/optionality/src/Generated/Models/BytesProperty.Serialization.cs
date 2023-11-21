@@ -33,7 +33,7 @@ namespace _Type.Property.Optionality.Models
                 writer.WritePropertyName("property"u8);
                 writer.WriteBase64StringValue(Property.ToArray(), "D");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

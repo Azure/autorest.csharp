@@ -27,53 +27,35 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Update))
             {
-                if (Optional.IsDefined(Update))
-                {
-                    writer.WritePropertyName("update"u8);
-                    writer.WriteStringValue(Update.Value.ToString());
-                }
+                writer.WritePropertyName("update"u8);
+                writer.WriteStringValue(Update.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
             {
-                if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
-                {
-                    writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
-                    writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
-                }
+                writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
+                writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Timestamp))
             {
-                if (Optional.IsDefined(Timestamp))
-                {
-                    writer.WritePropertyName("timestamp"u8);
-                    writer.WriteStringValue(Timestamp.Value, "O");
-                }
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ObjectIdentifier))
             {
-                if (Optional.IsDefined(ObjectIdentifier))
-                {
-                    writer.WritePropertyName("objectIdentifier"u8);
-                    writer.WriteStringValue(ObjectIdentifier);
-                }
+                writer.WritePropertyName("objectIdentifier"u8);
+                writer.WriteStringValue(ObjectIdentifier);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
-                if (Optional.IsDefined(TenantId))
-                {
-                    writer.WritePropertyName("tenantId"u8);
-                    writer.WriteStringValue(TenantId.Value);
-                }
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Upn))
             {
-                if (Optional.IsDefined(Upn))
-                {
-                    writer.WritePropertyName("upn"u8);
-                    writer.WriteStringValue(Upn);
-                }
+                writer.WritePropertyName("upn"u8);
+                writer.WriteStringValue(Upn);
             }
             if (Optional.IsDefined(AllowProtectedAppendWrites))
             {
@@ -85,7 +67,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

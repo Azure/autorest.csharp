@@ -27,39 +27,27 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Code))
             {
-                if (Optional.IsDefined(Code))
-                {
-                    writer.WritePropertyName("code"u8);
-                    writer.WriteStringValue(Code.Value.ToSerialString());
-                }
+                writer.WritePropertyName("code"u8);
+                writer.WriteStringValue(Code.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartOn))
             {
-                if (Optional.IsDefined(StartOn))
-                {
-                    writer.WritePropertyName("startTime"u8);
-                    writer.WriteStringValue(StartOn.Value, "O");
-                }
+                writer.WritePropertyName("startTime"u8);
+                writer.WriteStringValue(StartOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastAction))
             {
-                if (Optional.IsDefined(LastAction))
-                {
-                    writer.WritePropertyName("lastAction"u8);
-                    writer.WriteStringValue(LastAction.Value.ToSerialString());
-                }
+                writer.WritePropertyName("lastAction"u8);
+                writer.WriteStringValue(LastAction.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(LastActionOn))
             {
-                if (Optional.IsDefined(LastActionOn))
-                {
-                    writer.WritePropertyName("lastActionTime"u8);
-                    writer.WriteStringValue(LastActionOn.Value, "O");
-                }
+                writer.WritePropertyName("lastActionTime"u8);
+                writer.WriteStringValue(LastActionOn.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

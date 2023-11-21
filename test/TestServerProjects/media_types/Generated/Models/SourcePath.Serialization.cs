@@ -32,7 +32,7 @@ namespace media_types.Models
                 writer.WritePropertyName("source"u8);
                 writer.WriteStringValue(Source);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

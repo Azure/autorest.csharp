@@ -27,36 +27,27 @@ namespace Azure.Network.Management.Interface.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(GroupId))
             {
-                if (Optional.IsDefined(GroupId))
-                {
-                    writer.WritePropertyName("groupId"u8);
-                    writer.WriteStringValue(GroupId);
-                }
+                writer.WritePropertyName("groupId"u8);
+                writer.WriteStringValue(GroupId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RequiredMemberName))
             {
-                if (Optional.IsDefined(RequiredMemberName))
-                {
-                    writer.WritePropertyName("requiredMemberName"u8);
-                    writer.WriteStringValue(RequiredMemberName);
-                }
+                writer.WritePropertyName("requiredMemberName"u8);
+                writer.WriteStringValue(RequiredMemberName);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Fqdns))
             {
-                if (Optional.IsCollectionDefined(Fqdns))
+                writer.WritePropertyName("fqdns"u8);
+                writer.WriteStartArray();
+                foreach (var item in Fqdns)
                 {
-                    writer.WritePropertyName("fqdns"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Fqdns)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

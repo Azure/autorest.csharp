@@ -29,55 +29,40 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Tier))
             {
-                if (Optional.IsDefined(Tier))
-                {
-                    writer.WritePropertyName("tier"u8);
-                    writer.WriteStringValue(Tier.Value.ToSerialString());
-                }
+                writer.WritePropertyName("tier"u8);
+                writer.WriteStringValue(Tier.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ResourceType))
             {
-                if (Optional.IsDefined(ResourceType))
-                {
-                    writer.WritePropertyName("resourceType"u8);
-                    writer.WriteStringValue(ResourceType.Value);
-                }
+                writer.WritePropertyName("resourceType"u8);
+                writer.WriteStringValue(ResourceType.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Kind))
             {
-                if (Optional.IsDefined(Kind))
-                {
-                    writer.WritePropertyName("kind"u8);
-                    writer.WriteStringValue(Kind.Value.ToString());
-                }
+                writer.WritePropertyName("kind"u8);
+                writer.WriteStringValue(Kind.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Locations))
             {
-                if (Optional.IsCollectionDefined(Locations))
+                writer.WritePropertyName("locations"u8);
+                writer.WriteStartArray();
+                foreach (var item in Locations)
                 {
-                    writer.WritePropertyName("locations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Locations)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Capabilities))
             {
-                if (Optional.IsCollectionDefined(Capabilities))
+                writer.WritePropertyName("capabilities"u8);
+                writer.WriteStartArray();
+                foreach (var item in Capabilities)
                 {
-                    writer.WritePropertyName("capabilities"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Capabilities)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(Restrictions))
             {
@@ -89,7 +74,7 @@ namespace Azure.ResourceManager.Storage.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

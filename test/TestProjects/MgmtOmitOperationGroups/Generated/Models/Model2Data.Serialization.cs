@@ -39,21 +39,15 @@ namespace MgmtOmitOperationGroups
                 writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(F))
             {
-                if (Optional.IsDefined(F))
-                {
-                    writer.WritePropertyName("f"u8);
-                    writer.WriteStringValue(F);
-                }
+                writer.WritePropertyName("f"u8);
+                writer.WriteStringValue(F);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(G))
             {
-                if (Optional.IsDefined(G))
-                {
-                    writer.WritePropertyName("g"u8);
-                    writer.WriteStringValue(G);
-                }
+                writer.WritePropertyName("g"u8);
+                writer.WriteStringValue(G);
             }
             if (options.Format != "W")
             {
@@ -70,15 +64,12 @@ namespace MgmtOmitOperationGroups
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

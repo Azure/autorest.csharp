@@ -55,13 +55,10 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
-                if (Optional.IsDefined(TenantId))
-                {
-                    writer.WritePropertyName("tenantId"u8);
-                    writer.WriteStringValue(TenantId.Value);
-                }
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
             }
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -91,13 +88,10 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
@@ -106,26 +100,20 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(Hosts))
             {
-                if (Optional.IsCollectionDefined(Hosts))
+                writer.WritePropertyName("hosts"u8);
+                writer.WriteStartArray();
+                foreach (var item in Hosts)
                 {
-                    writer.WritePropertyName("hosts"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Hosts)
-                    {
-                        JsonSerializer.Serialize(writer, item);
-                    }
-                    writer.WriteEndArray();
+                    JsonSerializer.Serialize(writer, item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InstanceView))
             {
-                if (Optional.IsDefined(InstanceView))
-                {
-                    writer.WritePropertyName("instanceView"u8);
-                    writer.WriteObjectValue(InstanceView);
-                }
+                writer.WritePropertyName("instanceView"u8);
+                writer.WriteObjectValue(InstanceView);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
@@ -133,7 +121,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

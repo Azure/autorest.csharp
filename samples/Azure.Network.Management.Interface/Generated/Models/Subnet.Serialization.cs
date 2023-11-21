@@ -32,13 +32,10 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Etag))
             {
-                if (Optional.IsDefined(Etag))
-                {
-                    writer.WritePropertyName("etag"u8);
-                    writer.WriteStringValue(Etag);
-                }
+                writer.WritePropertyName("etag"u8);
+                writer.WriteStringValue(Etag);
             }
             if (Optional.IsDefined(Id))
             {
@@ -97,70 +94,55 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(PrivateEndpoints))
             {
-                if (Optional.IsCollectionDefined(PrivateEndpoints))
+                writer.WritePropertyName("privateEndpoints"u8);
+                writer.WriteStartArray();
+                foreach (var item in PrivateEndpoints)
                 {
-                    writer.WritePropertyName("privateEndpoints"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in PrivateEndpoints)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(IpConfigurations))
             {
-                if (Optional.IsCollectionDefined(IpConfigurations))
+                writer.WritePropertyName("ipConfigurations"u8);
+                writer.WriteStartArray();
+                foreach (var item in IpConfigurations)
                 {
-                    writer.WritePropertyName("ipConfigurations"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in IpConfigurations)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(IpConfigurationProfiles))
             {
-                if (Optional.IsCollectionDefined(IpConfigurationProfiles))
+                writer.WritePropertyName("ipConfigurationProfiles"u8);
+                writer.WriteStartArray();
+                foreach (var item in IpConfigurationProfiles)
                 {
-                    writer.WritePropertyName("ipConfigurationProfiles"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in IpConfigurationProfiles)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(ResourceNavigationLinks))
             {
-                if (Optional.IsCollectionDefined(ResourceNavigationLinks))
+                writer.WritePropertyName("resourceNavigationLinks"u8);
+                writer.WriteStartArray();
+                foreach (var item in ResourceNavigationLinks)
                 {
-                    writer.WritePropertyName("resourceNavigationLinks"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ResourceNavigationLinks)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(ServiceAssociationLinks))
             {
-                if (Optional.IsCollectionDefined(ServiceAssociationLinks))
+                writer.WritePropertyName("serviceAssociationLinks"u8);
+                writer.WriteStartArray();
+                foreach (var item in ServiceAssociationLinks)
                 {
-                    writer.WritePropertyName("serviceAssociationLinks"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in ServiceAssociationLinks)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(Delegations))
             {
@@ -172,21 +154,15 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Purpose))
             {
-                if (Optional.IsDefined(Purpose))
-                {
-                    writer.WritePropertyName("purpose"u8);
-                    writer.WriteStringValue(Purpose);
-                }
+                writer.WritePropertyName("purpose"u8);
+                writer.WriteStringValue(Purpose);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(PrivateEndpointNetworkPolicies))
             {
@@ -199,7 +175,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStringValue(PrivateLinkServiceNetworkPolicies);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

@@ -27,28 +27,22 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StringProperty))
             {
-                if (Optional.IsDefined(StringProperty))
-                {
-                    writer.WritePropertyName("StringProperty"u8);
-                    writer.WriteStringValue(StringProperty);
-                }
+                writer.WritePropertyName("StringProperty"u8);
+                writer.WriteStringValue(StringProperty);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsCollectionDefined(InternalListProperty))
             {
-                if (Optional.IsCollectionDefined(InternalListProperty))
+                writer.WritePropertyName("InternalListProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in InternalListProperty)
                 {
-                    writer.WritePropertyName("InternalListProperty"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in InternalListProperty)
-                    {
-                        writer.WriteObjectValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteObjectValue(item);
                 }
+                writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

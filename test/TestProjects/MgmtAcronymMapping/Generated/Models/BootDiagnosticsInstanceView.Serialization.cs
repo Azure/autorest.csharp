@@ -27,31 +27,22 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ConsoleScreenshotBlobUri))
             {
-                if (Optional.IsDefined(ConsoleScreenshotBlobUri))
-                {
-                    writer.WritePropertyName("consoleScreenshotBlobUri"u8);
-                    writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
-                }
+                writer.WritePropertyName("consoleScreenshotBlobUri"u8);
+                writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SerialConsoleLogBlobUri))
             {
-                if (Optional.IsDefined(SerialConsoleLogBlobUri))
-                {
-                    writer.WritePropertyName("serialConsoleLogBlobUri"u8);
-                    writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
-                }
+                writer.WritePropertyName("serialConsoleLogBlobUri"u8);
+                writer.WriteStringValue(SerialConsoleLogBlobUri.AbsoluteUri);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Status))
             {
-                if (Optional.IsDefined(Status))
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteObjectValue(Status);
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteObjectValue(Status);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

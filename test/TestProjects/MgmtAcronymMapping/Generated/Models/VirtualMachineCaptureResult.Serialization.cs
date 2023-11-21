@@ -27,68 +27,56 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Schema))
             {
-                if (Optional.IsDefined(Schema))
-                {
-                    writer.WritePropertyName("$schema"u8);
-                    writer.WriteStringValue(Schema);
-                }
+                writer.WritePropertyName("$schema"u8);
+                writer.WriteStringValue(Schema);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ContentVersion))
             {
-                if (Optional.IsDefined(ContentVersion))
-                {
-                    writer.WritePropertyName("contentVersion"u8);
-                    writer.WriteStringValue(ContentVersion);
-                }
+                writer.WritePropertyName("contentVersion"u8);
+                writer.WriteStringValue(ContentVersion);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Parameters))
             {
-                if (Optional.IsDefined(Parameters))
-                {
-                    writer.WritePropertyName("parameters"u8);
+                writer.WritePropertyName("parameters"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(Parameters))
+                using (JsonDocument document = JsonDocument.Parse(Parameters))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            if (options.Format != "W" && Optional.IsCollectionDefined(Resources))
+            {
+                writer.WritePropertyName("resources"u8);
+                writer.WriteStartArray();
+                foreach (var item in Resources)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(item);
+#else
+                    using (JsonDocument document = JsonDocument.Parse(item))
                     {
                         JsonSerializer.Serialize(writer, document.RootElement);
                     }
 #endif
                 }
-            }
-            if (options.Format != "W")
-            {
-                if (Optional.IsCollectionDefined(Resources))
-                {
-                    writer.WritePropertyName("resources"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in Resources)
-                    {
-                        if (item == null)
-                        {
-                            writer.WriteNullValue();
-                            continue;
-                        }
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item);
-#else
-                        using (JsonDocument document = JsonDocument.Parse(item))
-                        {
-                            JsonSerializer.Serialize(writer, document.RootElement);
-                        }
-#endif
-                    }
-                    writer.WriteEndArray();
-                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

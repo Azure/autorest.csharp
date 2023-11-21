@@ -27,39 +27,27 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(KeyName))
             {
-                if (Optional.IsDefined(KeyName))
-                {
-                    writer.WritePropertyName("keyName"u8);
-                    writer.WriteStringValue(KeyName);
-                }
+                writer.WritePropertyName("keyName"u8);
+                writer.WriteStringValue(KeyName);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Value))
             {
-                if (Optional.IsDefined(Value))
-                {
-                    writer.WritePropertyName("value"u8);
-                    writer.WriteStringValue(Value);
-                }
+                writer.WritePropertyName("value"u8);
+                writer.WriteStringValue(Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Permissions))
             {
-                if (Optional.IsDefined(Permissions))
-                {
-                    writer.WritePropertyName("permissions"u8);
-                    writer.WriteStringValue(Permissions.Value.ToSerialString());
-                }
+                writer.WritePropertyName("permissions"u8);
+                writer.WriteStringValue(Permissions.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CreatedOn))
             {
-                if (Optional.IsDefined(CreatedOn))
-                {
-                    writer.WritePropertyName("creationTime"u8);
-                    writer.WriteStringValue(CreatedOn.Value, "O");
-                }
+                writer.WritePropertyName("creationTime"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

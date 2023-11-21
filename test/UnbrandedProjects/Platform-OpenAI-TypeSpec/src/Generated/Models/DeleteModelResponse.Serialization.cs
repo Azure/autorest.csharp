@@ -30,7 +30,7 @@ namespace OpenAI.Models
             writer.WriteStringValue(Object);
             writer.WritePropertyName("deleted"u8);
             writer.WriteBooleanValue(Deleted);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

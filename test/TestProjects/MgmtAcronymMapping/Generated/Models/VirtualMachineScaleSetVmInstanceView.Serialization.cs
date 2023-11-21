@@ -62,13 +62,10 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(VmHealth))
             {
-                if (Optional.IsDefined(VmHealth))
-                {
-                    writer.WritePropertyName("vmHealth"u8);
-                    writer.WriteObjectValue(VmHealth);
-                }
+                writer.WritePropertyName("vmHealth"u8);
+                writer.WriteObjectValue(VmHealth);
             }
             if (Optional.IsDefined(BootDiagnostics))
             {
@@ -85,20 +82,17 @@ namespace MgmtAcronymMapping.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AssignedHost))
             {
-                if (Optional.IsDefined(AssignedHost))
-                {
-                    writer.WritePropertyName("assignedHost"u8);
-                    writer.WriteStringValue(AssignedHost);
-                }
+                writer.WritePropertyName("assignedHost"u8);
+                writer.WriteStringValue(AssignedHost);
             }
             if (Optional.IsDefined(PlacementGroupId))
             {
                 writer.WritePropertyName("placementGroupId"u8);
                 writer.WriteStringValue(PlacementGroupId);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

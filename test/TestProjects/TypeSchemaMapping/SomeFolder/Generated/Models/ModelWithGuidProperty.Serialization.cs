@@ -20,14 +20,11 @@ namespace TypeSchemaMapping.Models
         private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithGuidProperty");
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ModelProperty))
             {
-                if (Optional.IsDefined(ModelProperty))
-                {
-                    writer.WriteStartElement("ModelProperty");
-                    writer.WriteValue(ModelProperty.Value);
-                    writer.WriteEndElement();
-                }
+                writer.WriteStartElement("ModelProperty");
+                writer.WriteValue(ModelProperty.Value);
+                writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }

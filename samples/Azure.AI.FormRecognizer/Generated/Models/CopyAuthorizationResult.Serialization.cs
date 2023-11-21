@@ -33,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(AccessToken);
             writer.WritePropertyName("expirationDateTimeTicks"u8);
             writer.WriteNumberValue(ExpirationDateTimeTicks);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

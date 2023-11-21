@@ -27,39 +27,27 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SuccessfulInstanceCount))
             {
-                if (Optional.IsDefined(SuccessfulInstanceCount))
-                {
-                    writer.WritePropertyName("successfulInstanceCount"u8);
-                    writer.WriteNumberValue(SuccessfulInstanceCount.Value);
-                }
+                writer.WritePropertyName("successfulInstanceCount"u8);
+                writer.WriteNumberValue(SuccessfulInstanceCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(FailedInstanceCount))
             {
-                if (Optional.IsDefined(FailedInstanceCount))
-                {
-                    writer.WritePropertyName("failedInstanceCount"u8);
-                    writer.WriteNumberValue(FailedInstanceCount.Value);
-                }
+                writer.WritePropertyName("failedInstanceCount"u8);
+                writer.WriteNumberValue(FailedInstanceCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InProgressInstanceCount))
             {
-                if (Optional.IsDefined(InProgressInstanceCount))
-                {
-                    writer.WritePropertyName("inProgressInstanceCount"u8);
-                    writer.WriteNumberValue(InProgressInstanceCount.Value);
-                }
+                writer.WritePropertyName("inProgressInstanceCount"u8);
+                writer.WriteNumberValue(InProgressInstanceCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(PendingInstanceCount))
             {
-                if (Optional.IsDefined(PendingInstanceCount))
-                {
-                    writer.WritePropertyName("pendingInstanceCount"u8);
-                    writer.WriteNumberValue(PendingInstanceCount.Value);
-                }
+                writer.WritePropertyName("pendingInstanceCount"u8);
+                writer.WriteNumberValue(PendingInstanceCount.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

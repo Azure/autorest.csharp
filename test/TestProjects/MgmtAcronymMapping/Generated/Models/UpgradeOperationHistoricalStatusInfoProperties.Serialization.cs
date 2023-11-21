@@ -27,55 +27,37 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
-                if (Optional.IsDefined(RunningStatus))
-                {
-                    writer.WritePropertyName("runningStatus"u8);
-                    writer.WriteObjectValue(RunningStatus);
-                }
+                writer.WritePropertyName("runningStatus"u8);
+                writer.WriteObjectValue(RunningStatus);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Progress))
             {
-                if (Optional.IsDefined(Progress))
-                {
-                    writer.WritePropertyName("progress"u8);
-                    writer.WriteObjectValue(Progress);
-                }
+                writer.WritePropertyName("progress"u8);
+                writer.WriteObjectValue(Progress);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
-                if (Optional.IsDefined(Error))
-                {
-                    writer.WritePropertyName("error"u8);
-                    writer.WriteObjectValue(Error);
-                }
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(StartedBy))
             {
-                if (Optional.IsDefined(StartedBy))
-                {
-                    writer.WritePropertyName("startedBy"u8);
-                    writer.WriteStringValue(StartedBy.Value.ToSerialString());
-                }
+                writer.WritePropertyName("startedBy"u8);
+                writer.WriteStringValue(StartedBy.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TargetImageReference))
             {
-                if (Optional.IsDefined(TargetImageReference))
-                {
-                    writer.WritePropertyName("targetImageReference"u8);
-                    writer.WriteObjectValue(TargetImageReference);
-                }
+                writer.WritePropertyName("targetImageReference"u8);
+                writer.WriteObjectValue(TargetImageReference);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RollbackInfo))
             {
-                if (Optional.IsDefined(RollbackInfo))
-                {
-                    writer.WritePropertyName("rollbackInfo"u8);
-                    writer.WriteObjectValue(RollbackInfo);
-                }
+                writer.WritePropertyName("rollbackInfo"u8);
+                writer.WriteObjectValue(RollbackInfo);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

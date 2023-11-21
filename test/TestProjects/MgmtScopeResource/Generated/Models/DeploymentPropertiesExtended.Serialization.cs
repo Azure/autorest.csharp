@@ -27,82 +27,61 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
             {
-                if (Optional.IsDefined(ProvisioningState))
-                {
-                    writer.WritePropertyName("provisioningState"u8);
-                    writer.WriteStringValue(ProvisioningState.Value.ToString());
-                }
+                writer.WritePropertyName("provisioningState"u8);
+                writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CorrelationId))
             {
-                if (Optional.IsDefined(CorrelationId))
-                {
-                    writer.WritePropertyName("correlationId"u8);
-                    writer.WriteStringValue(CorrelationId);
-                }
+                writer.WritePropertyName("correlationId"u8);
+                writer.WriteStringValue(CorrelationId);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Timestamp))
             {
-                if (Optional.IsDefined(Timestamp))
-                {
-                    writer.WritePropertyName("timestamp"u8);
-                    writer.WriteStringValue(Timestamp.Value, "O");
-                }
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Duration))
             {
-                if (Optional.IsDefined(Duration))
-                {
-                    writer.WritePropertyName("duration"u8);
-                    writer.WriteStringValue(Duration.Value, "P");
-                }
+                writer.WritePropertyName("duration"u8);
+                writer.WriteStringValue(Duration.Value, "P");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Outputs))
             {
-                if (Optional.IsDefined(Outputs))
-                {
-                    writer.WritePropertyName("outputs"u8);
+                writer.WritePropertyName("outputs"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Outputs);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(Outputs))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            if (options.Format != "W")
-            {
-                if (Optional.IsDefined(Parameters))
+                using (JsonDocument document = JsonDocument.Parse(Outputs))
                 {
-                    writer.WritePropertyName("parameters"u8);
+                    JsonSerializer.Serialize(writer, document.RootElement);
+                }
+#endif
+            }
+            if (options.Format != "W" && Optional.IsDefined(Parameters))
+            {
+                writer.WritePropertyName("parameters"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
-                    using (JsonDocument document = JsonDocument.Parse(Parameters))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
+                using (JsonDocument document = JsonDocument.Parse(Parameters))
+                {
+                    JsonSerializer.Serialize(writer, document.RootElement);
                 }
+#endif
             }
             if (Optional.IsDefined(Mode))
             {
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToSerialString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ErrorResponse))
             {
-                if (Optional.IsDefined(ErrorResponse))
-                {
-                    writer.WritePropertyName("errorResponse"u8);
-                    writer.WriteObjectValue(ErrorResponse);
-                }
+                writer.WritePropertyName("errorResponse"u8);
+                writer.WriteObjectValue(ErrorResponse);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

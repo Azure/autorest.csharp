@@ -27,13 +27,10 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SourceId))
             {
-                if (Optional.IsDefined(SourceId))
-                {
-                    writer.WritePropertyName("sourceId"u8);
-                    writer.WriteStringValue(SourceId);
-                }
+                writer.WritePropertyName("sourceId"u8);
+                writer.WriteStringValue(SourceId);
             }
             writer.WritePropertyName("targetId"u8);
             writer.WriteStringValue(TargetId);
@@ -42,7 +39,7 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("notes"u8);
                 writer.WriteStringValue(Notes);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

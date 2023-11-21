@@ -35,7 +35,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(ErroneousDocumentsCount);
             writer.WritePropertyName("transactionsCount"u8);
             writer.WriteNumberValue(TransactionsCount);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

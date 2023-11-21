@@ -35,7 +35,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(CreatedDateTime, "O");
             writer.WritePropertyName("lastUpdatedDateTime"u8);
             writer.WriteStringValue(LastUpdatedDateTime, "O");
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

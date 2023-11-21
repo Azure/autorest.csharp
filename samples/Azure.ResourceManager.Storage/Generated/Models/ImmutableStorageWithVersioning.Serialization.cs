@@ -32,23 +32,17 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TimeStamp))
             {
-                if (Optional.IsDefined(TimeStamp))
-                {
-                    writer.WritePropertyName("timeStamp"u8);
-                    writer.WriteStringValue(TimeStamp.Value, "O");
-                }
+                writer.WritePropertyName("timeStamp"u8);
+                writer.WriteStringValue(TimeStamp.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MigrationState))
             {
-                if (Optional.IsDefined(MigrationState))
-                {
-                    writer.WritePropertyName("migrationState"u8);
-                    writer.WriteStringValue(MigrationState.Value.ToString());
-                }
+                writer.WritePropertyName("migrationState"u8);
+                writer.WriteStringValue(MigrationState.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

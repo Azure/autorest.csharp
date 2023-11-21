@@ -30,7 +30,7 @@ namespace _Specs_.Azure.Core.Traits.Models
             writer.WriteStartObject();
             writer.WritePropertyName("userActionResult"u8);
             writer.WriteStringValue(UserActionResult);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

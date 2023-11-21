@@ -33,7 +33,7 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteStringValue(Offer);
             writer.WritePropertyName("sku"u8);
             writer.WriteStringValue(Sku);
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

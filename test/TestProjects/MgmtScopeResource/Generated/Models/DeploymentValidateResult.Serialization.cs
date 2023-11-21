@@ -27,20 +27,17 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ErrorResponse))
             {
-                if (Optional.IsDefined(ErrorResponse))
-                {
-                    writer.WritePropertyName("errorResponse"u8);
-                    writer.WriteObjectValue(ErrorResponse);
-                }
+                writer.WritePropertyName("errorResponse"u8);
+                writer.WriteObjectValue(ErrorResponse);
             }
             if (Optional.IsDefined(Properties))
             {
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

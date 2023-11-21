@@ -57,50 +57,35 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Policy))
             {
-                if (Optional.IsDefined(Policy))
-                {
-                    writer.WritePropertyName("policy"u8);
-                    writer.WriteObjectValue(Policy);
-                }
+                writer.WritePropertyName("policy"u8);
+                writer.WriteObjectValue(Policy);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(RunningStatus))
             {
-                if (Optional.IsDefined(RunningStatus))
-                {
-                    writer.WritePropertyName("runningStatus"u8);
-                    writer.WriteObjectValue(RunningStatus);
-                }
+                writer.WritePropertyName("runningStatus"u8);
+                writer.WriteObjectValue(RunningStatus);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Progress))
             {
-                if (Optional.IsDefined(Progress))
-                {
-                    writer.WritePropertyName("progress"u8);
-                    writer.WriteObjectValue(Progress);
-                }
+                writer.WritePropertyName("progress"u8);
+                writer.WriteObjectValue(Progress);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Error))
             {
-                if (Optional.IsDefined(Error))
-                {
-                    writer.WritePropertyName("error"u8);
-                    writer.WriteObjectValue(Error);
-                }
+                writer.WritePropertyName("error"u8);
+                writer.WriteObjectValue(Error);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

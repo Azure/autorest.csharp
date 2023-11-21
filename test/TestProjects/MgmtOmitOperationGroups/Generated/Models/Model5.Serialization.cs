@@ -32,13 +32,10 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(K))
             {
-                if (Optional.IsDefined(K))
-                {
-                    writer.WritePropertyName("k"u8);
-                    writer.WriteStringValue(K);
-                }
+                writer.WritePropertyName("k"u8);
+                writer.WriteStringValue(K);
             }
             if (Optional.IsCollectionDefined(Modelqs))
             {
@@ -50,7 +47,7 @@ namespace MgmtOmitOperationGroups.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

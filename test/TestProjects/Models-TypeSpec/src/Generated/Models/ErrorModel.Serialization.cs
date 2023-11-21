@@ -33,15 +33,12 @@ namespace ModelsTypeSpec.Models
                 writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(InnerError))
             {
-                if (Optional.IsDefined(InnerError))
-                {
-                    writer.WritePropertyName("innerError"u8);
-                    writer.WriteObjectValue(InnerError);
-                }
+                writer.WritePropertyName("innerError"u8);
+                writer.WriteObjectValue(InnerError);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

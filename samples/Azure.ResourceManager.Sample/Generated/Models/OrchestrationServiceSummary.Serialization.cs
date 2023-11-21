@@ -27,23 +27,17 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ServiceName))
             {
-                if (Optional.IsDefined(ServiceName))
-                {
-                    writer.WritePropertyName("serviceName"u8);
-                    writer.WriteStringValue(ServiceName.Value.ToString());
-                }
+                writer.WritePropertyName("serviceName"u8);
+                writer.WriteStringValue(ServiceName.Value.ToString());
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ServiceState))
             {
-                if (Optional.IsDefined(ServiceState))
-                {
-                    writer.WritePropertyName("serviceState"u8);
-                    writer.WriteStringValue(ServiceState.Value.ToString());
-                }
+                writer.WritePropertyName("serviceState"u8);
+                writer.WriteStringValue(ServiceState.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

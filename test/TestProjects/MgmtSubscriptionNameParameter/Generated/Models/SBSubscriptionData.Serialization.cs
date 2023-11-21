@@ -44,47 +44,32 @@ namespace MgmtSubscriptionNameParameter
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(SystemData))
             {
-                if (Optional.IsDefined(SystemData))
-                {
-                    writer.WritePropertyName("systemData"u8);
-                    JsonSerializer.Serialize(writer, SystemData);
-                }
+                writer.WritePropertyName("systemData"u8);
+                JsonSerializer.Serialize(writer, SystemData);
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(MessageCount))
             {
-                if (Optional.IsDefined(MessageCount))
-                {
-                    writer.WritePropertyName("messageCount"u8);
-                    writer.WriteNumberValue(MessageCount.Value);
-                }
+                writer.WritePropertyName("messageCount"u8);
+                writer.WriteNumberValue(MessageCount.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(CreatedOn))
             {
-                if (Optional.IsDefined(CreatedOn))
-                {
-                    writer.WritePropertyName("createdAt"u8);
-                    writer.WriteStringValue(CreatedOn.Value, "O");
-                }
+                writer.WritePropertyName("createdAt"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(AccessedOn))
             {
-                if (Optional.IsDefined(AccessedOn))
-                {
-                    writer.WritePropertyName("accessedAt"u8);
-                    writer.WriteStringValue(AccessedOn.Value, "O");
-                }
+                writer.WritePropertyName("accessedAt"u8);
+                writer.WriteStringValue(AccessedOn.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(UpdatedOn))
             {
-                if (Optional.IsDefined(UpdatedOn))
-                {
-                    writer.WritePropertyName("updatedAt"u8);
-                    writer.WriteStringValue(UpdatedOn.Value, "O");
-                }
+                writer.WritePropertyName("updatedAt"u8);
+                writer.WriteStringValue(UpdatedOn.Value, "O");
             }
             if (Optional.IsDefined(LockDuration))
             {
@@ -152,7 +137,7 @@ namespace MgmtSubscriptionNameParameter
                 writer.WriteObjectValue(ClientAffineProperties);
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

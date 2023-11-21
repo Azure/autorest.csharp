@@ -27,15 +27,12 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Output))
             {
-                if (Optional.IsDefined(Output))
-                {
-                    writer.WritePropertyName("output"u8);
-                    writer.WriteStringValue(Output);
-                }
+                writer.WritePropertyName("output"u8);
+                writer.WriteStringValue(Output);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

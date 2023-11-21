@@ -27,41 +27,32 @@ namespace MgmtListMethods.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Id))
             {
-                if (Optional.IsDefined(Id))
-                {
-                    writer.WritePropertyName("id"u8);
-                    writer.WriteStringValue(Id);
-                }
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(UpdateWorkspaceQuotasType))
             {
-                if (Optional.IsDefined(UpdateWorkspaceQuotasType))
-                {
-                    writer.WritePropertyName("type"u8);
-                    writer.WriteStringValue(UpdateWorkspaceQuotasType);
-                }
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(UpdateWorkspaceQuotasType);
             }
             if (Optional.IsDefined(Limit))
             {
                 writer.WritePropertyName("limit"u8);
                 writer.WriteNumberValue(Limit.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Unit))
             {
-                if (Optional.IsDefined(Unit))
-                {
-                    writer.WritePropertyName("unit"u8);
-                    writer.WriteStringValue(Unit.Value.ToString());
-                }
+                writer.WritePropertyName("unit"u8);
+                writer.WriteStringValue(Unit.Value.ToString());
             }
             if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.Value.ToString());
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {

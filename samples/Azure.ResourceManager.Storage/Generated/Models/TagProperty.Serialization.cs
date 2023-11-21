@@ -27,47 +27,32 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Tag))
             {
-                if (Optional.IsDefined(Tag))
-                {
-                    writer.WritePropertyName("tag"u8);
-                    writer.WriteStringValue(Tag);
-                }
+                writer.WritePropertyName("tag"u8);
+                writer.WriteStringValue(Tag);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Timestamp))
             {
-                if (Optional.IsDefined(Timestamp))
-                {
-                    writer.WritePropertyName("timestamp"u8);
-                    writer.WriteStringValue(Timestamp.Value, "O");
-                }
+                writer.WritePropertyName("timestamp"u8);
+                writer.WriteStringValue(Timestamp.Value, "O");
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(ObjectIdentifier))
             {
-                if (Optional.IsDefined(ObjectIdentifier))
-                {
-                    writer.WritePropertyName("objectIdentifier"u8);
-                    writer.WriteStringValue(ObjectIdentifier);
-                }
+                writer.WritePropertyName("objectIdentifier"u8);
+                writer.WriteStringValue(ObjectIdentifier);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(TenantId))
             {
-                if (Optional.IsDefined(TenantId))
-                {
-                    writer.WritePropertyName("tenantId"u8);
-                    writer.WriteStringValue(TenantId.Value);
-                }
+                writer.WritePropertyName("tenantId"u8);
+                writer.WriteStringValue(TenantId.Value);
             }
-            if (options.Format != "W")
+            if (options.Format != "W" && Optional.IsDefined(Upn))
             {
-                if (Optional.IsDefined(Upn))
-                {
-                    writer.WritePropertyName("upn"u8);
-                    writer.WriteStringValue(Upn);
-                }
+                writer.WritePropertyName("upn"u8);
+                writer.WriteStringValue(Upn);
             }
-            if (_serializedAdditionalRawData != null && options.Format != "W")
+            if (options.Format != "W" && _serializedAdditionalRawData != null)
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
