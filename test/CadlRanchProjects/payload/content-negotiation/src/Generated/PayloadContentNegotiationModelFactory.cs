@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 
 namespace Payload.ContentNegotiation.Models
 {
@@ -18,7 +17,7 @@ namespace Payload.ContentNegotiation.Models
         /// <returns> A new <see cref="Models.PngImageAsJson"/> instance for mocking. </returns>
         public static PngImageAsJson PngImageAsJson(BinaryData content = null)
         {
-            return new PngImageAsJson(content, new Dictionary<string, BinaryData>());
+            return new PngImageAsJson(content, serializedAdditionalRawData: null);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VaultCreateOrUpdateContent(location, tags, properties, identity, new Dictionary<string, BinaryData>());
+            return new VaultCreateOrUpdateContent(location, tags, properties, identity, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VaultProperties"/>. </summary>
@@ -61,7 +61,7 @@ namespace MgmtMockAndSample.Models
             deployments ??= new List<string>();
             privateEndpointConnections ??= new List<PrivateEndpointConnectionItem>();
 
-            return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, readWriteSingleStringPropertySomething != null ? new SinglePropertyModel(readWriteSingleStringPropertySomething, new Dictionary<string, BinaryData>()) : null, readOnlySomething != null ? new ReadOnlySinglePropertyModel(readOnlySomething, new Dictionary<string, BinaryData>()) : null, deepSomething != null ? new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething, new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, readWriteSingleStringPropertySomething != null ? new SinglePropertyModel(readWriteSingleStringPropertySomething, new Dictionary<string, BinaryData>()) : null, readOnlySomething != null ? new ReadOnlySinglePropertyModel(readOnlySomething, new Dictionary<string, BinaryData>()) : null, deepSomething != null ? new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething, new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PrivateEndpointConnectionItem"/>. </summary>
@@ -73,7 +73,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.PrivateEndpointConnectionItem"/> instance for mocking. </returns>
         public static PrivateEndpointConnectionItem PrivateEndpointConnectionItem(string id = null, string etag = null, ResourceIdentifier privateEndpointId = null, MgmtMockAndSamplePrivateLinkServiceConnectionState connectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
-            return new PrivateEndpointConnectionItem(id, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState, new Dictionary<string, BinaryData>());
+            return new PrivateEndpointConnectionItem(id, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.VaultData"/>. </summary>
@@ -90,7 +90,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VaultData(id, name, resourceType, systemData, location, tags, properties, identity, new Dictionary<string, BinaryData>());
+            return new VaultData(id, name, resourceType, systemData, location, tags, properties, identity, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VaultKey"/>. </summary>
@@ -99,7 +99,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.VaultKey"/> instance for mocking. </returns>
         public static VaultKey VaultKey(string key = null, string content = null)
         {
-            return new VaultKey(key, content, new Dictionary<string, BinaryData>());
+            return new VaultKey(key, content, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VaultValidationResult"/>. </summary>
@@ -110,7 +110,7 @@ namespace MgmtMockAndSample.Models
         {
             issues ??= new List<VaultIssue>();
 
-            return new VaultValidationResult(issues?.ToList(), result, new Dictionary<string, BinaryData>());
+            return new VaultValidationResult(issues?.ToList(), result, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VaultIssue"/>. </summary>
@@ -120,7 +120,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.VaultIssue"/> instance for mocking. </returns>
         public static VaultIssue VaultIssue(string vaultIssueType = null, string description = null, int? sev = null)
         {
-            return new VaultIssue(vaultIssueType, description, sev, new Dictionary<string, BinaryData>());
+            return new VaultIssue(vaultIssueType, description, sev, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VaultAccessPolicyParameters"/>. </summary>
@@ -135,7 +135,7 @@ namespace MgmtMockAndSample.Models
         {
             accessPolicies ??= new List<AccessPolicyEntry>();
 
-            return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, accessPolicies != null ? new VaultAccessPolicyProperties(accessPolicies?.ToList(), new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, accessPolicies != null ? new VaultAccessPolicyProperties(accessPolicies?.ToList(), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DeletedVaultData"/>. </summary>
@@ -147,7 +147,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="MgmtMockAndSample.DeletedVaultData"/> instance for mocking. </returns>
         public static DeletedVaultData DeletedVaultData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DeletedVaultProperties properties = null)
         {
-            return new DeletedVaultData(id, name, resourceType, systemData, properties, new Dictionary<string, BinaryData>());
+            return new DeletedVaultData(id, name, resourceType, systemData, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeletedVaultProperties"/>. </summary>
@@ -162,7 +162,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DeletedVaultProperties(vaultId, location, deletedOn, scheduledPurgeOn, tags, purgeProtectionEnabled, new Dictionary<string, BinaryData>());
+            return new DeletedVaultProperties(vaultId, location, deletedOn, scheduledPurgeOn, tags, purgeProtectionEnabled, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VaultCheckNameAvailabilityContent"/>. </summary>
@@ -171,7 +171,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.VaultCheckNameAvailabilityContent"/> instance for mocking. </returns>
         public static VaultCheckNameAvailabilityContent VaultCheckNameAvailabilityContent(string name = null, EncryptionType resourceType = default)
         {
-            return new VaultCheckNameAvailabilityContent(name, resourceType, new Dictionary<string, BinaryData>());
+            return new VaultCheckNameAvailabilityContent(name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CheckNameAvailabilityResult"/>. </summary>
@@ -181,7 +181,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.CheckNameAvailabilityResult"/> instance for mocking. </returns>
         public static CheckNameAvailabilityResult CheckNameAvailabilityResult(bool? nameAvailable = null, Reason? reason = null, string message = null)
         {
-            return new CheckNameAvailabilityResult(nameAvailable, reason, message, new Dictionary<string, BinaryData>());
+            return new CheckNameAvailabilityResult(nameAvailable, reason, message, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData"/>. </summary>
@@ -200,7 +200,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, resourceType, systemData, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState, location, tags, new Dictionary<string, BinaryData>());
+            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, resourceType, systemData, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState, location, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MgmtMockAndSamplePrivateLinkResource"/>. </summary>
@@ -220,7 +220,7 @@ namespace MgmtMockAndSample.Models
             requiredZoneNames ??= new List<string>();
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtMockAndSamplePrivateLinkResource(id, name, resourceType, systemData, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), location, tags, new Dictionary<string, BinaryData>());
+            return new MgmtMockAndSamplePrivateLinkResource(id, name, resourceType, systemData, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), location, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.VirtualMachineExtensionImageData"/>. </summary>
@@ -240,7 +240,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, operatingSystem, computeRole, handlerSchema, vmScaleSetEnabled, supportsMultipleExtensions, location, tags, new Dictionary<string, BinaryData>());
+            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, operatingSystem, computeRole, handlerSchema, vmScaleSetEnabled, supportsMultipleExtensions, location, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DiskEncryptionSetData"/>. </summary>
@@ -265,7 +265,7 @@ namespace MgmtMockAndSample.Models
             previousKeys ??= new List<KeyForDiskEncryptionSet>();
             tags ??= new Dictionary<string, string>();
 
-            return new DiskEncryptionSetData(id, name, resourceType, systemData, identity, encryptionType, activeKey, previousKeys?.ToList(), provisioningState, rotationToLatestKeyVersionEnabled, lastKeyRotationTimestamp, federatedClientId, minimumTlsVersion, location, tags, new Dictionary<string, BinaryData>());
+            return new DiskEncryptionSetData(id, name, resourceType, systemData, identity, encryptionType, activeKey, previousKeys?.ToList(), provisioningState, rotationToLatestKeyVersionEnabled, lastKeyRotationTimestamp, federatedClientId, minimumTlsVersion, location, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.ManagedHsmData"/>. </summary>
@@ -282,7 +282,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ManagedHsmData(id, name, resourceType, systemData, tags, location, properties, sku, new Dictionary<string, BinaryData>());
+            return new ManagedHsmData(id, name, resourceType, systemData, tags, location, properties, sku, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ManagedHsmProperties"/>. </summary>
@@ -308,7 +308,7 @@ namespace MgmtMockAndSample.Models
             initialAdminObjectIds ??= new List<string>();
             privateEndpointConnections ??= new List<MhsmPrivateEndpointConnectionItem>();
 
-            return new ManagedHsmProperties(settings, protectedSettings, rawMessage, tenantId, initialAdminObjectIds?.ToList(), hsmUri, enableSoftDelete, softDeleteRetentionInDays, enablePurgeProtection, createMode, statusMessage, provisioningState, networkAcls, privateEndpointConnections?.ToList(), publicNetworkAccess, scheduledPurgeOn, new Dictionary<string, BinaryData>());
+            return new ManagedHsmProperties(settings, protectedSettings, rawMessage, tenantId, initialAdminObjectIds?.ToList(), hsmUri, enableSoftDelete, softDeleteRetentionInDays, enablePurgeProtection, createMode, statusMessage, provisioningState, networkAcls, privateEndpointConnections?.ToList(), publicNetworkAccess, scheduledPurgeOn, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MhsmPrivateEndpointConnectionItem"/>. </summary>
@@ -318,7 +318,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.MhsmPrivateEndpointConnectionItem"/> instance for mocking. </returns>
         public static MhsmPrivateEndpointConnectionItem MhsmPrivateEndpointConnectionItem(ResourceIdentifier privateEndpointId = null, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState = null)
         {
-            return new MhsmPrivateEndpointConnectionItem(privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, new Dictionary<string, BinaryData>());
+            return new MhsmPrivateEndpointConnectionItem(privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.MhsmPrivateEndpointConnectionData"/>. </summary>
@@ -338,7 +338,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MhsmPrivateEndpointConnectionData(id, name, resourceType, systemData, tags, location, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, sku, new Dictionary<string, BinaryData>());
+            return new MhsmPrivateEndpointConnectionData(id, name, resourceType, systemData, tags, location, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, sku, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DeletedManagedHsmData"/>. </summary>
@@ -350,7 +350,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="MgmtMockAndSample.DeletedManagedHsmData"/> instance for mocking. </returns>
         public static DeletedManagedHsmData DeletedManagedHsmData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DeletedManagedHsmProperties properties = null)
         {
-            return new DeletedManagedHsmData(id, name, resourceType, systemData, properties, new Dictionary<string, BinaryData>());
+            return new DeletedManagedHsmData(id, name, resourceType, systemData, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeletedManagedHsmProperties"/>. </summary>
@@ -365,7 +365,7 @@ namespace MgmtMockAndSample.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DeletedManagedHsmProperties(mhsmId, location, deletedOn, scheduledPurgeOn, purgeProtectionEnabled, tags, new Dictionary<string, BinaryData>());
+            return new DeletedManagedHsmProperties(mhsmId, location, deletedOn, scheduledPurgeOn, purgeProtectionEnabled, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MhsmPrivateLinkResource"/>. </summary>
@@ -386,7 +386,7 @@ namespace MgmtMockAndSample.Models
             requiredMembers ??= new List<string>();
             requiredZoneNames ??= new List<string>();
 
-            return new MhsmPrivateLinkResource(id, name, resourceType, systemData, tags, location, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), sku, new Dictionary<string, BinaryData>());
+            return new MhsmPrivateLinkResource(id, name, resourceType, systemData, tags, location, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), sku, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.FirewallPolicyData"/>. </summary>
@@ -422,7 +422,7 @@ namespace MgmtMockAndSample.Models
             childPolicies ??= new List<WritableSubResource>();
             snatPrivateRanges ??= new List<string>();
 
-            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, startupProbe, readinessProbe, desiredStatusCode, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList(), new Dictionary<string, BinaryData>()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority, new Dictionary<string, BinaryData>()) : null, skuTier != null ? new FirewallPolicySku(skuTier, new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, startupProbe, readinessProbe, desiredStatusCode, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList(), new Dictionary<string, BinaryData>()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority, new Dictionary<string, BinaryData>()) : null, skuTier != null ? new FirewallPolicySku(skuTier, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/>. </summary>
@@ -442,7 +442,7 @@ namespace MgmtMockAndSample.Models
         {
             ruleCollections ??= new List<FirewallPolicyRuleCollection>();
 
-            return new FirewallPolicyRuleCollectionGroupData(id, new Dictionary<string, BinaryData>(), name, etag, resourceType, priority, ruleCollections?.ToList(), provisioningState);
+            return new FirewallPolicyRuleCollectionGroupData(id, serializedAdditionalRawData: null, name, etag, resourceType, priority, ruleCollections?.ToList(), provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.RoleAssignmentData"/>. </summary>
@@ -457,7 +457,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="MgmtMockAndSample.RoleAssignmentData"/> instance for mocking. </returns>
         public static RoleAssignmentData RoleAssignmentData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string scope = null, string roleDefinitionId = null, string principalId = null, bool? canDelegate = null)
         {
-            return new RoleAssignmentData(id, name, resourceType, systemData, scope, roleDefinitionId, principalId, canDelegate, new Dictionary<string, BinaryData>());
+            return new RoleAssignmentData(id, name, resourceType, systemData, scope, roleDefinitionId, principalId, canDelegate, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EventData"/>. </summary>
@@ -466,7 +466,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.EventData"/> instance for mocking. </returns>
         public static EventData EventData(SenderAuthorization authorization = null, Guid? tenantId = null)
         {
-            return new EventData(authorization, tenantId, new Dictionary<string, BinaryData>());
+            return new EventData(authorization, tenantId, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SenderAuthorization"/>. </summary>
@@ -476,7 +476,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.SenderAuthorization"/> instance for mocking. </returns>
         public static SenderAuthorization SenderAuthorization(string action = null, string role = null, string scope = null)
         {
-            return new SenderAuthorization(action, role, scope, new Dictionary<string, BinaryData>());
+            return new SenderAuthorization(action, role, scope, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TemplateHashResult"/>. </summary>
@@ -485,7 +485,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.TemplateHashResult"/> instance for mocking. </returns>
         public static TemplateHashResult TemplateHashResult(string minifiedTemplate = null, string templateHash = null)
         {
-            return new TemplateHashResult(minifiedTemplate, templateHash, new Dictionary<string, BinaryData>());
+            return new TemplateHashResult(minifiedTemplate, templateHash, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.GuestConfigurationAssignmentData"/>. </summary>
@@ -497,7 +497,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="MgmtMockAndSample.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null, GuestConfigurationAssignmentProperties properties = null)
         {
-            return new GuestConfigurationAssignmentData(id, name, location, resourceType, new Dictionary<string, BinaryData>(), properties);
+            return new GuestConfigurationAssignmentData(id, name, location, resourceType, serializedAdditionalRawData: null, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationAssignmentProperties"/>. </summary>
@@ -513,7 +513,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.GuestConfigurationAssignmentProperties"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentProperties GuestConfigurationAssignmentProperties(string targetResourceId = null, ComplianceStatus? complianceStatus = null, DateTimeOffset? lastComplianceStatusChecked = null, string latestReportId = null, string parameterHash = null, string context = null, string assignmentHash = null, ProvisioningState? provisioningState = null, ResourceType? resourceType = null)
         {
-            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType, new Dictionary<string, BinaryData>());
+            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationBaseResource"/>. </summary>
@@ -524,7 +524,7 @@ namespace MgmtMockAndSample.Models
         /// <returns> A new <see cref="Models.GuestConfigurationBaseResource"/> instance for mocking. </returns>
         public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null)
         {
-            return new GuestConfigurationBaseResource(id, name, location, resourceType, new Dictionary<string, BinaryData>());
+            return new GuestConfigurationBaseResource(id, name, location, resourceType, serializedAdditionalRawData: null);
         }
     }
 }

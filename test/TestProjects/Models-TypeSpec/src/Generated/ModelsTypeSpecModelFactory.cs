@@ -19,7 +19,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
         public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
         {
-            return new FirstDerivedOutputModel("first", new Dictionary<string, BinaryData>(), first);
+            return new FirstDerivedOutputModel("first", serializedAdditionalRawData: null, first);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
@@ -27,7 +27,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
         public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
         {
-            return new SecondDerivedOutputModel("second", new Dictionary<string, BinaryData>(), second);
+            return new SecondDerivedOutputModel("second", serializedAdditionalRawData: null, second);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
@@ -73,7 +73,7 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), new Dictionary<string, BinaryData>());
+            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
@@ -123,7 +123,7 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
 
-            return new RoundTripModel(new Dictionary<string, BinaryData>(), requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
+            return new RoundTripModel(serializedAdditionalRawData: null, requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BaseModelWithProperties"/>. </summary>
@@ -131,7 +131,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.BaseModelWithProperties"/> instance for mocking. </returns>
         public static BaseModelWithProperties BaseModelWithProperties(string optionalPropertyOnBase = null)
         {
-            return new BaseModelWithProperties(optionalPropertyOnBase, new Dictionary<string, BinaryData>());
+            return new BaseModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
@@ -142,7 +142,7 @@ namespace ModelsTypeSpec.Models
         {
             requiredList ??= new List<CollectionItem>();
 
-            return new DerivedModelWithProperties(optionalPropertyOnBase, new Dictionary<string, BinaryData>(), requiredList?.ToList());
+            return new DerivedModelWithProperties(optionalPropertyOnBase, serializedAdditionalRawData: null, requiredList?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RoundTripReadOnlyModel"/>. </summary>
@@ -188,7 +188,7 @@ namespace ModelsTypeSpec.Models
             requiredCollectionWithNullableIntElement ??= new List<int?>();
             optionalCollectionWithNullableBooleanElement ??= new List<bool?>();
 
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), new Dictionary<string, BinaryData>());
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
@@ -211,7 +211,7 @@ namespace ModelsTypeSpec.Models
             optionalRecord ??= new Dictionary<string, RecordItem>();
             optionalNullableRecord ??= new Dictionary<string, RecordItem>();
 
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, new Dictionary<string, BinaryData>());
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InputRecursiveModel"/>. </summary>
@@ -220,7 +220,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.InputRecursiveModel"/> instance for mocking. </returns>
         public static InputRecursiveModel InputRecursiveModel(string message = null, InputRecursiveModel inner = null)
         {
-            return new InputRecursiveModel(message, inner, new Dictionary<string, BinaryData>());
+            return new InputRecursiveModel(message, inner, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ErrorModel"/>. </summary>
@@ -229,7 +229,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.ErrorModel"/> instance for mocking. </returns>
         public static ErrorModel ErrorModel(string message = null, ErrorModel innerError = null)
         {
-            return new ErrorModel(message, innerError, new Dictionary<string, BinaryData>());
+            return new ErrorModel(message, innerError, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NoUseBase"/>. </summary>
@@ -237,7 +237,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.NoUseBase"/> instance for mocking. </returns>
         public static NoUseBase NoUseBase(string baseModelProp = null)
         {
-            return new NoUseBase(baseModelProp, new Dictionary<string, BinaryData>());
+            return new NoUseBase(baseModelProp, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
@@ -246,7 +246,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
         public static SingleBase SingleBase(string kind = null, int size = default)
         {
-            return new UnknownSingleBase(kind, size, new Dictionary<string, BinaryData>());
+            return new UnknownSingleBase(kind, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Facet"/>. </summary>
@@ -254,7 +254,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.Facet"/> instance for mocking. </returns>
         public static Facet Facet(string field = null)
         {
-            return new Facet(field, new Dictionary<string, BinaryData>());
+            return new Facet(field, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NumericValuesFacetint32"/>. </summary>
@@ -266,7 +266,7 @@ namespace ModelsTypeSpec.Models
         {
             values ??= new List<int>();
 
-            return new NumericValuesFacetint32(field, new Dictionary<string, BinaryData>(), values?.ToList(), value);
+            return new NumericValuesFacetint32(field, serializedAdditionalRawData: null, values?.ToList(), value);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Int32ValuesFacet"/>. </summary>
@@ -279,7 +279,7 @@ namespace ModelsTypeSpec.Models
         {
             values ??= new List<int>();
 
-            return new Int32ValuesFacet(field, new Dictionary<string, BinaryData>(), values?.ToList(), value, kind);
+            return new Int32ValuesFacet(field, serializedAdditionalRawData: null, values?.ToList(), value, kind);
         }
     }
 }

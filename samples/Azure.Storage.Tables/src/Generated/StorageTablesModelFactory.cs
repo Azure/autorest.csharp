@@ -22,7 +22,7 @@ namespace Azure.Storage.Tables.Models
         {
             value ??= new List<TableResponseProperties>();
 
-            return new TableQueryResponse(odataMetadata, value?.ToList(), new Dictionary<string, BinaryData>());
+            return new TableQueryResponse(odataMetadata, value?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TableResponseProperties"/>. </summary>
@@ -33,7 +33,7 @@ namespace Azure.Storage.Tables.Models
         /// <returns> A new <see cref="Models.TableResponseProperties"/> instance for mocking. </returns>
         public static TableResponseProperties TableResponseProperties(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null)
         {
-            return new TableResponseProperties(tableName, odataType, odataId, odataEditLink, new Dictionary<string, BinaryData>());
+            return new TableResponseProperties(tableName, odataType, odataId, odataEditLink, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TableResponse"/>. </summary>
@@ -45,7 +45,7 @@ namespace Azure.Storage.Tables.Models
         /// <returns> A new <see cref="Models.TableResponse"/> instance for mocking. </returns>
         public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, string odataMetadata = null)
         {
-            return new TableResponse(tableName, odataType, odataId, odataEditLink, new Dictionary<string, BinaryData>(), odataMetadata);
+            return new TableResponse(tableName, odataType, odataId, odataEditLink, serializedAdditionalRawData: null, odataMetadata);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TableEntityQueryResponse"/>. </summary>
@@ -56,7 +56,7 @@ namespace Azure.Storage.Tables.Models
         {
             value ??= new List<IDictionary<string, object>>();
 
-            return new TableEntityQueryResponse(odataMetadata, value?.ToList(), new Dictionary<string, BinaryData>());
+            return new TableEntityQueryResponse(odataMetadata, value?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StorageServiceStats"/>. </summary>
@@ -64,7 +64,7 @@ namespace Azure.Storage.Tables.Models
         /// <returns> A new <see cref="Models.StorageServiceStats"/> instance for mocking. </returns>
         public static StorageServiceStats StorageServiceStats(GeoReplication geoReplication = null)
         {
-            return new StorageServiceStats(geoReplication, new Dictionary<string, BinaryData>());
+            return new StorageServiceStats(geoReplication, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GeoReplication"/>. </summary>
@@ -73,7 +73,7 @@ namespace Azure.Storage.Tables.Models
         /// <returns> A new <see cref="Models.GeoReplication"/> instance for mocking. </returns>
         public static GeoReplication GeoReplication(GeoReplicationStatusType status = default, DateTimeOffset lastSyncTime = default)
         {
-            return new GeoReplication(status, lastSyncTime, new Dictionary<string, BinaryData>());
+            return new GeoReplication(status, lastSyncTime, serializedAdditionalRawData: null);
         }
     }
 }

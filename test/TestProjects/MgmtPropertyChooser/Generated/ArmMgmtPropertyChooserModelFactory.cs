@@ -48,7 +48,7 @@ namespace MgmtPropertyChooser.Models
             zones ??= new List<string>();
             fakeResources ??= new List<MgmtPropertyChooserResourceData>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, identityWithRenamedProperty, identityWithDifferentPropertyType, identityWithNoUserIdentity, identityWithNoSystemIdentity, identityV3, zones?.ToList(), fakeResources?.ToList(), fakeSubResourceId != null ? ResourceManagerModelFactory.SubResource(fakeSubResourceId) : null, fakeWritableSubResourceId != null ? ResourceManagerModelFactory.WritableSubResource(fakeWritableSubResourceId) : null, provisioningState, licenseType, vmId, extensionsTimeBudget, new Dictionary<string, BinaryData>());
+            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, identityWithRenamedProperty, identityWithDifferentPropertyType, identityWithNoUserIdentity, identityWithNoSystemIdentity, identityV3, zones?.ToList(), fakeResources?.ToList(), fakeSubResourceId != null ? ResourceManagerModelFactory.SubResource(fakeSubResourceId) : null, fakeWritableSubResourceId != null ? ResourceManagerModelFactory.WritableSubResource(fakeWritableSubResourceId) : null, provisioningState, licenseType, vmId, extensionsTimeBudget, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineExtension"/>. </summary>
@@ -72,7 +72,7 @@ namespace MgmtPropertyChooser.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, new Dictionary<string, BinaryData>());
+            return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MgmtPropertyChooserResourceData"/>. </summary>
@@ -87,7 +87,7 @@ namespace MgmtPropertyChooser.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags, new Dictionary<string, BinaryData>());
+            return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IdentityWithRenamedProperty"/>. </summary>
@@ -100,7 +100,7 @@ namespace MgmtPropertyChooser.Models
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 
-            return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities, new Dictionary<string, BinaryData>());
+            return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IdentityWithDifferentPropertyType"/>. </summary>
@@ -113,7 +113,7 @@ namespace MgmtPropertyChooser.Models
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 
-            return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities, new Dictionary<string, BinaryData>());
+            return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatch"/>. </summary>
@@ -131,7 +131,7 @@ namespace MgmtPropertyChooser.Models
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
 
-            return new VirtualMachinePatch(tags, new Dictionary<string, BinaryData>(), plan, identity, zones?.ToList(), provisioningState, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachinePatch(tags, serializedAdditionalRawData: null, plan, identity, zones?.ToList(), provisioningState, licenseType, vmId, extensionsTimeBudget);
         }
     }
 }

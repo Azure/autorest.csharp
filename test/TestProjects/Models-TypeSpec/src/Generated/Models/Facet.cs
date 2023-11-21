@@ -44,7 +44,7 @@ namespace ModelsTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="Facet"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>

@@ -51,7 +51,7 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new InputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, new Dictionary<string, BinaryData>());
+            return new InputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MixedModel"/>. </summary>
@@ -93,7 +93,7 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, new Dictionary<string, BinaryData>());
+            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
@@ -135,7 +135,7 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, new Dictionary<string, BinaryData>());
+            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MixedModelWithReadonlyProperty"/>. </summary>
@@ -146,7 +146,7 @@ namespace ModelShapes.Models
         {
             readonlyListProperty ??= new List<ReadonlyModel>();
 
-            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty?.ToList(), new Dictionary<string, BinaryData>());
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadonlyModel"/>. </summary>
@@ -154,7 +154,7 @@ namespace ModelShapes.Models
         /// <returns> A new <see cref="Models.ReadonlyModel"/> instance for mocking. </returns>
         public static ReadonlyModel ReadonlyModel(string name = null)
         {
-            return new ReadonlyModel(name, new Dictionary<string, BinaryData>());
+            return new ReadonlyModel(name, serializedAdditionalRawData: null);
         }
     }
 }

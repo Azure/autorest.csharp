@@ -44,7 +44,7 @@ namespace ModelsTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="NoUseBase"/>. </summary>
         /// <param name="baseModelProp"> base model property. </param>

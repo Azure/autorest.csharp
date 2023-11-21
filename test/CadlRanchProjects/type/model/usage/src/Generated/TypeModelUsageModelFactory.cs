@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace _Type.Model.Usage.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace _Type.Model.Usage.Models
         /// <returns> A new <see cref="Models.OutputRecord"/> instance for mocking. </returns>
         public static OutputRecord OutputRecord(string requiredProp = null)
         {
-            return new OutputRecord(requiredProp, new Dictionary<string, BinaryData>());
+            return new OutputRecord(requiredProp, serializedAdditionalRawData: null);
         }
     }
 }

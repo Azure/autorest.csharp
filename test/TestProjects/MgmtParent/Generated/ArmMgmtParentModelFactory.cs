@@ -29,7 +29,7 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
+            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostGroupData"/>. </summary>
@@ -45,7 +45,7 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo, new Dictionary<string, BinaryData>());
+            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostData"/>. </summary>
@@ -61,7 +61,7 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo, new Dictionary<string, BinaryData>());
+            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DedicatedHostPatch"/>. </summary>
@@ -76,7 +76,7 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostPatch(tags, new Dictionary<string, BinaryData>(), platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState);
+            return new DedicatedHostPatch(tags, serializedAdditionalRawData: null, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtParent.VirtualMachineExtensionImageData"/>. </summary>
@@ -92,7 +92,7 @@ namespace MgmtParent.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar, new Dictionary<string, BinaryData>());
+            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar, serializedAdditionalRawData: null);
         }
     }
 }

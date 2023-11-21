@@ -20,7 +20,7 @@ namespace _Type.Property.Nullable.Models
         /// <returns> A new <see cref="Models.StringProperty"/> instance for mocking. </returns>
         public static StringProperty StringProperty(string requiredProperty = null, string nullableProperty = null)
         {
-            return new StringProperty(requiredProperty, nullableProperty, new Dictionary<string, BinaryData>());
+            return new StringProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BytesProperty"/>. </summary>
@@ -29,7 +29,7 @@ namespace _Type.Property.Nullable.Models
         /// <returns> A new <see cref="Models.BytesProperty"/> instance for mocking. </returns>
         public static BytesProperty BytesProperty(string requiredProperty = null, BinaryData nullableProperty = null)
         {
-            return new BytesProperty(requiredProperty, nullableProperty, new Dictionary<string, BinaryData>());
+            return new BytesProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DatetimeProperty"/>. </summary>
@@ -38,7 +38,7 @@ namespace _Type.Property.Nullable.Models
         /// <returns> A new <see cref="Models.DatetimeProperty"/> instance for mocking. </returns>
         public static DatetimeProperty DatetimeProperty(string requiredProperty = null, DateTimeOffset? nullableProperty = null)
         {
-            return new DatetimeProperty(requiredProperty, nullableProperty, new Dictionary<string, BinaryData>());
+            return new DatetimeProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DurationProperty"/>. </summary>
@@ -47,7 +47,7 @@ namespace _Type.Property.Nullable.Models
         /// <returns> A new <see cref="Models.DurationProperty"/> instance for mocking. </returns>
         public static DurationProperty DurationProperty(string requiredProperty = null, TimeSpan? nullableProperty = null)
         {
-            return new DurationProperty(requiredProperty, nullableProperty, new Dictionary<string, BinaryData>());
+            return new DurationProperty(requiredProperty, nullableProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsByteProperty"/>. </summary>
@@ -58,7 +58,7 @@ namespace _Type.Property.Nullable.Models
         {
             nullableProperty ??= new List<BinaryData>();
 
-            return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList(), new Dictionary<string, BinaryData>());
+            return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CollectionsModelProperty"/>. </summary>
@@ -69,7 +69,7 @@ namespace _Type.Property.Nullable.Models
         {
             nullableProperty ??= new List<InnerModel>();
 
-            return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList(), new Dictionary<string, BinaryData>());
+            return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InnerModel"/>. </summary>
@@ -77,7 +77,7 @@ namespace _Type.Property.Nullable.Models
         /// <returns> A new <see cref="Models.InnerModel"/> instance for mocking. </returns>
         public static InnerModel InnerModel(string property = null)
         {
-            return new InnerModel(property, new Dictionary<string, BinaryData>());
+            return new InnerModel(property, serializedAdditionalRawData: null);
         }
     }
 }

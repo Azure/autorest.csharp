@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace subscriptionId_apiVersion.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -19,7 +16,7 @@ namespace subscriptionId_apiVersion.Models
         /// <returns> A new <see cref="Models.SampleResourceGroup"/> instance for mocking. </returns>
         public static SampleResourceGroup SampleResourceGroup(string name = null, string location = null)
         {
-            return new SampleResourceGroup(name, location, new Dictionary<string, BinaryData>());
+            return new SampleResourceGroup(name, location, serializedAdditionalRawData: null);
         }
     }
 }

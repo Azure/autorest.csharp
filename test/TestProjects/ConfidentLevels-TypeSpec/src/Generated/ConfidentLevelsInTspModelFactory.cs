@@ -21,7 +21,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.UsualModel"/> instance for mocking. </returns>
         public static UsualModel UsualModel(string name = null, int age = default, double? size = null)
         {
-            return new UsualModel(name, age, size, new Dictionary<string, BinaryData>());
+            return new UsualModel(name, age, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnotherModelWithUnionProperty"/>. </summary>
@@ -29,7 +29,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.AnotherModelWithUnionProperty"/> instance for mocking. </returns>
         public static AnotherModelWithUnionProperty AnotherModelWithUnionProperty(BinaryData unionProperty = null)
         {
-            return new AnotherModelWithUnionProperty(unionProperty, new Dictionary<string, BinaryData>());
+            return new AnotherModelWithUnionProperty(unionProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.NonConfidentModelWithIndirectSelfReference"/>. </summary>
@@ -40,7 +40,7 @@ namespace ConfidentLevelsInTsp.Models
         {
             reference ??= new List<IndirectSelfReferenceModel>();
 
-            return new NonConfidentModelWithIndirectSelfReference(name, reference?.ToList(), new Dictionary<string, BinaryData>());
+            return new NonConfidentModelWithIndirectSelfReference(name, reference?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndirectSelfReferenceModel"/>. </summary>
@@ -50,7 +50,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.IndirectSelfReferenceModel"/> instance for mocking. </returns>
         public static IndirectSelfReferenceModel IndirectSelfReferenceModel(string something = null, NonConfidentModelWithSelfReference reference = null, BinaryData unionProperty = null)
         {
-            return new IndirectSelfReferenceModel(something, reference, unionProperty, new Dictionary<string, BinaryData>());
+            return new IndirectSelfReferenceModel(something, reference, unionProperty, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithIntegerLiteralTypeProperty"/>. </summary>
@@ -59,7 +59,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.ModelWithIntegerLiteralTypeProperty"/> instance for mocking. </returns>
         public static ModelWithIntegerLiteralTypeProperty ModelWithIntegerLiteralTypeProperty(string name = null, ModelWithIntegerLiteralTypePropertyId id = default)
         {
-            return new ModelWithIntegerLiteralTypeProperty(name, id, new Dictionary<string, BinaryData>());
+            return new ModelWithIntegerLiteralTypeProperty(name, id, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithFloatLiteralTypeProperty"/>. </summary>
@@ -68,7 +68,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.ModelWithFloatLiteralTypeProperty"/> instance for mocking. </returns>
         public static ModelWithFloatLiteralTypeProperty ModelWithFloatLiteralTypeProperty(string name = null, ModelWithFloatLiteralTypePropertyId id = default)
         {
-            return new ModelWithFloatLiteralTypeProperty(name, id, new Dictionary<string, BinaryData>());
+            return new ModelWithFloatLiteralTypeProperty(name, id, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BaseModel"/>. </summary>
@@ -77,7 +77,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.BaseModel"/> instance for mocking. </returns>
         public static BaseModel BaseModel(string name = null, double? size = null)
         {
-            return new BaseModel(name, size, new Dictionary<string, BinaryData>());
+            return new BaseModel(name, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModel"/>. </summary>
@@ -87,7 +87,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.DerivedModel"/> instance for mocking. </returns>
         public static DerivedModel DerivedModel(string name = null, double? size = null, int? age = null)
         {
-            return new DerivedModel(name, size, new Dictionary<string, BinaryData>(), age);
+            return new DerivedModel(name, size, serializedAdditionalRawData: null, age);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithUnion"/>. </summary>
@@ -97,7 +97,7 @@ namespace ConfidentLevelsInTsp.Models
         /// <returns> A new <see cref="Models.DerivedModelWithUnion"/> instance for mocking. </returns>
         public static DerivedModelWithUnion DerivedModelWithUnion(string name = null, double? size = null, BinaryData unionProperty = null)
         {
-            return new DerivedModelWithUnion(name, size, new Dictionary<string, BinaryData>(), unionProperty);
+            return new DerivedModelWithUnion(name, size, serializedAdditionalRawData: null, unionProperty);
         }
     }
 }

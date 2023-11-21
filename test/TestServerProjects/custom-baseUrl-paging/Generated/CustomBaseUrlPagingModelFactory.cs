@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace custom_baseUrl_paging.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace custom_baseUrl_paging.Models
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(ProductProperties properties = null)
         {
-            return new Product(properties, new Dictionary<string, BinaryData>());
+            return new Product(properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProductProperties"/>. </summary>
@@ -27,7 +24,7 @@ namespace custom_baseUrl_paging.Models
         /// <returns> A new <see cref="Models.ProductProperties"/> instance for mocking. </returns>
         public static ProductProperties ProductProperties(int? id = null, string name = null)
         {
-            return new ProductProperties(id, name, new Dictionary<string, BinaryData>());
+            return new ProductProperties(id, name, serializedAdditionalRawData: null);
         }
     }
 }

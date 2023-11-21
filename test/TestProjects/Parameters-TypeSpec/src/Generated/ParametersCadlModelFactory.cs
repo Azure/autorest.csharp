@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace ParametersCadl.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace ParametersCadl.Models
         /// <returns> A new <see cref="Models.Result"/> instance for mocking. </returns>
         public static Result Result(string id = null)
         {
-            return new Result(id, new Dictionary<string, BinaryData>());
+            return new Result(id, serializedAdditionalRawData: null);
         }
     }
 }

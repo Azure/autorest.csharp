@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using Azure;
 
 namespace _Azure.Lro.Standard.Models
@@ -20,7 +18,7 @@ namespace _Azure.Lro.Standard.Models
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(string name = null, string role = null)
         {
-            return new User(name, role, new Dictionary<string, BinaryData>());
+            return new User(name, role, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExportedUser"/>. </summary>
@@ -29,7 +27,7 @@ namespace _Azure.Lro.Standard.Models
         /// <returns> A new <see cref="Models.ExportedUser"/> instance for mocking. </returns>
         public static ExportedUser ExportedUser(string name = null, string resourceUri = null)
         {
-            return new ExportedUser(name, resourceUri, new Dictionary<string, BinaryData>());
+            return new ExportedUser(name, resourceUri, serializedAdditionalRawData: null);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateTranscriptionRequest"/> instance for mocking. </returns>
         public static CreateTranscriptionRequest CreateTranscriptionRequest(BinaryData file = null, CreateTranscriptionRequestModel model = default, string prompt = null, CreateTranscriptionRequestResponseFormat? responseFormat = null, double? temperature = null, string language = null)
         {
-            return new CreateTranscriptionRequest(file, model, prompt, responseFormat, temperature, language, new Dictionary<string, BinaryData>());
+            return new CreateTranscriptionRequest(file, model, prompt, responseFormat, temperature, language, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranscriptionResponse"/>. </summary>
@@ -47,7 +47,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateTranscriptionResponse"/> instance for mocking. </returns>
         public static CreateTranscriptionResponse CreateTranscriptionResponse(string text = null)
         {
-            return new CreateTranscriptionResponse(text, new Dictionary<string, BinaryData>());
+            return new CreateTranscriptionResponse(text, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationRequest"/>. </summary>
@@ -73,7 +73,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateTranslationRequest"/> instance for mocking. </returns>
         public static CreateTranslationRequest CreateTranslationRequest(BinaryData file = null, CreateTranslationRequestModel model = default, string prompt = null, CreateTranslationRequestResponseFormat? responseFormat = null, double? temperature = null)
         {
-            return new CreateTranslationRequest(file, model, prompt, responseFormat, temperature, new Dictionary<string, BinaryData>());
+            return new CreateTranslationRequest(file, model, prompt, responseFormat, temperature, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateTranslationResponse"/>. </summary>
@@ -81,7 +81,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateTranslationResponse"/> instance for mocking. </returns>
         public static CreateTranslationResponse CreateTranslationResponse(string text = null)
         {
-            return new CreateTranslationResponse(text, new Dictionary<string, BinaryData>());
+            return new CreateTranslationResponse(text, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionRequest"/>. </summary>
@@ -165,7 +165,7 @@ namespace OpenAI.Models
             functions ??= new List<ChatCompletionFunctions>();
             logitBias ??= new Dictionary<string, long>();
 
-            return new CreateChatCompletionRequest(model, messages?.ToList(), functions?.ToList(), functionCall, temperature, topP, n, maxTokens, stop, presencePenalty, frequencyPenalty, logitBias, user, stream, new Dictionary<string, BinaryData>());
+            return new CreateChatCompletionRequest(model, messages?.ToList(), functions?.ToList(), functionCall, temperature, topP, n, maxTokens, stop, presencePenalty, frequencyPenalty, logitBias, user, stream, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionRequestMessage"/>. </summary>
@@ -183,7 +183,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.ChatCompletionRequestMessage"/> instance for mocking. </returns>
         public static ChatCompletionRequestMessage ChatCompletionRequestMessage(ChatCompletionRequestMessageRole role = default, string content = null, string name = null, CreateFunctionCall functionCall = null)
         {
-            return new ChatCompletionRequestMessage(role, content, name, functionCall, new Dictionary<string, BinaryData>());
+            return new ChatCompletionRequestMessage(role, content, name, functionCall, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionFunctions"/>. </summary>
@@ -207,7 +207,7 @@ namespace OpenAI.Models
         {
             parameters ??= new Dictionary<string, BinaryData>();
 
-            return new ChatCompletionFunctions(name, description, parameters, new Dictionary<string, BinaryData>());
+            return new ChatCompletionFunctions(name, description, parameters, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponse"/>. </summary>
@@ -222,7 +222,7 @@ namespace OpenAI.Models
         {
             choices ??= new List<CreateChoice>();
 
-            return new CreateChatCompletionResponse(id, @object, created, model, choices?.ToList(), usage, new Dictionary<string, BinaryData>());
+            return new CreateChatCompletionResponse(id, @object, created, model, choices?.ToList(), usage, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChoice"/>. </summary>
@@ -237,7 +237,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateChoice"/> instance for mocking. </returns>
         public static CreateChoice CreateChoice(long index = default, ChatCompletionResponseMessage message = null, CreateChoiceFinishReason finishReason = default)
         {
-            return new CreateChoice(index, message, finishReason, new Dictionary<string, BinaryData>());
+            return new CreateChoice(index, message, finishReason, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChatCompletionResponseMessage"/>. </summary>
@@ -247,7 +247,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.ChatCompletionResponseMessage"/> instance for mocking. </returns>
         public static ChatCompletionResponseMessage ChatCompletionResponseMessage(ChatCompletionResponseMessageRole role = default, string content = null, CreateChatCompletionResponseFunctionCall functionCall = null)
         {
-            return new ChatCompletionResponseMessage(role, content, functionCall, new Dictionary<string, BinaryData>());
+            return new ChatCompletionResponseMessage(role, content, functionCall, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateChatCompletionResponseFunctionCall"/>. </summary>
@@ -260,7 +260,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateChatCompletionResponseFunctionCall"/> instance for mocking. </returns>
         public static CreateChatCompletionResponseFunctionCall CreateChatCompletionResponseFunctionCall(string name = null, string arguments = null)
         {
-            return new CreateChatCompletionResponseFunctionCall(name, arguments, new Dictionary<string, BinaryData>());
+            return new CreateChatCompletionResponseFunctionCall(name, arguments, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CompletionUsage"/>. </summary>
@@ -270,7 +270,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CompletionUsage"/> instance for mocking. </returns>
         public static CompletionUsage CompletionUsage(long promptTokens = default, long completionTokens = default, long totalTokens = default)
         {
-            return new CompletionUsage(promptTokens, completionTokens, totalTokens, new Dictionary<string, BinaryData>());
+            return new CompletionUsage(promptTokens, completionTokens, totalTokens, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuningJobRequest"/>. </summary>
@@ -310,7 +310,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateFineTuningJobRequest"/> instance for mocking. </returns>
         public static CreateFineTuningJobRequest CreateFineTuningJobRequest(string trainingFile = null, string validationFile = null, CreateFineTuningJobRequestModel model = default, CreateHyperparameters hyperparameters = null, string suffix = null)
         {
-            return new CreateFineTuningJobRequest(trainingFile, validationFile, model, hyperparameters, suffix, new Dictionary<string, BinaryData>());
+            return new CreateFineTuningJobRequest(trainingFile, validationFile, model, hyperparameters, suffix, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJob"/>. </summary>
@@ -360,7 +360,7 @@ namespace OpenAI.Models
         {
             resultFiles ??= new List<string>();
 
-            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles?.ToList(), trainedTokens, error, new Dictionary<string, BinaryData>());
+            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles?.ToList(), trainedTokens, error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobHyperparameters"/>. </summary>
@@ -374,7 +374,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuningJobHyperparameters"/> instance for mocking. </returns>
         public static FineTuningJobHyperparameters FineTuningJobHyperparameters(BinaryData nEpochs = null)
         {
-            return new FineTuningJobHyperparameters(nEpochs, new Dictionary<string, BinaryData>());
+            return new FineTuningJobHyperparameters(nEpochs, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobError"/>. </summary>
@@ -387,7 +387,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuningJobError"/> instance for mocking. </returns>
         public static FineTuningJobError FineTuningJobError(string message = null, string code = null, string param = null)
         {
-            return new FineTuningJobError(message, code, param, new Dictionary<string, BinaryData>());
+            return new FineTuningJobError(message, code, param, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListPaginatedFineTuningJobsResponse"/>. </summary>
@@ -399,7 +399,7 @@ namespace OpenAI.Models
         {
             data ??= new List<FineTuningJob>();
 
-            return new ListPaginatedFineTuningJobsResponse(@object, data?.ToList(), hasMore, new Dictionary<string, BinaryData>());
+            return new ListPaginatedFineTuningJobsResponse(@object, data?.ToList(), hasMore, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListFineTuningJobEventsResponse"/>. </summary>
@@ -410,7 +410,7 @@ namespace OpenAI.Models
         {
             data ??= new List<FineTuningJobEvent>();
 
-            return new ListFineTuningJobEventsResponse(@object, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListFineTuningJobEventsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuningJobEvent"/>. </summary>
@@ -422,7 +422,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuningJobEvent"/> instance for mocking. </returns>
         public static FineTuningJobEvent FineTuningJobEvent(string id = null, string @object = null, DateTimeOffset createdAt = default, FineTuningJobEventLevel level = default, string message = null)
         {
-            return new FineTuningJobEvent(id, @object, createdAt, level, message, new Dictionary<string, BinaryData>());
+            return new FineTuningJobEvent(id, @object, createdAt, level, message, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionRequest"/>. </summary>
@@ -520,7 +520,7 @@ namespace OpenAI.Models
         {
             logitBias ??= new Dictionary<string, long>();
 
-            return new CreateCompletionRequest(model, prompt, suffix, temperature, topP, n, maxTokens, stop, presencePenalty, frequencyPenalty, logitBias, user, stream, logprobs, echo, bestOf, new Dictionary<string, BinaryData>());
+            return new CreateCompletionRequest(model, prompt, suffix, temperature, topP, n, maxTokens, stop, presencePenalty, frequencyPenalty, logitBias, user, stream, logprobs, echo, bestOf, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponse"/>. </summary>
@@ -535,7 +535,7 @@ namespace OpenAI.Models
         {
             choices ??= new List<CreateCompletionResponseChoice>();
 
-            return new CreateCompletionResponse(id, @object, created, model, choices?.ToList(), usage, new Dictionary<string, BinaryData>());
+            return new CreateCompletionResponse(id, @object, created, model, choices?.ToList(), usage, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCompletionResponseChoice"/>. </summary>
@@ -552,7 +552,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateCompletionResponseChoice"/> instance for mocking. </returns>
         public static CreateCompletionResponseChoice CreateCompletionResponseChoice(long index = default, string text = null, CreateLogprobs logprobs = null, CreateCompletionResponseChoiceFinishReason finishReason = default)
         {
-            return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, new Dictionary<string, BinaryData>());
+            return new CreateCompletionResponseChoice(index, text, logprobs, finishReason, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateLogprobs"/>. </summary>
@@ -568,7 +568,7 @@ namespace OpenAI.Models
             topLogprobs ??= new List<IDictionary<string, long>>();
             textOffset ??= new List<long>();
 
-            return new CreateLogprobs(tokens?.ToList(), tokenLogprobs?.ToList(), topLogprobs?.ToList(), textOffset?.ToList(), new Dictionary<string, BinaryData>());
+            return new CreateLogprobs(tokens?.ToList(), tokenLogprobs?.ToList(), topLogprobs?.ToList(), textOffset?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditRequest"/>. </summary>
@@ -595,7 +595,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateEditRequest"/> instance for mocking. </returns>
         public static CreateEditRequest CreateEditRequest(CreateEditRequestModel model = default, string input = null, string instruction = null, long? n = null, double? temperature = null, double? topP = null)
         {
-            return new CreateEditRequest(model, input, instruction, n, temperature, topP, new Dictionary<string, BinaryData>());
+            return new CreateEditRequest(model, input, instruction, n, temperature, topP, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponse"/>. </summary>
@@ -608,7 +608,7 @@ namespace OpenAI.Models
         {
             choices ??= new List<CreateEditResponseChoice>();
 
-            return new CreateEditResponse(@object, created, choices?.ToList(), usage, new Dictionary<string, BinaryData>());
+            return new CreateEditResponse(@object, created, choices?.ToList(), usage, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEditResponseChoice"/>. </summary>
@@ -622,7 +622,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateEditResponseChoice"/> instance for mocking. </returns>
         public static CreateEditResponseChoice CreateEditResponseChoice(string text = null, long index = default, CreateEditResponseChoiceFinishReason finishReason = default)
         {
-            return new CreateEditResponseChoice(text, index, finishReason, new Dictionary<string, BinaryData>());
+            return new CreateEditResponseChoice(text, index, finishReason, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingRequest"/>. </summary>
@@ -638,7 +638,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateEmbeddingRequest"/> instance for mocking. </returns>
         public static CreateEmbeddingRequest CreateEmbeddingRequest(CreateEmbeddingRequestModel model = default, BinaryData input = null, string user = null)
         {
-            return new CreateEmbeddingRequest(model, input, user, new Dictionary<string, BinaryData>());
+            return new CreateEmbeddingRequest(model, input, user, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateEmbeddingResponse"/>. </summary>
@@ -651,7 +651,7 @@ namespace OpenAI.Models
         {
             data ??= new List<Embedding>();
 
-            return new CreateEmbeddingResponse(@object, model, data?.ToList(), usage, new Dictionary<string, BinaryData>());
+            return new CreateEmbeddingResponse(@object, model, data?.ToList(), usage, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Embedding"/>. </summary>
@@ -666,7 +666,7 @@ namespace OpenAI.Models
         {
             embeddingProperty ??= new List<double>();
 
-            return new Embedding(index, @object, embeddingProperty?.ToList(), new Dictionary<string, BinaryData>());
+            return new Embedding(index, @object, embeddingProperty?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateUsage"/>. </summary>
@@ -675,7 +675,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateUsage"/> instance for mocking. </returns>
         public static CreateUsage CreateUsage(long promptTokens = default, long totalTokens = default)
         {
-            return new CreateUsage(promptTokens, totalTokens, new Dictionary<string, BinaryData>());
+            return new CreateUsage(promptTokens, totalTokens, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListFilesResponse"/>. </summary>
@@ -686,7 +686,7 @@ namespace OpenAI.Models
         {
             data ??= new List<OpenAIFile>();
 
-            return new ListFilesResponse(@object, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListFilesResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OpenAIFile"/>. </summary>
@@ -707,7 +707,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.OpenAIFile"/> instance for mocking. </returns>
         public static OpenAIFile OpenAIFile(string id = null, OpenAIFileObject @object = default, long bytes = default, DateTimeOffset createdAt = default, string filename = null, string purpose = null, OpenAIFileStatus status = default, string statusDetails = null)
         {
-            return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails, new Dictionary<string, BinaryData>());
+            return new OpenAIFile(id, @object, bytes, createdAt, filename, purpose, status, statusDetails, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeleteFileResponse"/>. </summary>
@@ -717,7 +717,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.DeleteFileResponse"/> instance for mocking. </returns>
         public static DeleteFileResponse DeleteFileResponse(string id = null, string @object = null, bool deleted = default)
         {
-            return new DeleteFileResponse(id, @object, deleted, new Dictionary<string, BinaryData>());
+            return new DeleteFileResponse(id, @object, deleted, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateFineTuneRequest"/>. </summary>
@@ -821,7 +821,7 @@ namespace OpenAI.Models
         {
             classificationBetas ??= new List<double>();
 
-            return new CreateFineTuneRequest(trainingFile, validationFile, model, nEpochs, batchSize, learningRateMultiplier, promptLossRate, computeClassificationMetrics, classificationNClasses, classificationPositiveClass, classificationBetas?.ToList(), suffix, new Dictionary<string, BinaryData>());
+            return new CreateFineTuneRequest(trainingFile, validationFile, model, nEpochs, batchSize, learningRateMultiplier, promptLossRate, computeClassificationMetrics, classificationNClasses, classificationPositiveClass, classificationBetas?.ToList(), suffix, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTune"/>. </summary>
@@ -852,7 +852,7 @@ namespace OpenAI.Models
             resultFiles ??= new List<OpenAIFile>();
             events ??= new List<FineTuneEvent>();
 
-            return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles?.ToList(), validationFiles?.ToList(), resultFiles?.ToList(), events?.ToList(), new Dictionary<string, BinaryData>());
+            return new FineTune(id, @object, createdAt, updatedAt, model, fineTunedModel, organizationId, status, hyperparams, trainingFiles?.ToList(), validationFiles?.ToList(), resultFiles?.ToList(), events?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuneHyperparams"/>. </summary>
@@ -872,7 +872,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuneHyperparams"/> instance for mocking. </returns>
         public static FineTuneHyperparams FineTuneHyperparams(long nEpochs = default, long batchSize = default, double promptLossWeight = default, double learningRateMultiplier = default, bool? computeClassificationMetrics = null, string classificationPositiveClass = null, long? classificationNClasses = null)
         {
-            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, computeClassificationMetrics, classificationPositiveClass, classificationNClasses, new Dictionary<string, BinaryData>());
+            return new FineTuneHyperparams(nEpochs, batchSize, promptLossWeight, learningRateMultiplier, computeClassificationMetrics, classificationPositiveClass, classificationNClasses, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FineTuneEvent"/>. </summary>
@@ -883,7 +883,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.FineTuneEvent"/> instance for mocking. </returns>
         public static FineTuneEvent FineTuneEvent(string @object = null, DateTimeOffset createdAt = default, string level = null, string message = null)
         {
-            return new FineTuneEvent(@object, createdAt, level, message, new Dictionary<string, BinaryData>());
+            return new FineTuneEvent(@object, createdAt, level, message, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListFineTunesResponse"/>. </summary>
@@ -894,7 +894,7 @@ namespace OpenAI.Models
         {
             data ??= new List<FineTune>();
 
-            return new ListFineTunesResponse(@object, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListFineTunesResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListFineTuneEventsResponse"/>. </summary>
@@ -905,7 +905,7 @@ namespace OpenAI.Models
         {
             data ??= new List<FineTuneEvent>();
 
-            return new ListFineTuneEventsResponse(@object, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListFineTuneEventsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListModelsResponse"/>. </summary>
@@ -916,7 +916,7 @@ namespace OpenAI.Models
         {
             data ??= new List<Model>();
 
-            return new ListModelsResponse(@object, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListModelsResponse(@object, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Model"/>. </summary>
@@ -927,7 +927,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.Model"/> instance for mocking. </returns>
         public static Model Model(string id = null, ModelObject @object = default, DateTimeOffset created = default, string ownedBy = null)
         {
-            return new Model(id, @object, created, ownedBy, new Dictionary<string, BinaryData>());
+            return new Model(id, @object, created, ownedBy, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeleteModelResponse"/>. </summary>
@@ -937,7 +937,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.DeleteModelResponse"/> instance for mocking. </returns>
         public static DeleteModelResponse DeleteModelResponse(string id = null, string @object = null, bool deleted = default)
         {
-            return new DeleteModelResponse(id, @object, deleted, new Dictionary<string, BinaryData>());
+            return new DeleteModelResponse(id, @object, deleted, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageRequest"/>. </summary>
@@ -949,7 +949,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateImageRequest"/> instance for mocking. </returns>
         public static CreateImageRequest CreateImageRequest(string prompt = null, long? n = null, CreateImageRequestSize? size = null, CreateImageRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateImageRequest(prompt, n, size, responseFormat, user, new Dictionary<string, BinaryData>());
+            return new CreateImageRequest(prompt, n, size, responseFormat, user, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImagesResponse"/>. </summary>
@@ -960,7 +960,7 @@ namespace OpenAI.Models
         {
             data ??= new List<Image>();
 
-            return new ImagesResponse(created, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new ImagesResponse(created, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Image"/>. </summary>
@@ -969,7 +969,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.Image"/> instance for mocking. </returns>
         public static Image Image(Uri url = null, BinaryData b64Json = null)
         {
-            return new Image(url, b64Json, new Dictionary<string, BinaryData>());
+            return new Image(url, b64Json, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageEditRequest"/>. </summary>
@@ -990,7 +990,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateImageEditRequest"/> instance for mocking. </returns>
         public static CreateImageEditRequest CreateImageEditRequest(string prompt = null, BinaryData image = null, BinaryData mask = null, long? n = null, CreateImageEditRequestSize? size = null, CreateImageEditRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateImageEditRequest(prompt, image, mask, n, size, responseFormat, user, new Dictionary<string, BinaryData>());
+            return new CreateImageEditRequest(prompt, image, mask, n, size, responseFormat, user, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateImageVariationRequest"/>. </summary>
@@ -1005,7 +1005,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateImageVariationRequest"/> instance for mocking. </returns>
         public static CreateImageVariationRequest CreateImageVariationRequest(BinaryData image = null, long? n = null, CreateImageVariationRequestSize? size = null, CreateImageVariationRequestResponseFormat? responseFormat = null, string user = null)
         {
-            return new CreateImageVariationRequest(image, n, size, responseFormat, user, new Dictionary<string, BinaryData>());
+            return new CreateImageVariationRequest(image, n, size, responseFormat, user, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationRequest"/>. </summary>
@@ -1020,7 +1020,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateModerationRequest"/> instance for mocking. </returns>
         public static CreateModerationRequest CreateModerationRequest(BinaryData input = null, CreateModerationRequestModel? model = null)
         {
-            return new CreateModerationRequest(input, model, new Dictionary<string, BinaryData>());
+            return new CreateModerationRequest(input, model, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateModerationResponse"/>. </summary>
@@ -1032,7 +1032,7 @@ namespace OpenAI.Models
         {
             results ??= new List<CreateResult>();
 
-            return new CreateModerationResponse(id, model, results?.ToList(), new Dictionary<string, BinaryData>());
+            return new CreateModerationResponse(id, model, results?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateResult"/>. </summary>
@@ -1042,7 +1042,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateResult"/> instance for mocking. </returns>
         public static CreateResult CreateResult(bool flagged = default, CreateCategories categories = null, CreateCategoryScores categoryScores = null)
         {
-            return new CreateResult(flagged, categories, categoryScores, new Dictionary<string, BinaryData>());
+            return new CreateResult(flagged, categories, categoryScores, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCategories"/>. </summary>
@@ -1080,7 +1080,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateCategories"/> instance for mocking. </returns>
         public static CreateCategories CreateCategories(bool hate = default, bool hateThreatening = default, bool harassment = default, bool harassmentThreatening = default, bool selfHarm = default, bool selfHarmIntent = default, bool selfHarmInstructive = default, bool sexual = default, bool sexualMinors = default, bool violence = default, bool violenceGraphic = default)
         {
-            return new CreateCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, new Dictionary<string, BinaryData>());
+            return new CreateCategories(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CreateCategoryScores"/>. </summary>
@@ -1098,7 +1098,7 @@ namespace OpenAI.Models
         /// <returns> A new <see cref="Models.CreateCategoryScores"/> instance for mocking. </returns>
         public static CreateCategoryScores CreateCategoryScores(double hate = default, double hateThreatening = default, double harassment = default, double harassmentThreatening = default, double selfHarm = default, double selfHarmIntent = default, double selfHarmInstructive = default, double sexual = default, double sexualMinors = default, double violence = default, double violenceGraphic = default)
         {
-            return new CreateCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, new Dictionary<string, BinaryData>());
+            return new CreateCategoryScores(hate, hateThreatening, harassment, harassmentThreatening, selfHarm, selfHarmIntent, selfHarmInstructive, sexual, sexualMinors, violence, violenceGraphic, serializedAdditionalRawData: null);
         }
     }
 }

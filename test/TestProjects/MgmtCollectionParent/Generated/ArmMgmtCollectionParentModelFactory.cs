@@ -31,7 +31,7 @@ namespace MgmtCollectionParent.Models
             orderItemIds ??= new List<string>();
             orderStageHistory ??= new List<StageDetails>();
 
-            return new OrderResourceData(id, name, resourceType, systemData, orderItemIds?.ToList(), currentStage, orderStageHistory?.ToList(), new Dictionary<string, BinaryData>());
+            return new OrderResourceData(id, name, resourceType, systemData, orderItemIds?.ToList(), currentStage, orderStageHistory?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StageDetails"/>. </summary>
@@ -42,7 +42,7 @@ namespace MgmtCollectionParent.Models
         /// <returns> A new <see cref="Models.StageDetails"/> instance for mocking. </returns>
         public static StageDetails StageDetails(StageStatus? stageStatus = null, StageName? stageName = null, string displayName = null, DateTimeOffset? startOn = null)
         {
-            return new StageDetails(stageStatus, stageName, displayName, startOn, new Dictionary<string, BinaryData>());
+            return new StageDetails(stageStatus, stageName, displayName, startOn, serializedAdditionalRawData: null);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace CognitiveSearch.Models
         /// </list>
         /// </para>
         /// </summary>
-        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="ScoringFunction"/>. </summary>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>

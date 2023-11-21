@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <returns> A new <see cref="Models.NoDecoratorModelInPublic"/> instance for mocking. </returns>
         public static NoDecoratorModelInPublic NoDecoratorModelInPublic(string name = null)
         {
-            return new NoDecoratorModelInPublic(name, new Dictionary<string, BinaryData>());
+            return new NoDecoratorModelInPublic(name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInPublic"/>. </summary>
@@ -26,7 +23,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <returns> A new <see cref="Models.PublicDecoratorModelInPublic"/> instance for mocking. </returns>
         public static PublicDecoratorModelInPublic PublicDecoratorModelInPublic(string name = null)
         {
-            return new PublicDecoratorModelInPublic(name, new Dictionary<string, BinaryData>());
+            return new PublicDecoratorModelInPublic(name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
@@ -34,7 +31,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
         public static PublicDecoratorModelInInternal PublicDecoratorModelInInternal(string name = null)
         {
-            return new PublicDecoratorModelInInternal(name, new Dictionary<string, BinaryData>());
+            return new PublicDecoratorModelInInternal(name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
@@ -42,7 +39,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>
         public static SharedModel SharedModel(string name = null)
         {
-            return new SharedModel(name, new Dictionary<string, BinaryData>());
+            return new SharedModel(name, serializedAdditionalRawData: null);
         }
     }
 }

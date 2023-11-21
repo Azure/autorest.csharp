@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -19,7 +16,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(int id = default, string name = null)
         {
-            return new User(id, name, new Dictionary<string, BinaryData>());
+            return new User(id, name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UserActionResponse"/>. </summary>
@@ -27,7 +24,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         /// <returns> A new <see cref="Models.UserActionResponse"/> instance for mocking. </returns>
         public static UserActionResponse UserActionResponse(string userActionResult = null)
         {
-            return new UserActionResponse(userActionResult, new Dictionary<string, BinaryData>());
+            return new UserActionResponse(userActionResult, serializedAdditionalRawData: null);
         }
     }
 }

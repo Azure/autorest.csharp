@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +19,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.DotFish"/> instance for mocking. </returns>
         public static DotFish DotFish(string fishType = null, string species = null)
         {
-            return new UnknownDotFish(fishType, species, new Dictionary<string, BinaryData>());
+            return new UnknownDotFish(fishType, species, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DotFishMarket"/>. </summary>
@@ -40,7 +39,7 @@ namespace body_complex.Models
             salmons ??= new List<DotSalmon>();
             fishes ??= new List<DotFish>();
 
-            return new DotFishMarket(sampleSalmon, salmons?.ToList(), sampleFish, fishes?.ToList(), new Dictionary<string, BinaryData>());
+            return new DotFishMarket(sampleSalmon, salmons?.ToList(), sampleFish, fishes?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DotSalmon"/>. </summary>
@@ -50,7 +49,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.DotSalmon"/> instance for mocking. </returns>
         public static DotSalmon DotSalmon(string species = null, string location = null, bool? iswild = null)
         {
-            return new DotSalmon("DotSalmon", species, new Dictionary<string, BinaryData>(), location, iswild);
+            return new DotSalmon("DotSalmon", species, serializedAdditionalRawData: null, location, iswild);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadonlyObj"/>. </summary>
@@ -59,7 +58,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.ReadonlyObj"/> instance for mocking. </returns>
         public static ReadonlyObj ReadonlyObj(string id = null, int? size = null)
         {
-            return new ReadonlyObj(id, size, new Dictionary<string, BinaryData>());
+            return new ReadonlyObj(id, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MyBaseType"/>. </summary>
@@ -69,7 +68,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.MyBaseType"/> instance for mocking. </returns>
         public static MyBaseType MyBaseType(string kind = "Unknown", string propB1 = null, string propBH1 = null)
         {
-            return new UnknownMyBaseType(kind, propB1, propBH1, new Dictionary<string, BinaryData>());
+            return new UnknownMyBaseType(kind, propB1, propBH1, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MyDerivedType"/>. </summary>
@@ -79,7 +78,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.MyDerivedType"/> instance for mocking. </returns>
         public static MyDerivedType MyDerivedType(string propB1 = null, string propBH1 = null, string propD1 = null)
         {
-            return new MyDerivedType(MyKind.Kind1, propB1, propBH1, new Dictionary<string, BinaryData>(), propD1);
+            return new MyDerivedType(MyKind.Kind1, propB1, propBH1, serializedAdditionalRawData: null, propD1);
         }
     }
 }

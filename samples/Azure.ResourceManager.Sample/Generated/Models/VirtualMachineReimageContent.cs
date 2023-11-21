@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// </list>
         /// </para>
         /// </summary>
-        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineReimageContent"/>. </summary>
         public VirtualMachineReimageContent()

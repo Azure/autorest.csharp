@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using MgmtPagination;
 
 namespace MgmtPagination.Models
@@ -21,7 +19,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeIntegerModelData"/> instance for mocking. </returns>
         public static PageSizeIntegerModelData PageSizeIntegerModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeIntegerModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeIntegerModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeInt64ModelData"/>. </summary>
@@ -31,7 +29,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeInt64ModelData"/> instance for mocking. </returns>
         public static PageSizeInt64ModelData PageSizeInt64ModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeInt64ModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeInt64ModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeInt32ModelData"/>. </summary>
@@ -41,7 +39,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeInt32ModelData"/> instance for mocking. </returns>
         public static PageSizeInt32ModelData PageSizeInt32ModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeInt32ModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeInt32ModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeNumericModelData"/>. </summary>
@@ -51,7 +49,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeNumericModelData"/> instance for mocking. </returns>
         public static PageSizeNumericModelData PageSizeNumericModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeNumericModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeNumericModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeFloatModelData"/>. </summary>
@@ -61,7 +59,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeFloatModelData"/> instance for mocking. </returns>
         public static PageSizeFloatModelData PageSizeFloatModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeFloatModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeFloatModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeDoubleModelData"/>. </summary>
@@ -71,7 +69,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeDoubleModelData"/> instance for mocking. </returns>
         public static PageSizeDoubleModelData PageSizeDoubleModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeDoubleModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeDoubleModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeDecimalModelData"/>. </summary>
@@ -81,7 +79,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeDecimalModelData"/> instance for mocking. </returns>
         public static PageSizeDecimalModelData PageSizeDecimalModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeDecimalModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeDecimalModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeStringModelData"/>. </summary>
@@ -91,7 +89,7 @@ namespace MgmtPagination.Models
         /// <returns> A new <see cref="MgmtPagination.PageSizeStringModelData"/> instance for mocking. </returns>
         public static PageSizeStringModelData PageSizeStringModelData(string id = null, string name = null, string resourceType = null)
         {
-            return new PageSizeStringModelData(id, name, resourceType, new Dictionary<string, BinaryData>());
+            return new PageSizeStringModelData(id, name, resourceType, serializedAdditionalRawData: null);
         }
     }
 }

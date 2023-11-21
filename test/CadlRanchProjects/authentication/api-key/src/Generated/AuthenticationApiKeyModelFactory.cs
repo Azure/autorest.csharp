@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace Authentication.ApiKey.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace Authentication.ApiKey.Models
         /// <returns> A new <see cref="Models.InvalidAuth"/> instance for mocking. </returns>
         public static InvalidAuth InvalidAuth(string error = null)
         {
-            return new InvalidAuth(error, new Dictionary<string, BinaryData>());
+            return new InvalidAuth(error, serializedAdditionalRawData: null);
         }
     }
 }

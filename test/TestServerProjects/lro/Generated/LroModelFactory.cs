@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace lro.Models
@@ -26,7 +25,7 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Product(id, type, tags, location, name, new Dictionary<string, BinaryData>(), provisioningState, provisioningStateValues);
+            return new Product(id, type, tags, location, name, serializedAdditionalRawData: null, provisioningState, provisioningStateValues);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
@@ -40,7 +39,7 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, type, tags, location, name, new Dictionary<string, BinaryData>());
+            return new Resource(id, type, tags, location, name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubProduct"/>. </summary>
@@ -50,7 +49,7 @@ namespace lro.Models
         /// <returns> A new <see cref="Models.SubProduct"/> instance for mocking. </returns>
         public static SubProduct SubProduct(string id = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
-            return new SubProduct(id, new Dictionary<string, BinaryData>(), provisioningState, provisioningStateValues);
+            return new SubProduct(id, serializedAdditionalRawData: null, provisioningState, provisioningStateValues);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResource"/>. </summary>
@@ -58,7 +57,7 @@ namespace lro.Models
         /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
         public static SubResource SubResource(string id = null)
         {
-            return new SubResource(id, new Dictionary<string, BinaryData>());
+            return new SubResource(id, serializedAdditionalRawData: null);
         }
     }
 }

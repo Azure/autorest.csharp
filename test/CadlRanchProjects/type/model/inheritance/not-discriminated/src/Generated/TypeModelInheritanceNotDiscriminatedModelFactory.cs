@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string name = null)
         {
-            return new Pet(name, new Dictionary<string, BinaryData>());
+            return new Pet(name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -27,7 +24,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string name = null, int age = default)
         {
-            return new Cat(name, new Dictionary<string, BinaryData>(), age);
+            return new Cat(name, serializedAdditionalRawData: null, age);
         }
     }
 }

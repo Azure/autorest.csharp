@@ -29,7 +29,7 @@ namespace AuthoringTypeSpec.Models
         {
             warnings ??= new List<JobWarning>();
 
-            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, new Dictionary<string, BinaryData>());
+            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.JobWarning"/>. </summary>
@@ -38,7 +38,7 @@ namespace AuthoringTypeSpec.Models
         /// <returns> A new <see cref="Models.JobWarning"/> instance for mocking. </returns>
         public static JobWarning JobWarning(string code = null, string message = null)
         {
-            return new JobWarning(code, message, new Dictionary<string, BinaryData>());
+            return new JobWarning(code, message, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SwapDeploymentsJob"/>. </summary>
@@ -55,7 +55,7 @@ namespace AuthoringTypeSpec.Models
         {
             warnings ??= new List<JobWarning>();
 
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, new Dictionary<string, BinaryData>());
+            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, serializedAdditionalRawData: null);
         }
     }
 }

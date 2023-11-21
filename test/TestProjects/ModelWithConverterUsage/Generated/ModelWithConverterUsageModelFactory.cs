@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace ModelWithConverterUsage.Models
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
         public static OutputModel OutputModel(string outputModelProperty = null)
         {
-            return new OutputModel(outputModelProperty, new Dictionary<string, BinaryData>());
+            return new OutputModel(outputModelProperty, serializedAdditionalRawData: null);
         }
     }
 }

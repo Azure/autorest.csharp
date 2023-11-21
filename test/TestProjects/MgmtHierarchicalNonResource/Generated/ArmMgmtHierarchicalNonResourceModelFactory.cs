@@ -22,7 +22,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="MgmtHierarchicalNonResource.SharedGalleryData"/> instance for mocking. </returns>
         public static SharedGalleryData SharedGalleryData(string name = null, string location = null, string uniqueId = null)
         {
-            return new SharedGalleryData(name, location, new Dictionary<string, BinaryData>(), uniqueId);
+            return new SharedGalleryData(name, location, serializedAdditionalRawData: null, uniqueId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PirSharedGalleryResource"/>. </summary>
@@ -32,7 +32,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.PirSharedGalleryResource"/> instance for mocking. </returns>
         public static PirSharedGalleryResource PirSharedGalleryResource(string name = null, string location = null, string uniqueId = null)
         {
-            return new PirSharedGalleryResource(name, location, new Dictionary<string, BinaryData>(), uniqueId);
+            return new PirSharedGalleryResource(name, location, serializedAdditionalRawData: null, uniqueId);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PirResource"/>. </summary>
@@ -41,7 +41,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.PirResource"/> instance for mocking. </returns>
         public static PirResource PirResource(string name = null, string location = null)
         {
-            return new PirResource(name, location, new Dictionary<string, BinaryData>());
+            return new PirResource(name, location, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SharedGalleryImage"/>. </summary>
@@ -63,7 +63,7 @@ namespace MgmtHierarchicalNonResource.Models
             disallowedDiskTypes ??= new List<string>();
             features ??= new List<GalleryImageFeature>();
 
-            return new SharedGalleryImage(name, location, new Dictionary<string, BinaryData>(), uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), new Dictionary<string, BinaryData>()) : null, hyperVGeneration, features?.ToList(), purchasePlan);
+            return new SharedGalleryImage(name, location, serializedAdditionalRawData: null, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), new Dictionary<string, BinaryData>()) : null, hyperVGeneration, features?.ToList(), purchasePlan);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GalleryImageIdentifier"/>. </summary>
@@ -73,7 +73,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.GalleryImageIdentifier"/> instance for mocking. </returns>
         public static GalleryImageIdentifier GalleryImageIdentifier(string publisher = null, string offer = null, string sku = null)
         {
-            return new GalleryImageIdentifier(publisher, offer, sku, new Dictionary<string, BinaryData>());
+            return new GalleryImageIdentifier(publisher, offer, sku, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RecommendedMachineConfiguration"/>. </summary>
@@ -82,7 +82,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.RecommendedMachineConfiguration"/> instance for mocking. </returns>
         public static RecommendedMachineConfiguration RecommendedMachineConfiguration(ResourceRange vCpus = null, ResourceRange memory = null)
         {
-            return new RecommendedMachineConfiguration(vCpus, memory, new Dictionary<string, BinaryData>());
+            return new RecommendedMachineConfiguration(vCpus, memory, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceRange"/>. </summary>
@@ -91,7 +91,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.ResourceRange"/> instance for mocking. </returns>
         public static ResourceRange ResourceRange(int? min = null, int? max = null)
         {
-            return new ResourceRange(min, max, new Dictionary<string, BinaryData>());
+            return new ResourceRange(min, max, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GalleryImageFeature"/>. </summary>
@@ -100,7 +100,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.GalleryImageFeature"/> instance for mocking. </returns>
         public static GalleryImageFeature GalleryImageFeature(string name = null, string value = null)
         {
-            return new GalleryImageFeature(name, value, new Dictionary<string, BinaryData>());
+            return new GalleryImageFeature(name, value, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImagePurchasePlan"/>. </summary>
@@ -110,7 +110,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.ImagePurchasePlan"/> instance for mocking. </returns>
         public static ImagePurchasePlan ImagePurchasePlan(string name = null, string publisher = null, string product = null)
         {
-            return new ImagePurchasePlan(name, publisher, product, new Dictionary<string, BinaryData>());
+            return new ImagePurchasePlan(name, publisher, product, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SharedGalleryImageVersion"/>. </summary>
@@ -122,7 +122,7 @@ namespace MgmtHierarchicalNonResource.Models
         /// <returns> A new <see cref="Models.SharedGalleryImageVersion"/> instance for mocking. </returns>
         public static SharedGalleryImageVersion SharedGalleryImageVersion(string name = null, string location = null, string uniqueId = null, DateTimeOffset? publishedOn = null, DateTimeOffset? endOfLifeOn = null)
         {
-            return new SharedGalleryImageVersion(name, location, new Dictionary<string, BinaryData>(), uniqueId, publishedOn, endOfLifeOn);
+            return new SharedGalleryImageVersion(name, location, serializedAdditionalRawData: null, uniqueId, publishedOn, endOfLifeOn);
         }
     }
 }

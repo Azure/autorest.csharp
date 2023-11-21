@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace AppConfiguration.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace AppConfiguration.Models
         /// <returns> A new <see cref="Models.Key"/> instance for mocking. </returns>
         public static Key Key(string name = null)
         {
-            return new Key(name, new Dictionary<string, BinaryData>());
+            return new Key(name, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Label"/>. </summary>
@@ -26,7 +23,7 @@ namespace AppConfiguration.Models
         /// <returns> A new <see cref="Models.Label"/> instance for mocking. </returns>
         public static Label Label(string name = null)
         {
-            return new Label(name, new Dictionary<string, BinaryData>());
+            return new Label(name, serializedAdditionalRawData: null);
         }
     }
 }

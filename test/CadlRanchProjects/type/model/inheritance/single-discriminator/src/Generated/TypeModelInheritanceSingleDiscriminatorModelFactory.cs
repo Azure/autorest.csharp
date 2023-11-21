@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -19,7 +16,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <returns> A new <see cref="Models.Dinosaur"/> instance for mocking. </returns>
         public static Dinosaur Dinosaur(string kind = null, int size = default)
         {
-            return new UnknownDinosaur(kind, size, new Dictionary<string, BinaryData>());
+            return new UnknownDinosaur(kind, size, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TRex"/>. </summary>
@@ -27,7 +24,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <returns> A new <see cref="Models.TRex"/> instance for mocking. </returns>
         public static TRex TRex(int size = default)
         {
-            return new TRex("t-rex", size, new Dictionary<string, BinaryData>());
+            return new TRex("t-rex", size, serializedAdditionalRawData: null);
         }
     }
 }

@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace required_optional.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -19,7 +16,7 @@ namespace required_optional.Models
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(int id = default, string name = null)
         {
-            return new Product(id, name, new Dictionary<string, BinaryData>());
+            return new Product(id, name, serializedAdditionalRawData: null);
         }
     }
 }

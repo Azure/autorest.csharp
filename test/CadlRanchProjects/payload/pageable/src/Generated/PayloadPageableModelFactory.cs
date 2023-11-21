@@ -19,7 +19,7 @@ namespace Payload.Pageable.Models
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(string name = null)
         {
-            return new User(name, new Dictionary<string, BinaryData>());
+            return new User(name, serializedAdditionalRawData: null);
         }
     }
 }

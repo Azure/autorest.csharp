@@ -50,7 +50,7 @@ namespace MgmtExactMatchInheritance.Models
         {
             supportingUris ??= new List<Uri>();
 
-            return new ExactMatchModel1Data(id, name, resourceType, systemData, @new, supportingUris?.ToList(), type1, type2, type3, type4, type5, type6, type7, type8, type9, type10, type11, type12, type13, type14, type15, type16, type17, type18, type19, new Dictionary<string, BinaryData>());
+            return new ExactMatchModel1Data(id, name, resourceType, systemData, @new, supportingUris?.ToList(), type1, type2, type3, type4, type5, type6, type7, type8, type9, type10, type11, type12, type13, type14, type15, type16, type17, type18, type19, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExactMatchInheritance.ExactMatchModel5Data"/>. </summary>
@@ -66,7 +66,7 @@ namespace MgmtExactMatchInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ExactMatchModel5Data(id, name, resourceType, systemData, tags, location, @new, new Dictionary<string, BinaryData>());
+            return new ExactMatchModel5Data(id, name, resourceType, systemData, tags, location, @new, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExactMatchModel10"/>. </summary>
@@ -81,7 +81,7 @@ namespace MgmtExactMatchInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ExactMatchModel10(id, name, resourceType, systemData, location, tags, new Dictionary<string, BinaryData>());
+            return new ExactMatchModel10(id, name, resourceType, systemData, location, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExactMatchModel11"/>. </summary>
@@ -90,7 +90,7 @@ namespace MgmtExactMatchInheritance.Models
         /// <returns> A new <see cref="Models.ExactMatchModel11"/> instance for mocking. </returns>
         public static ExactMatchModel11 ExactMatchModel11(string name = null, ResourceType? resourceType = null)
         {
-            return new ExactMatchModel11(name, resourceType, new Dictionary<string, BinaryData>());
+            return new ExactMatchModel11(name, resourceType, serializedAdditionalRawData: null);
         }
     }
 }

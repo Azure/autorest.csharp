@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace additionalProperties.Models
@@ -76,7 +75,7 @@ namespace additionalProperties.Models
         {
             additionalProperties ??= new Dictionary<string, float>();
 
-            return new PetAPInProperties(id, name, status, additionalProperties, new Dictionary<string, BinaryData>());
+            return new PetAPInProperties(id, name, status, additionalProperties, serializedAdditionalRawData: null);
         }
     }
 }

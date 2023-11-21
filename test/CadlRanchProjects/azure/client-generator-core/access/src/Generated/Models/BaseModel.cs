@@ -44,7 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         /// </list>
         /// </para>
         /// </summary>
-        protected internal IDictionary<string, BinaryData> _serializedAdditionalRawData;
+        private protected IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
         /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="name"></param>

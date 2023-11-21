@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure;
@@ -27,7 +26,7 @@ namespace _Azure.Lro.RpcLegacy.Models
             errors ??= new List<ErrorResponse>();
             results ??= new List<string>();
 
-            return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList(), new Dictionary<string, BinaryData>());
+            return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
@@ -35,7 +34,7 @@ namespace _Azure.Lro.RpcLegacy.Models
         /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>
         public static ErrorResponse ErrorResponse(ResponseError error = null)
         {
-            return new ErrorResponse(error, new Dictionary<string, BinaryData>());
+            return new ErrorResponse(error, serializedAdditionalRawData: null);
         }
     }
 }

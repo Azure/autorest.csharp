@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 
 namespace ApiVersionInTsp.Models
 {
@@ -18,7 +17,7 @@ namespace ApiVersionInTsp.Models
         /// <returns> A new <see cref="Models.DetectionResult"/> instance for mocking. </returns>
         public static DetectionResult DetectionResult(Guid resultId = default)
         {
-            return new DetectionResult(resultId, new Dictionary<string, BinaryData>());
+            return new DetectionResult(resultId, serializedAdditionalRawData: null);
         }
     }
 }

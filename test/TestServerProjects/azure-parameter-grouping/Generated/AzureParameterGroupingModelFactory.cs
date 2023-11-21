@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -21,7 +18,7 @@ namespace azure_parameter_grouping.Models
         /// <returns> A new <see cref="Models.ParameterGroupingPostRequiredParameters"/> instance for mocking. </returns>
         public static ParameterGroupingPostRequiredParameters ParameterGroupingPostRequiredParameters(string customHeader = null, int? query = null, string path = null, int body = default)
         {
-            return new ParameterGroupingPostRequiredParameters(customHeader, query, path, body, new Dictionary<string, BinaryData>());
+            return new ParameterGroupingPostRequiredParameters(customHeader, query, path, body, serializedAdditionalRawData: null);
         }
     }
 }

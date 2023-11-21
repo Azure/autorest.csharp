@@ -123,7 +123,7 @@ namespace MgmtAcronymMapping.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, new Dictionary<string, BinaryData>());
+            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImageReference"/>. </summary>
@@ -154,7 +154,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.ImageReference"/> instance for mocking. </returns>
         public static ImageReference ImageReference(string id = null, string publisher = null, string offer = null, string sku = null, string version = null, string exactVersion = null)
         {
-            return new ImageReference(id, new Dictionary<string, BinaryData>(), publisher, offer, sku, version, exactVersion);
+            return new ImageReference(id, serializedAdditionalRawData: null, publisher, offer, sku, version, exactVersion);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DataDisk"/>. </summary>
@@ -209,7 +209,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.DataDisk"/> instance for mocking. </returns>
         public static DataDisk DataDisk(int lun = default, string name = null, Uri vhdUri = null, Uri imageUri = null, CachingType? caching = null, bool? writeAcceleratorEnabled = null, DiskCreateOptionType createOption = default, int? diskSizeGB = null, ManagedDiskParameters managedDisk = null, bool? toBeDetached = null, long? diskIopsReadWrite = null, long? diskMBpsReadWrite = null)
         {
-            return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri, new Dictionary<string, BinaryData>()) : null, imageUri != null ? new VirtualHardDisk(imageUri, new Dictionary<string, BinaryData>()) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite, new Dictionary<string, BinaryData>());
+            return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri, new Dictionary<string, BinaryData>()) : null, imageUri != null ? new VirtualHardDisk(imageUri, new Dictionary<string, BinaryData>()) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineInstanceView"/>. </summary>
@@ -279,7 +279,7 @@ namespace MgmtAcronymMapping.Models
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus, new Dictionary<string, BinaryData>());
+            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineAgentInstanceView"/>. </summary>
@@ -301,7 +301,7 @@ namespace MgmtAcronymMapping.Models
             extensionHandlers ??= new List<VirtualMachineExtensionHandlerInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers?.ToList(), statuses?.ToList(), new Dictionary<string, BinaryData>());
+            return new VirtualMachineAgentInstanceView(vmAgentVersion, extensionHandlers?.ToList(), statuses?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineExtensionHandlerInstanceView"/>. </summary>
@@ -320,7 +320,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineExtensionHandlerInstanceView"/> instance for mocking. </returns>
         public static VirtualMachineExtensionHandlerInstanceView VirtualMachineExtensionHandlerInstanceView(string virtualMachineExtensionHandlerInstanceViewType = null, string typeHandlerVersion = null, InstanceViewStatus status = null)
         {
-            return new VirtualMachineExtensionHandlerInstanceView(virtualMachineExtensionHandlerInstanceViewType, typeHandlerVersion, status, new Dictionary<string, BinaryData>());
+            return new VirtualMachineExtensionHandlerInstanceView(virtualMachineExtensionHandlerInstanceViewType, typeHandlerVersion, status, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MaintenanceRedeployStatus"/>. </summary>
@@ -355,7 +355,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.MaintenanceRedeployStatus"/> instance for mocking. </returns>
         public static MaintenanceRedeployStatus MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed = null, DateTimeOffset? preMaintenanceWindowStartOn = null, DateTimeOffset? preMaintenanceWindowEndOn = null, DateTimeOffset? maintenanceWindowStartOn = null, DateTimeOffset? maintenanceWindowEndOn = null, MaintenanceOperationResultCodeType? lastOperationResultCode = null, string lastOperationMessage = null)
         {
-            return new MaintenanceRedeployStatus(isCustomerInitiatedMaintenanceAllowed, preMaintenanceWindowStartOn, preMaintenanceWindowEndOn, maintenanceWindowStartOn, maintenanceWindowEndOn, lastOperationResultCode, lastOperationMessage, new Dictionary<string, BinaryData>());
+            return new MaintenanceRedeployStatus(isCustomerInitiatedMaintenanceAllowed, preMaintenanceWindowStartOn, preMaintenanceWindowEndOn, maintenanceWindowStartOn, maintenanceWindowEndOn, lastOperationResultCode, lastOperationMessage, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DiskInstanceView"/>. </summary>
@@ -377,7 +377,7 @@ namespace MgmtAcronymMapping.Models
             encryptionSettings ??= new List<DiskEncryptionSettings>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList(), new Dictionary<string, BinaryData>());
+            return new DiskInstanceView(name, encryptionSettings?.ToList(), statuses?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.BootDiagnosticsInstanceView"/>. </summary>
@@ -396,7 +396,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.BootDiagnosticsInstanceView"/> instance for mocking. </returns>
         public static BootDiagnosticsInstanceView BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri = null, Uri serialConsoleLogBlobUri = null, InstanceViewStatus status = null)
         {
-            return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status, new Dictionary<string, BinaryData>());
+            return new BootDiagnosticsInstanceView(consoleScreenshotBlobUri, serialConsoleLogBlobUri, status, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatchStatus"/>. </summary>
@@ -411,7 +411,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachinePatchStatus"/> instance for mocking. </returns>
         public static VirtualMachinePatchStatus VirtualMachinePatchStatus(AvailablePatchSummary availablePatchSummary = null, LastPatchInstallationSummary lastPatchInstallationSummary = null)
         {
-            return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary, new Dictionary<string, BinaryData>());
+            return new VirtualMachinePatchStatus(availablePatchSummary, lastPatchInstallationSummary, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AvailablePatchSummary"/>. </summary>
@@ -454,7 +454,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.AvailablePatchSummary"/> instance for mocking. </returns>
         public static AvailablePatchSummary AvailablePatchSummary(PatchOperationStatus? status = null, string assessmentActivityId = null, bool? rebootPending = null, int? criticalAndSecurityPatchCount = null, int? otherPatchCount = null, Uri uri = null, DateTimeOffset? startOn = null, DateTimeOffset? lastModifiedOn = null, ApiError error = null)
         {
-            return new AvailablePatchSummary(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, uri, startOn, lastModifiedOn, error, new Dictionary<string, BinaryData>());
+            return new AvailablePatchSummary(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, uri, startOn, lastModifiedOn, error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApiError"/>. </summary>
@@ -483,7 +483,7 @@ namespace MgmtAcronymMapping.Models
         {
             details ??= new List<ApiErrorBase>();
 
-            return new ApiError(details?.ToList(), innererror, code, target, message, new Dictionary<string, BinaryData>());
+            return new ApiError(details?.ToList(), innererror, code, target, message, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ApiErrorBase"/>. </summary>
@@ -502,7 +502,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.ApiErrorBase"/> instance for mocking. </returns>
         public static ApiErrorBase ApiErrorBase(string code = null, string target = null, string message = null)
         {
-            return new ApiErrorBase(code, target, message, new Dictionary<string, BinaryData>());
+            return new ApiErrorBase(code, target, message, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.InnerError"/>. </summary>
@@ -517,7 +517,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.InnerError"/> instance for mocking. </returns>
         public static InnerError InnerError(string exceptiontype = null, string errordetail = null)
         {
-            return new InnerError(exceptiontype, errordetail, new Dictionary<string, BinaryData>());
+            return new InnerError(exceptiontype, errordetail, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LastPatchInstallationSummary"/>. </summary>
@@ -576,7 +576,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.LastPatchInstallationSummary"/> instance for mocking. </returns>
         public static LastPatchInstallationSummary LastPatchInstallationSummary(PatchOperationStatus? status = null, string installationActivityId = null, bool? maintenanceWindowExceeded = null, RebootStatus? rebootStatus = null, int? notSelectedPatchCount = null, int? excludedPatchCount = null, int? pendingPatchCount = null, int? installedPatchCount = null, int? failedPatchCount = null, DateTimeOffset? startOn = null, DateTimeOffset? lastModifiedOn = null, string startedBy = null, ApiError error = null)
         {
-            return new LastPatchInstallationSummary(status, installationActivityId, maintenanceWindowExceeded, rebootStatus, notSelectedPatchCount, excludedPatchCount, pendingPatchCount, installedPatchCount, failedPatchCount, startOn, lastModifiedOn, startedBy, error, new Dictionary<string, BinaryData>());
+            return new LastPatchInstallationSummary(status, installationActivityId, maintenanceWindowExceeded, rebootStatus, notSelectedPatchCount, excludedPatchCount, pendingPatchCount, installedPatchCount, failedPatchCount, startOn, lastModifiedOn, startedBy, error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.ImageData"/>. </summary>
@@ -607,7 +607,7 @@ namespace MgmtAcronymMapping.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration, new Dictionary<string, BinaryData>());
+            return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImagePatch"/>. </summary>
@@ -636,7 +636,7 @@ namespace MgmtAcronymMapping.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ImagePatch(tags, new Dictionary<string, BinaryData>(), sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
+            return new ImagePatch(tags, serializedAdditionalRawData: null, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineCaptureResult"/>. </summary>
@@ -665,7 +665,7 @@ namespace MgmtAcronymMapping.Models
         {
             resources ??= new List<BinaryData>();
 
-            return new VirtualMachineCaptureResult(id, new Dictionary<string, BinaryData>(), schema, contentVersion, parameters, resources?.ToList());
+            return new VirtualMachineCaptureResult(id, serializedAdditionalRawData: null, schema, contentVersion, parameters, resources?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachinePatch"/>. </summary>
@@ -772,7 +772,7 @@ namespace MgmtAcronymMapping.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachinePatch(tags, new Dictionary<string, BinaryData>(), plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachinePatch(tags, serializedAdditionalRawData: null, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineSize"/>. </summary>
@@ -803,7 +803,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineSize"/> instance for mocking. </returns>
         public static VirtualMachineSize VirtualMachineSize(string name = null, int? numberOfCores = null, int? osDiskSizeInMB = null, int? resourceDiskSizeInMB = null, int? memoryInMB = null, int? maxDataDiskCount = null)
         {
-            return new VirtualMachineSize(name, numberOfCores, osDiskSizeInMB, resourceDiskSizeInMB, memoryInMB, maxDataDiskCount, new Dictionary<string, BinaryData>());
+            return new VirtualMachineSize(name, numberOfCores, osDiskSizeInMB, resourceDiskSizeInMB, memoryInMB, maxDataDiskCount, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RetrieveBootDiagnosticsDataResult"/>. </summary>
@@ -818,7 +818,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RetrieveBootDiagnosticsDataResult"/> instance for mocking. </returns>
         public static RetrieveBootDiagnosticsDataResult RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri = null, Uri serialConsoleLogBlobUri = null)
         {
-            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri, new Dictionary<string, BinaryData>());
+            return new RetrieveBootDiagnosticsDataResult(consoleScreenshotBlobUri, serialConsoleLogBlobUri, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineAssessPatchesResult"/>. </summary>
@@ -859,7 +859,7 @@ namespace MgmtAcronymMapping.Models
         {
             patches ??= new List<VirtualMachineSoftwarePatchProperties>();
 
-            return new VirtualMachineAssessPatchesResult(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, startOn, patches?.ToList(), error, new Dictionary<string, BinaryData>());
+            return new VirtualMachineAssessPatchesResult(status, assessmentActivityId, rebootPending, criticalAndSecurityPatchCount, otherPatchCount, startOn, patches?.ToList(), error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineSoftwarePatchProperties"/>. </summary>
@@ -908,7 +908,7 @@ namespace MgmtAcronymMapping.Models
         {
             classifications ??= new List<string>();
 
-            return new VirtualMachineSoftwarePatchProperties(patchId, name, version, kbid, classifications?.ToList(), rebootBehavior, activityId, publishedOn, lastModifiedOn, assessmentState, new Dictionary<string, BinaryData>());
+            return new VirtualMachineSoftwarePatchProperties(patchId, name, version, kbid, classifications?.ToList(), rebootBehavior, activityId, publishedOn, lastModifiedOn, assessmentState, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetData"/>. </summary>
@@ -1009,7 +1009,7 @@ namespace MgmtAcronymMapping.Models
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), ipsecSomething, testIPsec, p2sServer, upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetExtensionData"/>. </summary>
@@ -1070,7 +1070,7 @@ namespace MgmtAcronymMapping.Models
         {
             provisionAfterExtensions ??= new List<string>();
 
-            return new VirtualMachineScaleSetExtensionData(id, new Dictionary<string, BinaryData>(), name, resourceType, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
+            return new VirtualMachineScaleSetExtensionData(id, serializedAdditionalRawData: null, name, resourceType, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResourceReadOnly"/>. </summary>
@@ -1081,7 +1081,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.SubResourceReadOnly"/> instance for mocking. </returns>
         public static SubResourceReadOnly SubResourceReadOnly(string id = null)
         {
-            return new SubResourceReadOnly(id, new Dictionary<string, BinaryData>());
+            return new SubResourceReadOnly(id, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetInstanceView"/>. </summary>
@@ -1109,7 +1109,7 @@ namespace MgmtAcronymMapping.Models
             statuses ??= new List<InstanceViewStatus>();
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
-            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), new Dictionary<string, BinaryData>()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), new Dictionary<string, BinaryData>()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineStatusCodeCount"/>. </summary>
@@ -1124,7 +1124,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineStatusCodeCount"/> instance for mocking. </returns>
         public static VirtualMachineStatusCodeCount VirtualMachineStatusCodeCount(string code = null, int? count = null)
         {
-            return new VirtualMachineStatusCodeCount(code, count, new Dictionary<string, BinaryData>());
+            return new VirtualMachineStatusCodeCount(code, count, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
@@ -1141,7 +1141,7 @@ namespace MgmtAcronymMapping.Models
         {
             statusesSummary ??= new List<VirtualMachineStatusCodeCount>();
 
-            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList(), new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetVmExtensionsSummary(name, statusesSummary?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.OrchestrationServiceSummary"/>. </summary>
@@ -1156,7 +1156,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.OrchestrationServiceSummary"/> instance for mocking. </returns>
         public static OrchestrationServiceSummary OrchestrationServiceSummary(OrchestrationServiceName? serviceName = null, OrchestrationServiceState? serviceState = null)
         {
-            return new OrchestrationServiceSummary(serviceName, serviceState, new Dictionary<string, BinaryData>());
+            return new OrchestrationServiceSummary(serviceName, serviceState, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetExtensionPatch"/>. </summary>
@@ -1209,7 +1209,7 @@ namespace MgmtAcronymMapping.Models
         {
             provisionAfterExtensions ??= new List<string>();
 
-            return new VirtualMachineScaleSetExtensionPatch(id, name, resourceType, systemData, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList(), new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetExtensionPatch(id, name, resourceType, systemData, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, provisionAfterExtensions?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetSku"/>. </summary>
@@ -1228,7 +1228,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetSku"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetSku VirtualMachineScaleSetSku(string resourceType = null, MgmtAcronymMappingSku sku = null, VirtualMachineScaleSetSkuCapacity capacity = null)
         {
-            return new VirtualMachineScaleSetSku(resourceType, sku, capacity, new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetSku(resourceType, sku, capacity, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetSkuCapacity"/>. </summary>
@@ -1251,7 +1251,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetSkuCapacity"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetSkuCapacity VirtualMachineScaleSetSkuCapacity(long? minimum = null, long? maximum = null, long? defaultCapacity = null, VirtualMachineScaleSetSkuScaleType? scaleType = null)
         {
-            return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType, new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetSkuCapacity(minimum, maximum, defaultCapacity, scaleType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoricalStatusInfo"/>. </summary>
@@ -1270,7 +1270,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.UpgradeOperationHistoricalStatusInfo"/> instance for mocking. </returns>
         public static UpgradeOperationHistoricalStatusInfo UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties = null, ResourceType? upgradeOperationHistoricalStatusInfoType = null, AzureLocation? location = null)
         {
-            return new UpgradeOperationHistoricalStatusInfo(properties, upgradeOperationHistoricalStatusInfoType, location, new Dictionary<string, BinaryData>());
+            return new UpgradeOperationHistoricalStatusInfo(properties, upgradeOperationHistoricalStatusInfoType, location, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoricalStatusInfoProperties"/>. </summary>
@@ -1301,7 +1301,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.UpgradeOperationHistoricalStatusInfoProperties"/> instance for mocking. </returns>
         public static UpgradeOperationHistoricalStatusInfoProperties UpgradeOperationHistoricalStatusInfoProperties(UpgradeOperationHistoryStatus runningStatus = null, RollingUpgradeProgressInfo progress = null, ApiError error = null, UpgradeOperationInvoker? startedBy = null, ImageReference targetImageReference = null, RollbackStatusInfo rollbackInfo = null)
         {
-            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus, progress, error, startedBy, targetImageReference, rollbackInfo, new Dictionary<string, BinaryData>());
+            return new UpgradeOperationHistoricalStatusInfoProperties(runningStatus, progress, error, startedBy, targetImageReference, rollbackInfo, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UpgradeOperationHistoryStatus"/>. </summary>
@@ -1320,7 +1320,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.UpgradeOperationHistoryStatus"/> instance for mocking. </returns>
         public static UpgradeOperationHistoryStatus UpgradeOperationHistoryStatus(UpgradeState? code = null, DateTimeOffset? startOn = null, DateTimeOffset? endOn = null)
         {
-            return new UpgradeOperationHistoryStatus(code, startOn, endOn, new Dictionary<string, BinaryData>());
+            return new UpgradeOperationHistoryStatus(code, startOn, endOn, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollingUpgradeProgressInfo"/>. </summary>
@@ -1343,7 +1343,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RollingUpgradeProgressInfo"/> instance for mocking. </returns>
         public static RollingUpgradeProgressInfo RollingUpgradeProgressInfo(int? successfulInstanceCount = null, int? failedInstanceCount = null, int? inProgressInstanceCount = null, int? pendingInstanceCount = null)
         {
-            return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount, new Dictionary<string, BinaryData>());
+            return new RollingUpgradeProgressInfo(successfulInstanceCount, failedInstanceCount, inProgressInstanceCount, pendingInstanceCount, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollbackStatusInfo"/>. </summary>
@@ -1362,7 +1362,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RollbackStatusInfo"/> instance for mocking. </returns>
         public static RollbackStatusInfo RollbackStatusInfo(int? successfullyRolledbackInstanceCount = null, int? failedRolledbackInstanceCount = null, ApiError rollbackError = null)
         {
-            return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError, new Dictionary<string, BinaryData>());
+            return new RollbackStatusInfo(successfullyRolledbackInstanceCount, failedRolledbackInstanceCount, rollbackError, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetRollingUpgradeData"/>. </summary>
@@ -1393,7 +1393,7 @@ namespace MgmtAcronymMapping.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineScaleSetRollingUpgradeData(id, name, resourceType, systemData, tags, location, policy, runningStatus, progress, error, new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetRollingUpgradeData(id, name, resourceType, systemData, tags, location, policy, runningStatus, progress, error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RollingUpgradeRunningStatus"/>. </summary>
@@ -1416,7 +1416,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RollingUpgradeRunningStatus"/> instance for mocking. </returns>
         public static RollingUpgradeRunningStatus RollingUpgradeRunningStatus(RollingUpgradeStatusCode? code = null, DateTimeOffset? startOn = null, RollingUpgradeActionType? lastAction = null, DateTimeOffset? lastActionOn = null)
         {
-            return new RollingUpgradeRunningStatus(code, startOn, lastAction, lastActionOn, new Dictionary<string, BinaryData>());
+            return new RollingUpgradeRunningStatus(code, startOn, lastAction, lastActionOn, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RecoveryWalkResponse"/>. </summary>
@@ -1431,7 +1431,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RecoveryWalkResponse"/> instance for mocking. </returns>
         public static RecoveryWalkResponse RecoveryWalkResponse(bool? walkPerformed = null, int? nextPlatformUpdateDomain = null)
         {
-            return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain, new Dictionary<string, BinaryData>());
+            return new RecoveryWalkResponse(walkPerformed, nextPlatformUpdateDomain, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtAcronymMapping.VirtualMachineScaleSetVmData"/>. </summary>
@@ -1529,7 +1529,7 @@ namespace MgmtAcronymMapping.Models
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetVmInstanceView"/>. </summary>
@@ -1583,7 +1583,7 @@ namespace MgmtAcronymMapping.Models
             disks ??= new List<DiskInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, new Dictionary<string, BinaryData>());
+            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RequestRateByIntervalContent"/>. </summary>
@@ -1618,7 +1618,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.RequestRateByIntervalContent"/> instance for mocking. </returns>
         public static RequestRateByIntervalContent RequestRateByIntervalContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IntervalInMin intervalLength = default)
         {
-            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, new Dictionary<string, BinaryData>(), intervalLength);
+            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, serializedAdditionalRawData: null, intervalLength);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LogAnalyticsInputBase"/>. </summary>
@@ -1649,7 +1649,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.LogAnalyticsInputBase"/> instance for mocking. </returns>
         public static LogAnalyticsInputBase LogAnalyticsInputBase(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
         {
-            return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, new Dictionary<string, BinaryData>());
+            return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.LogAnalytics"/>. </summary>
@@ -1676,7 +1676,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.LogAnalytics"/> instance for mocking. </returns>
         public static LogAnalytics LogAnalytics(string logAnalyticsOutput = null, ContentType? contentType = null, BinaryData content = null, RequestMethod? requestMethod = null, Uri basePathUri = null)
         {
-            return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, new Dictionary<string, BinaryData>()) : null, contentType, content, requestMethod, basePathUri, new Dictionary<string, BinaryData>());
+            return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, new Dictionary<string, BinaryData>()) : null, contentType, content, requestMethod, basePathUri, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ThrottledRequestsContent"/>. </summary>
@@ -1707,7 +1707,7 @@ namespace MgmtAcronymMapping.Models
         /// <returns> A new <see cref="Models.ThrottledRequestsContent"/> instance for mocking. </returns>
         public static ThrottledRequestsContent ThrottledRequestsContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
         {
-            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, new Dictionary<string, BinaryData>());
+            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, serializedAdditionalRawData: null);
         }
     }
 }

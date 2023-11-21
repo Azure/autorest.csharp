@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -30,7 +29,7 @@ namespace MgmtConstants.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content, new Dictionary<string, BinaryData>());
+            return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithRequiredConstant"/>. </summary>
@@ -41,7 +40,7 @@ namespace MgmtConstants.Models
         /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
         public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, bool requiredBooleanConstant = default, FloatConstant requiredFloatConstant = default)
         {
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, new Dictionary<string, BinaryData>());
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, serializedAdditionalRawData: null);
         }
     }
 }

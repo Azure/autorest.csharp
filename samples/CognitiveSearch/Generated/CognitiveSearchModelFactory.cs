@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             facets ??= new Dictionary<string, IList<FacetResult>>();
             results ??= new List<SearchResult>();
 
-            return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results?.ToList(), nextLink, new Dictionary<string, BinaryData>());
+            return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results?.ToList(), nextLink, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FacetResult"/>. </summary>
@@ -62,7 +62,7 @@ namespace CognitiveSearch.Models
         {
             results ??= new List<SuggestResult>();
 
-            return new SuggestDocumentsResult(results?.ToList(), coverage, new Dictionary<string, BinaryData>());
+            return new SuggestDocumentsResult(results?.ToList(), coverage, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SuggestResult"/>. </summary>
@@ -91,7 +91,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.SuggestRequest"/> instance for mocking. </returns>
         public static SuggestRequest SuggestRequest(string filter = null, bool? useFuzzyMatching = null, string highlightPostTag = null, string highlightPreTag = null, double? minimumCoverage = null, string orderBy = null, string searchText = null, string searchFields = null, string select = null, string suggesterName = null, int? top = null)
         {
-            return new SuggestRequest(filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchText, searchFields, select, suggesterName, top, new Dictionary<string, BinaryData>());
+            return new SuggestRequest(filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, orderBy, searchText, searchFields, select, suggesterName, top, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexDocumentsResult"/>. </summary>
@@ -101,7 +101,7 @@ namespace CognitiveSearch.Models
         {
             results ??= new List<IndexingResult>();
 
-            return new IndexDocumentsResult(results?.ToList(), new Dictionary<string, BinaryData>());
+            return new IndexDocumentsResult(results?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexingResult"/>. </summary>
@@ -112,7 +112,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.IndexingResult"/> instance for mocking. </returns>
         public static IndexingResult IndexingResult(string key = null, string errorMessage = null, bool succeeded = default, int statusCode = default)
         {
-            return new IndexingResult(key, errorMessage, succeeded, statusCode, new Dictionary<string, BinaryData>());
+            return new IndexingResult(key, errorMessage, succeeded, statusCode, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AutocompleteResult"/>. </summary>
@@ -123,7 +123,7 @@ namespace CognitiveSearch.Models
         {
             results ??= new List<AutocompleteItem>();
 
-            return new AutocompleteResult(coverage, results?.ToList(), new Dictionary<string, BinaryData>());
+            return new AutocompleteResult(coverage, results?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AutocompleteItem"/>. </summary>
@@ -132,7 +132,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.AutocompleteItem"/> instance for mocking. </returns>
         public static AutocompleteItem AutocompleteItem(string text = null, string queryPlusText = null)
         {
-            return new AutocompleteItem(text, queryPlusText, new Dictionary<string, BinaryData>());
+            return new AutocompleteItem(text, queryPlusText, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AutocompleteRequest"/>. </summary>
@@ -149,7 +149,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.AutocompleteRequest"/> instance for mocking. </returns>
         public static AutocompleteRequest AutocompleteRequest(string searchText = null, AutocompleteMode? autocompleteMode = null, string filter = null, bool? useFuzzyMatching = null, string highlightPostTag = null, string highlightPreTag = null, double? minimumCoverage = null, string searchFields = null, string suggesterName = null, int? top = null)
         {
-            return new AutocompleteRequest(searchText, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, suggesterName, top, new Dictionary<string, BinaryData>());
+            return new AutocompleteRequest(searchText, autocompleteMode, filter, useFuzzyMatching, highlightPostTag, highlightPreTag, minimumCoverage, searchFields, suggesterName, top, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListDataSourcesResult"/>. </summary>
@@ -159,7 +159,7 @@ namespace CognitiveSearch.Models
         {
             dataSources ??= new List<DataSource>();
 
-            return new ListDataSourcesResult(dataSources?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListDataSourcesResult(dataSources?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListIndexersResult"/>. </summary>
@@ -169,7 +169,7 @@ namespace CognitiveSearch.Models
         {
             indexers ??= new List<Indexer>();
 
-            return new ListIndexersResult(indexers?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListIndexersResult(indexers?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexerExecutionInfo"/>. </summary>
@@ -182,7 +182,7 @@ namespace CognitiveSearch.Models
         {
             executionHistory ??= new List<IndexerExecutionResult>();
 
-            return new IndexerExecutionInfo(status, lastResult, executionHistory?.ToList(), limits, new Dictionary<string, BinaryData>());
+            return new IndexerExecutionInfo(status, lastResult, executionHistory?.ToList(), limits, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexerExecutionResult"/>. </summary>
@@ -202,7 +202,7 @@ namespace CognitiveSearch.Models
             errors ??= new List<ItemError>();
             warnings ??= new List<ItemWarning>();
 
-            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors?.ToList(), warnings?.ToList(), itemCount, failedItemCount, initialTrackingState, finalTrackingState, new Dictionary<string, BinaryData>());
+            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors?.ToList(), warnings?.ToList(), itemCount, failedItemCount, initialTrackingState, finalTrackingState, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemError"/>. </summary>
@@ -215,7 +215,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ItemError"/> instance for mocking. </returns>
         public static ItemError ItemError(string key = null, string errorMessage = null, int statusCode = default, string name = null, string details = null, string documentationLink = null)
         {
-            return new ItemError(key, errorMessage, statusCode, name, details, documentationLink, new Dictionary<string, BinaryData>());
+            return new ItemError(key, errorMessage, statusCode, name, details, documentationLink, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ItemWarning"/>. </summary>
@@ -227,7 +227,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ItemWarning"/> instance for mocking. </returns>
         public static ItemWarning ItemWarning(string key = null, string message = null, string name = null, string details = null, string documentationLink = null)
         {
-            return new ItemWarning(key, message, name, details, documentationLink, new Dictionary<string, BinaryData>());
+            return new ItemWarning(key, message, name, details, documentationLink, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.IndexerLimits"/>. </summary>
@@ -237,7 +237,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.IndexerLimits"/> instance for mocking. </returns>
         public static IndexerLimits IndexerLimits(TimeSpan? maxRunTime = null, long? maxDocumentExtractionSize = null, long? maxDocumentContentCharactersToExtract = null)
         {
-            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract, new Dictionary<string, BinaryData>());
+            return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListSkillsetsResult"/>. </summary>
@@ -247,7 +247,7 @@ namespace CognitiveSearch.Models
         {
             skillsets ??= new List<Skillset>();
 
-            return new ListSkillsetsResult(skillsets?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListSkillsetsResult(skillsets?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SynonymMap"/>. </summary>
@@ -259,7 +259,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.SynonymMap"/> instance for mocking. </returns>
         public static SynonymMap SynonymMap(string name = null, SynonymMapFormat format = default, string synonyms = null, EncryptionKey encryptionKey = null, string eTag = null)
         {
-            return new SynonymMap(name, format, synonyms, encryptionKey, eTag, new Dictionary<string, BinaryData>());
+            return new SynonymMap(name, format, synonyms, encryptionKey, eTag, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListSynonymMapsResult"/>. </summary>
@@ -269,7 +269,7 @@ namespace CognitiveSearch.Models
         {
             synonymMaps ??= new List<SynonymMap>();
 
-            return new ListSynonymMapsResult(synonymMaps?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListSynonymMapsResult(synonymMaps?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ListIndexesResult"/>. </summary>
@@ -279,7 +279,7 @@ namespace CognitiveSearch.Models
         {
             indexes ??= new List<Index>();
 
-            return new ListIndexesResult(indexes?.ToList(), new Dictionary<string, BinaryData>());
+            return new ListIndexesResult(indexes?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GetIndexStatisticsResult"/>. </summary>
@@ -288,7 +288,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.GetIndexStatisticsResult"/> instance for mocking. </returns>
         public static GetIndexStatisticsResult GetIndexStatisticsResult(long documentCount = default, long storageSize = default)
         {
-            return new GetIndexStatisticsResult(documentCount, storageSize, new Dictionary<string, BinaryData>());
+            return new GetIndexStatisticsResult(documentCount, storageSize, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnalyzeRequest"/>. </summary>
@@ -303,7 +303,7 @@ namespace CognitiveSearch.Models
             tokenFilters ??= new List<TokenFilterName>();
             charFilters ??= new List<CharFilterName>();
 
-            return new AnalyzeRequest(text, analyzer, tokenizer, tokenFilters?.ToList(), charFilters?.ToList(), new Dictionary<string, BinaryData>());
+            return new AnalyzeRequest(text, analyzer, tokenizer, tokenFilters?.ToList(), charFilters?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnalyzeResult"/>. </summary>
@@ -313,7 +313,7 @@ namespace CognitiveSearch.Models
         {
             tokens ??= new List<TokenInfo>();
 
-            return new AnalyzeResult(tokens?.ToList(), new Dictionary<string, BinaryData>());
+            return new AnalyzeResult(tokens?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TokenInfo"/>. </summary>
@@ -324,7 +324,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.TokenInfo"/> instance for mocking. </returns>
         public static TokenInfo TokenInfo(string token = null, int startOffset = default, int endOffset = default, int position = default)
         {
-            return new TokenInfo(token, startOffset, endOffset, position, new Dictionary<string, BinaryData>());
+            return new TokenInfo(token, startOffset, endOffset, position, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceStatistics"/>. </summary>
@@ -333,7 +333,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ServiceStatistics"/> instance for mocking. </returns>
         public static ServiceStatistics ServiceStatistics(ServiceCounters counters = null, ServiceLimits limits = null)
         {
-            return new ServiceStatistics(counters, limits, new Dictionary<string, BinaryData>());
+            return new ServiceStatistics(counters, limits, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceCounters"/>. </summary>
@@ -347,7 +347,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ServiceCounters"/> instance for mocking. </returns>
         public static ServiceCounters ServiceCounters(ResourceCounter documentCounter = null, ResourceCounter indexCounter = null, ResourceCounter indexerCounter = null, ResourceCounter dataSourceCounter = null, ResourceCounter storageSizeCounter = null, ResourceCounter synonymMapCounter = null, ResourceCounter skillsetCounter = null)
         {
-            return new ServiceCounters(documentCounter, indexCounter, indexerCounter, dataSourceCounter, storageSizeCounter, synonymMapCounter, skillsetCounter, new Dictionary<string, BinaryData>());
+            return new ServiceCounters(documentCounter, indexCounter, indexerCounter, dataSourceCounter, storageSizeCounter, synonymMapCounter, skillsetCounter, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceCounter"/>. </summary>
@@ -356,7 +356,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ResourceCounter"/> instance for mocking. </returns>
         public static ResourceCounter ResourceCounter(long usage = default, long? quota = null)
         {
-            return new ResourceCounter(usage, quota, new Dictionary<string, BinaryData>());
+            return new ResourceCounter(usage, quota, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ServiceLimits"/>. </summary>
@@ -367,7 +367,7 @@ namespace CognitiveSearch.Models
         /// <returns> A new <see cref="Models.ServiceLimits"/> instance for mocking. </returns>
         public static ServiceLimits ServiceLimits(int? maxFieldsPerIndex = null, int? maxFieldNestingDepthPerIndex = null, int? maxComplexCollectionFieldsPerIndex = null, int? maxComplexObjectsInCollectionsPerDocument = null)
         {
-            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument, new Dictionary<string, BinaryData>());
+            return new ServiceLimits(maxFieldsPerIndex, maxFieldNestingDepthPerIndex, maxComplexCollectionFieldsPerIndex, maxComplexObjectsInCollectionsPerDocument, serializedAdditionalRawData: null);
         }
     }
 }

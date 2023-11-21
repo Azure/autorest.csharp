@@ -40,7 +40,7 @@ namespace MgmtScopeResource.Models
             parameters ??= new Dictionary<string, ParameterValuesValue>();
             nonComplianceMessages ??= new List<NonComplianceMessage>();
 
-            return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList(), new Dictionary<string, BinaryData>());
+            return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Deployment"/>. </summary>
@@ -52,7 +52,7 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Deployment(location, properties, tags, new Dictionary<string, BinaryData>());
+            return new Deployment(location, properties, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentProperties"/>. </summary>
@@ -62,7 +62,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentProperties"/> instance for mocking. </returns>
         public static DeploymentProperties DeploymentProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default)
         {
-            return new DeploymentProperties(template, parameters, mode, new Dictionary<string, BinaryData>());
+            return new DeploymentProperties(template, parameters, mode, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.DeploymentExtendedData"/>. </summary>
@@ -78,7 +78,7 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DeploymentExtendedData(id, name, resourceType, systemData, location, properties, tags, new Dictionary<string, BinaryData>());
+            return new DeploymentExtendedData(id, name, resourceType, systemData, location, properties, tags, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentPropertiesExtended"/>. </summary>
@@ -93,7 +93,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentPropertiesExtended"/> instance for mocking. </returns>
         public static DeploymentPropertiesExtended DeploymentPropertiesExtended(ProvisioningState? provisioningState = null, string correlationId = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, BinaryData outputs = null, BinaryData parameters = null, DeploymentMode? mode = null, string error = null)
         {
-            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentValidateResult"/>. </summary>
@@ -102,7 +102,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentValidateResult"/> instance for mocking. </returns>
         public static DeploymentValidateResult DeploymentValidateResult(string error = null, DeploymentPropertiesExtended properties = null)
         {
-            return new DeploymentValidateResult(error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, properties, new Dictionary<string, BinaryData>());
+            return new DeploymentValidateResult(error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentExportResult"/>. </summary>
@@ -110,7 +110,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentExportResult"/> instance for mocking. </returns>
         public static DeploymentExportResult DeploymentExportResult(BinaryData template = null)
         {
-            return new DeploymentExportResult(template, new Dictionary<string, BinaryData>());
+            return new DeploymentExportResult(template, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentWhatIf"/>. </summary>
@@ -119,7 +119,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentWhatIf"/> instance for mocking. </returns>
         public static DeploymentWhatIf DeploymentWhatIf(string location = null, DeploymentWhatIfProperties properties = null)
         {
-            return new DeploymentWhatIf(location, properties, new Dictionary<string, BinaryData>());
+            return new DeploymentWhatIf(location, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentWhatIfProperties"/>. </summary>
@@ -130,7 +130,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentWhatIfProperties"/> instance for mocking. </returns>
         public static DeploymentWhatIfProperties DeploymentWhatIfProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default, WhatIfResultFormat? whatIfResultFormat = null)
         {
-            return new DeploymentWhatIfProperties(template, parameters, mode, new Dictionary<string, BinaryData>(), whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, new Dictionary<string, BinaryData>()) : null);
+            return new DeploymentWhatIfProperties(template, parameters, mode, serializedAdditionalRawData: null, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, new Dictionary<string, BinaryData>()) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfOperationResult"/>. </summary>
@@ -142,7 +142,7 @@ namespace MgmtScopeResource.Models
         {
             changes ??= new List<WhatIfChange>();
 
-            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, changes?.ToList(), new Dictionary<string, BinaryData>());
+            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, changes?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfChange"/>. </summary>
@@ -154,7 +154,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.WhatIfChange"/> instance for mocking. </returns>
         public static WhatIfChange WhatIfChange(string resourceId = null, ChangeType changeType = default, string unsupportedReason = null, BinaryData before = null, BinaryData after = null)
         {
-            return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after, new Dictionary<string, BinaryData>());
+            return new WhatIfChange(resourceId, changeType, unsupportedReason, before, after, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentOperation"/>. </summary>
@@ -164,7 +164,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperation"/> instance for mocking. </returns>
         public static DeploymentOperation DeploymentOperation(string id = null, string operationId = null, DeploymentOperationProperties properties = null)
         {
-            return new DeploymentOperation(id, operationId, properties, new Dictionary<string, BinaryData>());
+            return new DeploymentOperation(id, operationId, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentOperationProperties"/>. </summary>
@@ -181,7 +181,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperationProperties"/> instance for mocking. </returns>
         public static DeploymentOperationProperties DeploymentOperationProperties(ProvisioningOperation? provisioningOperation = null, string provisioningState = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, TimeSpan? anotherDuration = null, string serviceRequestId = null, string statusCode = null, StatusMessage statusMessage = null, BinaryData requestContent = null, BinaryData responseContent = null)
         {
-            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent, new Dictionary<string, BinaryData>()) : null, responseContent != null ? new HttpMessage(responseContent, new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent, new Dictionary<string, BinaryData>()) : null, responseContent != null ? new HttpMessage(responseContent, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StatusMessage"/>. </summary>
@@ -190,7 +190,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.StatusMessage"/> instance for mocking. </returns>
         public static StatusMessage StatusMessage(string status = null, string error = null)
         {
-            return new StatusMessage(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, new Dictionary<string, BinaryData>());
+            return new StatusMessage(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TemplateHashResult"/>. </summary>
@@ -199,7 +199,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.TemplateHashResult"/> instance for mocking. </returns>
         public static TemplateHashResult TemplateHashResult(string minifiedTemplate = null, string templateHash = null)
         {
-            return new TemplateHashResult(minifiedTemplate, templateHash, new Dictionary<string, BinaryData>());
+            return new TemplateHashResult(minifiedTemplate, templateHash, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.ResourceLinkData"/>. </summary>
@@ -211,7 +211,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="MgmtScopeResource.ResourceLinkData"/> instance for mocking. </returns>
         public static ResourceLinkData ResourceLinkData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, ResourceLinkProperties properties = null)
         {
-            return new ResourceLinkData(id, name, resourceType, systemData, properties, new Dictionary<string, BinaryData>());
+            return new ResourceLinkData(id, name, resourceType, systemData, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ResourceLinkProperties"/>. </summary>
@@ -221,7 +221,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.ResourceLinkProperties"/> instance for mocking. </returns>
         public static ResourceLinkProperties ResourceLinkProperties(string sourceId = null, string targetId = null, string notes = null)
         {
-            return new ResourceLinkProperties(sourceId, targetId, notes, new Dictionary<string, BinaryData>());
+            return new ResourceLinkProperties(sourceId, targetId, notes, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.VMInsightsOnboardingStatusData"/>. </summary>
@@ -238,7 +238,7 @@ namespace MgmtScopeResource.Models
         {
             data ??= new List<DataContainer>();
 
-            return new VMInsightsOnboardingStatusData(id, name, resourceType, systemData, resourceId, onboardingStatus, dataStatus, data?.ToList(), new Dictionary<string, BinaryData>());
+            return new VMInsightsOnboardingStatusData(id, name, resourceType, systemData, resourceId, onboardingStatus, dataStatus, data?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DataContainer"/>. </summary>
@@ -246,7 +246,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DataContainer"/> instance for mocking. </returns>
         public static DataContainer DataContainer(WorkspaceInfo workspace = null)
         {
-            return new DataContainer(workspace, new Dictionary<string, BinaryData>());
+            return new DataContainer(workspace, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WorkspaceInfo"/>. </summary>
@@ -256,7 +256,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.WorkspaceInfo"/> instance for mocking. </returns>
         public static WorkspaceInfo WorkspaceInfo(string id = null, string location = null, string customerId = null)
         {
-            return new WorkspaceInfo(id, location, customerId, new Dictionary<string, BinaryData>());
+            return new WorkspaceInfo(id, location, customerId, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtScopeResource.GuestConfigurationAssignmentData"/>. </summary>
@@ -268,7 +268,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="MgmtScopeResource.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, string location = null, string resourceType = null, GuestConfigurationAssignmentProperties properties = null)
         {
-            return new GuestConfigurationAssignmentData(id, name, location, resourceType, new Dictionary<string, BinaryData>(), properties);
+            return new GuestConfigurationAssignmentData(id, name, location, resourceType, serializedAdditionalRawData: null, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationAssignmentProperties"/>. </summary>
@@ -284,7 +284,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.GuestConfigurationAssignmentProperties"/> instance for mocking. </returns>
         public static GuestConfigurationAssignmentProperties GuestConfigurationAssignmentProperties(string targetResourceId = null, ComplianceStatus? complianceStatus = null, DateTimeOffset? lastComplianceStatusChecked = null, string latestReportId = null, string parameterHash = null, string context = null, string assignmentHash = null, ProvisioningState? provisioningState = null, string resourceType = null)
         {
-            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType, new Dictionary<string, BinaryData>());
+            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationBaseResource"/>. </summary>
@@ -295,7 +295,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.GuestConfigurationBaseResource"/> instance for mocking. </returns>
         public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, string location = null, string resourceType = null)
         {
-            return new GuestConfigurationBaseResource(id, name, location, resourceType, new Dictionary<string, BinaryData>());
+            return new GuestConfigurationBaseResource(id, name, location, resourceType, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Marketplace"/>. </summary>
@@ -336,7 +336,7 @@ namespace MgmtScopeResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Marketplace(id, name, resourceType, systemData, billingPeriodId, usageStart, usageEnd, resourceRate, offerName, resourceGroup, additionalInfo, orderNumber, instanceName, instanceId, currency, consumedQuantity, unitOfMeasure, pretaxCost, isEstimated, meterId, subscriptionGuid, subscriptionName, accountName, departmentName, consumedService, costCenter, additionalProperties, publisherName, planName, isRecurringCharge, etag, tags, new Dictionary<string, BinaryData>());
+            return new Marketplace(id, name, resourceType, systemData, billingPeriodId, usageStart, usageEnd, resourceRate, offerName, resourceGroup, additionalInfo, orderNumber, instanceName, instanceId, currency, consumedQuantity, unitOfMeasure, pretaxCost, isEstimated, meterId, subscriptionGuid, subscriptionName, accountName, departmentName, consumedService, costCenter, additionalProperties, publisherName, planName, isRecurringCharge, etag, tags, serializedAdditionalRawData: null);
         }
     }
 }

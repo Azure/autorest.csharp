@@ -52,7 +52,7 @@ namespace MgmtExpandResourceTypes.Models
             txtRecords ??= new List<TxtRecord>();
             caaRecords ??= new List<CaaRecord>();
 
-            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname, new Dictionary<string, BinaryData>()) : null, soaRecord, caaRecords?.ToList(), new Dictionary<string, BinaryData>());
+            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname, new Dictionary<string, BinaryData>()) : null, soaRecord, caaRecords?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExpandResourceTypes.ZoneData"/>. </summary>
@@ -81,7 +81,7 @@ namespace MgmtExpandResourceTypes.Models
             registrationVirtualNetworks ??= new List<WritableSubResource>();
             resolutionVirtualNetworks ??= new List<WritableSubResource>();
 
-            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList(), new Dictionary<string, BinaryData>());
+            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DnsResourceReferenceResult"/>. </summary>
@@ -91,7 +91,7 @@ namespace MgmtExpandResourceTypes.Models
         {
             dnsResourceReferences ??= new List<DnsResourceReference>();
 
-            return new DnsResourceReferenceResult(dnsResourceReferences?.ToList(), new Dictionary<string, BinaryData>());
+            return new DnsResourceReferenceResult(dnsResourceReferences?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DnsResourceReference"/>. </summary>
@@ -102,7 +102,7 @@ namespace MgmtExpandResourceTypes.Models
         {
             dnsResources ??= new List<WritableSubResource>();
 
-            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, new Dictionary<string, BinaryData>());
+            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, serializedAdditionalRawData: null);
         }
     }
 }

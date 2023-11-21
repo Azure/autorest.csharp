@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,7 +27,7 @@ namespace validation.Models
         {
             displayNames ??= new List<string>();
 
-            return new Product(displayNames?.ToList(), capacity, image, child, constChild, constInt, constString, constStringAsEnum, new Dictionary<string, BinaryData>());
+            return new Product(displayNames?.ToList(), capacity, image, child, constChild, constInt, constString, constStringAsEnum, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ChildProduct"/>. </summary>
@@ -37,7 +36,7 @@ namespace validation.Models
         /// <returns> A new <see cref="Models.ChildProduct"/> instance for mocking. </returns>
         public static ChildProduct ChildProduct(ChildProductConstProperty constProperty = default, int? count = null)
         {
-            return new ChildProduct(constProperty, count, new Dictionary<string, BinaryData>());
+            return new ChildProduct(constProperty, count, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ConstantProduct"/>. </summary>
@@ -46,7 +45,7 @@ namespace validation.Models
         /// <returns> A new <see cref="Models.ConstantProduct"/> instance for mocking. </returns>
         public static ConstantProduct ConstantProduct(ConstantProductConstProperty constProperty = default, ConstantProductConstProperty2 constProperty2 = default)
         {
-            return new ConstantProduct(constProperty, constProperty2, new Dictionary<string, BinaryData>());
+            return new ConstantProduct(constProperty, constProperty2, serializedAdditionalRawData: null);
         }
     }
 }

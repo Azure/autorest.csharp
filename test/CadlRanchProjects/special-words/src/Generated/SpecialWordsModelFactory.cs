@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace SpecialWords
 {
     /// <summary> Model factory for models. </summary>

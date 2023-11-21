@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace ProtocolMethodsInRestClient.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -19,7 +16,7 @@ namespace ProtocolMethodsInRestClient.Models
         /// <returns> A new <see cref="Models.Grouped"/> instance for mocking. </returns>
         public static Grouped Grouped(string first = null, int second = default)
         {
-            return new Grouped(first, second, new Dictionary<string, BinaryData>());
+            return new Grouped(first, second, serializedAdditionalRawData: null);
         }
     }
 }

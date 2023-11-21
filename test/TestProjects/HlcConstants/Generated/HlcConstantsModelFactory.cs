@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace HlcConstants.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -21,7 +18,7 @@ namespace HlcConstants.Models
         /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
         public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, bool requiredBooleanConstant = default, FloatConstant requiredFloatConstant = default)
         {
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, new Dictionary<string, BinaryData>());
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, serializedAdditionalRawData: null);
         }
     }
 }

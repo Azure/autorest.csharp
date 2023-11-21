@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -26,7 +25,7 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.CarData"/> instance for mocking. </returns>
         public static CarData CarData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string horsepower = null)
         {
-            return new CarData(id, name, resourceType, systemData, horsepower, new Dictionary<string, BinaryData>());
+            return new CarData(id, name, resourceType, systemData, horsepower, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSingletonResource.IgnitionData"/>. </summary>
@@ -38,7 +37,7 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.IgnitionData"/> instance for mocking. </returns>
         public static IgnitionData IgnitionData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? pushButton = null)
         {
-            return new IgnitionData(id, name, resourceType, systemData, pushButton, new Dictionary<string, BinaryData>());
+            return new IgnitionData(id, name, resourceType, systemData, pushButton, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSingletonResource.BrakeData"/>. </summary>
@@ -50,7 +49,7 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.BrakeData"/> instance for mocking. </returns>
         public static BrakeData BrakeData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? hitBrake = null)
         {
-            return new BrakeData(id, name, resourceType, systemData, hitBrake, new Dictionary<string, BinaryData>());
+            return new BrakeData(id, name, resourceType, systemData, hitBrake, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSingletonResource.SingletonResourceData"/>. </summary>
@@ -62,7 +61,7 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.SingletonResourceData"/> instance for mocking. </returns>
         public static SingletonResourceData SingletonResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null)
         {
-            return new SingletonResourceData(id, name, resourceType, systemData, @new, new Dictionary<string, BinaryData>());
+            return new SingletonResourceData(id, name, resourceType, systemData, @new, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSingletonResource.ParentResourceData"/>. </summary>
@@ -78,7 +77,7 @@ namespace MgmtSingletonResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ParentResourceData(id, name, resourceType, systemData, tags, location, @new, new Dictionary<string, BinaryData>());
+            return new ParentResourceData(id, name, resourceType, systemData, tags, location, @new, serializedAdditionalRawData: null);
         }
     }
 }

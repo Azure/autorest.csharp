@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace httpInfrastructure.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -18,7 +15,7 @@ namespace httpInfrastructure.Models
         /// <returns> A new <see cref="Models.MyException"/> instance for mocking. </returns>
         public static MyException MyException(string statusCode = null)
         {
-            return new MyException(statusCode, new Dictionary<string, BinaryData>());
+            return new MyException(statusCode, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.B"/>. </summary>
@@ -27,7 +24,7 @@ namespace httpInfrastructure.Models
         /// <returns> A new <see cref="Models.B"/> instance for mocking. </returns>
         public static B B(string statusCode = null, string textStatusCode = null)
         {
-            return new B(statusCode, new Dictionary<string, BinaryData>(), textStatusCode);
+            return new B(statusCode, serializedAdditionalRawData: null, textStatusCode);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.C"/>. </summary>
@@ -35,7 +32,7 @@ namespace httpInfrastructure.Models
         /// <returns> A new <see cref="Models.C"/> instance for mocking. </returns>
         public static C C(string httpCode = null)
         {
-            return new C(httpCode, new Dictionary<string, BinaryData>());
+            return new C(httpCode, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.D"/>. </summary>
@@ -43,7 +40,7 @@ namespace httpInfrastructure.Models
         /// <returns> A new <see cref="Models.D"/> instance for mocking. </returns>
         public static D D(string httpStatusCode = null)
         {
-            return new D(httpStatusCode, new Dictionary<string, BinaryData>());
+            return new D(httpStatusCode, serializedAdditionalRawData: null);
         }
     }
 }
