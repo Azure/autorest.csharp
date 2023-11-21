@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Type,
                 Summary: null,
-                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+                Description: $"Initializes a new instance of the {Type:C} class.",
                 Modifiers: Internal,
                 Parameters: new[] { KnownParameters.ArmClient, ResourceIdentifierParameter },
                 Initializer: new(
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var builder = new StringBuilder();
             builder.Append(methodSignature.Name).Append("(");
             // all methods here should be extension methods, therefore we skip the first parameter which is the extension method parameter "this" and in this context, it is actually myself
-            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.ToString()));
+            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.Name));
             builder.Append(")");
 
             return builder.ToString();

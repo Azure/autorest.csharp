@@ -41,7 +41,7 @@ namespace MgmtOmitOperationGroups
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="Model2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="Model2Resource"/> object. </returns>
         public static Model2Resource GetModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -143,7 +143,7 @@ namespace MgmtOmitOperationGroups
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="Model5"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Model5> GetModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
@@ -170,7 +170,7 @@ namespace MgmtOmitOperationGroups
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="Model5"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Model5> GetModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));

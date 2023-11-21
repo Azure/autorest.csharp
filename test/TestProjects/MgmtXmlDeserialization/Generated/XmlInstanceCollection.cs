@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtXmlDeserialization
 {
     /// <summary>
-    /// A class representing a collection of <see cref="XmlInstanceResource" /> and their operations.
-    /// Each <see cref="XmlInstanceResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="XmlInstanceCollection" /> instance call the GetXmlInstances method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="XmlInstanceResource"/> and their operations.
+    /// Each <see cref="XmlInstanceResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="XmlInstanceCollection"/> instance call the GetXmlInstances method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class XmlInstanceCollection : ArmCollection, IEnumerable<XmlInstanceResource>, IAsyncEnumerable<XmlInstanceResource>
     {
@@ -229,7 +229,7 @@ namespace MgmtXmlDeserialization
         /// <param name="top"> Number of records to return. </param>
         /// <param name="skip"> Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="XmlInstanceResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<XmlInstanceResource> GetAllAsync(string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);
@@ -254,7 +254,7 @@ namespace MgmtXmlDeserialization
         /// <param name="top"> Number of records to return. </param>
         /// <param name="skip"> Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="XmlInstanceResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="XmlInstanceResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<XmlInstanceResource> GetAll(string filter = null, int? top = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _xmlInstanceXmlDeserializationRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, filter, top, skip);

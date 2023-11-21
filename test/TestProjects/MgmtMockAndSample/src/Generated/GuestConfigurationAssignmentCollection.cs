@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtMockAndSample
 {
     /// <summary>
-    /// A class representing a collection of <see cref="GuestConfigurationAssignmentResource" /> and their operations.
-    /// Each <see cref="GuestConfigurationAssignmentResource" /> in the collection will belong to the same instance of <see cref="ArmResource" />.
-    /// To get a <see cref="GuestConfigurationAssignmentCollection" /> instance call the GetGuestConfigurationAssignments method from an instance of <see cref="ArmResource" />.
+    /// A class representing a collection of <see cref="GuestConfigurationAssignmentResource"/> and their operations.
+    /// Each <see cref="GuestConfigurationAssignmentResource"/> in the collection will belong to the same instance of <see cref="ArmResource"/>.
+    /// To get a <see cref="GuestConfigurationAssignmentCollection"/> instance call the GetGuestConfigurationAssignments method from an instance of <see cref="ArmResource"/>.
     /// </summary>
     public partial class GuestConfigurationAssignmentCollection : ArmCollection, IEnumerable<GuestConfigurationAssignmentResource>, IAsyncEnumerable<GuestConfigurationAssignmentResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="GuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="GuestConfigurationAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<GuestConfigurationAssignmentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _guestConfigurationAssignmentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -244,7 +244,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="GuestConfigurationAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="GuestConfigurationAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<GuestConfigurationAssignmentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _guestConfigurationAssignmentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

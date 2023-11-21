@@ -22,9 +22,9 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary>
-    /// A class representing a collection of <see cref="VirtualMachineResource" /> and their operations.
-    /// Each <see cref="VirtualMachineResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="VirtualMachineCollection" /> instance call the GetVirtualMachines method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="VirtualMachineResource"/> and their operations.
+    /// Each <see cref="VirtualMachineResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="VirtualMachineCollection"/> instance call the GetVirtualMachines method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class VirtualMachineCollection : ArmCollection, IEnumerable<VirtualMachineResource>, IAsyncEnumerable<VirtualMachineResource>
     {
@@ -227,7 +227,7 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -249,7 +249,7 @@ namespace Azure.ResourceManager.Sample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

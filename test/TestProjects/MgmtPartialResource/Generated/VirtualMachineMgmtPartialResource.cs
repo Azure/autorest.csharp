@@ -17,7 +17,7 @@ namespace MgmtPartialResource
 {
     /// <summary>
     /// A class extending from the VirtualMachineResource in MgmtPartialResource along with the instance operations that can be performed on it.
-    /// You can only construct a <see cref="VirtualMachineMgmtPartialResource" /> from a <see cref="ResourceIdentifier" /> with a resource type of Microsoft.Compute/virtualMachines.
+    /// You can only construct a <see cref="VirtualMachineMgmtPartialResource"/> from a <see cref="ResourceIdentifier"/> with a resource type of Microsoft.Compute/virtualMachines.
     /// </summary>
     public partial class VirtualMachineMgmtPartialResource : ArmResource
     {

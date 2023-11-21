@@ -46,7 +46,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetAResource"/> object. </returns>
         public static RecordSetAResource GetRecordSetAResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -65,7 +65,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetAaaaResource"/> object. </returns>
         public static RecordSetAaaaResource GetRecordSetAaaaResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -84,7 +84,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetCaaResource"/> object. </returns>
         public static RecordSetCaaResource GetRecordSetCaaResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -103,7 +103,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetCNameResource"/> object. </returns>
         public static RecordSetCNameResource GetRecordSetCNameResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -122,7 +122,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetMxResource"/> object. </returns>
         public static RecordSetMxResource GetRecordSetMxResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -141,7 +141,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetNsResource"/> object. </returns>
         public static RecordSetNsResource GetRecordSetNsResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -160,7 +160,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetPtrResource"/> object. </returns>
         public static RecordSetPtrResource GetRecordSetPtrResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -179,7 +179,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetSoaResource"/> object. </returns>
         public static RecordSetSoaResource GetRecordSetSoaResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -198,7 +198,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetSrvResource"/> object. </returns>
         public static RecordSetSrvResource GetRecordSetSrvResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -217,7 +217,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetTxtResource"/> object. </returns>
         public static RecordSetTxtResource GetRecordSetTxtResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -236,7 +236,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ZoneResource"/> object. </returns>
         public static ZoneResource GetZoneResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -342,7 +342,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ZoneResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -371,7 +371,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ZoneResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));

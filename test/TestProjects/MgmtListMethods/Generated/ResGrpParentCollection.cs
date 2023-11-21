@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ResGrpParentResource" /> and their operations.
-    /// Each <see cref="ResGrpParentResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ResGrpParentCollection" /> instance call the GetResGrpParents method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ResGrpParentResource"/> and their operations.
+    /// Each <see cref="ResGrpParentResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="ResGrpParentCollection"/> instance call the GetResGrpParents method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ResGrpParentCollection : ArmCollection, IEnumerable<ResGrpParentResource>, IAsyncEnumerable<ResGrpParentResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -245,7 +245,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

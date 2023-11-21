@@ -21,9 +21,9 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary>
-    /// A class representing a collection of <see cref="RecordSetAaaaResource" /> and their operations.
-    /// Each <see cref="RecordSetAaaaResource" /> in the collection will belong to the same instance of <see cref="ZoneResource" />.
-    /// To get a <see cref="RecordSetAaaaCollection" /> instance call the GetRecordSetAaaas method from an instance of <see cref="ZoneResource" />.
+    /// A class representing a collection of <see cref="RecordSetAaaaResource"/> and their operations.
+    /// Each <see cref="RecordSetAaaaResource"/> in the collection will belong to the same instance of <see cref="ZoneResource"/>.
+    /// To get a <see cref="RecordSetAaaaCollection"/> instance call the GetRecordSetAaaas method from an instance of <see cref="ZoneResource"/>.
     /// </summary>
     public partial class RecordSetAaaaCollection : ArmCollection, IEnumerable<RecordSetAaaaResource>, IAsyncEnumerable<RecordSetAaaaResource>
     {
@@ -226,7 +226,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetAaaaResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RecordSetAaaaResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetAaaaResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetAaaaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix);
@@ -250,7 +250,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetAaaaResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RecordSetAaaaResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetAaaaResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetAaaaRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "AAAA".ToRecordType(), top, recordsetnamesuffix);

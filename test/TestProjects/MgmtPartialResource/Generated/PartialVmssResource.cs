@@ -18,7 +18,7 @@ namespace MgmtPartialResource
 {
     /// <summary>
     /// A class extending from the VirtualMachineScaleSetResource in MgmtPartialResource along with the instance operations that can be performed on it.
-    /// You can only construct a <see cref="PartialVmssResource" /> from a <see cref="ResourceIdentifier" /> with a resource type of Microsoft.Compute/virtualMachineScaleSets.
+    /// You can only construct a <see cref="PartialVmssResource"/> from a <see cref="ResourceIdentifier"/> with a resource type of Microsoft.Compute/virtualMachineScaleSets.
     /// </summary>
     public partial class PartialVmssResource : ArmResource
     {
@@ -76,7 +76,7 @@ namespace MgmtPartialResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="PublicIPAddressResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _publicIPAddressRestClient.CreateListVirtualMachineScaleSetPublicIPAddressesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -98,7 +98,7 @@ namespace MgmtPartialResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="PublicIPAddressResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PublicIPAddressResource> GetPublicIPAddresses(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _publicIPAddressRestClient.CreateListVirtualMachineScaleSetPublicIPAddressesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

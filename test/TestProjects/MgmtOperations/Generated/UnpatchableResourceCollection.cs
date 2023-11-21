@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtOperations
 {
     /// <summary>
-    /// A class representing a collection of <see cref="UnpatchableResource" /> and their operations.
-    /// Each <see cref="UnpatchableResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get an <see cref="UnpatchableResourceCollection" /> instance call the GetUnpatchableResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="UnpatchableResource"/> and their operations.
+    /// Each <see cref="UnpatchableResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get an <see cref="UnpatchableResourceCollection"/> instance call the GetUnpatchableResources method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class UnpatchableResourceCollection : ArmCollection, IEnumerable<UnpatchableResource>, IAsyncEnumerable<UnpatchableResource>
     {
@@ -227,7 +227,7 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="UnpatchableResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="UnpatchableResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<UnpatchableResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
@@ -249,7 +249,7 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="UnpatchableResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="UnpatchableResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<UnpatchableResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);

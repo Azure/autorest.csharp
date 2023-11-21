@@ -22,9 +22,9 @@ using MgmtMockAndSample.Models;
 namespace MgmtMockAndSample
 {
     /// <summary>
-    /// A class representing a collection of <see cref="VaultResource" /> and their operations.
-    /// Each <see cref="VaultResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="VaultCollection" /> instance call the GetVaults method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="VaultResource"/> and their operations.
+    /// Each <see cref="VaultResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="VaultCollection"/> instance call the GetVaults method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class VaultCollection : ArmCollection, IEnumerable<VaultResource>, IAsyncEnumerable<VaultResource>
     {
@@ -226,7 +226,7 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VaultResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VaultResource> GetAllAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _vaultRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);
@@ -249,7 +249,7 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VaultResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VaultResource> GetAll(int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _vaultRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);

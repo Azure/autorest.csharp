@@ -20,9 +20,9 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ResourceLinkResource" /> and their operations.
-    /// Each <see cref="ResourceLinkResource" /> in the collection will belong to the same instance of <see cref="TenantResource" />.
-    /// To get a <see cref="ResourceLinkCollection" /> instance call the GetResourceLinks method from an instance of <see cref="TenantResource" />.
+    /// A class representing a collection of <see cref="ResourceLinkResource"/> and their operations.
+    /// Each <see cref="ResourceLinkResource"/> in the collection will belong to the same instance of <see cref="TenantResource"/>.
+    /// To get a <see cref="ResourceLinkCollection"/> instance call the GetResourceLinks method from an instance of <see cref="TenantResource"/>.
     /// </summary>
     public partial class ResourceLinkCollection : ArmCollection
     {
@@ -212,7 +212,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLinkResource> GetAllAsync(Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
@@ -235,7 +235,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="filter"> The filter to apply when getting resource links. To get links only at the specified scope (not below the scope), use Filter.atScope(). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLinkResource> GetAll(Filter? filter = null, CancellationToken cancellationToken = default)
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);

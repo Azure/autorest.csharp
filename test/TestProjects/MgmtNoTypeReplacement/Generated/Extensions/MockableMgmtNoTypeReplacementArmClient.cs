@@ -37,11 +37,11 @@ namespace MgmtNoTypeReplacement.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource"/> object. </returns>
         public virtual NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(ResourceIdentifier id)
         {
             NoTypeReplacementModel1Resource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtNoTypeReplacement.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource"/> object. </returns>
         public virtual NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(ResourceIdentifier id)
         {
             NoTypeReplacementModel2Resource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtNoTypeReplacement.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource"/> object. </returns>
         public virtual NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(ResourceIdentifier id)
         {
             NoTypeReplacementModel3Resource.ValidateResourceId(id);

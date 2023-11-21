@@ -72,7 +72,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineResource> GetVirtualMachinesByLocationAsync(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => VirtualMachineRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);
@@ -95,7 +95,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </summary>
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineResource> GetVirtualMachinesByLocation(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => VirtualMachineRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);
@@ -118,7 +118,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineResource> GetVirtualMachinesAsync(string statusOnly = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => VirtualMachineRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
@@ -141,7 +141,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </summary>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineResource> GetVirtualMachines(string statusOnly = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => VirtualMachineRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
@@ -163,7 +163,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ImageResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ImageResource> GetImagesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ImageRestClient.CreateListRequest(Id.SubscriptionId);
@@ -185,7 +185,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ImageResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ImageResource> GetImages(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ImageRestClient.CreateListRequest(Id.SubscriptionId);
@@ -207,7 +207,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => VirtualMachineScaleSetRestClient.CreateListAllRequest(Id.SubscriptionId);
@@ -229,7 +229,7 @@ namespace MgmtAcronymMapping.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineScaleSetResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSets(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => VirtualMachineScaleSetRestClient.CreateListAllRequest(Id.SubscriptionId);

@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ResGrpParentWithNonResChResource" /> and their operations.
-    /// Each <see cref="ResGrpParentWithNonResChResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ResGrpParentWithNonResChCollection" /> instance call the GetResGrpParentWithNonResChes method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ResGrpParentWithNonResChResource"/> and their operations.
+    /// Each <see cref="ResGrpParentWithNonResChResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="ResGrpParentWithNonResChCollection"/> instance call the GetResGrpParentWithNonResChes method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ResGrpParentWithNonResChCollection : ArmCollection, IEnumerable<ResGrpParentWithNonResChResource>, IAsyncEnumerable<ResGrpParentWithNonResChResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -246,7 +246,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithNonResChRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

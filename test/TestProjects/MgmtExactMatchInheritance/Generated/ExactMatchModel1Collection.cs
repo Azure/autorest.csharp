@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtExactMatchInheritance
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ExactMatchModel1Resource" /> and their operations.
-    /// Each <see cref="ExactMatchModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get an <see cref="ExactMatchModel1Collection" /> instance call the GetExactMatchModel1s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ExactMatchModel1Resource"/> and their operations.
+    /// Each <see cref="ExactMatchModel1Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get an <see cref="ExactMatchModel1Collection"/> instance call the GetExactMatchModel1s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ExactMatchModel1Collection : ArmCollection, IEnumerable<ExactMatchModel1Resource>, IAsyncEnumerable<ExactMatchModel1Resource>
     {
@@ -219,7 +219,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ExactMatchModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ExactMatchModel1Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ExactMatchModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ExactMatchModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ExactMatchModel1Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ExactMatchModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

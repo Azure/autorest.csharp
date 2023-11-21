@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> and their operations.
-    /// Each <see cref="ResGrpParentWithAncestorWithNonResChResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ResGrpParentWithAncestorWithNonResChCollection" /> instance call the GetResGrpParentWithAncestorWithNonResChes method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> and their operations.
+    /// Each <see cref="ResGrpParentWithAncestorWithNonResChResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="ResGrpParentWithAncestorWithNonResChCollection"/> instance call the GetResGrpParentWithAncestorWithNonResChes method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ResGrpParentWithAncestorWithNonResChCollection : ArmCollection, IEnumerable<ResGrpParentWithAncestorWithNonResChResource>, IAsyncEnumerable<ResGrpParentWithAncestorWithNonResChResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithAncestorWithNonResChRestClient.CreateListTestRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -246,7 +246,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithAncestorWithNonResChRestClient.CreateListTestRequest(Id.SubscriptionId, Id.ResourceGroupName);

@@ -37,11 +37,11 @@ namespace MgmtCustomizations.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="PetStoreResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PetStoreResource.CreateResourceIdentifier" /> to create a <see cref="PetStoreResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="PetStoreResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PetStoreResource.CreateResourceIdentifier" /> to create a <see cref="PetStoreResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PetStoreResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PetStoreResource"/> object. </returns>
         public virtual PetStoreResource GetPetStoreResource(ResourceIdentifier id)
         {
             PetStoreResource.ValidateResourceId(id);

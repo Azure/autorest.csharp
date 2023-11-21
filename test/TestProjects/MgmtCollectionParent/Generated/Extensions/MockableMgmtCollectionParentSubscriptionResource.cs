@@ -57,7 +57,7 @@ namespace MgmtCollectionParent.Mocking
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="OrderResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<OrderResource> GetOrderResourcesAsync(string skipToken = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);
@@ -80,7 +80,7 @@ namespace MgmtCollectionParent.Mocking
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="OrderResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<OrderResource> GetOrderResources(string skipToken = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OrderResourceRestClient.CreateListOrderAtSubscriptionLevelRequest(Id.SubscriptionId, skipToken);

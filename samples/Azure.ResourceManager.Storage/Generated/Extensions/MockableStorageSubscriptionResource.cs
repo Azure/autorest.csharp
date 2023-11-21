@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageSkuInformation"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<StorageSkuInformation> GetSkusAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SkusRestClient.CreateListRequest(Id.SubscriptionId);
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageSkuInformation" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageSkuInformation"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<StorageSkuInformation> GetSkus(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SkusRestClient.CreateListRequest(Id.SubscriptionId);
@@ -164,7 +164,7 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageAccountResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<StorageAccountResource> GetStorageAccountsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => StorageAccountRestClient.CreateListRequest(Id.SubscriptionId);
@@ -186,7 +186,7 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageAccountResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<StorageAccountResource> GetStorageAccounts(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => StorageAccountRestClient.CreateListRequest(Id.SubscriptionId);
@@ -209,7 +209,7 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="StorageUsage"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<StorageUsage> GetUsagesByLocationAsync(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => UsagesRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);
@@ -231,7 +231,7 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// </summary>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="StorageUsage" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="StorageUsage"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<StorageUsage> GetUsagesByLocation(AzureLocation location, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => UsagesRestClient.CreateListByLocationRequest(Id.SubscriptionId, location);

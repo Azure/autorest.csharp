@@ -21,9 +21,9 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes
 {
     /// <summary>
-    /// A class representing a collection of <see cref="RecordSetPtrResource" /> and their operations.
-    /// Each <see cref="RecordSetPtrResource" /> in the collection will belong to the same instance of <see cref="ZoneResource" />.
-    /// To get a <see cref="RecordSetPtrCollection" /> instance call the GetRecordSetPtrs method from an instance of <see cref="ZoneResource" />.
+    /// A class representing a collection of <see cref="RecordSetPtrResource"/> and their operations.
+    /// Each <see cref="RecordSetPtrResource"/> in the collection will belong to the same instance of <see cref="ZoneResource"/>.
+    /// To get a <see cref="RecordSetPtrCollection"/> instance call the GetRecordSetPtrs method from an instance of <see cref="ZoneResource"/>.
     /// </summary>
     public partial class RecordSetPtrCollection : ArmCollection, IEnumerable<RecordSetPtrResource>, IAsyncEnumerable<RecordSetPtrResource>
     {
@@ -226,7 +226,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetPtrResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RecordSetPtrResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetPtrResource> GetAllAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetPtrRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix);
@@ -250,7 +250,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetPtrResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RecordSetPtrResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetPtrResource> GetAll(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetPtrRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "PTR".ToRecordType(), top, recordsetnamesuffix);

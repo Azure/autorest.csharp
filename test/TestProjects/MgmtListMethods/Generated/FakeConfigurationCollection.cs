@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FakeConfigurationResource" /> and their operations.
-    /// Each <see cref="FakeConfigurationResource" /> in the collection will belong to the same instance of <see cref="FakeResource" />.
-    /// To get a <see cref="FakeConfigurationCollection" /> instance call the GetFakeConfigurations method from an instance of <see cref="FakeResource" />.
+    /// A class representing a collection of <see cref="FakeConfigurationResource"/> and their operations.
+    /// Each <see cref="FakeConfigurationResource"/> in the collection will belong to the same instance of <see cref="FakeResource"/>.
+    /// To get a <see cref="FakeConfigurationCollection"/> instance call the GetFakeConfigurations method from an instance of <see cref="FakeResource"/>.
     /// </summary>
     public partial class FakeConfigurationCollection : ArmCollection, IEnumerable<FakeConfigurationResource>, IAsyncEnumerable<FakeConfigurationResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeConfigurationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeConfigurationResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
@@ -244,7 +244,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeConfigurationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeConfigurationResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);

@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtMultipleParentResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="SubParentResource" /> and their operations.
-    /// Each <see cref="SubParentResource" /> in the collection will belong to the same instance of <see cref="TheParentResource" />.
-    /// To get a <see cref="SubParentCollection" /> instance call the GetSubParents method from an instance of <see cref="TheParentResource" />.
+    /// A class representing a collection of <see cref="SubParentResource"/> and their operations.
+    /// Each <see cref="SubParentResource"/> in the collection will belong to the same instance of <see cref="TheParentResource"/>.
+    /// To get a <see cref="SubParentCollection"/> instance call the GetSubParents method from an instance of <see cref="TheParentResource"/>.
     /// </summary>
     public partial class SubParentCollection : ArmCollection, IEnumerable<SubParentResource>, IAsyncEnumerable<SubParentResource>
     {
@@ -226,7 +226,7 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubParentResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand);
@@ -249,7 +249,7 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubParentResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand);

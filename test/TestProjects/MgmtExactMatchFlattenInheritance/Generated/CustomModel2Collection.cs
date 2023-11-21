@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtExactMatchFlattenInheritance
 {
     /// <summary>
-    /// A class representing a collection of <see cref="CustomModel2Resource" /> and their operations.
-    /// Each <see cref="CustomModel2Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="CustomModel2Collection" /> instance call the GetCustomModel2s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="CustomModel2Resource"/> and their operations.
+    /// Each <see cref="CustomModel2Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="CustomModel2Collection"/> instance call the GetCustomModel2s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class CustomModel2Collection : ArmCollection, IEnumerable<CustomModel2Resource>, IAsyncEnumerable<CustomModel2Resource>
     {
@@ -222,7 +222,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel2Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel2Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -243,7 +243,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel2Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel2Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel2Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _customModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

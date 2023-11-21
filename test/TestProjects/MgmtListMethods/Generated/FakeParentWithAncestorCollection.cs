@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FakeParentWithAncestorResource" /> and their operations.
-    /// Each <see cref="FakeParentWithAncestorResource" /> in the collection will belong to the same instance of <see cref="FakeResource" />.
-    /// To get a <see cref="FakeParentWithAncestorCollection" /> instance call the GetFakeParentWithAncestors method from an instance of <see cref="FakeResource" />.
+    /// A class representing a collection of <see cref="FakeParentWithAncestorResource"/> and their operations.
+    /// Each <see cref="FakeParentWithAncestorResource"/> in the collection will belong to the same instance of <see cref="FakeResource"/>.
+    /// To get a <see cref="FakeParentWithAncestorCollection"/> instance call the GetFakeParentWithAncestors method from an instance of <see cref="FakeResource"/>.
     /// </summary>
     public partial class FakeParentWithAncestorCollection : ArmCollection, IEnumerable<FakeParentWithAncestorResource>, IAsyncEnumerable<FakeParentWithAncestorResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
@@ -245,7 +245,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);

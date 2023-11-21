@@ -40,7 +40,7 @@ namespace MgmtSingletonResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="CarResource" /> object. </returns>
+        /// <returns> Returns a <see cref="CarResource"/> object. </returns>
         public static CarResource GetCarResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -59,7 +59,7 @@ namespace MgmtSingletonResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="IgnitionResource"/> object. </returns>
         public static IgnitionResource GetIgnitionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -78,7 +78,7 @@ namespace MgmtSingletonResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="BrakeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BrakeResource"/> object. </returns>
         public static BrakeResource GetBrakeResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -97,7 +97,7 @@ namespace MgmtSingletonResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SingletonResource"/> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -116,7 +116,7 @@ namespace MgmtSingletonResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ParentResource"/> object. </returns>
         public static ParentResource GetParentResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));

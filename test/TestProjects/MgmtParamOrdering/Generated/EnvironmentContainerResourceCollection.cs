@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtParamOrdering
 {
     /// <summary>
-    /// A class representing a collection of <see cref="EnvironmentContainerResource" /> and their operations.
-    /// Each <see cref="EnvironmentContainerResource" /> in the collection will belong to the same instance of <see cref="WorkspaceResource" />.
-    /// To get an <see cref="EnvironmentContainerResourceCollection" /> instance call the GetEnvironmentContainerResources method from an instance of <see cref="WorkspaceResource" />.
+    /// A class representing a collection of <see cref="EnvironmentContainerResource"/> and their operations.
+    /// Each <see cref="EnvironmentContainerResource"/> in the collection will belong to the same instance of <see cref="WorkspaceResource"/>.
+    /// To get an <see cref="EnvironmentContainerResourceCollection"/> instance call the GetEnvironmentContainerResources method from an instance of <see cref="WorkspaceResource"/>.
     /// </summary>
     public partial class EnvironmentContainerResourceCollection : ArmCollection, IEnumerable<EnvironmentContainerResource>, IAsyncEnumerable<EnvironmentContainerResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="EnvironmentContainerResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="EnvironmentContainerResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<EnvironmentContainerResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _environmentContainerResourceEnvironmentContainersRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -244,7 +244,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="EnvironmentContainerResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="EnvironmentContainerResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<EnvironmentContainerResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _environmentContainerResourceEnvironmentContainersRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

@@ -41,7 +41,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ExactMatchModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="ExactMatchModel1Resource"/> object. </returns>
         public static ExactMatchModel1Resource GetExactMatchModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -60,7 +60,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ExactMatchModel5Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="ExactMatchModel5Resource"/> object. </returns>
         public static ExactMatchModel5Resource GetExactMatchModel5Resource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -295,7 +295,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ExactMatchModel3"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
@@ -322,7 +322,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ExactMatchModel3"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ExactMatchModel3> GetExactMatchModel3s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));

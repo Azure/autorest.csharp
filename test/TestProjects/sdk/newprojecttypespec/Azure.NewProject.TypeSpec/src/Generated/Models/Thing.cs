@@ -115,7 +115,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <description><see cref="string"/></description>
         /// </item>
         /// <item>
-        /// <description><see cref="IList{T}"/> Where <c>T</c> is of type <see cref="string"/></description>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
         /// </item>
         /// <item>
         /// <description><see cref="int"/></description>

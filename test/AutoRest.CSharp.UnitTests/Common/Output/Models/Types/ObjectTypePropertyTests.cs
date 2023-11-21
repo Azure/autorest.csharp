@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using System;
 using System.Globalization;
+using System.Linq;
+using AutoRest.CSharp.Generation.Writers;
 
 namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
 {
@@ -89,26 +91,6 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             Assert.AreEqual(expectedResult.ToString(), result.ToString());
         }
 
-        // Validates that the type description summary string is constructed correctly for a given dictionary type
-        [Test]
-        public void TestConstructTypeStringForCollection_DictionaryType()
-        {
-            bool isNullable = false;
-            InputType keyType = new InputPrimitiveType(InputTypeKind.String, isNullable);
-            InputType valueType = new InputPrimitiveType(InputTypeKind.Int32, isNullable);
-            InputType type = new InputDictionaryType("InputDictionaryType", keyType, valueType, isNullable);
-
-            CSharpType cSharpType = typeFactory.CreateType(type);
-
-            FormattableString result = ObjectTypeProperty.ConstructTypeStringForCollection(cSharpType);
-            FormattableString expectedResult = $"<description><see cref=\"global::System.Collections.Generic.IDictionary<string, int>\"/></description>";
-
-            bool areStringsEqual = string.Compare(result.ToString(), expectedResult.ToString(), CultureInfo.CurrentCulture,
-                CompareOptions.IgnoreSymbols) == 0;
-
-            Assert.True(areStringsEqual);
-        }
-
         // Validates that the summary description string is constructed correctly for several types
         [Test]
         public void TestGetUnionTypesDescriptions()
@@ -131,10 +113,10 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             InputLiteralType boolLiteralType = new InputLiteralType("InputLiteralType", boolLiteralValueType, true, isNullable);
 
             InputType dateTimeLiteralValueType = new InputPrimitiveType(InputTypeKind.DateTime, isNullable);
-            var dateTime = new DateTimeOffset();
+            var dateTime = new DateTimeOffset(1,2,3,4,5,6, TimeSpan.Zero);
             InputLiteralType dateTimeLiteralType = new InputLiteralType("InputLiteralType", dateTimeLiteralValueType, dateTime, isNullable);
 
-            IList<CSharpType> unionItems = new List<CSharpType>()
+            var unionItems = new List<CSharpType>
             {
                 typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Boolean, false)),
                 typeFactory.CreateType(new InputPrimitiveType(InputTypeKind.Int32, false)),
@@ -148,35 +130,23 @@ namespace AutoRest.CSharp.Tests.Common.Output.Models.Types
             IReadOnlyList<FormattableString> descriptions = ObjectTypeProperty.GetUnionTypesDescriptions(unionItems);
 
             Assert.AreEqual(7, descriptions.Count);
-            var expectedDescription = "<description><see cref=\"bool\"/></description>";
-            bool areStringsEqual = string.Compare(descriptions[0].ToString(), expectedDescription.ToString(), CultureInfo.CurrentCulture,
-               CompareOptions.IgnoreSymbols) == 0;
 
-            Assert.True(areStringsEqual);
+            var codeWriter = new CodeWriter();
+            codeWriter.AppendXmlDocumentation($"<test>", $"</test>", descriptions.ToList().Join(Environment.NewLine));
+            var actual = codeWriter.ToString(false);
 
-            expectedDescription = "<description><see cref=\"int\"/></description>";
-            areStringsEqual = string.Compare(descriptions[1].ToString(), expectedDescription.ToString(), CultureInfo.CurrentCulture,
-              CompareOptions.IgnoreSymbols) == 0;
+            var expected = string.Join(Environment.NewLine,
+                "/// <test>",
+                "/// <description><see cref=\"bool\"/></description>",
+                "/// <description><see cref=\"int\"/></description>",
+                "/// <description><see cref=\"global::System.Collections.Generic.IDictionary{TKey,TValue}\"/> where <c>TKey</c> is of type <see cref=\"string\"/>, where <c>TValue</c> is of type <see cref=\"int\"/></description>",
+                "/// <description>21</description>",
+                "/// <description>\"test\"</description>",
+                "/// <description>True</description>",
+                $"/// <description>{dateTime}</description>",
+                "/// </test>") + Environment.NewLine;
 
-            Assert.True(areStringsEqual);
-
-            var expectedDictionaryDescription = $"<description><see cref=\"global::System.Collections.Generic.IDictionary<string, int>\"/></description>";
-            areStringsEqual = string.Compare(descriptions[2].ToString(), expectedDictionaryDescription.ToString(), CultureInfo.CurrentCulture,
-              CompareOptions.IgnoreSymbols) == 0;
-
-            Assert.True(areStringsEqual);
-
-            var expectedLiteralDescription = $"<description>21</description>";
-            Assert.AreEqual(expectedLiteralDescription, descriptions[3].ToString());
-
-            var expectedStringLiteralDescription = $"<description>test</description>";
-            Assert.AreEqual(expectedStringLiteralDescription, descriptions[4].ToString());
-
-            var expectedBoolLiteralDescription = $"<description>True</description>";
-            Assert.AreEqual(expectedBoolLiteralDescription, descriptions[5].ToString());
-
-            var expectedDateTimeLiteralDescription = $"<description>{dateTime}</description>";
-            Assert.AreEqual(expectedDateTimeLiteralDescription, descriptions[6].ToString());
+            Assert.AreEqual(expected, actual);
         }
     }
 

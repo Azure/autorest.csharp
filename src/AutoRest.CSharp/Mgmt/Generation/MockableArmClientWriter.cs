@@ -103,26 +103,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {types.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
             }
         }
-
-        private void WriteGetResourceFromIdMethod(Resource resource)
-        {
-            List<FormattableString> lines = new List<FormattableString>();
-            string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
-            lines.Add($"Gets an object representing {an} <see cref=\"{resource.Type}\" /> along with the instance operations that can be performed on it but with no data.");
-            lines.Add($"You can use <see cref=\"{resource.Type}.CreateResourceIdentifier\" /> to create {an} <see cref=\"{resource.Type}\" /> <see cref=\"{typeof(ResourceIdentifier)}\" /> from its components.");
-            _writer.WriteXmlDocumentationSummary(FormattableStringHelpers.Join(lines, "\r\n"));
-            _writer.WriteXmlDocumentationParameter("id", $"The resource ID of the resource to get.");
-            _writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resource.Type.Name}\" /> object.");
-            using (_writer.Scope($"public virtual {resource.Type} Get{resource.Type.Name}({typeof(Azure.Core.ResourceIdentifier)} id)"))
-            {
-                WriteGetter(resource, "Client");
-            }
-        }
-
-        private void WriteGetter(Resource resource, string armVariable)
-        {
-            _writer.Line($"{resource.Type.Name}.ValidateResourceId(id);");
-            _writer.Line($"return new {resource.Type.Name}({armVariable}, id);");
-        }
     }
 }

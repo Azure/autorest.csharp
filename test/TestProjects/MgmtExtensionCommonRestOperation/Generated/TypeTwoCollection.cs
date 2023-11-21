@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtExtensionCommonRestOperation
 {
     /// <summary>
-    /// A class representing a collection of <see cref="TypeTwoResource" /> and their operations.
-    /// Each <see cref="TypeTwoResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="TypeTwoCollection" /> instance call the GetTypeTwos method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="TypeTwoResource"/> and their operations.
+    /// Each <see cref="TypeTwoResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="TypeTwoCollection"/> instance call the GetTypeTwos method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class TypeTwoCollection : ArmCollection, IEnumerable<TypeTwoResource>, IAsyncEnumerable<TypeTwoResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TypeTwoResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeTwoResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeTwoCommonRestClient.CreateListTypeTwosRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -245,7 +245,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TypeTwoResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeTwoResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeTwoCommonRestClient.CreateListTypeTwosRequest(Id.SubscriptionId, Id.ResourceGroupName);

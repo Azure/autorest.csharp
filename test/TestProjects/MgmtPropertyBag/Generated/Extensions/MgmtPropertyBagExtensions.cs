@@ -46,7 +46,7 @@ namespace MgmtPropertyBag
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="FooResource" /> object. </returns>
+        /// <returns> Returns a <see cref="FooResource"/> object. </returns>
         public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -65,7 +65,7 @@ namespace MgmtPropertyBag
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BarResource"/> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -245,7 +245,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -275,7 +275,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -305,7 +305,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -335,7 +335,7 @@ namespace MgmtPropertyBag
         /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));

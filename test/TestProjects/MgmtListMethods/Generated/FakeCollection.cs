@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FakeResource" /> and their operations.
-    /// Each <see cref="FakeResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
-    /// To get a <see cref="FakeCollection" /> instance call the GetFakes method from an instance of <see cref="SubscriptionResource" />.
+    /// A class representing a collection of <see cref="FakeResource"/> and their operations.
+    /// Each <see cref="FakeResource"/> in the collection will belong to the same instance of <see cref="SubscriptionResource"/>.
+    /// To get a <see cref="FakeCollection"/> instance call the GetFakes method from an instance of <see cref="SubscriptionResource"/>.
     /// </summary>
     public partial class FakeCollection : ArmCollection, IEnumerable<FakeResource>, IAsyncEnumerable<FakeResource>
     {
@@ -227,7 +227,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeResource> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);

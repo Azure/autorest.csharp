@@ -22,9 +22,9 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="DeploymentExtendedResource" /> and their operations.
-    /// Each <see cref="DeploymentExtendedResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />, <see cref="ResourceGroupResource" />, <see cref="ManagementGroupResource" /> or <see cref="TenantResource" />.
-    /// To get a <see cref="DeploymentExtendedCollection" /> instance call the GetDeploymentExtendeds method from an instance of <see cref="SubscriptionResource" />, <see cref="ResourceGroupResource" />, <see cref="ManagementGroupResource" /> or <see cref="TenantResource" />.
+    /// A class representing a collection of <see cref="DeploymentExtendedResource"/> and their operations.
+    /// Each <see cref="DeploymentExtendedResource"/> in the collection will belong to the same instance of <see cref="SubscriptionResource"/>, <see cref="ResourceGroupResource"/>, <see cref="ManagementGroupResource"/> or <see cref="TenantResource"/>.
+    /// To get a <see cref="DeploymentExtendedCollection"/> instance call the GetDeploymentExtendeds method from an instance of <see cref="SubscriptionResource"/>, <see cref="ResourceGroupResource"/>, <see cref="ManagementGroupResource"/> or <see cref="TenantResource"/>.
     /// </summary>
     public partial class DeploymentExtendedCollection : ArmCollection, IEnumerable<DeploymentExtendedResource>, IAsyncEnumerable<DeploymentExtendedResource>
     {
@@ -218,7 +218,7 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq '{state}'. </param>
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeploymentExtendedResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="DeploymentExtendedResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DeploymentExtendedResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
@@ -242,7 +242,7 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the operation. For example, you can use $filter=provisioningState eq '{state}'. </param>
         /// <param name="top"> The number of results to get. If null is passed, returns all deployments. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeploymentExtendedResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="DeploymentExtendedResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DeploymentExtendedResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);

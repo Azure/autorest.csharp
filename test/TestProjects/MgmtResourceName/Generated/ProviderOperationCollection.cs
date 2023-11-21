@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtResourceName
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ProviderOperationResource" /> and their operations.
-    /// Each <see cref="ProviderOperationResource" /> in the collection will belong to the same instance of <see cref="TenantResource" />.
-    /// To get a <see cref="ProviderOperationCollection" /> instance call the GetProviderOperations method from an instance of <see cref="TenantResource" />.
+    /// A class representing a collection of <see cref="ProviderOperationResource"/> and their operations.
+    /// Each <see cref="ProviderOperationResource"/> in the collection will belong to the same instance of <see cref="TenantResource"/>.
+    /// To get a <see cref="ProviderOperationCollection"/> instance call the GetProviderOperations method from an instance of <see cref="TenantResource"/>.
     /// </summary>
     public partial class ProviderOperationCollection : ArmCollection, IEnumerable<ProviderOperationResource>, IAsyncEnumerable<ProviderOperationResource>
     {
@@ -145,7 +145,7 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="expand"> Specifies whether to expand the values. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ProviderOperationResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ProviderOperationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ProviderOperationResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
@@ -168,7 +168,7 @@ namespace MgmtResourceName
         /// </summary>
         /// <param name="expand"> Specifies whether to expand the values. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ProviderOperationResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ProviderOperationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ProviderOperationResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);

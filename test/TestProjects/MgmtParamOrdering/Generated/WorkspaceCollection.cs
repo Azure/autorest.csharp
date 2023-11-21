@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtParamOrdering
 {
     /// <summary>
-    /// A class representing a collection of <see cref="WorkspaceResource" /> and their operations.
-    /// Each <see cref="WorkspaceResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="WorkspaceCollection" /> instance call the GetWorkspaces method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="WorkspaceResource"/> and their operations.
+    /// Each <see cref="WorkspaceResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="WorkspaceCollection"/> instance call the GetWorkspaces method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class WorkspaceCollection : ArmCollection, IEnumerable<WorkspaceResource>, IAsyncEnumerable<WorkspaceResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WorkspaceResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WorkspaceResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WorkspaceResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -245,7 +245,7 @@ namespace MgmtParamOrdering
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WorkspaceResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WorkspaceResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WorkspaceResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

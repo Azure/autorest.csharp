@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtCollectionParent
 {
     /// <summary>
-    /// A class representing a collection of <see cref="OrderResource" /> and their operations.
-    /// Each <see cref="OrderResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get an <see cref="OrderResourceCollection" /> instance call the GetOrderResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="OrderResource"/> and their operations.
+    /// Each <see cref="OrderResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get an <see cref="OrderResourceCollection"/> instance call the GetOrderResources method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class OrderResourceCollection : ArmCollection, IEnumerable<OrderResource>, IAsyncEnumerable<OrderResource>
     {
@@ -147,7 +147,7 @@ namespace MgmtCollectionParent
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="OrderResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<OrderResource> GetAllAsync(string skipToken = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelRequest(Id.SubscriptionId, Id.ResourceGroupName, skipToken);
@@ -170,7 +170,7 @@ namespace MgmtCollectionParent
         /// </summary>
         /// <param name="skipToken"> $skipToken is supported on Get list of order, which provides the next page in the list of order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="OrderResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<OrderResource> GetAll(string skipToken = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelRequest(Id.SubscriptionId, Id.ResourceGroupName, skipToken);

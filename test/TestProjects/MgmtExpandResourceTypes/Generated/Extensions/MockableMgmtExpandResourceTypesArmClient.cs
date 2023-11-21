@@ -37,11 +37,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetAResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetAResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetAResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetAResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetAResource"/> object. </returns>
         public virtual RecordSetAResource GetRecordSetAResource(ResourceIdentifier id)
         {
             RecordSetAResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetAaaaResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetAaaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAaaaResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetAaaaResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetAaaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAaaaResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetAaaaResource"/> object. </returns>
         public virtual RecordSetAaaaResource GetRecordSetAaaaResource(ResourceIdentifier id)
         {
             RecordSetAaaaResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetCaaResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetCaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCaaResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetCaaResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetCaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCaaResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetCaaResource"/> object. </returns>
         public virtual RecordSetCaaResource GetRecordSetCaaResource(ResourceIdentifier id)
         {
             RecordSetCaaResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetCNameResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetCNameResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCNameResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetCNameResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetCNameResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCNameResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetCNameResource"/> object. </returns>
         public virtual RecordSetCNameResource GetRecordSetCNameResource(ResourceIdentifier id)
         {
             RecordSetCNameResource.ValidateResourceId(id);
@@ -85,11 +85,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetMxResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetMxResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetMxResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetMxResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetMxResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetMxResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetMxResource"/> object. </returns>
         public virtual RecordSetMxResource GetRecordSetMxResource(ResourceIdentifier id)
         {
             RecordSetMxResource.ValidateResourceId(id);
@@ -97,11 +97,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetNsResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetNsResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetNsResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetNsResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetNsResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetNsResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetNsResource"/> object. </returns>
         public virtual RecordSetNsResource GetRecordSetNsResource(ResourceIdentifier id)
         {
             RecordSetNsResource.ValidateResourceId(id);
@@ -109,11 +109,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetPtrResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetPtrResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetPtrResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetPtrResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetPtrResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetPtrResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetPtrResource"/> object. </returns>
         public virtual RecordSetPtrResource GetRecordSetPtrResource(ResourceIdentifier id)
         {
             RecordSetPtrResource.ValidateResourceId(id);
@@ -121,11 +121,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetSoaResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetSoaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSoaResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetSoaResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetSoaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSoaResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetSoaResource"/> object. </returns>
         public virtual RecordSetSoaResource GetRecordSetSoaResource(ResourceIdentifier id)
         {
             RecordSetSoaResource.ValidateResourceId(id);
@@ -133,11 +133,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetSrvResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetSrvResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSrvResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetSrvResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetSrvResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSrvResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetSrvResource"/> object. </returns>
         public virtual RecordSetSrvResource GetRecordSetSrvResource(ResourceIdentifier id)
         {
             RecordSetSrvResource.ValidateResourceId(id);
@@ -145,11 +145,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="RecordSetTxtResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RecordSetTxtResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetTxtResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="RecordSetTxtResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RecordSetTxtResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetTxtResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
+        /// <returns> Returns a <see cref="RecordSetTxtResource"/> object. </returns>
         public virtual RecordSetTxtResource GetRecordSetTxtResource(ResourceIdentifier id)
         {
             RecordSetTxtResource.ValidateResourceId(id);
@@ -157,11 +157,11 @@ namespace MgmtExpandResourceTypes.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ZoneResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ZoneResource.CreateResourceIdentifier" /> to create a <see cref="ZoneResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ZoneResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ZoneResource.CreateResourceIdentifier" /> to create a <see cref="ZoneResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ZoneResource"/> object. </returns>
         public virtual ZoneResource GetZoneResource(ResourceIdentifier id)
         {
             ZoneResource.ValidateResourceId(id);

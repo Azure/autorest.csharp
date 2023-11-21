@@ -37,11 +37,11 @@ namespace MgmtConstants.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="OptionalMachineResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="OptionalMachineResource.CreateResourceIdentifier" /> to create an <see cref="OptionalMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="OptionalMachineResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="OptionalMachineResource.CreateResourceIdentifier" /> to create an <see cref="OptionalMachineResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="OptionalMachineResource" /> object. </returns>
+        /// <returns> Returns a <see cref="OptionalMachineResource"/> object. </returns>
         public virtual OptionalMachineResource GetOptionalMachineResource(ResourceIdentifier id)
         {
             OptionalMachineResource.ValidateResourceId(id);
