@@ -43,9 +43,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        private static BoolExpression IsNotWireFormat(ModelReaderWriterOptionsExpression options)
-            => NotEqual(options.Format, Serializations.WireFormat);
-
         public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
             var jsonModelInterface = json.IJsonModelInterface;
@@ -74,7 +71,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
                 new MethodBodyStatement[]
                 {
-                    ValidateJsonFormat(options, json.IModelInterface).ToArray(),
+                    Serializations.ValidateJsonFormat(options, json.IModelInterface),
                     EmptyLine,
                     // using var document = JsonDocument.ParseValue(ref reader);
                     UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
@@ -166,7 +163,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(bool hasJson, bool hasXml, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
-                yield return GetConcreteFormat(options, iModelTInterface, out var format);
+                yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
 
                 yield return EmptyLine;
 
@@ -223,7 +220,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                  */
                 var typeOfT = iModelTInterface.Arguments[0];
                 var defaultCase = SwitchCase.Default(
-                    ThrowValidationFailException(options.Format, typeOfT)
+                    Serializations.ThrowValidationFailException(options.Format, typeOfT)
                 );
                 switchStatement.Add(defaultCase);
 
@@ -233,7 +230,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             static IEnumerable<MethodBodyStatement> BuildModelCreateMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
-                yield return GetConcreteFormat(options, iModelTInterface, out var format);
+                yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
 
                 yield return EmptyLine;
 
@@ -267,7 +264,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                  */
                 var typeOfT = iModelTInterface.Arguments[0];
                 var defaultCase = SwitchCase.Default(
-                    ThrowValidationFailException(options.Format, typeOfT)
+                    Serializations.ThrowValidationFailException(options.Format, typeOfT)
                 );
                 switchStatement.Add(defaultCase);
 
@@ -275,42 +272,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> ValidateJsonFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
-        {
-            /*
-                var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
-                if (format != "J")
-                {
-                    throw new FormatException($"The model {nameof(ThisModel)} does not support '{format}' format.");
-                }
-             */
-            yield return GetConcreteFormat(options, iModelTInterface, out var format);
-
-            yield return new IfStatement(NotEqual(format, Serializations.JsonFormat))
-            {
-                ThrowValidationFailException(format, iModelTInterface.Arguments[0])
-            };
-        }
-
-        private static MethodBodyStatement GetConcreteFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface, out TypedValueExpression format)
-            => Var("format", new TypedTernaryConditionalOperator(
-                Equal(options.Format, Serializations.WireFormat),
-                new StringExpression(This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options)),
-                options.Format), out format);
-
-        private static MethodBodyStatement ThrowValidationFailException(ValueExpression format, CSharpType typeOfT)
-            => Throw(New.Instance(
-                    typeof(InvalidOperationException),
-                    new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
-                    {
-                        Nameof(typeOfT),
-                        format
-                    })));
-
         public static MethodBodyStatement[] WriteObject(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options)
             => new[]
             {
-                ValidateJsonFormat(options, serialization.IModelInterface).ToArray(),
+                Serializations.ValidateJsonFormat(options, serialization.IModelInterface),
                 EmptyLine,
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
@@ -388,9 +353,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value)
             };
 
+            // TODO -- refactor this to the CheckNotWireFormat method
             if (additionalProperties.ShouldExcludeInWireSerialization)
             {
-                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), IsNotWireFormat(options)))
+                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), Serializations.IsNotWireFormat(options.Format)))
                 {
                     statement
                 };
@@ -704,17 +670,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
             DeserializeValue(additionalPropertiesSerialization.ValueSerialization!, jsonProperty.Value, out var value);
             var additionalPropertiesStatement = dictionary.Add(jsonProperty.Name, value);
 
-            if (additionalPropertiesSerialization.ShouldExcludeInWireSerialization)
-            {
-                yield return new IfStatement(IsNotWireFormat(options))
-                {
-                    additionalPropertiesStatement
-                };
-            }
-            else
-            {
-                yield return additionalPropertiesStatement;
-            }
+            yield return Serializations.WrapInCheckNotWire(
+                additionalPropertiesSerialization,
+                options.Format,
+                additionalPropertiesStatement);
         }
 
         private static MethodBodyStatement DeserializeIntoObjectProperties(IEnumerable<JsonPropertySerialization> propertySerializations, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, VariableReference> propertyVariables, bool shouldTreatEmptyStringAsNull)
