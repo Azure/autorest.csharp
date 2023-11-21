@@ -17,7 +17,7 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class GeoReplication : IXmlSerializable, IPersistableModel<GeoReplication>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "GeoReplication");
             writer.WriteStartElement("Status");
@@ -28,6 +28,8 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static GeoReplication DeserializeGeoReplication(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -41,7 +43,7 @@ namespace Azure.Storage.Tables.Models
             {
                 lastSyncTime = lastSyncTimeElement.GetDateTimeOffsetValue("R");
             }
-            return new GeoReplication(status, lastSyncTime, default);
+            return new GeoReplication(status, lastSyncTime, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<GeoReplication>.Write(ModelReaderWriterOptions options)
@@ -54,7 +56,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

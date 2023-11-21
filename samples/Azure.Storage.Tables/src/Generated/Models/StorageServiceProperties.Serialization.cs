@@ -18,7 +18,7 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class StorageServiceProperties : IXmlSerializable, IPersistableModel<StorageServiceProperties>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "StorageServiceProperties");
             if (Optional.IsDefined(Logging))
@@ -44,6 +44,8 @@ namespace Azure.Storage.Tables.Models
             }
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -72,7 +74,7 @@ namespace Azure.Storage.Tables.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, default);
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<StorageServiceProperties>.Write(ModelReaderWriterOptions options)
@@ -85,7 +87,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

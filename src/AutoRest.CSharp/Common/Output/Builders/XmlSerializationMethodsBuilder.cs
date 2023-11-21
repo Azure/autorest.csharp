@@ -28,20 +28,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static IEnumerable<Method> BuildXmlSerializationMethods(XmlObjectSerialization serialization)
         {
             // a private helper method with the options to do the full xml serialization
-            const string privateWriteMethodName = "Write";
             var xmlWriter = new XmlWriterExpression(KnownParameters.Serializations.XmlWriter);
             var nameHint = (ValueExpression)KnownParameters.Serializations.NameHint;
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             yield return new Method
             (
-                new MethodSignature(privateWriteMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
+                new MethodSignature(Serializations.XmlWriteMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
                 WriteObject(serialization, xmlWriter, nameHint, options).ToArray()
             );
 
             yield return new Method
             (
                 new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
-                This.Invoke(privateWriteMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
+                This.Invoke(Serializations.XmlWriteMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
             );
         }
 

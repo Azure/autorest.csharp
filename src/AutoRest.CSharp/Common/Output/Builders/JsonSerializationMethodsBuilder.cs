@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelReadMethodBody(model, json != null, xml != null, data, options, iModelTInterface).ToArray()
+                BuildModelCreateMethodBody(model, json != null, xml != null, data, options, iModelTInterface).ToArray()
             );
 
             // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         {
                             UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
                             UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
-                            This.CastTo(typeof(IXmlSerializable)).Invoke(nameof(IXmlSerializable.Write), xmlWriter, Null).ToStatement(),
+                            new InvokeInstanceMethodStatement(null, Serializations.XmlWriteMethodName, new[] { xmlWriter, Null, options }, false),
                             xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
                             new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
                                 // return BinaryData.FromStream(stream);
@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return switchStatement;
             }
 
-            static IEnumerable<MethodBodyStatement> BuildModelReadMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            static IEnumerable<MethodBodyStatement> BuildModelCreateMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
                 yield return GetConcreteFormat(options, iModelTInterface, out var format);

@@ -17,7 +17,7 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class AccessPolicy : IXmlSerializable, IPersistableModel<AccessPolicy>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "AccessPolicy");
             writer.WriteStartElement("Start");
@@ -31,6 +31,8 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static AccessPolicy DeserializeAccessPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -49,7 +51,7 @@ namespace Azure.Storage.Tables.Models
             {
                 permission = (string)permissionElement;
             }
-            return new AccessPolicy(start, expiry, permission, default);
+            return new AccessPolicy(start, expiry, permission, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<AccessPolicy>.Write(ModelReaderWriterOptions options)
@@ -62,7 +64,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

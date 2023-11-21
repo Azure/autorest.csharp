@@ -19,7 +19,7 @@ namespace Azure.Storage.Tables.Models
 {
     internal partial class StorageError : IUtf8JsonSerializable, IJsonModel<StorageError>, IXmlSerializable, IPersistableModel<StorageError>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "StorageError");
             if (Optional.IsDefined(Message))
@@ -31,6 +31,8 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static StorageError DeserializeStorageError(XElement element, ModelReaderWriterOptions options = null)
         {
             string message = default;
@@ -38,7 +40,7 @@ namespace Azure.Storage.Tables.Models
             {
                 message = (string)messageElement;
             }
-            return new StorageError(message, default);
+            return new StorageError(message, serializedAdditionalRawData: null);
         }
 
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<StorageError>)this).Write(writer, new ModelReaderWriterOptions("W"));
@@ -126,7 +128,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

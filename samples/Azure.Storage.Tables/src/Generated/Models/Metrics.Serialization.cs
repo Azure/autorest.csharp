@@ -17,7 +17,7 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class Metrics : IXmlSerializable, IPersistableModel<Metrics>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Metrics");
             if (Optional.IsDefined(Version))
@@ -42,6 +42,8 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static Metrics DeserializeMetrics(XElement element, ModelReaderWriterOptions options = null)
         {
             string version = default;
@@ -64,7 +66,7 @@ namespace Azure.Storage.Tables.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Metrics(version, enabled, includeAPIs, retentionPolicy, default);
+            return new Metrics(version, enabled, includeAPIs, retentionPolicy, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Metrics>.Write(ModelReaderWriterOptions options)
@@ -77,7 +79,7 @@ namespace Azure.Storage.Tables.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {
