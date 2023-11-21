@@ -44,7 +44,7 @@ namespace _Type.Scalar
         }
 
         /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual String GetStringClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Type.Scalar
         }
 
         /// <summary> Initializes a new instance of Boolean. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Boolean GetBooleanClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Type.Scalar
         }
 
         /// <summary> Initializes a new instance of Unknown. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Unknown GetUnknownClient(string apiVersion = "1.0.0")
         {

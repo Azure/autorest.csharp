@@ -39,7 +39,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new NewProjectTypeSpecClientOptions())
@@ -47,7 +47,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NewProjectTypeSpecClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new NewProjectTypeSpecClientOptions())
@@ -55,7 +55,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -73,7 +73,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Initializes a new instance of NewProjectTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -91,7 +91,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopActionAsync(DateTimeOffset,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
@@ -102,7 +102,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction(DateTimeOffset,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
@@ -127,7 +127,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -163,7 +163,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -589,8 +589,8 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> paramete has string format. </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
-        /// <param name="body"> The ModelWithFormat to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StringFormatAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
@@ -605,8 +605,8 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> paramete has string format. </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
-        /// <param name="body"> The ModelWithFormat to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StringFormat(Guid,ModelWithFormat,CancellationToken)']/*" />
@@ -635,7 +635,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -675,7 +675,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -710,9 +710,9 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -747,9 +747,9 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -775,9 +775,9 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
@@ -795,9 +795,9 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
@@ -829,8 +829,8 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -873,8 +873,8 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -912,8 +912,8 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -951,8 +951,8 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -1071,7 +1071,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Create with literal value. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
@@ -1086,7 +1086,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> Create with literal value. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
@@ -1329,7 +1329,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
@@ -1343,7 +1343,7 @@ namespace Azure.NewProject.TypeSpec
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)

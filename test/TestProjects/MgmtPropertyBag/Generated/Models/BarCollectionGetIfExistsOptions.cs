@@ -31,7 +31,7 @@ namespace MgmtPropertyBag.Models
         public string IfMatch { get; set; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
-        /// <summary> The int? to use. </summary>
+        /// <summary> The top. </summary>
         public int? Top { get; set; }
         /// <summary> Optional. Number of records to skip. </summary>
         public int? Skip { get; set; }

@@ -134,7 +134,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
-        /// <param name="file"> The CreateFileRequest to use. </param>
+        /// <param name="file"> The <see cref="CreateFileRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public virtual async Task<Result<OpenAIFile>> CreateAsync(CreateFileRequest file, CancellationToken cancellationToken = default)
@@ -148,7 +148,7 @@ namespace OpenAI
         }
 
         /// <summary> Returns a list of files that belong to the user's organization. </summary>
-        /// <param name="file"> The CreateFileRequest to use. </param>
+        /// <param name="file"> The <see cref="CreateFileRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="file"/> is null. </exception>
         public virtual Result<OpenAIFile> Create(CreateFileRequest file, CancellationToken cancellationToken = default)

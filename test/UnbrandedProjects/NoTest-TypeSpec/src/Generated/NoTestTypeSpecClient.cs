@@ -34,7 +34,7 @@ namespace NoTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of NoTestTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public NoTestTypeSpecClient(Uri endpoint, KeyCredential credential) : this(endpoint, credential, new NoTestTypeSpecClientOptions())
@@ -42,7 +42,7 @@ namespace NoTestTypeSpec
         }
 
         /// <summary> Initializes a new instance of NoTestTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -59,9 +59,9 @@ namespace NoTestTypeSpec
         }
 
         /// <summary> Return hi. </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         public virtual async Task<Result<Thing>> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, CancellationToken cancellationToken = default)
@@ -75,9 +75,9 @@ namespace NoTestTypeSpec
         }
 
         /// <summary> Return hi. </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         public virtual Result<Thing> SayHi(string headParameter, string queryParameter, string optionalQuery = null, CancellationToken cancellationToken = default)
@@ -105,9 +105,9 @@ namespace NoTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
@@ -146,9 +146,9 @@ namespace NoTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>

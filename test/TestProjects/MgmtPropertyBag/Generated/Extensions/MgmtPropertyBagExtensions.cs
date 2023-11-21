@@ -242,7 +242,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. The default value is 10. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
@@ -272,7 +272,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. The default value is 10. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
@@ -302,7 +302,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
@@ -332,7 +332,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>

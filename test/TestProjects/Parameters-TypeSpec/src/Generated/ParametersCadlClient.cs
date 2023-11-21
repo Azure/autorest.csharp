@@ -44,8 +44,8 @@ namespace ParametersCadl
             _apiVersion = options.Version;
         }
 
-        /// <param name="start"> The int to use. </param>
-        /// <param name="end"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/> to use. </param>
+        /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='OperationAsync(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<Result>> OperationAsync(int start, int? end = null, CancellationToken cancellationToken = default)
@@ -55,8 +55,8 @@ namespace ParametersCadl
             return Response.FromValue(Result.FromResponse(response), response);
         }
 
-        /// <param name="start"> The int to use. </param>
-        /// <param name="end"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/> to use. </param>
+        /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation(int,int?,CancellationToken)']/*" />
         public virtual Response<Result> Operation(int start, int? end = null, CancellationToken cancellationToken = default)
@@ -81,8 +81,8 @@ namespace ParametersCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The int to use. </param>
-        /// <param name="end"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/> to use. </param>
+        /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -118,8 +118,8 @@ namespace ParametersCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The int to use. </param>
-        /// <param name="end"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/> to use. </param>
+        /// <param name="end"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -140,8 +140,8 @@ namespace ParametersCadl
             }
         }
 
-        /// <param name="end"> The int to use. </param>
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="end"> The <see cref="int"/> to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2Async(int,int?,CancellationToken)']/*" />
         public virtual async Task<Response<Result>> Operation2Async(int end, int? start = null, CancellationToken cancellationToken = default)
@@ -151,8 +151,8 @@ namespace ParametersCadl
             return Response.FromValue(Result.FromResponse(response), response);
         }
 
-        /// <param name="end"> The int to use. </param>
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="end"> The <see cref="int"/> to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2(int,int?,CancellationToken)']/*" />
         public virtual Response<Result> Operation2(int end, int? start = null, CancellationToken cancellationToken = default)
@@ -177,8 +177,8 @@ namespace ParametersCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="end"> The int to use. </param>
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="end"> The <see cref="int"/> to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -214,8 +214,8 @@ namespace ParametersCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="end"> The int to use. </param>
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="end"> The <see cref="int"/> to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

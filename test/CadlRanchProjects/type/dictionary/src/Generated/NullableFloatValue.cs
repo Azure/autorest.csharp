@@ -39,7 +39,7 @@ namespace _Type._Dictionary
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal NullableFloatValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -166,7 +166,7 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <param name="body"> The IDictionary{string,float?} to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,float?},CancellationToken)']/*" />
@@ -180,7 +180,7 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <param name="body"> The IDictionary{string,float?} to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(IDictionary{string,float?},CancellationToken)']/*" />

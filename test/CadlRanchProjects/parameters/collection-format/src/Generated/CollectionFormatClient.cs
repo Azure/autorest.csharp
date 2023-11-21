@@ -44,7 +44,7 @@ namespace Parameters.CollectionFormat
         }
 
         /// <summary> Initializes a new instance of Query. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Query GetQueryClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace Parameters.CollectionFormat
         }
 
         /// <summary> Initializes a new instance of Header. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Header GetHeaderClient(string apiVersion = "1.0.0")
         {

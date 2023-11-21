@@ -38,7 +38,7 @@ namespace Projection.ProjectedName
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace Projection.ProjectedName
             _apiVersion = apiVersion;
         }
 
-        /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
+        /// <param name="jsonProjectedNameModel"> The <see cref="JsonProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(JsonProjectedNameModel,CancellationToken)']/*" />
@@ -61,7 +61,7 @@ namespace Projection.ProjectedName
             return response;
         }
 
-        /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
+        /// <param name="jsonProjectedNameModel"> The <see cref="JsonProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(JsonProjectedNameModel,CancellationToken)']/*" />
@@ -153,7 +153,7 @@ namespace Projection.ProjectedName
             }
         }
 
-        /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
+        /// <param name="clientProjectedNameModel"> The <see cref="ClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(ClientProjectedNameModel,CancellationToken)']/*" />
@@ -167,7 +167,7 @@ namespace Projection.ProjectedName
             return response;
         }
 
-        /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
+        /// <param name="clientProjectedNameModel"> The <see cref="ClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(ClientProjectedNameModel,CancellationToken)']/*" />
@@ -259,7 +259,7 @@ namespace Projection.ProjectedName
             }
         }
 
-        /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
+        /// <param name="languageProjectedNameModel"> The <see cref="LanguageProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(LanguageProjectedNameModel,CancellationToken)']/*" />
@@ -273,7 +273,7 @@ namespace Projection.ProjectedName
             return response;
         }
 
-        /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
+        /// <param name="languageProjectedNameModel"> The <see cref="LanguageProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(LanguageProjectedNameModel,CancellationToken)']/*" />
@@ -365,7 +365,7 @@ namespace Projection.ProjectedName
             }
         }
 
-        /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
+        /// <param name="jsonAndClientProjectedNameModel"> The <see cref="JsonAndClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
@@ -379,7 +379,7 @@ namespace Projection.ProjectedName
             return response;
         }
 
-        /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
+        /// <param name="jsonAndClientProjectedNameModel"> The <see cref="JsonAndClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)']/*" />

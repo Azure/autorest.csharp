@@ -38,7 +38,7 @@ namespace Client.Structure.Service.TwoOperationGroup
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="client"> Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client. Allowed values: "default" | "multi-client" | "renamed-operation" | "two-operation-group". </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Group2(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string client, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;

@@ -59,10 +59,10 @@ namespace MgmtSingletonResource
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="carName"> The string to use. </param>
-        /// <param name="default"> The BrakeName to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="carName"> The <see cref="string"/> to use. </param>
+        /// <param name="default"> The <see cref="BrakeName"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -90,10 +90,10 @@ namespace MgmtSingletonResource
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="carName"> The string to use. </param>
-        /// <param name="default"> The BrakeName to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="carName"> The <see cref="string"/> to use. </param>
+        /// <param name="default"> The <see cref="BrakeName"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>

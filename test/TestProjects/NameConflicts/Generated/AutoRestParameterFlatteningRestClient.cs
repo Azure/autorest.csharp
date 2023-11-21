@@ -60,13 +60,13 @@ namespace NameConflicts
             return message0;
         }
 
-        /// <param name="request"> The string to use. </param>
-        /// <param name="message"> The string to use. </param>
-        /// <param name="scope"> The string to use. </param>
-        /// <param name="uri"> The string to use. </param>
-        /// <param name="pipeline"> The string to use. </param>
-        /// <param name="clientDiagnostics"> The string to use. </param>
-        /// <param name="class"> The Class to use. </param>
+        /// <param name="request"> The <see cref="string"/> to use. </param>
+        /// <param name="message"> The <see cref="string"/> to use. </param>
+        /// <param name="scope"> The <see cref="string"/> to use. </param>
+        /// <param name="uri"> The <see cref="string"/> to use. </param>
+        /// <param name="pipeline"> The <see cref="string"/> to use. </param>
+        /// <param name="clientDiagnostics"> The <see cref="string"/> to use. </param>
+        /// <param name="class"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/> or <paramref name="class"/> is null. </exception>
         public async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
@@ -116,13 +116,13 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="request"> The string to use. </param>
-        /// <param name="message"> The string to use. </param>
-        /// <param name="scope"> The string to use. </param>
-        /// <param name="uri"> The string to use. </param>
-        /// <param name="pipeline"> The string to use. </param>
-        /// <param name="clientDiagnostics"> The string to use. </param>
-        /// <param name="class"> The Class to use. </param>
+        /// <param name="request"> The <see cref="string"/> to use. </param>
+        /// <param name="message"> The <see cref="string"/> to use. </param>
+        /// <param name="scope"> The <see cref="string"/> to use. </param>
+        /// <param name="uri"> The <see cref="string"/> to use. </param>
+        /// <param name="pipeline"> The <see cref="string"/> to use. </param>
+        /// <param name="clientDiagnostics"> The <see cref="string"/> to use. </param>
+        /// <param name="class"> The <see cref="Class"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/> or <paramref name="class"/> is null. </exception>
         public Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
@@ -190,7 +190,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The Stream to use. </param>
+        /// <param name="stringBody"> The <see cref="Stream"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Azure.Response> AnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -206,7 +206,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The Stream to use. </param>
+        /// <param name="stringBody"> The <see cref="Stream"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Azure.Response AnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -241,7 +241,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The string to use. </param>
+        /// <param name="stringBody"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Azure.Response> AnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -257,7 +257,7 @@ namespace NameConflicts
         }
 
         /// <summary> Analyze body, that could be different media types. </summary>
-        /// <param name="stringBody"> The string to use. </param>
+        /// <param name="stringBody"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Azure.Response AnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
@@ -292,7 +292,7 @@ namespace NameConflicts
             return message;
         }
 
-        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="httpMessage"> The <see cref="Models.HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.HttpMessage>> HttpMessageAsync(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
@@ -312,7 +312,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="httpMessage"> The HttpMessage to use. </param>
+        /// <param name="httpMessage"> The <see cref="Models.HttpMessage"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.HttpMessage> HttpMessage(Models.HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
@@ -352,7 +352,7 @@ namespace NameConflicts
             return message;
         }
 
-        /// <param name="request"> The Request to use. </param>
+        /// <param name="request"> The <see cref="Models.Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.Request>> RequestAsync(Models.Request request = null, CancellationToken cancellationToken = default)
         {
@@ -372,7 +372,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="request"> The Request to use. </param>
+        /// <param name="request"> The <see cref="Models.Request"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Request> Request(Models.Request request = null, CancellationToken cancellationToken = default)
         {
@@ -412,7 +412,7 @@ namespace NameConflicts
             return message;
         }
 
-        /// <param name="response"> The Response to use. </param>
+        /// <param name="response"> The <see cref="Models.Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
         {
@@ -432,7 +432,7 @@ namespace NameConflicts
             }
         }
 
-        /// <param name="response"> The Response to use. </param>
+        /// <param name="response"> The <see cref="Models.Response"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Models.Response> Response(Models.Response response = null, CancellationToken cancellationToken = default)
         {

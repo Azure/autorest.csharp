@@ -56,7 +56,7 @@ namespace MgmtNoTypeReplacement
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -82,7 +82,7 @@ namespace MgmtNoTypeReplacement
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -132,10 +132,10 @@ namespace MgmtNoTypeReplacement
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="noTypeReplacementModel3SName"> The string to use. </param>
-        /// <param name="data"> The NoTypeReplacementModel3Data to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="noTypeReplacementModel3SName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="NoTypeReplacementModel3Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -162,10 +162,10 @@ namespace MgmtNoTypeReplacement
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="noTypeReplacementModel3SName"> The string to use. </param>
-        /// <param name="data"> The NoTypeReplacementModel3Data to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="noTypeReplacementModel3SName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="NoTypeReplacementModel3Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="noTypeReplacementModel3SName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -212,9 +212,9 @@ namespace MgmtNoTypeReplacement
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="noTypeReplacementModel3SName"> The string to use. </param>
+        /// <param name="noTypeReplacementModel3SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -242,9 +242,9 @@ namespace MgmtNoTypeReplacement
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="noTypeReplacementModel3SName"> The string to use. </param>
+        /// <param name="noTypeReplacementModel3SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>

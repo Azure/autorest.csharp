@@ -41,9 +41,9 @@ namespace Azure.ResourceManager.Sample.Models
         public string Skus { get; }
         /// <summary> The expand expression to apply on the operation. </summary>
         public string Expand { get; set; }
-        /// <summary> The int? to use. </summary>
+        /// <summary> The top. </summary>
         public int? Top { get; set; }
-        /// <summary> The string to use. </summary>
+        /// <summary> The orderby. </summary>
         public string Orderby { get; set; }
     }
 }

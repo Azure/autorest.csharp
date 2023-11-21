@@ -38,7 +38,7 @@ namespace Encode.Bytes
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace Encode.Bytes
             _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The DefaultBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultBytesProperty,CancellationToken)']/*" />
@@ -61,7 +61,7 @@ namespace Encode.Bytes
             return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The DefaultBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultBytesProperty,CancellationToken)']/*" />
@@ -153,7 +153,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="body"> The Base64BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64Async(Base64BytesProperty,CancellationToken)']/*" />
@@ -167,7 +167,7 @@ namespace Encode.Bytes
             return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Base64BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64(Base64BytesProperty,CancellationToken)']/*" />
@@ -259,7 +259,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="body"> The Base64urlBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlAsync(Base64urlBytesProperty,CancellationToken)']/*" />
@@ -273,7 +273,7 @@ namespace Encode.Bytes
             return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Base64urlBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64url(Base64urlBytesProperty,CancellationToken)']/*" />
@@ -365,7 +365,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="body"> The Base64urlArrayBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArrayAsync(Base64urlArrayBytesProperty,CancellationToken)']/*" />
@@ -379,7 +379,7 @@ namespace Encode.Bytes
             return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Base64urlArrayBytesProperty to use. </param>
+        /// <param name="body"> The <see cref="Base64urlArrayBytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Base64urlArray(Base64urlArrayBytesProperty,CancellationToken)']/*" />

@@ -34,14 +34,14 @@ namespace RenameGetList
         }
 
         /// <summary> Initializes a new instance of RenameGetListClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenameGetListClient(Uri endpoint) : this(endpoint, new RenameGetListClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of RenameGetListClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public RenameGetListClient(Uri endpoint, RenameGetListClientOptions options)
@@ -65,7 +65,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -100,7 +100,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -135,8 +135,8 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -172,8 +172,8 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -251,7 +251,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -277,7 +277,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>

@@ -38,7 +38,7 @@ namespace Encode.Duration
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace Encode.Duration
             _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The DefaultDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultDurationProperty,CancellationToken)']/*" />
@@ -61,7 +61,7 @@ namespace Encode.Duration
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The DefaultDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultDurationProperty,CancellationToken)']/*" />
@@ -153,7 +153,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The ISO8601DurationProperty to use. </param>
+        /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601Async(ISO8601DurationProperty,CancellationToken)']/*" />
@@ -167,7 +167,7 @@ namespace Encode.Duration
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The ISO8601DurationProperty to use. </param>
+        /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601(ISO8601DurationProperty,CancellationToken)']/*" />
@@ -259,7 +259,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The Int32SecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32SecondsAsync(Int32SecondsDurationProperty,CancellationToken)']/*" />
@@ -273,7 +273,7 @@ namespace Encode.Duration
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Int32SecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32Seconds(Int32SecondsDurationProperty,CancellationToken)']/*" />
@@ -365,7 +365,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The FloatSecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsAsync(FloatSecondsDurationProperty,CancellationToken)']/*" />
@@ -379,7 +379,7 @@ namespace Encode.Duration
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The FloatSecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSeconds(FloatSecondsDurationProperty,CancellationToken)']/*" />
@@ -471,7 +471,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The FloatSecondsDurationArrayProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArrayAsync(FloatSecondsDurationArrayProperty,CancellationToken)']/*" />
@@ -485,7 +485,7 @@ namespace Encode.Duration
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The FloatSecondsDurationArrayProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArray(FloatSecondsDurationArrayProperty,CancellationToken)']/*" />

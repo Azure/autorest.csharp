@@ -70,7 +70,7 @@ namespace PublicClientCtor
             return message;
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response> OperationAsync(TestModel value, CancellationToken cancellationToken = default)
@@ -91,7 +91,7 @@ namespace PublicClientCtor
             }
         }
 
-        /// <param name="value"> The TestModel to use. </param>
+        /// <param name="value"> The <see cref="TestModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response Operation(TestModel value, CancellationToken cancellationToken = default)

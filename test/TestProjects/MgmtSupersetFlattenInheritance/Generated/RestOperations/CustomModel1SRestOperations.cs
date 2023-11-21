@@ -56,8 +56,8 @@ namespace MgmtSupersetFlattenInheritance
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -82,8 +82,8 @@ namespace MgmtSupersetFlattenInheritance
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -132,10 +132,10 @@ namespace MgmtSupersetFlattenInheritance
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="customModel1SName"> The string to use. </param>
-        /// <param name="customModel1"> The CustomModel1 to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="customModel1SName"> The <see cref="string"/> to use. </param>
+        /// <param name="customModel1"> The <see cref="CustomModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -162,10 +162,10 @@ namespace MgmtSupersetFlattenInheritance
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="customModel1SName"> The string to use. </param>
-        /// <param name="customModel1"> The CustomModel1 to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="customModel1SName"> The <see cref="string"/> to use. </param>
+        /// <param name="customModel1"> The <see cref="CustomModel1"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -212,9 +212,9 @@ namespace MgmtSupersetFlattenInheritance
             return message;
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="customModel1SName"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="customModel1SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -240,9 +240,9 @@ namespace MgmtSupersetFlattenInheritance
             }
         }
 
-        /// <param name="subscriptionId"> The string to use. </param>
-        /// <param name="resourceGroupName"> The string to use. </param>
-        /// <param name="customModel1SName"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="customModel1SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>

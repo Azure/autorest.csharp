@@ -127,7 +127,7 @@ namespace Server.Path.Multiple
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="keyword"> The string to use. </param>
+        /// <param name="keyword"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyword"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
@@ -163,7 +163,7 @@ namespace Server.Path.Multiple
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="keyword"> The string to use. </param>
+        /// <param name="keyword"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="keyword"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>

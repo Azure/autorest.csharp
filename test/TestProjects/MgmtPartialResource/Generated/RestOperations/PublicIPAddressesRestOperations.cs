@@ -59,7 +59,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets information about all public IP addresses on a virtual machine scale set level. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="virtualMachineScaleSetName"> The name of the virtual machine scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -88,7 +88,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets information about all public IP addresses on a virtual machine scale set level. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="virtualMachineScaleSetName"> The name of the virtual machine scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -136,7 +136,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Deletes the specified public IP address. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -162,7 +162,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Deletes the specified public IP address. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -212,7 +212,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets the specified public IP address in a specified resource group. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
@@ -244,7 +244,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets the specified public IP address in a specified resource group. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
@@ -300,7 +300,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Creates or updates a static or dynamic public IP address. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="data"> Parameters supplied to the create or update public IP address operation. </param>
@@ -327,7 +327,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Creates or updates a static or dynamic public IP address. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="data"> Parameters supplied to the create or update public IP address operation. </param>
@@ -371,7 +371,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets all the public IP addresses in a subscription. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -396,7 +396,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets all the public IP addresses in a subscription. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -440,7 +440,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets all public IP addresses in a resource group. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -467,7 +467,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Gets all public IP addresses in a resource group. </summary>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -509,7 +509,7 @@ namespace MgmtPartialResource
 
         /// <summary> Gets information about all public IP addresses on a virtual machine scale set level. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="virtualMachineScaleSetName"> The name of the virtual machine scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -540,7 +540,7 @@ namespace MgmtPartialResource
 
         /// <summary> Gets information about all public IP addresses on a virtual machine scale set level. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="virtualMachineScaleSetName"> The name of the virtual machine scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -585,7 +585,7 @@ namespace MgmtPartialResource
 
         /// <summary> Gets all the public IP addresses in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -612,7 +612,7 @@ namespace MgmtPartialResource
 
         /// <summary> Gets all the public IP addresses in a subscription. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -653,7 +653,7 @@ namespace MgmtPartialResource
 
         /// <summary> Gets all public IP addresses in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -682,7 +682,7 @@ namespace MgmtPartialResource
 
         /// <summary> Gets all public IP addresses in a resource group. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="subscriptionId"> The string to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>

@@ -38,7 +38,7 @@ namespace _Type.Property.Optionality
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal CollectionsModel(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -228,7 +228,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsModelProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='PutAllAsync(CollectionsModelProperty,CancellationToken)']/*" />
@@ -243,7 +243,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsModelProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='PutAll(CollectionsModelProperty,CancellationToken)']/*" />
@@ -336,7 +336,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsModelProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='PutDefaultAsync(CollectionsModelProperty,CancellationToken)']/*" />
@@ -351,7 +351,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsModelProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='PutDefault(CollectionsModelProperty,CancellationToken)']/*" />

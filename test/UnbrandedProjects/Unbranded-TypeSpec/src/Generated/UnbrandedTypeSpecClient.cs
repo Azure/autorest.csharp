@@ -34,7 +34,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
         public UnbrandedTypeSpecClient(Uri endpoint, KeyCredential credential) : this(endpoint, credential, new UnbrandedTypeSpecClientOptions())
@@ -42,7 +42,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
@@ -68,9 +68,9 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
@@ -104,9 +104,9 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The string to use. </param>
-        /// <param name="queryParameter"> The string to use. </param>
-        /// <param name="optionalQuery"> The string to use. </param>
+        /// <param name="headParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
+        /// <param name="optionalQuery"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
@@ -131,9 +131,9 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
@@ -150,9 +150,9 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
-        /// <param name="action"> The RoundTripModel to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
+        /// <param name="action"> The <see cref="RoundTripModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
@@ -183,8 +183,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -226,8 +226,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -264,8 +264,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -302,8 +302,8 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The string to use. </param>
-        /// <param name="p1"> The string to use. </param>
+        /// <param name="p2"> The <see cref="string"/> to use. </param>
+        /// <param name="p1"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -417,7 +417,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Create with literal value. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Result<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
@@ -431,7 +431,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> Create with literal value. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Result<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
@@ -607,7 +607,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Result<Thing>> TopActionAsync(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -617,7 +617,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> top level method. </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Result<Thing> TopAction(DateTimeOffset action, CancellationToken cancellationToken = default)
         {
@@ -641,7 +641,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -676,7 +676,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="action"> The DateTimeOffset to use. </param>
+        /// <param name="action"> The <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="MessageFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1087,8 +1087,8 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> parameter has string format. </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
-        /// <param name="body"> The ModelWithFormat to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Result> StringFormatAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
@@ -1102,8 +1102,8 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> parameter has string format. </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
-        /// <param name="body"> The ModelWithFormat to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
+        /// <param name="body"> The <see cref="ModelWithFormat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Result StringFormat(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
@@ -1131,7 +1131,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -1170,7 +1170,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subscriptionId"> The Guid to use. </param>
+        /// <param name="subscriptionId"> The <see cref="Guid"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -1443,7 +1443,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual async Task<Result<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
@@ -1457,7 +1457,7 @@ namespace UnbrandedTypeSpec
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
-        /// <param name="body"> The Thing to use. </param>
+        /// <param name="body"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         public virtual Result<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
@@ -1643,7 +1643,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The string to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1679,7 +1679,7 @@ namespace UnbrandedTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The string to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>

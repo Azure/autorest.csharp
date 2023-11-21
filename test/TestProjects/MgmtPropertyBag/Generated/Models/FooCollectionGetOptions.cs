@@ -28,9 +28,9 @@ namespace MgmtPropertyBag.Models
         public string FooName { get; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
-        /// <summary> The int? to use. </summary>
+        /// <summary> The top. </summary>
         public int? Top { get; set; }
-        /// <summary> The string to use. </summary>
+        /// <summary> The orderby. </summary>
         public string Orderby { get; set; }
         /// <summary> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </summary>
         public ETag? IfMatch { get; set; }

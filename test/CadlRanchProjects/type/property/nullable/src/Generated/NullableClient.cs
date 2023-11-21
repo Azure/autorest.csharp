@@ -44,7 +44,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual String GetStringClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary> Initializes a new instance of Bytes. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Bytes GetBytesClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary> Initializes a new instance of Datetime. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Datetime GetDatetimeClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary> Initializes a new instance of Duration. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Duration GetDurationClient(string apiVersion = "1.0.0")
         {
@@ -84,7 +84,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary> Initializes a new instance of CollectionsByte. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsByte GetCollectionsByteClient(string apiVersion = "1.0.0")
         {
@@ -94,7 +94,7 @@ namespace _Type.Property.Nullable
         }
 
         /// <summary> Initializes a new instance of CollectionsModel. </summary>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsModel GetCollectionsModelClient(string apiVersion = "1.0.0")
         {

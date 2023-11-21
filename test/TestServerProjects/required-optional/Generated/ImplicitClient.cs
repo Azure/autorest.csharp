@@ -43,7 +43,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
-        /// <param name="pathParameter"> The string to use. </param>
+        /// <param name="pathParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> GetRequiredPathAsync(string pathParameter, CancellationToken cancellationToken = default)
         {
@@ -61,7 +61,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly required path parameter. </summary>
-        /// <param name="pathParameter"> The string to use. </param>
+        /// <param name="pathParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response GetRequiredPath(string pathParameter, CancellationToken cancellationToken = default)
         {
@@ -79,7 +79,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
-        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalQueryAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -97,7 +97,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional query parameter. </summary>
-        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalQuery(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -115,7 +115,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional header parameter. </summary>
-        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalHeaderAsync(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -133,7 +133,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional header parameter. </summary>
-        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalHeader(string queryParameter = null, CancellationToken cancellationToken = default)
         {
@@ -151,7 +151,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The string to use. </param>
+        /// <param name="bodyParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalBodyAsync(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -169,7 +169,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The string to use. </param>
+        /// <param name="bodyParameter"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalBody(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -187,7 +187,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The Stream to use. </param>
+        /// <param name="bodyParameter"> The <see cref="Stream"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
         {
@@ -205,7 +205,7 @@ namespace required_optional
         }
 
         /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The Stream to use. </param>
+        /// <param name="bodyParameter"> The <see cref="Stream"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
         {

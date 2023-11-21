@@ -55,7 +55,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
         /// </summary>
-        /// <param name="job"> The CreateFineTuningJobRequest to use. </param>
+        /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual async Task<Result<FineTuningJob>> CreateAsync(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
@@ -76,7 +76,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
         /// </summary>
-        /// <param name="job"> The CreateFineTuningJobRequest to use. </param>
+        /// <param name="job"> The <see cref="CreateFineTuningJobRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="job"/> is null. </exception>
         public virtual Result<FineTuningJob> Create(CreateFineTuningJobRequest job, CancellationToken cancellationToken = default)
@@ -272,7 +272,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
         /// </summary>
-        /// <param name="fineTuningJobId"> The string to use. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -290,7 +290,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/fine-tuning)
         /// </summary>
-        /// <param name="fineTuningJobId"> The string to use. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -320,7 +320,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The string to use. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -361,7 +361,7 @@ namespace OpenAI
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="fineTuningJobId"> The string to use. </param>
+        /// <param name="fineTuningJobId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTuningJobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="fineTuningJobId"/> is an empty string, and was expected to be non-empty. </exception>

@@ -22,7 +22,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
 
-        /// <summary> The string to use. </summary>
+        /// <summary> The <see cref="string"/> to use. </summary>
         public string ClientParameter { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -41,7 +41,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="keyCredential"> The key credential to copy. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="clientParameter"> The string to use. </param>
+        /// <param name="clientParameter"> The <see cref="string"/> to use. </param>
         internal Client4(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, AzureKeyCredential keyCredential, Uri endpoint, string clientParameter)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -61,7 +61,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> The string to use. </param>
+        /// <param name="filter"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -95,7 +95,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> The string to use. </param>
+        /// <param name="filter"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

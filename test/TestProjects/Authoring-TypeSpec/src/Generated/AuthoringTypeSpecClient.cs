@@ -36,14 +36,14 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Initializes a new instance of AuthoringTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AuthoringTypeSpecClient(Uri endpoint) : this(endpoint, new AuthoringTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of AuthoringTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public AuthoringTypeSpecClient(Uri endpoint, AuthoringTypeSpecClientOptions options)
@@ -67,7 +67,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -102,7 +102,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -137,8 +137,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -174,8 +174,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -202,9 +202,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -231,9 +231,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -274,9 +274,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -318,9 +318,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -348,9 +348,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -377,9 +377,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -420,9 +420,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -464,9 +464,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
-        /// <param name="jobId"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
+        /// <param name="jobId"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -545,7 +545,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -571,7 +571,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -597,9 +597,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The int? to use. </param>
-        /// <param name="skip"> The int? to use. </param>
-        /// <param name="maxpagesize"> The int? to use. </param>
+        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> The <see cref="int"/>? to use. </param>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -621,9 +621,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The int? to use. </param>
-        /// <param name="skip"> The int? to use. </param>
-        /// <param name="maxpagesize"> The int? to use. </param>
+        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> The <see cref="int"/>? to use. </param>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -645,9 +645,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The int? to use. </param>
-        /// <param name="skip"> The int? to use. </param>
-        /// <param name="maxpagesize"> The int? to use. </param>
+        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> The <see cref="int"/>? to use. </param>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -669,9 +669,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The int? to use. </param>
-        /// <param name="skip"> The int? to use. </param>
-        /// <param name="maxpagesize"> The int? to use. </param>
+        /// <param name="maxCount"> The <see cref="int"/>? to use. </param>
+        /// <param name="skip"> The <see cref="int"/>? to use. </param>
+        /// <param name="maxpagesize"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -694,7 +694,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -732,7 +732,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -770,7 +770,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -806,7 +806,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -842,8 +842,8 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="projectFileVersion"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="projectFileVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -880,8 +880,8 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="projectFileVersion"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="projectFileVersion"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="projectFileVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -918,7 +918,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -954,7 +954,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -990,7 +990,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -1028,7 +1028,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -1066,8 +1066,8 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
@@ -1106,8 +1106,8 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
@@ -1146,8 +1146,8 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1184,8 +1184,8 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
-        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
+        /// <param name="deploymentName"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1222,7 +1222,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -1260,7 +1260,7 @@ namespace AuthoringTypeSpec
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectName"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>

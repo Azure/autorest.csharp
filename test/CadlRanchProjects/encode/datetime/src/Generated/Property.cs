@@ -38,7 +38,7 @@ namespace Encode.Datetime
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The string to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace Encode.Datetime
             _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The DefaultDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultDatetimeProperty,CancellationToken)']/*" />
@@ -61,7 +61,7 @@ namespace Encode.Datetime
             return Response.FromValue(DefaultDatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The DefaultDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultDatetimeProperty,CancellationToken)']/*" />
@@ -153,7 +153,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The Rfc3339DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339Async(Rfc3339DatetimeProperty,CancellationToken)']/*" />
@@ -167,7 +167,7 @@ namespace Encode.Datetime
             return Response.FromValue(Rfc3339DatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Rfc3339DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc3339DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc3339(Rfc3339DatetimeProperty,CancellationToken)']/*" />
@@ -259,7 +259,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The Rfc7231DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231Async(Rfc7231DatetimeProperty,CancellationToken)']/*" />
@@ -273,7 +273,7 @@ namespace Encode.Datetime
             return Response.FromValue(Rfc7231DatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Rfc7231DatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="Rfc7231DatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Rfc7231(Rfc7231DatetimeProperty,CancellationToken)']/*" />
@@ -365,7 +365,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The UnixTimestampDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampAsync(UnixTimestampDatetimeProperty,CancellationToken)']/*" />
@@ -379,7 +379,7 @@ namespace Encode.Datetime
             return Response.FromValue(UnixTimestampDatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The UnixTimestampDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestamp(UnixTimestampDatetimeProperty,CancellationToken)']/*" />
@@ -471,7 +471,7 @@ namespace Encode.Datetime
             }
         }
 
-        /// <param name="body"> The UnixTimestampArrayDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArrayAsync(UnixTimestampArrayDatetimeProperty,CancellationToken)']/*" />
@@ -485,7 +485,7 @@ namespace Encode.Datetime
             return Response.FromValue(UnixTimestampArrayDatetimeProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The UnixTimestampArrayDatetimeProperty to use. </param>
+        /// <param name="body"> The <see cref="UnixTimestampArrayDatetimeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='UnixTimestampArray(UnixTimestampArrayDatetimeProperty,CancellationToken)']/*" />

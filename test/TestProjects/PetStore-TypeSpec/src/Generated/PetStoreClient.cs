@@ -35,14 +35,14 @@ namespace PetStore
         }
 
         /// <summary> Initializes a new instance of PetStoreClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PetStoreClient(Uri endpoint) : this(endpoint, new PetStoreClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PetStoreClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public PetStoreClient(Uri endpoint, PetStoreClientOptions options)
@@ -214,7 +214,7 @@ namespace PetStore
             }
         }
 
-        /// <param name="pet"> The Pet to use. </param>
+        /// <param name="pet"> The <see cref="Pet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='CreateAsync(Pet,CancellationToken)']/*" />
@@ -228,7 +228,7 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
-        /// <param name="pet"> The Pet to use. </param>
+        /// <param name="pet"> The <see cref="Pet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pet"/> is null. </exception>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Create(Pet,CancellationToken)']/*" />
@@ -320,7 +320,7 @@ namespace PetStore
             }
         }
 
-        /// <param name="kind"> The PetKind to use. </param>
+        /// <param name="kind"> The <see cref="PetKind"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKindAsync(PetKind,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetPetByKindAsync(PetKind kind, CancellationToken cancellationToken = default)
@@ -330,7 +330,7 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
-        /// <param name="kind"> The PetKind to use. </param>
+        /// <param name="kind"> The <see cref="PetKind"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetPetByKind(PetKind,CancellationToken)']/*" />
         public virtual Response<Pet> GetPetByKind(PetKind kind, CancellationToken cancellationToken = default)
@@ -355,7 +355,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The string to use. Allowed values: "dog" | "cat". </param>
+        /// <param name="kind"> The <see cref="string"/> to use. Allowed values: "dog" | "cat". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
@@ -395,7 +395,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The string to use. Allowed values: "dog" | "cat". </param>
+        /// <param name="kind"> The <see cref="string"/> to use. Allowed values: "dog" | "cat". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="kind"/> is an empty string, and was expected to be non-empty. </exception>
@@ -420,7 +420,7 @@ namespace PetStore
             }
         }
 
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(int?,CancellationToken)']/*" />
         public virtual async Task<Response<Pet>> GetFirstPetAsync(int? start = null, CancellationToken cancellationToken = default)
@@ -430,7 +430,7 @@ namespace PetStore
             return Response.FromValue(Pet.FromResponse(response), response);
         }
 
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(int?,CancellationToken)']/*" />
         public virtual Response<Pet> GetFirstPet(int? start = null, CancellationToken cancellationToken = default)
@@ -455,7 +455,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -491,7 +491,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="start"> The int? to use. </param>
+        /// <param name="start"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -512,7 +512,7 @@ namespace PetStore
             }
         }
 
-        /// <param name="kind"> The string to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFishAsync(string,CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetFishAsync(string kind = null, CancellationToken cancellationToken = default)
@@ -522,7 +522,7 @@ namespace PetStore
             return Response.FromValue(Fish.FromResponse(response), response);
         }
 
-        /// <param name="kind"> The string to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFish(string,CancellationToken)']/*" />
         public virtual Response<Fish> GetFish(string kind = null, CancellationToken cancellationToken = default)
@@ -547,7 +547,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The string to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -583,7 +583,7 @@ namespace PetStore
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The string to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

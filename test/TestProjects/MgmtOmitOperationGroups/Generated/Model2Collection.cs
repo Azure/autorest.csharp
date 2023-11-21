@@ -67,8 +67,8 @@ namespace MgmtOmitOperationGroups
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="model2SName"> The string to use. </param>
-        /// <param name="data"> The Model2Data to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="Model2Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
@@ -107,8 +107,8 @@ namespace MgmtOmitOperationGroups
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="model2SName"> The string to use. </param>
-        /// <param name="data"> The Model2Data to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="Model2Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> or <paramref name="data"/> is null. </exception>
@@ -146,7 +146,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model2SName"> The string to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
@@ -182,7 +182,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model2SName"> The string to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
@@ -259,7 +259,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model2SName"> The string to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
@@ -294,7 +294,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model2SName"> The string to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
@@ -329,7 +329,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model2SName"> The string to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
@@ -366,7 +366,7 @@ namespace MgmtOmitOperationGroups
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="model2SName"> The string to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>

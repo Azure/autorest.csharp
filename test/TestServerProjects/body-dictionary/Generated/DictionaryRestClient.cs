@@ -187,7 +187,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutEmptyAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
@@ -209,7 +209,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutEmpty(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
@@ -569,7 +569,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,bool} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutBooleanTfftAsync(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
@@ -591,7 +591,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,bool} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="bool"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutBooleanTfft(IDictionary<string, bool> arrayBody, CancellationToken cancellationToken = default)
@@ -825,7 +825,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,int} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutIntegerValidAsync(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
@@ -847,7 +847,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,int} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutIntegerValid(IDictionary<string, int> arrayBody, CancellationToken cancellationToken = default)
@@ -1081,7 +1081,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,long} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="long"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutLongValidAsync(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
@@ -1103,7 +1103,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,long} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="long"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutLongValid(IDictionary<string, long> arrayBody, CancellationToken cancellationToken = default)
@@ -1337,7 +1337,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,float} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutFloatValidAsync(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
@@ -1359,7 +1359,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,float} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="float"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutFloatValid(IDictionary<string, float> arrayBody, CancellationToken cancellationToken = default)
@@ -1593,7 +1593,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,double} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="double"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutDoubleValidAsync(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
@@ -1615,7 +1615,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,double} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="double"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutDoubleValid(IDictionary<string, double> arrayBody, CancellationToken cancellationToken = default)
@@ -1849,7 +1849,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutStringValidAsync(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
@@ -1871,7 +1871,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,string} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutStringValid(IDictionary<string, string> arrayBody, CancellationToken cancellationToken = default)
@@ -2105,7 +2105,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutDateValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
@@ -2127,7 +2127,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutDateValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
@@ -2361,7 +2361,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutDateTimeValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
@@ -2383,7 +2383,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutDateTimeValid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
@@ -2617,7 +2617,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutDateTimeRfc1123ValidAsync(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
@@ -2639,7 +2639,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,DateTimeOffset} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="DateTimeOffset"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutDateTimeRfc1123Valid(IDictionary<string, DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
@@ -2747,7 +2747,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,TimeSpan} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutDurationValidAsync(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
@@ -2769,7 +2769,7 @@ namespace body_dictionary
         }
 
         /// <summary> Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,TimeSpan} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutDurationValid(IDictionary<string, TimeSpan> arrayBody, CancellationToken cancellationToken = default)
@@ -2877,7 +2877,7 @@ namespace body_dictionary
         }
 
         /// <summary> Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,Byte[]} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is an array of type <see cref="byte"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutByteValidAsync(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
@@ -2899,7 +2899,7 @@ namespace body_dictionary
         }
 
         /// <summary> Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,Byte[]} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is an array of type <see cref="byte"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutByteValid(IDictionary<string, byte[]> arrayBody, CancellationToken cancellationToken = default)
@@ -3399,7 +3399,7 @@ namespace body_dictionary
         }
 
         /// <summary> Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,Widget} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="Widget"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutComplexValidAsync(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
@@ -3421,7 +3421,7 @@ namespace body_dictionary
         }
 
         /// <summary> Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,Widget} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="Widget"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutComplexValid(IDictionary<string, Widget> arrayBody, CancellationToken cancellationToken = default)
@@ -3925,7 +3925,7 @@ namespace body_dictionary
         }
 
         /// <summary> Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,IList{string}} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <c>IList{string}</c> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutArrayValidAsync(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
@@ -3947,7 +3947,7 @@ namespace body_dictionary
         }
 
         /// <summary> Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,IList{string}} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <c>IList{string}</c> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutArrayValid(IDictionary<string, IList<string>> arrayBody, CancellationToken cancellationToken = default)
@@ -4438,7 +4438,7 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,IDictionary{string,string}} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <c>IDictionary{string,string}</c> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public async Task<Response> PutDictionaryValidAsync(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
@@ -4460,7 +4460,7 @@ namespace body_dictionary
         }
 
         /// <summary> Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}. </summary>
-        /// <param name="arrayBody"> The IDictionary{string,IDictionary{string,string}} to use. </param>
+        /// <param name="arrayBody"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <c>IDictionary{string,string}</c> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public Response PutDictionaryValid(IDictionary<string, IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
