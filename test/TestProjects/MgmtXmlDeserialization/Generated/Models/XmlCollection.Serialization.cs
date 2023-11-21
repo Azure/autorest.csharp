@@ -98,7 +98,7 @@ namespace MgmtXmlDeserialization.Models
                 writer.WritePropertyName("nextLink"u8);
                 writer.WriteStringValue(NextLink);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -171,7 +171,7 @@ namespace MgmtXmlDeserialization.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }

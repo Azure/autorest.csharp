@@ -21,9 +21,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<VirtualMachineScaleSetExtensionProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VirtualMachineScaleSetExtensionProfile>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetExtensionProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VirtualMachineScaleSetExtensionProfile>)} interface");
+                throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -42,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("extensionsTimeBudget"u8);
                 writer.WriteStringValue(ExtensionsTimeBudget);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -62,10 +63,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         VirtualMachineScaleSetExtensionProfile IJsonModel<VirtualMachineScaleSetExtensionProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetExtensionProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -105,7 +106,7 @@ namespace Azure.ResourceManager.Sample.Models
                     extensionsTimeBudget = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,25 +117,31 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IPersistableModel<VirtualMachineScaleSetExtensionProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetExtensionProfile>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{options.Format}' format.");
+            }
         }
 
         VirtualMachineScaleSetExtensionProfile IPersistableModel<VirtualMachineScaleSetExtensionProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<VirtualMachineScaleSetExtensionProfile>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetExtensionProfile(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeVirtualMachineScaleSetExtensionProfile(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VirtualMachineScaleSetExtensionProfile)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<VirtualMachineScaleSetExtensionProfile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

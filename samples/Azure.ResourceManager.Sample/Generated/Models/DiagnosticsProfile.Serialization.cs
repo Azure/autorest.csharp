@@ -20,9 +20,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<DiagnosticsProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DiagnosticsProfile>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<DiagnosticsProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DiagnosticsProfile>)} interface");
+                throw new InvalidOperationException($"The model {nameof(DiagnosticsProfile)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,10 +52,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         DiagnosticsProfile IJsonModel<DiagnosticsProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<DiagnosticsProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DiagnosticsProfile)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(DiagnosticsProfile)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -83,7 +84,7 @@ namespace Azure.ResourceManager.Sample.Models
                     bootDiagnostics = BootDiagnostics.DeserializeBootDiagnostics(property.Value);
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,25 +95,31 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IPersistableModel<DiagnosticsProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(DiagnosticsProfile)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<DiagnosticsProfile>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DiagnosticsProfile)} does not support '{options.Format}' format.");
+            }
         }
 
         DiagnosticsProfile IPersistableModel<DiagnosticsProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(DiagnosticsProfile)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<DiagnosticsProfile>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDiagnosticsProfile(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDiagnosticsProfile(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DiagnosticsProfile)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<DiagnosticsProfile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

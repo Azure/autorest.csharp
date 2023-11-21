@@ -20,9 +20,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         void IJsonModel<LogAnalytics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LogAnalytics>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<LogAnalytics>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LogAnalytics>)} interface");
+                throw new InvalidOperationException($"The model {nameof(LogAnalytics)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -34,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteObjectValue(Properties);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -54,10 +55,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         LogAnalytics IJsonModel<LogAnalytics>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<LogAnalytics>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(LogAnalytics)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -86,7 +87,7 @@ namespace Azure.ResourceManager.Sample.Models
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -97,25 +98,31 @@ namespace Azure.ResourceManager.Sample.Models
 
         BinaryData IPersistableModel<LogAnalytics>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LogAnalytics>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
+            }
         }
 
         LogAnalytics IPersistableModel<LogAnalytics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LogAnalytics>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLogAnalytics(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeLogAnalytics(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LogAnalytics)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<LogAnalytics>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

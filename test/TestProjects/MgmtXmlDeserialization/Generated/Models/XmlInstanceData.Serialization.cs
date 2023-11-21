@@ -100,7 +100,7 @@ namespace MgmtXmlDeserialization
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -170,7 +170,7 @@ namespace MgmtXmlDeserialization
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }

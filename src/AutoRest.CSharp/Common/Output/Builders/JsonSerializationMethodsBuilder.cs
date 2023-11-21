@@ -38,14 +38,13 @@ using Azure.ResourceManager.Resources.Models;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using SerializationFormat = AutoRest.CSharp.Output.Models.Serialization.SerializationFormat;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        private static BoolExpression BuildIsJsonFormatExpression(ModelReaderWriterOptionsExpression options)
-            => Equal(options.Format, Serializations.JsonFormat);
+        private static BoolExpression IsNotWireFormat(ModelReaderWriterOptionsExpression options)
+            => NotEqual(options.Format, Serializations.WireFormat);
 
         public static IEnumerable<Method> BuildJsonSerializationMethods(SerializableObjectType model, JsonObjectSerialization json)
         {
@@ -391,7 +390,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (additionalProperties.ShouldExcludeInWireSerialization)
             {
-                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), BuildIsJsonFormatExpression(options)))
+                statement = new IfStatement(And(NotEqual(additionalPropertiesExpression, Null), IsNotWireFormat(options)))
                 {
                     statement
                 };
@@ -707,7 +706,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (additionalPropertiesSerialization.ShouldExcludeInWireSerialization)
             {
-                yield return new IfStatement(BuildIsJsonFormatExpression(options))
+                yield return new IfStatement(IsNotWireFormat(options))
                 {
                     additionalPropertiesStatement
                 };
