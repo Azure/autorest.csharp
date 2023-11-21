@@ -70,9 +70,10 @@ namespace MgmtXmlDeserialization
 
         void IJsonModel<XmlInstanceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<XmlInstanceData>)} interface");
+                throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -119,10 +120,10 @@ namespace MgmtXmlDeserialization
 
         XmlInstanceData IJsonModel<XmlInstanceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -180,49 +181,47 @@ namespace MgmtXmlDeserialization
 
         BinaryData IPersistableModel<XmlInstanceData>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
 
-            if (options.Format == "J")
+            switch (format)
             {
-                return ModelReaderWriter.Write(this, options);
-            }
-            else
-            {
-                using MemoryStream stream = new MemoryStream();
-                using XmlWriter writer = XmlWriter.Create(stream);
-                ((IXmlSerializable)this).Write(writer, null);
-                writer.Flush();
-                if (stream.Position > int.MaxValue)
-                {
-                    return BinaryData.FromStream(stream);
-                }
-                else
-                {
-                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                }
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
             }
         }
 
         XmlInstanceData IPersistableModel<XmlInstanceData>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
 
-            if (options.Format == "J")
+            switch (format)
             {
-                using JsonDocument document = JsonDocument.Parse(data);
-                return DeserializeXmlInstanceData(document.RootElement, options);
-            }
-            else
-            {
-                return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeXmlInstanceData(document.RootElement, options);
+                    }
+                case "X":
+                    return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
             }
         }
 

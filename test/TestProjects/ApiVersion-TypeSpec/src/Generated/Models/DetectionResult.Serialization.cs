@@ -88,25 +88,31 @@ namespace ApiVersionInTsp.Models
 
         BinaryData IPersistableModel<DetectionResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<DetectionResult>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
+            }
         }
 
         DetectionResult IPersistableModel<DetectionResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<DetectionResult>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDetectionResult(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDetectionResult(document.RootElement, options);
+                    }
+                default:
+                    throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<DetectionResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

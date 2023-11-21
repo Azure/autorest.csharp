@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 new MethodSignature(nameof(IJsonModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Utf8JsonReader, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
                 new MethodBodyStatement[]
                 {
-                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, options, true),
+                    ValidateJsonFormat(options, json.IModelInterface).ToArray(),
                     EmptyLine,
                     // using var document = JsonDocument.ParseValue(ref reader);
                     UsingDeclare("document", JsonDocumentExpression.ParseValue(reader), out var docVariable),
@@ -118,12 +118,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                new MethodBodyStatement[]
-                {
-                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, options, json != null),
-                    EmptyLine,
-                    BuildModelWriteMethodBody(options, json != null, xml != null)
-                }
+                BuildModelWriteMethodBody(json != null, xml != null, options, iModelTInterface).ToArray()
             );
 
             // T IPersistableModel<T>.Read(BinaryData data, ModelReaderWriterOptions options)
@@ -131,12 +126,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Create), null, null, MethodSignatureModifiers.None, typeOfT, null, new[] { KnownParameters.Serializations.Data, KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                new MethodBodyStatement[]
-                {
-                    BuildModelSerializerHelperValidateFormatStatement(typeOfT, options, true),
-                    EmptyLine,
-                    BuildModelReadMethod(model, json != null, xml != null, data, options)
-                }
+                BuildModelReadMethodBody(model, json != null, xml != null, data, options, iModelTInterface).ToArray()
             );
 
             // ModelReaderWriterFormat IPersistableModel<T>.GetFormatFromOptions(ModelReaderWriterOptions options)
@@ -165,180 +155,169 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.Create), data, options)
                 );
 
-                // ModelReaderWriterFormat IPersistableModel<object>.GetWireFormat(ModelReaderWriterOptions options)
+                // ModelReaderWriterFormat IPersistableModel<object>.GetFormatFromOptions(ModelReaderWriterOptions options)
                 yield return new
                 (
                     new MethodSignature(nameof(IPersistableModel<object>.GetFormatFromOptions), null, null, MethodSignatureModifiers.None, typeof(string), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelObjectInterface),
-                    // => (IPersistableModel<T>this).GetWireFormat(options);
+                    // => (IPersistableModel<T>this).GetFormatFromOptions(options);
                     This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options)
                 );
             }
 
-            static MethodBodyStatement BuildModelWriteMethodBody(ModelReaderWriterOptionsExpression options, bool hasJson, bool hasXml)
+            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(bool hasJson, bool hasXml, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
-                // return ModelReaderWriter.WriteCore(this, options);
-                var jsonPart = Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options }));
-                /*  using MemoryStream stream = new MemoryStream();
-                    using XmlWriter writer = XmlWriter.Create(stream);
-                    ((IXmlSerializable)this).Write(writer, null);
-                    writer.Flush();
-                    if (stream.Position > int.MaxValue)
-                    {
-                        return BinaryData.FromStream(stream);
-                    }
-                    else
-                    {
-                        return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                    }
-                 */
-                var xmlPart = new MethodBodyStatement[]
-                {
-                    UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
-                    UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
-                    This.CastTo(typeof(IXmlSerializable)).Invoke(nameof(IXmlSerializable.Write), xmlWriter, Null).ToStatement(),
-                    xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
-                    new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
-                        // return BinaryData.FromStream(stream);
-                        Return(BinaryDataExpression.FromStream(stream, false)),
-                        // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        Return(New.Instance(typeof(BinaryData),
-                            InvokeStaticMethodExpression.Extension(
-                                typeof(MemoryExtensions),
-                                nameof(MemoryExtensions.AsMemory),
-                                stream.Invoke(nameof(MemoryStream.GetBuffer)),
-                                new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
-                                ))))
-                };
+                // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
+                yield return GetConcreteFormat(options, iModelTInterface, out var format);
 
-                if (hasJson && hasXml)
-                {
-                    // we have both, we need to wrap things in a if-else statement
-                    return new IfElseStatement(BuildIsJsonFormatExpression(options), jsonPart, xmlPart);
-                }
+                yield return EmptyLine;
+
+                var switchStatement = new SwitchStatement(format);
 
                 if (hasJson)
-                    return jsonPart;
+                {
+                    var jsonCase = new SwitchCase(Serializations.JsonFormat,
+                        Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options }))
+                        );
+                    switchStatement.Add(jsonCase);
+                }
 
                 if (hasXml)
-                    return xmlPart;
+                {
+                    /*  using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    */
+                    var xmlCase = new SwitchCase(Serializations.XmlFormat,
+                        new MethodBodyStatement[]
+                        {
+                            UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
+                            UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
+                            This.CastTo(typeof(IXmlSerializable)).Invoke(nameof(IXmlSerializable.Write), xmlWriter, Null).ToStatement(),
+                            xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
+                            new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
+                                // return BinaryData.FromStream(stream);
+                                Return(BinaryDataExpression.FromStream(stream, false)),
+                                // return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                                Return(New.Instance(typeof(BinaryData),
+                                    InvokeStaticMethodExpression.Extension(
+                                        typeof(MemoryExtensions),
+                                        nameof(MemoryExtensions.AsMemory),
+                                        stream.Invoke(nameof(MemoryStream.GetBuffer)),
+                                        new[] { Int(0), stream.Property(nameof(Stream.Position)).CastTo(typeof(int)) }
+                                        ))))
+                        }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
+                    switchStatement.Add(xmlCase);
+                }
 
-                throw new InvalidOperationException("We should never get here if we have neither json serialization nor xml serialization");
+                // default case
+                /*
+                 * throw new FormatException($"The model {nameof(T)} does not support '{options.Format}' format.");
+                 */
+                var typeOfT = iModelTInterface.Arguments[0];
+                var defaultCase = SwitchCase.Default(
+                    ThrowValidationFailException(options.Format, typeOfT)
+                );
+                switchStatement.Add(defaultCase);
+
+                yield return switchStatement;
             }
 
-            static MethodBodyStatement BuildModelReadMethod(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options)
+            static IEnumerable<MethodBodyStatement> BuildModelReadMethodBody(SerializableObjectType model, bool hasJson, bool hasXml, BinaryDataExpression data, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
-                /* using var document = JsonDocument.ParseValue(ref reader);
-                 * return DeserializeXXX(doc.RootElement, options);
-                 */
-                var jsonPart = new MethodBodyStatement[]
-                {
-                    UsingDeclare("document", JsonDocumentExpression.Parse(data), out var docVariable),
-                    Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
-                };
-                // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
-                var xmlPart = Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), options));
+                // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
+                yield return GetConcreteFormat(options, iModelTInterface, out var format);
 
-                if (hasJson && hasXml)
-                {
-                    // we have both, we need to wrap things in a if-else statement
-                    // condition: options.Format == ModelReaderWriterFormat.Json
-                    var condition = Equal(options.Format, Serializations.JsonFormat);
-                    return new IfElseStatement(condition, jsonPart, xmlPart);
-                }
+                yield return EmptyLine;
+
+                var switchStatement = new SwitchStatement(format);
 
                 if (hasJson)
-                    return jsonPart;
+                {
+                    /* using var document = JsonDocument.ParseValue(ref reader);
+                     * return DeserializeXXX(doc.RootElement, options);
+                     */
+                    var jsonCase = new SwitchCase(Serializations.JsonFormat,
+                        new MethodBodyStatement[]
+                        {
+                            UsingDeclare("document", JsonDocumentExpression.Parse(data), out var docVariable),
+                            Return(SerializableObjectTypeExpression.Deserialize(model, docVariable.RootElement, options))
+                        }, addScope: true); // using statement must have a scope, if we do not have the addScope parameter here, the generated code will not compile
+                    switchStatement.Add(jsonCase);
+                }
 
                 if (hasXml)
-                    return xmlPart;
+                {
+                    // return DeserializeXmlCollection(XElement.Load(data.ToStream()), options);
+                    var xmlCase = new SwitchCase(Serializations.XmlFormat,
+                        Return(SerializableObjectTypeExpression.Deserialize(model, XElementExpression.Load(data.ToStream()), options)));
+                    switchStatement.Add(xmlCase);
+                }
 
-                throw new InvalidOperationException("We should never get here if we have neither json serialization nor xml serialization");
+                // default case
+                /*
+                 * throw new FormatException($"The model {nameof(T)} does not support '{options.Format}' format.");
+                 */
+                var typeOfT = iModelTInterface.Arguments[0];
+                var defaultCase = SwitchCase.Default(
+                    ThrowValidationFailException(options.Format, typeOfT)
+                );
+                switchStatement.Add(defaultCase);
+
+                yield return switchStatement;
             }
         }
 
-        private static MethodBodyStatement BuildModelSerializerHelperValidateFormatStatement(CSharpType type, ModelReaderWriterOptionsExpression options, bool hasJson)
+        private static IEnumerable<MethodBodyStatement> ValidateJsonFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
         {
             /*
-                bool implementsJson = this is IJsonModel<T>; // we only have this when the model is not implementing this interface, otherwise compiler complains.
-                bool isValid = (format == ModelReaderWriterFormat.Json && implementsJson) || format == ModelReaderWriterFormat.Wire;
-                if (!isValid)
+                var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
+                if (format != "J")
                 {
                     throw new FormatException($"The model {nameof(ThisModel)} does not support '{format}' format.");
                 }
              */
-            var format = options.Format;
-            var iJsonModelType = new CSharpType(typeof(IJsonModel<>), type);
-            var isValid = new VariableReference(typeof(bool), "isValid");
-            if (hasJson)
+            yield return GetConcreteFormat(options, iModelTInterface, out var format);
+
+            yield return new IfStatement(NotEqual(format, Serializations.JsonFormat))
             {
-                return new MethodBodyStatement[]
-                {
-                    Declare(isValid, Or(Equal(format, Serializations.JsonFormat), Equal(format, Serializations.WireFormat))),
-                    new IfStatement(Not(new BoolExpression(isValid)))
-                    {
-                        Throw(New.Instance(
-                            typeof(FormatException),
-                            new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
-                            {
-                                Nameof(type),
-                                format
-                            })))
-                    }
-                };
-            }
-            else
-            {
-                var implementsJson = new VariableReference(typeof(bool), "implementsJson");
-                return new MethodBodyStatement[]
-                {
-                    Declare(implementsJson, Is(This, iJsonModelType)),
-                    Declare(isValid, Or(And(Equal(format, Serializations.JsonFormat), new BoolExpression(implementsJson)), Equal(format, Serializations.WireFormat))),
-                    new IfStatement(Not(new BoolExpression(isValid)))
-                    {
-                        Throw(New.Instance(
-                            typeof(FormatException),
-                            new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
-                            {
-                                new InvokeInstanceMethodExpression(null, nameof(GetType), Array.Empty<ValueExpression>(), null, false).Property(nameof(Type.Name)),
-                                format
-                            })))
-                    }
-                };
-            }
+                ThrowValidationFailException(format, iModelTInterface.Arguments[0])
+            };
         }
+
+        private static MethodBodyStatement GetConcreteFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface, out TypedValueExpression format)
+            => Var("format", new TypedTernaryConditionalOperator(
+                Equal(options.Format, Serializations.WireFormat),
+                new StringExpression(This.CastTo(iModelTInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options)),
+                options.Format), out format);
+
+        private static MethodBodyStatement ThrowValidationFailException(ValueExpression format, CSharpType typeOfT)
+            => Throw(New.Instance(
+                    typeof(InvalidOperationException),
+                    new FormattableStringExpression("The model {0} does not support '{1}' format.", new[]
+                    {
+                        Nameof(typeOfT),
+                        format
+                    })));
 
         public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
             => new[]
             {
-                CheckFormat(options, serialization),
+                ValidateJsonFormat(options, serialization.IModelInterface).ToArray(),
                 EmptyLine,
                 utf8JsonWriter.WriteStartObject(),
                 WriteProperties(utf8JsonWriter, serialization.Properties, options).ToArray(),
                 SerializeAdditionalProperties(utf8JsonWriter, options, serialization.AdditionalProperties),
                 utf8JsonWriter.WriteEndObject()
             };
-
-        private static MethodBodyStatement CheckFormat(ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
-        {
-            /*
-                if ((options.Format != "W" || ((IPersistableModel<T>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
-                {
-                    throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<T>)} interface");
-                    // use this when it support JSON for wire $"Must use 'J' or 'W' format when calling the {nameof(IJsonModel<T>)} interface"
-                }
-             */
-            // condition: (options.Format != "W" || ((IPersistableModel<T>)this).GetFormatFromOptions(options) != "J") && options.Format != "J"
-            var iModelInterface = serialization.IModelInterface;
-            var condition = Or(
-                    NotEqual(options.Format, Serializations.WireFormat),
-                    NotEqual(This.CastTo(iModelInterface).Invoke(nameof(IPersistableModel<object>.GetFormatFromOptions), options), Serializations.JsonFormat))
-                .And(NotEqual(options.Format, Serializations.JsonFormat));
-            return new IfStatement(condition)
-            {
-                // TODO switch the message to include W when possible
-                Throw(New.Instance(typeof(InvalidOperationException), new FormattableStringExpression("Must use 'J' format when calling the {0} interface", Nameof(serialization.IJsonModelInterface))))
-            };
-        }
 
         public static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties, ModelReaderWriterOptionsExpression options)
         {
