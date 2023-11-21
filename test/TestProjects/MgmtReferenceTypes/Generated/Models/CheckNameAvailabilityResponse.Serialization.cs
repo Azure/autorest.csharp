@@ -21,9 +21,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         void IJsonModel<CheckNameAvailabilityResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CheckNameAvailabilityResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityResponse>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CheckNameAvailabilityResponse>)} interface");
+                throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -47,10 +48,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         CheckNameAvailabilityResponse IJsonModel<CheckNameAvailabilityResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityResponse>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -99,25 +100,31 @@ namespace Azure.ResourceManager.Fake.Models
 
         BinaryData IPersistableModel<CheckNameAvailabilityResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityResponse>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{options.Format}' format.");
+            }
         }
 
         CheckNameAvailabilityResponse IPersistableModel<CheckNameAvailabilityResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<CheckNameAvailabilityResponse>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeCheckNameAvailabilityResponse(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(CheckNameAvailabilityResponse)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<CheckNameAvailabilityResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

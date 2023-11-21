@@ -21,9 +21,10 @@ namespace MgmtPagination.Models
 
         void IJsonModel<PageSizeNumericModelListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PageSizeNumericModelListResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<PageSizeNumericModelListResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PageSizeNumericModelListResult>)} interface");
+                throw new InvalidOperationException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -48,7 +49,7 @@ namespace MgmtPagination.Models
                     writer.WriteStringValue(NextLink);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -68,10 +69,10 @@ namespace MgmtPagination.Models
 
         PageSizeNumericModelListResult IJsonModel<PageSizeNumericModelListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<PageSizeNumericModelListResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -111,7 +112,7 @@ namespace MgmtPagination.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -122,25 +123,31 @@ namespace MgmtPagination.Models
 
         BinaryData IPersistableModel<PageSizeNumericModelListResult>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<PageSizeNumericModelListResult>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
+            }
         }
 
         PageSizeNumericModelListResult IPersistableModel<PageSizeNumericModelListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<PageSizeNumericModelListResult>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePageSizeNumericModelListResult(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePageSizeNumericModelListResult(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PageSizeNumericModelListResult)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<PageSizeNumericModelListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

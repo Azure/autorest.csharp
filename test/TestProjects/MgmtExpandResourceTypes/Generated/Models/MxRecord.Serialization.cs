@@ -20,9 +20,10 @@ namespace MgmtExpandResourceTypes.Models
 
         void IJsonModel<MxRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MxRecord>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<MxRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MxRecord>)} interface");
+                throw new InvalidOperationException($"The model {nameof(MxRecord)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -36,7 +37,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("exchange"u8);
                 writer.WriteStringValue(Exchange);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,10 +57,10 @@ namespace MgmtExpandResourceTypes.Models
 
         MxRecord IJsonModel<MxRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<MxRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MxRecord)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(MxRecord)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -94,7 +95,7 @@ namespace MgmtExpandResourceTypes.Models
                     exchange = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -105,25 +106,31 @@ namespace MgmtExpandResourceTypes.Models
 
         BinaryData IPersistableModel<MxRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(MxRecord)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<MxRecord>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MxRecord)} does not support '{options.Format}' format.");
+            }
         }
 
         MxRecord IPersistableModel<MxRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(MxRecord)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<MxRecord>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMxRecord(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeMxRecord(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MxRecord)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<MxRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

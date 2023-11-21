@@ -20,9 +20,10 @@ namespace MgmtSafeFlatten.Models
 
         void IJsonModel<LayerTwoSingle>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LayerTwoSingle>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<LayerTwoSingle>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LayerTwoSingle>)} interface");
+                throw new InvalidOperationException($"The model {nameof(LayerTwoSingle)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +32,7 @@ namespace MgmtSafeFlatten.Models
                 writer.WritePropertyName("myProp"u8);
                 writer.WriteStringValue(MyProp);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,10 +52,10 @@ namespace MgmtSafeFlatten.Models
 
         LayerTwoSingle IJsonModel<LayerTwoSingle>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<LayerTwoSingle>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(LayerTwoSingle)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -79,7 +80,7 @@ namespace MgmtSafeFlatten.Models
                     myProp = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -90,25 +91,31 @@ namespace MgmtSafeFlatten.Models
 
         BinaryData IPersistableModel<LayerTwoSingle>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LayerTwoSingle>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
+            }
         }
 
         LayerTwoSingle IPersistableModel<LayerTwoSingle>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LayerTwoSingle>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLayerTwoSingle(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeLayerTwoSingle(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LayerTwoSingle)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<LayerTwoSingle>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

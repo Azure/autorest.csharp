@@ -20,9 +20,10 @@ namespace MgmtDiscriminator.Models
 
         void IJsonModel<UrlSigningActionParameters>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UrlSigningActionParameters>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<UrlSigningActionParameters>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UrlSigningActionParameters>)} interface");
+                throw new InvalidOperationException($"The model {nameof(UrlSigningActionParameters)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -43,7 +44,7 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -63,10 +64,10 @@ namespace MgmtDiscriminator.Models
 
         UrlSigningActionParameters IJsonModel<UrlSigningActionParameters>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<UrlSigningActionParameters>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UrlSigningActionParameters)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(UrlSigningActionParameters)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -116,7 +117,7 @@ namespace MgmtDiscriminator.Models
                     parameterNameOverride = array;
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -127,25 +128,31 @@ namespace MgmtDiscriminator.Models
 
         BinaryData IPersistableModel<UrlSigningActionParameters>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(UrlSigningActionParameters)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<UrlSigningActionParameters>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(UrlSigningActionParameters)} does not support '{options.Format}' format.");
+            }
         }
 
         UrlSigningActionParameters IPersistableModel<UrlSigningActionParameters>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(UrlSigningActionParameters)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<UrlSigningActionParameters>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUrlSigningActionParameters(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeUrlSigningActionParameters(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(UrlSigningActionParameters)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<UrlSigningActionParameters>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

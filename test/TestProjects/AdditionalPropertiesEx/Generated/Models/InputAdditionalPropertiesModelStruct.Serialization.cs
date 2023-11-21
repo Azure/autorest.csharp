@@ -20,9 +20,10 @@ namespace AdditionalPropertiesEx.Models
 
         void IJsonModel<InputAdditionalPropertiesModelStruct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InputAdditionalPropertiesModelStruct>)} interface");
+                throw new InvalidOperationException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -38,10 +39,10 @@ namespace AdditionalPropertiesEx.Models
 
         InputAdditionalPropertiesModelStruct IJsonModel<InputAdditionalPropertiesModelStruct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -74,25 +75,31 @@ namespace AdditionalPropertiesEx.Models
 
         BinaryData IPersistableModel<InputAdditionalPropertiesModelStruct>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+            }
         }
 
         InputAdditionalPropertiesModelStruct IPersistableModel<InputAdditionalPropertiesModelStruct>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<InputAdditionalPropertiesModelStruct>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeInputAdditionalPropertiesModelStruct(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(InputAdditionalPropertiesModelStruct)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<InputAdditionalPropertiesModelStruct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

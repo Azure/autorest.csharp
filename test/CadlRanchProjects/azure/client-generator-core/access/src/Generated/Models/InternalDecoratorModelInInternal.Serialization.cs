@@ -21,15 +21,16 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         void IJsonModel<InternalDecoratorModelInInternal>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<InternalDecoratorModelInInternal>)} interface");
+                throw new InvalidOperationException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,10 +50,10 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         InternalDecoratorModelInInternal IJsonModel<InternalDecoratorModelInInternal>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -77,7 +78,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,25 +89,31 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
 
         BinaryData IPersistableModel<InternalDecoratorModelInInternal>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
+            }
         }
 
         InternalDecoratorModelInInternal IPersistableModel<InternalDecoratorModelInInternal>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<InternalDecoratorModelInInternal>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeInternalDecoratorModelInInternal(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeInternalDecoratorModelInInternal(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(InternalDecoratorModelInInternal)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<InternalDecoratorModelInInternal>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

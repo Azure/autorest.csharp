@@ -21,9 +21,10 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<ListBlobInventoryPolicy>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ListBlobInventoryPolicy>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<ListBlobInventoryPolicy>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ListBlobInventoryPolicy>)} interface");
+                throw new InvalidOperationException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -40,7 +41,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteEndArray();
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,10 +61,10 @@ namespace Azure.ResourceManager.Storage.Models
 
         ListBlobInventoryPolicy IJsonModel<ListBlobInventoryPolicy>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<ListBlobInventoryPolicy>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -97,7 +98,7 @@ namespace Azure.ResourceManager.Storage.Models
                     value = array;
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -108,25 +109,31 @@ namespace Azure.ResourceManager.Storage.Models
 
         BinaryData IPersistableModel<ListBlobInventoryPolicy>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ListBlobInventoryPolicy>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{options.Format}' format.");
+            }
         }
 
         ListBlobInventoryPolicy IPersistableModel<ListBlobInventoryPolicy>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ListBlobInventoryPolicy>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeListBlobInventoryPolicy(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeListBlobInventoryPolicy(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ListBlobInventoryPolicy)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ListBlobInventoryPolicy>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

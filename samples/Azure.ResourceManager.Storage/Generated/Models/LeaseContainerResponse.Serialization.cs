@@ -20,9 +20,10 @@ namespace Azure.ResourceManager.Storage.Models
 
         void IJsonModel<LeaseContainerResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LeaseContainerResponse>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<LeaseContainerResponse>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LeaseContainerResponse>)} interface");
+                throw new InvalidOperationException($"The model {nameof(LeaseContainerResponse)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -36,7 +37,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("leaseTimeSeconds"u8);
                 writer.WriteStringValue(LeaseTimeSeconds);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,10 +57,10 @@ namespace Azure.ResourceManager.Storage.Models
 
         LeaseContainerResponse IJsonModel<LeaseContainerResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<LeaseContainerResponse>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LeaseContainerResponse)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(LeaseContainerResponse)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -90,7 +91,7 @@ namespace Azure.ResourceManager.Storage.Models
                     leaseTimeSeconds = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,25 +102,31 @@ namespace Azure.ResourceManager.Storage.Models
 
         BinaryData IPersistableModel<LeaseContainerResponse>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LeaseContainerResponse)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LeaseContainerResponse>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LeaseContainerResponse)} does not support '{options.Format}' format.");
+            }
         }
 
         LeaseContainerResponse IPersistableModel<LeaseContainerResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LeaseContainerResponse)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LeaseContainerResponse>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLeaseContainerResponse(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeLeaseContainerResponse(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LeaseContainerResponse)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<LeaseContainerResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -69,36 +69,41 @@ namespace xml_service.Models
 
         BinaryData IPersistableModel<Metrics>.Write(ModelReaderWriterOptions options)
         {
-            bool implementsJson = this is IJsonModel<Metrics>;
-            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<Metrics>)this).GetFormatFromOptions(options) : options.Format;
 
-            using MemoryStream stream = new MemoryStream();
-            using XmlWriter writer = XmlWriter.Create(stream);
-            ((IXmlSerializable)this).Write(writer, null);
-            writer.Flush();
-            if (stream.Position > int.MaxValue)
+            switch (format)
             {
-                return BinaryData.FromStream(stream);
-            }
-            else
-            {
-                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Metrics)} does not support '{options.Format}' format.");
             }
         }
 
         Metrics IPersistableModel<Metrics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(Metrics)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<Metrics>)this).GetFormatFromOptions(options) : options.Format;
 
-            return DeserializeMetrics(XElement.Load(data.ToStream()), options);
+            switch (format)
+            {
+                case "X":
+                    return DeserializeMetrics(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Metrics)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<Metrics>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";

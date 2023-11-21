@@ -20,9 +20,10 @@ namespace MgmtExpandResourceTypes.Models
 
         void IJsonModel<PtrRecord>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PtrRecord>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<PtrRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PtrRecord>)} interface");
+                throw new InvalidOperationException($"The model {nameof(PtrRecord)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +32,7 @@ namespace MgmtExpandResourceTypes.Models
                 writer.WritePropertyName("ptrdname"u8);
                 writer.WriteStringValue(Ptrdname);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,10 +52,10 @@ namespace MgmtExpandResourceTypes.Models
 
         PtrRecord IJsonModel<PtrRecord>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<PtrRecord>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(PtrRecord)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -79,7 +80,7 @@ namespace MgmtExpandResourceTypes.Models
                     ptrdname = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -90,25 +91,31 @@ namespace MgmtExpandResourceTypes.Models
 
         BinaryData IPersistableModel<PtrRecord>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<PtrRecord>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
+            }
         }
 
         PtrRecord IPersistableModel<PtrRecord>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<PtrRecord>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePtrRecord(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePtrRecord(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PtrRecord)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<PtrRecord>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -20,9 +20,10 @@ namespace Azure.Network.Management.Interface.Models
 
         void IJsonModel<IPConfigurationProfile>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<IPConfigurationProfile>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<IPConfigurationProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<IPConfigurationProfile>)} interface");
+                throw new InvalidOperationException($"The model {nameof(IPConfigurationProfile)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -68,7 +69,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             writer.WriteEndObject();
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -88,10 +89,10 @@ namespace Azure.Network.Management.Interface.Models
 
         IPConfigurationProfile IJsonModel<IPConfigurationProfile>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<IPConfigurationProfile>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(IPConfigurationProfile)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -166,7 +167,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -177,25 +178,31 @@ namespace Azure.Network.Management.Interface.Models
 
         BinaryData IPersistableModel<IPConfigurationProfile>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<IPConfigurationProfile>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
+            }
         }
 
         IPConfigurationProfile IPersistableModel<IPConfigurationProfile>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<IPConfigurationProfile>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeIPConfigurationProfile(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeIPConfigurationProfile(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(IPConfigurationProfile)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<IPConfigurationProfile>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

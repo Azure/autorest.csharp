@@ -20,9 +20,10 @@ namespace MgmtHierarchicalNonResource.Models
 
         void IJsonModel<GalleryImageIdentifier>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<GalleryImageIdentifier>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<GalleryImageIdentifier>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<GalleryImageIdentifier>)} interface");
+                throw new InvalidOperationException($"The model {nameof(GalleryImageIdentifier)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -32,7 +33,7 @@ namespace MgmtHierarchicalNonResource.Models
             writer.WriteStringValue(Offer);
             writer.WritePropertyName("sku"u8);
             writer.WriteStringValue(Sku);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,10 +53,10 @@ namespace MgmtHierarchicalNonResource.Models
 
         GalleryImageIdentifier IJsonModel<GalleryImageIdentifier>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<GalleryImageIdentifier>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(GalleryImageIdentifier)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(GalleryImageIdentifier)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -92,7 +93,7 @@ namespace MgmtHierarchicalNonResource.Models
                     sku = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,25 +104,31 @@ namespace MgmtHierarchicalNonResource.Models
 
         BinaryData IPersistableModel<GalleryImageIdentifier>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(GalleryImageIdentifier)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<GalleryImageIdentifier>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(GalleryImageIdentifier)} does not support '{options.Format}' format.");
+            }
         }
 
         GalleryImageIdentifier IPersistableModel<GalleryImageIdentifier>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(GalleryImageIdentifier)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<GalleryImageIdentifier>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeGalleryImageIdentifier(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeGalleryImageIdentifier(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(GalleryImageIdentifier)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<GalleryImageIdentifier>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

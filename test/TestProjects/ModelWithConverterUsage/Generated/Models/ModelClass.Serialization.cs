@@ -22,9 +22,10 @@ namespace ModelWithConverterUsage.Models
 
         void IJsonModel<ModelClass>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelClass>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<ModelClass>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelClass>)} interface");
+                throw new InvalidOperationException($"The model {nameof(ModelClass)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -40,7 +41,7 @@ namespace ModelWithConverterUsage.Models
                 writer.WritePropertyName("Obj_Property"u8);
                 writer.WriteObjectValue(ObjProperty);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -60,10 +61,10 @@ namespace ModelWithConverterUsage.Models
 
         ModelClass IJsonModel<ModelClass>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<ModelClass>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelClass)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(ModelClass)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -104,7 +105,7 @@ namespace ModelWithConverterUsage.Models
                     objProperty = Product.DeserializeProduct(property.Value);
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -115,25 +116,31 @@ namespace ModelWithConverterUsage.Models
 
         BinaryData IPersistableModel<ModelClass>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ModelClass)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ModelClass>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelClass)} does not support '{options.Format}' format.");
+            }
         }
 
         ModelClass IPersistableModel<ModelClass>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ModelClass)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ModelClass>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelClass(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeModelClass(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelClass)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ModelClass>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

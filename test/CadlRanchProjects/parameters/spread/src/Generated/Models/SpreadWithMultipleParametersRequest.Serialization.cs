@@ -21,9 +21,10 @@ namespace Parameters.Spread.Models
 
         void IJsonModel<SpreadWithMultipleParametersRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadWithMultipleParametersRequest>)} interface");
+                throw new InvalidOperationException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -39,7 +40,7 @@ namespace Parameters.Spread.Models
             writer.WriteStringValue(Prop5);
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(Prop6);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -59,10 +60,10 @@ namespace Parameters.Spread.Models
 
         SpreadWithMultipleParametersRequest IJsonModel<SpreadWithMultipleParametersRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -117,7 +118,7 @@ namespace Parameters.Spread.Models
                     prop6 = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -128,25 +129,31 @@ namespace Parameters.Spread.Models
 
         BinaryData IPersistableModel<SpreadWithMultipleParametersRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
+            }
         }
 
         SpreadWithMultipleParametersRequest IPersistableModel<SpreadWithMultipleParametersRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadWithMultipleParametersRequest>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSpreadWithMultipleParametersRequest(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SpreadWithMultipleParametersRequest)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<SpreadWithMultipleParametersRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -21,9 +21,10 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<FirewallPolicyThreatIntelWhitelist>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FirewallPolicyThreatIntelWhitelist>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyThreatIntelWhitelist>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FirewallPolicyThreatIntelWhitelist>)} interface");
+                throw new InvalidOperationException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -52,7 +53,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -72,10 +73,10 @@ namespace MgmtMockAndSample.Models
 
         FirewallPolicyThreatIntelWhitelist IJsonModel<FirewallPolicyThreatIntelWhitelist>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyThreatIntelWhitelist>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -131,7 +132,7 @@ namespace MgmtMockAndSample.Models
                     fqdns = array;
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -142,25 +143,31 @@ namespace MgmtMockAndSample.Models
 
         BinaryData IPersistableModel<FirewallPolicyThreatIntelWhitelist>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyThreatIntelWhitelist>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{options.Format}' format.");
+            }
         }
 
         FirewallPolicyThreatIntelWhitelist IPersistableModel<FirewallPolicyThreatIntelWhitelist>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<FirewallPolicyThreatIntelWhitelist>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyThreatIntelWhitelist(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeFirewallPolicyThreatIntelWhitelist(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(FirewallPolicyThreatIntelWhitelist)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<FirewallPolicyThreatIntelWhitelist>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -20,9 +20,10 @@ namespace CognitiveServices.TextAnalytics.Models
 
         void IJsonModel<DocumentError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DocumentError>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentError>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DocumentError>)} interface");
+                throw new InvalidOperationException($"The model {nameof(DocumentError)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -30,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Id);
             writer.WritePropertyName("error"u8);
             writer.WriteObjectValue(Error);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,10 +51,10 @@ namespace CognitiveServices.TextAnalytics.Models
 
         DocumentError IJsonModel<DocumentError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentError>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(DocumentError)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -84,7 +85,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     error = TextAnalyticsError.DeserializeTextAnalyticsError(property.Value);
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,25 +96,31 @@ namespace CognitiveServices.TextAnalytics.Models
 
         BinaryData IPersistableModel<DocumentError>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentError>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
+            }
         }
 
         DocumentError IPersistableModel<DocumentError>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<DocumentError>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeDocumentError(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeDocumentError(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(DocumentError)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<DocumentError>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

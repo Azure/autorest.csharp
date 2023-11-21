@@ -20,9 +20,10 @@ namespace CognitiveServices.TextAnalytics.Models
 
         void IJsonModel<LinkedEntity>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<LinkedEntity>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<LinkedEntity>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<LinkedEntity>)} interface");
+                throw new InvalidOperationException($"The model {nameof(LinkedEntity)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -46,7 +47,7 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteStringValue(Url);
             writer.WritePropertyName("dataSource"u8);
             writer.WriteStringValue(DataSource);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -66,10 +67,10 @@ namespace CognitiveServices.TextAnalytics.Models
 
         LinkedEntity IJsonModel<LinkedEntity>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<LinkedEntity>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(LinkedEntity)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(LinkedEntity)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -129,7 +130,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     dataSource = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -140,25 +141,31 @@ namespace CognitiveServices.TextAnalytics.Models
 
         BinaryData IPersistableModel<LinkedEntity>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LinkedEntity)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LinkedEntity>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LinkedEntity)} does not support '{options.Format}' format.");
+            }
         }
 
         LinkedEntity IPersistableModel<LinkedEntity>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(LinkedEntity)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<LinkedEntity>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeLinkedEntity(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeLinkedEntity(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(LinkedEntity)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<LinkedEntity>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

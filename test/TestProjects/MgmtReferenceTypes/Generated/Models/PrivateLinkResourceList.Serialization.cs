@@ -22,9 +22,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         void IJsonModel<PrivateLinkResourceList>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<PrivateLinkResourceList>)} interface");
+                throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -46,10 +47,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         PrivateLinkResourceList IJsonModel<PrivateLinkResourceList>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -87,25 +88,31 @@ namespace Azure.ResourceManager.Fake.Models
 
         BinaryData IPersistableModel<PrivateLinkResourceList>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
+            }
         }
 
         PrivateLinkResourceList IPersistableModel<PrivateLinkResourceList>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<PrivateLinkResourceList>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializePrivateLinkResourceList(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializePrivateLinkResourceList(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(PrivateLinkResourceList)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<PrivateLinkResourceList>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

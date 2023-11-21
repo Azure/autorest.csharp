@@ -41,36 +41,41 @@ namespace xml_service.Models
 
         BinaryData IPersistableModel<ModelWithUrlProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool implementsJson = this is IJsonModel<ModelWithUrlProperty>;
-            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithUrlProperty>)this).GetFormatFromOptions(options) : options.Format;
 
-            using MemoryStream stream = new MemoryStream();
-            using XmlWriter writer = XmlWriter.Create(stream);
-            ((IXmlSerializable)this).Write(writer, null);
-            writer.Flush();
-            if (stream.Position > int.MaxValue)
+            switch (format)
             {
-                return BinaryData.FromStream(stream);
-            }
-            else
-            {
-                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelWithUrlProperty)} does not support '{options.Format}' format.");
             }
         }
 
         ModelWithUrlProperty IPersistableModel<ModelWithUrlProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ModelWithUrlProperty)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ModelWithUrlProperty>)this).GetFormatFromOptions(options) : options.Format;
 
-            return DeserializeModelWithUrlProperty(XElement.Load(data.ToStream()), options);
+            switch (format)
+            {
+                case "X":
+                    return DeserializeModelWithUrlProperty(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelWithUrlProperty)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ModelWithUrlProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";

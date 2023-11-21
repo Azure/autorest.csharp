@@ -20,9 +20,10 @@ namespace Azure.AI.FormRecognizer.Models
 
         void IJsonModel<FormFieldsReport>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<FormFieldsReport>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<FormFieldsReport>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<FormFieldsReport>)} interface");
+                throw new InvalidOperationException($"The model {nameof(FormFieldsReport)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -30,7 +31,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteStringValue(FieldName);
             writer.WritePropertyName("accuracy"u8);
             writer.WriteNumberValue(Accuracy);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,10 +51,10 @@ namespace Azure.AI.FormRecognizer.Models
 
         FormFieldsReport IJsonModel<FormFieldsReport>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<FormFieldsReport>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(FormFieldsReport)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(FormFieldsReport)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -84,7 +85,7 @@ namespace Azure.AI.FormRecognizer.Models
                     accuracy = property.Value.GetSingle();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,25 +96,31 @@ namespace Azure.AI.FormRecognizer.Models
 
         BinaryData IPersistableModel<FormFieldsReport>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(FormFieldsReport)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<FormFieldsReport>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(FormFieldsReport)} does not support '{options.Format}' format.");
+            }
         }
 
         FormFieldsReport IPersistableModel<FormFieldsReport>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(FormFieldsReport)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<FormFieldsReport>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeFormFieldsReport(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeFormFieldsReport(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(FormFieldsReport)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<FormFieldsReport>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

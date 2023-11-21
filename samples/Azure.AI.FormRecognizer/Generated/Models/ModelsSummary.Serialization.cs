@@ -20,9 +20,10 @@ namespace Azure.AI.FormRecognizer.Models
 
         void IJsonModel<ModelsSummary>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ModelsSummary>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<ModelsSummary>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ModelsSummary>)} interface");
+                throw new InvalidOperationException($"The model {nameof(ModelsSummary)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -32,7 +33,7 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteNumberValue(Limit);
             writer.WritePropertyName("lastUpdatedDateTime"u8);
             writer.WriteStringValue(LastUpdatedDateTime, "O");
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -52,10 +53,10 @@ namespace Azure.AI.FormRecognizer.Models
 
         ModelsSummary IJsonModel<ModelsSummary>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<ModelsSummary>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(ModelsSummary)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -92,7 +93,7 @@ namespace Azure.AI.FormRecognizer.Models
                     lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -103,25 +104,31 @@ namespace Azure.AI.FormRecognizer.Models
 
         BinaryData IPersistableModel<ModelsSummary>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ModelsSummary>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
+            }
         }
 
         ModelsSummary IPersistableModel<ModelsSummary>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ModelsSummary>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeModelsSummary(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeModelsSummary(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ModelsSummary)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ModelsSummary>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

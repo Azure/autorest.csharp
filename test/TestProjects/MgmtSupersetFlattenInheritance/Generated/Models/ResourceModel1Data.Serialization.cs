@@ -21,9 +21,10 @@ namespace MgmtSupersetFlattenInheritance
 
         void IJsonModel<ResourceModel1Data>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ResourceModel1Data>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ResourceModel1Data>)} interface");
+                throw new InvalidOperationException($"The model {nameof(ResourceModel1Data)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -55,7 +56,7 @@ namespace MgmtSupersetFlattenInheritance
                     JsonSerializer.Serialize(writer, SystemData);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -75,10 +76,10 @@ namespace MgmtSupersetFlattenInheritance
 
         ResourceModel1Data IJsonModel<ResourceModel1Data>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ResourceModel1Data)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(ResourceModel1Data)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -131,7 +132,7 @@ namespace MgmtSupersetFlattenInheritance
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -142,25 +143,31 @@ namespace MgmtSupersetFlattenInheritance
 
         BinaryData IPersistableModel<ResourceModel1Data>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ResourceModel1Data)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ResourceModel1Data)} does not support '{options.Format}' format.");
+            }
         }
 
         ResourceModel1Data IPersistableModel<ResourceModel1Data>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ResourceModel1Data)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ResourceModel1Data>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeResourceModel1Data(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeResourceModel1Data(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ResourceModel1Data)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ResourceModel1Data>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

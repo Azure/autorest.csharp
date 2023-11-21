@@ -38,36 +38,41 @@ namespace xml_service.Models
 
         BinaryData IPersistableModel<BlobPrefix>.Write(ModelReaderWriterOptions options)
         {
-            bool implementsJson = this is IJsonModel<BlobPrefix>;
-            bool isValid = options.Format == "J" && implementsJson || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {GetType().Name} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<BlobPrefix>)this).GetFormatFromOptions(options) : options.Format;
 
-            using MemoryStream stream = new MemoryStream();
-            using XmlWriter writer = XmlWriter.Create(stream);
-            ((IXmlSerializable)this).Write(writer, null);
-            writer.Flush();
-            if (stream.Position > int.MaxValue)
+            switch (format)
             {
-                return BinaryData.FromStream(stream);
-            }
-            else
-            {
-                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(BlobPrefix)} does not support '{options.Format}' format.");
             }
         }
 
         BlobPrefix IPersistableModel<BlobPrefix>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(BlobPrefix)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<BlobPrefix>)this).GetFormatFromOptions(options) : options.Format;
 
-            return DeserializeBlobPrefix(XElement.Load(data.ToStream()), options);
+            switch (format)
+            {
+                case "X":
+                    return DeserializeBlobPrefix(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(BlobPrefix)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<BlobPrefix>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";

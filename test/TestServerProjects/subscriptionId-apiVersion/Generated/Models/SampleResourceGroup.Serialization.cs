@@ -20,9 +20,10 @@ namespace subscriptionId_apiVersion.Models
 
         void IJsonModel<SampleResourceGroup>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SampleResourceGroup>)} interface");
+                throw new InvalidOperationException($"The model {nameof(SampleResourceGroup)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -36,7 +37,7 @@ namespace subscriptionId_apiVersion.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -56,10 +57,10 @@ namespace subscriptionId_apiVersion.Models
 
         SampleResourceGroup IJsonModel<SampleResourceGroup>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(SampleResourceGroup)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -90,7 +91,7 @@ namespace subscriptionId_apiVersion.Models
                     location = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -101,25 +102,31 @@ namespace subscriptionId_apiVersion.Models
 
         BinaryData IPersistableModel<SampleResourceGroup>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
+            }
         }
 
         SampleResourceGroup IPersistableModel<SampleResourceGroup>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<SampleResourceGroup>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSampleResourceGroup(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSampleResourceGroup(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SampleResourceGroup)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<SampleResourceGroup>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

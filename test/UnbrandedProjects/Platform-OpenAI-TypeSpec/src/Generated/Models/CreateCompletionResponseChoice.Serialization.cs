@@ -17,9 +17,10 @@ namespace OpenAI.Models
 
         void IJsonModel<CreateCompletionResponseChoice>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<CreateCompletionResponseChoice>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoice>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<CreateCompletionResponseChoice>)} interface");
+                throw new InvalidOperationException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -38,7 +39,7 @@ namespace OpenAI.Models
             }
             writer.WritePropertyName("finish_reason"u8);
             writer.WriteStringValue(FinishReason.ToString());
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -58,10 +59,10 @@ namespace OpenAI.Models
 
         CreateCompletionResponseChoice IJsonModel<CreateCompletionResponseChoice>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoice>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -109,7 +110,7 @@ namespace OpenAI.Models
                     finishReason = new CreateCompletionResponseChoiceFinishReason(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -120,25 +121,31 @@ namespace OpenAI.Models
 
         BinaryData IPersistableModel<CreateCompletionResponseChoice>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoice>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
+            }
         }
 
         CreateCompletionResponseChoice IPersistableModel<CreateCompletionResponseChoice>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<CreateCompletionResponseChoice>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeCreateCompletionResponseChoice(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeCreateCompletionResponseChoice(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(CreateCompletionResponseChoice)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<CreateCompletionResponseChoice>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

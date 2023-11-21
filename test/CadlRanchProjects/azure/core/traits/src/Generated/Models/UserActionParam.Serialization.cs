@@ -21,15 +21,16 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         void IJsonModel<UserActionParam>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<UserActionParam>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<UserActionParam>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<UserActionParam>)} interface");
+                throw new InvalidOperationException($"The model {nameof(UserActionParam)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("userActionValue"u8);
             writer.WriteStringValue(UserActionValue);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,10 +50,10 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         UserActionParam IJsonModel<UserActionParam>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<UserActionParam>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(UserActionParam)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(UserActionParam)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -77,7 +78,7 @@ namespace _Specs_.Azure.Core.Traits.Models
                     userActionValue = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,25 +89,31 @@ namespace _Specs_.Azure.Core.Traits.Models
 
         BinaryData IPersistableModel<UserActionParam>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(UserActionParam)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<UserActionParam>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(UserActionParam)} does not support '{options.Format}' format.");
+            }
         }
 
         UserActionParam IPersistableModel<UserActionParam>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(UserActionParam)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<UserActionParam>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeUserActionParam(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeUserActionParam(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(UserActionParam)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<UserActionParam>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -20,9 +20,10 @@ namespace MgmtAcronymMapping.Models
 
         void IJsonModel<RollingUpgradeProgressInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RollingUpgradeProgressInfo>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<RollingUpgradeProgressInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RollingUpgradeProgressInfo>)} interface");
+                throw new InvalidOperationException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -58,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(PendingInstanceCount.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -78,10 +79,10 @@ namespace MgmtAcronymMapping.Models
 
         RollingUpgradeProgressInfo IJsonModel<RollingUpgradeProgressInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<RollingUpgradeProgressInfo>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -140,7 +141,7 @@ namespace MgmtAcronymMapping.Models
                     pendingInstanceCount = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -151,25 +152,31 @@ namespace MgmtAcronymMapping.Models
 
         BinaryData IPersistableModel<RollingUpgradeProgressInfo>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<RollingUpgradeProgressInfo>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
+            }
         }
 
         RollingUpgradeProgressInfo IPersistableModel<RollingUpgradeProgressInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<RollingUpgradeProgressInfo>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRollingUpgradeProgressInfo(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RollingUpgradeProgressInfo)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<RollingUpgradeProgressInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

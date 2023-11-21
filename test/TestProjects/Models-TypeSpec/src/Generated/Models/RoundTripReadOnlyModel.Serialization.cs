@@ -21,9 +21,10 @@ namespace ModelsTypeSpec.Models
 
         void IJsonModel<RoundTripReadOnlyModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<RoundTripReadOnlyModel>)} interface");
+                throw new InvalidOperationException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -245,7 +246,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -265,10 +266,10 @@ namespace ModelsTypeSpec.Models
 
         RoundTripReadOnlyModel IJsonModel<RoundTripReadOnlyModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -543,7 +544,7 @@ namespace ModelsTypeSpec.Models
                     optionalCollectionWithNullableBooleanElement = array;
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -554,25 +555,31 @@ namespace ModelsTypeSpec.Models
 
         BinaryData IPersistableModel<RoundTripReadOnlyModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{options.Format}' format.");
+            }
         }
 
         RoundTripReadOnlyModel IPersistableModel<RoundTripReadOnlyModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<RoundTripReadOnlyModel>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeRoundTripReadOnlyModel(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeRoundTripReadOnlyModel(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(RoundTripReadOnlyModel)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<RoundTripReadOnlyModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -21,9 +21,10 @@ namespace SpreadTypeSpec.Models
 
         void IJsonModel<SpreadAliasWithSpreadAliasRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<SpreadAliasWithSpreadAliasRequest>)} interface");
+                throw new InvalidOperationException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +32,7 @@ namespace SpreadTypeSpec.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,10 +52,10 @@ namespace SpreadTypeSpec.Models
 
         SpreadAliasWithSpreadAliasRequest IJsonModel<SpreadAliasWithSpreadAliasRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -85,7 +86,7 @@ namespace SpreadTypeSpec.Models
                     age = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -96,25 +97,31 @@ namespace SpreadTypeSpec.Models
 
         BinaryData IPersistableModel<SpreadAliasWithSpreadAliasRequest>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{options.Format}' format.");
+            }
         }
 
         SpreadAliasWithSpreadAliasRequest IPersistableModel<SpreadAliasWithSpreadAliasRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<SpreadAliasWithSpreadAliasRequest>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(SpreadAliasWithSpreadAliasRequest)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<SpreadAliasWithSpreadAliasRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

@@ -21,15 +21,16 @@ namespace Encode.Bytes.Models
 
         void IJsonModel<Base64urlBytesProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<Base64urlBytesProperty>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<Base64urlBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<Base64urlBytesProperty>)} interface");
+                throw new InvalidOperationException($"The model {nameof(Base64urlBytesProperty)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
             writer.WriteBase64StringValue(Value.ToArray(), "U");
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,10 +50,10 @@ namespace Encode.Bytes.Models
 
         Base64urlBytesProperty IJsonModel<Base64urlBytesProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<Base64urlBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(Base64urlBytesProperty)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(Base64urlBytesProperty)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -77,7 +78,7 @@ namespace Encode.Bytes.Models
                     value = BinaryData.FromBytes(property.Value.GetBytesFromBase64("U"));
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -88,25 +89,31 @@ namespace Encode.Bytes.Models
 
         BinaryData IPersistableModel<Base64urlBytesProperty>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(Base64urlBytesProperty)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<Base64urlBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Base64urlBytesProperty)} does not support '{options.Format}' format.");
+            }
         }
 
         Base64urlBytesProperty IPersistableModel<Base64urlBytesProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(Base64urlBytesProperty)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<Base64urlBytesProperty>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeBase64urlBytesProperty(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeBase64urlBytesProperty(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(Base64urlBytesProperty)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<Base64urlBytesProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

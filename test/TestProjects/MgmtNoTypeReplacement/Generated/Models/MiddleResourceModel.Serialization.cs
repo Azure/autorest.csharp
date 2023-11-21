@@ -20,9 +20,10 @@ namespace MgmtNoTypeReplacement.Models
 
         void IJsonModel<MiddleResourceModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MiddleResourceModel>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<MiddleResourceModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MiddleResourceModel>)} interface");
+                throw new InvalidOperationException($"The model {nameof(MiddleResourceModel)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -31,7 +32,7 @@ namespace MgmtNoTypeReplacement.Models
                 writer.WritePropertyName("foo"u8);
                 writer.WriteObjectValue(Foo);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -51,10 +52,10 @@ namespace MgmtNoTypeReplacement.Models
 
         MiddleResourceModel IJsonModel<MiddleResourceModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<MiddleResourceModel>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MiddleResourceModel)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(MiddleResourceModel)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -83,7 +84,7 @@ namespace MgmtNoTypeReplacement.Models
                     foo = NoSubResourceModel2.DeserializeNoSubResourceModel2(property.Value);
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -94,25 +95,31 @@ namespace MgmtNoTypeReplacement.Models
 
         BinaryData IPersistableModel<MiddleResourceModel>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(MiddleResourceModel)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<MiddleResourceModel>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MiddleResourceModel)} does not support '{options.Format}' format.");
+            }
         }
 
         MiddleResourceModel IPersistableModel<MiddleResourceModel>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(MiddleResourceModel)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<MiddleResourceModel>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMiddleResourceModel(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeMiddleResourceModel(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MiddleResourceModel)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<MiddleResourceModel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

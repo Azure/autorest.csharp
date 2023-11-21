@@ -22,9 +22,10 @@ namespace MgmtExactMatchInheritance.Models
 
         void IJsonModel<ExactMatchModel11>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ExactMatchModel11>)} interface");
+                throw new InvalidOperationException($"The model {nameof(ExactMatchModel11)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -44,7 +45,7 @@ namespace MgmtExactMatchInheritance.Models
                     writer.WriteStringValue(ResourceType.Value);
                 }
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -64,10 +65,10 @@ namespace MgmtExactMatchInheritance.Models
 
         ExactMatchModel11 IJsonModel<ExactMatchModel11>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(ExactMatchModel11)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -102,7 +103,7 @@ namespace MgmtExactMatchInheritance.Models
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -113,25 +114,31 @@ namespace MgmtExactMatchInheritance.Models
 
         BinaryData IPersistableModel<ExactMatchModel11>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ExactMatchModel11)} does not support '{options.Format}' format.");
+            }
         }
 
         ExactMatchModel11 IPersistableModel<ExactMatchModel11>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ExactMatchModel11)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ExactMatchModel11>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel11(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeExactMatchModel11(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ExactMatchModel11)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ExactMatchModel11>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

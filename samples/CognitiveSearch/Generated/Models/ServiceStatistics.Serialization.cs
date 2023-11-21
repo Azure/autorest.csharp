@@ -20,9 +20,10 @@ namespace CognitiveSearch.Models
 
         void IJsonModel<ServiceStatistics>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<ServiceStatistics>)} interface");
+                throw new InvalidOperationException($"The model {nameof(ServiceStatistics)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -30,7 +31,7 @@ namespace CognitiveSearch.Models
             writer.WriteObjectValue(Counters);
             writer.WritePropertyName("limits"u8);
             writer.WriteObjectValue(Limits);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -50,10 +51,10 @@ namespace CognitiveSearch.Models
 
         ServiceStatistics IJsonModel<ServiceStatistics>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(ServiceStatistics)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(ServiceStatistics)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -84,7 +85,7 @@ namespace CognitiveSearch.Models
                     limits = ServiceLimits.DeserializeServiceLimits(property.Value);
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,25 +96,31 @@ namespace CognitiveSearch.Models
 
         BinaryData IPersistableModel<ServiceStatistics>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ServiceStatistics)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ServiceStatistics)} does not support '{options.Format}' format.");
+            }
         }
 
         ServiceStatistics IPersistableModel<ServiceStatistics>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(ServiceStatistics)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<ServiceStatistics>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeServiceStatistics(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeServiceStatistics(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(ServiceStatistics)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<ServiceStatistics>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

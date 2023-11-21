@@ -45,9 +45,10 @@ namespace Azure.Storage.Tables.Models
 
         void IJsonModel<StorageError>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<StorageError>)} interface");
+                throw new InvalidOperationException($"The model {nameof(StorageError)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -56,7 +57,7 @@ namespace Azure.Storage.Tables.Models
                 writer.WritePropertyName("Message"u8);
                 writer.WriteStringValue(Message);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -76,10 +77,10 @@ namespace Azure.Storage.Tables.Models
 
         StorageError IJsonModel<StorageError>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(StorageError)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -104,7 +105,7 @@ namespace Azure.Storage.Tables.Models
                     message = property.Value.GetString();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -115,49 +116,47 @@ namespace Azure.Storage.Tables.Models
 
         BinaryData IPersistableModel<StorageError>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
 
-            if (options.Format == "J")
+            switch (format)
             {
-                return ModelReaderWriter.Write(this, options);
-            }
-            else
-            {
-                using MemoryStream stream = new MemoryStream();
-                using XmlWriter writer = XmlWriter.Create(stream);
-                ((IXmlSerializable)this).Write(writer, null);
-                writer.Flush();
-                if (stream.Position > int.MaxValue)
-                {
-                    return BinaryData.FromStream(stream);
-                }
-                else
-                {
-                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                }
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                case "X":
+                    {
+                        using MemoryStream stream = new MemoryStream();
+                        using XmlWriter writer = XmlWriter.Create(stream);
+                        ((IXmlSerializable)this).Write(writer, null);
+                        writer.Flush();
+                        if (stream.Position > int.MaxValue)
+                        {
+                            return BinaryData.FromStream(stream);
+                        }
+                        else
+                        {
+                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                        }
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
             }
         }
 
         StorageError IPersistableModel<StorageError>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<StorageError>)this).GetFormatFromOptions(options) : options.Format;
 
-            if (options.Format == "J")
+            switch (format)
             {
-                using JsonDocument document = JsonDocument.Parse(data);
-                return DeserializeStorageError(document.RootElement, options);
-            }
-            else
-            {
-                return DeserializeStorageError(XElement.Load(data.ToStream()), options);
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeStorageError(document.RootElement, options);
+                    }
+                case "X":
+                    return DeserializeStorageError(XElement.Load(data.ToStream()), options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(StorageError)} does not support '{options.Format}' format.");
             }
         }
 

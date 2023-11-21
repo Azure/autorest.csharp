@@ -21,15 +21,16 @@ namespace ApiVersionInTsp.Models
 
         void IJsonModel<DetectionResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<DetectionResult>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<DetectionResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<DetectionResult>)} interface");
+                throw new InvalidOperationException($"The model {nameof(DetectionResult)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
             writer.WritePropertyName("resultId"u8);
             writer.WriteStringValue(ResultId);
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -49,10 +50,10 @@ namespace ApiVersionInTsp.Models
 
         DetectionResult IJsonModel<DetectionResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<DetectionResult>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(DetectionResult)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -77,7 +78,7 @@ namespace ApiVersionInTsp.Models
                     resultId = property.Value.GetGuid();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -95,7 +96,7 @@ namespace ApiVersionInTsp.Models
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
             }
         }
 
@@ -111,7 +112,7 @@ namespace ApiVersionInTsp.Models
                         return DeserializeDetectionResult(document.RootElement, options);
                     }
                 default:
-                    throw new FormatException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(DetectionResult)} does not support '{options.Format}' format.");
             }
         }
 

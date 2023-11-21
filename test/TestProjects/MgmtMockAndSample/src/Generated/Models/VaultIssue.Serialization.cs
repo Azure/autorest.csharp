@@ -20,9 +20,10 @@ namespace MgmtMockAndSample.Models
 
         void IJsonModel<VaultIssue>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<VaultIssue>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<VaultIssue>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<VaultIssue>)} interface");
+                throw new InvalidOperationException($"The model {nameof(VaultIssue)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -41,7 +42,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("sev"u8);
                 writer.WriteNumberValue(Sev.Value);
             }
-            if (_serializedAdditionalRawData != null && options.Format == "J")
+            if (_serializedAdditionalRawData != null && options.Format != "W")
             {
                 foreach (var item in _serializedAdditionalRawData)
                 {
@@ -61,10 +62,10 @@ namespace MgmtMockAndSample.Models
 
         VaultIssue IJsonModel<VaultIssue>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<VaultIssue>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(VaultIssue)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(VaultIssue)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -105,7 +106,7 @@ namespace MgmtMockAndSample.Models
                     sev = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format == "J")
+                if (options.Format != "W")
                 {
                     additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                 }
@@ -116,25 +117,31 @@ namespace MgmtMockAndSample.Models
 
         BinaryData IPersistableModel<VaultIssue>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(VaultIssue)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<VaultIssue>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VaultIssue)} does not support '{options.Format}' format.");
+            }
         }
 
         VaultIssue IPersistableModel<VaultIssue>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(VaultIssue)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<VaultIssue>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeVaultIssue(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeVaultIssue(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(VaultIssue)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<VaultIssue>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";

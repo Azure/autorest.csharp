@@ -21,9 +21,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         void IJsonModel<MgmtReferenceTypesSku>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            if ((options.Format != "W" || ((IPersistableModel<MgmtReferenceTypesSku>)this).GetFormatFromOptions(options) != "J") && options.Format != "J")
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtReferenceTypesSku>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new InvalidOperationException($"Must use 'J' format when calling the {nameof(IJsonModel<MgmtReferenceTypesSku>)} interface");
+                throw new InvalidOperationException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -54,10 +55,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         MgmtReferenceTypesSku IJsonModel<MgmtReferenceTypesSku>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtReferenceTypesSku>)this).GetFormatFromOptions(options) : options.Format;
+            if (format != "J")
             {
-                throw new FormatException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{options.Format}' format.");
+                throw new InvalidOperationException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
@@ -118,25 +119,31 @@ namespace Azure.ResourceManager.Fake.Models
 
         BinaryData IPersistableModel<MgmtReferenceTypesSku>.Write(ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtReferenceTypesSku>)this).GetFormatFromOptions(options) : options.Format;
 
-            return ModelReaderWriter.Write(this, options);
+            switch (format)
+            {
+                case "J":
+                    return ModelReaderWriter.Write(this, options);
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{options.Format}' format.");
+            }
         }
 
         MgmtReferenceTypesSku IPersistableModel<MgmtReferenceTypesSku>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            bool isValid = options.Format == "J" || options.Format == "W";
-            if (!isValid)
-            {
-                throw new FormatException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{options.Format}' format.");
-            }
+            var format = options.Format == "W" ? ((IPersistableModel<MgmtReferenceTypesSku>)this).GetFormatFromOptions(options) : options.Format;
 
-            using JsonDocument document = JsonDocument.Parse(data);
-            return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
+            switch (format)
+            {
+                case "J":
+                    {
+                        using JsonDocument document = JsonDocument.Parse(data);
+                        return DeserializeMgmtReferenceTypesSku(document.RootElement, options);
+                    }
+                default:
+                    throw new InvalidOperationException($"The model {nameof(MgmtReferenceTypesSku)} does not support '{options.Format}' format.");
+            }
         }
 
         string IPersistableModel<MgmtReferenceTypesSku>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
