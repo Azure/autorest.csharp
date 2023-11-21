@@ -12,21 +12,16 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static class Serializations
         {
-            private readonly static StringExpression _wireFormat = Literal("W");
-            public static StringExpression WireFormat => _wireFormat;
-            private readonly static StringExpression _jsonFormat = Literal("J");
-            public static StringExpression JsonFormat => _jsonFormat;
-            private readonly static StringExpression _xmlFormat = Literal("X");
-            public static StringExpression XmlFormat => _xmlFormat;
+            public static StringExpression WireFormat = Literal("W");
+            public static StringExpression JsonFormat = Literal("J");
+            public static StringExpression XmlFormat = Literal("X");
 
-            public static MethodBodyStatement WrapInCheckIsJson(PropertySerialization serialization, ValueExpression format, MethodBodyStatement statement)
+            public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression format, MethodBodyStatement statement)
             {
                 if (!serialization.ShouldExcludeInWireSerialization)
-                {
                     return statement;
-                }
 
-                return new IfStatement(Equal(format, JsonFormat))
+                return new IfStatement(NotEqual(format, WireFormat))
                 {
                     statement
                 };

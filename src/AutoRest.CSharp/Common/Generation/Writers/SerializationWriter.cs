@@ -126,7 +126,11 @@ namespace AutoRest.CSharp.Generation.Writers
         /// <param name="xml"></param>
         private static void WriteXmlSerialization(CodeWriter writer, SerializableObjectType model, XmlObjectSerialization xml)
         {
-            writer.WriteMethod(XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(xml));
+            foreach (var method in XmlSerializationMethodsBuilder.BuildXmlSerializationMethods(xml))
+            {
+                writer.WriteMethod(method);
+            }
+
             writer.WriteMethod(XmlSerializationMethodsBuilder.BuildDeserialize(model.Declaration, xml));
         }
 

@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {

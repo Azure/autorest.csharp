@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IJsonModel<object>.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.Utf8JsonWriter, KnownParameters.Serializations.Options }, ExplicitInterface: jsonModelInterface),
-                WriteObject(writer, options, json)
+                WriteObject(json, writer, options)
             );
 
             // T IJsonModel<T>.Read(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         format
                     })));
 
-        public static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options, JsonObjectSerialization serialization)
+        public static MethodBodyStatement[] WriteObject(JsonObjectSerialization serialization, Utf8JsonWriterExpression utf8JsonWriter, ModelReaderWriterOptionsExpression options)
             => new[]
             {
                 ValidateJsonFormat(options, serialization.IModelInterface).ToArray(),
@@ -325,7 +325,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (property.ValueSerialization == null)
                 {
                     // Flattened property
-                    yield return Serializations.WrapInCheckIsJson(
+                    yield return Serializations.WrapInCheckNotWire(
                         property,
                         options.Format,
                         new[]
@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         ? And(NotEqual(property.Value, Null), InvokeOptional.IsCollectionDefined(property.Value))
                         : NotEqual(property.Value, Null);
 
-                    yield return Serializations.WrapInCheckIsJson(
+                    yield return Serializations.WrapInCheckNotWire(
                         property,
                         options.Format,
                         InvokeOptional.WrapInIsDefined(
@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    yield return Serializations.WrapInCheckIsJson(
+                    yield return Serializations.WrapInCheckNotWire(
                         property,
                         options.Format,
                         InvokeOptional.WrapInIsDefined(property, WritePropertySerialization(utf8JsonWriter, property)));

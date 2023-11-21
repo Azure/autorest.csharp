@@ -20,7 +20,7 @@ namespace MgmtXmlDeserialization.Models
 {
     internal partial class XmlCollection : IUtf8JsonSerializable, IJsonModel<XmlCollection>, IXmlSerializable, IPersistableModel<XmlCollection>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlCollection");
             if (Optional.IsDefined(Count))
@@ -45,6 +45,8 @@ namespace MgmtXmlDeserialization.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static XmlCollection DeserializeXmlCollection(XElement element, ModelReaderWriterOptions options = null)
         {
             long? count = default;
@@ -64,7 +66,7 @@ namespace MgmtXmlDeserialization.Models
                 array.Add(XmlInstanceData.DeserializeXmlInstanceData(e));
             }
             value = array;
-            return new XmlCollection(value, count, nextLink, default);
+            return new XmlCollection(value, count, nextLink, serializedAdditionalRawData: null);
         }
 
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlCollection>)this).Write(writer, new ModelReaderWriterOptions("W"));

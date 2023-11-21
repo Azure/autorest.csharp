@@ -20,26 +20,40 @@ namespace MgmtXmlDeserialization
 {
     public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModel<XmlInstanceData>, IXmlSerializable, IPersistableModel<XmlInstanceData>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlInstance");
-            writer.WriteStartElement("id");
-            writer.WriteValue(Id);
-            writer.WriteEndElement();
-            writer.WriteStartElement("name");
-            writer.WriteValue(Name);
-            writer.WriteEndElement();
-            writer.WriteStartElement("type");
-            writer.WriteValue(ResourceType);
-            writer.WriteEndElement();
-            if (Optional.IsDefined(SystemData))
+            if (options.Format != "W")
             {
-                writer.WriteStartElement("systemData");
-                writer.WriteValue(SystemData);
+                writer.WriteStartElement("id");
+                writer.WriteValue(Id);
                 writer.WriteEndElement();
+            }
+            if (options.Format != "W")
+            {
+                writer.WriteStartElement("name");
+                writer.WriteValue(Name);
+                writer.WriteEndElement();
+            }
+            if (options.Format != "W")
+            {
+                writer.WriteStartElement("type");
+                writer.WriteValue(ResourceType);
+                writer.WriteEndElement();
+            }
+            if (options.Format != "W")
+            {
+                if (Optional.IsDefined(SystemData))
+                {
+                    writer.WriteStartElement("systemData");
+                    writer.WriteValue(SystemData);
+                    writer.WriteEndElement();
+                }
             }
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static XmlInstanceData DeserializeXmlInstanceData(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -63,7 +77,7 @@ namespace MgmtXmlDeserialization
             {
                 systemData = null;
             }
-            return new XmlInstanceData(id, name, resourceType, systemData, default);
+            return new XmlInstanceData(id, name, resourceType, systemData, serializedAdditionalRawData: null);
         }
 
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlInstanceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
@@ -77,22 +91,22 @@ namespace MgmtXmlDeserialization
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {

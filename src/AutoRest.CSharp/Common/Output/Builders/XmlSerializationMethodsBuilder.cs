@@ -2,10 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.ClientModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
@@ -22,48 +20,70 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using ValidationType = AutoRest.CSharp.Output.Models.Shared.ValidationType;
 
 namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
-        public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
+        public static IEnumerable<Method> BuildXmlSerializationMethods(XmlObjectSerialization serialization)
         {
-            return new Method
+            // a private helper method with the options to do the full xml serialization
+            const string privateWriteMethodName = "Write";
+            var xmlWriter = new XmlWriterExpression(KnownParameters.Serializations.XmlWriter);
+            var nameHint = (ValueExpression)KnownParameters.Serializations.NameHint;
+            var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
+            yield return new Method
+            (
+                new MethodSignature(privateWriteMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
+                WriteObject(serialization, xmlWriter, nameHint, options).ToArray()
+            );
+
+            yield return new Method
             (
                 new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
-                SerializeExpression(new XmlWriterExpression(KnownParameters.Serializations.XmlWriter), serialization, KnownParameters.Serializations.NameHint).AsStatement()
+                This.Invoke(privateWriteMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
             );
         }
 
-        public static IEnumerable<MethodBodyStatement> SerializeExpression(XmlWriterExpression xmlWriter, XmlObjectSerialization objectSerialization, ValueExpression nameHint)
+        private static IEnumerable<MethodBodyStatement> WriteObject(XmlObjectSerialization objectSerialization, XmlWriterExpression xmlWriter, ValueExpression nameHint, ModelReaderWriterOptionsExpression options)
         {
             yield return xmlWriter.WriteStartElement(NullCoalescing(nameHint, Literal(objectSerialization.Name)));
 
             foreach (XmlObjectAttributeSerialization serialization in objectSerialization.Attributes)
             {
-                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
-                {
-                    xmlWriter.WriteStartAttribute(serialization.SerializedName),
-                    SerializeValueExpression(xmlWriter, serialization.ValueSerialization, serialization.Value),
-                    xmlWriter.WriteEndAttribute()
-                }));
+                yield return Serializations.WrapInCheckNotWire(
+                    serialization,
+                    options.Format,
+                    InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
+                    {
+                        xmlWriter.WriteStartAttribute(serialization.SerializedName),
+                        SerializeValueExpression(xmlWriter, serialization.ValueSerialization, serialization.Value),
+                        xmlWriter.WriteEndAttribute()
+                    })));
             }
 
             foreach (XmlObjectElementSerialization serialization in objectSerialization.Elements)
             {
-                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value)));
+                yield return Serializations.WrapInCheckNotWire(
+                    serialization,
+                    options.Format,
+                    InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value))));
             }
 
             foreach (XmlObjectArraySerialization serialization in objectSerialization.EmbeddedArrays)
             {
-                yield return InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value)));
+                yield return Serializations.WrapInCheckNotWire(
+                    serialization,
+                    options.Format,
+                    InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value))));
             }
 
             if (objectSerialization.ContentSerialization is { } contentSerialization)
             {
-                yield return SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value);
+                yield return Serializations.WrapInCheckNotWire(
+                    contentSerialization,
+                    options.Format,
+                    SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value));
             }
 
             yield return xmlWriter.WriteEndElement();
@@ -221,7 +241,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 else
                 {
                     // this must be the raw data property
-                    arguments.Add(Default);
+                    arguments.Add(new PositionalParameterReference(parameter.Name, Null));
                 }
             }
 

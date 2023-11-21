@@ -213,6 +213,7 @@ namespace AutoRest.CSharp.Output.Builders
                     var name = property.SerializedName;
                     var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
                     var isContent = property.Schema.Serialization?.Xml?.Text == true;
+                    var shouldExcludeInWireSerialization = property.IsReadOnly;
 
                     if (isContent)
                     {
