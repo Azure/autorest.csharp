@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Authorization))
                 {
@@ -35,7 +35,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteObjectValue(Authorization);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(TenantId))
                 {

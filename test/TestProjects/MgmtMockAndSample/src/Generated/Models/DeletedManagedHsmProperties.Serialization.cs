@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MhsmId))
                 {
@@ -35,7 +35,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(MhsmId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Location))
                 {
@@ -43,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(Location.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DeletedOn))
                 {
@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(DeletedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ScheduledPurgeOn))
                 {
@@ -59,7 +59,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(ScheduledPurgeOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PurgeProtectionEnabled))
                 {
@@ -67,7 +67,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteBooleanValue(PurgeProtectionEnabled.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Tags))
                 {

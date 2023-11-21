@@ -71,7 +71,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("toBeDetached"u8);
                 writer.WriteBooleanValue(ToBeDetached.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DiskIopsReadWrite))
                 {
@@ -79,7 +79,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(DiskIopsReadWrite.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DiskMBpsReadWrite))
                 {

@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastEnabledOn))
                 {

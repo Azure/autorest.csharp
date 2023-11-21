@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VirtualMachine))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteObjectValue(VirtualMachine);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Extensions))
                 {
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OrchestrationServices))
                 {

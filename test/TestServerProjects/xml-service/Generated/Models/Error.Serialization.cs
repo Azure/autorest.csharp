@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     internal partial class Error : IXmlSerializable, IPersistableModel<Error>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Error");
             if (Optional.IsDefined(Status))
@@ -35,6 +35,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static Error DeserializeError(XElement element, ModelReaderWriterOptions options = null)
         {
             int? status = default;
@@ -47,7 +49,7 @@ namespace xml_service.Models
             {
                 message = (string)messageElement;
             }
-            return new Error(status, message, default);
+            return new Error(status, message, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)
@@ -60,7 +62,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningOperation))
                 {
@@ -35,7 +35,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ProvisioningOperation.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -43,7 +43,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ProvisioningState);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Timestamp))
                 {
@@ -51,7 +51,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Timestamp.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Duration))
                 {
@@ -59,7 +59,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Duration.Value, "P");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AnotherDuration))
                 {
@@ -67,7 +67,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AnotherDuration.Value, "c");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ServiceRequestId))
                 {
@@ -75,7 +75,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ServiceRequestId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StatusCode))
                 {
@@ -83,7 +83,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(StatusCode);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StatusMessage))
                 {
@@ -91,7 +91,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteObjectValue(StatusMessage);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Request))
                 {
@@ -99,7 +99,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteObjectValue(Request);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Response))
                 {

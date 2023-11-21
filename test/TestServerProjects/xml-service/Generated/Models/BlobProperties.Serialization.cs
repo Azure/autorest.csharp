@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class BlobProperties : IXmlSerializable, IPersistableModel<BlobProperties>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "BlobProperties");
             writer.WriteStartElement("Last-Modified");
@@ -185,6 +185,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static BlobProperties DeserializeBlobProperties(XElement element, ModelReaderWriterOptions options = null)
         {
             DateTimeOffset lastModified = default;
@@ -327,7 +329,7 @@ namespace xml_service.Models
             {
                 archiveStatus = new ArchiveStatus(archiveStatusElement.Value);
             }
-            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, default);
+            return new BlobProperties(lastModified, etag, contentLength, contentType, contentEncoding, contentLanguage, contentMD5, contentDisposition, cacheControl, blobSequenceNumber, blobType, leaseStatus, leaseState, leaseDuration, copyId, copyStatus, copySource, copyProgress, copyCompletionTime, copyStatusDescription, serverEncrypted, incrementalCopy, destinationSnapshot, deletedTime, remainingRetentionDays, accessTier, accessTierInferred, archiveStatus, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<BlobProperties>.Write(ModelReaderWriterOptions options)
@@ -340,7 +342,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

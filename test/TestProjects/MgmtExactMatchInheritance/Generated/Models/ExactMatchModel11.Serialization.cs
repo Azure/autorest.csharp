@@ -29,7 +29,7 @@ namespace MgmtExactMatchInheritance.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -37,7 +37,7 @@ namespace MgmtExactMatchInheritance.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {

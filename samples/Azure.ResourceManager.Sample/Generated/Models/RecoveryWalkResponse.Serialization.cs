@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(WalkPerformed))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteBooleanValue(WalkPerformed.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NextPlatformUpdateDomain))
                 {

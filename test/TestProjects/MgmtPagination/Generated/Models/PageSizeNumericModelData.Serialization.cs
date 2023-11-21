@@ -27,7 +27,7 @@ namespace MgmtPagination
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -35,7 +35,7 @@ namespace MgmtPagination
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -43,7 +43,7 @@ namespace MgmtPagination
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {

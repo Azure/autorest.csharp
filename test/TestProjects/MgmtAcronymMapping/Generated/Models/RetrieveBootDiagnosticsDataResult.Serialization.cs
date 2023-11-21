@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ConsoleScreenshotBlobUri))
                 {
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(ConsoleScreenshotBlobUri.AbsoluteUri);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SerialConsoleLogBlobUri))
                 {

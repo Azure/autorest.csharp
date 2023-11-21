@@ -27,7 +27,7 @@ namespace MgmtHierarchicalNonResource
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -35,7 +35,7 @@ namespace MgmtHierarchicalNonResource
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Location))
                 {

@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();

@@ -27,7 +27,7 @@ namespace xms_error_responses.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {

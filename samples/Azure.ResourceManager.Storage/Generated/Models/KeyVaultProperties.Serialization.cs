@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("keyvaulturi"u8);
                 writer.WriteStringValue(KeyVaultUri.AbsoluteUri);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CurrentVersionedKeyIdentifier))
                 {
@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(CurrentVersionedKeyIdentifier);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastKeyRotationTimestamp))
                 {

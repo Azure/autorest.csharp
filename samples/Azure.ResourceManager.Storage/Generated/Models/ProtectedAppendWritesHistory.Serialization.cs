@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
                 writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Timestamp))
                 {

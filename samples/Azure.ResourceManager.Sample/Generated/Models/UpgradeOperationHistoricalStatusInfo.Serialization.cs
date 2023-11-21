@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Properties))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteObjectValue(Properties);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(UpgradeOperationHistoricalStatusInfoType))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(UpgradeOperationHistoricalStatusInfoType);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Location))
                 {

@@ -28,7 +28,7 @@ namespace MgmtPropertyChooser.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PrincipalId))
                 {
@@ -36,7 +36,7 @@ namespace MgmtPropertyChooser.Models
                     writer.WriteStringValue(PrincipalId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(TenantId))
                 {

@@ -61,7 +61,7 @@ namespace MgmtPropertyChooser.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -74,7 +74,7 @@ namespace MgmtPropertyChooser.Models
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VmId))
                 {

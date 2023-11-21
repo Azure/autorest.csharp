@@ -137,7 +137,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -145,7 +145,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ProvisioningState);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceView))
                 {
@@ -158,7 +158,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VmId))
                 {

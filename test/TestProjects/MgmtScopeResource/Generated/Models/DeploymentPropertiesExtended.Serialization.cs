@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -35,7 +35,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ProvisioningState.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CorrelationId))
                 {
@@ -43,7 +43,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(CorrelationId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Timestamp))
                 {
@@ -51,7 +51,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Timestamp.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Duration))
                 {
@@ -59,7 +59,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Duration.Value, "P");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Outputs))
                 {
@@ -74,7 +74,7 @@ namespace MgmtScopeResource.Models
 #endif
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Parameters))
                 {
@@ -94,7 +94,7 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("mode"u8);
                 writer.WriteStringValue(Mode.Value.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ErrorResponse))
                 {

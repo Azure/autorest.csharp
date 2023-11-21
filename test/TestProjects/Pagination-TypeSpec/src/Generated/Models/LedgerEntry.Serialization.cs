@@ -30,12 +30,12 @@ namespace Pagination.Models
             writer.WriteStartObject();
             writer.WritePropertyName("contents"u8);
             writer.WriteStringValue(Contents);
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("collectionId"u8);
                 writer.WriteStringValue(CollectionId);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("transactionId"u8);
                 writer.WriteStringValue(TransactionId);

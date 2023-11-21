@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class SignedIdentifier : IXmlSerializable, IPersistableModel<SignedIdentifier>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "SignedIdentifier");
             writer.WriteStartElement("Id");
@@ -26,6 +26,8 @@ namespace xml_service.Models
             writer.WriteObjectValue(AccessPolicy, "AccessPolicy");
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -39,7 +41,7 @@ namespace xml_service.Models
             {
                 accessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicyElement);
             }
-            return new SignedIdentifier(id, accessPolicy, default);
+            return new SignedIdentifier(id, accessPolicy, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<SignedIdentifier>.Write(ModelReaderWriterOptions options)
@@ -52,7 +54,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

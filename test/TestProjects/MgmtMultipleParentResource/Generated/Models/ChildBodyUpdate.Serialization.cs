@@ -70,7 +70,7 @@ namespace MgmtMultipleParentResource.Models
                 writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

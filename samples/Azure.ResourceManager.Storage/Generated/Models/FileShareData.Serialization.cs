@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -38,22 +38,22 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(Etag.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Storage
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -97,7 +97,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("rootSquash"u8);
                 writer.WriteStringValue(RootSquash.Value.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Version))
                 {
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(Version);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Deleted))
                 {
@@ -113,7 +113,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteBooleanValue(Deleted.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DeletedOn))
                 {
@@ -121,7 +121,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(DeletedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RemainingRetentionDays))
                 {
@@ -134,7 +134,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("accessTier"u8);
                 writer.WriteStringValue(AccessTier.Value.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AccessTierChangeOn))
                 {
@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(AccessTierChangeOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AccessTierStatus))
                 {
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(AccessTierStatus);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ShareUsageBytes))
                 {
@@ -158,7 +158,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteNumberValue(ShareUsageBytes.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LeaseStatus))
                 {
@@ -166,7 +166,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LeaseStatus.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LeaseState))
                 {
@@ -174,7 +174,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LeaseState.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LeaseDuration))
                 {
@@ -192,7 +192,7 @@ namespace Azure.ResourceManager.Storage
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SnapshotOn))
                 {

@@ -32,7 +32,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -40,7 +40,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -55,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(BackendIPConfigurations))
                 {
@@ -68,7 +68,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(LoadBalancingRules))
                 {
@@ -81,7 +81,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OutboundRule))
                 {
@@ -89,7 +89,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteObjectValue(OutboundRule);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OutboundRules))
                 {
@@ -102,7 +102,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

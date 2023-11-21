@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(TargetResourceId))
                 {
@@ -42,7 +42,7 @@ namespace MgmtScopeResource.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ComplianceStatus))
                 {
@@ -50,7 +50,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ComplianceStatus.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastComplianceStatusChecked))
                 {
@@ -65,7 +65,7 @@ namespace MgmtScopeResource.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LatestReportId))
                 {
@@ -80,7 +80,7 @@ namespace MgmtScopeResource.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ParameterHash))
                 {
@@ -100,7 +100,7 @@ namespace MgmtScopeResource.Models
                 writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AssignmentHash))
                 {
@@ -115,7 +115,7 @@ namespace MgmtScopeResource.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -130,7 +130,7 @@ namespace MgmtScopeResource.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {

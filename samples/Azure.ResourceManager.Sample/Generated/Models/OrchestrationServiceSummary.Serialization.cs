@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ServiceName))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ServiceName.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ServiceState))
                 {

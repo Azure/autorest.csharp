@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("version"u8);
                 writer.WriteStringValue(Version);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ExactVersion))
                 {

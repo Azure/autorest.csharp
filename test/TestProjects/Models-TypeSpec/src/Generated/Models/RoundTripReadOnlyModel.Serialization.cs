@@ -28,17 +28,17 @@ namespace ModelsTypeSpec.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyString"u8);
                 writer.WriteStringValue(RequiredReadonlyString);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OptionalReadonlyString))
                 {
@@ -46,7 +46,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteStringValue(OptionalReadonlyString);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OptionalReadonlyInt))
                 {
@@ -54,12 +54,12 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNumberValue(OptionalReadonlyInt.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyModel"u8);
                 writer.WriteObjectValue(RequiredReadonlyModel);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OptionalReadonlyModel))
                 {
@@ -67,27 +67,27 @@ namespace ModelsTypeSpec.Models
                     writer.WriteObjectValue(OptionalReadonlyModel);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyFixedStringEnum"u8);
                 writer.WriteStringValue(RequiredReadonlyFixedStringEnum.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyExtensibleEnum"u8);
                 writer.WriteStringValue(RequiredReadonlyExtensibleEnum.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("optionalReadonlyFixedStringEnum"u8);
                 writer.WriteStringValue(OptionalReadonlyFixedStringEnum.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("optionalReadonlyExtensibleEnum"u8);
                 writer.WriteStringValue(OptionalReadonlyExtensibleEnum.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyStringList"u8);
                 writer.WriteStartArray();
@@ -97,7 +97,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyIntList"u8);
                 writer.WriteStartArray();
@@ -107,7 +107,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadOnlyModelList"u8);
                 writer.WriteStartArray();
@@ -117,7 +117,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadOnlyIntRecord"u8);
                 writer.WriteStartObject();
@@ -128,7 +128,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredStringRecord"u8);
                 writer.WriteStartObject();
@@ -139,7 +139,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadOnlyModelRecord"u8);
                 writer.WriteStartObject();
@@ -150,7 +150,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OptionalReadonlyStringList))
                 {
@@ -163,7 +163,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OptionalReadonlyIntList))
                 {
@@ -176,7 +176,7 @@ namespace ModelsTypeSpec.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OptionalReadOnlyModelList))
                 {
@@ -205,7 +205,7 @@ namespace ModelsTypeSpec.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OptionalModelRecord))
                 {

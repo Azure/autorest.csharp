@@ -41,22 +41,22 @@ namespace MgmtMultipleParentResource
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -96,7 +96,7 @@ namespace MgmtMultipleParentResource
                 writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

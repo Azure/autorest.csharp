@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class ModelWithByteProperty : IXmlSerializable, IPersistableModel<ModelWithByteProperty>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithByteProperty");
             if (Optional.IsDefined(Bytes))
@@ -29,6 +29,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static ModelWithByteProperty DeserializeModelWithByteProperty(XElement element, ModelReaderWriterOptions options = null)
         {
             byte[] bytes = default;
@@ -36,7 +38,7 @@ namespace xml_service.Models
             {
                 bytes = bytesElement.GetBytesFromBase64Value("D");
             }
-            return new ModelWithByteProperty(bytes, default);
+            return new ModelWithByteProperty(bytes, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ModelWithByteProperty>.Write(ModelReaderWriterOptions options)
@@ -49,7 +51,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

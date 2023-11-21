@@ -28,7 +28,7 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -36,7 +36,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Tags))
                 {
@@ -50,22 +50,22 @@ namespace MgmtScopeResource.Models
                     writer.WriteEndObject();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -75,7 +75,7 @@ namespace MgmtScopeResource.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(BillingPeriodId))
                 {
@@ -83,7 +83,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(BillingPeriodId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(UsageStart))
                 {
@@ -91,7 +91,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(UsageStart.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(UsageEnd))
                 {
@@ -99,7 +99,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(UsageEnd.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceRate))
                 {
@@ -107,7 +107,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteNumberValue(ResourceRate.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OfferName))
                 {
@@ -115,7 +115,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(OfferName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceGroup))
                 {
@@ -123,7 +123,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ResourceGroup);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AdditionalInfo))
                 {
@@ -131,7 +131,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AdditionalInfo);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OrderNumber))
                 {
@@ -139,7 +139,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(OrderNumber);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceName))
                 {
@@ -147,7 +147,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(InstanceName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceId))
                 {
@@ -155,7 +155,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(InstanceId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Currency))
                 {
@@ -163,7 +163,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Currency);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ConsumedQuantity))
                 {
@@ -171,7 +171,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteNumberValue(ConsumedQuantity.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(UnitOfMeasure))
                 {
@@ -179,7 +179,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(UnitOfMeasure);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PretaxCost))
                 {
@@ -187,7 +187,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteNumberValue(PretaxCost.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(IsEstimated))
                 {
@@ -195,7 +195,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteBooleanValue(IsEstimated.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MeterId))
                 {
@@ -203,7 +203,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(MeterId.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SubscriptionGuid))
                 {
@@ -211,7 +211,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(SubscriptionGuid.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SubscriptionName))
                 {
@@ -219,7 +219,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(SubscriptionName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AccountName))
                 {
@@ -227,7 +227,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AccountName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DepartmentName))
                 {
@@ -235,7 +235,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(DepartmentName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ConsumedService))
                 {
@@ -243,7 +243,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(ConsumedService);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CostCenter))
                 {
@@ -251,7 +251,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(CostCenter);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AdditionalProperties))
                 {
@@ -259,7 +259,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(AdditionalProperties);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PublisherName))
                 {
@@ -267,7 +267,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(PublisherName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PlanName))
                 {
@@ -275,7 +275,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(PlanName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(IsRecurringCharge))
                 {

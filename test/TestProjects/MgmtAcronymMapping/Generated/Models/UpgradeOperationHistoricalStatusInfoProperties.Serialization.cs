@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RunningStatus))
                 {
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteObjectValue(RunningStatus);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Progress))
                 {
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteObjectValue(Progress);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Error))
                 {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteObjectValue(Error);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartedBy))
                 {
@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(StartedBy.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(TargetImageReference))
                 {
@@ -67,7 +67,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteObjectValue(TargetImageReference);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RollbackInfo))
                 {

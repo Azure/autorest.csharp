@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Status.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AssessmentActivityId))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(AssessmentActivityId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RebootPending))
                 {
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteBooleanValue(RebootPending.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CriticalAndSecurityPatchCount))
                 {
@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OtherPatchCount))
                 {
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(OtherPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartOn))
                 {
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(StartOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Patches))
                 {
@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Error))
                 {

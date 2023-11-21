@@ -18,7 +18,7 @@ namespace xml_service.Models
 {
     public partial class Slideshow : IXmlSerializable, IPersistableModel<Slideshow>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "slideshow");
             if (Optional.IsDefined(Title))
@@ -49,6 +49,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static Slideshow DeserializeSlideshow(XElement element, ModelReaderWriterOptions options = null)
         {
             string title = default;
@@ -73,7 +75,7 @@ namespace xml_service.Models
                 array.Add(Slide.DeserializeSlide(e));
             }
             slides = array;
-            return new Slideshow(title, date, author, slides, default);
+            return new Slideshow(title, date, author, slides, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Slideshow>.Write(ModelReaderWriterOptions options)
@@ -86,7 +88,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

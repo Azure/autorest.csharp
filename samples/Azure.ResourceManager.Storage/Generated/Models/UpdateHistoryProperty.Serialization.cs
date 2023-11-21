@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Update))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Update.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ImmutabilityPeriodSinceCreationInDays))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Timestamp))
                 {
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Timestamp.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ObjectIdentifier))
                 {
@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(ObjectIdentifier);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(TenantId))
                 {
@@ -67,7 +67,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(TenantId.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Upn))
                 {

@@ -27,7 +27,7 @@ namespace ModelShapes.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ReadonlyProperty))
                 {
@@ -35,7 +35,7 @@ namespace ModelShapes.Models
                     writer.WriteObjectValue(ReadonlyProperty);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(ReadonlyListProperty))
                 {

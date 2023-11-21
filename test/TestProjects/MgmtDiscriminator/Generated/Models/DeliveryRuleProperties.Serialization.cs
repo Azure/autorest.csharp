@@ -63,7 +63,7 @@ namespace MgmtDiscriminator.Models
                 writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Foo))
                 {

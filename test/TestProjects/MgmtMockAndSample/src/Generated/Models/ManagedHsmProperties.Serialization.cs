@@ -71,7 +71,7 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(HsmUri))
                 {
@@ -99,7 +99,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StatusMessage))
                 {
@@ -107,7 +107,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(StatusMessage);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -120,7 +120,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(PrivateEndpointConnections))
                 {
@@ -138,7 +138,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ScheduledPurgeOn))
                 {

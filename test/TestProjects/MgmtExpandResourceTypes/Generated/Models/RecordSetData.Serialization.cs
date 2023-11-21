@@ -35,22 +35,22 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -76,7 +76,7 @@ namespace MgmtExpandResourceTypes
                 writer.WritePropertyName("TTL"u8);
                 writer.WriteNumberValue(TTL.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Fqdn))
                 {
@@ -84,7 +84,7 @@ namespace MgmtExpandResourceTypes
                     writer.WriteStringValue(Fqdn);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

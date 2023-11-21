@@ -27,7 +27,7 @@ namespace MgmtScopeResource.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -35,7 +35,7 @@ namespace MgmtScopeResource.Models
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OperationId))
                 {

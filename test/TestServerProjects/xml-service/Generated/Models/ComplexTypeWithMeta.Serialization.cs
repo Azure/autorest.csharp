@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class ComplexTypeWithMeta : IXmlSerializable, IPersistableModel<ComplexTypeWithMeta>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XMLComplexTypeWithMeta");
             if (Optional.IsDefined(ID))
@@ -29,6 +29,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element, ModelReaderWriterOptions options = null)
         {
             string id = default;
@@ -36,7 +38,7 @@ namespace xml_service.Models
             {
                 id = (string)idElement;
             }
-            return new ComplexTypeWithMeta(id, default);
+            return new ComplexTypeWithMeta(id, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ComplexTypeWithMeta>.Write(ModelReaderWriterOptions options)
@@ -49,7 +51,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

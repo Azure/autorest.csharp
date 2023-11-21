@@ -50,7 +50,7 @@ namespace MgmtParamOrdering.Models
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(HostId))
                 {
@@ -58,7 +58,7 @@ namespace MgmtParamOrdering.Models
                     writer.WriteStringValue(HostId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningOn))
                 {
@@ -66,7 +66,7 @@ namespace MgmtParamOrdering.Models
                     writer.WriteStringValue(ProvisioningOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

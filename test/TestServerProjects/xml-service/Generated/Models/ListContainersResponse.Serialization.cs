@@ -18,7 +18,7 @@ namespace xml_service.Models
 {
     public partial class ListContainersResponse : IXmlSerializable, IPersistableModel<ListContainersResponse>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "EnumerationResults");
             writer.WriteStartAttribute("ServiceEndpoint");
@@ -50,6 +50,8 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static ListContainersResponse DeserializeListContainersResponse(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -88,7 +90,7 @@ namespace xml_service.Models
                 }
                 containers = array;
             }
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker, default);
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ListContainersResponse>.Write(ModelReaderWriterOptions options)
@@ -101,7 +103,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

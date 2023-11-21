@@ -27,7 +27,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -40,7 +40,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NextLink))
                 {

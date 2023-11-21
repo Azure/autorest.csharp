@@ -27,7 +27,7 @@ namespace lro.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -35,7 +35,7 @@ namespace lro.Models
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -59,7 +59,7 @@ namespace lro.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -74,7 +74,7 @@ namespace lro.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningStateValues))
                 {

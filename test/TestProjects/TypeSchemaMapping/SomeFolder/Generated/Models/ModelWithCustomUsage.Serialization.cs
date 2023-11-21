@@ -19,7 +19,7 @@ namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModel<ModelWithCustomUsage>, IXmlSerializable, IPersistableModel<ModelWithCustomUsage>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithCustomUsage");
             if (Optional.IsDefined(ModelProperty))
@@ -31,6 +31,8 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(XElement element, ModelReaderWriterOptions options = null)
         {
             string modelProperty = default;
@@ -38,7 +40,7 @@ namespace TypeSchemaMapping.Models
             {
                 modelProperty = (string)modelPropertyElement;
             }
-            return new ModelWithCustomUsage(modelProperty, default);
+            return new ModelWithCustomUsage(modelProperty, serializedAdditionalRawData: null);
         }
 
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ModelWithCustomUsage>)this).Write(writer, new ModelReaderWriterOptions("W"));
@@ -126,7 +128,7 @@ namespace TypeSchemaMapping.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

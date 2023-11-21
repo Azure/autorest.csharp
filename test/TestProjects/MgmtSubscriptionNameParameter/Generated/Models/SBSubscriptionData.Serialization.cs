@@ -29,22 +29,22 @@ namespace MgmtSubscriptionNameParameter
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -54,7 +54,7 @@ namespace MgmtSubscriptionNameParameter
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MessageCount))
                 {
@@ -62,7 +62,7 @@ namespace MgmtSubscriptionNameParameter
                     writer.WriteNumberValue(MessageCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CreatedOn))
                 {
@@ -70,7 +70,7 @@ namespace MgmtSubscriptionNameParameter
                     writer.WriteStringValue(CreatedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AccessedOn))
                 {
@@ -78,7 +78,7 @@ namespace MgmtSubscriptionNameParameter
                     writer.WriteStringValue(AccessedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(UpdatedOn))
                 {

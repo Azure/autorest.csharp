@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Minimum))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(Minimum.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Maximum))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(Maximum.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DefaultCapacity))
                 {
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteNumberValue(DefaultCapacity.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ScaleType))
                 {

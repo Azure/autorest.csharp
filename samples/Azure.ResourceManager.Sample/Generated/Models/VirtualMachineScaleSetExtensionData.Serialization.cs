@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Sample
                     writer.WriteStringValue(ResourceType.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -104,7 +104,7 @@ namespace Azure.ResourceManager.Sample
                 }
 #endif
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

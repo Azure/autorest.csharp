@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("@search.score"u8);
                 writer.WriteNumberValue(Score);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Highlights))
                 {

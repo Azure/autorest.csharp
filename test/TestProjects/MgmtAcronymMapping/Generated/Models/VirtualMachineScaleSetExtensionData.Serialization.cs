@@ -32,7 +32,7 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {
@@ -40,7 +40,7 @@ namespace MgmtAcronymMapping
                     writer.WriteStringValue(ResourceType);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -104,7 +104,7 @@ namespace MgmtAcronymMapping
                 }
 #endif
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

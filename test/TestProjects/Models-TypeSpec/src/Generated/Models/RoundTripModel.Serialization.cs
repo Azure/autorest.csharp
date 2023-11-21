@@ -84,12 +84,12 @@ namespace ModelsTypeSpec.Models
                     writer.WriteNull("nonRequiredNullableString");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("requiredReadonlyInt"u8);
                 writer.WriteNumberValue(RequiredReadonlyInt);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NonRequiredReadonlyInt))
                 {

@@ -28,22 +28,22 @@ namespace _Azure.Lro.RpcLegacy.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("jobId"u8);
                 writer.WriteStringValue(JobId);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("comment"u8);
                 writer.WriteStringValue(Comment);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Errors))
                 {
@@ -56,7 +56,7 @@ namespace _Azure.Lro.RpcLegacy.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Results))
                 {

@@ -30,17 +30,17 @@ namespace AuthoringTypeSpec.Models
             writer.WriteStartObject();
             writer.WritePropertyName("jobId"u8);
             writer.WriteStringValue(JobId);
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("createdDateTime"u8);
                 writer.WriteStringValue(CreatedDateTime, "O");
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("lastUpdatedDateTime"u8);
                 writer.WriteStringValue(LastUpdatedDateTime, "O");
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("expirationDateTime"u8);
                 writer.WriteStringValue(ExpirationDateTime, "O");
@@ -56,7 +56,7 @@ namespace AuthoringTypeSpec.Models
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
             JsonSerializer.Serialize(writer, Errors);
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);

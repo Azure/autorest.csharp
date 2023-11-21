@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class RetentionPolicy : IXmlSerializable, IPersistableModel<RetentionPolicy>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "RetentionPolicy");
             writer.WriteStartElement("Enabled");
@@ -32,6 +32,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static RetentionPolicy DeserializeRetentionPolicy(XElement element, ModelReaderWriterOptions options = null)
         {
             bool enabled = default;
@@ -44,7 +46,7 @@ namespace xml_service.Models
             {
                 days = (int?)daysElement;
             }
-            return new RetentionPolicy(enabled, days, default);
+            return new RetentionPolicy(enabled, days, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<RetentionPolicy>.Write(ModelReaderWriterOptions options)
@@ -57,7 +59,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

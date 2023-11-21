@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Schema))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Schema);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ContentVersion))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ContentVersion);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Parameters))
                 {
@@ -58,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
 #endif
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Resources))
                 {

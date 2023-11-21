@@ -33,7 +33,7 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("properties"u8);
                 writer.WriteObjectValue(Properties);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -51,7 +51,7 @@ namespace MgmtScopeResource
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {

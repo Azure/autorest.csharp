@@ -27,7 +27,7 @@ namespace MgmtListMethods.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -35,7 +35,7 @@ namespace MgmtListMethods.Models
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(UpdateWorkspaceQuotasType))
                 {
@@ -48,7 +48,7 @@ namespace MgmtListMethods.Models
                 writer.WritePropertyName("limit"u8);
                 writer.WriteNumberValue(Limit.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Unit))
                 {

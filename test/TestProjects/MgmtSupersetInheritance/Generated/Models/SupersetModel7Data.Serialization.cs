@@ -28,7 +28,7 @@ namespace MgmtSupersetInheritance
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -36,7 +36,7 @@ namespace MgmtSupersetInheritance
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -44,7 +44,7 @@ namespace MgmtSupersetInheritance
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {
@@ -57,7 +57,7 @@ namespace MgmtSupersetInheritance
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {

@@ -18,7 +18,7 @@ namespace xml_service.Models
 {
     public partial class Blob : IXmlSerializable, IPersistableModel<Blob>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Blob");
             writer.WriteStartElement("Name");
@@ -42,6 +42,8 @@ namespace xml_service.Models
             }
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static Blob DeserializeBlob(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -75,7 +77,7 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Blob(name, deleted, snapshot, properties, metadata, default);
+            return new Blob(name, deleted, snapshot, properties, metadata, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<Blob>.Write(ModelReaderWriterOptions options)
@@ -88,7 +90,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

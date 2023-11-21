@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("autoReplaceOnFailure"u8);
                 writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(HostId))
                 {
@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(HostId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(VirtualMachines))
                 {
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType.Value.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningOn))
                 {
@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ProvisioningOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -93,7 +93,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ProvisioningState);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceView))
                 {

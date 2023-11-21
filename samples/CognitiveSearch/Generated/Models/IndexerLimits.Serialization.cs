@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MaxRunTime))
                 {
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(MaxRunTime.Value, "P");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MaxDocumentExtractionSize))
                 {
@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(MaxDocumentExtractionSize.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MaxDocumentContentCharactersToExtract))
                 {

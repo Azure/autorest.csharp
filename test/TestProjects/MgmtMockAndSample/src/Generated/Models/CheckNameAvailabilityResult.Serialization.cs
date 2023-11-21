@@ -27,7 +27,7 @@ namespace MgmtMockAndSample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NameAvailable))
                 {
@@ -35,7 +35,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteBooleanValue(NameAvailable.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Reason))
                 {
@@ -43,7 +43,7 @@ namespace MgmtMockAndSample.Models
                     writer.WriteStringValue(Reason.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Message))
                 {

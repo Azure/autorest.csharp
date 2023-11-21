@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Storage.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Tier))
                 {
@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Tier.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceType))
                 {
@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(ResourceType.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Kind))
                 {
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Kind.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Locations))
                 {
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Capabilities))
                 {

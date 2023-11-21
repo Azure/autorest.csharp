@@ -195,7 +195,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("readOnlyRequiredRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -218,7 +218,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
                 {

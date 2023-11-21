@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

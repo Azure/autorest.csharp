@@ -35,7 +35,7 @@ namespace MgmtMockAndSample
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Location))
                 {
@@ -43,7 +43,7 @@ namespace MgmtMockAndSample
                     writer.WriteStringValue(Location.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Tags))
                 {
@@ -57,22 +57,22 @@ namespace MgmtMockAndSample
                     writer.WriteEndObject();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -92,7 +92,7 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("activeKey"u8);
                 writer.WriteObjectValue(ActiveKey);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(PreviousKeys))
                 {
@@ -105,7 +105,7 @@ namespace MgmtMockAndSample
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -118,7 +118,7 @@ namespace MgmtMockAndSample
                 writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
                 writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastKeyRotationTimestamp))
                 {

@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class ObjectWithXMsTextProperty : IXmlSerializable, IPersistableModel<ObjectWithXMsTextProperty>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "Data");
             if (Optional.IsDefined(Language))
@@ -30,6 +30,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static ObjectWithXMsTextProperty DeserializeObjectWithXMsTextProperty(XElement element, ModelReaderWriterOptions options = null)
         {
             string language = default;
@@ -39,7 +41,7 @@ namespace xml_service.Models
                 language = (string)languageAttribute;
             }
             content = (string)element;
-            return new ObjectWithXMsTextProperty(language, content, default);
+            return new ObjectWithXMsTextProperty(language, content, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ObjectWithXMsTextProperty>.Write(ModelReaderWriterOptions options)
@@ -52,7 +54,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

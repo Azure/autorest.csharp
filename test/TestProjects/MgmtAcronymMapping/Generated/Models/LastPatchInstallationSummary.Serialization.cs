@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(Status.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstallationActivityId))
                 {
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(InstallationActivityId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MaintenanceWindowExceeded))
                 {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteBooleanValue(MaintenanceWindowExceeded.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RebootStatus))
                 {
@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(RebootStatus.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NotSelectedPatchCount))
                 {
@@ -67,7 +67,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(NotSelectedPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ExcludedPatchCount))
                 {
@@ -75,7 +75,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(ExcludedPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PendingPatchCount))
                 {
@@ -83,7 +83,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(PendingPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstalledPatchCount))
                 {
@@ -91,7 +91,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(InstalledPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(FailedPatchCount))
                 {
@@ -99,7 +99,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(FailedPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartOn))
                 {
@@ -107,7 +107,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(StartOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -115,7 +115,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(LastModifiedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartedBy))
                 {
@@ -123,7 +123,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(StartedBy);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Error))
                 {

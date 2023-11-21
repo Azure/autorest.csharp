@@ -27,7 +27,7 @@ namespace TypeSchemaMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StringProperty))
                 {
@@ -35,7 +35,7 @@ namespace TypeSchemaMapping.Models
                     writer.WriteStringValue(StringProperty);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(InternalListProperty))
                 {

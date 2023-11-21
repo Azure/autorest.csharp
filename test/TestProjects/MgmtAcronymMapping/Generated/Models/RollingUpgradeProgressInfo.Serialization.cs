@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SuccessfulInstanceCount))
                 {
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(SuccessfulInstanceCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(FailedInstanceCount))
                 {
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(FailedInstanceCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InProgressInstanceCount))
                 {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(InProgressInstanceCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PendingInstanceCount))
                 {

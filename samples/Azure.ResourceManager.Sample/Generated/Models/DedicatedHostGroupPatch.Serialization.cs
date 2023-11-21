@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Hosts))
                 {
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceView))
                 {

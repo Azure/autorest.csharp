@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PatchId))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(PatchId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Version))
                 {
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Version);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Kbid))
                 {
@@ -59,7 +59,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(Kbid);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Classifications))
                 {
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RebootBehavior))
                 {
@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(RebootBehavior.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ActivityId))
                 {
@@ -88,7 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(ActivityId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PublishedOn))
                 {
@@ -96,7 +96,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(PublishedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -104,7 +104,7 @@ namespace Azure.ResourceManager.Sample.Models
                     writer.WriteStringValue(LastModifiedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AssessmentState))
                 {

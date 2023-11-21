@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Statuses))
                 {

@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("text"u8);
                 writer.WriteStringValue(Text);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("queryPlusText"u8);
                 writer.WriteStringValue(QueryPlusText);

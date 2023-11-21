@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class CorsRule : IXmlSerializable, IPersistableModel<CorsRule>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "CorsRule");
             writer.WriteStartElement("AllowedOrigins");
@@ -37,6 +37,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static CorsRule DeserializeCorsRule(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -65,7 +67,7 @@ namespace xml_service.Models
             {
                 maxAgeInSeconds = (int)maxAgeInSecondsElement;
             }
-            return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds, default);
+            return new CorsRule(allowedOrigins, allowedMethods, allowedHeaders, exposedHeaders, maxAgeInSeconds, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<CorsRule>.Write(ModelReaderWriterOptions options)
@@ -78,7 +80,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

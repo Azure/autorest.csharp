@@ -27,7 +27,7 @@ namespace MgmtCollectionParent.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StageStatus))
                 {
@@ -35,7 +35,7 @@ namespace MgmtCollectionParent.Models
                     writer.WriteStringValue(StageStatus.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StageName))
                 {
@@ -43,7 +43,7 @@ namespace MgmtCollectionParent.Models
                     writer.WriteStringValue(StageName.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(DisplayName))
                 {
@@ -51,7 +51,7 @@ namespace MgmtCollectionParent.Models
                     writer.WriteStringValue(DisplayName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartOn))
                 {

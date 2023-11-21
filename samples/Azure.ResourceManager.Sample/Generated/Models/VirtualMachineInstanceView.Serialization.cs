@@ -92,7 +92,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VmHealth))
                 {
@@ -105,7 +105,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("bootDiagnostics"u8);
                 writer.WriteObjectValue(BootDiagnostics);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AssignedHost))
                 {

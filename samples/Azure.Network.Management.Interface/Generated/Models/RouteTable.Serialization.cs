@@ -27,7 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -40,7 +40,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -84,7 +84,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Subnets))
                 {
@@ -102,7 +102,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("disableBgpRoutePropagation"u8);
                 writer.WriteBooleanValue(DisableBgpRoutePropagation.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

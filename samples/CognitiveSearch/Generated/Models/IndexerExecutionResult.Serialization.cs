@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ErrorMessage))
                 {
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(ErrorMessage);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartTime))
                 {
@@ -48,7 +48,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(StartTime.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(EndTime))
                 {
@@ -56,7 +56,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(EndTime.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("errors"u8);
                 writer.WriteStartArray();
@@ -66,7 +66,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("warnings"u8);
                 writer.WriteStartArray();
@@ -76,17 +76,17 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("itemsProcessed"u8);
                 writer.WriteNumberValue(ItemCount);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("itemsFailed"u8);
                 writer.WriteNumberValue(FailedItemCount);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InitialTrackingState))
                 {
@@ -94,7 +94,7 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(InitialTrackingState);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(FinalTrackingState))
                 {

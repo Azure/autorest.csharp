@@ -17,17 +17,22 @@ namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithGuidProperty : IXmlSerializable, IPersistableModel<ModelWithGuidProperty>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithGuidProperty");
-            if (Optional.IsDefined(ModelProperty))
+            if (options.Format != "W")
             {
-                writer.WriteStartElement("ModelProperty");
-                writer.WriteValue(ModelProperty.Value);
-                writer.WriteEndElement();
+                if (Optional.IsDefined(ModelProperty))
+                {
+                    writer.WriteStartElement("ModelProperty");
+                    writer.WriteValue(ModelProperty.Value);
+                    writer.WriteEndElement();
+                }
             }
             writer.WriteEndElement();
         }
+
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -36,7 +41,7 @@ namespace TypeSchemaMapping.Models
             {
                 modelProperty = new Guid(modelPropertyElement.Value);
             }
-            return new ModelWithGuidProperty(modelProperty, default);
+            return new ModelWithGuidProperty(modelProperty, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ModelWithGuidProperty>.Write(ModelReaderWriterOptions options)
@@ -49,7 +54,7 @@ namespace TypeSchemaMapping.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

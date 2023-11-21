@@ -28,7 +28,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteNumberValue(Id);

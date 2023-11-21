@@ -27,22 +27,22 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("token"u8);
                 writer.WriteStringValue(Token);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("startOffset"u8);
                 writer.WriteNumberValue(StartOffset);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("endOffset"u8);
                 writer.WriteNumberValue(EndOffset);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("position"u8);
                 writer.WriteNumberValue(Position);

@@ -27,7 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(GroupId))
                 {
@@ -35,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(GroupId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RequiredMemberName))
                 {
@@ -43,7 +43,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(RequiredMemberName);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Fqdns))
                 {

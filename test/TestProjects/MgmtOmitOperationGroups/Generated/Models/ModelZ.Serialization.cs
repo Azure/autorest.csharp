@@ -32,7 +32,7 @@ namespace MgmtOmitOperationGroups.Models
                 writer.WritePropertyName("h"u8);
                 writer.WriteStringValue(H);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(I))
                 {

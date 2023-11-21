@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Storage
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Sku))
                 {
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(Sku);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Kind))
                 {
@@ -70,22 +70,22 @@ namespace Azure.ResourceManager.Storage
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Storage
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -103,7 +103,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(ProvisioningState.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PrimaryEndpoints))
                 {
@@ -111,7 +111,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(PrimaryEndpoints);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PrimaryLocation))
                 {
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(PrimaryLocation);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StatusOfPrimary))
                 {
@@ -127,7 +127,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(StatusOfPrimary.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastGeoFailoverOn))
                 {
@@ -135,7 +135,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(LastGeoFailoverOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SecondaryLocation))
                 {
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(SecondaryLocation);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StatusOfSecondary))
                 {
@@ -151,7 +151,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(StatusOfSecondary.Value.ToSerialString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CreatedOn))
                 {
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteStringValue(CreatedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CustomDomain))
                 {
@@ -167,7 +167,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(CustomDomain);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SasPolicy))
                 {
@@ -175,7 +175,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(SasPolicy);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(KeyPolicy))
                 {
@@ -183,7 +183,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(KeyPolicy);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(KeyCreationTime))
                 {
@@ -191,7 +191,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(KeyCreationTime);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SecondaryEndpoints))
                 {
@@ -199,7 +199,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(SecondaryEndpoints);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Encryption))
                 {
@@ -207,7 +207,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(Encryption);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AccessTier))
                 {
@@ -225,7 +225,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("supportsHttpsTrafficOnly"u8);
                 writer.WriteBooleanValue(EnableHttpsTrafficOnly.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NetworkRuleSet))
                 {
@@ -238,7 +238,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("isHnsEnabled"u8);
                 writer.WriteBooleanValue(IsHnsEnabled.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(GeoReplicationStats))
                 {
@@ -246,7 +246,7 @@ namespace Azure.ResourceManager.Storage
                     writer.WriteObjectValue(GeoReplicationStats);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(FailoverInProgress))
                 {
@@ -259,7 +259,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("largeFileSharesState"u8);
                 writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(PrivateEndpointConnections))
                 {
@@ -277,7 +277,7 @@ namespace Azure.ResourceManager.Storage
                 writer.WritePropertyName("routingPreference"u8);
                 writer.WriteObjectValue(RoutingPreference);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(BlobRestoreStatus))
                 {

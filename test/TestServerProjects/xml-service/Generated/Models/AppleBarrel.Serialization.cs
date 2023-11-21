@@ -18,7 +18,7 @@ namespace xml_service.Models
 {
     public partial class AppleBarrel : IXmlSerializable, IPersistableModel<AppleBarrel>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "AppleBarrel");
             if (Optional.IsCollectionDefined(GoodApples))
@@ -46,6 +46,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static AppleBarrel DeserializeAppleBarrel(XElement element, ModelReaderWriterOptions options = null)
         {
             IList<string> goodApples = default;
@@ -68,7 +70,7 @@ namespace xml_service.Models
                 }
                 badApples = array;
             }
-            return new AppleBarrel(goodApples, badApples, default);
+            return new AppleBarrel(goodApples, badApples, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<AppleBarrel>.Write(ModelReaderWriterOptions options)
@@ -81,7 +83,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

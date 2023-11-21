@@ -32,7 +32,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -40,7 +40,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Etag);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -65,7 +65,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(InboundNatRules))
                 {
@@ -78,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(InboundNatPools))
                 {
@@ -91,7 +91,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(OutboundRules))
                 {
@@ -104,7 +104,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(LoadBalancingRules))
                 {
@@ -147,7 +147,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("publicIPPrefix"u8);
                 writer.WriteObjectValue(PublicIPPrefix);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

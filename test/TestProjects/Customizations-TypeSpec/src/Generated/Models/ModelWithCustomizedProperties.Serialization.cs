@@ -149,7 +149,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorOptionalNullable");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("vectorReadOnly"u8);
                 writer.WriteStartArray();
@@ -159,7 +159,7 @@ namespace CustomizationsInTsp.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VectorOptionalReadOnly))
                 {
@@ -179,7 +179,7 @@ namespace CustomizationsInTsp.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (VectorNullableReadOnly != null)
                 {
@@ -196,7 +196,7 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("vectorNullableReadOnly");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VectorOptionalNullableReadOnly))
                 {

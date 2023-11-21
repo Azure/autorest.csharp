@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Coverage))
                 {
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(Coverage.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();

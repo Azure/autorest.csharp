@@ -37,7 +37,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(AppliedDnsServers))
                 {
@@ -55,7 +55,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("internalDnsNameLabel"u8);
                 writer.WriteStringValue(InternalDnsNameLabel);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InternalFqdn))
                 {
@@ -63,7 +63,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(InternalFqdn);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InternalDomainNameSuffix))
                 {

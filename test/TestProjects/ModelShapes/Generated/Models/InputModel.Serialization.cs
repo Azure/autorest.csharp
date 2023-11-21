@@ -189,7 +189,7 @@ namespace ModelShapes.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VectorReadOnly))
                 {
@@ -202,7 +202,7 @@ namespace ModelShapes.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("vectorReadOnlyRequired"u8);
                 writer.WriteStartArray();
@@ -236,7 +236,7 @@ namespace ModelShapes.Models
                     writer.WriteNull("vectorNullable");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VectorReadOnlyNullable))
                 {
@@ -256,7 +256,7 @@ namespace ModelShapes.Models
                     }
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (VectorReadOnlyRequiredNullable != null)
                 {

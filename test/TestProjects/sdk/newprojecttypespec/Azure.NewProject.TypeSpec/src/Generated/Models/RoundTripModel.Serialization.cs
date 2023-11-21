@@ -178,7 +178,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("readOnlyRequiredRecordUnknown"u8);
                 writer.WriteStartObject();
@@ -201,7 +201,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
                 {

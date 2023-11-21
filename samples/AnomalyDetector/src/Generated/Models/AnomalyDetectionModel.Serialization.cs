@@ -28,7 +28,7 @@ namespace AnomalyDetector.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("modelId"u8);
                 writer.WriteStringValue(ModelId);

@@ -35,7 +35,7 @@ namespace MgmtScopeResource.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NextLink))
                 {

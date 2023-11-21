@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Etag.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(UpdateHistory))
                 {
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("immutabilityPeriodSinceCreationInDays"u8);
                 writer.WriteNumberValue(ImmutabilityPeriodSinceCreationInDays.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(State))
                 {

@@ -30,7 +30,7 @@ namespace MgmtAcronymMapping
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceId))
                 {
@@ -38,7 +38,7 @@ namespace MgmtAcronymMapping
                     writer.WriteStringValue(InstanceId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Sku))
                 {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Zones))
                 {
@@ -77,22 +77,22 @@ namespace MgmtAcronymMapping
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {
@@ -102,7 +102,7 @@ namespace MgmtAcronymMapping
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LatestModelApplied))
                 {
@@ -110,7 +110,7 @@ namespace MgmtAcronymMapping
                     writer.WriteBooleanValue(LatestModelApplied.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VmId))
                 {
@@ -118,7 +118,7 @@ namespace MgmtAcronymMapping
                     writer.WriteStringValue(VmId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(InstanceView))
                 {
@@ -171,7 +171,7 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("availabilitySet"u8);
                 JsonSerializer.Serialize(writer, AvailabilitySet);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {
@@ -184,7 +184,7 @@ namespace MgmtAcronymMapping
                 writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ModelDefinitionApplied))
                 {

@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("documentCount"u8);
                 writer.WriteNumberValue(DocumentCount);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("storageSize"u8);
                 writer.WriteNumberValue(StorageSize);

@@ -27,7 +27,7 @@ namespace MgmtAcronymMapping.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -35,7 +35,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(Status.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(AssessmentActivityId))
                 {
@@ -43,7 +43,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(AssessmentActivityId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RebootPending))
                 {
@@ -51,7 +51,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteBooleanValue(RebootPending.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(CriticalAndSecurityPatchCount))
                 {
@@ -59,7 +59,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteNumberValue(CriticalAndSecurityPatchCount.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(OtherPatchCount))
                 {
@@ -72,7 +72,7 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("uri"u8);
                 writer.WriteStringValue(Uri.AbsoluteUri);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(StartOn))
                 {
@@ -80,7 +80,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(StartOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastModifiedOn))
                 {
@@ -88,7 +88,7 @@ namespace MgmtAcronymMapping.Models
                     writer.WriteStringValue(LastModifiedOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Error))
                 {

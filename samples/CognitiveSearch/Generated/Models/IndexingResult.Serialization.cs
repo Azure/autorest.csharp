@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("key"u8);
                 writer.WriteStringValue(Key);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ErrorMessage))
                 {
@@ -40,12 +40,12 @@ namespace CognitiveSearch.Models
                     writer.WriteStringValue(ErrorMessage);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Succeeded);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("statusCode"u8);
                 writer.WriteNumberValue(StatusCode);

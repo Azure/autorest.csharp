@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class RootWithRefAndMeta : IXmlSerializable, IPersistableModel<RootWithRefAndMeta>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndMeta");
             if (Optional.IsDefined(RefToModel))
@@ -33,6 +33,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element, ModelReaderWriterOptions options = null)
         {
             ComplexTypeWithMeta refToModel = default;
@@ -45,7 +47,7 @@ namespace xml_service.Models
             {
                 something = (string)somethingElement;
             }
-            return new RootWithRefAndMeta(refToModel, something, default);
+            return new RootWithRefAndMeta(refToModel, something, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<RootWithRefAndMeta>.Write(ModelReaderWriterOptions options)
@@ -58,7 +60,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

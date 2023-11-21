@@ -39,7 +39,7 @@ namespace MgmtOmitOperationGroups
                 writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(F))
                 {
@@ -47,7 +47,7 @@ namespace MgmtOmitOperationGroups
                     writer.WriteStringValue(F);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(G))
                 {
@@ -55,22 +55,22 @@ namespace MgmtOmitOperationGroups
                     writer.WriteStringValue(G);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(SystemData))
                 {

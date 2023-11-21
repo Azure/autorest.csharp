@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class ModelWithUrlProperty : IXmlSerializable, IPersistableModel<ModelWithUrlProperty>
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "ModelWithUrlProperty");
             if (Optional.IsDefined(Url))
@@ -29,6 +29,8 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+
         internal static ModelWithUrlProperty DeserializeModelWithUrlProperty(XElement element, ModelReaderWriterOptions options = null)
         {
             Uri url = default;
@@ -36,7 +38,7 @@ namespace xml_service.Models
             {
                 url = new Uri((string)urlElement);
             }
-            return new ModelWithUrlProperty(url, default);
+            return new ModelWithUrlProperty(url, serializedAdditionalRawData: null);
         }
 
         BinaryData IPersistableModel<ModelWithUrlProperty>.Write(ModelReaderWriterOptions options)
@@ -49,7 +51,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        ((IXmlSerializable)this).Write(writer, null);
+                        _Write(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

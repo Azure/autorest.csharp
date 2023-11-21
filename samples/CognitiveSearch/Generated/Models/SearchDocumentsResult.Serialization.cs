@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Count))
                 {
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(Count.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Coverage))
                 {
@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     writer.WriteNumberValue(Coverage.Value);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Facets))
                 {
@@ -67,7 +67,7 @@ namespace CognitiveSearch.Models
                     writer.WriteEndObject();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NextPageParameters))
                 {
@@ -75,7 +75,7 @@ namespace CognitiveSearch.Models
                     writer.WriteObjectValue(NextPageParameters);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
@@ -85,7 +85,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NextLink))
                 {

@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("days"u8);
                 writer.WriteNumberValue(Days.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastEnabledOn))
                 {
@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(LastEnabledOn.Value, "O");
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MinRestoreOn))
                 {

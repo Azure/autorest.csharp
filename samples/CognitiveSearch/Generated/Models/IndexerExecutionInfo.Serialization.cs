@@ -27,12 +27,12 @@ namespace CognitiveSearch.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("status"u8);
                 writer.WriteStringValue(Status.ToSerialString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(LastResult))
                 {
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
                     writer.WriteObjectValue(LastResult);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("executionHistory"u8);
                 writer.WriteStartArray();
@@ -50,7 +50,7 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 writer.WritePropertyName("limits"u8);
                 writer.WriteObjectValue(Limits);

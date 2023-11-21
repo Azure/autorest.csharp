@@ -56,7 +56,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(HsmPoolResourceId))
                 {
@@ -119,7 +119,7 @@ namespace MgmtMockAndSample.Models
                 writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(PrivateEndpointConnections))
                 {

@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Status))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Status.Value.ToString());
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(FailureReason))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(FailureReason);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RestoreId))
                 {
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(RestoreId);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Parameters))
                 {

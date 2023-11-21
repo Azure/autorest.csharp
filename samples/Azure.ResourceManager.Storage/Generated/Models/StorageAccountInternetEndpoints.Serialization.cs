@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Blob))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Blob);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(File))
                 {
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(File);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Web))
                 {
@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(Web);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Dfs))
                 {

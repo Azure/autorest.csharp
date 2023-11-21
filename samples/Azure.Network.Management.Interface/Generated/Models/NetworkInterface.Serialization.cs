@@ -27,7 +27,7 @@ namespace Azure.Network.Management.Interface.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -40,7 +40,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
@@ -48,7 +48,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Name);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -74,7 +74,7 @@ namespace Azure.Network.Management.Interface.Models
             }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(VirtualMachine))
                 {
@@ -87,7 +87,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("networkSecurityGroup"u8);
                 writer.WriteObjectValue(NetworkSecurityGroup);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(PrivateEndpoint))
                 {
@@ -105,7 +105,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(TapConfigurations))
                 {
@@ -123,7 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("dnsSettings"u8);
                 writer.WriteObjectValue(DnsSettings);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(MacAddress))
                 {
@@ -131,7 +131,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(MacAddress);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Primary))
                 {
@@ -149,7 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("enableIPForwarding"u8);
                 writer.WriteBooleanValue(EnableIPForwarding.Value);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(HostedWorkloads))
                 {
@@ -162,7 +162,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ResourceGuid))
                 {
@@ -170,7 +170,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(ResourceGuid);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

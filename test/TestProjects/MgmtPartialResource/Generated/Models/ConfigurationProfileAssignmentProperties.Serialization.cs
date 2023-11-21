@@ -37,7 +37,7 @@ namespace MgmtPartialResource.Models
                 writer.WritePropertyName("targetId"u8);
                 writer.WriteStringValue(TargetId);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Status))
                 {

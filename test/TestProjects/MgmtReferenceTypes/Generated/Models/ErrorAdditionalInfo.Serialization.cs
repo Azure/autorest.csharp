@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Fake.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ErrorAdditionalInfoType))
                 {
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Fake.Models
                     writer.WriteStringValue(ErrorAdditionalInfoType);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Info))
                 {

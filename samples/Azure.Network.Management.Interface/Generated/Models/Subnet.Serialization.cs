@@ -32,7 +32,7 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Etag))
                 {
@@ -97,7 +97,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(PrivateEndpoints))
                 {
@@ -110,7 +110,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(IpConfigurations))
                 {
@@ -123,7 +123,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(IpConfigurationProfiles))
                 {
@@ -136,7 +136,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(ResourceNavigationLinks))
                 {
@@ -149,7 +149,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(ServiceAssociationLinks))
                 {
@@ -172,7 +172,7 @@ namespace Azure.Network.Management.Interface.Models
                 }
                 writer.WriteEndArray();
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Purpose))
                 {
@@ -180,7 +180,7 @@ namespace Azure.Network.Management.Interface.Models
                     writer.WriteStringValue(Purpose);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(ProvisioningState))
                 {

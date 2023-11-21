@@ -28,7 +28,7 @@ namespace MgmtSupersetInheritance.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Value))
                 {
@@ -41,7 +41,7 @@ namespace MgmtSupersetInheritance.Models
                     writer.WriteEndArray();
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(NextLink))
                 {

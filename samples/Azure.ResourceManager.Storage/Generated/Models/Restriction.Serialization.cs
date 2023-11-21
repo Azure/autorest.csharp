@@ -27,7 +27,7 @@ namespace Azure.ResourceManager.Storage.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(RestrictionType))
                 {
@@ -35,7 +35,7 @@ namespace Azure.ResourceManager.Storage.Models
                     writer.WriteStringValue(RestrictionType);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsCollectionDefined(Values))
                 {

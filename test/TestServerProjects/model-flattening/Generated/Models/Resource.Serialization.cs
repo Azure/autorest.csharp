@@ -27,7 +27,7 @@ namespace model_flattening.Models
             }
 
             writer.WriteStartObject();
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Id))
                 {
@@ -35,7 +35,7 @@ namespace model_flattening.Models
                     writer.WriteStringValue(Id);
                 }
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Type))
                 {
@@ -59,7 +59,7 @@ namespace model_flattening.Models
                 writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
-            if (options.Format == "J")
+            if (options.Format != "W")
             {
                 if (Optional.IsDefined(Name))
                 {
