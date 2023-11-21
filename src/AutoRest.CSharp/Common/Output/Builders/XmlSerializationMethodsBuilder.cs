@@ -28,19 +28,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
-        private static readonly CSharpType nullableModelSerializerOptionsType = new CSharpType(typeof(ModelReaderWriterOptions), isNullable: true);
-
-        private static readonly Parameter xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, ValidationType.None, null);
-        private static readonly Parameter nameHint = new Parameter("nameHint", null, typeof(string), null, ValidationType.None, null);
-        private static readonly Parameter elementParameter = new Parameter("element", null, typeof(XElement), null, ValidationType.None, null);
-        private static readonly Parameter optionalOptionsParameter = new Parameter("options", null, nullableModelSerializerOptionsType, Constant.Default(nullableModelSerializerOptionsType), ValidationType.None, null);
-
         public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
         {
             return new Method
             (
-                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { xmlWriter, nameHint }, ExplicitInterface: typeof(IXmlSerializable)),
-                SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement()
+                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
+                SerializeExpression(new XmlWriterExpression(KnownParameters.Serializations.XmlWriter), serialization, KnownParameters.Serializations.NameHint).AsStatement()
             );
         }
 
@@ -177,8 +170,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             return new Method
             (
-                new MethodSignature($"Deserialize{declaration.Name}", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { elementParameter, optionalOptionsParameter }),
-                BuildDeserializeBody(new XElementExpression(elementParameter), serialization).ToArray()
+                new MethodSignature($"Deserialize{declaration.Name}", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { KnownParameters.Serializations.XElement, KnownParameters.Serializations.OptionalOptions }),
+                BuildDeserializeBody(new XElementExpression(KnownParameters.Serializations.XElement), serialization).ToArray()
             );
         }
 
