@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static AssignValueStatement Assign<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
-            => variable != null ? new AssignValueStatement(variable, expression) : Return(expression);
+            => variable != null ? Assign(variable, expression) : Return(expression);
 
         public static MethodBodyStatement InvokeConsoleWriteLine(ValueExpression expression)
             => new InvokeStaticMethodStatement(typeof(Console), nameof(Console.WriteLine), expression);

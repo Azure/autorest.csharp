@@ -24,10 +24,10 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
             IJsonModelInterface = new CSharpType(typeof(IJsonModel<>), modelType);
-            IModelInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
+            IPersistableModelTInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
             // we only need this interface when the model is a struct
             IJsonModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IJsonModel<object>) : null;
-            IModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
+            IPersistableModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
             IJsonInterface = Configuration.ApiTypes.IUtf8JsonSerializableType;
         }
 
@@ -43,17 +43,17 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         /// </summary>
         public CSharpType IJsonModelInterface { get; }
         /// <summary>
-        /// The interface IModel{T}
+        /// The interface IPersistableModel{T}
         /// </summary>
-        public CSharpType IModelInterface { get; }
+        public CSharpType IPersistableModelTInterface { get; }
         /// <summary>
         /// The interface IJsonModel{object}. We only have this interface when this model is a struct
         /// </summary>
         public CSharpType? IJsonModelObjectInterface { get; }
         /// <summary>
-        /// The interface IModel{object}. We only have this interface when this model is a struct
+        /// The interface IPersistableModel{object}. We only have this interface when this model is a struct
         /// </summary>
-        public CSharpType? IModelObjectInterface { get; }
+        public CSharpType? IPersistableModelObjectInterface { get; }
         /// <summary>
         /// The interface IUtf8JsonSerializable
         /// </summary>

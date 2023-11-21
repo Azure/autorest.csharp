@@ -228,7 +228,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
-                    writer.AppendRaw(setValue.Operator);
+                    writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
                     break;
                 case DeclareVariableStatement { Type: { } type } declareVariable:

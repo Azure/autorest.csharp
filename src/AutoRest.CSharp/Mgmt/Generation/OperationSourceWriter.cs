@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 _writer.Line();
                                 if (param.IsRawData)
                                 {
-                                    _writer.Append($"\tnew {typeof(Dictionary<string, BinaryData>)}()");
+                                    _writer.Append($"\tnull");
                                 }
                                 else
                                 {

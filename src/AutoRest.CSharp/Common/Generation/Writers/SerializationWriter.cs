@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 if (xml != null)
                 {
-                    writer.Append($"{xml.IXmlInterface}, {xml.IModelInterface}, ");
+                    writer.Append($"{xml.IXmlInterface}, {xml.IPersistableModelTInterface}, ");
                 }
 
                 writer.RemoveTrailingComma();

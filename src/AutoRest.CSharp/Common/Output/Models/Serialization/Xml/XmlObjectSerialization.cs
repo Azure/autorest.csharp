@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
-            IModelInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
+            IPersistableModelTInterface = new CSharpType(typeof(IPersistableModel<>), modelType);
             // we only need this interface when the model is a struct
-            IModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
+            IPersistableModelObjectInterface = model.IsStruct ? (CSharpType)typeof(IPersistableModel<object>) : null;
             IXmlInterface = Configuration.ApiTypes.IXmlSerializableType;
         }
 
@@ -45,12 +45,12 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
         /// </summary>
         public CSharpType IXmlInterface { get; }
         /// <summary>
-        /// The interface IModel{T}
+        /// The interface IPersistableModel{T}
         /// </summary>
-        public CSharpType IModelInterface { get; }
+        public CSharpType IPersistableModelTInterface { get; }
         /// <summary>
-        /// The interface IModel{object}
+        /// The interface IPersistableModel{object}
         /// </summary>
-        public CSharpType? IModelObjectInterface { get; }
+        public CSharpType? IPersistableModelObjectInterface { get; }
     }
 }
