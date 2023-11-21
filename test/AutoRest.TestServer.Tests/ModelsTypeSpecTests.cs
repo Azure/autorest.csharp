@@ -2,15 +2,15 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
-using NUnit.Framework;
 using ModelsTypeSpec.Models;
-using System.Net.ClientModel;
+using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -448,7 +448,7 @@ namespace AutoRest.TestServer.Tests
         {
             var options = format switch
             {
-                "W" => ModelReaderWriterOptions.Wire,
+                "W" => new ModelReaderWriterOptions("W"),
                 "J" => ModelReaderWriterOptions.Json,
                 _ => throw new NotSupportedException()
             };
@@ -579,7 +579,7 @@ namespace AutoRest.TestServer.Tests
         {
             var options = format switch
             {
-                "W" => ModelReaderWriterOptions.Wire,
+                "W" => new ModelReaderWriterOptions("W"),
                 "J" => ModelReaderWriterOptions.Json,
                 _ => throw new NotSupportedException()
             };
@@ -606,7 +606,7 @@ namespace AutoRest.TestServer.Tests
         {
             var options = format switch
             {
-                "W" => ModelReaderWriterOptions.Wire,
+                "W" => new ModelReaderWriterOptions("W"),
                 "J" => ModelReaderWriterOptions.Json,
                 _ => throw new NotSupportedException()
             };

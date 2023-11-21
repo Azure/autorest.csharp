@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(
                  new ConstructorSignature(
                      type,
-                     $"Initializes a new instance of <see cref=\"{type.ToStringForDocs(true)}\"/>",
+                     $"Initializes a new instance of <see cref=\"{type:C}\"/>",
                      null,
                      modifiers,
                      parameters,

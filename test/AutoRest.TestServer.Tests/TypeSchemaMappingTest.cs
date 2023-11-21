@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ClientModel;
 using System.Linq;
-using System.Net.ClientModel;
 using System.Reflection;
 using System.Text.Json;
 using System.Xml.Linq;

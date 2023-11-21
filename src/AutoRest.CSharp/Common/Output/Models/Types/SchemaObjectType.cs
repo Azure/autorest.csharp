@@ -250,7 +250,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var signature = new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of <see cref=\"{Type.ToStringForDocs(true)}\"/>",
+                $"Initializes a new instance of <see cref=\"{Type:C}\"/>",
                 null,
                 IsInheritableCommonType ? Protected : Internal,
                 serializationConstructorParameters,

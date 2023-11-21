@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of <see cref=\"{Type.ToStringForDocs(true)}\"/>",
+                $"Initializes a new instance of <see cref=\"{Type:C}\"/>",
                 null,
                 accessibility,
                 fullParameterList,
@@ -185,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of <see cref=\"{Type.ToStringForDocs(true)}\"/>",
+                $"Initializes a new instance of <see cref=\"{Type:C}\"/>",
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
