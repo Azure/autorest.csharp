@@ -190,7 +190,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (ctorParameter.IsRawData)
                 {
                     // we do not want to include the raw data as a parameter of the model factory entry method, therefore here we skip the parameter, and use empty dictionary as argument
-                    methodArguments.Add(New.Instance(TypeFactory.GetImplementationType(ctorParameter.Type)));
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Null));
                     continue;
                 }
 

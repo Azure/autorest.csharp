@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return null;
 
                 // when this model has derived types, the accessibility should change from private to `protected internal`
-                string accessibility = HasDerivedTypes() ? "protected internal" : "private";
+                string accessibility = HasDerivedTypes() ? "private protected" : "private";
 
                 _rawDataField = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration(PrivateAdditionalPropertiesPropertyName,
