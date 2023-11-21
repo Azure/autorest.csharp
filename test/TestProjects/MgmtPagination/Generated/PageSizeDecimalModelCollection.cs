@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtPagination
 {
     /// <summary>
-    /// A class representing a collection of <see cref="PageSizeDecimalModelResource" /> and their operations.
-    /// Each <see cref="PageSizeDecimalModelResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="PageSizeDecimalModelCollection" /> instance call the GetPageSizeDecimalModels method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="PageSizeDecimalModelResource"/> and their operations.
+    /// Each <see cref="PageSizeDecimalModelResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="PageSizeDecimalModelCollection"/> instance call the GetPageSizeDecimalModels method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class PageSizeDecimalModelCollection : ArmCollection, IEnumerable<PageSizeDecimalModelResource>, IAsyncEnumerable<PageSizeDecimalModelResource>
     {
@@ -220,7 +220,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PageSizeDecimalModelResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="PageSizeDecimalModelResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeDecimalModelResource> GetAllAsync(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
@@ -242,7 +242,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PageSizeDecimalModelResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="PageSizeDecimalModelResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeDecimalModelResource> GetAll(decimal? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDecimalModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);

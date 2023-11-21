@@ -1022,7 +1022,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FixedFloatEnumAsync(FixedFloatEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FixedFloatEnumAsync(Models.FixedFloatEnum,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1058,7 +1058,7 @@ namespace ModelsTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FixedFloatEnum(FixedFloatEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FixedFloatEnum(Models.FixedFloatEnum,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

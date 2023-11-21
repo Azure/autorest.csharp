@@ -22,9 +22,9 @@ using MgmtMockAndSample.Models;
 namespace MgmtMockAndSample
 {
     /// <summary>
-    /// A class representing a collection of <see cref="RoleAssignmentResource" /> and their operations.
-    /// Each <see cref="RoleAssignmentResource" /> in the collection will belong to the same instance of <see cref="ArmResource" />.
-    /// To get a <see cref="RoleAssignmentCollection" /> instance call the GetRoleAssignments method from an instance of <see cref="ArmResource" />.
+    /// A class representing a collection of <see cref="RoleAssignmentResource"/> and their operations.
+    /// Each <see cref="RoleAssignmentResource"/> in the collection will belong to the same instance of <see cref="ArmResource"/>.
+    /// To get a <see cref="RoleAssignmentCollection"/> instance call the GetRoleAssignments method from an instance of <see cref="ArmResource"/>.
     /// </summary>
     public partial class RoleAssignmentCollection : ArmCollection, IEnumerable<RoleAssignmentResource>, IAsyncEnumerable<RoleAssignmentResource>
     {
@@ -241,7 +241,7 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RoleAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RoleAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RoleAssignmentResource> GetAllAsync(string filter = null, CancellationToken cancellationToken = default)
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)
@@ -309,7 +309,7 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. Use $filter=atScope() to return all role assignments at or above the scope. Use $filter=principalId eq {id} to return all role assignments at, above or below the scope for the specified principal. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RoleAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RoleAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RoleAssignmentResource> GetAll(string filter = null, CancellationToken cancellationToken = default)
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)

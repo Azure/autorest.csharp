@@ -22,9 +22,9 @@ using MgmtParamOrdering.Models;
 namespace MgmtParamOrdering
 {
     /// <summary>
-    /// A class representing a collection of <see cref="DedicatedHostGroupResource" /> and their operations.
-    /// Each <see cref="DedicatedHostGroupResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="DedicatedHostGroupCollection" /> instance call the GetDedicatedHostGroups method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="DedicatedHostGroupResource"/> and their operations.
+    /// Each <see cref="DedicatedHostGroupResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="DedicatedHostGroupCollection"/> instance call the GetDedicatedHostGroups method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class DedicatedHostGroupCollection : ArmCollection, IEnumerable<DedicatedHostGroupResource>, IAsyncEnumerable<DedicatedHostGroupResource>
     {
@@ -228,7 +228,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="DedicatedHostGroupResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DedicatedHostGroupResource> GetAllAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _dedicatedHostGroupRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
@@ -250,7 +250,7 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="DedicatedHostGroupResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DedicatedHostGroupResource> GetAll(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _dedicatedHostGroupRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);

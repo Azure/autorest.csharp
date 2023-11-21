@@ -91,19 +91,22 @@ namespace CustomizationsInTsp.Models
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (VectorOptional != null)
+            if (Optional.IsDefined(VectorOptional))
             {
-                writer.WritePropertyName("vectorOptional"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorOptional.Value.Span)
+                if (VectorOptional != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorOptional"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptional.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteNull("vectorOptional");
+                else
+                {
+                    writer.WriteNull("vectorOptional");
+                }
             }
             if (VectorNullable != null)
             {
@@ -119,19 +122,22 @@ namespace CustomizationsInTsp.Models
             {
                 writer.WriteNull("vectorNullable");
             }
-            if (VectorOptionalNullable != null)
+            if (Optional.IsDefined(VectorOptionalNullable))
             {
-                writer.WritePropertyName("vectorOptionalNullable"u8);
-                writer.WriteStartArray();
-                foreach (var item in VectorOptionalNullable.Value.Span)
+                if (VectorOptionalNullable != null)
                 {
-                    writer.WriteNumberValue(item);
+                    writer.WritePropertyName("vectorOptionalNullable"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in VectorOptionalNullable.Value.Span)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
                 }
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteNull("vectorOptionalNullable");
+                else
+                {
+                    writer.WriteNull("vectorOptionalNullable");
+                }
             }
             writer.WriteEndObject();
         }

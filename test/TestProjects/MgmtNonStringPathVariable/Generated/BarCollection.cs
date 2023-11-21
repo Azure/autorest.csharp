@@ -18,9 +18,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtNonStringPathVariable
 {
     /// <summary>
-    /// A class representing a collection of <see cref="BarResource" /> and their operations.
-    /// Each <see cref="BarResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="BarCollection" /> instance call the GetBars method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="BarResource"/> and their operations.
+    /// Each <see cref="BarResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="BarCollection"/> instance call the GetBars method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class BarCollection : ArmCollection
     {

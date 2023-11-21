@@ -84,7 +84,7 @@ namespace SpecialWords
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SameAsModelAsync(SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SameAsModelAsync(SpecialWords.SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -123,7 +123,7 @@ namespace SpecialWords
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SameAsModel(SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SameAsModel(SpecialWords.SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -19,9 +19,9 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A Class representing a ProviderOperation along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ProviderOperationResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetProviderOperationResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TenantResource" /> using the GetProviderOperation method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ProviderOperationResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetProviderOperationResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantResource"/> using the GetProviderOperation method.
     /// </summary>
     public partial class ProviderOperationResource : ArmResource
     {
@@ -42,7 +42,7 @@ namespace MgmtResourceName
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ProviderOperationResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ProviderOperationResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ProviderOperationResource(ArmClient client, ProviderOperationData data) : this(client, data.Id)

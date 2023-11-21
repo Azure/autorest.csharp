@@ -17,6 +17,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -63,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line();
                         using (_writer.WriteMethodDeclaration(_opSource.ArmClientCtor))
                         {
-                            _writer.Line($"{_opSource.ArmClientField.Name} = {MgmtTypeProvider.ArmClientParameter.Name};");
+                            _writer.Line($"{_opSource.ArmClientField.Name} = {KnownParameters.ArmClient.Name};");
                         }
                     }
 
@@ -129,7 +130,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable), false).AsStatement());
+                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, false).AsStatement());
             }
         }
 
@@ -138,18 +139,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable), true).AsStatement());
+                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement());
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(ResponseExpression response, bool async)
+        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(StreamExpression stream, bool async)
         {
             if (_opSource.IsReturningResource)
             {
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                yield return UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document);
+                yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
                 var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
@@ -168,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, response, _opSource.ReturnType.Equals(typeof(BinaryData)));
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, stream, _opSource.ReturnType.Equals(typeof(BinaryData)));
             }
         }
     }

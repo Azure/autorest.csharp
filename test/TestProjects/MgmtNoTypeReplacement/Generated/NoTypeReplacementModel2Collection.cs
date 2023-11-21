@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtNoTypeReplacement
 {
     /// <summary>
-    /// A class representing a collection of <see cref="NoTypeReplacementModel2Resource" /> and their operations.
-    /// Each <see cref="NoTypeReplacementModel2Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="NoTypeReplacementModel2Collection" /> instance call the GetNoTypeReplacementModel2s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="NoTypeReplacementModel2Resource"/> and their operations.
+    /// Each <see cref="NoTypeReplacementModel2Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="NoTypeReplacementModel2Collection"/> instance call the GetNoTypeReplacementModel2s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class NoTypeReplacementModel2Collection : ArmCollection, IEnumerable<NoTypeReplacementModel2Resource>, IAsyncEnumerable<NoTypeReplacementModel2Resource>
     {
@@ -219,7 +219,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NoTypeReplacementModel2Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NoTypeReplacementModel2Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NoTypeReplacementModel2Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtNoTypeReplacement
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NoTypeReplacementModel2Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NoTypeReplacementModel2Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NoTypeReplacementModel2Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _noTypeReplacementModel2RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

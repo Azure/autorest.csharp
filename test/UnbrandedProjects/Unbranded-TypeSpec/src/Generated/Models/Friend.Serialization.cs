@@ -37,10 +37,10 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="result"> The result to deserialize the model from. </param>
-        internal static Friend FromResponse(PipelineResponse result)
+        /// <param name="response"> The result to deserialize the model from. </param>
+        internal static Friend FromResponse(PipelineResponse response)
         {
-            using var document = JsonDocument.Parse(result.Content);
+            using var document = JsonDocument.Parse(response.Content);
             return DeserializeFriend(document.RootElement);
         }
 

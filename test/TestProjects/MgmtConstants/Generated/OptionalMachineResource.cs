@@ -21,9 +21,9 @@ namespace MgmtConstants
 {
     /// <summary>
     /// A Class representing an OptionalMachine along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="OptionalMachineResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetOptionalMachineResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetOptionalMachine method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="OptionalMachineResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetOptionalMachineResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetOptionalMachine method.
     /// </summary>
     public partial class OptionalMachineResource : ArmResource
     {
@@ -46,7 +46,7 @@ namespace MgmtConstants
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "OptionalMachineResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OptionalMachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal OptionalMachineResource(ArmClient client, OptionalMachineData data) : this(client, data.Id)

@@ -40,9 +40,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="ResourceModel1Resource"/> object. </returns>
         public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtSupersetFlattenInheritanceArmClient(client).GetResourceModel1Resource(id);
         }
 
@@ -56,9 +59,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="TrackedResourceModel1Resource"/> object. </returns>
         public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
+            Argument.AssertNotNull(client, nameof(client));
+
             return GetMockableMgmtSupersetFlattenInheritanceArmClient(client).GetTrackedResourceModel1Resource(id);
         }
 
@@ -70,9 +76,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of ResourceModel1Resources and their operations over a ResourceModel1Resource. </returns>
         public static ResourceModel1Collection GetResourceModel1s(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel1s();
         }
 
@@ -95,11 +104,13 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="resourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<ResourceModel1Resource>> GetResourceModel1Async(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel1Async(resourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -122,11 +133,13 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="resourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="resourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<ResourceModel1Resource> GetResourceModel1(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel1(resourceModel1SName, cancellationToken);
         }
 
@@ -138,9 +151,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of TrackedResourceModel1Resources and their operations over a TrackedResourceModel1Resource. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroupResource resourceGroupResource)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel1s();
         }
 
@@ -163,11 +179,13 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="trackedResourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel1Async(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -190,11 +208,13 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="trackedResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="trackedResourceModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public static Response<TrackedResourceModel1Resource> GetTrackedResourceModel1(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel1(trackedResourceModel1SName, cancellationToken);
         }
 
@@ -216,9 +236,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="CustomModel1"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel1> GetCustomModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1sAsync(cancellationToken);
         }
 
@@ -240,9 +263,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="CustomModel1"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel1> GetCustomModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1s(cancellationToken);
         }
 
@@ -267,9 +293,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         public static async Task<Response<CustomModel1>> PutCustomModel1Async(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel1Async(customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
         }
 
@@ -294,9 +322,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel1"> The CustomModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="customModel1SName"/> or <paramref name="customModel1"/> is null. </exception>
         public static Response<CustomModel1> PutCustomModel1(this ResourceGroupResource resourceGroupResource, string customModel1SName, CustomModel1 customModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel1(customModel1SName, customModel1, cancellationToken);
         }
 
@@ -320,9 +350,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="customModel1SName"/> is null. </exception>
         public static async Task<Response<CustomModel1>> GetCustomModel1Async(this ResourceGroupResource resourceGroupResource, string customModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1Async(customModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -346,9 +378,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="customModel1SName"/> is null. </exception>
         public static Response<CustomModel1> GetCustomModel1(this ResourceGroupResource resourceGroupResource, string customModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel1(customModel1SName, cancellationToken);
         }
 
@@ -370,9 +404,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="CustomModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel2> GetCustomModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2sAsync(cancellationToken);
         }
 
@@ -394,9 +431,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="CustomModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel2> GetCustomModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2s(cancellationToken);
         }
 
@@ -421,9 +461,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel2"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
         public static async Task<Response<CustomModel2>> PutCustomModel2Async(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel2Async(customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -448,9 +490,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel2"> The CustomModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="customModel2SName"/> or <paramref name="customModel2"/> is null. </exception>
         public static Response<CustomModel2> PutCustomModel2(this ResourceGroupResource resourceGroupResource, string customModel2SName, CustomModel2 customModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutCustomModel2(customModel2SName, customModel2, cancellationToken);
         }
 
@@ -474,9 +518,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="customModel2SName"/> is null. </exception>
         public static async Task<Response<CustomModel2>> GetCustomModel2Async(this ResourceGroupResource resourceGroupResource, string customModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2Async(customModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -500,9 +546,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="customModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="customModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="customModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="customModel2SName"/> is null. </exception>
         public static Response<CustomModel2> GetCustomModel2(this ResourceGroupResource resourceGroupResource, string customModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetCustomModel2(customModel2SName, cancellationToken);
         }
 
@@ -524,9 +572,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="SubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1sAsync(cancellationToken);
         }
 
@@ -548,9 +599,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="SubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel1> GetSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1s(cancellationToken);
         }
 
@@ -575,9 +629,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
         public static async Task<Response<SubResourceModel1>> PutSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
@@ -602,9 +658,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel1"> The SubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="subResourceModel1SName"/> or <paramref name="subResourceModel1"/> is null. </exception>
         public static Response<SubResourceModel1> PutSubResourceModel1(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, SubResourceModel1 subResourceModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, subResourceModel1, cancellationToken);
         }
 
@@ -628,9 +686,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="subResourceModel1SName"/> is null. </exception>
         public static async Task<Response<SubResourceModel1>> GetSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1Async(subResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -654,9 +714,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="subResourceModel1SName"/> is null. </exception>
         public static Response<SubResourceModel1> GetSubResourceModel1(this ResourceGroupResource resourceGroupResource, string subResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel1(subResourceModel1SName, cancellationToken);
         }
 
@@ -678,9 +740,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="SubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2sAsync(cancellationToken);
         }
 
@@ -702,9 +767,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="SubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel2> GetSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2s(cancellationToken);
         }
 
@@ -729,9 +797,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
         public static async Task<Response<SubResourceModel2>> PutSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -756,9 +826,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel2"> The SubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="subResourceModel2SName"/> or <paramref name="subResourceModel2"/> is null. </exception>
         public static Response<SubResourceModel2> PutSubResourceModel2(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, SubResourceModel2 subResourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, subResourceModel2, cancellationToken);
         }
 
@@ -782,9 +854,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="subResourceModel2SName"/> is null. </exception>
         public static async Task<Response<SubResourceModel2>> GetSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2Async(subResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -808,9 +882,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="subResourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="subResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="subResourceModel2SName"/> is null. </exception>
         public static Response<SubResourceModel2> GetSubResourceModel2(this ResourceGroupResource resourceGroupResource, string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetSubResourceModel2(subResourceModel2SName, cancellationToken);
         }
 
@@ -832,9 +908,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1sAsync(cancellationToken);
         }
 
@@ -856,9 +935,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="WritableSubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1s(cancellationToken);
         }
 
@@ -883,9 +965,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel1>> PutWritableSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
@@ -910,9 +994,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel1"> The WritableSubResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="writableSubResourceModel1SName"/> or <paramref name="writableSubResourceModel1"/> is null. </exception>
         public static Response<WritableSubResourceModel1> PutWritableSubResourceModel1(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, WritableSubResourceModel1 writableSubResourceModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
         }
 
@@ -936,9 +1022,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel1>> GetWritableSubResourceModel1Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1Async(writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -962,9 +1050,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="writableSubResourceModel1SName"/> is null. </exception>
         public static Response<WritableSubResourceModel1> GetWritableSubResourceModel1(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel1(writableSubResourceModel1SName, cancellationToken);
         }
 
@@ -986,9 +1076,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2sAsync(cancellationToken);
         }
 
@@ -1010,9 +1103,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="WritableSubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2s(cancellationToken);
         }
 
@@ -1037,9 +1133,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel2>> PutWritableSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1064,9 +1162,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel2"> The WritableSubResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="writableSubResourceModel2SName"/> or <paramref name="writableSubResourceModel2"/> is null. </exception>
         public static Response<WritableSubResourceModel2> PutWritableSubResourceModel2(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, WritableSubResourceModel2 writableSubResourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
         }
 
@@ -1090,9 +1190,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public static async Task<Response<WritableSubResourceModel2>> GetWritableSubResourceModel2Async(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2Async(writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1116,9 +1218,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="writableSubResourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="writableSubResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="writableSubResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="writableSubResourceModel2SName"/> is null. </exception>
         public static Response<WritableSubResourceModel2> GetWritableSubResourceModel2(this ResourceGroupResource resourceGroupResource, string writableSubResourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetWritableSubResourceModel2(writableSubResourceModel2SName, cancellationToken);
         }
 
@@ -1140,9 +1244,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="ResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceModel2> GetResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2sAsync(cancellationToken);
         }
 
@@ -1164,9 +1271,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="ResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceModel2> GetResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2s(cancellationToken);
         }
 
@@ -1191,9 +1301,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
         public static async Task<Response<ResourceModel2>> PutResourceModel2Async(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1218,9 +1330,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceModel2"> The ResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="resourceModel2SName"/> or <paramref name="resourceModel2"/> is null. </exception>
         public static Response<ResourceModel2> PutResourceModel2(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, ResourceModel2 resourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutResourceModel2(resourceModel2SName, resourceModel2, cancellationToken);
         }
 
@@ -1244,9 +1358,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="resourceModel2SName"/> is null. </exception>
         public static async Task<Response<ResourceModel2>> GetResourceModel2Async(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2Async(resourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1270,9 +1386,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="resourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="resourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="resourceModel2SName"/> is null. </exception>
         public static Response<ResourceModel2> GetResourceModel2(this ResourceGroupResource resourceGroupResource, string resourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetResourceModel2(resourceModel2SName, cancellationToken);
         }
 
@@ -1294,9 +1412,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="TrackedResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2sAsync(cancellationToken);
         }
 
@@ -1318,9 +1439,12 @@ namespace MgmtSupersetFlattenInheritance
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="TrackedResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2s(cancellationToken);
         }
 
@@ -1345,9 +1469,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
         public static async Task<Response<TrackedResourceModel2>> PutTrackedResourceModel2Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1372,9 +1498,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="trackedResourceModel2"> The TrackedResourceModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="trackedResourceModel2SName"/> or <paramref name="trackedResourceModel2"/> is null. </exception>
         public static Response<TrackedResourceModel2> PutTrackedResourceModel2(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, TrackedResourceModel2 trackedResourceModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
         }
 
@@ -1398,9 +1526,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public static async Task<Response<TrackedResourceModel2>> GetTrackedResourceModel2Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2Async(trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1424,9 +1554,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="trackedResourceModel2SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="trackedResourceModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="trackedResourceModel2SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="trackedResourceModel2SName"/> is null. </exception>
         public static Response<TrackedResourceModel2> GetTrackedResourceModel2(this ResourceGroupResource resourceGroupResource, string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetTrackedResourceModel2(trackedResourceModel2SName, cancellationToken);
         }
 
@@ -1451,9 +1583,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         public static async Task<Response<NonResourceModel1>> PutNonResourceModel1Async(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1478,9 +1612,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="nonResourceModel1"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/>, <paramref name="nonResourceModel1SName"/> or <paramref name="nonResourceModel1"/> is null. </exception>
         public static Response<NonResourceModel1> PutNonResourceModel1(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, NonResourceModel1 nonResourceModel1, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, nonResourceModel1, cancellationToken);
         }
 
@@ -1504,9 +1640,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="nonResourceModel1SName"/> is null. </exception>
         public static async Task<Response<NonResourceModel1>> GetNonResourceModel1Async(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return await GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetNonResourceModel1Async(nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1530,9 +1668,11 @@ namespace MgmtSupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="nonResourceModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="nonResourceModel1SName"/> is null. </exception>
         public static Response<NonResourceModel1> GetNonResourceModel1(this ResourceGroupResource resourceGroupResource, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
             return GetMockableMgmtSupersetFlattenInheritanceResourceGroupResource(resourceGroupResource).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
         }
     }

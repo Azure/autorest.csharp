@@ -37,11 +37,11 @@ namespace MgmtSupersetInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SupersetModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SupersetModel1Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SupersetModel1Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel1Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel1Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel1Resource"/> object. </returns>
         public virtual SupersetModel1Resource GetSupersetModel1Resource(ResourceIdentifier id)
         {
             SupersetModel1Resource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtSupersetInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SupersetModel4Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SupersetModel4Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel4Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SupersetModel4Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel4Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel4Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel4Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel4Resource"/> object. </returns>
         public virtual SupersetModel4Resource GetSupersetModel4Resource(ResourceIdentifier id)
         {
             SupersetModel4Resource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtSupersetInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SupersetModel6Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SupersetModel6Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel6Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SupersetModel6Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel6Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel6Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel6Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel6Resource"/> object. </returns>
         public virtual SupersetModel6Resource GetSupersetModel6Resource(ResourceIdentifier id)
         {
             SupersetModel6Resource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtSupersetInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SupersetModel7Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SupersetModel7Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel7Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SupersetModel7Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SupersetModel7Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel7Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SupersetModel7Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="SupersetModel7Resource"/> object. </returns>
         public virtual SupersetModel7Resource GetSupersetModel7Resource(ResourceIdentifier id)
         {
             SupersetModel7Resource.ValidateResourceId(id);

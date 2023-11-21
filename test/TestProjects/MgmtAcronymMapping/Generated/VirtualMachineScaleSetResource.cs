@@ -22,9 +22,9 @@ namespace MgmtAcronymMapping
 {
     /// <summary>
     /// A Class representing a VirtualMachineScaleSet along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineScaleSetResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachineScaleSet method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="VirtualMachineScaleSetResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetVirtualMachineScaleSetResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetVirtualMachineScaleSet method.
     /// </summary>
     public partial class VirtualMachineScaleSetResource : ArmResource
     {
@@ -49,7 +49,7 @@ namespace MgmtAcronymMapping
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal VirtualMachineScaleSetResource(ArmClient client, VirtualMachineScaleSetData data) : this(client, data.Id)
@@ -154,7 +154,7 @@ namespace MgmtAcronymMapping
         }
 
         /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgradeResource along with the instance operations that can be performed on it in the VirtualMachineScaleSet. </summary>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> object. </returns>
         public virtual VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgrade()
         {
             return new VirtualMachineScaleSetRollingUpgradeResource(Client, Id.AppendChildResource("rollingUpgrades", "latest"));
@@ -643,7 +643,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VirtualMachineScaleSetSku" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineScaleSetSku"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VirtualMachineScaleSetSku> GetSkusAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetRestClient.CreateListSkusRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -665,7 +665,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VirtualMachineScaleSetSku" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineScaleSetSku"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VirtualMachineScaleSetSku> GetSkus(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetRestClient.CreateListSkusRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -687,7 +687,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="UpgradeOperationHistoricalStatusInfo" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="UpgradeOperationHistoricalStatusInfo"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<UpgradeOperationHistoricalStatusInfo> GetOSUpgradeHistoryAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetRestClient.CreateGetOSUpgradeHistoryRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -709,7 +709,7 @@ namespace MgmtAcronymMapping
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="UpgradeOperationHistoricalStatusInfo" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="UpgradeOperationHistoricalStatusInfo"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<UpgradeOperationHistoricalStatusInfo> GetOSUpgradeHistory(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineScaleSetRestClient.CreateGetOSUpgradeHistoryRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -41,12 +42,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Type,
                 Summary: null,
-                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+                Description: $"Initializes a new instance of the {Type:C} class.",
                 Modifiers: Internal,
-                Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
+                Parameters: new[] { KnownParameters.ArmClient, ResourceIdentifierParameter },
                 Initializer: new(
                     isBase: true,
-                    arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
+                    arguments: new[] { KnownParameters.ArmClient, ResourceIdentifierParameter }));
         }
 
         private string? _factoryMethodName;
@@ -102,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var builder = new StringBuilder();
             builder.Append(methodSignature.Name).Append("(");
             // all methods here should be extension methods, therefore we skip the first parameter which is the extension method parameter "this" and in this context, it is actually myself
-            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.ToString()));
+            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.Name));
             builder.Append(")");
 
             return builder.ToString();

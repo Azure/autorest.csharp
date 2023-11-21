@@ -37,11 +37,11 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="ExactMatchModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ExactMatchModel1Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="ExactMatchModel1Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExactMatchModel1Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="ExactMatchModel1Resource"/> object. </returns>
         public virtual ExactMatchModel1Resource GetExactMatchModel1Resource(ResourceIdentifier id)
         {
             ExactMatchModel1Resource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtExactMatchInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="ExactMatchModel5Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ExactMatchModel5Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="ExactMatchModel5Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExactMatchModel5Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel5Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="ExactMatchModel5Resource"/> object. </returns>
         public virtual ExactMatchModel5Resource GetExactMatchModel5Resource(ResourceIdentifier id)
         {
             ExactMatchModel5Resource.ValidateResourceId(id);

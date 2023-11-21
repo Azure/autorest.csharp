@@ -20,9 +20,9 @@ namespace MgmtExactMatchInheritance
 {
     /// <summary>
     /// A Class representing an ExactMatchModel5 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="ExactMatchModel5Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetExactMatchModel5Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetExactMatchModel5 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="ExactMatchModel5Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetExactMatchModel5Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetExactMatchModel5 method.
     /// </summary>
     public partial class ExactMatchModel5Resource : ArmResource
     {
@@ -45,7 +45,7 @@ namespace MgmtExactMatchInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel5Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ExactMatchModel5Resource(ArmClient client, ExactMatchModel5Data data) : this(client, data.Id)

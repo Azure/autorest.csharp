@@ -163,6 +163,23 @@ namespace OpenAI.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="long"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <c>IList{long}</c></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>
@@ -225,6 +242,17 @@ namespace OpenAI.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

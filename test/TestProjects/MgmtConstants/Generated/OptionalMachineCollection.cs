@@ -22,9 +22,9 @@ using MgmtConstants.Models;
 namespace MgmtConstants
 {
     /// <summary>
-    /// A class representing a collection of <see cref="OptionalMachineResource" /> and their operations.
-    /// Each <see cref="OptionalMachineResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get an <see cref="OptionalMachineCollection" /> instance call the GetOptionalMachines method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="OptionalMachineResource"/> and their operations.
+    /// Each <see cref="OptionalMachineResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get an <see cref="OptionalMachineCollection"/> instance call the GetOptionalMachines method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class OptionalMachineCollection : ArmCollection, IEnumerable<OptionalMachineResource>, IAsyncEnumerable<OptionalMachineResource>
     {
@@ -231,7 +231,7 @@ namespace MgmtConstants
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="OptionalMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<OptionalMachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -253,7 +253,7 @@ namespace MgmtConstants
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="OptionalMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<OptionalMachineResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

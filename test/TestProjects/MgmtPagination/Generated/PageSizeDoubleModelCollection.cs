@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtPagination
 {
     /// <summary>
-    /// A class representing a collection of <see cref="PageSizeDoubleModelResource" /> and their operations.
-    /// Each <see cref="PageSizeDoubleModelResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="PageSizeDoubleModelCollection" /> instance call the GetPageSizeDoubleModels method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="PageSizeDoubleModelResource"/> and their operations.
+    /// Each <see cref="PageSizeDoubleModelResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="PageSizeDoubleModelCollection"/> instance call the GetPageSizeDoubleModels method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class PageSizeDoubleModelCollection : ArmCollection, IEnumerable<PageSizeDoubleModelResource>, IAsyncEnumerable<PageSizeDoubleModelResource>
     {
@@ -220,7 +220,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PageSizeDoubleModelResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="PageSizeDoubleModelResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PageSizeDoubleModelResource> GetAllAsync(double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
@@ -242,7 +242,7 @@ namespace MgmtPagination
         /// </summary>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PageSizeDoubleModelResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="PageSizeDoubleModelResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PageSizeDoubleModelResource> GetAll(double? maxpagesize = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);

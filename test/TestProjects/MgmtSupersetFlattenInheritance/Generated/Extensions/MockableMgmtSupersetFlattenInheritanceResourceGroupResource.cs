@@ -192,7 +192,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel1"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel1> GetCustomModel1sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -212,7 +212,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel1"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel1> GetCustomModel1s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -372,7 +372,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CustomModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CustomModel2> GetCustomModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -392,7 +392,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CustomModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CustomModel2> GetCustomModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CustomModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -552,7 +552,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -572,7 +572,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel1> GetSubResourceModel1s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -732,7 +732,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -752,7 +752,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubResourceModel2> GetSubResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => SubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -912,7 +912,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -932,7 +932,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WritableSubResourceModel1"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel1sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -1092,7 +1092,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="WritableSubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -1112,7 +1112,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="WritableSubResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => WritableSubResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -1272,7 +1272,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceModel2> GetResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -1292,7 +1292,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceModel2> GetResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -1452,7 +1452,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TrackedResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TrackedResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -1472,7 +1472,7 @@ namespace MgmtSupersetFlattenInheritance.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TrackedResourceModel2"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TrackedResourceModel2sRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

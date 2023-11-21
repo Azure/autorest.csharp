@@ -19,9 +19,9 @@ namespace MgmtPagination
 {
     /// <summary>
     /// A Class representing a PageSizeStringModel along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PageSizeStringModelResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetPageSizeStringModelResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetPageSizeStringModel method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="PageSizeStringModelResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetPageSizeStringModelResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetPageSizeStringModel method.
     /// </summary>
     public partial class PageSizeStringModelResource : ArmResource
     {
@@ -44,7 +44,7 @@ namespace MgmtPagination
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PageSizeStringModelResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PageSizeStringModelResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal PageSizeStringModelResource(ArmClient client, PageSizeStringModelData data) : this(client, new ResourceIdentifier(data.Id))

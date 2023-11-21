@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtLRO
 {
     /// <summary>
-    /// A class representing a collection of <see cref="BarResource" /> and their operations.
-    /// Each <see cref="BarResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="BarCollection" /> instance call the GetBars method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="BarResource"/> and their operations.
+    /// Each <see cref="BarResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="BarCollection"/> instance call the GetBars method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class BarCollection : ArmCollection, IEnumerable<BarResource>, IAsyncEnumerable<BarResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtLRO
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -245,7 +245,7 @@ namespace MgmtLRO
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="BarResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BarResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtSingletonResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="CarResource" /> and their operations.
-    /// Each <see cref="CarResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="CarCollection" /> instance call the GetCars method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="CarResource"/> and their operations.
+    /// Each <see cref="CarResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="CarCollection"/> instance call the GetCars method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class CarCollection : ArmCollection, IEnumerable<CarResource>, IAsyncEnumerable<CarResource>
     {
@@ -219,7 +219,7 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="CarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="CarResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<CarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="CarResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="CarResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<CarResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
