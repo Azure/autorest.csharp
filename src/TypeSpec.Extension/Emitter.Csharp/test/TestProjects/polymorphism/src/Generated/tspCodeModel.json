@@ -80,32 +80,6 @@
   },
   {
    "$id": "10",
-   "Name": "SawShark",
-   "Namespace": "PolymorphismOperation",
-   "Description": "The third level model SawShark in polymorphic multiple levels inheritance.",
-   "IsNullable": false,
-   "DiscriminatorValue": "saw",
-   "BaseModel": {
-    "$ref": "7"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "11",
-   "Name": "GoblinShark",
-   "Namespace": "PolymorphismOperation",
-   "Description": "The third level model GoblinShark in polymorphic multiple levels inheritance.",
-   "IsNullable": false,
-   "DiscriminatorValue": "goblin",
-   "BaseModel": {
-    "$ref": "7"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "12",
    "Name": "Salmon",
    "Namespace": "PolymorphismOperation",
    "Description": "The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.",
@@ -117,12 +91,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "13",
+     "$id": "11",
      "Name": "friends",
      "SerializedName": "friends",
      "Description": "",
      "Type": {
-      "$id": "14",
+      "$id": "12",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -133,15 +107,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "15",
+     "$id": "13",
      "Name": "hate",
      "SerializedName": "hate",
      "Description": "",
      "Type": {
-      "$id": "16",
+      "$id": "14",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "17",
+       "$id": "15",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -155,7 +129,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "18",
+     "$id": "16",
      "Name": "partner",
      "SerializedName": "partner",
      "Description": "",
@@ -166,6 +140,32 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "17",
+   "Name": "SawShark",
+   "Namespace": "PolymorphismOperation",
+   "Description": "The third level model SawShark in polymorphic multiple levels inheritance.",
+   "IsNullable": false,
+   "DiscriminatorValue": "saw",
+   "BaseModel": {
+    "$ref": "7"
+   },
+   "Usage": "RoundTrip",
+   "Properties": []
+  },
+  {
+   "$id": "18",
+   "Name": "GoblinShark",
+   "Namespace": "PolymorphismOperation",
+   "Description": "The third level model GoblinShark in polymorphic multiple levels inheritance.",
+   "IsNullable": false,
+   "DiscriminatorValue": "goblin",
+   "BaseModel": {
+    "$ref": "7"
+   },
+   "Usage": "RoundTrip",
+   "Properties": []
   }
  ],
  "Clients": [
