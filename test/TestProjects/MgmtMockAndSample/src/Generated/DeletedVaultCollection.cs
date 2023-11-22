@@ -18,9 +18,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtMockAndSample
 {
     /// <summary>
-    /// A class representing a collection of <see cref="DeletedVaultResource" /> and their operations.
-    /// Each <see cref="DeletedVaultResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
-    /// To get a <see cref="DeletedVaultCollection" /> instance call the GetDeletedVaults method from an instance of <see cref="SubscriptionResource" />.
+    /// A class representing a collection of <see cref="DeletedVaultResource"/> and their operations.
+    /// Each <see cref="DeletedVaultResource"/> in the collection will belong to the same instance of <see cref="SubscriptionResource"/>.
+    /// To get a <see cref="DeletedVaultCollection"/> instance call the GetDeletedVaults method from an instance of <see cref="SubscriptionResource"/>.
     /// </summary>
     public partial class DeletedVaultCollection : ArmCollection
     {

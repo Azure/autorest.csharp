@@ -20,9 +20,9 @@ namespace MgmtSingletonResource
 {
     /// <summary>
     /// A Class representing a ParentResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetParentResource method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetParentResource method.
     /// </summary>
     public partial class ParentResource : ArmResource
     {
@@ -48,7 +48,7 @@ namespace MgmtSingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ParentResource(ArmClient client, ParentResourceData data) : this(client, data.Id)
@@ -92,7 +92,7 @@ namespace MgmtSingletonResource
         }
 
         /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SingletonResource"/> object. </returns>
         public virtual SingletonResource GetSingletonResource()
         {
             return new SingletonResource(Client, Id.AppendChildResource("singletonResources", "current"));

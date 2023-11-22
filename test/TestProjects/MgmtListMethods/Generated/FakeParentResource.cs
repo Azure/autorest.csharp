@@ -19,9 +19,9 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a FakeParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource"/> using the GetFakeParent method.
     /// </summary>
     public partial class FakeParentResource : ArmResource
     {
@@ -47,7 +47,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeParentResource(ArmClient client, FakeParentData data) : this(client, data.Id)

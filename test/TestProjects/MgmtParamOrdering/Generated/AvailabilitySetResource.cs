@@ -21,9 +21,9 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A Class representing an AvailabilitySet along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AvailabilitySetResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAvailabilitySetResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetAvailabilitySet method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AvailabilitySetResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAvailabilitySetResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetAvailabilitySet method.
     /// </summary>
     public partial class AvailabilitySetResource : ArmResource
     {
@@ -49,7 +49,7 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AvailabilitySetResource(ArmClient client, AvailabilitySetData data) : this(client, data.Id)

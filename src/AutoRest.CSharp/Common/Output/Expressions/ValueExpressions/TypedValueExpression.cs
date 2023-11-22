@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
                 return typed.Untyped;
             }
 
-            throw new InvalidOperationException($"Expression with return type {typed.Type.ToStringForDocs()} is cast to type {type.ToStringForDocs()}");
+            throw new InvalidOperationException($"Expression with return type {typed.Type.Name} is cast to type {type.Name}");
         }
     }
 }

@@ -344,7 +344,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"private readonly {enumType.ValueType} _value;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref=\"{name}\"/>.");
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {name:C}.");
 
                     if (isString)
                     {
@@ -384,13 +384,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line();
                     }
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
+                    writer.WriteXmlDocumentationSummary($"Determines if two {name:C} values are the same.");
                     writer.Line($"public static bool operator ==({cs} left, {cs} right) => left.Equals(right);");
 
-                    writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are not the same.");
+                    writer.WriteXmlDocumentationSummary($"Determines if two {name:C} values are not the same.");
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
-                    writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
+                    writer.WriteXmlDocumentationSummary($"Converts a string to a {name:C}.");
                     writer.Line($"public static implicit operator {cs}({enumType.ValueType} value) => new {cs}(value);");
                     writer.Line();
 

@@ -19,9 +19,9 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A Class representing a RecordSetSoa along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="RecordSetSoaResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetRecordSetSoaResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetSoa method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="RecordSetSoaResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetRecordSetSoaResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ZoneResource"/> using the GetRecordSetSoa method.
     /// </summary>
     public partial class RecordSetSoaResource : ArmResource
     {
@@ -48,7 +48,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "RecordSetSoaResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetSoaResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal RecordSetSoaResource(ArmClient client, RecordSetData data) : this(client, data.Id)

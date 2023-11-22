@@ -21,9 +21,9 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A Class representing a VirtualMachineScaleSet along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineScaleSetResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineScaleSetResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachineScaleSet method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="VirtualMachineScaleSetResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetVirtualMachineScaleSetResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetVirtualMachineScaleSet method.
     /// </summary>
     public partial class VirtualMachineScaleSetResource : ArmResource
     {
@@ -49,7 +49,7 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal VirtualMachineScaleSetResource(ArmClient client, VirtualMachineScaleSetData data) : this(client, data.Id)

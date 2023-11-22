@@ -19,9 +19,9 @@ namespace MgmtSingletonResource
 {
     /// <summary>
     /// A Class representing a Car along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="CarResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetCarResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetCar method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="CarResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetCarResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetCar method.
     /// </summary>
     public partial class CarResource : ArmResource
     {
@@ -47,7 +47,7 @@ namespace MgmtSingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "CarResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CarResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal CarResource(ArmClient client, CarData data) : this(client, data.Id)
@@ -91,14 +91,14 @@ namespace MgmtSingletonResource
         }
 
         /// <summary> Gets an object representing a IgnitionResource along with the instance operations that can be performed on it in the Car. </summary>
-        /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="IgnitionResource"/> object. </returns>
         public virtual IgnitionResource GetIgnition()
         {
             return new IgnitionResource(Client, Id.AppendChildResource("ignitions", "default"));
         }
 
         /// <summary> Gets an object representing a BrakeResource along with the instance operations that can be performed on it in the Car. </summary>
-        /// <returns> Returns a <see cref="BrakeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BrakeResource"/> object. </returns>
         public virtual BrakeResource GetBrake()
         {
             return new BrakeResource(Client, Id.AppendChildResource("brakes", "default"));

@@ -19,9 +19,9 @@ namespace MgmtOperations
 {
     /// <summary>
     /// A Class representing an AvailabilitySetChild along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AvailabilitySetChildResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAvailabilitySetChildResource method.
-    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetResource" /> using the GetAvailabilitySetChild method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AvailabilitySetChildResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAvailabilitySetChildResource method.
+    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetResource"/> using the GetAvailabilitySetChild method.
     /// </summary>
     public partial class AvailabilitySetChildResource : ArmResource
     {
@@ -48,7 +48,7 @@ namespace MgmtOperations
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetChildResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AvailabilitySetChildResource(ArmClient client, AvailabilitySetChildData data) : this(client, data.Id)

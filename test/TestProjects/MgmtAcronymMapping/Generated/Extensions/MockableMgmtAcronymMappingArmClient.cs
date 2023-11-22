@@ -37,11 +37,11 @@ namespace MgmtAcronymMapping.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineResource"/> object. </returns>
         public virtual VirtualMachineResource GetVirtualMachineResource(ResourceIdentifier id)
         {
             VirtualMachineResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtAcronymMapping.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="ImageResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ImageResource.CreateResourceIdentifier" /> to create an <see cref="ImageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="ImageResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ImageResource.CreateResourceIdentifier" /> to create an <see cref="ImageResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ImageResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ImageResource"/> object. </returns>
         public virtual ImageResource GetImageResource(ResourceIdentifier id)
         {
             ImageResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtAcronymMapping.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource"/> object. </returns>
         public virtual VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(ResourceIdentifier id)
         {
             VirtualMachineScaleSetResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtAcronymMapping.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetExtensionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetExtensionResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtensionResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource"/> object. </returns>
         public virtual VirtualMachineScaleSetExtensionResource GetVirtualMachineScaleSetExtensionResource(ResourceIdentifier id)
         {
             VirtualMachineScaleSetExtensionResource.ValidateResourceId(id);
@@ -85,11 +85,11 @@ namespace MgmtAcronymMapping.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetRollingUpgradeResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetRollingUpgradeResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> object. </returns>
         public virtual VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgradeResource(ResourceIdentifier id)
         {
             VirtualMachineScaleSetRollingUpgradeResource.ValidateResourceId(id);
@@ -97,11 +97,11 @@ namespace MgmtAcronymMapping.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineScaleSetVmResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineScaleSetVmResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVmResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVmResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVmResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVmResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource"/> object. </returns>
         public virtual VirtualMachineScaleSetVmResource GetVirtualMachineScaleSetVmResource(ResourceIdentifier id)
         {
             VirtualMachineScaleSetVmResource.ValidateResourceId(id);

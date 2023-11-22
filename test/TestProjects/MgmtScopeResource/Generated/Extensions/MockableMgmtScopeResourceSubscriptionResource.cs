@@ -112,7 +112,7 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(string filter = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSubscriptionRequest(Id.SubscriptionId, filter);
@@ -135,7 +135,7 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="filter"> The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceLinkResource> GetResourceLinks(string filter = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResourceLinkRestClient.CreateListAtSubscriptionRequest(Id.SubscriptionId, filter);

@@ -49,7 +49,7 @@ namespace MgmtExtensionResource.Mocking
         }
 
         /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource. </summary>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubSingletonResource"/> object. </returns>
         public virtual SubSingletonResource GetSubSingleton()
         {
             return new SubSingletonResource(Client, Id.AppendProviderResource("Microsoft.Singleton", "subSingletons", "default"));

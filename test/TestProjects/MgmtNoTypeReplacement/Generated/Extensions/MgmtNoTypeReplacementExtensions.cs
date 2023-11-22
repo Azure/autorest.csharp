@@ -40,7 +40,7 @@ namespace MgmtNoTypeReplacement
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource"/> object. </returns>
         public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -59,7 +59,7 @@ namespace MgmtNoTypeReplacement
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource"/> object. </returns>
         public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -78,7 +78,7 @@ namespace MgmtNoTypeReplacement
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource"/> object. </returns>
         public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));

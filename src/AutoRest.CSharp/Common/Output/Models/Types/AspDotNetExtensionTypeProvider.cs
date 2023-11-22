@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
         private IReadOnlyList<LowLevelClient> _clients;
+        private IReadOnlyList<LowLevelClient> _topLevelClients;
 
         public AspDotNetExtensionTypeProvider(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
@@ -32,11 +33,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             //TODO: very bad design that this list is empty when we leave the constructor and is filled in at some point in the future.
             //creates lots of opportunity run into issues with iterators
             _clients = clients;
+            _topLevelClients = _clients.Where(client => client is { IsSubClient: false, Declaration.Accessibility: "public" }).ToList();
         }
 
-        public FormattableString Description => $"Extension methods to add {GetClientSeeRefs()} to client builder";
-
-        private IEnumerable<LowLevelClient> _topLevelClients => _clients.Where(client => !client.IsSubClient && client.Declaration.Accessibility == "public");
+        public FormattableString Description => $"Extension methods to add {_topLevelClients.GetClientTypesFormattable()} to client builder";
 
         protected override string DefaultName { get; }
 
@@ -44,12 +44,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>? _extensionMethods;
         public IReadOnlyDictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> ExtesnsionMethods => _extensionMethods ??= EnsureExtensionMethods();
-
-        public FormattableString GetClientSeeRefs()
-        {
-            var fs = _topLevelClients.Select(client => (FormattableString)$"<see cref=\"{client.Type}\"/>").ToArray();
-            return fs.Join(", ");
-        }
 
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> EnsureExtensionMethods()
         {
@@ -88,7 +82,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                         }
                     }
 
-                    FormattableString summary = $"Registers a <see cref=\"{client.Type}\"/> instance";
+                    FormattableString summary = $"Registers a {client.Type:C} instance";
                     var constrait = includeCredential
                         ? (FormattableString)$"{typeof(IAzureClientFactoryBuilderWithCredential)}"
                         : $"{typeof(IAzureClientFactoryBuilder)}";
@@ -121,7 +115,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             {
                 var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
 
-                FormattableString summary = $"Registers a <see cref=\"{client.Type}\"/> instance";
+                FormattableString summary = $"Registers a {client.Type:C} instance";
                 yield return new MethodSignature(
                     $"Add{client.Declaration.Name}",
                     summary,

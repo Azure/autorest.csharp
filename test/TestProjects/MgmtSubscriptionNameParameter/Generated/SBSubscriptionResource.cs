@@ -19,9 +19,9 @@ namespace MgmtSubscriptionNameParameter
 {
     /// <summary>
     /// A Class representing a SBSubscription along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SBSubscriptionResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetSBSubscriptionResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetSBSubscription method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="SBSubscriptionResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetSBSubscriptionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetSBSubscription method.
     /// </summary>
     public partial class SBSubscriptionResource : ArmResource
     {
@@ -47,7 +47,7 @@ namespace MgmtSubscriptionNameParameter
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "SBSubscriptionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SBSubscriptionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal SBSubscriptionResource(ArmClient client, SBSubscriptionData data) : this(client, data.Id)

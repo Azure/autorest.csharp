@@ -37,11 +37,11 @@ namespace MgmtDiscriminator.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="DeliveryRuleResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="DeliveryRuleResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DeliveryRuleResource"/> object. </returns>
         public virtual DeliveryRuleResource GetDeliveryRuleResource(ResourceIdentifier id)
         {
             DeliveryRuleResource.ValidateResourceId(id);

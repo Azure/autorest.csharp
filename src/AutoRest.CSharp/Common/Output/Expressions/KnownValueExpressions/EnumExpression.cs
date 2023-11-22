@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
                     : new FrameworkTypeExpression(EnumType.ValueType.FrameworkType, new InvokeStaticMethodExpression(EnumType.Type, name, new[] { Untyped }, null, true))
                 : EnumType is { IsExtensible: true, IsStringValueType: true }
                     ? Untyped.InvokeToString()
-                    : throw new InvalidOperationException($"No conversion available fom {EnumType.Type.ToStringForDocs()}");
+                    : throw new InvalidOperationException($"No conversion available fom {EnumType.Type.Name}");
 
         public static TypedValueExpression ToEnum(EnumType enumType, ValueExpression value)
             => enumType.IsExtensible

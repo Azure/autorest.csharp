@@ -22,9 +22,9 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a ManagedHsm along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ManagedHsmResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetManagedHsmResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetManagedHsm method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ManagedHsmResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetManagedHsmResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetManagedHsm method.
     /// </summary>
     public partial class ManagedHsmResource : ArmResource
     {
@@ -52,7 +52,7 @@ namespace MgmtMockAndSample
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ManagedHsmResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagedHsmResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ManagedHsmResource(ArmClient client, ManagedHsmData data) : this(client, data.Id)
@@ -372,7 +372,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MhsmPrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="MhsmPrivateLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MhsmPrivateLinkResource> GetMHSMPrivateLinkResourcesByMhsmResourceAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mhsmPrivateLinkResourcesRestClient.CreateListByMhsmResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -393,7 +393,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MhsmPrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="MhsmPrivateLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MhsmPrivateLinkResource> GetMHSMPrivateLinkResourcesByMhsmResource(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mhsmPrivateLinkResourcesRestClient.CreateListByMhsmResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

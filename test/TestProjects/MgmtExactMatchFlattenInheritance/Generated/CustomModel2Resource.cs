@@ -19,9 +19,9 @@ namespace MgmtExactMatchFlattenInheritance
 {
     /// <summary>
     /// A Class representing a CustomModel2 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="CustomModel2Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetCustomModel2Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetCustomModel2 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="CustomModel2Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetCustomModel2Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetCustomModel2 method.
     /// </summary>
     public partial class CustomModel2Resource : ArmResource
     {
@@ -47,7 +47,7 @@ namespace MgmtExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "CustomModel2Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CustomModel2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal CustomModel2Resource(ArmClient client, CustomModel2Data data) : this(client, data.Id)

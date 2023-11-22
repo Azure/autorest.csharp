@@ -19,9 +19,9 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A Class representing a RecordSetTxt along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="RecordSetTxtResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetRecordSetTxtResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetTxt method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="RecordSetTxtResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetRecordSetTxtResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ZoneResource"/> using the GetRecordSetTxt method.
     /// </summary>
     public partial class RecordSetTxtResource : ArmResource
     {
@@ -48,7 +48,7 @@ namespace MgmtExpandResourceTypes
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "RecordSetTxtResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetTxtResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal RecordSetTxtResource(ArmClient client, RecordSetData data) : this(client, data.Id)

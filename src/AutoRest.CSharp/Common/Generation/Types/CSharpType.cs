@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Types
         public bool IsLiteral { get; init; }
         public Constant? Literal { get; init; }
         public bool IsUnion { get; }
-        public CSharpType[] UnionItemTypes { get; } = Array.Empty<CSharpType>();
+        public IReadOnlyList<CSharpType> UnionItemTypes { get; } = Array.Empty<CSharpType>();
         public bool IsPublic { get; }
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
@@ -152,6 +152,11 @@ namespace AutoRest.CSharp.Generation.Types
 
         public override int GetHashCode() => HashCode.Combine(_implementation, _type, ((System.Collections.IStructuralEquatable)Arguments).GetHashCode(EqualityComparer<CSharpType>.Default));
 
+        public CSharpType GetGenericTypeDefinition()
+            => _type is null
+                ? throw new NotSupportedException($"{nameof(TypeProvider)} doesn't support generics.")
+                : new(_type, IsNullable);
+
         public bool IsGenericType => Arguments.Length > 0;
 
         public CSharpType WithNullable(bool isNullable) =>
@@ -191,29 +196,6 @@ namespace AutoRest.CSharp.Generation.Types
             };
 
             return name != null;
-        }
-
-        public string ToStringForDocs()
-        {
-            var sb = new StringBuilder(TryGetCSharpFriendlyName(out var keywordName) ? keywordName : Name);
-            if (IsNullable && IsValueType)
-            {
-                sb.Append("?");
-            }
-
-            if (Arguments.Any())
-            {
-                sb.Append("{");
-                foreach (var argument in Arguments)
-                {
-                    sb.Append(argument.ToStringForDocs()).Append(",");
-                }
-
-                sb.Remove(sb.Length - 1, 1);
-                sb.Append("}");
-            }
-
-            return sb.ToString();
         }
 
         internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)

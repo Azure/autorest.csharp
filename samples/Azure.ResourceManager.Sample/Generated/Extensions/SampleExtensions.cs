@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AvailabilitySetResource"/> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ProximityPlacementGroupResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ProximityPlacementGroupResource"/> object. </returns>
         public static ProximityPlacementGroupResource GetProximityPlacementGroupResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DedicatedHostGroupResource"/> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -103,7 +103,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
+        /// <returns> Returns a <see cref="DedicatedHostResource"/> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="SshPublicKeyResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SshPublicKeyResource"/> object. </returns>
         public static SshPublicKeyResource GetSshPublicKeyResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -141,7 +141,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource"/> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -160,7 +160,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionResource"/> object. </returns>
         public static VirtualMachineExtensionResource GetVirtualMachineExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -179,7 +179,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource"/> object. </returns>
         public static VirtualMachineScaleSetVirtualMachineExtensionResource GetVirtualMachineScaleSetVirtualMachineExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -198,7 +198,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineResource"/> object. </returns>
         public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -217,7 +217,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ImageResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ImageResource"/> object. </returns>
         public static ImageResource GetImageResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -236,7 +236,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource"/> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -255,7 +255,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource"/> object. </returns>
         public static VirtualMachineScaleSetExtensionResource GetVirtualMachineScaleSetExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource"/> object. </returns>
         public static VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgradeResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -293,7 +293,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource"/> object. </returns>
         public static VirtualMachineScaleSetVmResource GetVirtualMachineScaleSetVmResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -955,7 +955,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AvailabilitySetResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -984,7 +984,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AvailabilitySetResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1012,7 +1012,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ProximityPlacementGroupResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ProximityPlacementGroupResource> GetProximityPlacementGroupsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1040,7 +1040,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ProximityPlacementGroupResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ProximityPlacementGroupResource> GetProximityPlacementGroups(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1068,7 +1068,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="DedicatedHostGroupResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DedicatedHostGroupResource> GetDedicatedHostGroupsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1096,7 +1096,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="DedicatedHostGroupResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DedicatedHostGroupResource> GetDedicatedHostGroups(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1124,7 +1124,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="SshPublicKeyResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SshPublicKeyResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SshPublicKeyResource> GetSshPublicKeysAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1152,7 +1152,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="SshPublicKeyResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SshPublicKeyResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SshPublicKeyResource> GetSshPublicKeys(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1247,7 +1247,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="options"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, SubscriptionResourceGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1276,7 +1276,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="options"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this SubscriptionResource subscriptionResource, SubscriptionResourceGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1307,7 +1307,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="publisherName"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetOffersVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1338,7 +1338,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="publisherName"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetOffersVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1367,7 +1367,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetPublishersVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1396,7 +1396,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetPublishersVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1428,7 +1428,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> or <paramref name="offer"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/>, <paramref name="publisherName"/> or <paramref name="offer"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetSkusVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1460,7 +1460,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> or <paramref name="offer"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/>, <paramref name="publisherName"/> or <paramref name="offer"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetSkusVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1489,7 +1489,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="SampleUsage" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SampleUsage"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SampleUsage> GetUsagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1518,7 +1518,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="SampleUsage" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SampleUsage"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SampleUsage> GetUsages(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1547,7 +1547,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesByLocationAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1576,7 +1576,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachinesByLocation(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1605,7 +1605,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1634,7 +1634,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1663,7 +1663,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineSize"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineSize> GetVirtualMachineSizesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1692,7 +1692,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineSize"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineSize> GetVirtualMachineSizes(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1720,7 +1720,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ImageResource> GetImagesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1748,7 +1748,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ImageResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ImageResource> GetImages(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1776,7 +1776,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
@@ -1804,7 +1804,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VirtualMachineScaleSetResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));

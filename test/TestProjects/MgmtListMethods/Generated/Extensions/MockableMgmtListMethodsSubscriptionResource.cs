@@ -358,7 +358,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -380,7 +380,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLoc(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -405,7 +405,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -431,7 +431,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -454,7 +454,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -476,7 +476,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChes(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -498,7 +498,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -520,7 +520,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocs(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -545,7 +545,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocationAsync(string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -572,7 +572,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocation(string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -596,7 +596,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -618,7 +618,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithAncestorResource> GetFakeParentWithAncestors(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
@@ -641,7 +641,7 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, expand);
@@ -664,7 +664,7 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocs(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithNonResChWithLocRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, expand);
@@ -687,7 +687,7 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChesAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, expand);
@@ -710,7 +710,7 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are 'instanceView'. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChes(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithNonResChRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, expand);
@@ -732,7 +732,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithLocRestClient.CreateListTestRequest(Id.SubscriptionId);
@@ -754,7 +754,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocs(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorWithLocRestClient.CreateListTestRequest(Id.SubscriptionId);
@@ -779,7 +779,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -806,7 +806,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(string location, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -830,7 +830,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorsAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorRestClient.CreateNonPageableListBySubscriptionRequest(Id.SubscriptionId);
@@ -851,7 +851,7 @@ namespace MgmtListMethods.Mocking
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestors(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => ResGrpParentWithAncestorRestClient.CreateNonPageableListBySubscriptionRequest(Id.SubscriptionId);
@@ -876,7 +876,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="content"/> is null. </exception>
-        /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<UpdateWorkspaceQuotas> UpdateAllQuotaAsync(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
@@ -904,7 +904,7 @@ namespace MgmtListMethods.Mocking
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="content"/> is null. </exception>
-        /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="UpdateWorkspaceQuotas"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<UpdateWorkspaceQuotas> UpdateAllQuota(string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));

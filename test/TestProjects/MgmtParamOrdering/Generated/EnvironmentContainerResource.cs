@@ -19,9 +19,9 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A Class representing an EnvironmentContainerResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="EnvironmentContainerResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetEnvironmentContainerResource method.
-    /// Otherwise you can get one from its parent resource <see cref="WorkspaceResource" /> using the GetEnvironmentContainerResource method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="EnvironmentContainerResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetEnvironmentContainerResource method.
+    /// Otherwise you can get one from its parent resource <see cref="WorkspaceResource"/> using the GetEnvironmentContainerResource method.
     /// </summary>
     public partial class EnvironmentContainerResource : ArmResource
     {
@@ -48,7 +48,7 @@ namespace MgmtParamOrdering
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "EnvironmentContainerResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="EnvironmentContainerResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal EnvironmentContainerResource(ArmClient client, EnvironmentContainerResourceData data) : this(client, data.Id)

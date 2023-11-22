@@ -18,9 +18,9 @@ namespace MgmtSingletonResource
 {
     /// <summary>
     /// A Class representing an Ignition along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="IgnitionResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetIgnitionResource method.
-    /// Otherwise you can get one from its parent resource <see cref="CarResource" /> using the GetIgnition method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="IgnitionResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetIgnitionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="CarResource"/> using the GetIgnition method.
     /// </summary>
     public partial class IgnitionResource : ArmResource
     {
@@ -46,7 +46,7 @@ namespace MgmtSingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "IgnitionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="IgnitionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal IgnitionResource(ArmClient client, IgnitionData data) : this(client, data.Id)

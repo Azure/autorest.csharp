@@ -20,9 +20,9 @@ namespace MgmtOmitOperationGroups
 {
     /// <summary>
     /// A Class representing a Model2 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="Model2Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetModel2Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetModel2 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="Model2Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetModel2Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetModel2 method.
     /// </summary>
     public partial class Model2Resource : ArmResource
     {
@@ -50,7 +50,7 @@ namespace MgmtOmitOperationGroups
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "Model2Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Model2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal Model2Resource(ArmClient client, Model2Data data) : this(client, data.Id)

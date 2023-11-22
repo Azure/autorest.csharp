@@ -20,9 +20,9 @@ namespace MgmtExactMatchFlattenInheritance
 {
     /// <summary>
     /// A Class representing an AzureResourceFlattenModel1 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AzureResourceFlattenModel1Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAzureResourceFlattenModel1Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetAzureResourceFlattenModel1 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AzureResourceFlattenModel1Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAzureResourceFlattenModel1Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetAzureResourceFlattenModel1 method.
     /// </summary>
     public partial class AzureResourceFlattenModel1Resource : ArmResource
     {
@@ -48,7 +48,7 @@ namespace MgmtExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AzureResourceFlattenModel1Resource(ArmClient client, AzureResourceFlattenModel1Data data) : this(client, data.Id)
