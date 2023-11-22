@@ -96,7 +96,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 List<FormattableString> childrenList = new List<FormattableString>();
                 foreach (var implementation in Discriminator.Implementations)
                 {
-                    if (!implementation.Type.IsPublic)
+                    // when the base type is public and the implementation type is not public, we skip it
+                    if (Type.IsPublic && !implementation.Type.IsPublic)
                         continue;
                     childrenList.Add($"{implementation.Type:C}");
                 }
