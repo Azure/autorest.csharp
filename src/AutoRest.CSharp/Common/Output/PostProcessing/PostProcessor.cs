@@ -425,5 +425,5 @@ internal class PostProcessor
         return nodes.Where((val, index) => index >= targetIndex);
     }
 
-    private static readonly List<string> DiscriminatorDescFixedPart = ObjectType.DiscriminatorDescFixedPart;
+    private static readonly IReadOnlyList<string> DiscriminatorDescFixedPart = ObjectType.DiscriminatorDescFixedPart;
 }
