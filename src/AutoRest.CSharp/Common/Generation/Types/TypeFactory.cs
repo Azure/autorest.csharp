@@ -494,7 +494,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsArray(CSharpType type)
         {
-            return type.IsFrameworkType && type.FrameworkType.IsArray;
+            return type is { IsFrameworkType: true, FrameworkType.IsArray: true };
         }
     }
 }

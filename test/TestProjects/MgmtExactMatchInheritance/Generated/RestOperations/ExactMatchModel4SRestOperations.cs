@@ -61,10 +61,10 @@ namespace MgmtExactMatchInheritance
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel4SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel4"> The <see cref="ExactMatchModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -91,10 +91,10 @@ namespace MgmtExactMatchInheritance
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel4SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel4"> The <see cref="ExactMatchModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>

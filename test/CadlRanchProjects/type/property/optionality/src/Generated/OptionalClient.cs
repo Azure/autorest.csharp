@@ -44,7 +44,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual String GetStringClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of Bytes. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Bytes GetBytesClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of Datetime. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Datetime GetDatetimeClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of Duration. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Duration GetDurationClient(string apiVersion = "1.0.0")
         {
@@ -84,7 +84,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of CollectionsByte. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsByte GetCollectionsByteClient(string apiVersion = "1.0.0")
         {
@@ -94,7 +94,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of CollectionsModel. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsModel GetCollectionsModelClient(string apiVersion = "1.0.0")
         {
@@ -104,7 +104,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of StringLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual StringLiteral GetStringLiteralClient(string apiVersion = "1.0.0")
         {
@@ -114,7 +114,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of IntLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual IntLiteral GetIntLiteralClient(string apiVersion = "1.0.0")
         {
@@ -124,7 +124,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of FloatLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual FloatLiteral GetFloatLiteralClient(string apiVersion = "1.0.0")
         {
@@ -134,7 +134,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of BooleanLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual BooleanLiteral GetBooleanLiteralClient(string apiVersion = "1.0.0")
         {
@@ -144,7 +144,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of UnionStringLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnionStringLiteral GetUnionStringLiteralClient(string apiVersion = "1.0.0")
         {
@@ -154,7 +154,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of UnionIntLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnionIntLiteral GetUnionIntLiteralClient(string apiVersion = "1.0.0")
         {
@@ -164,7 +164,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of UnionFloatLiteral. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnionFloatLiteral GetUnionFloatLiteralClient(string apiVersion = "1.0.0")
         {
@@ -174,7 +174,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Initializes a new instance of RequiredAndOptional. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual RequiredAndOptional GetRequiredAndOptionalClient(string apiVersion = "1.0.0")
         {
