@@ -570,19 +570,6 @@ export function getInputType(
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
-
-            // Temporary part. Derived types may not be referenced directly by any operation
-            // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            if (model.DiscriminatorPropertyName && m.derivedModels) {
-                for (const dm of m.derivedModels) {
-                    getInputType(
-                        context,
-                        getFormattedType(program, dm),
-                        models,
-                        enums
-                    );
-                }
-            }
         }
 
         return model;

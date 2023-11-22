@@ -479,6 +479,245 @@
   },
   {
    "$id": "63",
+   "Name": "PollutedPet",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The base Pet model polluted by union in derived type",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "64",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsNullable": false,
+     "Type": {
+      "$id": "65",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "66",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name of the pet",
+     "Type": {
+      "$id": "67",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "68",
+   "Name": "PollutedDog",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The dog with a union type",
+   "IsNullable": false,
+   "DiscriminatorValue": "dog",
+   "BaseModel": {
+    "$ref": "63"
+   },
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "69",
+     "Name": "woof",
+     "SerializedName": "woof",
+     "Description": "Woof",
+     "Type": {
+      "$id": "70",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "71",
+     "Name": "color",
+     "SerializedName": "color",
+     "Description": "Color, could be specified by a string or by an array of int as RGB",
+     "Type": {
+      "$id": "72",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$id": "73",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       {
+        "$id": "74",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "75",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "76",
+   "Name": "UnpollutedCat",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The cat without a union type",
+   "IsNullable": false,
+   "DiscriminatorValue": "cat",
+   "BaseModel": {
+    "$ref": "63"
+   },
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "77",
+     "Name": "meow",
+     "SerializedName": "meow",
+     "Description": "Meow",
+     "Type": {
+      "$id": "78",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "79",
+   "Name": "BaseModel",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The base model",
+   "IsNullable": false,
+   "Usage": "None",
+   "Properties": [
+    {
+     "$id": "80",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name",
+     "Type": {
+      "$id": "81",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "82",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "The size",
+     "Type": {
+      "$id": "83",
+      "Name": "float64",
+      "Kind": "Float64",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "84",
+   "Name": "DerivedModel",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The derived model",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "79"
+   },
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "85",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "The age",
+     "Type": {
+      "$id": "86",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "87",
+   "Name": "DerivedModelWithUnion",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "This is a derived model with unions",
+   "IsNullable": false,
+   "BaseModel": {
+    "$ref": "79"
+   },
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "88",
+     "Name": "unionProperty",
+     "SerializedName": "unionProperty",
+     "Description": "The union property",
+     "Type": {
+      "$id": "89",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$id": "90",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       {
+        "$id": "91",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "92",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "93",
    "Name": "Cat",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The cat",
@@ -490,12 +729,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "64",
+     "$id": "94",
      "Name": "meow",
      "SerializedName": "meow",
      "Description": "Meow",
      "Type": {
-      "$id": "65",
+      "$id": "95",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -506,7 +745,7 @@
    ]
   },
   {
-   "$id": "66",
+   "$id": "96",
    "Name": "Dog",
    "Namespace": "ConfidentLevelsInTsp",
    "Description": "The dog",
@@ -518,253 +757,14 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "67",
+     "$id": "97",
      "Name": "woof",
      "SerializedName": "woof",
      "Description": "Woof",
      "Type": {
-      "$id": "68",
+      "$id": "98",
       "Name": "string",
       "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "69",
-   "Name": "PollutedPet",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The base Pet model polluted by union in derived type",
-   "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "70",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsNullable": false,
-     "Type": {
-      "$id": "71",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsDiscriminator": true
-    },
-    {
-     "$id": "72",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name of the pet",
-     "Type": {
-      "$id": "73",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "74",
-   "Name": "PollutedDog",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The dog with a union type",
-   "IsNullable": false,
-   "DiscriminatorValue": "dog",
-   "BaseModel": {
-    "$ref": "69"
-   },
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "75",
-     "Name": "woof",
-     "SerializedName": "woof",
-     "Description": "Woof",
-     "Type": {
-      "$id": "76",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "77",
-     "Name": "color",
-     "SerializedName": "color",
-     "Description": "Color, could be specified by a string or by an array of int as RGB",
-     "Type": {
-      "$id": "78",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "79",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       {
-        "$id": "80",
-        "Name": "Array",
-        "ElementType": {
-         "$id": "81",
-         "Name": "int32",
-         "Kind": "Int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
-       }
-      ],
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "82",
-   "Name": "UnpollutedCat",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The cat without a union type",
-   "IsNullable": false,
-   "DiscriminatorValue": "cat",
-   "BaseModel": {
-    "$ref": "69"
-   },
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "83",
-     "Name": "meow",
-     "SerializedName": "meow",
-     "Description": "Meow",
-     "Type": {
-      "$id": "84",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "85",
-   "Name": "BaseModel",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The base model",
-   "IsNullable": false,
-   "Usage": "None",
-   "Properties": [
-    {
-     "$id": "86",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "The name",
-     "Type": {
-      "$id": "87",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "88",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "The size",
-     "Type": {
-      "$id": "89",
-      "Name": "float64",
-      "Kind": "Float64",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "90",
-   "Name": "DerivedModel",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "The derived model",
-   "IsNullable": false,
-   "BaseModel": {
-    "$ref": "85"
-   },
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "91",
-     "Name": "age",
-     "SerializedName": "age",
-     "Description": "The age",
-     "Type": {
-      "$id": "92",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$id": "93",
-   "Name": "DerivedModelWithUnion",
-   "Namespace": "ConfidentLevelsInTsp",
-   "Description": "This is a derived model with unions",
-   "IsNullable": false,
-   "BaseModel": {
-    "$ref": "85"
-   },
-   "Usage": "Input",
-   "Properties": [
-    {
-     "$id": "94",
-     "Name": "unionProperty",
-     "SerializedName": "unionProperty",
-     "Description": "The union property",
-     "Type": {
-      "$id": "95",
-      "Name": "Union",
-      "UnionItemTypes": [
-       {
-        "$id": "96",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       {
-        "$id": "97",
-        "Name": "Array",
-        "ElementType": {
-         "$id": "98",
-         "Name": "int32",
-         "Kind": "Int32",
-         "IsNullable": false
-        },
-        "IsNullable": false
-       }
-      ],
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1586,7 +1586,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "69"
+        "$ref": "63"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1663,7 +1663,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "69"
+        "$ref": "63"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1695,7 +1695,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "74"
+        "$ref": "68"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1772,7 +1772,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "74"
+        "$ref": "68"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1804,7 +1804,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "82"
+        "$ref": "76"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -1881,7 +1881,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "82"
+        "$ref": "76"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -1913,7 +1913,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "90"
+        "$ref": "84"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2019,7 +2019,7 @@
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "93"
+        "$ref": "87"
        },
        "Location": "Body",
        "IsRequired": true,

@@ -49,6 +49,47 @@
   },
   {
    "$id": "7",
+   "Name": "Dinosaur",
+   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
+   "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "8",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsNullable": false,
+     "Type": {
+      "$id": "9",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "10",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "",
+     "Type": {
+      "$id": "11",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "12",
    "Name": "SeaGull",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
@@ -61,7 +102,7 @@
    "Properties": []
   },
   {
-   "$id": "8",
+   "$id": "13",
    "Name": "Sparrow",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
@@ -74,7 +115,7 @@
    "Properties": []
   },
   {
-   "$id": "9",
+   "$id": "14",
    "Name": "Goose",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single level inheritance.",
@@ -87,7 +128,7 @@
    "Properties": []
   },
   {
-   "$id": "10",
+   "$id": "15",
    "Name": "Eagle",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
    "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
@@ -99,12 +140,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "11",
+     "$id": "16",
      "Name": "friends",
      "SerializedName": "friends",
      "Description": "",
      "Type": {
-      "$id": "12",
+      "$id": "17",
       "Name": "Array",
       "ElementType": {
        "$ref": "2"
@@ -115,15 +156,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "13",
+     "$id": "18",
      "Name": "hate",
      "SerializedName": "hate",
      "Description": "",
      "Type": {
-      "$id": "14",
+      "$id": "19",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "15",
+       "$id": "20",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -137,7 +178,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "16",
+     "$id": "21",
      "Name": "partner",
      "SerializedName": "partner",
      "Description": "",
@@ -150,47 +191,6 @@
    ]
   },
   {
-   "$id": "17",
-   "Name": "Dinosaur",
-   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
-   "Description": "Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.",
-   "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
-   "Usage": "Output",
-   "Properties": [
-    {
-     "$id": "18",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "Discriminator",
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsNullable": false,
-     "Type": {
-      "$id": "19",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsDiscriminator": true
-    },
-    {
-     "$id": "20",
-     "Name": "size",
-     "SerializedName": "size",
-     "Description": "",
-     "Type": {
-      "$id": "21",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
    "$id": "22",
    "Name": "TRex",
    "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
@@ -198,7 +198,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "t-rex",
    "BaseModel": {
-    "$ref": "17"
+    "$ref": "7"
    },
    "Usage": "Output",
    "Properties": []
@@ -766,7 +766,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "17"
+        "$ref": "7"
        },
        "BodyMediaType": "Json",
        "Headers": [],

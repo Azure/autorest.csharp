@@ -83,6 +83,43 @@
   },
   {
    "$id": "10",
+   "Name": "Snake",
+   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "Description": "Test fixed enum type for discriminator",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "11",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "discriminator property",
+     "Type": {
+      "$ref": "4"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "12",
+     "Name": "length",
+     "SerializedName": "length",
+     "Description": "Length of the snake",
+     "Type": {
+      "$id": "13",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "14",
    "Name": "Golden",
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "Golden dog model",
@@ -95,43 +132,6 @@
    "Properties": []
   },
   {
-   "$id": "11",
-   "Name": "Snake",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Test fixed enum type for discriminator",
-   "IsNullable": false,
-   "DiscriminatorPropertyName": "kind",
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "12",
-     "Name": "kind",
-     "SerializedName": "kind",
-     "Description": "discriminator property",
-     "Type": {
-      "$ref": "4"
-     },
-     "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": true
-    },
-    {
-     "$id": "13",
-     "Name": "length",
-     "SerializedName": "length",
-     "Description": "Length of the snake",
-     "Type": {
-      "$id": "14",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
    "$id": "15",
    "Name": "Cobra",
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
@@ -139,7 +139,7 @@
    "IsNullable": false,
    "DiscriminatorValue": "cobra",
    "BaseModel": {
-    "$ref": "11"
+    "$ref": "10"
    },
    "Usage": "RoundTrip",
    "Properties": []
@@ -547,7 +547,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -577,7 +577,7 @@
        "NameInRequest": "input",
        "Description": "Snake to create",
        "Type": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -716,7 +716,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -778,7 +778,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
