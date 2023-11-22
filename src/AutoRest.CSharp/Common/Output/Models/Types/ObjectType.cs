@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        public static readonly List<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
+        public static readonly IReadOnlyList<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
             " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
             "The available derived classes include " };
 
@@ -98,7 +98,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 List<FormattableString> childrenList = new List<FormattableString>();
                 foreach (var implementation in Discriminator.Implementations)
                 {
-                    childrenList.Add($"{implementation.Type.Implementation.Type:C}");
+                    if (!implementation.Type.IsPublic)
+                        continue;
+                    childrenList.Add($"{implementation.Type:C}");
                 }
                 return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}.";
             }
