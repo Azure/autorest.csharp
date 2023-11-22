@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtSupersetFlattenInheritance
 {
     /// <summary>
-    /// A class representing a collection of <see cref="TrackedResourceModel1Resource" /> and their operations.
-    /// Each <see cref="TrackedResourceModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="TrackedResourceModel1Collection" /> instance call the GetTrackedResourceModel1s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="TrackedResourceModel1Resource"/> and their operations.
+    /// Each <see cref="TrackedResourceModel1Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="TrackedResourceModel1Collection"/> instance call the GetTrackedResourceModel1s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class TrackedResourceModel1Collection : ArmCollection, IEnumerable<TrackedResourceModel1Resource>, IAsyncEnumerable<TrackedResourceModel1Resource>
     {
@@ -219,7 +219,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TrackedResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TrackedResourceModel1Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TrackedResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TrackedResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TrackedResourceModel1Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TrackedResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _trackedResourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

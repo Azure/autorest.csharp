@@ -52,7 +52,7 @@ namespace MgmtExtensionResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubSingletonResource"/> object. </returns>
         public static SubSingletonResource GetSubSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -71,7 +71,7 @@ namespace MgmtExtensionResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource"/> object. </returns>
         public static SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -90,7 +90,7 @@ namespace MgmtExtensionResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource"/> object. </returns>
         public static BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -109,7 +109,7 @@ namespace MgmtExtensionResource
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
-        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource"/> object. </returns>
         public static ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
             Argument.AssertNotNull(client, nameof(client));
@@ -203,7 +203,7 @@ namespace MgmtExtensionResource
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubSingletonResource"/> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));

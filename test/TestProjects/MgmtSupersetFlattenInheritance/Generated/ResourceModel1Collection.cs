@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtSupersetFlattenInheritance
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ResourceModel1Resource" /> and their operations.
-    /// Each <see cref="ResourceModel1Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ResourceModel1Collection" /> instance call the GetResourceModel1s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ResourceModel1Resource"/> and their operations.
+    /// Each <see cref="ResourceModel1Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="ResourceModel1Collection"/> instance call the GetResourceModel1s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ResourceModel1Collection : ArmCollection, IEnumerable<ResourceModel1Resource>, IAsyncEnumerable<ResourceModel1Resource>
     {
@@ -219,7 +219,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ResourceModel1Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ResourceModel1Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ResourceModel1Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ResourceModel1Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ResourceModel1Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceModel1RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

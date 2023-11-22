@@ -587,6 +587,6 @@ namespace AutoRest.CSharp.Mgmt.Models
         }
 
         private Func<bool, FormattableString> EnsureReturnsDescription()
-            => (isAsync) => $"{(isAsync ? "An async" : "A")} collection of <see cref=\"{ListItemType!}\" /> that may take multiple service requests to iterate over.";
+            => (isAsync) => $"{(isAsync ? "An async" : "A")} collection of {ListItemType!:C} that may take multiple service requests to iterate over.";
     }
 }

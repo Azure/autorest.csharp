@@ -20,9 +20,9 @@ namespace MgmtMultipleParentResource
 {
     /// <summary>
     /// A Class representing a SubParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SubParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetSubParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TheParentResource" /> using the GetSubParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="SubParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetSubParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TheParentResource"/> using the GetSubParent method.
     /// </summary>
     public partial class SubParentResource : ArmResource
     {
@@ -46,7 +46,7 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "SubParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal SubParentResource(ArmClient client, SubParentData data) : this(client, data.Id)

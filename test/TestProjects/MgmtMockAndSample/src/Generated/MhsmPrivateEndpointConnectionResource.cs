@@ -19,9 +19,9 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a MhsmPrivateEndpointConnection along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="MhsmPrivateEndpointConnectionResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetMhsmPrivateEndpointConnectionResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ManagedHsmResource" /> using the GetMhsmPrivateEndpointConnection method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="MhsmPrivateEndpointConnectionResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetMhsmPrivateEndpointConnectionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ManagedHsmResource"/> using the GetMhsmPrivateEndpointConnection method.
     /// </summary>
     public partial class MhsmPrivateEndpointConnectionResource : ArmResource
     {
@@ -45,7 +45,7 @@ namespace MgmtMockAndSample
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "MhsmPrivateEndpointConnectionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MhsmPrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal MhsmPrivateEndpointConnectionResource(ArmClient client, MhsmPrivateEndpointConnectionData data) : this(client, data.Id)

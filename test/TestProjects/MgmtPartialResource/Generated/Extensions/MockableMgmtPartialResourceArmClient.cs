@@ -37,11 +37,11 @@ namespace MgmtPartialResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="PublicIPAddressResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PublicIPAddressResource.CreateResourceIdentifier" /> to create a <see cref="PublicIPAddressResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="PublicIPAddressResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PublicIPAddressResource.CreateResourceIdentifier" /> to create a <see cref="PublicIPAddressResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PublicIPAddressResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PublicIPAddressResource"/> object. </returns>
         public virtual PublicIPAddressResource GetPublicIPAddressResource(ResourceIdentifier id)
         {
             PublicIPAddressResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtPartialResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ConfigurationProfileAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ConfigurationProfileAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="ConfigurationProfileAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ConfigurationProfileAssignmentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ConfigurationProfileAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="ConfigurationProfileAssignmentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource"/> object. </returns>
         public virtual ConfigurationProfileAssignmentResource GetConfigurationProfileAssignmentResource(ResourceIdentifier id)
         {
             ConfigurationProfileAssignmentResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtPartialResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="PartialVmssResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PartialVmssResource.CreateResourceIdentifier" /> to create a <see cref="PartialVmssResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="PartialVmssResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PartialVmssResource.CreateResourceIdentifier" /> to create a <see cref="PartialVmssResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PartialVmssResource" /> object. </returns>
+        /// <returns> Returns a <see cref="PartialVmssResource"/> object. </returns>
         public virtual PartialVmssResource GetPartialVmssResource(ResourceIdentifier id)
         {
             PartialVmssResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtPartialResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineMgmtPartialResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineMgmtPartialResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineMgmtPartialResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="VirtualMachineMgmtPartialResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineMgmtPartialResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineMgmtPartialResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource"/> object. </returns>
         public virtual VirtualMachineMgmtPartialResource GetVirtualMachineMgmtPartialResource(ResourceIdentifier id)
         {
             VirtualMachineMgmtPartialResource.ValidateResourceId(id);

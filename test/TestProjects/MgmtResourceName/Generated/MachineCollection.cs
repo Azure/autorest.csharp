@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtResourceName
 {
     /// <summary>
-    /// A class representing a collection of <see cref="MachineResource" /> and their operations.
-    /// Each <see cref="MachineResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="MachineCollection" /> instance call the GetMachines method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="MachineResource"/> and their operations.
+    /// Each <see cref="MachineResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="MachineCollection"/> instance call the GetMachines method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class MachineCollection : ArmCollection, IEnumerable<MachineResource>, IAsyncEnumerable<MachineResource>
     {
@@ -219,7 +219,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="MachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MachineResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="MachineResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MachineResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

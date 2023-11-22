@@ -99,9 +99,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             var extensionVariable = (ValueExpression)KnownParameters.ArmClient;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
             var body = Snippets.Return(
-                    extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),
-                    new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable))
-                    ));
+                extensionVariable.Invoke(nameof(ArmClient.GetCachedClient),
+                new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable))
+                ));
             return new(signature, body);
         }
 
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 description,
                 MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
                 resource.Type,
-                $"Returns a <see cref=\"{resource.Type.Name}\" /> object.",
+                $"Returns a {resource.Type:C} object.",
                 parameters);
 
             if (IsArmCore)

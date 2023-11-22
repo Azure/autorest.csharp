@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtCustomizations
 {
     /// <summary>
-    /// A class representing a collection of <see cref="PetStoreResource" /> and their operations.
-    /// Each <see cref="PetStoreResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="PetStoreCollection" /> instance call the GetPetStores method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="PetStoreResource"/> and their operations.
+    /// Each <see cref="PetStoreResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="PetStoreCollection"/> instance call the GetPetStores method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class PetStoreCollection : ArmCollection, IEnumerable<PetStoreResource>, IAsyncEnumerable<PetStoreResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtCustomizations
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PetStoreResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="PetStoreResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<PetStoreResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _petStoreRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -245,7 +245,7 @@ namespace MgmtCustomizations
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PetStoreResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="PetStoreResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<PetStoreResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _petStoreRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);

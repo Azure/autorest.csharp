@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Type,
                 null,
-                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
+                Description: $"Initializes a new instance of the {Type:C} class for mocking.",
                 Modifiers: Protected,
                 Parameters: Array.Empty<Parameter>());
         }
@@ -330,7 +330,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         BuildDescriptionForSingletonResource(resource),
                         MethodModifiers,
                         resource.Type,
-                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                        $"Returns a {resource.Type:C} object.",
                         Array.Empty<Parameter>());
             var methodBody = Snippets.Return(
                 Snippets.New.Instance(

@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtPartialResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ConfigurationProfileAssignmentResource" /> and their operations.
-    /// Each <see cref="ConfigurationProfileAssignmentResource" /> in the collection will belong to the same instance of <see cref="VirtualMachineMgmtPartialResource" />.
-    /// To get a <see cref="ConfigurationProfileAssignmentCollection" /> instance call the GetConfigurationProfileAssignments method from an instance of <see cref="VirtualMachineMgmtPartialResource" />.
+    /// A class representing a collection of <see cref="ConfigurationProfileAssignmentResource"/> and their operations.
+    /// Each <see cref="ConfigurationProfileAssignmentResource"/> in the collection will belong to the same instance of <see cref="VirtualMachineMgmtPartialResource"/>.
+    /// To get a <see cref="ConfigurationProfileAssignmentCollection"/> instance call the GetConfigurationProfileAssignments method from an instance of <see cref="VirtualMachineMgmtPartialResource"/>.
     /// </summary>
     public partial class ConfigurationProfileAssignmentCollection : ArmCollection, IEnumerable<ConfigurationProfileAssignmentResource>, IAsyncEnumerable<ConfigurationProfileAssignmentResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtPartialResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ConfigurationProfileAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ConfigurationProfileAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ConfigurationProfileAssignmentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _configurationProfileAssignmentRestClient.CreateListByVirtualMachinesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -244,7 +244,7 @@ namespace MgmtPartialResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ConfigurationProfileAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ConfigurationProfileAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ConfigurationProfileAssignmentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _configurationProfileAssignmentRestClient.CreateListByVirtualMachinesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
