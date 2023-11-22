@@ -558,7 +558,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
+                Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
             setUsage(context, m, model);
 
@@ -571,23 +571,16 @@ export function getInputType(
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
 
-            // add the derived models into the list
-            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
-                model.DerivedModels = [];
+            // Temporary part. Derived types may not be referenced directly by any operation
+            // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
+            if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    // skip open generic type model which has un-instanced template parameter. e.g.
-                    // model GenericModel<T> { value: T }
-                    if (dm.isFinished) {
-                        const derivedModel = getInputType(
-                            context,
-                            getFormattedType(program, dm),
-                            models,
-                            enums
-                        );
-                        model.DerivedModels.push(
-                            derivedModel as InputModelType
-                        );
-                    }
+                    getInputType(
+                        context,
+                        getFormattedType(program, dm),
+                        models,
+                        enums
+                    );
                 }
             }
         }
