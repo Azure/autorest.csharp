@@ -17,7 +17,7 @@ namespace xml_service.Models
 {
     public partial class Banana : IXmlSerializable, IPersistableModel<Banana>
     {
-        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "banana");
             if (Optional.IsDefined(Name))
@@ -41,7 +41,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static Banana DeserializeBanana(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -73,7 +73,7 @@ namespace xml_service.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        _Write(writer, null, options);
+                        WriteInternal(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

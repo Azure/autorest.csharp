@@ -20,7 +20,7 @@ namespace MgmtXmlDeserialization.Models
 {
     internal partial class XmlCollection : IUtf8JsonSerializable, IJsonModel<XmlCollection>, IXmlSerializable, IPersistableModel<XmlCollection>
     {
-        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlCollection");
             if (Optional.IsDefined(Count))
@@ -45,7 +45,7 @@ namespace MgmtXmlDeserialization.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static XmlCollection DeserializeXmlCollection(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -194,7 +194,7 @@ namespace MgmtXmlDeserialization.Models
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        _Write(writer, null, options);
+                        WriteInternal(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {

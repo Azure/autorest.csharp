@@ -20,7 +20,7 @@ namespace MgmtXmlDeserialization
 {
     public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModel<XmlInstanceData>, IXmlSerializable, IPersistableModel<XmlInstanceData>
     {
-        private void _Write(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
         {
             writer.WriteStartElement(nameHint ?? "XmlInstance");
             if (options.Format != "W")
@@ -50,7 +50,7 @@ namespace MgmtXmlDeserialization
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => _Write(writer, nameHint, new ModelReaderWriterOptions("W"));
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
 
         internal static XmlInstanceData DeserializeXmlInstanceData(XElement element, ModelReaderWriterOptions options = null)
         {
@@ -199,7 +199,7 @@ namespace MgmtXmlDeserialization
                     {
                         using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
-                        _Write(writer, null, options);
+                        WriteInternal(writer, null, options);
                         writer.Flush();
                         if (stream.Position > int.MaxValue)
                         {
