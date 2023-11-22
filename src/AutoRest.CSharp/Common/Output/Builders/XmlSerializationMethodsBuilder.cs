@@ -33,14 +33,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
             yield return new Method
             (
-                new MethodSignature(Serializations.XmlWriteMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
+                new MethodSignature(serialization.WriteXmlMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
                 WriteObject(serialization, xmlWriter, nameHint, options).ToArray()
             );
 
             yield return new Method
             (
                 new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
-                This.Invoke(Serializations.XmlWriteMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
+                This.Invoke(serialization.WriteXmlMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
             );
         }
 

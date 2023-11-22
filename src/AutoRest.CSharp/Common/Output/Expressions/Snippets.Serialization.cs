@@ -17,8 +17,6 @@ namespace AutoRest.CSharp.Common.Output.Models
     {
         public static class Serializations
         {
-            public const string XmlWriteMethodName = "_Write";
-
             public static StringExpression WireFormat = Literal("W");
             public static StringExpression JsonFormat = Literal("J");
             public static StringExpression XmlFormat = Literal("X");

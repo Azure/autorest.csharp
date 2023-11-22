@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             yield return new
             (
                 new MethodSignature(nameof(IPersistableModel<object>.Write), null, null, MethodSignatureModifiers.None, typeof(BinaryData), null, new[] { KnownParameters.Serializations.Options }, ExplicitInterface: iModelTInterface),
-                BuildModelWriteMethodBody(json != null, xml != null, options, iModelTInterface).ToArray()
+                BuildModelWriteMethodBody(json, xml, options, iModelTInterface).ToArray()
             );
 
             // T IPersistableModel<T>.Create(BinaryData data, ModelReaderWriterOptions options)
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 );
             }
 
-            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(bool hasJson, bool hasXml, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            static IEnumerable<MethodBodyStatement> BuildModelWriteMethodBody(JsonObjectSerialization? json, XmlObjectSerialization? xml, ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
             {
                 // var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
                 yield return Serializations.GetConcreteFormat(options, iModelTInterface, out var format);
@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 var switchStatement = new SwitchStatement(format);
 
-                if (hasJson)
+                if (json != null)
                 {
                     var jsonCase = new SwitchCase(Serializations.JsonFormat,
                         Return(new InvokeStaticMethodExpression(typeof(ModelReaderWriter), nameof(ModelReaderWriter.Write), new[] { This, options }))
@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     switchStatement.Add(jsonCase);
                 }
 
-                if (hasXml)
+                if (xml != null)
                 {
                     /*  using MemoryStream stream = new MemoryStream();
                         using XmlWriter writer = XmlWriter.Create(stream);
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         {
                             UsingDeclare("stream", typeof(MemoryStream), New.Instance(typeof(MemoryStream)), out var stream),
                             UsingDeclare("writer", typeof(XmlWriter), new InvokeStaticMethodExpression(typeof(XmlWriter), nameof(XmlWriter.Create), new[] { stream }), out var xmlWriter),
-                            new InvokeInstanceMethodStatement(null, Serializations.XmlWriteMethodName, new[] { xmlWriter, Null, options }, false),
+                            new InvokeInstanceMethodStatement(null, xml.WriteXmlMethodName, new[] { xmlWriter, Null, options }, false),
                             xmlWriter.Invoke(nameof(MemoryStream.Flush)).ToStatement(),
                             new IfElseStatement(GreaterThan(stream.Property(nameof(Stream.Position)), IntExpression.MaxValue),
                                 // return BinaryData.FromStream(stream);

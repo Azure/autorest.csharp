@@ -16,7 +16,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
             XmlObjectElementSerialization[] elements,
             XmlObjectAttributeSerialization[] attributes,
             XmlObjectArraySerialization[] embeddedArrays,
-            XmlObjectContentSerialization? contentSerialization)
+            XmlObjectContentSerialization? contentSerialization,
+            string? writeXmlMethodName = null)
         {
             Type = model.Type;
             Elements = elements;
@@ -24,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
             Name = name;
             EmbeddedArrays = embeddedArrays;
             ContentSerialization = contentSerialization;
+            WriteXmlMethodName = writeXmlMethodName ?? "WriteInternal";
 
             // select interface model type here
             var modelType = model.IsUnknownDerivedType && model.Inherits is { IsFrameworkType: false, Implementation: { } baseModel } ? baseModel.Type : model.Type;
@@ -39,6 +41,8 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
         public XmlObjectArraySerialization[] EmbeddedArrays { get; }
         public XmlObjectContentSerialization? ContentSerialization { get; }
         public CSharpType Type { get; }
+
+        public string WriteXmlMethodName { get; }
 
         /// <summary>
         /// The interface IXmlSerializable
