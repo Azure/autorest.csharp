@@ -58,9 +58,9 @@ namespace MgmtOmitOperationGroups
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="model2SName"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -86,9 +86,9 @@ namespace MgmtOmitOperationGroups
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="model2SName"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="model2SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>

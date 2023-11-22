@@ -44,7 +44,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Model GetModelClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace Parameters.Spread
         }
 
         /// <summary> Initializes a new instance of Alias. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Alias GetAliasClient(string apiVersion = "1.0.0")
         {

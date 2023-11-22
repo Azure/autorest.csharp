@@ -53,7 +53,7 @@ namespace ModelShapes
             return message;
         }
 
-        /// <param name="value"> The InputModel to use. </param>
+        /// <param name="value"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response> InputAsync(InputModel value, CancellationToken cancellationToken = default)
@@ -74,7 +74,7 @@ namespace ModelShapes
             }
         }
 
-        /// <param name="value"> The InputModel to use. </param>
+        /// <param name="value"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response Input(InputModel value, CancellationToken cancellationToken = default)
@@ -112,7 +112,7 @@ namespace ModelShapes
             return message;
         }
 
-        /// <param name="value"> The MixedModel to use. </param>
+        /// <param name="value"> The <see cref="MixedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response<MixedModel>> MixedAsync(MixedModel value, CancellationToken cancellationToken = default)
@@ -138,7 +138,7 @@ namespace ModelShapes
             }
         }
 
-        /// <param name="value"> The MixedModel to use. </param>
+        /// <param name="value"> The <see cref="MixedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response<MixedModel> Mixed(MixedModel value, CancellationToken cancellationToken = default)
@@ -232,7 +232,7 @@ namespace ModelShapes
             return message;
         }
 
-        /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
+        /// <param name="value"> The <see cref="MixedModelWithReadonlyProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response<MixedModelWithReadonlyProperty>> MixedreadonlyAsync(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
@@ -258,7 +258,7 @@ namespace ModelShapes
             }
         }
 
-        /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
+        /// <param name="value"> The <see cref="MixedModelWithReadonlyProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response<MixedModelWithReadonlyProperty> Mixedreadonly(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
@@ -305,8 +305,8 @@ namespace ModelShapes
             return message;
         }
 
-        /// <param name="code"> The String to use. </param>
-        /// <param name="status"> The String to use. </param>
+        /// <param name="code"> The <see cref="string"/> to use. </param>
+        /// <param name="status"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> FlattenedParameterOperationAsync(string code = null, string status = null, CancellationToken cancellationToken = default)
         {
@@ -321,8 +321,8 @@ namespace ModelShapes
             }
         }
 
-        /// <param name="code"> The String to use. </param>
-        /// <param name="status"> The String to use. </param>
+        /// <param name="code"> The <see cref="string"/> to use. </param>
+        /// <param name="status"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response FlattenedParameterOperation(string code = null, string status = null, CancellationToken cancellationToken = default)
         {
