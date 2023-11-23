@@ -281,10 +281,13 @@ namespace AutoRest.CSharp.Common.Input
 
             foreach (var schema in schemas)
             {
-                var derived = schema.Children?.Immediate.OfType<ObjectSchema>().Select(s => _modelsCache[s]);
+                var derived = schema.Children?.Immediate.OfType<ObjectSchema>();
                 if (derived != null)
                 {
-                    _derivedModelsCache[schema].AddRange(derived);
+                    foreach (var item in derived)
+                    {
+                        _derivedModelsCache[item].Add(_modelsCache[schema]);
+                    }
                 }
             }
 
