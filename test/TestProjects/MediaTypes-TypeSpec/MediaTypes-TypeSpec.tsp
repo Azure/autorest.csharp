@@ -24,14 +24,6 @@ model Body {
     id: string;
 }
 
-@route("/oneBinaryBodyBinaryContentType")
-@convenientAPI(true)
-op oneBinaryBodyBinaryContentType(@body body: bytes, @header contentType: "application/octet-stream"): void;
-
-@route("/oneBinaryBodyJsonContentType")
-@convenientAPI(true)
-op oneBinaryBodyJsonContentType(@body body: bytes, @header contentType: "application/json"): void;
-
 @route("/oneBinaryBodyTwoContentTypes")
 @convenientAPI(true)
 op oneBinaryBodyTwoContentTypes(@body body: bytes, @header contentType: "application/json" | "application/octet-stream"): void;

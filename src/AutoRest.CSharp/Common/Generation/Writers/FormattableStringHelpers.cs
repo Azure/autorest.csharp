@@ -111,6 +111,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
+                    // TODO: Currently only BinaryData is considered, other types are still in discussion
                     case { IsFrameworkType: true } when contentType != null && IsContentTypeBinary(contentType) && parameter.RequestLocation == RequestLocation.Body:
                         return $"{parameter.Name:I}";
                     case { IsFrameworkType: true }:
@@ -132,7 +133,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{parameter.Name:I}{conversionMethod}";
         }
 
-        // TO-DO: This is a temporary solution. We will move this part to some common place.
+        // TODO: This is a temporary solution. We will move this part to some common place.
         private static bool IsContentTypeBinary(string contentType)
         {
             var typeSubs = contentType.Split('/');

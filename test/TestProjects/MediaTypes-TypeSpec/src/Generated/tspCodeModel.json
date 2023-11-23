@@ -39,7 +39,7 @@
    "Operations": [
     {
      "$id": "6",
-     "Name": "oneBinaryBodyBinaryContentType",
+     "Name": "oneBinaryBodyTwoContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Parameters": [
       {
@@ -68,269 +68,13 @@
        "NameInRequest": "content-type",
        "Type": {
         "$id": "10",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "11",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "application/octet-stream",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "12",
-        "Type": {
-         "$ref": "10"
-        },
-        "Value": "application/octet-stream"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "13",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$id": "14",
-        "Name": "bytes",
-        "Kind": "Bytes",
-        "IsNullable": false
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "15",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "16",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "17",
-        "Type": {
-         "$ref": "16"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "18",
-       "Name": "apiVersion",
-       "NameInRequest": "api-version",
-       "Description": "",
-       "Type": {
-        "$id": "19",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": true,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "IsResourceParameter": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Client",
-       "DefaultValue": {
-        "$id": "20",
-        "Type": {
-         "$id": "21",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "2021-03-25"
-       }
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "22",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Binary",
-     "Uri": "{endpoint}",
-     "Path": "/oneBinaryBodyBinaryContentType",
-     "RequestMediaTypes": [
-      "application/octet-stream"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "23",
-     "Name": "oneBinaryBodyJsonContentType",
-     "ResourceName": "MultipleMediaTypes",
-     "Parameters": [
-      {
-       "$ref": "7"
-      },
-      {
-       "$id": "24",
-       "Name": "contentType",
-       "NameInRequest": "content-type",
-       "Type": {
-        "$id": "25",
-        "Name": "Literal",
-        "LiteralValueType": {
-         "$id": "26",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "Value": "application/json",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "DefaultValue": {
-        "$id": "27",
-        "Type": {
-         "$ref": "25"
-        },
-        "Value": "application/json"
-       },
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant"
-      },
-      {
-       "$id": "28",
-       "Name": "body",
-       "NameInRequest": "body",
-       "Type": {
-        "$id": "29",
-        "Name": "bytes",
-        "Kind": "Bytes",
-        "IsNullable": false
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "30",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "31",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "32",
-        "Type": {
-         "$ref": "31"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "18"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "33",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Binary",
-     "Uri": "{endpoint}",
-     "Path": "/oneBinaryBodyJsonContentType",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "34",
-     "Name": "oneBinaryBodyTwoContentTypes",
-     "ResourceName": "MultipleMediaTypes",
-     "Parameters": [
-      {
-       "$ref": "7"
-      },
-      {
-       "$id": "35",
-       "Name": "contentType",
-       "NameInRequest": "content-type",
-       "Type": {
-        "$id": "36",
         "Name": "Union",
         "UnionItemTypes": [
          {
-          "$id": "37",
+          "$id": "11",
           "Name": "Literal",
           "LiteralValueType": {
-           "$id": "38",
+           "$id": "12",
            "Name": "String",
            "Kind": "String",
            "IsNullable": false
@@ -339,10 +83,10 @@
           "IsNullable": false
          },
          {
-          "$id": "39",
+          "$id": "13",
           "Name": "Literal",
           "LiteralValueType": {
-           "$id": "40",
+           "$id": "14",
            "Name": "String",
            "Kind": "String",
            "IsNullable": false
@@ -364,11 +108,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "41",
+       "$id": "15",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "42",
+        "$id": "16",
         "Name": "bytes",
         "Kind": "Bytes",
         "IsNullable": false
@@ -384,11 +128,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "43",
+       "$id": "17",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "18",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -403,20 +147,48 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "19",
         "Type": {
-         "$ref": "44"
+         "$ref": "18"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "18"
+       "$id": "20",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "21",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "22",
+        "Type": {
+         "$id": "23",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2021-03-25"
+       }
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "24",
        "StatusCodes": [
         204
        ],
@@ -438,7 +210,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "25",
      "Name": "oneStringBodyThreeContentTypes",
      "ResourceName": "MultipleMediaTypes",
      "Parameters": [
@@ -446,18 +218,18 @@
        "$ref": "7"
       },
       {
-       "$id": "48",
+       "$id": "26",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "49",
+        "$id": "27",
         "Name": "Union",
         "UnionItemTypes": [
          {
-          "$id": "50",
+          "$id": "28",
           "Name": "Literal",
           "LiteralValueType": {
-           "$id": "51",
+           "$id": "29",
            "Name": "String",
            "Kind": "String",
            "IsNullable": false
@@ -466,10 +238,10 @@
           "IsNullable": false
          },
          {
-          "$id": "52",
+          "$id": "30",
           "Name": "Literal",
           "LiteralValueType": {
-           "$id": "53",
+           "$id": "31",
            "Name": "String",
            "Kind": "String",
            "IsNullable": false
@@ -478,10 +250,10 @@
           "IsNullable": false
          },
          {
-          "$id": "54",
+          "$id": "32",
           "Name": "Literal",
           "LiteralValueType": {
-           "$id": "55",
+           "$id": "33",
            "Name": "String",
            "Kind": "String",
            "IsNullable": false
@@ -503,11 +275,11 @@
        "Kind": "Constant"
       },
       {
-       "$id": "56",
+       "$id": "34",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
-        "$id": "57",
+        "$id": "35",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -523,11 +295,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "58",
+       "$id": "36",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "59",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -542,20 +314,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "38",
         "Type": {
-         "$ref": "59"
+         "$ref": "37"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "18"
+       "$ref": "20"
       }
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "39",
        "StatusCodes": [
         204
        ],
@@ -578,7 +350,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "62",
+     "$id": "40",
      "Name": "oneModelBodyOneContentType",
      "ResourceName": "MultipleMediaTypes",
      "Parameters": [
@@ -586,14 +358,14 @@
        "$ref": "7"
       },
       {
-       "$id": "63",
+       "$id": "41",
        "Name": "contentType",
        "NameInRequest": "content-type",
        "Type": {
-        "$id": "64",
+        "$id": "42",
         "Name": "Literal",
         "LiteralValueType": {
-         "$id": "65",
+         "$id": "43",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -603,9 +375,9 @@
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "66",
+        "$id": "44",
         "Type": {
-         "$ref": "64"
+         "$ref": "42"
         },
         "Value": "application/json"
        },
@@ -619,7 +391,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "67",
+       "$id": "45",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -636,11 +408,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "68",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "69",
+        "$id": "47",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -655,20 +427,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "70",
+        "$id": "48",
         "Type": {
-         "$ref": "69"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "18"
+       "$ref": "20"
       }
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "49",
        "StatusCodes": [
         204
        ],
@@ -690,7 +462,7 @@
     }
    ],
    "Protocol": {
-    "$id": "72"
+    "$id": "50"
    },
    "Creatable": true
   }

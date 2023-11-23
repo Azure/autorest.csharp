@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (converter.ConvenienceSpread == null)
                     {
-                        // TO-DO: A temporary solution to only take the fisrt content type if there are multiple
+                        // TODO: A temporary solution to only take the fisrt content type if there are multiple
                         var parameter = convenienceParameter.GetConversionFormattable(protocolParameter.Type, RequestMediaTypes?.FirstOrDefault());
                         if (protocolParameter.Type.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
                         {
