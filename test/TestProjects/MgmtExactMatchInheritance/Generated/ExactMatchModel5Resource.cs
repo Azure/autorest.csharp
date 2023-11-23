@@ -166,7 +166,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ExactMatchModel5 to use. </param>
+        /// <param name="data"> The <see cref="ExactMatchModel5Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ExactMatchModel5Resource>> UpdateAsync(WaitUntil waitUntil, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
@@ -203,7 +203,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ExactMatchModel5 to use. </param>
+        /// <param name="data"> The <see cref="ExactMatchModel5Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ExactMatchModel5Resource> Update(WaitUntil waitUntil, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
