@@ -47,7 +47,7 @@ namespace OpenAI
             _endpoint = endpoint;
         }
 
-        /// <param name="edit"> The CreateEditRequest to use. </param>
+        /// <param name="edit"> The <see cref="CreateEditRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="edit"/> is null. </exception>
         [Obsolete("deprecated")]
@@ -61,7 +61,7 @@ namespace OpenAI
             return Result.FromValue(CreateEditResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <param name="edit"> The CreateEditRequest to use. </param>
+        /// <param name="edit"> The <see cref="CreateEditRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="edit"/> is null. </exception>
         [Obsolete("deprecated")]

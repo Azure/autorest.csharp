@@ -135,8 +135,8 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(Model,int?,CancellationToken)']/*" />
@@ -151,8 +151,8 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)']/*" />
@@ -182,7 +182,7 @@ namespace ConvenienceInCadl
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -222,7 +222,7 @@ namespace ConvenienceInCadl
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -871,7 +871,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryValueAsync(int?,CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ProtocolOptionalQueryValueAsync(int? optional = null, CancellationToken cancellationToken = default)
@@ -892,7 +892,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryValue(int?,CancellationToken)']/*" />
         public virtual Response<Model> ProtocolOptionalQueryValue(int? optional = null, CancellationToken cancellationToken = default)
@@ -927,7 +927,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -963,7 +963,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -985,7 +985,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryValueAsync(int,CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ProtocolRequiredQueryValueAsync(int required, CancellationToken cancellationToken = default)
@@ -1006,7 +1006,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryValue(int,CancellationToken)']/*" />
         public virtual Response<Model> ProtocolRequiredQueryValue(int required, CancellationToken cancellationToken = default)
@@ -1041,7 +1041,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1077,7 +1077,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1099,7 +1099,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="optional"> The Model to use. </param>
+        /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ProtocolOptionalModelAsync(Model optional = null, CancellationToken cancellationToken = default)
@@ -1111,7 +1111,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="optional"> The Model to use. </param>
+        /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(Model,CancellationToken)']/*" />
         public virtual Response ProtocolOptionalModel(Model optional = null, CancellationToken cancellationToken = default)
@@ -1195,7 +1195,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(Model,CancellationToken)']/*" />
@@ -1210,7 +1210,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(Model,CancellationToken)']/*" />
@@ -1303,7 +1303,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional query parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalValueAsync(int?,CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ConvenienceOptionalQueryWithOptionalValueAsync(int? optional = null, CancellationToken cancellationToken = default)
@@ -1324,7 +1324,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional query parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)']/*" />
         public virtual Response<Model> ConvenienceOptionalQueryWithOptionalValue(int? optional = null, CancellationToken cancellationToken = default)
@@ -1359,7 +1359,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1395,7 +1395,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1417,7 +1417,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with required query parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalValueAsync(int,CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ConvenienceRequiredQueryWithOptionalValueAsync(int required, CancellationToken cancellationToken = default)
@@ -1438,7 +1438,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with required query parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalValue(int,CancellationToken)']/*" />
         public virtual Response<Model> ConvenienceRequiredQueryWithOptionalValue(int required, CancellationToken cancellationToken = default)
@@ -1473,7 +1473,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1509,7 +1509,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1531,7 +1531,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(int?,CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ConvenienceOptionalQueryWithRequiredAsync(int? optional = null, CancellationToken cancellationToken = default)
@@ -1542,7 +1542,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(int?,CancellationToken)']/*" />
         public virtual Response<Model> ConvenienceOptionalQueryWithRequired(int? optional = null, CancellationToken cancellationToken = default)
@@ -1567,7 +1567,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1603,7 +1603,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1625,7 +1625,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(int,CancellationToken)']/*" />
         public virtual async Task<Response<Model>> ConvenienceRequiredQueryWithRequiredAsync(int required, CancellationToken cancellationToken = default)
@@ -1636,7 +1636,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(int,CancellationToken)']/*" />
         public virtual Response<Model> ConvenienceRequiredQueryWithRequired(int required, CancellationToken cancellationToken = default)
@@ -1661,7 +1661,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1697,7 +1697,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="required"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="int"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -1719,7 +1719,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Model to use. </param>
+        /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(Model optional = null, CancellationToken cancellationToken = default)
@@ -1731,7 +1731,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Model to use. </param>
+        /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(Model,CancellationToken)']/*" />
         public virtual Response ConvenienceOptionalModelWithOptional(Model optional = null, CancellationToken cancellationToken = default)
@@ -1815,7 +1815,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with required body parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(Model,CancellationToken)']/*" />
@@ -1830,7 +1830,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with required body parameter and optional RequestContext and convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(Model,CancellationToken)']/*" />
@@ -1923,7 +1923,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Model to use. </param>
+        /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(Model,CancellationToken)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(Model optional = null, CancellationToken cancellationToken = default)
@@ -1935,7 +1935,7 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
-        /// <param name="optional"> The Model to use. </param>
+        /// <param name="optional"> The <see cref="Model"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(Model,CancellationToken)']/*" />
         public virtual Response ConvenienceOptionalModelWithRequired(Model optional = null, CancellationToken cancellationToken = default)
@@ -2019,8 +2019,8 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(Model,int?,CancellationToken)']/*" />
@@ -2035,8 +2035,8 @@ namespace ConvenienceInCadl
         }
 
         /// <summary> Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method. </summary>
-        /// <param name="required"> The Model to use. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="required"> The <see cref="Model"/> to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)']/*" />
@@ -2066,7 +2066,7 @@ namespace ConvenienceInCadl
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2106,7 +2106,7 @@ namespace ConvenienceInCadl
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="optional"> The Int32 to use. </param>
+        /// <param name="optional"> The <see cref="int"/>? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

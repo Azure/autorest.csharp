@@ -48,7 +48,7 @@ namespace OpenAI
         }
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
-        /// <param name="content"> The CreateModerationRequest to use. </param>
+        /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Result<CreateModerationResponse>> CreateAsync(CreateModerationRequest content, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace OpenAI
         }
 
         /// <summary> Classifies if text violates OpenAI's Content Policy. </summary>
-        /// <param name="content"> The CreateModerationRequest to use. </param>
+        /// <param name="content"> The <see cref="CreateModerationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Result<CreateModerationResponse> Create(CreateModerationRequest content, CancellationToken cancellationToken = default)

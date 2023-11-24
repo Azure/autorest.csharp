@@ -49,7 +49,7 @@ namespace _Type.Model.Usage
             _apiVersion = options.Version;
         }
 
-        /// <param name="input"> The InputRecord to use. </param>
+        /// <param name="input"> The <see cref="InputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(InputRecord,CancellationToken)']/*" />
@@ -63,7 +63,7 @@ namespace _Type.Model.Usage
             return response;
         }
 
-        /// <param name="input"> The InputRecord to use. </param>
+        /// <param name="input"> The <see cref="InputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(InputRecord,CancellationToken)']/*" />
@@ -243,7 +243,7 @@ namespace _Type.Model.Usage
             }
         }
 
-        /// <param name="body"> The InputOutputRecord to use. </param>
+        /// <param name="body"> The <see cref="InputOutputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(InputOutputRecord,CancellationToken)']/*" />
@@ -257,7 +257,7 @@ namespace _Type.Model.Usage
             return Response.FromValue(InputOutputRecord.FromResponse(response), response);
         }
 
-        /// <param name="body"> The InputOutputRecord to use. </param>
+        /// <param name="body"> The <see cref="InputOutputRecord"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(InputOutputRecord,CancellationToken)']/*" />

@@ -47,7 +47,7 @@ namespace OpenAI
             _endpoint = endpoint;
         }
 
-        /// <param name="createChatCompletionRequest"> The CreateChatCompletionRequest to use. </param>
+        /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
         public virtual async Task<Result<CreateChatCompletionResponse>> CreateAsync(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)
@@ -60,7 +60,7 @@ namespace OpenAI
             return Result.FromValue(CreateChatCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <param name="createChatCompletionRequest"> The CreateChatCompletionRequest to use. </param>
+        /// <param name="createChatCompletionRequest"> The <see cref="CreateChatCompletionRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createChatCompletionRequest"/> is null. </exception>
         public virtual Result<CreateChatCompletionResponse> Create(CreateChatCompletionRequest createChatCompletionRequest, CancellationToken cancellationToken = default)

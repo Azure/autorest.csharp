@@ -53,7 +53,7 @@ namespace JsonAsBinary
             return message;
         }
 
-        /// <param name="body"> The Stream to use. </param>
+        /// <param name="body"> The <see cref="Stream"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<Stream>> OperationAsync(Stream body = null, CancellationToken cancellationToken = default)
         {
@@ -71,7 +71,7 @@ namespace JsonAsBinary
             }
         }
 
-        /// <param name="body"> The Stream to use. </param>
+        /// <param name="body"> The <see cref="Stream"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<Stream> Operation(Stream body = null, CancellationToken cancellationToken = default)
         {

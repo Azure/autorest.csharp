@@ -14,22 +14,6 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
-        /// <param name="first"></param>
-        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
-        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
-        {
-            return new FirstDerivedOutputModel("first", serializedAdditionalRawData: null, first);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
-        /// <param name="second"></param>
-        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
-        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
-        {
-            return new SecondDerivedOutputModel("second", serializedAdditionalRawData: null, second);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -280,6 +264,22 @@ namespace ModelsTypeSpec.Models
             values ??= new List<int>();
 
             return new Int32ValuesFacet(field, serializedAdditionalRawData: null, values?.ToList(), value, kind);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
+        /// <param name="first"></param>
+        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
+        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
+        {
+            return new FirstDerivedOutputModel("first", serializedAdditionalRawData: null, first);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
+        /// <param name="second"></param>
+        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
+        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
+        {
+            return new SecondDerivedOutputModel("second", serializedAdditionalRawData: null, second);
         }
     }
 }

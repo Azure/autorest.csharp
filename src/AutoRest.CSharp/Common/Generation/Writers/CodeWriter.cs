@@ -357,7 +357,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             // Because of the limitations of type cref in XmlDoc
             // we add "?" nullability operator after `cref` block
-
             var isNullable = type is { IsNullable: true, IsValueType: true };
             var arguments = type.IsGenericType ? type.Arguments : null;
 
@@ -380,26 +379,36 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 for (int i = 0; i < arguments.Length; i++)
                 {
-                    if (arguments[i] is { IsFrameworkType: true, FrameworkType.IsGenericParameter: true })
+                    var argument = arguments[i];
+                    if (argument is { IsFrameworkType: true, FrameworkType.IsGenericParameter: true })
                     {
                         continue;
                     }
 
                     AppendRaw(" where <c>");
                     AppendType(type.Arguments[i], false, false);
-                    AppendRaw("</c> is of type ");
+                    AppendRaw("</c> is");
+                    if (TypeFactory.IsArray(argument))
+                    {
+                        AppendRaw(" an array of type ");
+                        argument = TypeFactory.GetElementType(argument);
+                    }
+                    else
+                    {
+                        AppendRaw(" of type ");
+                    }
 
                     // If argument type is non-generic, we can provide "see cref" for it
                     // Otherwise, just write its name
-                    if (arguments[i].IsGenericType)
+                    if (argument.IsGenericType)
                     {
                         AppendRaw("<c>");
-                        AppendType(arguments[i], false, true);
+                        AppendType(argument, false, true);
                         AppendRaw("</c>");
                     }
                     else
                     {
-                        AppendTypeForCRef(arguments[i]);
+                        AppendTypeForCRef(argument);
                     }
 
                     AppendRaw(",");

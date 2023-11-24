@@ -49,7 +49,7 @@ namespace Parameters.BodyOptionality
             _apiVersion = options.Version;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicitAsync(BodyModel,CancellationToken)']/*" />
@@ -63,7 +63,7 @@ namespace Parameters.BodyOptionality
             return response;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicit(BodyModel,CancellationToken)']/*" />
@@ -155,7 +155,7 @@ namespace Parameters.BodyOptionality
             }
         }
 
-        /// <param name="bodyModel"> The BodyModel to use. </param>
+        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicitAsync(BodyModel,CancellationToken)']/*" />
@@ -169,7 +169,7 @@ namespace Parameters.BodyOptionality
             return response;
         }
 
-        /// <param name="bodyModel"> The BodyModel to use. </param>
+        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicit(BodyModel,CancellationToken)']/*" />

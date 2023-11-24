@@ -37,7 +37,7 @@ namespace Encode.Bytes
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal RequestBody(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -46,7 +46,7 @@ namespace Encode.Bytes
             _apiVersion = apiVersion;
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='DefaultAsync(BinaryData,CancellationToken)']/*" />
@@ -60,7 +60,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Default(BinaryData,CancellationToken)']/*" />
@@ -152,7 +152,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='OctetStreamAsync(BinaryData,CancellationToken)']/*" />
@@ -161,12 +161,12 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(value);
+            using RequestContent content = value;
             Response response = await OctetStreamAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='OctetStream(BinaryData,CancellationToken)']/*" />
@@ -175,7 +175,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(value);
+            using RequestContent content = value;
             Response response = OctetStream(content, context);
             return response;
         }
@@ -258,7 +258,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='CustomContentTypeAsync(BinaryData,CancellationToken)']/*" />
@@ -267,12 +267,12 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(value);
+            using RequestContent content = value;
             Response response = await CustomContentTypeAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='CustomContentType(BinaryData,CancellationToken)']/*" />
@@ -281,7 +281,7 @@ namespace Encode.Bytes
             Argument.AssertNotNull(value, nameof(value));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            using RequestContent content = RequestContentHelper.FromObject(value);
+            using RequestContent content = value;
             Response response = CustomContentType(content, context);
             return response;
         }
@@ -364,7 +364,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64Async(BinaryData,CancellationToken)']/*" />
@@ -378,7 +378,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <param name="value"> The Bytes to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64(BinaryData,CancellationToken)']/*" />
@@ -470,7 +470,7 @@ namespace Encode.Bytes
             }
         }
 
-        /// <param name="value"> The BytesBase64Url to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64urlAsync(BinaryData,CancellationToken)']/*" />
@@ -484,7 +484,7 @@ namespace Encode.Bytes
             return response;
         }
 
-        /// <param name="value"> The BytesBase64Url to use. </param>
+        /// <param name="value"> The <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         /// <include file="Docs/RequestBody.xml" path="doc/members/member[@name='Base64url(BinaryData,CancellationToken)']/*" />

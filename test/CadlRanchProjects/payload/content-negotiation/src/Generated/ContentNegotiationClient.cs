@@ -44,7 +44,7 @@ namespace Payload.ContentNegotiation
         }
 
         /// <summary> Initializes a new instance of SameBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual SameBody GetSameBodyClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace Payload.ContentNegotiation
         }
 
         /// <summary> Initializes a new instance of DifferentBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual DifferentBody GetDifferentBodyClient(string apiVersion = "1.0.0")
         {

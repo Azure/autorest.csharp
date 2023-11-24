@@ -312,7 +312,7 @@ namespace MgmtDiscriminator
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="body"> The DerivedModel to use. </param>
+        /// <param name="body"> The <see cref="DerivedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<DerivedModel>> PostAsync(DerivedModel body = null, CancellationToken cancellationToken = default)
         {
@@ -343,7 +343,7 @@ namespace MgmtDiscriminator
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="body"> The DerivedModel to use. </param>
+        /// <param name="body"> The <see cref="DerivedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<DerivedModel> Post(DerivedModel body = null, CancellationToken cancellationToken = default)
         {
