@@ -558,7 +558,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
+                Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
             setUsage(context, m, model);
 
@@ -570,26 +570,6 @@ export function getInputType(
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
-
-            // add the derived models into the list
-            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
-                model.DerivedModels = [];
-                for (const dm of m.derivedModels) {
-                    // skip open generic type model which has un-instanced template parameter. e.g.
-                    // model GenericModel<T> { value: T }
-                    if (dm.isFinished) {
-                        const derivedModel = getInputType(
-                            context,
-                            getFormattedType(program, dm),
-                            models,
-                            enums
-                        );
-                        model.DerivedModels.push(
-                            derivedModel as InputModelType
-                        );
-                    }
-                }
-            }
         }
 
         return model;

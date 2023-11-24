@@ -36,7 +36,7 @@ namespace SpecialWords
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Parameters(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -56,7 +56,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="and"> The String to use. </param>
+        /// <param name="and"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="and"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -91,7 +91,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="and"> The String to use. </param>
+        /// <param name="and"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="and"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -126,7 +126,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="as"> The String to use. </param>
+        /// <param name="as"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="as"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -161,7 +161,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="as"> The String to use. </param>
+        /// <param name="as"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="as"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -196,7 +196,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="assert"> The String to use. </param>
+        /// <param name="assert"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="assert"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -231,7 +231,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="assert"> The String to use. </param>
+        /// <param name="assert"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="assert"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -266,7 +266,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="async"> The String to use. </param>
+        /// <param name="async"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="async"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -301,7 +301,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="async"> The String to use. </param>
+        /// <param name="async"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="async"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -336,7 +336,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="await"> The String to use. </param>
+        /// <param name="await"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="await"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -371,7 +371,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="await"> The String to use. </param>
+        /// <param name="await"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="await"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -406,7 +406,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="break"> The String to use. </param>
+        /// <param name="break"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="break"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -441,7 +441,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="break"> The String to use. </param>
+        /// <param name="break"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="break"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -476,7 +476,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="class"> The String to use. </param>
+        /// <param name="class"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="class"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -511,7 +511,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="class"> The String to use. </param>
+        /// <param name="class"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="class"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -546,7 +546,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="constructor"> The String to use. </param>
+        /// <param name="constructor"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="constructor"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -581,7 +581,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="constructor"> The String to use. </param>
+        /// <param name="constructor"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="constructor"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -616,7 +616,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="continue"> The String to use. </param>
+        /// <param name="continue"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="continue"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -651,7 +651,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="continue"> The String to use. </param>
+        /// <param name="continue"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="continue"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -686,7 +686,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="def"> The String to use. </param>
+        /// <param name="def"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="def"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -721,7 +721,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="def"> The String to use. </param>
+        /// <param name="def"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="def"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -756,7 +756,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="del"> The String to use. </param>
+        /// <param name="del"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="del"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -791,7 +791,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="del"> The String to use. </param>
+        /// <param name="del"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="del"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -826,7 +826,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="elif"> The String to use. </param>
+        /// <param name="elif"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="elif"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -861,7 +861,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="elif"> The String to use. </param>
+        /// <param name="elif"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="elif"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -896,7 +896,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="else"> The String to use. </param>
+        /// <param name="else"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="else"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -931,7 +931,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="else"> The String to use. </param>
+        /// <param name="else"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="else"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -966,7 +966,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="except"> The String to use. </param>
+        /// <param name="except"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="except"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1001,7 +1001,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="except"> The String to use. </param>
+        /// <param name="except"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="except"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1036,7 +1036,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exec"> The String to use. </param>
+        /// <param name="exec"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exec"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1071,7 +1071,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exec"> The String to use. </param>
+        /// <param name="exec"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exec"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1106,7 +1106,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="finally"> The String to use. </param>
+        /// <param name="finally"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="finally"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1141,7 +1141,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="finally"> The String to use. </param>
+        /// <param name="finally"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="finally"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1176,7 +1176,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="for"> The String to use. </param>
+        /// <param name="for"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="for"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1211,7 +1211,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="for"> The String to use. </param>
+        /// <param name="for"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="for"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1246,7 +1246,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="from"> The String to use. </param>
+        /// <param name="from"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="from"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1281,7 +1281,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="from"> The String to use. </param>
+        /// <param name="from"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="from"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1316,7 +1316,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="global"> The String to use. </param>
+        /// <param name="global"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="global"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1351,7 +1351,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="global"> The String to use. </param>
+        /// <param name="global"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="global"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1386,7 +1386,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="if"> The String to use. </param>
+        /// <param name="if"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1421,7 +1421,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="if"> The String to use. </param>
+        /// <param name="if"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1456,7 +1456,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="import"> The String to use. </param>
+        /// <param name="import"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="import"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1491,7 +1491,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="import"> The String to use. </param>
+        /// <param name="import"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="import"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1526,7 +1526,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="in"> The String to use. </param>
+        /// <param name="in"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="in"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1561,7 +1561,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="in"> The String to use. </param>
+        /// <param name="in"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="in"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1596,7 +1596,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="is"> The String to use. </param>
+        /// <param name="is"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="is"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1631,7 +1631,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="is"> The String to use. </param>
+        /// <param name="is"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="is"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1666,7 +1666,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="lambda"> The String to use. </param>
+        /// <param name="lambda"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="lambda"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1701,7 +1701,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="lambda"> The String to use. </param>
+        /// <param name="lambda"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="lambda"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1736,7 +1736,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="not"> The String to use. </param>
+        /// <param name="not"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="not"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1771,7 +1771,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="not"> The String to use. </param>
+        /// <param name="not"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="not"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1806,7 +1806,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="or"> The String to use. </param>
+        /// <param name="or"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="or"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1841,7 +1841,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="or"> The String to use. </param>
+        /// <param name="or"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="or"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1876,7 +1876,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="pass"> The String to use. </param>
+        /// <param name="pass"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pass"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1911,7 +1911,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="pass"> The String to use. </param>
+        /// <param name="pass"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pass"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1946,7 +1946,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="raise"> The String to use. </param>
+        /// <param name="raise"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="raise"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -1981,7 +1981,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="raise"> The String to use. </param>
+        /// <param name="raise"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="raise"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2016,7 +2016,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="return"> The String to use. </param>
+        /// <param name="return"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="return"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2051,7 +2051,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="return"> The String to use. </param>
+        /// <param name="return"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="return"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2086,7 +2086,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="try"> The String to use. </param>
+        /// <param name="try"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="try"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2121,7 +2121,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="try"> The String to use. </param>
+        /// <param name="try"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="try"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2156,7 +2156,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="while"> The String to use. </param>
+        /// <param name="while"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="while"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2191,7 +2191,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="while"> The String to use. </param>
+        /// <param name="while"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="while"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2226,7 +2226,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="with"> The String to use. </param>
+        /// <param name="with"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="with"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2261,7 +2261,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="with"> The String to use. </param>
+        /// <param name="with"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="with"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2296,7 +2296,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="yield"> The String to use. </param>
+        /// <param name="yield"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="yield"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2331,7 +2331,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="yield"> The String to use. </param>
+        /// <param name="yield"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="yield"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2366,7 +2366,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="cancellationToken"> The String to use. </param>
+        /// <param name="cancellationToken"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -2401,7 +2401,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="cancellationToken"> The String to use. </param>
+        /// <param name="cancellationToken"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="cancellationToken"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

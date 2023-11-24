@@ -44,7 +44,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of StringsOnly. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual StringsOnly GetStringsOnlyClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of StringExtensible. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual StringExtensible GetStringExtensibleClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of StringExtensibleNamed. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual StringExtensibleNamed GetStringExtensibleNamedClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of IntsOnly. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual IntsOnly GetIntsOnlyClient(string apiVersion = "1.0.0")
         {
@@ -84,7 +84,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of FloatsOnly. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual FloatsOnly GetFloatsOnlyClient(string apiVersion = "1.0.0")
         {
@@ -94,7 +94,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of ModelsOnly. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ModelsOnly GetModelsOnlyClient(string apiVersion = "1.0.0")
         {
@@ -104,7 +104,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of EnumsOnly. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual EnumsOnly GetEnumsOnlyClient(string apiVersion = "1.0.0")
         {
@@ -114,7 +114,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of StringAndArray. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual StringAndArray GetStringAndArrayClient(string apiVersion = "1.0.0")
         {
@@ -124,7 +124,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of MixedLiterals. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual MixedLiterals GetMixedLiteralsClient(string apiVersion = "1.0.0")
         {
@@ -134,7 +134,7 @@ namespace _Type.Union
         }
 
         /// <summary> Initializes a new instance of MixedTypes. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual MixedTypes GetMixedTypesClient(string apiVersion = "1.0.0")
         {

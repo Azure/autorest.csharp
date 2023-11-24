@@ -47,7 +47,7 @@ namespace OpenAI
             _endpoint = endpoint;
         }
 
-        /// <param name="createCompletionRequest"> The CreateCompletionRequest to use. </param>
+        /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
         public virtual async Task<Result<CreateCompletionResponse>> CreateAsync(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
@@ -60,7 +60,7 @@ namespace OpenAI
             return Result.FromValue(CreateCompletionResponse.FromResponse(result.GetRawResponse()), result.GetRawResponse());
         }
 
-        /// <param name="createCompletionRequest"> The CreateCompletionRequest to use. </param>
+        /// <param name="createCompletionRequest"> The <see cref="CreateCompletionRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createCompletionRequest"/> is null. </exception>
         public virtual Result<CreateCompletionResponse> Create(CreateCompletionRequest createCompletionRequest, CancellationToken cancellationToken = default)
