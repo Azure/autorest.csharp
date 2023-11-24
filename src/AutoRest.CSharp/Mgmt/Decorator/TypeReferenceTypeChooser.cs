@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var replacedType = BuildExactMatchType(typeToReplace);
 
             _valueCache.TryAdd(typeToReplace.ObjectSchema, replacedType);
-            return null;
+            return replacedType;
         }
 
         private static CSharpType? BuildExactMatchType(MgmtObjectType typeToReplace)
