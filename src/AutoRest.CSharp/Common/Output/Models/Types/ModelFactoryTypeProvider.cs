@@ -128,7 +128,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         if (parameters.Count > 1)
                         {
                             // this parameter should be the raw data field, otherwise this property should not have been flattened in the first place
-                            arguments.Add(New.Instance(TypeFactory.GetImplementationType(parameters[1].Type)));
+                            arguments.Add(new PositionalParameterReference(parameter.Name, Null));
                         }
                         result = New.Instance(parentPropertyType, arguments.ToArray());
                         break;
