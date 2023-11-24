@@ -303,19 +303,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
                         if (csharpType != null)
                         {
-                            //// re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
-                            //switch (mgmtObjectType)
-                            //{
-                            //    case ResourceData resourceData:
-                            //        replacedTypes.Add(new ResourceData(schema, csharpType.Name, csharpType.Namespace));
-                            //        break;
-                            //    case MgmtReferenceType referenceType:
-                            //        replacedTypes.Add(new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
-                            //        break;
-                            //    default:
-                            //        replacedTypes.Add(new MgmtObjectType(schema, csharpType.Name, csharpType.Namespace));
-                            //        break;
-                            //}
                             replacedTypes.Add(schema, csharpType.Implementation);
                         }
                     }

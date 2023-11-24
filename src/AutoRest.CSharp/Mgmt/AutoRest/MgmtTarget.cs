@@ -286,7 +286,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            var modelWriter = ReferenceTypeWriter.GetWriter(model);
+            var modelWriter = model switch
+            {
+                MgmtReferenceType => new ReferenceTypeWriter(),
+                ResourceData data => new ResourceDataWriter(data),
+                SystemObjectType => null,
+                _ => new ModelWriter()
+            };
             if (modelWriter == null)
                 return;
 
