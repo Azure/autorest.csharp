@@ -215,7 +215,7 @@ namespace Azure.ResourceManager.Sample.Models
             hosts ??= new List<Resources.Models.SubResource>();
             instanceViewHosts ??= new List<DedicatedHostInstanceViewWithName>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, zones?.ToList(), hostUris?.ToList(), tenantId, platformFaultDomainCount, hosts?.ToList(), instanceViewHosts != null ? new DedicatedHostGroupInstanceView(instanceViewHosts?.ToList(), new Dictionary<string, BinaryData>()) : null, supportAutomaticPlacement, serializedAdditionalRawData: null);
+            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, zones?.ToList(), hostUris?.ToList(), tenantId, platformFaultDomainCount, hosts?.ToList(), instanceViewHosts != null ? new DedicatedHostGroupInstanceView(instanceViewHosts?.ToList(), serializedAdditionalRawData: null) : null, supportAutomaticPlacement, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResourceReadOnly"/>. </summary>
@@ -252,7 +252,7 @@ namespace Azure.ResourceManager.Sample.Models
             availableCapacityAllocatableVms ??= new List<DedicatedHostAllocatableVm>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new DedicatedHostInstanceViewWithName(assetId, availableCapacityAllocatableVms != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVms?.ToList(), new Dictionary<string, BinaryData>()) : null, statuses?.ToList(), serializedAdditionalRawData: null, name);
+            return new DedicatedHostInstanceViewWithName(assetId, availableCapacityAllocatableVms != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVms?.ToList(), serializedAdditionalRawData: null) : null, statuses?.ToList(), serializedAdditionalRawData: null, name);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DedicatedHostInstanceView"/>. </summary>
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample.Models
             availableCapacityAllocatableVms ??= new List<DedicatedHostAllocatableVm>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new DedicatedHostInstanceView(assetId, availableCapacityAllocatableVms != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVms?.ToList(), new Dictionary<string, BinaryData>()) : null, statuses?.ToList(), serializedAdditionalRawData: null);
+            return new DedicatedHostInstanceView(assetId, availableCapacityAllocatableVms != null ? new DedicatedHostAvailableCapacity(availableCapacityAllocatableVms?.ToList(), serializedAdditionalRawData: null) : null, statuses?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DedicatedHostAllocatableVm"/>. </summary>
@@ -325,7 +325,7 @@ namespace Azure.ResourceManager.Sample.Models
             hosts ??= new List<Resources.Models.SubResource>();
             instanceViewHosts ??= new List<DedicatedHostInstanceViewWithName>();
 
-            return new DedicatedHostGroupPatch(tags, serializedAdditionalRawData: null, zones?.ToList(), platformFaultDomainCount, hosts?.ToList(), instanceViewHosts != null ? new DedicatedHostGroupInstanceView(instanceViewHosts?.ToList(), new Dictionary<string, BinaryData>()) : null, supportAutomaticPlacement);
+            return new DedicatedHostGroupPatch(tags, serializedAdditionalRawData: null, zones?.ToList(), platformFaultDomainCount, hosts?.ToList(), instanceViewHosts != null ? new DedicatedHostGroupInstanceView(instanceViewHosts?.ToList(), serializedAdditionalRawData: null) : null, supportAutomaticPlacement);
         }
 
         /// <summary> Initializes a new instance of <see cref="Sample.DedicatedHostData"/>. </summary>
@@ -714,7 +714,7 @@ namespace Azure.ResourceManager.Sample.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, serializedAdditionalRawData: null);
+            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, serializedAdditionalRawData: null) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), serializedAdditionalRawData: null) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, serializedAdditionalRawData: null) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, serializedAdditionalRawData: null) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, serializedAdditionalRawData: null) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ImageReference"/>. </summary>
@@ -800,7 +800,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <returns> A new <see cref="Models.DataDisk"/> instance for mocking. </returns>
         public static DataDisk DataDisk(int lun = default, string name = null, Uri vhdUri = null, Uri imageUri = null, CachingType? caching = null, bool? writeAcceleratorEnabled = null, DiskCreateOptionType createOption = default, int? diskSizeGB = null, ManagedDiskParameters managedDisk = null, bool? toBeDetached = null, long? diskIopsReadWrite = null, long? diskMBpsReadWrite = null)
         {
-            return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri, new Dictionary<string, BinaryData>()) : null, imageUri != null ? new VirtualHardDisk(imageUri, new Dictionary<string, BinaryData>()) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite, serializedAdditionalRawData: null);
+            return new DataDisk(lun, name, vhdUri != null ? new VirtualHardDisk(vhdUri, serializedAdditionalRawData: null) : null, imageUri != null ? new VirtualHardDisk(imageUri, serializedAdditionalRawData: null) : null, caching, writeAcceleratorEnabled, createOption, diskSizeGB, managedDisk, toBeDetached, diskIopsReadWrite, diskMBpsReadWrite, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineInstanceView"/>. </summary>
@@ -875,7 +875,7 @@ namespace Azure.ResourceManager.Sample.Models
             extensions ??= new List<VirtualMachineExtensionInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus, serializedAdditionalRawData: null);
+            return new VirtualMachineInstanceView(platformUpdateDomain, platformFaultDomain, computerName, osName, osVersion, hyperVGeneration, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, serializedAdditionalRawData: null) : null, bootDiagnostics, assignedHost, statuses?.ToList(), patchStatus, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineAgentInstanceView"/>. </summary>
@@ -1364,7 +1364,7 @@ namespace Azure.ResourceManager.Sample.Models
             zones ??= new List<string>();
             networkInterfaces ??= new List<NetworkInterfaceReference>();
 
-            return new VirtualMachinePatch(tags, serializedAdditionalRawData: null, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, new Dictionary<string, BinaryData>()) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachinePatch(tags, serializedAdditionalRawData: null, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, serializedAdditionalRawData: null) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), serializedAdditionalRawData: null) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, serializedAdditionalRawData: null) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, serializedAdditionalRawData: null) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice, serializedAdditionalRawData: null) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RetrieveBootDiagnosticsDataResult"/>. </summary>
@@ -1558,7 +1558,7 @@ namespace Azure.ResourceManager.Sample.Models
             zones ??= new List<string>();
             scaleInRules ??= new List<VirtualMachineScaleSetScaleInRule>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, sku, plan, identity, zones?.ToList(), upgradePolicy, automaticRepairsPolicy, virtualMachineProfile, provisioningState, overprovision, doNotRunExtensionsOnOverprovisionedVms, uniqueId, singlePlacementGroup, zoneBalance, platformFaultDomainCount, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null, scaleInRules != null ? new ScaleInPolicy(scaleInRules?.ToList(), serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Sample.VirtualMachineScaleSetExtensionData"/>. </summary>
@@ -1647,7 +1647,7 @@ namespace Azure.ResourceManager.Sample.Models
             statuses ??= new List<InstanceViewStatus>();
             orchestrationServices ??= new List<OrchestrationServiceSummary>();
 
-            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), new Dictionary<string, BinaryData>()) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetInstanceView(virtualMachineStatusesSummary != null ? new VirtualMachineScaleSetInstanceViewStatusesSummary(virtualMachineStatusesSummary?.ToList(), serializedAdditionalRawData: null) : null, extensions?.ToList(), statuses?.ToList(), orchestrationServices?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineStatusCodeCount"/>. </summary>
@@ -2072,7 +2072,7 @@ namespace Azure.ResourceManager.Sample.Models
             networkInterfaces ??= new List<NetworkInterfaceReference>();
             networkInterfaceConfigurations ??= new List<VirtualMachineScaleSetNetworkConfiguration>();
 
-            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, new Dictionary<string, BinaryData>()) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, new Dictionary<string, BinaryData>()) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, new Dictionary<string, BinaryData>()) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), new Dictionary<string, BinaryData>()) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), new Dictionary<string, BinaryData>()) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, new Dictionary<string, BinaryData>()) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetVmData(id, name, resourceType, systemData, tags, location, instanceId, sku, plan, resources?.ToList(), zones?.ToList(), latestModelApplied, vmId, instanceView, hardwareVmSize != null ? new HardwareProfile(hardwareVmSize, serializedAdditionalRawData: null) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled, serializedAdditionalRawData: null) : null, osProfile, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost, serializedAdditionalRawData: null) : null, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList(), serializedAdditionalRawData: null) : null, networkInterfaceConfigurations != null ? new VirtualMachineScaleSetVmNetworkProfileConfiguration(networkInterfaceConfigurations?.ToList(), serializedAdditionalRawData: null) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics, serializedAdditionalRawData: null) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, provisioningState, licenseType, modelDefinitionApplied, protectionPolicy, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetVmInstanceView"/>. </summary>
@@ -2131,7 +2131,7 @@ namespace Azure.ResourceManager.Sample.Models
             extensions ??= new List<VirtualMachineExtensionInstanceView>();
             statuses ??= new List<InstanceViewStatus>();
 
-            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, new Dictionary<string, BinaryData>()) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, serializedAdditionalRawData: null);
+            return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), extensions?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus, serializedAdditionalRawData: null) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RequestRateByIntervalContent"/>. </summary>
@@ -2208,7 +2208,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <returns> A new <see cref="Models.LogAnalytics"/> instance for mocking. </returns>
         public static LogAnalytics LogAnalytics(string logAnalyticsOutput = null)
         {
-            return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ThrottledRequestsContent"/>. </summary>

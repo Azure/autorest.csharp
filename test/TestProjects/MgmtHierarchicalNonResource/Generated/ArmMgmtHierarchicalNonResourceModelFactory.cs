@@ -63,7 +63,7 @@ namespace MgmtHierarchicalNonResource.Models
             disallowedDiskTypes ??= new List<string>();
             features ??= new List<GalleryImageFeature>();
 
-            return new SharedGalleryImage(name, location, serializedAdditionalRawData: null, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), new Dictionary<string, BinaryData>()) : null, hyperVGeneration, features?.ToList(), purchasePlan);
+            return new SharedGalleryImage(name, location, serializedAdditionalRawData: null, uniqueId, osType, osState, endOfLifeOn, identifier, recommended, disallowedDiskTypes != null ? new Disallowed(disallowedDiskTypes?.ToList(), serializedAdditionalRawData: null) : null, hyperVGeneration, features?.ToList(), purchasePlan);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.GalleryImageIdentifier"/>. </summary>

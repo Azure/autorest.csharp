@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -52,7 +51,7 @@ namespace MgmtExpandResourceTypes.Models
             txtRecords ??= new List<TxtRecord>();
             caaRecords ??= new List<CaaRecord>();
 
-            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname, new Dictionary<string, BinaryData>()) : null, soaRecord, caaRecords?.ToList(), serializedAdditionalRawData: null);
+            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname, serializedAdditionalRawData: null) : null, soaRecord, caaRecords?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtExpandResourceTypes.ZoneData"/>. </summary>

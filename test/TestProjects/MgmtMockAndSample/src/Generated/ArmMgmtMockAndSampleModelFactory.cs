@@ -61,7 +61,7 @@ namespace MgmtMockAndSample.Models
             deployments ??= new List<string>();
             privateEndpointConnections ??= new List<PrivateEndpointConnectionItem>();
 
-            return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, readWriteSingleStringPropertySomething != null ? new SinglePropertyModel(readWriteSingleStringPropertySomething, new Dictionary<string, BinaryData>()) : null, readOnlySomething != null ? new ReadOnlySinglePropertyModel(readOnlySomething, new Dictionary<string, BinaryData>()) : null, deepSomething != null ? new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething, new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, readWriteSingleStringPropertySomething != null ? new SinglePropertyModel(readWriteSingleStringPropertySomething, serializedAdditionalRawData: null) : null, readOnlySomething != null ? new ReadOnlySinglePropertyModel(readOnlySomething, serializedAdditionalRawData: null) : null, deepSomething != null ? new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething, serializedAdditionalRawData: null), serializedAdditionalRawData: null), serializedAdditionalRawData: null), serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PrivateEndpointConnectionItem"/>. </summary>
@@ -135,7 +135,7 @@ namespace MgmtMockAndSample.Models
         {
             accessPolicies ??= new List<AccessPolicyEntry>();
 
-            return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, accessPolicies != null ? new VaultAccessPolicyProperties(accessPolicies?.ToList(), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, accessPolicies != null ? new VaultAccessPolicyProperties(accessPolicies?.ToList(), serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DeletedVaultData"/>. </summary>
@@ -422,7 +422,7 @@ namespace MgmtMockAndSample.Models
             childPolicies ??= new List<WritableSubResource>();
             snatPrivateRanges ??= new List<string>();
 
-            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, startupProbe, readinessProbe, desiredStatusCode, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList(), new Dictionary<string, BinaryData>()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority, new Dictionary<string, BinaryData>()) : null, skuTier != null ? new FirewallPolicySku(skuTier, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, startupProbe, readinessProbe, desiredStatusCode, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList(), serializedAdditionalRawData: null) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority, serializedAdditionalRawData: null) : null, skuTier != null ? new FirewallPolicySku(skuTier, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/>. </summary>

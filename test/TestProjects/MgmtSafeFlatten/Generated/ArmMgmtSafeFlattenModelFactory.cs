@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -37,7 +36,7 @@ namespace MgmtSafeFlatten.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()) : null, layerOneType, layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null, serializedAdditionalRawData: null);
+            return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null, layerOneType, layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtSafeFlatten.TypeTwoData"/>. </summary>
@@ -54,7 +53,7 @@ namespace MgmtSafeFlatten.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, new Dictionary<string, BinaryData>()), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp, serializedAdditionalRawData: null), serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
     }
 }

@@ -93,7 +93,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentPropertiesExtended"/> instance for mocking. </returns>
         public static DeploymentPropertiesExtended DeploymentPropertiesExtended(ProvisioningState? provisioningState = null, string correlationId = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, BinaryData outputs = null, BinaryData parameters = null, DeploymentMode? mode = null, string error = null)
         {
-            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new DeploymentPropertiesExtended(provisioningState, correlationId, timestamp, duration, outputs, parameters, mode, error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentValidateResult"/>. </summary>
@@ -102,7 +102,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentValidateResult"/> instance for mocking. </returns>
         public static DeploymentValidateResult DeploymentValidateResult(string error = null, DeploymentPropertiesExtended properties = null)
         {
-            return new DeploymentValidateResult(error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, properties, serializedAdditionalRawData: null);
+            return new DeploymentValidateResult(error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, properties, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeploymentExportResult"/>. </summary>
@@ -130,7 +130,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentWhatIfProperties"/> instance for mocking. </returns>
         public static DeploymentWhatIfProperties DeploymentWhatIfProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default, WhatIfResultFormat? whatIfResultFormat = null)
         {
-            return new DeploymentWhatIfProperties(template, parameters, mode, serializedAdditionalRawData: null, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, new Dictionary<string, BinaryData>()) : null);
+            return new DeploymentWhatIfProperties(template, parameters, mode, serializedAdditionalRawData: null, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat, serializedAdditionalRawData: null) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfOperationResult"/>. </summary>
@@ -142,7 +142,7 @@ namespace MgmtScopeResource.Models
         {
             changes ??= new List<WhatIfChange>();
 
-            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, changes?.ToList(), serializedAdditionalRawData: null);
+            return new WhatIfOperationResult(status, error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, changes?.ToList(), serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.WhatIfChange"/>. </summary>
@@ -181,7 +181,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.DeploymentOperationProperties"/> instance for mocking. </returns>
         public static DeploymentOperationProperties DeploymentOperationProperties(ProvisioningOperation? provisioningOperation = null, string provisioningState = null, DateTimeOffset? timestamp = null, TimeSpan? duration = null, TimeSpan? anotherDuration = null, string serviceRequestId = null, string statusCode = null, StatusMessage statusMessage = null, BinaryData requestContent = null, BinaryData responseContent = null)
         {
-            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent, new Dictionary<string, BinaryData>()) : null, responseContent != null ? new HttpMessage(responseContent, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new DeploymentOperationProperties(provisioningOperation, provisioningState, timestamp, duration, anotherDuration, serviceRequestId, statusCode, statusMessage, requestContent != null ? new HttpMessage(requestContent, serializedAdditionalRawData: null) : null, responseContent != null ? new HttpMessage(responseContent, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StatusMessage"/>. </summary>
@@ -190,7 +190,7 @@ namespace MgmtScopeResource.Models
         /// <returns> A new <see cref="Models.StatusMessage"/> instance for mocking. </returns>
         public static StatusMessage StatusMessage(string status = null, string error = null)
         {
-            return new StatusMessage(status, error != null ? new ErrorResponse(error, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new StatusMessage(status, error != null ? new ErrorResponse(error, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TemplateHashResult"/>. </summary>

@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Storage.Models
         {
             corsRulesValue ??= new List<CorsRule>();
 
-            return new BlobServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList(), new Dictionary<string, BinaryData>()) : null, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, lastAccessTimeTrackingPolicy, serializedAdditionalRawData: null);
+            return new BlobServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList(), serializedAdditionalRawData: null) : null, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, lastAccessTimeTrackingPolicy, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.RestorePolicyProperties"/>. </summary>
@@ -231,7 +231,7 @@ namespace Azure.ResourceManager.Storage.Models
         {
             corsRulesValue ??= new List<CorsRule>();
 
-            return new FileServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList(), new Dictionary<string, BinaryData>()) : null, shareDeleteRetentionPolicy, protocolSmb != null ? new ProtocolSettings(protocolSmb, new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new FileServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList(), serializedAdditionalRawData: null) : null, shareDeleteRetentionPolicy, protocolSmb != null ? new ProtocolSettings(protocolSmb, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Storage.FileShareData"/>. </summary>
@@ -377,7 +377,7 @@ namespace Azure.ResourceManager.Storage.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, tags, identity, publicNetworkAccess, sasPolicy, keyExpirationPeriodInDays.HasValue ? new KeyPolicy(keyExpirationPeriodInDays.Value, new Dictionary<string, BinaryData>()) : null, customDomain, encryption, networkRuleSet, accessTier, azureFilesIdentityBasedAuthentication, enableHttpsTrafficOnly, isHnsEnabled, largeFileSharesState, routingPreference, allowBlobPublicAccess, minimumTlsVersion, allowSharedKeyAccess, enableNfsV3, allowCrossTenantReplication, defaultToOAuthAuthentication, immutableStorageWithVersioning, serializedAdditionalRawData: null);
+            return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, tags, identity, publicNetworkAccess, sasPolicy, keyExpirationPeriodInDays.HasValue ? new KeyPolicy(keyExpirationPeriodInDays.Value, serializedAdditionalRawData: null) : null, customDomain, encryption, networkRuleSet, accessTier, azureFilesIdentityBasedAuthentication, enableHttpsTrafficOnly, isHnsEnabled, largeFileSharesState, routingPreference, allowBlobPublicAccess, minimumTlsVersion, allowSharedKeyAccess, enableNfsV3, allowCrossTenantReplication, defaultToOAuthAuthentication, immutableStorageWithVersioning, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.EncryptionService"/>. </summary>
@@ -452,7 +452,7 @@ namespace Azure.ResourceManager.Storage.Models
             tags ??= new Dictionary<string, string>();
             privateEndpointConnections ??= new List<StoragePrivateEndpointConnectionData>();
 
-            return new StorageAccountData(id, name, resourceType, systemData, tags, location, sku, kind, identity, extendedLocation, provisioningState, primaryEndpoints, primaryLocation, statusOfPrimary, lastGeoFailoverOn, secondaryLocation, statusOfSecondary, createdOn, customDomain, sasPolicy, keyExpirationPeriodInDays.HasValue ? new KeyPolicy(keyExpirationPeriodInDays.Value, new Dictionary<string, BinaryData>()) : null, keyCreationTime, secondaryEndpoints, encryption, accessTier, azureFilesIdentityBasedAuthentication, enableHttpsTrafficOnly, networkRuleSet, isHnsEnabled, geoReplicationStats, failoverInProgress, largeFileSharesState, privateEndpointConnections?.ToList(), routingPreference, blobRestoreStatus, allowBlobPublicAccess, minimumTlsVersion, allowSharedKeyAccess, enableNfsV3, allowCrossTenantReplication, defaultToOAuthAuthentication, publicNetworkAccess, immutableStorageWithVersioning, serializedAdditionalRawData: null);
+            return new StorageAccountData(id, name, resourceType, systemData, tags, location, sku, kind, identity, extendedLocation, provisioningState, primaryEndpoints, primaryLocation, statusOfPrimary, lastGeoFailoverOn, secondaryLocation, statusOfSecondary, createdOn, customDomain, sasPolicy, keyExpirationPeriodInDays.HasValue ? new KeyPolicy(keyExpirationPeriodInDays.Value, serializedAdditionalRawData: null) : null, keyCreationTime, secondaryEndpoints, encryption, accessTier, azureFilesIdentityBasedAuthentication, enableHttpsTrafficOnly, networkRuleSet, isHnsEnabled, geoReplicationStats, failoverInProgress, largeFileSharesState, privateEndpointConnections?.ToList(), routingPreference, blobRestoreStatus, allowBlobPublicAccess, minimumTlsVersion, allowSharedKeyAccess, enableNfsV3, allowCrossTenantReplication, defaultToOAuthAuthentication, publicNetworkAccess, immutableStorageWithVersioning, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Endpoints"/>. </summary>
@@ -663,7 +663,7 @@ namespace Azure.ResourceManager.Storage.Models
         {
             rules ??= new List<ManagementPolicyRule>();
 
-            return new ManagementPolicyData(id, name, resourceType, systemData, lastModifiedOn, rules != null ? new ManagementPolicySchema(rules?.ToList(), new Dictionary<string, BinaryData>()) : null, serializedAdditionalRawData: null);
+            return new ManagementPolicyData(id, name, resourceType, systemData, lastModifiedOn, rules != null ? new ManagementPolicySchema(rules?.ToList(), serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Storage.BlobInventoryPolicyData"/>. </summary>
