@@ -254,7 +254,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var backingBaseObjectType = _backingObjectType?.Inherits is { IsFrameworkType: false, Implementation: ObjectType baseType } ? baseType : null;
+            var backingBaseObjectType = _backingObjectType?.GetBaseObjectType();
             return CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel, backingBaseObjectType);
         }
 

@@ -31,6 +31,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_valueCache.TryGetValue(typeToReplace.ObjectSchema, out var result))
                 return result;
 
+            var replacedType = BuildExactMatchType(typeToReplace);
+
+            _valueCache.TryAdd(typeToReplace.ObjectSchema, replacedType);
+            return null;
+        }
+
+        private static CSharpType? BuildExactMatchType(MgmtObjectType typeToReplace)
+        {
             foreach (System.Type replacementType in TypeReferenceTypes)
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
@@ -41,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
 
-            _valueCache.TryAdd(typeToReplace.ObjectSchema, null);
+            // nothing matches, return null
             return null;
         }
 

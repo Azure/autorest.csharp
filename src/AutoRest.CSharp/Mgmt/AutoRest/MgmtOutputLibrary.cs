@@ -294,16 +294,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             //var replacedTypes = new List<MgmtObjectType>();
             foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
             {
-                TypeProvider? type;
-
-                if (_schemaOrNameToModels.TryGetValue(schema, out type))
+                if (_schemaOrNameToModels.TryGetValue(schema, out var type))
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
                         var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
                         if (csharpType != null)
                         {
-                            replacedTypes.Add(schema, csharpType.Implementation);
+                            // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
+                            switch (mgmtObjectType)
+                            {
+                                case MgmtReferenceType referenceType:
+                                    // when we get a reference type, we should still wrap it into a reference type
+                                    replacedTypes.Add(schema, new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
+                                    break;
+                                default:
+                                    // other types will go into SystemObjectType
+                                    replacedTypes.Add(schema, csharpType.Implementation);
+                                    break;
+                            }
                         }
                     }
                 }
