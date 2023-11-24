@@ -44,7 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary> Initializes a new instance of PublicOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual PublicOperation GetPublicOperationClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary> Initializes a new instance of InternalOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual InternalOperation GetInternalOperationClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary> Initializes a new instance of SharedModelInOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual SharedModelInOperation GetSharedModelInOperationClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         }
 
         /// <summary> Initializes a new instance of RelativeModelInOperation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual RelativeModelInOperation GetRelativeModelInOperationClient(string apiVersion = "1.0.0")
         {

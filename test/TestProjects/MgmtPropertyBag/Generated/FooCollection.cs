@@ -22,9 +22,9 @@ using MgmtPropertyBag.Models;
 namespace MgmtPropertyBag
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FooResource" /> and their operations.
-    /// Each <see cref="FooResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="FooCollection" /> instance call the GetFoos method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="FooResource"/> and their operations.
+    /// Each <see cref="FooResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="FooCollection"/> instance call the GetFoos method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class FooCollection : ArmCollection, IEnumerable<FooResource>, IAsyncEnumerable<FooResource>
     {
@@ -72,8 +72,8 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
+        /// <param name="orderby"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
@@ -116,8 +116,8 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
+        /// <param name="orderby"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
@@ -230,7 +230,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FooResource> GetAllAsync(FooCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new FooCollectionGetAllOptions();
@@ -254,7 +254,7 @@ namespace MgmtPropertyBag
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FooResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FooResource> GetAll(FooCollectionGetAllOptions options, CancellationToken cancellationToken = default)
         {
             options ??= new FooCollectionGetAllOptions();

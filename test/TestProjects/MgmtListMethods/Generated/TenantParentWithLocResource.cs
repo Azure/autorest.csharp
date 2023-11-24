@@ -19,9 +19,9 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a TenantParentWithLoc along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TenantParentWithLocResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTenantParentWithLocResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TenantTestResource" /> using the GetTenantParentWithLoc method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TenantParentWithLocResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTenantParentWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantTestResource"/> using the GetTenantParentWithLoc method.
     /// </summary>
     public partial class TenantParentWithLocResource : ArmResource
     {
@@ -43,7 +43,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TenantParentWithLocResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantParentWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TenantParentWithLocResource(ArmClient client, TenantParentWithLocData data) : this(client, data.Id)

@@ -22,9 +22,9 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a Fake along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeResource method.
-    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" /> using the GetFake method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource"/> using the GetFake method.
     /// </summary>
     public partial class FakeResource : ArmResource
     {
@@ -46,7 +46,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeResource(ArmClient client, FakeData data) : this(client, data.Id)
@@ -621,7 +621,7 @@ namespace MgmtListMethods
         /// <param name="value"> The parameters for updating a list of fake configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        /// <returns> An async collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeConfigurationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeConfigurationResource> UpdateConfigurationsAsync(FakeConfigurationListResult value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(value, nameof(value));
@@ -646,7 +646,7 @@ namespace MgmtListMethods
         /// <param name="value"> The parameters for updating a list of fake configuration. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        /// <returns> A collection of <see cref="FakeConfigurationResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeConfigurationResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeConfigurationResource> UpdateConfigurations(FakeConfigurationListResult value, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(value, nameof(value));

@@ -120,86 +120,22 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": [
-    {
-     "$id": "17",
-     "Name": "Shark",
-     "Namespace": "PetStore",
-     "Description": "Shark is a fish",
-     "IsNullable": false,
-     "DiscriminatorValue": "shark",
-     "BaseModel": {
-      "$ref": "12"
-     },
-     "Usage": "Output",
-     "Properties": [
-      {
-       "$id": "18",
-       "Name": "bite",
-       "SerializedName": "bite",
-       "Description": "The bite of the shark",
-       "Type": {
-        "$id": "19",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "IsRequired": true,
-       "IsReadOnly": false
-      }
-     ]
-    },
-    {
-     "$id": "20",
-     "Name": "Tuna",
-     "Namespace": "PetStore",
-     "Description": "Tuna is a fish",
-     "IsNullable": false,
-     "DiscriminatorValue": "tuna",
-     "BaseModel": {
-      "$ref": "12"
-     },
-     "Usage": "Output",
-     "Properties": [
-      {
-       "$id": "21",
-       "Name": "fat",
-       "SerializedName": "fat",
-       "Description": "The amount of fat of the tuna",
-       "Type": {
-        "$id": "22",
-        "Name": "int32",
-        "Kind": "Int32",
-        "IsNullable": false
-       },
-       "IsRequired": true,
-       "IsReadOnly": false
-      }
-     ]
-    }
    ]
   },
   {
-   "$ref": "17"
-  },
-  {
-   "$ref": "20"
-  },
-  {
-   "$id": "23",
+   "$id": "17",
    "Name": "Toy",
    "Namespace": "PetStore",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
     {
-     "$id": "24",
+     "$id": "18",
      "Name": "id",
      "SerializedName": "id",
      "Description": "",
      "Type": {
-      "$id": "25",
+      "$id": "19",
       "Name": "int64",
       "Kind": "Int64",
       "IsNullable": false
@@ -208,12 +144,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "26",
+     "$id": "20",
      "Name": "petId",
      "SerializedName": "petId",
      "Description": "",
      "Type": {
-      "$id": "27",
+      "$id": "21",
       "Name": "int64",
       "Kind": "Int64",
       "IsNullable": false
@@ -222,12 +158,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "28",
+     "$id": "22",
      "Name": "name",
      "SerializedName": "name",
      "Description": "",
      "Type": {
-      "$id": "29",
+      "$id": "23",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -238,7 +174,7 @@
    ]
   },
   {
-   "$id": "30",
+   "$id": "24",
    "Name": "Error",
    "Namespace": "PetStore",
    "Description": "Error",
@@ -246,12 +182,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "31",
+     "$id": "25",
      "Name": "code",
      "SerializedName": "code",
      "Description": "",
      "Type": {
-      "$id": "32",
+      "$id": "26",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -260,12 +196,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "33",
+     "$id": "27",
      "Name": "message",
      "SerializedName": "message",
      "Description": "",
      "Type": {
-      "$id": "34",
+      "$id": "28",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -276,12 +212,68 @@
    ]
   },
   {
-   "$id": "35",
+   "$id": "29",
    "Name": "PetId",
    "Namespace": "PetStore",
    "IsNullable": false,
    "Usage": "None",
    "Properties": []
+  },
+  {
+   "$id": "30",
+   "Name": "Shark",
+   "Namespace": "PetStore",
+   "Description": "Shark is a fish",
+   "IsNullable": false,
+   "DiscriminatorValue": "shark",
+   "BaseModel": {
+    "$ref": "12"
+   },
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "31",
+     "Name": "bite",
+     "SerializedName": "bite",
+     "Description": "The bite of the shark",
+     "Type": {
+      "$id": "32",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  },
+  {
+   "$id": "33",
+   "Name": "Tuna",
+   "Namespace": "PetStore",
+   "Description": "Tuna is a fish",
+   "IsNullable": false,
+   "DiscriminatorValue": "tuna",
+   "BaseModel": {
+    "$ref": "12"
+   },
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "34",
+     "Name": "fat",
+     "SerializedName": "fat",
+     "Description": "The amount of fat of the tuna",
+     "Type": {
+      "$id": "35",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [

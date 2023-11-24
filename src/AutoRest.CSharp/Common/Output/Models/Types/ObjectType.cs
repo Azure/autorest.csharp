@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
 
-        public FormattableString? Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
+        public FormattableString Description => _description ??= $"{CreateDescription()}{CreateExtraDescriptionWithDiscriminator()}";
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
@@ -96,9 +96,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 List<FormattableString> childrenList = new List<FormattableString>();
                 foreach (var implementation in Discriminator.Implementations)
                 {
-                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type}\"/>");
+                    childrenList.Add($"{implementation.Type.Implementation.Type:C}");
                 }
-                return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type}\"/>{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}.";
+                return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}.";
             }
             return $"";
         }

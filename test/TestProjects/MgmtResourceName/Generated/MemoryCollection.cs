@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtResourceName
 {
     /// <summary>
-    /// A class representing a collection of <see cref="Memory" /> and their operations.
-    /// Each <see cref="Memory" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="MemoryCollection" /> instance call the GetMemories method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="Memory"/> and their operations.
+    /// Each <see cref="Memory"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="MemoryCollection"/> instance call the GetMemories method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class MemoryCollection : ArmCollection, IEnumerable<Memory>, IAsyncEnumerable<Memory>
     {
@@ -67,8 +67,8 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="memoryResourceName"> The String to use. </param>
-        /// <param name="data"> The Memory to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="MemoryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> or <paramref name="data"/> is null. </exception>
@@ -107,8 +107,8 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="memoryResourceName"> The String to use. </param>
-        /// <param name="data"> The Memory to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="MemoryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> or <paramref name="data"/> is null. </exception>
@@ -146,7 +146,7 @@ namespace MgmtResourceName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
@@ -182,7 +182,7 @@ namespace MgmtResourceName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
@@ -219,7 +219,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="Memory" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="Memory"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<Memory> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="Memory" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="Memory"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<Memory> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -259,7 +259,7 @@ namespace MgmtResourceName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
@@ -294,7 +294,7 @@ namespace MgmtResourceName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
@@ -329,7 +329,7 @@ namespace MgmtResourceName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
@@ -366,7 +366,7 @@ namespace MgmtResourceName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="memoryResourceName"> The String to use. </param>
+        /// <param name="memoryResourceName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>

@@ -21,9 +21,9 @@ using Azure.ResourceManager.ManagementGroups;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="MgmtGroupParentResource" /> and their operations.
-    /// Each <see cref="MgmtGroupParentResource" /> in the collection will belong to the same instance of <see cref="ManagementGroupResource" />.
-    /// To get a <see cref="MgmtGroupParentCollection" /> instance call the GetMgmtGroupParents method from an instance of <see cref="ManagementGroupResource" />.
+    /// A class representing a collection of <see cref="MgmtGroupParentResource"/> and their operations.
+    /// Each <see cref="MgmtGroupParentResource"/> in the collection will belong to the same instance of <see cref="ManagementGroupResource"/>.
+    /// To get a <see cref="MgmtGroupParentCollection"/> instance call the GetMgmtGroupParents method from an instance of <see cref="ManagementGroupResource"/>.
     /// </summary>
     public partial class MgmtGroupParentCollection : ArmCollection, IEnumerable<MgmtGroupParentResource>, IAsyncEnumerable<MgmtGroupParentResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MgmtGroupParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="MgmtGroupParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MgmtGroupParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGroupParentRestClient.CreateListRequest(Id.Name);
@@ -246,7 +246,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MgmtGroupParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="MgmtGroupParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MgmtGroupParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGroupParentRestClient.CreateListRequest(Id.Name);

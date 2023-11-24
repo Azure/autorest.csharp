@@ -22,9 +22,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtScopeResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FakePolicyAssignmentResource" /> and their operations.
-    /// Each <see cref="FakePolicyAssignmentResource" /> in the collection will belong to the same instance of <see cref="ArmResource" />.
-    /// To get a <see cref="FakePolicyAssignmentCollection" /> instance call the GetFakePolicyAssignments method from an instance of <see cref="ArmResource" />.
+    /// A class representing a collection of <see cref="FakePolicyAssignmentResource"/> and their operations.
+    /// Each <see cref="FakePolicyAssignmentResource"/> in the collection will belong to the same instance of <see cref="ArmResource"/>.
+    /// To get a <see cref="FakePolicyAssignmentCollection"/> instance call the GetFakePolicyAssignments method from an instance of <see cref="ArmResource"/>.
     /// </summary>
     public partial class FakePolicyAssignmentCollection : ArmCollection, IEnumerable<FakePolicyAssignmentResource>, IAsyncEnumerable<FakePolicyAssignmentResource>
     {
@@ -242,7 +242,7 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakePolicyAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakePolicyAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakePolicyAssignmentResource> GetAllAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)
@@ -311,7 +311,7 @@ namespace MgmtScopeResource
         /// <param name="filter"> The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()' or 'policyDefinitionId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter=atScope() is provided, the returned list only includes all policy assignments that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy assignments that at the given scope. If $filter=policyDefinitionId eq '{value}' is provided, the returned list includes all policy assignments of the policy definition whose id is {value}. </param>
         /// <param name="top"> Maximum number of records to return. When the $top filter is not provided, it will return 500 records. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakePolicyAssignmentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakePolicyAssignmentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakePolicyAssignmentResource> GetAll(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             if (Id.ResourceType == ResourceGroupResource.ResourceType)

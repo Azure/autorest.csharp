@@ -19,9 +19,9 @@ namespace MgmtExactMatchFlattenInheritance
 {
     /// <summary>
     /// A Class representing a CustomModel3 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="CustomModel3Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetCustomModel3Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetCustomModel3 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="CustomModel3Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetCustomModel3Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetCustomModel3 method.
     /// </summary>
     public partial class CustomModel3Resource : ArmResource
     {
@@ -44,7 +44,7 @@ namespace MgmtExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "CustomModel3Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CustomModel3Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal CustomModel3Resource(ArmClient client, CustomModel3Data data) : this(client, new ResourceIdentifier(data.Id))
@@ -168,7 +168,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The CustomModel3 to use. </param>
+        /// <param name="data"> The <see cref="CustomModel3Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<CustomModel3Resource>> UpdateAsync(WaitUntil waitUntil, CustomModel3Data data, CancellationToken cancellationToken = default)
@@ -206,7 +206,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The CustomModel3 to use. </param>
+        /// <param name="data"> The <see cref="CustomModel3Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<CustomModel3Resource> Update(WaitUntil waitUntil, CustomModel3Data data, CancellationToken cancellationToken = default)

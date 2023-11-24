@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtExpandResourceTypes
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ZoneResource" /> and their operations.
-    /// Each <see cref="ZoneResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ZoneCollection" /> instance call the GetZones method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ZoneResource"/> and their operations.
+    /// Each <see cref="ZoneResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="ZoneCollection"/> instance call the GetZones method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ZoneCollection : ArmCollection, IEnumerable<ZoneResource>, IAsyncEnumerable<ZoneResource>
     {
@@ -229,7 +229,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ZoneResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ZoneResource> GetAllAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _zoneRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);
@@ -252,7 +252,7 @@ namespace MgmtExpandResourceTypes
         /// </summary>
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ZoneResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ZoneResource> GetAll(int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _zoneRestClient.CreateListByResourceGroupRequest(Id.SubscriptionId, Id.ResourceGroupName, top);

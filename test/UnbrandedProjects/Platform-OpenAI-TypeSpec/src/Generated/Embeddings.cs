@@ -48,7 +48,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an embedding vector representing the input text. </summary>
-        /// <param name="embedding"> The CreateEmbeddingRequest to use. </param>
+        /// <param name="embedding"> The <see cref="CreateEmbeddingRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
         public virtual async Task<Result<CreateEmbeddingResponse>> CreateAsync(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an embedding vector representing the input text. </summary>
-        /// <param name="embedding"> The CreateEmbeddingRequest to use. </param>
+        /// <param name="embedding"> The <see cref="CreateEmbeddingRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="embedding"/> is null. </exception>
         public virtual Result<CreateEmbeddingResponse> Create(CreateEmbeddingRequest embedding, CancellationToken cancellationToken = default)

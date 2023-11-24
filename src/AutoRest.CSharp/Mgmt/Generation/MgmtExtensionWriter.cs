@@ -2,15 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -47,6 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
+            _writer.WriteParametersValidation(signature.Parameters.Take(1));
+
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
                 .Append($"{This.MockableExtension.FactoryMethodName}({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");

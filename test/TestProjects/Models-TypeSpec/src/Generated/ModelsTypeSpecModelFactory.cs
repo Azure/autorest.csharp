@@ -14,22 +14,6 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
-        /// <param name="first"></param>
-        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
-        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
-        {
-            return new FirstDerivedOutputModel("first", first);
-        }
-
-        /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
-        /// <param name="second"></param>
-        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
-        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
-        {
-            return new SecondDerivedOutputModel("second", second);
-        }
-
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
@@ -176,6 +160,22 @@ namespace ModelsTypeSpec.Models
         public static SingleBase SingleBase(string kind = null, int size = default)
         {
             return new UnknownSingleBase(kind, size);
+        }
+
+        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
+        /// <param name="first"></param>
+        /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
+        public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
+        {
+            return new FirstDerivedOutputModel("first", first);
+        }
+
+        /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
+        /// <param name="second"></param>
+        /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
+        public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
+        {
+            return new SecondDerivedOutputModel("second", second);
         }
     }
 }
