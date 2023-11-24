@@ -165,7 +165,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The SupersetModel6 to use. </param>
+        /// <param name="data"> The <see cref="SupersetModel6Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SupersetModel6Resource>> UpdateAsync(WaitUntil waitUntil, SupersetModel6Data data, CancellationToken cancellationToken = default)
@@ -202,7 +202,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The SupersetModel6 to use. </param>
+        /// <param name="data"> The <see cref="SupersetModel6Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SupersetModel6Resource> Update(WaitUntil waitUntil, SupersetModel6Data data, CancellationToken cancellationToken = default)

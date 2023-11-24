@@ -57,7 +57,7 @@ namespace MgmtExactMatchFlattenInheritance
         }
 
         /// <summary> Get an CustomModel2s. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -84,7 +84,7 @@ namespace MgmtExactMatchFlattenInheritance
         }
 
         /// <summary> Get an CustomModel2s. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
@@ -139,10 +139,10 @@ namespace MgmtExactMatchFlattenInheritance
         }
 
         /// <summary> Create or update an CustomModel2. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -169,10 +169,10 @@ namespace MgmtExactMatchFlattenInheritance
         }
 
         /// <summary> Create or update an CustomModel2. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="name"> The String to use. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -219,9 +219,9 @@ namespace MgmtExactMatchFlattenInheritance
         }
 
         /// <summary> Get an CustomModel2. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -250,9 +250,9 @@ namespace MgmtExactMatchFlattenInheritance
         }
 
         /// <summary> Get an CustomModel2. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>

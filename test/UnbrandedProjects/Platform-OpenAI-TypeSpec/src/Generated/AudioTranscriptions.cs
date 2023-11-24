@@ -48,7 +48,7 @@ namespace OpenAI
         }
 
         /// <summary> Transcribes audio into the input language. </summary>
-        /// <param name="audio"> The CreateTranscriptionRequest to use. </param>
+        /// <param name="audio"> The <see cref="CreateTranscriptionRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
         public virtual async Task<Result<CreateTranscriptionResponse>> CreateAsync(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace OpenAI
         }
 
         /// <summary> Transcribes audio into the input language. </summary>
-        /// <param name="audio"> The CreateTranscriptionRequest to use. </param>
+        /// <param name="audio"> The <see cref="CreateTranscriptionRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="audio"/> is null. </exception>
         public virtual Result<CreateTranscriptionResponse> Create(CreateTranscriptionRequest audio, CancellationToken cancellationToken = default)

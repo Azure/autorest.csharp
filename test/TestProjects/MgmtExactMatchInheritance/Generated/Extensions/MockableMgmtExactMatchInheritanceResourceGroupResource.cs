@@ -72,7 +72,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel1SName"> The String to use. </param>
+        /// <param name="exactMatchModel1SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -94,7 +94,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel1SName"> The String to use. </param>
+        /// <param name="exactMatchModel1SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -123,7 +123,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -145,7 +145,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -167,8 +167,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel2"> The <see cref="ExactMatchModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
@@ -203,8 +203,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel2SName"> The String to use. </param>
-        /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
+        /// <param name="exactMatchModel2SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel2"> The <see cref="ExactMatchModel2"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
@@ -279,8 +279,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel3"> The <see cref="ExactMatchModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
@@ -315,8 +315,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel3SName"> The String to use. </param>
-        /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
+        /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel3"> The <see cref="ExactMatchModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
@@ -351,7 +351,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel3SName"> The String to use. </param>
+        /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
@@ -385,7 +385,7 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel3SName"> The String to use. </param>
+        /// <param name="exactMatchModel3SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
@@ -419,8 +419,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel4"> The <see cref="ExactMatchModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
@@ -455,8 +455,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel4SName"> The String to use. </param>
-        /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
+        /// <param name="exactMatchModel4SName"> The <see cref="string"/> to use. </param>
+        /// <param name="exactMatchModel4"> The <see cref="ExactMatchModel4"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>

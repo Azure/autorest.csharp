@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return conversion == null ? constantFormattable : $"{constantFormattable}{conversion}";
         }
 
-        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
+        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType, string? contentType)
         {
             if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
@@ -111,6 +111,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
+                    // TODO: Currently only BinaryData is considered, other types are still in discussion
+                    case { IsFrameworkType: true } when contentType != null && IsContentTypeBinary(contentType) && parameter.RequestLocation == RequestLocation.Body:
+                        return $"{parameter.Name:I}";
                     case { IsFrameworkType: true }:
                         return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
                 }
@@ -128,6 +131,25 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return $"{parameter.Name:I}{conversionMethod}";
+        }
+
+        // TODO: This is a temporary solution. We will move this part to some common place.
+        private static bool IsContentTypeBinary(string contentType)
+        {
+            var typeSubs = contentType.Split('/');
+            if (typeSubs.Length != 2)
+            {
+                throw new NotSupportedException($"Content type {contentType} is not supported.");
+            }
+
+            var type = typeSubs[0];
+            var subType = typeSubs[1];
+            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream")
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)

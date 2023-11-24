@@ -129,7 +129,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> The String to use. </param>
+        /// <param name="filter"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -154,7 +154,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> The String to use. </param>
+        /// <param name="filter"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -185,7 +185,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary> Initializes a new instance of Client4. </summary>
-        /// <param name="clientParameter"> The String to use. </param>
+        /// <param name="clientParameter"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientParameter"/> is null. </exception>
         public virtual Client4 GetClient4(string clientParameter)
         {

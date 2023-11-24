@@ -38,7 +38,7 @@ namespace _Type.Union
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal StringExtensible(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;

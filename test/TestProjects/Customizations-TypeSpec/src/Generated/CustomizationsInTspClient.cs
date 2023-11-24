@@ -45,7 +45,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
-        /// <param name="input"> The RootModel to use. </param>
+        /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTripAsync(RootModel,CancellationToken)']/*" />
@@ -60,7 +60,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
-        /// <param name="input"> The RootModel to use. </param>
+        /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTrip(RootModel,CancellationToken)']/*" />

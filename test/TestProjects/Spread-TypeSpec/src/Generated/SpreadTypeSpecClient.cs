@@ -37,14 +37,14 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint) : this(endpoint, new SpreadTypeSpecClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SpreadTypeSpecClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SpreadTypeSpecClient(Uri endpoint, SpreadTypeSpecClientOptions options)
@@ -59,7 +59,7 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread a model as body. </summary>
-        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModelAsync(Thing,CancellationToken)']/*" />
@@ -74,7 +74,7 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread a model as body. </summary>
-        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadModel(Thing,CancellationToken)']/*" />
@@ -277,8 +277,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which has multiple target property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -297,8 +297,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which has multiple target property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -331,8 +331,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -374,8 +374,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -403,9 +403,9 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which contains a complex model property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
+        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -422,9 +422,9 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which contains a complex model property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
+        /// <param name="thing"> The <see cref="Thing"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -455,8 +455,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -498,8 +498,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -527,8 +527,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias with contains another alias property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -547,8 +547,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias with contains another alias property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -581,8 +581,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -624,8 +624,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -653,8 +653,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias with contains optional properties as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <param name="color"> optional property of the Thing. </param>
@@ -689,8 +689,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias with contains optional properties as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <param name="color"> optional property of the Thing. </param>
@@ -739,8 +739,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -782,8 +782,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="top"> The <see cref="int"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>

@@ -137,7 +137,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModelAsync(Bird,CancellationToken)']/*" />
@@ -151,7 +151,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return response;
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModel(Bird,CancellationToken)']/*" />
@@ -331,7 +331,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(Bird,CancellationToken)']/*" />
@@ -345,7 +345,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             return response;
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModel(Bird,CancellationToken)']/*" />
