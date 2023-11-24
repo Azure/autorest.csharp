@@ -44,7 +44,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of Query. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Query GetQueryClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of Property. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Property GetPropertyClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of Header. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Header GetHeaderClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of RequestBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual RequestBody GetRequestBodyClient(string apiVersion = "1.0.0")
         {
@@ -84,7 +84,7 @@ namespace Encode.Bytes
         }
 
         /// <summary> Initializes a new instance of ResponseBody. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ResponseBody GetResponseBodyClient(string apiVersion = "1.0.0")
         {

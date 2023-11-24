@@ -79,28 +79,10 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": [
-    {
-     "$id": "10",
-     "Name": "Golden",
-     "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-     "Description": "Golden dog model",
-     "IsNullable": false,
-     "DiscriminatorValue": "golden",
-     "BaseModel": {
-      "$ref": "6"
-     },
-     "Usage": "RoundTrip",
-     "Properties": []
-    }
    ]
   },
   {
-   "$ref": "10"
-  },
-  {
-   "$id": "11",
+   "$id": "10",
    "Name": "Snake",
    "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
    "Description": "Test fixed enum type for discriminator",
@@ -109,7 +91,7 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "12",
+     "$id": "11",
      "Name": "kind",
      "SerializedName": "kind",
      "Description": "discriminator property",
@@ -121,12 +103,12 @@
      "IsDiscriminator": true
     },
     {
-     "$id": "13",
+     "$id": "12",
      "Name": "length",
      "SerializedName": "length",
      "Description": "Length of the snake",
      "Type": {
-      "$id": "14",
+      "$id": "13",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -134,25 +116,33 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": [
-    {
-     "$id": "15",
-     "Name": "Cobra",
-     "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-     "Description": "Cobra model",
-     "IsNullable": false,
-     "DiscriminatorValue": "cobra",
-     "BaseModel": {
-      "$ref": "11"
-     },
-     "Usage": "RoundTrip",
-     "Properties": []
-    }
    ]
   },
   {
-   "$ref": "15"
+   "$id": "14",
+   "Name": "Golden",
+   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "Description": "Golden dog model",
+   "IsNullable": false,
+   "DiscriminatorValue": "golden",
+   "BaseModel": {
+    "$ref": "6"
+   },
+   "Usage": "RoundTrip",
+   "Properties": []
+  },
+  {
+   "$id": "15",
+   "Name": "Cobra",
+   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+   "Description": "Cobra model",
+   "IsNullable": false,
+   "DiscriminatorValue": "cobra",
+   "BaseModel": {
+    "$ref": "10"
+   },
+   "Usage": "RoundTrip",
+   "Properties": []
   }
  ],
  "Clients": [
@@ -557,7 +547,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -587,7 +577,7 @@
        "NameInRequest": "input",
        "Description": "Snake to create",
        "Type": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -726,7 +716,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -788,7 +778,7 @@
         200
        ],
        "BodyType": {
-        "$ref": "11"
+        "$ref": "10"
        },
        "BodyMediaType": "Json",
        "Headers": [],
