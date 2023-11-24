@@ -291,7 +291,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
             var replacedTypes = new Dictionary<ObjectSchema, TypeProvider>();
-            //var replacedTypes = new List<MgmtObjectType>();
             foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
             {
                 if (_schemaOrNameToModels.TryGetValue(schema, out var type))
