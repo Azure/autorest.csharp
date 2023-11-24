@@ -49,13 +49,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _backingObjectType = backingObjectType;
         }
 
-        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
-        {
-            _type = type;
-            _sourceInputModel = sourceInputModel;
-            DefaultName = GetNameWithoutGeneric(type);
-        }
-
         protected override string DefaultName { get; }
         protected override string DefaultNamespace => _type.Namespace ?? base.DefaultNamespace;
 
