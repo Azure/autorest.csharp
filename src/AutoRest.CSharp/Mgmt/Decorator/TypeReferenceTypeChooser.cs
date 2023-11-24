@@ -1,21 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager;
-using Azure.ResourceManager.Resources.Models;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -44,7 +35,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {
-                    var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
+                    var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType, typeToReplace);
                     _valueCache.TryAdd(typeToReplace.ObjectSchema, csharpType);
                     return csharpType;
                 }

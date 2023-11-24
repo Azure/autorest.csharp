@@ -26,18 +26,28 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private static ConcurrentDictionary<Type, SystemObjectType> _typeCache = new ConcurrentDictionary<Type, SystemObjectType>();
 
-        public static SystemObjectType Create(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public static SystemObjectType Create(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType = null)
         {
             if (_typeCache.TryGetValue(type, out var result))
                 return result;
 
-            result = new SystemObjectType(type, defaultNamespace, sourceInputModel);
+            result = new SystemObjectType(type, defaultNamespace, sourceInputModel, backingObjectType);
             _typeCache.TryAdd(type, result);
             return result;
         }
 
         private readonly Type _type;
         private readonly SourceInputModel? _sourceInputModel;
+
+        private readonly ObjectType? _backingObjectType; // this is the object type that gets replaced when there is a replacement
+
+        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType) : base(defaultNamespace, sourceInputModel)
+        {
+            _type = type;
+            _sourceInputModel = sourceInputModel;
+            DefaultName = GetNameWithoutGeneric(type);
+            _backingObjectType = backingObjectType;
+        }
 
         private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
@@ -127,17 +137,33 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
-            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
+        {
+            if (_backingObjectType is not null)
+            {
+                return _backingObjectType.InitializationConstructor;
+            }
+            return BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
+        }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
+        {
+            if (_backingObjectType is not null)
+            {
+                return _backingObjectType.Properties;
+            }
+
+            return ConstructProperties();
+        }
+
+        private IEnumerable<ObjectTypeProperty> ConstructProperties()
         {
             var internalPropertiesToInclude = new List<PropertyInfo>();
             PropertyMatchDetection.AddInternalIncludes(_type, internalPropertiesToInclude);
 
             foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type).Concat(internalPropertiesToInclude))
             {
-                var getter = property.GetGetMethod();
-                var setter = property.GetSetMethod();
+                var getter = property.GetMethod;
+                var setter = property.SetMethod;
                 var isNullable = IsNullable(property.PropertyType);
                 MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions(
                     getter != null && getter.IsPublic ? "public" : "internal",
@@ -159,6 +185,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
+                if (TypeFactory.IsList(property.PropertyType))
+                {
+                    prop.Schema = new ArraySchema()
+                    {
+                        Type = AllSchemaTypes.Array
+                    };
+                }
                 if (TypeFactory.IsDictionary(property.PropertyType))
                 {
                     prop.Schema = new DictionarySchema()
@@ -168,6 +201,29 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
 
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
+            }
+
+            static bool IsNullable(Type type)
+            {
+                if (type == null)
+                    return true; // obvious
+                if (!type.IsValueType)
+                    return true; // ref-type
+                if (Nullable.GetUnderlyingType(type) != null)
+                    return true; // Nullable<T>
+                return false; // value-type
+            }
+
+            bool IsRequired(PropertyInfo property)
+            {
+                var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+
+                return dict[property.Name].Required;
+            }
+
+            static string GetPropertySummary(MethodInfo? setter)
+            {
+                return setter != null ? " or sets" : string.Empty;
             }
         }
 
@@ -184,35 +240,22 @@ namespace AutoRest.CSharp.Output.Models.Types
             yield return BuildSerializationConstructor();
         }
 
-        private bool IsRequired(PropertyInfo property)
-        {
-            var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
-
-            return dict[property.Name].Required;
-        }
-
-        private bool IsNullable(Type type)
-        {
-            if (type == null)
-                return true; // obvious
-            if (!type.IsValueType)
-                return true; // ref-type
-            if (Nullable.GetUnderlyingType(type) != null)
-                return true; // Nullable<T>
-            return false; // value-type
-        }
-
-        private string GetPropertySummary(MethodInfo? setter)
-        {
-            return setter != null ? " or sets" : string.Empty;
-        }
-
         protected override ObjectTypeConstructor BuildSerializationConstructor()
-            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName), GetBaseObjectType()?.SerializationConstructor);
+        {
+            if (_backingObjectType is not null)
+                return _backingObjectType.SerializationConstructor;
+            return BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName), GetBaseObjectType()?.SerializationConstructor);
+        }
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel);
+            if (_type.BaseType == null || _type.BaseType == typeof(object))
+            {
+                return null;
+            }
+
+            var backingBaseObjectType = _backingObjectType?.Inherits is { IsFrameworkType: false, Implementation: ObjectType baseType } ? baseType : null;
+            return CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel, backingBaseObjectType);
         }
 
         protected override FormattableString CreateDescription()
