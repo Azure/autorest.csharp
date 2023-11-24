@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
                 propertyType: typeof(bool),
                 name: "HasData",
-                get: new());
+                propertyBody: new AutoPropertyBody(false));
 
             yield return hasDataProperty;
 
@@ -166,7 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
                 propertyType: ResourceData.Type,
                 name: "Data",
-                get: new(new MethodBodyStatement[]
+                propertyBody: new MethodPropertyBody(new MethodBodyStatement[]
                 {
                     new IfStatement(Not(new BoolExpression(new VariableReference(hasDataProperty.PropertyType, hasDataProperty.Declaration))), AddBraces: false)
                     {

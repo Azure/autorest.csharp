@@ -684,71 +684,61 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("virtual ", modifiers.HasFlag(MethodSignatureModifiers.Virtual)); // property does not support other modifiers, here we just ignore them if any
 
             writer.Append($"{property.PropertyType} {property.Declaration:I}"); // the declaration order here is quite anonying - we might need to assign the values to those properties in other places before these are written
-            bool isInline = property.Get.IsInline && (property.Set?.IsInline ?? true); // an absent setter indicates it is inline.
-            if (!isInline)
-            {
-                writer.Line();
-            }
-            writer.AppendRaw("{");
 
-            // to validate the modifiers are consistent with the modifiers that are already on the property declaration is quite complicated, here we just assume the builder of PropertyDeclaration could handle it properly
-            // and if they did not, the compiler will complain on our generated code
-            if (property.Get is { } get)
+            switch (property.PropertyBody)
             {
-                // write the getter
-                if (!isInline)
+                case ExpressionPropertyBody(var expression):
+                    writer.AppendRaw(" => ")
+                        .WriteValueExpression(expression);
+                    break;
+                case AutoPropertyBody(var hasSetter, var setterModifiers, var initialization):
+                    writer.AppendRaw("{ get; ");
+                    if (hasSetter)
+                    {
+                        WritePropertyAccessorModifiers(writer, setterModifiers);
+                        writer.AppendRaw(" set; ");
+                    }
+                    writer.AppendRaw("}");
+                    if (initialization is not null)
+                    {
+                        writer.AppendRaw(" = ")
+                            .WriteValueExpression(initialization);
+                    }
+                    break;
+                case MethodPropertyBody(var getter, var setter, var setterModifiers):
+                    writer.LineRaw("{");
+                    // write getter
+                    WriteMethodPropertyAccessor(writer, "get", getter);
+                    // write setter
+                    if (setter is not null)
+                    {
+                        WriteMethodPropertyAccessor(writer, "set", setter, setterModifiers);
+                    }
+                    writer.AppendRaw("}");
+                    break;
+                default:
+                    throw new InvalidOperationException($"Unhandled property body type {property.PropertyBody}");
+            }
+
+            writer.Line();
+
+            static void WriteMethodPropertyAccessor(CodeWriter writer, string name, MethodBodyStatement body, MethodSignatureModifiers modifiers = MethodSignatureModifiers.None)
+            {
+                WritePropertyAccessorModifiers(writer, modifiers);
+                writer.LineRaw(name)
+                    .LineRaw("{");
+                using (writer.AmbientScope())
                 {
-                    writer.Line();
+                    writer.WriteMethodBodyStatement(body);
                 }
-                WritePropertyAccessorMethod(writer, "get", get, isInline);
-
+                writer.LineRaw("}");
             }
 
-            if (property.Set is { } set)
+            static void WritePropertyAccessorModifiers(CodeWriter writer, MethodSignatureModifiers modifiers)
             {
-                // write the setter
-                if (!isInline)
-                {
-                    writer.Line();
-                }
-                WritePropertyAccessorMethod(writer, "set", set, isInline);
-            }
-
-            writer.AppendRaw("}");
-
-            static void WritePropertyAccessorMethod(CodeWriter writer, string methodName, PropertyAccessorMethod method, bool isInline)
-            {
-                // write modifiers
-                // the property modifiers should never have public because the modifiers of accessor method must be more restrictive than the modifiers on the property, we just ignore it if we have it
-                var modifiers = method.Modifiers;
                 writer.AppendRawIf("protected ", modifiers.HasFlag(MethodSignatureModifiers.Protected))
                     .AppendRawIf("internal ", modifiers.HasFlag(MethodSignatureModifiers.Internal))
                     .AppendRawIf("private ", modifiers.HasFlag(MethodSignatureModifiers.Private));
-
-                writer.AppendRaw(methodName);
-
-                if (method.BodyExpression is { } expression)
-                {
-                    writer.AppendRaw(" => ")
-                        .WriteValueExpression(expression);
-
-                    writer.AppendRaw(";");
-                    if (!isInline)
-                        writer.Line();
-                }
-                else if (method.Body is { } body)
-                {
-                    using (writer.AmbientScope())
-                    {
-                        writer.AppendRaw("{");
-                        writer.WriteMethodBodyStatement(body);
-                        writer.AppendRaw("}");
-                    }
-                }
-                else
-                {
-                    writer.AppendRaw(";");
-                }
             }
         }
     }

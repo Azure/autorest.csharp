@@ -3,18 +3,16 @@
 
 using System;
 using System.Diagnostics;
-using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
     [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
-    internal record PropertyDeclaration(FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType PropertyType, CodeWriterDeclaration Declaration, PropertyAccessorMethod Get, PropertyAccessorMethod? Set = null, ValueExpression? InitializationValue = null)
+    internal record PropertyDeclaration(FormattableString? Description, MethodSignatureModifiers Modifiers, CSharpType PropertyType, CodeWriterDeclaration Declaration, PropertyBody PropertyBody)
     {
-        public PropertyDeclaration(FormattableString? description, MethodSignatureModifiers modifiers, CSharpType propertyType, string name, PropertyAccessorMethod get, PropertyAccessorMethod? set = null, ValueExpression? initializationValue = null) : this(description, modifiers, propertyType, new CodeWriterDeclaration(name), get, set, initializationValue)
+        public PropertyDeclaration(FormattableString? description, MethodSignatureModifiers modifiers, CSharpType propertyType, string name, PropertyBody propertyBody) : this(description, modifiers, propertyType, new CodeWriterDeclaration(name), propertyBody)
         {
             Declaration.SetActualName(name);
         }
