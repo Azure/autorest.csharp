@@ -11,10 +11,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ReferenceTypeWriter : ModelWriter
     {
-        public static ModelWriter GetWriter(TypeProvider typeProvider) => typeProvider switch
+        public static ModelWriter? GetWriter(TypeProvider typeProvider) => typeProvider switch
         {
             MgmtReferenceType => new ReferenceTypeWriter(),
             ResourceData data => new ResourceDataWriter(data),
+            SystemObjectType => null,
             _ => new ModelWriter()
         };
 

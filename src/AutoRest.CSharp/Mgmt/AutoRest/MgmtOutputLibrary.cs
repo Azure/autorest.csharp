@@ -290,7 +290,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
-            var replacedTypes = new List<MgmtObjectType>();
+            var replacedTypes = new Dictionary<ObjectSchema, TypeProvider>();
+            //var replacedTypes = new List<MgmtObjectType>();
             foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
             {
                 TypeProvider? type;
@@ -302,33 +303,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
                         if (csharpType != null)
                         {
-                            // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
-                            switch (mgmtObjectType)
-                            {
-                                case ResourceData resourceData:
-                                    replacedTypes.Add(new ResourceData(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
-                                case MgmtReferenceType referenceType:
-                                    replacedTypes.Add(new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
-                                default:
-                                    replacedTypes.Add(new MgmtObjectType(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
-                            }
+                            //// re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
+                            //switch (mgmtObjectType)
+                            //{
+                            //    case ResourceData resourceData:
+                            //        replacedTypes.Add(new ResourceData(schema, csharpType.Name, csharpType.Namespace));
+                            //        break;
+                            //    case MgmtReferenceType referenceType:
+                            //        replacedTypes.Add(new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
+                            //        break;
+                            //    default:
+                            //        replacedTypes.Add(new MgmtObjectType(schema, csharpType.Name, csharpType.Namespace));
+                            //        break;
+                            //}
+                            replacedTypes.Add(schema, csharpType.Implementation);
                         }
                     }
                 }
             }
 
             // third, update the entries in cache maps with the new model instances
-            foreach (var replacedType in replacedTypes)
+            foreach (var (schema, replacedType) in replacedTypes)
             {
-                var oriModel = _schemaOrNameToModels[replacedType.ObjectSchema];
-                _schemaOrNameToModels[replacedType.ObjectSchema] = replacedType;
+                var originalModel = _schemaOrNameToModels[schema];
+                _schemaOrNameToModels[schema] = replacedType;
                 MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, replacedType.ObjectSchema.GetFullSerializedName()),
-                    replacedType.ObjectSchema.GetFullSerializedName(),
-                    "ReplaceType", oriModel.Declaration.FullName, replacedType.Declaration.FullName);
+                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, schema.GetFullSerializedName()),
+                    schema.GetFullSerializedName(),
+                    "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
             return _schemaOrNameToModels;
