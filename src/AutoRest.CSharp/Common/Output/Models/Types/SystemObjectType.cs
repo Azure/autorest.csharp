@@ -55,20 +55,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             protected override ObjectTypeConstructor BuildSerializationConstructor()
                 => _backingObjectType.SerializationConstructor;
-
-            protected override IEnumerable<ObjectTypeProperty> BuildProperties()
-                => _backingObjectType.Properties;
-
-            protected override CSharpType? CreateInheritedType()
-            {
-                if (_type.BaseType == null || _type.BaseType == typeof(object))
-                {
-                    return null;
-                }
-
-                var backingBaseObjectType = _backingObjectType?.GetBaseObjectType();
-                return CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel, backingBaseObjectType);
-            }
         }
 
         private readonly Type _type;
