@@ -215,8 +215,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (type == null)
                     return true; // obvious
-                if (!type.IsValueType)
-                    return true; // ref-type
+                if (type.IsClass)
+                    return true; // classes are nullable
                 if (Nullable.GetUnderlyingType(type) != null)
                     return true; // Nullable<T>
                 return false; // value-type
