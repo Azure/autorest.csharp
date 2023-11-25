@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -181,9 +182,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     Nullable = isNullable,
                     ReadOnly = property.IsReadOnly(),
-                    SerializedName = GetSerializedName(property.Name),
-                    Summary = $"Gets{GetPropertySummary(setter)} {property.Name}",
-                    Required = IsRequired(property),
+                    SerializedName = GetSerializedName(property.Name, SystemType),
+                    Summary = GetPropertySummary(setter != null, property.Name),
+                    Required = IsRequired(property, SystemType),
                     Language = new Languages()
                     {
                         Default = new Language() { Name = property.Name },
@@ -222,24 +223,28 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false; // value-type
             }
 
-            bool IsRequired(PropertyInfo property)
+            static bool IsRequired(PropertyInfo property, Type systemType)
             {
-                var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+                var dict = ReferenceClassFinder.GetPropertyMetadata(systemType);
 
                 return dict[property.Name].Required;
             }
 
-            static string GetPropertySummary(MethodInfo? setter)
+            static string GetPropertySummary(bool hasSetter, string name)
             {
-                return setter != null ? " or sets" : string.Empty;
+                var builder = new StringBuilder("Gets ");
+                if (hasSetter)
+                    builder.Append("or sets ");
+                builder.Append(name);
+                return builder.ToString();
             }
-        }
 
-        private string GetSerializedName(string name)
-        {
-            var dict = ReferenceClassFinder.GetPropertyMetadata(SystemType);
+            static string GetSerializedName(string name, Type systemType)
+            {
+                var dict = ReferenceClassFinder.GetPropertyMetadata(systemType);
 
-            return dict[name].SerializedName;
+                return dict[name].SerializedName;
+            }
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
