@@ -198,7 +198,7 @@ namespace AutoRest.CSharp.Generation.Types
             return name != null;
         }
 
-        internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType)
+        internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType = null)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
             var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel, backingObjectType);

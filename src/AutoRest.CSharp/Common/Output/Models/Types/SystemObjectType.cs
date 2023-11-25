@@ -31,22 +31,53 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_typeCache.TryGetValue(type, out var result))
                 return result;
 
-            result = new SystemObjectType(type, defaultNamespace, sourceInputModel, backingObjectType);
+            result = backingObjectType == null ?
+                new SystemObjectType(type, defaultNamespace, sourceInputModel) :
+                new ReplacedSystemObjectType(type, defaultNamespace, sourceInputModel, backingObjectType);
             _typeCache.TryAdd(type, result);
             return result;
+        }
+
+        /// <summary>
+        /// A simple inner private class to represent the case that a SystemObjectType is created to replace an existing constructed ObjectType in this library.
+        /// </summary>
+        private class ReplacedSystemObjectType : SystemObjectType
+        {
+            private readonly ObjectType _backingObjectType; // this is the object type that gets replaced when there is a replacement
+            public ReplacedSystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType backingObjectType) : base(type, defaultNamespace, sourceInputModel)
+            {
+                _backingObjectType = backingObjectType;
+            }
+
+            protected override ObjectTypeConstructor BuildInitializationConstructor()
+                => _backingObjectType.InitializationConstructor;
+
+            protected override ObjectTypeConstructor BuildSerializationConstructor()
+                => _backingObjectType.SerializationConstructor;
+
+            protected override IEnumerable<ObjectTypeProperty> BuildProperties()
+                => _backingObjectType.Properties;
+
+            protected override CSharpType? CreateInheritedType()
+            {
+                if (_type.BaseType == null || _type.BaseType == typeof(object))
+                {
+                    return null;
+                }
+
+                var backingBaseObjectType = _backingObjectType?.GetBaseObjectType();
+                return CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel, backingBaseObjectType);
+            }
         }
 
         private readonly Type _type;
         private readonly SourceInputModel? _sourceInputModel;
 
-        private readonly ObjectType? _backingObjectType; // this is the object type that gets replaced when there is a replacement
-
-        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType) : base(defaultNamespace, sourceInputModel)
+        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             _type = type;
             _sourceInputModel = sourceInputModel;
             DefaultName = GetNameWithoutGeneric(type);
-            _backingObjectType = backingObjectType;
         }
 
         protected override string DefaultName { get; }
@@ -130,25 +161,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
-        {
-            if (_backingObjectType is not null)
-            {
-                return _backingObjectType.InitializationConstructor;
-            }
-            return BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
-        }
+            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
-        {
-            if (_backingObjectType is not null)
-            {
-                return _backingObjectType.Properties;
-            }
-
-            return ConstructProperties();
-        }
-
-        private IEnumerable<ObjectTypeProperty> ConstructProperties()
         {
             var internalPropertiesToInclude = new List<PropertyInfo>();
             PropertyMatchDetection.AddInternalIncludes(_type, internalPropertiesToInclude);
@@ -234,21 +249,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
-        {
-            if (_backingObjectType is not null)
-                return _backingObjectType.SerializationConstructor;
-            return BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName), GetBaseObjectType()?.SerializationConstructor);
-        }
+            => BuildConstructor(GetCtor(_type, ReferenceClassFinder.SerializationCtorAttributeName), GetBaseObjectType()?.SerializationConstructor);
 
         protected override CSharpType? CreateInheritedType()
         {
-            if (_type.BaseType == null || _type.BaseType == typeof(object))
-            {
-                return null;
-            }
-
-            var backingBaseObjectType = _backingObjectType?.GetBaseObjectType();
-            return CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel, backingBaseObjectType);
+            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel);
         }
 
         protected override FormattableString CreateDescription()
