@@ -159,6 +159,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
                 //given that the generation will fail with the new types
+                if (TypeFactory.IsList(property.PropertyType))
+                {
+                    prop.Schema = new ArraySchema()
+                    {
+                        Type = AllSchemaTypes.Array
+                    };
+                }
                 if (TypeFactory.IsDictionary(property.PropertyType))
                 {
                     prop.Schema = new DictionarySchema()
