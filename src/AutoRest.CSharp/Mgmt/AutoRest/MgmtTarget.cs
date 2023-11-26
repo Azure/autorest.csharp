@@ -286,7 +286,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+            var modelWriter = model switch
+            {
+                MgmtReferenceType => new ReferenceTypeWriter(),
+                ResourceData data => new ResourceDataWriter(data),
+                SystemObjectType => null,
+                _ => new ModelWriter()
+            };
+            if (modelWriter == null)
+                return;
+
+            modelWriter.WriteModel(codeWriter, model);
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 
