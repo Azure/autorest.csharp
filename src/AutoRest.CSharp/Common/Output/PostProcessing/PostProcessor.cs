@@ -179,8 +179,16 @@ internal class PostProcessor
             return project;
 
         var root = await modelFactoryGeneratedDocument.GetSyntaxRootAsync();
-        root = root?.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);
-        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root!);
+        Debug.Assert(root is not null);
+        root = root.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia)!;
+        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root);
+
+        // see if this class still has any method, if it contains nothing, we should remove this document
+        var methods = root.DescendantNodes().OfType<MethodDeclarationSyntax>();
+        if (!methods.Any())
+        {
+            return project.RemoveDocument(modelFactoryGeneratedDocument.Id);
+        }
 
         return modelFactoryGeneratedDocument.Project;
     }
