@@ -198,10 +198,10 @@ namespace AutoRest.CSharp.Generation.Types
             return name != null;
         }
 
-        internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType = null)
+        internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, IEnumerable<ObjectTypeProperty>? backingProperties = null)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
-            var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel, backingObjectType);
+            var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel, backingProperties);
             // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
             return new CSharpType(
                 systemObjectType,
@@ -245,8 +245,8 @@ namespace AutoRest.CSharp.Generation.Types
             return type;
         }
 
-        internal static CSharpType FromSystemType(BuildContext context, Type type, ObjectType? backingObjectType = null)
-            => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel, backingObjectType);
+        internal static CSharpType FromSystemType(BuildContext context, Type type, IEnumerable<ObjectTypeProperty>? backingProperties = null)
+            => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel, backingProperties);
 
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {

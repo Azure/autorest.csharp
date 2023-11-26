@@ -11,10 +11,10 @@ using System.Reflection;
 using System.Text;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -27,44 +27,26 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private static ConcurrentDictionary<Type, SystemObjectType> _typeCache = new ConcurrentDictionary<Type, SystemObjectType>();
 
-        public static SystemObjectType Create(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType? backingObjectType = null)
+        public static SystemObjectType Create(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, IEnumerable<ObjectTypeProperty>? backingProperties = null)
         {
             if (_typeCache.TryGetValue(type, out var result))
                 return result;
 
-            result = backingObjectType == null ?
-                new SystemObjectType(type, defaultNamespace, sourceInputModel) :
-                new ReplacedSystemObjectType(type, defaultNamespace, sourceInputModel, backingObjectType);
+            result = new SystemObjectType(type, defaultNamespace, sourceInputModel, backingProperties);
             _typeCache.TryAdd(type, result);
             return result;
         }
 
-        /// <summary>
-        /// A simple inner private class to represent the case that a SystemObjectType is created to replace an existing constructed ObjectType in this library.
-        /// </summary>
-        private class ReplacedSystemObjectType : SystemObjectType
-        {
-            private readonly ObjectType _backingObjectType; // this is the object type that gets replaced when there is a replacement
-            public ReplacedSystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, ObjectType backingObjectType) : base(type, defaultNamespace, sourceInputModel)
-            {
-                _backingObjectType = backingObjectType;
-            }
-
-            protected override ObjectTypeConstructor BuildInitializationConstructor()
-                => _backingObjectType.InitializationConstructor;
-
-            protected override ObjectTypeConstructor BuildSerializationConstructor()
-                => _backingObjectType.SerializationConstructor;
-        }
-
         private readonly Type _type;
         private readonly SourceInputModel? _sourceInputModel;
+        private readonly IReadOnlyDictionary<string, ObjectTypeProperty> _backingProperties;
 
-        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, IEnumerable<ObjectTypeProperty>? backingProperties) : base(defaultNamespace, sourceInputModel)
         {
             _type = type;
             _sourceInputModel = sourceInputModel;
             DefaultName = GetNameWithoutGeneric(type);
+            _backingProperties = backingProperties?.ToDictionary(p => p.Declaration.Name) ?? new Dictionary<string, ObjectTypeProperty>();
         }
 
         protected override string DefaultName { get; }
@@ -75,11 +57,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal override Type? SerializeAs => GetSerializeAs(_type);
 
         protected override string DefaultAccessibility { get; } = "public";
-
-        private string ToCamelCase(string name)
-        {
-            return name.Substring(0, 1).ToLower(CultureInfo.InvariantCulture) + name.Substring(1);
-        }
 
         internal Type SystemType => _type;
 
@@ -127,18 +104,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectTypeConstructor BuildConstructor(ConstructorInfo ctor, ObjectTypeConstructor? baseConstructor)
         {
-            var parameters = ctor.GetParameters()
-                .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null))
-                .ToArray();
+            var parameters = new List<Parameter>();
+            foreach (var param in ctor.GetParameters())
+            {
+                _backingProperties.TryGetValue(param.Name!.ToCleanName(), out var backingProperty);
+                var parameter = new Parameter(param.Name!, FormattableStringHelpers.FromString(backingProperty?.Description) ?? $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null);
+                parameters.Add(parameter);
+            }
 
             // we should only add initializers when there is a corresponding parameter
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
-            foreach (var autoRestProperty in Properties)
+            foreach (var property in Properties)
             {
-                if (parameters.Any(parameter => parameter.Name == autoRestProperty.Declaration.Name.ToVariableName()))
+                var parameter = parameters.FirstOrDefault(p => p.Name == property.Declaration.Name.ToVariableName());
+                if (parameter is not null)
                 {
-                    Reference reference = new Reference(ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
-                    initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
+                    initializers.Add(new ObjectPropertyInitializer(property, parameter));
                 }
             }
 
@@ -157,6 +138,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type).Concat(internalPropertiesToInclude))
             {
+                // try to get the backing property if any
+                _backingProperties.TryGetValue(property.Name, out var backingProperty);
+
+                // construct the property
                 var getter = property.GetMethod;
                 var setter = property.SetMethod;
                 var isNullable = IsNullable(property.PropertyType);
@@ -164,38 +149,45 @@ namespace AutoRest.CSharp.Output.Models.Types
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
                     new CSharpType(property.PropertyType, isNullable));
-                Property prop = new Property()
+                Property schemaProperty;
+                if (backingProperty?.SchemaProperty is not null)
                 {
-                    Nullable = isNullable,
-                    ReadOnly = property.IsReadOnly(),
-                    SerializedName = GetSerializedName(property.Name, SystemType),
-                    Summary = GetPropertySummary(setter != null, property.Name),
-                    Required = IsRequired(property, SystemType),
-                    Language = new Languages()
+                    schemaProperty = backingProperty.SchemaProperty;
+                }
+                else
+                {
+                    schemaProperty = new Property()
                     {
-                        Default = new Language() { Name = property.Name },
+                        Nullable = isNullable,
+                        ReadOnly = property.IsReadOnly(),
+                        SerializedName = GetSerializedName(property.Name, SystemType),
+                        Summary = GetPropertySummary(setter != null, property.Name),
+                        Required = IsRequired(property, SystemType),
+                        Language = new Languages()
+                        {
+                            Default = new Language() { Name = property.Name },
+                        }
+                    };
+                    //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
+                    //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
+                    //given that the generation will fail with the new types
+                    if (TypeFactory.IsList(property.PropertyType))
+                    {
+                        schemaProperty.Schema = new ArraySchema()
+                        {
+                            Type = AllSchemaTypes.Array
+                        };
                     }
-                };
-
-                //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager is known
-                //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
-                //given that the generation will fail with the new types
-                if (TypeFactory.IsList(property.PropertyType))
-                {
-                    prop.Schema = new ArraySchema()
+                    if (TypeFactory.IsDictionary(property.PropertyType))
                     {
-                        Type = AllSchemaTypes.Array
-                    };
-                }
-                if (TypeFactory.IsDictionary(property.PropertyType))
-                {
-                    prop.Schema = new DictionarySchema()
-                    {
-                        Type = AllSchemaTypes.Dictionary
-                    };
+                        schemaProperty.Schema = new DictionarySchema()
+                        {
+                            Type = AllSchemaTypes.Dictionary
+                        };
+                    }
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
+                yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
             }
 
             static bool IsNullable(Type type)
