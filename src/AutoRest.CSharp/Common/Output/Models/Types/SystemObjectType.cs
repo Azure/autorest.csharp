@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var param in ctor.GetParameters())
             {
                 _backingProperties.TryGetValue(param.Name!.ToCleanName(), out var backingProperty);
-                var parameter = new Parameter(param.Name!, FormattableStringHelpers.FromString(backingProperty?.Description) ?? $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null);
+                var parameter = new Parameter(param.Name!, FormattableStringHelpers.FromString(backingProperty?.Description) ?? $"The {param.Name}", GetCSharpType(param.ParameterType), null, ValidationType.None, null);
                 parameters.Add(parameter);
             }
 
@@ -128,6 +128,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ObjectTypeConstructor(Type, modifiers, parameters, initializers.ToArray(), baseConstructor);
         }
 
+        // TODO -- this might be unnecessary, need to investigate the ctor of CSharpType to make sure it could correctly handle typeof System.Nullable<T>
+        private static CSharpType GetCSharpType(Type type)
+        {
+            var unwrapNullable = Nullable.GetUnderlyingType(type);
+
+            return unwrapNullable == null ? new CSharpType(type, IsNullable(type)) : new CSharpType(unwrapNullable, true);
+
+            static bool IsNullable(Type type)
+            {
+                if (type == null)
+                    return true; // obvious
+                if (type.IsClass)
+                    return true; // classes are nullable
+                if (Nullable.GetUnderlyingType(type) != null)
+                    return true; // Nullable<T>
+                return false; // value-type
+            }
+        }
+
         protected override ObjectTypeConstructor BuildInitializationConstructor()
             => BuildConstructor(GetCtor(_type, ReferenceClassFinder.InitializationCtorAttributeName), GetBaseObjectType()?.InitializationConstructor);
 
@@ -144,11 +163,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // construct the property
                 var getter = property.GetMethod;
                 var setter = property.SetMethod;
-                var isNullable = IsNullable(property.PropertyType);
+                var declarationType = GetCSharpType(property.PropertyType);
                 MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions(
                     getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
-                    new CSharpType(property.PropertyType, isNullable));
+                    declarationType);
                 Property schemaProperty;
                 if (backingProperty?.SchemaProperty is not null)
                 {
@@ -158,7 +177,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     schemaProperty = new Property()
                     {
-                        Nullable = isNullable,
+                        Nullable = declarationType.IsNullable,
                         ReadOnly = property.IsReadOnly(),
                         SerializedName = GetSerializedName(property.Name, SystemType),
                         Summary = GetPropertySummary(setter != null, property.Name),
@@ -188,17 +207,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
 
                 yield return new ObjectTypeProperty(memberDeclarationOptions, schemaProperty.Summary!, schemaProperty.IsReadOnly, schemaProperty, new CSharpType(property.PropertyType, GetSerializeAs(property.PropertyType)));
-            }
-
-            static bool IsNullable(Type type)
-            {
-                if (type == null)
-                    return true; // obvious
-                if (type.IsClass)
-                    return true; // classes are nullable
-                if (Nullable.GetUnderlyingType(type) != null)
-                    return true; // Nullable<T>
-                return false; // value-type
             }
 
             static bool IsRequired(PropertyInfo property, Type systemType)
