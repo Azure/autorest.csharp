@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class SearchOptions
     {
-        /// <summary> Initializes a new instance of SearchOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="SearchOptions"/>. </summary>
         public SearchOptions()
         {
             Facets = new ChangeTrackingList<string>();

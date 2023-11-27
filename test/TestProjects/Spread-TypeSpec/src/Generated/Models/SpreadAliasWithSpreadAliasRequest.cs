@@ -13,7 +13,7 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithSpreadAliasRequest. </summary>
     internal partial class SpreadAliasWithSpreadAliasRequest
     {
-        /// <summary> Initializes a new instance of SpreadAliasWithSpreadAliasRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithSpreadAliasRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>

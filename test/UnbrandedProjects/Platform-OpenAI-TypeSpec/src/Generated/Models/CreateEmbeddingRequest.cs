@@ -11,7 +11,7 @@ namespace OpenAI.Models
     /// <summary> The CreateEmbeddingRequest. </summary>
     public partial class CreateEmbeddingRequest
     {
-        /// <summary> Initializes a new instance of CreateEmbeddingRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
         /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
         /// <param name="input">
         /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a
@@ -29,7 +29,7 @@ namespace OpenAI.Models
             Input = input;
         }
 
-        /// <summary> Initializes a new instance of CreateEmbeddingRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEmbeddingRequest"/>. </summary>
         /// <param name="model"> ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them. </param>
         /// <param name="input">
         /// Input text to embed, encoded as a string or array of tokens. To embed multiple inputs in a

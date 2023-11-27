@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> The NumericValuesFacetint32. </summary>
     public partial class NumericValuesFacetint32 : Facet
     {
-        /// <summary> Initializes a new instance of NumericValuesFacetint32. </summary>
+        /// <summary> Initializes a new instance of <see cref="NumericValuesFacetint32"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>
@@ -29,7 +29,7 @@ namespace ModelsTypeSpec.Models
             Value = value;
         }
 
-        /// <summary> Initializes a new instance of NumericValuesFacetint32. </summary>
+        /// <summary> Initializes a new instance of <see cref="NumericValuesFacetint32"/>. </summary>
         /// <param name="field"> A field to facet by, where the field is attributed as 'facetable'. </param>
         /// <param name="values"> The facet ranges to produce. The values must be listed in ascending order to get the expected results. For example, values=10,20 produces three buckets: one for base rate 0 up to but not including 10, one for 10 up to but not including 20, and one for 20 and higher. </param>
         /// <param name="value"></param>

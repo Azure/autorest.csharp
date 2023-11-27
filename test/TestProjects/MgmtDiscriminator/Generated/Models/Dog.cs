@@ -10,13 +10,13 @@ namespace MgmtDiscriminator.Models
     /// <summary> A dog. </summary>
     public partial class Dog : Pet
     {
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         public Dog()
         {
             Kind = PetKind.Dog;
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="bark"> A dog can bark. </param>

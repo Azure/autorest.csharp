@@ -10,12 +10,12 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> First item. </summary>
     public partial class FirstItem
     {
-        /// <summary> Initializes a new instance of FirstItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
         internal FirstItem()
         {
         }
 
-        /// <summary> Initializes a new instance of FirstItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirstItem"/>. </summary>
         /// <param name="id"> The id of the item. </param>
         internal FirstItem(int id)
         {

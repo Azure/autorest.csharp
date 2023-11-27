@@ -16,12 +16,12 @@ namespace MgmtExtensionResource
     /// </summary>
     public partial class SubSingletonData : ResourceData
     {
-        /// <summary> Initializes a new instance of SubSingletonData. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubSingletonData"/>. </summary>
         internal SubSingletonData()
         {
         }
 
-        /// <summary> Initializes a new instance of SubSingletonData. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubSingletonData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

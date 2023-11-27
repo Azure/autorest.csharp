@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class UpdateResource
     {
-        /// <summary> Initializes a new instance of UpdateResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         public UpdateResource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();

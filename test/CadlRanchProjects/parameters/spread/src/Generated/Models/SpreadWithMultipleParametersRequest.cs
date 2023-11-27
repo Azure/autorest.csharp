@@ -13,7 +13,7 @@ namespace Parameters.Spread.Models
     /// <summary> The SpreadWithMultipleParametersRequest. </summary>
     internal partial class SpreadWithMultipleParametersRequest
     {
-        /// <summary> Initializes a new instance of SpreadWithMultipleParametersRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadWithMultipleParametersRequest"/>. </summary>
         /// <param name="prop1"></param>
         /// <param name="prop2"></param>
         /// <param name="prop3"></param>

@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
         public VirtualMachineScaleSetVmProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmProfile"/>. </summary>
         /// <param name="osProfile">
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile

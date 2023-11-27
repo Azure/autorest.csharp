@@ -19,7 +19,7 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class FakePolicyAssignmentData : ResourceData
     {
-        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         public FakePolicyAssignmentData()
         {
             NotScopes = new ChangeTrackingList<string>();
@@ -27,7 +27,7 @@ namespace MgmtScopeResource
             NonComplianceMessages = new ChangeTrackingList<NonComplianceMessage>();
         }
 
-        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

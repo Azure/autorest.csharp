@@ -14,13 +14,13 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> TrackedResource with flatten properties, but the id comes from flattened properties, therefore this should not be a resource. </summary>
     public partial class TrackedResourceModel2 : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2"/>. </summary>
         /// <param name="location"> The location. </param>
         public TrackedResourceModel2(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="TrackedResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

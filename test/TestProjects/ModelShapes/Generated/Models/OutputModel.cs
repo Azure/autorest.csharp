@@ -15,7 +15,7 @@ namespace ModelShapes.Models
     /// <summary> The OutputModel. </summary>
     public partial class OutputModel
     {
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -57,7 +57,7 @@ namespace ModelShapes.Models
             VectorRequiredNullable = vectorRequiredNullable;
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>

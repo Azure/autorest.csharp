@@ -12,7 +12,7 @@ namespace ApiVersionInTsp.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ApiVersionInTspModelFactory
     {
-        /// <summary> Initializes a new instance of DetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <returns> A new <see cref="Models.DetectionResult"/> instance for mocking. </returns>
         public static DetectionResult DetectionResult(Guid resultId = default)

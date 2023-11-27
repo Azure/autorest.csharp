@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The CreateChatCompletionRequest. </summary>
     public partial class CreateChatCompletionRequest
     {
-        /// <summary> Initializes a new instance of CreateChatCompletionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.
@@ -32,7 +32,7 @@ namespace OpenAI.Models
             LogitBias = new OptionalDictionary<string, long>();
         }
 
-        /// <summary> Initializes a new instance of CreateChatCompletionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility)
         /// table for details on which models work with the Chat API.

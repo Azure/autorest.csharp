@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class InstanceViewStatus
     {
-        /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
         public InstanceViewStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="InstanceViewStatus"/>. </summary>
         /// <param name="code">
         /// The status code.
         /// Serialized Name: InstanceViewStatus.code

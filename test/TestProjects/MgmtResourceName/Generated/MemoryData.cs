@@ -13,12 +13,12 @@ namespace MgmtResourceName
     /// <summary> A class representing the Memory data model. </summary>
     public partial class MemoryData : ResourceData
     {
-        /// <summary> Initializes a new instance of MemoryData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MemoryData"/>. </summary>
         public MemoryData()
         {
         }
 
-        /// <summary> Initializes a new instance of MemoryData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MemoryData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -14,13 +14,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class CustomModel3ListResult
     {
-        /// <summary> Initializes a new instance of CustomModel3ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel3ListResult"/>. </summary>
         internal CustomModel3ListResult()
         {
             Value = new ChangeTrackingList<CustomModel3Data>();
         }
 
-        /// <summary> Initializes a new instance of CustomModel3ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel3ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
         internal CustomModel3ListResult(IReadOnlyList<CustomModel3Data> value, string nextLink)

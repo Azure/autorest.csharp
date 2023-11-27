@@ -17,7 +17,7 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class TokenFilter
     {
-        /// <summary> Initializes a new instance of TokenFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenFilter"/>. </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public TokenFilter(string name)
@@ -27,7 +27,7 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of TokenFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         internal TokenFilter(string odataType, string name)

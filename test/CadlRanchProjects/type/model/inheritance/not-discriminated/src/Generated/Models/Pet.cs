@@ -13,7 +13,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
     /// <summary> This is base model for not-discriminated normal multiple levels inheritance. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Pet(string name)

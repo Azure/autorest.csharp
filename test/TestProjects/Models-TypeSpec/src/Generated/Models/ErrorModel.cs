@@ -10,12 +10,12 @@ namespace ModelsTypeSpec.Models
     /// <summary> Output model that has property of its own type. </summary>
     public partial class ErrorModel
     {
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorModel"/>. </summary>
         internal ErrorModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorModel"/>. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>
         internal ErrorModel(string message, ErrorModel innerError)

@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The import. </summary>
     public partial class Import
     {
-        /// <summary> Initializes a new instance of Import. </summary>
+        /// <summary> Initializes a new instance of <see cref="Import"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Import(string name)

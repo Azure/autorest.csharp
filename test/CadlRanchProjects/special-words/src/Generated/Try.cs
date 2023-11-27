@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The try. </summary>
     public partial class Try
     {
-        /// <summary> Initializes a new instance of Try. </summary>
+        /// <summary> Initializes a new instance of <see cref="Try"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Try(string name)

@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents an indexer. </summary>
     public partial class Indexer
     {
-        /// <summary> Initializes a new instance of Indexer. </summary>
+        /// <summary> Initializes a new instance of <see cref="Indexer"/>. </summary>
         /// <param name="name"> The name of the indexer. </param>
         /// <param name="dataSourceName"> The name of the datasource from which this indexer reads data. </param>
         /// <param name="targetIndexName"> The name of the index to which this indexer writes data. </param>
@@ -32,7 +32,7 @@ namespace CognitiveSearch.Models
             OutputFieldMappings = new ChangeTrackingList<FieldMapping>();
         }
 
-        /// <summary> Initializes a new instance of Indexer. </summary>
+        /// <summary> Initializes a new instance of <see cref="Indexer"/>. </summary>
         /// <param name="name"> The name of the indexer. </param>
         /// <param name="description"> The description of the indexer. </param>
         /// <param name="dataSourceName"> The name of the datasource from which this indexer reads data. </param>

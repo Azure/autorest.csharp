@@ -13,12 +13,12 @@ namespace MgmtSingletonResource
     /// <summary> A class representing the Car data model. </summary>
     public partial class CarData : ResourceData
     {
-        /// <summary> Initializes a new instance of CarData. </summary>
+        /// <summary> Initializes a new instance of <see cref="CarData"/>. </summary>
         public CarData()
         {
         }
 
-        /// <summary> Initializes a new instance of CarData. </summary>
+        /// <summary> Initializes a new instance of <see cref="CarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

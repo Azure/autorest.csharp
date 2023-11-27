@@ -15,7 +15,7 @@ namespace OpenAI.Models
     /// </summary>
     public partial class CreateCompletionResponse
     {
-        /// <summary> Initializes a new instance of CreateCompletionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the completion. </param>
         /// <param name="object"> The object type, which is always `text_completion`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the completion was created. </param>
@@ -36,7 +36,7 @@ namespace OpenAI.Models
             Choices = choices.ToList();
         }
 
-        /// <summary> Initializes a new instance of CreateCompletionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the completion. </param>
         /// <param name="object"> The object type, which is always `text_completion`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the completion was created. </param>

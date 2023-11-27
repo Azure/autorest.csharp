@@ -13,7 +13,7 @@ namespace required_optional.Models
     /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper
     {
-        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public StringWrapper(string value)

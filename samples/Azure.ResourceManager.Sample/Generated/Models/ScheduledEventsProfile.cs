@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ScheduledEventsProfile
     {
-        /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         public ScheduledEventsProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="ScheduledEventsProfile"/>. </summary>
         /// <param name="terminateNotificationProfile">
         /// Specifies Terminate Scheduled Event related configurations.
         /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile

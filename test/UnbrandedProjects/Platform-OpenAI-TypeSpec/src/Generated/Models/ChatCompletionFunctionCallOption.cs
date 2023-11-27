@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The ChatCompletionFunctionCallOption. </summary>
     internal partial class ChatCompletionFunctionCallOption
     {
-        /// <summary> Initializes a new instance of ChatCompletionFunctionCallOption. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctionCallOption"/>. </summary>
         /// <param name="name"> The name of the function to call. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ChatCompletionFunctionCallOption(string name)

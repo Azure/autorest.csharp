@@ -11,7 +11,7 @@ namespace NoTestTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class NoTestTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>

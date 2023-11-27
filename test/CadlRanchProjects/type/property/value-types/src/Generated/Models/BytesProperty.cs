@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a bytes property. </summary>
     public partial class BytesProperty
     {
-        /// <summary> Initializes a new instance of BytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="BytesProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public BytesProperty(BinaryData property)

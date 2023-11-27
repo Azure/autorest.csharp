@@ -17,7 +17,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtParamOrderingModelFactory
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -33,7 +33,7 @@ namespace MgmtParamOrdering.Models
             return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.DedicatedHostGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -49,7 +49,7 @@ namespace MgmtParamOrdering.Models
             return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.DedicatedHostData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -65,7 +65,7 @@ namespace MgmtParamOrdering.Models
             return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -81,7 +81,7 @@ namespace MgmtParamOrdering.Models
             return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.EnvironmentContainerResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -97,7 +97,7 @@ namespace MgmtParamOrdering.Models
             return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties);
         }
 
-        /// <summary> Initializes a new instance of WorkspaceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.WorkspaceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -128,7 +128,7 @@ namespace MgmtParamOrdering.Models
             return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParamOrdering.VirtualMachineScaleSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -145,7 +145,7 @@ namespace MgmtParamOrdering.Models
             return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList());
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineScaleSetInstanceView"/>. </summary>
         /// <param name="virtualMachine"> The instance view status summary for the virtual machine scale set. </param>
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceView"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(string virtualMachine = null)

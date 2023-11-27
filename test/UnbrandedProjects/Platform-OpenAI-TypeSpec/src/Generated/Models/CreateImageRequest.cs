@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateImageRequest. </summary>
     public partial class CreateImageRequest
     {
-        /// <summary> Initializes a new instance of CreateImageRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="prompt"/> is null. </exception>
         public CreateImageRequest(string prompt)
@@ -20,7 +20,7 @@ namespace OpenAI.Models
             Prompt = prompt;
         }
 
-        /// <summary> Initializes a new instance of CreateImageRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="n"> The number of images to generate. Must be between 1 and 10. </param>
         /// <param name="size"> The size of the generated images. Must be one of `256x256`, `512x512`, or `1024x1024`. </param>

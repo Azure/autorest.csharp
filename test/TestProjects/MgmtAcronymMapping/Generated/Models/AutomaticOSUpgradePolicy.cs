@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class AutomaticOSUpgradePolicy
     {
-        /// <summary> Initializes a new instance of AutomaticOSUpgradePolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradePolicy"/>. </summary>
         public AutomaticOSUpgradePolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of AutomaticOSUpgradePolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradePolicy"/>. </summary>
         /// <param name="enableAutomaticOSUpgrade">
         /// Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. &lt;br&gt;&lt;br&gt; If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true.
         /// Serialized Name: AutomaticOSUpgradePolicy.enableAutomaticOSUpgrade

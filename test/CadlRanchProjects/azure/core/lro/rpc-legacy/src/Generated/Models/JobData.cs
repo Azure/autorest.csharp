@@ -13,7 +13,7 @@ namespace _Azure.Lro.RpcLegacy.Models
     /// <summary> Data of the job. </summary>
     public partial class JobData
     {
-        /// <summary> Initializes a new instance of JobData. </summary>
+        /// <summary> Initializes a new instance of <see cref="JobData"/>. </summary>
         /// <param name="comment"> Comment. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="comment"/> is null. </exception>
         public JobData(string comment)

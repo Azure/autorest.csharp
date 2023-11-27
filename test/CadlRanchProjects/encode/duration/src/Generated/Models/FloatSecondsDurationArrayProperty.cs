@@ -15,7 +15,7 @@ namespace Encode.Duration.Models
     /// <summary> The FloatSecondsDurationArrayProperty. </summary>
     public partial class FloatSecondsDurationArrayProperty
     {
-        /// <summary> Initializes a new instance of FloatSecondsDurationArrayProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationArrayProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public FloatSecondsDurationArrayProperty(IEnumerable<TimeSpan> value)
@@ -25,7 +25,7 @@ namespace Encode.Duration.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of FloatSecondsDurationArrayProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationArrayProperty"/>. </summary>
         /// <param name="value"></param>
         internal FloatSecondsDurationArrayProperty(IList<TimeSpan> value)
         {

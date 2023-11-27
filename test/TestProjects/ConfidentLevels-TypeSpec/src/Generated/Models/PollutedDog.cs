@@ -14,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The dog with a union type. </summary>
     public partial class PollutedDog : PollutedPet
     {
-        /// <summary> Initializes a new instance of PollutedDog. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
@@ -30,7 +30,7 @@ namespace ConfidentLevelsInTsp.Models
             Color = color;
         }
 
-        /// <summary> Initializes a new instance of PollutedDog. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>

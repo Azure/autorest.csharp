@@ -14,14 +14,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// </summary>
     public abstract partial class Dinosaur
     {
-        /// <summary> Initializes a new instance of Dinosaur. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dinosaur"/>. </summary>
         /// <param name="size"></param>
         protected Dinosaur(int size)
         {
             Size = size;
         }
 
-        /// <summary> Initializes a new instance of Dinosaur. </summary>
+        /// <summary> Initializes a new instance of <see cref="Dinosaur"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         internal Dinosaur(string kind, int size)

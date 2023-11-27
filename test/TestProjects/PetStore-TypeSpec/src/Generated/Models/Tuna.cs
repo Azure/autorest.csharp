@@ -10,7 +10,7 @@ namespace PetStore.Models
     /// <summary> Tuna is a fish. </summary>
     public partial class Tuna : Fish
     {
-        /// <summary> Initializes a new instance of Tuna. </summary>
+        /// <summary> Initializes a new instance of <see cref="Tuna"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
         internal Tuna(int size, int fat) : base(size)
@@ -19,7 +19,7 @@ namespace PetStore.Models
             Fat = fat;
         }
 
-        /// <summary> Initializes a new instance of Tuna. </summary>
+        /// <summary> Initializes a new instance of <see cref="Tuna"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>

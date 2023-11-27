@@ -13,13 +13,13 @@ namespace MgmtMockAndSample.Models
     /// <summary> A list of private link resources. </summary>
     internal partial class MhsmPrivateLinkResourceListResult
     {
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResourceListResult"/>. </summary>
         internal MhsmPrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<MhsmPrivateLinkResource>();
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResourceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResourceListResult"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
         internal MhsmPrivateLinkResourceListResult(IReadOnlyList<MhsmPrivateLinkResource> value)
         {

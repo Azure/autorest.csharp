@@ -16,7 +16,7 @@ namespace AnomalyDetector.Models
     /// </summary>
     public partial class MultivariateBatchDetectionOptions
     {
-        /// <summary> Initializes a new instance of MultivariateBatchDetectionOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionOptions"/>. </summary>
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in

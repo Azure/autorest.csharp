@@ -9,12 +9,12 @@ namespace OpenAI.Models
     /// <summary> The FineTuningJobHyperparameters. </summary>
     public partial class FineTuningJobHyperparameters
     {
-        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobHyperparameters"/>. </summary>
         internal FineTuningJobHyperparameters()
         {
         }
 
-        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobHyperparameters"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.

@@ -10,12 +10,12 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The ModelY. </summary>
     public partial class ModelY
     {
-        /// <summary> Initializes a new instance of ModelY. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
         public ModelY()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelY. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelY"/>. </summary>
         /// <param name="e"></param>
         internal ModelY(string e)
         {

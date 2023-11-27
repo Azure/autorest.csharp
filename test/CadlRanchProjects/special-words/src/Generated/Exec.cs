@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The exec. </summary>
     public partial class Exec
     {
-        /// <summary> Initializes a new instance of Exec. </summary>
+        /// <summary> Initializes a new instance of <see cref="Exec"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Exec(string name)

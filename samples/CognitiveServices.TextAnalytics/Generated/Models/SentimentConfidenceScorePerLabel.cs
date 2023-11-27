@@ -10,7 +10,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. </summary>
     public partial class SentimentConfidenceScorePerLabel
     {
-        /// <summary> Initializes a new instance of SentimentConfidenceScorePerLabel. </summary>
+        /// <summary> Initializes a new instance of <see cref="SentimentConfidenceScorePerLabel"/>. </summary>
         /// <param name="positive"></param>
         /// <param name="neutral"></param>
         /// <param name="negative"></param>

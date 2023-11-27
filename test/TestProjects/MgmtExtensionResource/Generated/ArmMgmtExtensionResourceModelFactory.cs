@@ -16,7 +16,7 @@ namespace MgmtExtensionResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExtensionResourceModelFactory
     {
-        /// <summary> Initializes a new instance of DnsNameAvailabilityResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DnsNameAvailabilityResult"/>. </summary>
         /// <param name="available"> Domain availability (True/False). </param>
         /// <returns> A new <see cref="Models.DnsNameAvailabilityResult"/> instance for mocking. </returns>
         public static DnsNameAvailabilityResult DnsNameAvailabilityResult(bool? available = null)
@@ -24,7 +24,7 @@ namespace MgmtExtensionResource.Models
             return new DnsNameAvailabilityResult(available);
         }
 
-        /// <summary> Initializes a new instance of SubSingletonData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtExtensionResource.SubSingletonData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -36,7 +36,7 @@ namespace MgmtExtensionResource.Models
             return new SubSingletonData(id, name, resourceType, systemData, something);
         }
 
-        /// <summary> Initializes a new instance of PolicyDefinitionData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtExtensionResource.PolicyDefinitionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

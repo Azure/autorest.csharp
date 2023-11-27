@@ -14,12 +14,12 @@ namespace MgmtMockAndSample.Models
     /// </summary>
     public abstract partial class FirewallPolicyRule
     {
-        /// <summary> Initializes a new instance of FirewallPolicyRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         protected FirewallPolicyRule()
         {
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="FirewallPolicyRule"/>. </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>

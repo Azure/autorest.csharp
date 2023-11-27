@@ -13,13 +13,13 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The properties for the table query response. </summary>
     public partial class TableQueryResponse
     {
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         internal TableQueryResponse()
         {
             Value = new ChangeTrackingList<TableResponseProperties>();
         }
 
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
         internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value)

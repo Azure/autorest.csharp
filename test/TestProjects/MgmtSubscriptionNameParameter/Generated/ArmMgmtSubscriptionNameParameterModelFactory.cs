@@ -16,7 +16,7 @@ namespace MgmtSubscriptionNameParameter.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSubscriptionNameParameterModelFactory
     {
-        /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSubscriptionNameParameter.SBSubscriptionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

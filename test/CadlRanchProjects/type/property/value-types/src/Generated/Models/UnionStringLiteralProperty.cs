@@ -10,7 +10,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a union of string literal as property. </summary>
     public partial class UnionStringLiteralProperty
     {
-        /// <summary> Initializes a new instance of UnionStringLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionStringLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public UnionStringLiteralProperty(UnionStringLiteralPropertyProperty property)
         {

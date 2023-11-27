@@ -14,14 +14,14 @@ namespace MgmtMockAndSample.Models
     /// <summary> A set of rules governing the network accessibility of a managed hsm pool. </summary>
     public partial class MhsmNetworkRuleSet
     {
-        /// <summary> Initializes a new instance of MhsmNetworkRuleSet. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmNetworkRuleSet"/>. </summary>
         public MhsmNetworkRuleSet()
         {
             IpRules = new ChangeTrackingList<MhsmipRule>();
             VirtualNetworkRules = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of MhsmNetworkRuleSet. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmNetworkRuleSet"/>. </summary>
         /// <param name="bypass"> Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'. </param>
         /// <param name="defaultAction"> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </param>
         /// <param name="ipRules"> The list of IP address rules. </param>

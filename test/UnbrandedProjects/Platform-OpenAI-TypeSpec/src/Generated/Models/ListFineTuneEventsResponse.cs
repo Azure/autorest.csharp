@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The ListFineTuneEventsResponse. </summary>
     public partial class ListFineTuneEventsResponse
     {
-        /// <summary> Initializes a new instance of ListFineTuneEventsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListFineTuneEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace OpenAI.Models
             Data = data.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListFineTuneEventsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListFineTuneEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         internal ListFineTuneEventsResponse(string @object, IReadOnlyList<FineTuneEvent> data)

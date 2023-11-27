@@ -11,7 +11,7 @@ namespace OpenAI.Models
     /// <summary> The ChatCompletionFunctions. </summary>
     public partial class ChatCompletionFunctions
     {
-        /// <summary> Initializes a new instance of ChatCompletionFunctions. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
         /// <param name="name">
         /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
         /// dashes, with a maximum length of 64.
@@ -33,7 +33,7 @@ namespace OpenAI.Models
             Parameters = parameters;
         }
 
-        /// <summary> Initializes a new instance of ChatCompletionFunctions. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionFunctions"/>. </summary>
         /// <param name="name">
         /// The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and
         /// dashes, with a maximum length of 64.
