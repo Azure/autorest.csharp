@@ -9,10 +9,10 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.AI.FormRecognizer.Models
+namespace Azure.Storage.Tables.Models
 {
-    /// <summary> Request parameter to train a new custom model. </summary>
-    public partial class TrainRequest
+    /// <summary> The properties for the table entity query response. </summary>
+    public partial class TableEntityQueryResult
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,39 +46,26 @@ namespace Azure.AI.FormRecognizer.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="TrainRequest"/>. </summary>
-        /// <param name="source"> Source path containing the training documents. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="source"/> is null. </exception>
-        public TrainRequest(string source)
+        /// <summary> Initializes a new instance of <see cref="TableEntityQueryResult"/>. </summary>
+        internal TableEntityQueryResult()
         {
-            Argument.AssertNotNull(source, nameof(source));
-
-            Source = source;
+            Value = new ChangeTrackingList<IDictionary<string, object>>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="TrainRequest"/>. </summary>
-        /// <param name="source"> Source path containing the training documents. </param>
-        /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
-        /// <param name="useLabelFile"> Use label file for training a model. </param>
+        /// <summary> Initializes a new instance of <see cref="TableEntityQueryResult"/>. </summary>
+        /// <param name="odataMetadata"> The metadata response of the table. </param>
+        /// <param name="value"> List of table entities. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TrainRequest(string source, TrainSourceFilter sourceFilter, bool? useLabelFile, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal TableEntityQueryResult(string odataMetadata, IReadOnlyList<IDictionary<string, object>> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            Source = source;
-            SourceFilter = sourceFilter;
-            UseLabelFile = useLabelFile;
+            OdataMetadata = odataMetadata;
+            Value = value;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="TrainRequest"/> for deserialization. </summary>
-        internal TrainRequest()
-        {
-        }
-
-        /// <summary> Source path containing the training documents. </summary>
-        public string Source { get; }
-        /// <summary> Filter to apply to the documents in the source path for training. </summary>
-        public TrainSourceFilter SourceFilter { get; set; }
-        /// <summary> Use label file for training a model. </summary>
-        public bool? UseLabelFile { get; set; }
+        /// <summary> The metadata response of the table. </summary>
+        public string OdataMetadata { get; }
+        /// <summary> List of table entities. </summary>
+        public IReadOnlyList<IDictionary<string, object>> Value { get; }
     }
 }

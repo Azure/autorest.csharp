@@ -14,14 +14,14 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AIFormRecognizerModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.TrainContent"/>. </summary>
         /// <param name="source"> Source path containing the training documents. </param>
         /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
         /// <param name="useLabelFile"> Use label file for training a model. </param>
-        /// <returns> A new <see cref="FormRecognizer.Models.TrainRequest"/> instance for mocking. </returns>
-        public static TrainRequest TrainRequest(string source = null, TrainSourceFilter sourceFilter = null, bool? useLabelFile = null)
+        /// <returns> A new <see cref="FormRecognizer.Models.TrainContent"/> instance for mocking. </returns>
+        public static TrainContent TrainContent(string source = null, TrainSourceFilter sourceFilter = null, bool? useLabelFile = null)
         {
-            return new TrainRequest(source, sourceFilter, useLabelFile, serializedAdditionalRawData: null);
+            return new TrainContent(source, sourceFilter, useLabelFile, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="FormRecognizer.Models.ErrorInformation"/>. </summary>

@@ -14,16 +14,16 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainRequest : IUtf8JsonSerializable, IJsonModel<TrainRequest>
+    public partial class TrainContent : IUtf8JsonSerializable, IJsonModel<TrainContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrainRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TrainContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<TrainRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<TrainContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TrainContent>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(TrainRequest)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(TrainContent)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -57,19 +57,19 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
         }
 
-        TrainRequest IJsonModel<TrainRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TrainContent IJsonModel<TrainContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TrainContent>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(TrainRequest)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(TrainContent)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTrainRequest(document.RootElement, options);
+            return DeserializeTrainContent(document.RootElement, options);
         }
 
-        internal static TrainRequest DeserializeTrainRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static TrainContent DeserializeTrainContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -113,38 +113,38 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TrainRequest(source, sourceFilter.Value, Optional.ToNullable(useLabelFile), serializedAdditionalRawData);
+            return new TrainContent(source, sourceFilter.Value, Optional.ToNullable(useLabelFile), serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<TrainRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TrainContent>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TrainContent>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(TrainRequest)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(TrainContent)} does not support '{options.Format}' format.");
             }
         }
 
-        TrainRequest IPersistableModel<TrainRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        TrainContent IPersistableModel<TrainContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TrainRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TrainContent>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeTrainRequest(document.RootElement, options);
+                        return DeserializeTrainContent(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(TrainRequest)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(TrainContent)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<TrainRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TrainContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

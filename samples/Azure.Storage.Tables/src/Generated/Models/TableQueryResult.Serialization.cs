@@ -14,16 +14,16 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableQueryResponse : IUtf8JsonSerializable, IJsonModel<TableQueryResponse>
+    public partial class TableQueryResult : IUtf8JsonSerializable, IJsonModel<TableQueryResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableQueryResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableQueryResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<TableQueryResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<TableQueryResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(TableQueryResponse)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(TableQueryResult)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -60,19 +60,19 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndObject();
         }
 
-        TableQueryResponse IJsonModel<TableQueryResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TableQueryResult IJsonModel<TableQueryResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(TableQueryResponse)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(TableQueryResult)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTableQueryResponse(document.RootElement, options);
+            return DeserializeTableQueryResult(document.RootElement, options);
         }
 
-        internal static TableQueryResponse DeserializeTableQueryResponse(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static TableQueryResult DeserializeTableQueryResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -111,38 +111,38 @@ namespace Azure.Storage.Tables.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TableQueryResponse(odataMetadata.Value, Optional.ToList(value), serializedAdditionalRawData);
+            return new TableQueryResult(odataMetadata.Value, Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<TableQueryResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TableQueryResult>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(TableQueryResponse)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(TableQueryResult)} does not support '{options.Format}' format.");
             }
         }
 
-        TableQueryResponse IPersistableModel<TableQueryResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
+        TableQueryResult IPersistableModel<TableQueryResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableQueryResult>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeTableQueryResponse(document.RootElement, options);
+                        return DeserializeTableQueryResult(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(TableQueryResponse)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(TableQueryResult)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<TableQueryResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TableQueryResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

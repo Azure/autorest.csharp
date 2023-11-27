@@ -14,16 +14,16 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableEntityQueryResponse : IUtf8JsonSerializable, IJsonModel<TableEntityQueryResponse>
+    public partial class TableEntityQueryResult : IUtf8JsonSerializable, IJsonModel<TableEntityQueryResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableEntityQueryResponse>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<TableEntityQueryResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<TableEntityQueryResponse>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<TableEntityQueryResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(TableEntityQueryResponse)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(TableEntityQueryResult)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -76,19 +76,19 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndObject();
         }
 
-        TableEntityQueryResponse IJsonModel<TableEntityQueryResponse>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        TableEntityQueryResult IJsonModel<TableEntityQueryResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResult>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(TableEntityQueryResponse)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(TableEntityQueryResult)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeTableEntityQueryResponse(document.RootElement, options);
+            return DeserializeTableEntityQueryResult(document.RootElement, options);
         }
 
-        internal static TableEntityQueryResponse DeserializeTableEntityQueryResponse(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static TableEntityQueryResult DeserializeTableEntityQueryResult(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -146,38 +146,38 @@ namespace Azure.Storage.Tables.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new TableEntityQueryResponse(odataMetadata.Value, Optional.ToList(value), serializedAdditionalRawData);
+            return new TableEntityQueryResult(odataMetadata.Value, Optional.ToList(value), serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<TableEntityQueryResponse>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<TableEntityQueryResult>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResult>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(TableEntityQueryResponse)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(TableEntityQueryResult)} does not support '{options.Format}' format.");
             }
         }
 
-        TableEntityQueryResponse IPersistableModel<TableEntityQueryResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
+        TableEntityQueryResult IPersistableModel<TableEntityQueryResult>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResponse>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<TableEntityQueryResult>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeTableEntityQueryResponse(document.RootElement, options);
+                        return DeserializeTableEntityQueryResult(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(TableEntityQueryResponse)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(TableEntityQueryResult)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<TableEntityQueryResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<TableEntityQueryResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

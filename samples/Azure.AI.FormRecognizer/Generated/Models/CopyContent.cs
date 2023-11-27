@@ -12,7 +12,7 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter to copy an existing custom model from the source resource to a target resource referenced by the resource ID. </summary>
-    public partial class CopyRequest
+    public partial class CopyContent
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,12 +46,12 @@ namespace Azure.AI.FormRecognizer.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="CopyRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CopyContent"/>. </summary>
         /// <param name="targetResourceId"> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </param>
         /// <param name="targetResourceRegion"> Location of the target Azure resource. A valid Azure region name supported by Cognitive Services. </param>
         /// <param name="copyAuthorization"> Entity that encodes claims to authorize the copy request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="targetResourceId"/>, <paramref name="targetResourceRegion"/> or <paramref name="copyAuthorization"/> is null. </exception>
-        public CopyRequest(string targetResourceId, string targetResourceRegion, CopyAuthorizationResult copyAuthorization)
+        public CopyContent(string targetResourceId, string targetResourceRegion, CopyAuthorizationResult copyAuthorization)
         {
             Argument.AssertNotNull(targetResourceId, nameof(targetResourceId));
             Argument.AssertNotNull(targetResourceRegion, nameof(targetResourceRegion));
@@ -62,12 +62,12 @@ namespace Azure.AI.FormRecognizer.Models
             CopyAuthorization = copyAuthorization;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CopyRequest"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="CopyContent"/>. </summary>
         /// <param name="targetResourceId"> Azure Resource Id of the target Form Recognizer resource where the model is copied to. </param>
         /// <param name="targetResourceRegion"> Location of the target Azure resource. A valid Azure region name supported by Cognitive Services. </param>
         /// <param name="copyAuthorization"> Entity that encodes claims to authorize the copy request. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CopyRequest(string targetResourceId, string targetResourceRegion, CopyAuthorizationResult copyAuthorization, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CopyContent(string targetResourceId, string targetResourceRegion, CopyAuthorizationResult copyAuthorization, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             TargetResourceId = targetResourceId;
             TargetResourceRegion = targetResourceRegion;
@@ -75,8 +75,8 @@ namespace Azure.AI.FormRecognizer.Models
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> Initializes a new instance of <see cref="CopyRequest"/> for deserialization. </summary>
-        internal CopyRequest()
+        /// <summary> Initializes a new instance of <see cref="CopyContent"/> for deserialization. </summary>
+        internal CopyContent()
         {
         }
 

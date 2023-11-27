@@ -9,10 +9,10 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Azure.Storage.Tables.Models
+namespace Azure.AI.FormRecognizer.Models
 {
-    /// <summary> The properties for the table query response. </summary>
-    public partial class TableQueryResponse
+    /// <summary> Request parameter to train a new custom model. </summary>
+    public partial class TrainContent
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,26 +46,39 @@ namespace Azure.Storage.Tables.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
-        internal TableQueryResponse()
+        /// <summary> Initializes a new instance of <see cref="TrainContent"/>. </summary>
+        /// <param name="source"> Source path containing the training documents. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="source"/> is null. </exception>
+        public TrainContent(string source)
         {
-            Value = new ChangeTrackingList<TableResponseProperties>();
+            Argument.AssertNotNull(source, nameof(source));
+
+            Source = source;
         }
 
-        /// <summary> Initializes a new instance of <see cref="TableQueryResponse"/>. </summary>
-        /// <param name="odataMetadata"> The metadata response of the table. </param>
-        /// <param name="value"> List of tables. </param>
+        /// <summary> Initializes a new instance of <see cref="TrainContent"/>. </summary>
+        /// <param name="source"> Source path containing the training documents. </param>
+        /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
+        /// <param name="useLabelFile"> Use label file for training a model. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal TrainContent(string source, TrainSourceFilter sourceFilter, bool? useLabelFile, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
-            OdataMetadata = odataMetadata;
-            Value = value;
+            Source = source;
+            SourceFilter = sourceFilter;
+            UseLabelFile = useLabelFile;
             _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
-        /// <summary> The metadata response of the table. </summary>
-        public string OdataMetadata { get; }
-        /// <summary> List of tables. </summary>
-        public IReadOnlyList<TableResponseProperties> Value { get; }
+        /// <summary> Initializes a new instance of <see cref="TrainContent"/> for deserialization. </summary>
+        internal TrainContent()
+        {
+        }
+
+        /// <summary> Source path containing the training documents. </summary>
+        public string Source { get; }
+        /// <summary> Filter to apply to the documents in the source path for training. </summary>
+        public TrainSourceFilter SourceFilter { get; set; }
+        /// <summary> Use label file for training a model. </summary>
+        public bool? UseLabelFile { get; set; }
     }
 }

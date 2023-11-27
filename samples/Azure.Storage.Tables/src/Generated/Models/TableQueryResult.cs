@@ -11,8 +11,8 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    /// <summary> The properties for the table entity query response. </summary>
-    public partial class TableEntityQueryResponse
+    /// <summary> The properties for the table query response. </summary>
+    public partial class TableQueryResult
     {
         /// <summary>
         /// Keeps track of any properties unknown to the library.
@@ -46,17 +46,17 @@ namespace Azure.Storage.Tables.Models
         /// </summary>
         private IDictionary<string, BinaryData> _serializedAdditionalRawData;
 
-        /// <summary> Initializes a new instance of <see cref="TableEntityQueryResponse"/>. </summary>
-        internal TableEntityQueryResponse()
+        /// <summary> Initializes a new instance of <see cref="TableQueryResult"/>. </summary>
+        internal TableQueryResult()
         {
-            Value = new ChangeTrackingList<IDictionary<string, object>>();
+            Value = new ChangeTrackingList<TableResponseProperties>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="TableEntityQueryResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResult"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
-        /// <param name="value"> List of table entities. </param>
+        /// <param name="value"> List of tables. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TableEntityQueryResponse(string odataMetadata, IReadOnlyList<IDictionary<string, object>> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal TableQueryResult(string odataMetadata, IReadOnlyList<TableResponseProperties> value, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             OdataMetadata = odataMetadata;
             Value = value;
@@ -65,7 +65,7 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> The metadata response of the table. </summary>
         public string OdataMetadata { get; }
-        /// <summary> List of table entities. </summary>
-        public IReadOnlyList<IDictionary<string, object>> Value { get; }
+        /// <summary> List of tables. </summary>
+        public IReadOnlyList<TableResponseProperties> Value { get; }
     }
 }

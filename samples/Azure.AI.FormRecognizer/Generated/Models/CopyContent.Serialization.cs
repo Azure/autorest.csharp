@@ -14,16 +14,16 @@ using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class CopyRequest : IUtf8JsonSerializable, IJsonModel<CopyRequest>
+    public partial class CopyContent : IUtf8JsonSerializable, IJsonModel<CopyContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CopyRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<CopyContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
 
-        void IJsonModel<CopyRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IJsonModel<CopyContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CopyRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CopyContent>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(CopyRequest)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(CopyContent)} does not support '{format}' format.");
             }
 
             writer.WriteStartObject();
@@ -51,19 +51,19 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndObject();
         }
 
-        CopyRequest IJsonModel<CopyRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        CopyContent IJsonModel<CopyContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CopyRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CopyContent>)this).GetFormatFromOptions(options) : options.Format;
             if (format != "J")
             {
-                throw new InvalidOperationException($"The model {nameof(CopyRequest)} does not support '{format}' format.");
+                throw new InvalidOperationException($"The model {nameof(CopyContent)} does not support '{format}' format.");
             }
 
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCopyRequest(document.RootElement, options);
+            return DeserializeCopyContent(document.RootElement, options);
         }
 
-        internal static CopyRequest DeserializeCopyRequest(JsonElement element, ModelReaderWriterOptions options = null)
+        internal static CopyContent DeserializeCopyContent(JsonElement element, ModelReaderWriterOptions options = null)
         {
             options ??= new ModelReaderWriterOptions("W");
 
@@ -99,38 +99,38 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CopyRequest(targetResourceId, targetResourceRegion, copyAuthorization, serializedAdditionalRawData);
+            return new CopyContent(targetResourceId, targetResourceRegion, copyAuthorization, serializedAdditionalRawData);
         }
 
-        BinaryData IPersistableModel<CopyRequest>.Write(ModelReaderWriterOptions options)
+        BinaryData IPersistableModel<CopyContent>.Write(ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CopyRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CopyContent>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     return ModelReaderWriter.Write(this, options);
                 default:
-                    throw new InvalidOperationException($"The model {nameof(CopyRequest)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(CopyContent)} does not support '{options.Format}' format.");
             }
         }
 
-        CopyRequest IPersistableModel<CopyRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
+        CopyContent IPersistableModel<CopyContent>.Create(BinaryData data, ModelReaderWriterOptions options)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CopyRequest>)this).GetFormatFromOptions(options) : options.Format;
+            var format = options.Format == "W" ? ((IPersistableModel<CopyContent>)this).GetFormatFromOptions(options) : options.Format;
 
             switch (format)
             {
                 case "J":
                     {
                         using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCopyRequest(document.RootElement, options);
+                        return DeserializeCopyContent(document.RootElement, options);
                     }
                 default:
-                    throw new InvalidOperationException($"The model {nameof(CopyRequest)} does not support '{options.Format}' format.");
+                    throw new InvalidOperationException($"The model {nameof(CopyContent)} does not support '{options.Format}' format.");
             }
         }
 
-        string IPersistableModel<CopyRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
+        string IPersistableModel<CopyContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }
