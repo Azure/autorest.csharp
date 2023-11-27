@@ -117,32 +117,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
         }
 
         /// <summary>
-        /// This method returns the default description for an input parameter. For parameters that are of input model
-        /// type, the default description is constructed using the type name of the corresponding CSharpType.
-        /// </summary>
-        /// <param name="param">The input parameter.</param>
-        /// <param name="type">The CSharpType for the input parameter.</param>
-        /// <returns>The default formatted description string for the input parameter.</returns>
-        public static FormattableString GetInputParamDefaultDescription(InputParameter param, CSharpType type)
-        {
-            FormattableString defaultDescription = $"";
-
-            if (param?.Type != null)
-            {
-                defaultDescription = $"The {param.Type.Name} to use.";
-            }
-
-            InputType? inputParamType = param?.Type;
-
-            if (inputParamType is InputModelType)
-            {
-                defaultDescription = string.IsNullOrWhiteSpace(type.Name) ? defaultDescription : $"The {type.Name} to use.";
-            }
-
-            return defaultDescription;
-        }
-
-        /// <summary>
         /// This method constructs the variable name for an input parameter. If the input parameter type is an input model type,
         /// and the input parameter name is the same as the input parameter type name, the variable name is constructed using the supplied CSharpType name. Otherwise,
         /// it will use the input parameter name by default.
