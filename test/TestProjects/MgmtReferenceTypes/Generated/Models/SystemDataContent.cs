@@ -12,15 +12,15 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>
     [PropertyReferenceType]
-    public partial class SystemData
+    public partial class SystemDataContent
     {
-        /// <summary> Initializes a new instance of SystemData. </summary>
+        /// <summary> Initializes a new instance of SystemDataContent. </summary>
         [InitializationConstructor]
-        public SystemData()
+        public SystemDataContent()
         {
         }
 
-        /// <summary> Initializes a new instance of SystemData. </summary>
+        /// <summary> Initializes a new instance of SystemDataContent. </summary>
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdByType"> The type of identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="lastModifiedByType"> The type of identity that last modified the resource. </param>
         /// <param name="lastModifiedOn"> The timestamp of resource last modification (UTC). </param>
         [SerializationConstructor]
-        internal SystemData(string createdBy, CreatedByType? createdByType, DateTimeOffset? createdOn, string lastModifiedBy, CreatedByType? lastModifiedByType, DateTimeOffset? lastModifiedOn)
+        internal SystemDataContent(string createdBy, CreatedByType? createdByType, DateTimeOffset? createdOn, string lastModifiedBy, CreatedByType? lastModifiedByType, DateTimeOffset? lastModifiedOn)
         {
             CreatedBy = createdBy;
             CreatedByType = createdByType;
