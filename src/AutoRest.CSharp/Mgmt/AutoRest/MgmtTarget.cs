@@ -290,11 +290,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 MgmtReferenceType => new ReferenceTypeWriter(),
                 ResourceData data => new ResourceDataWriter(data),
-                SystemObjectType => null,
                 _ => new ModelWriter()
             };
-            if (modelWriter == null)
-                return;
 
             modelWriter.WriteModel(codeWriter, model);
 
