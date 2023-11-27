@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -10,14 +11,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeConstructor
     {
-        public ObjectTypeConstructor(ConstructorSignature signature, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(ConstructorSignature signature, IReadOnlyList<ObjectPropertyInitializer> initializers, ObjectTypeConstructor? baseConstructor = null)
         {
             Signature = signature;
             Initializers = initializers;
             BaseConstructor = baseConstructor;
         }
 
-        public ObjectTypeConstructor(CSharpType type, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(CSharpType type, MethodSignatureModifiers modifiers, IReadOnlyList<Parameter> parameters, IReadOnlyList<ObjectPropertyInitializer> initializers, ObjectTypeConstructor? baseConstructor = null)
             : this(
                  new ConstructorSignature(
                      type,
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public ConstructorSignature Signature { get; }
-        public ObjectPropertyInitializer[] Initializers { get; }
+        public IReadOnlyList<ObjectPropertyInitializer> Initializers { get; }
         public ObjectTypeConstructor? BaseConstructor { get; }
 
         public ObjectTypeProperty? FindPropertyInitializedByParameter(Parameter constructorParameter)
