@@ -50,21 +50,15 @@ namespace AutoRest.CSharp.Generation.Writers
                                 writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
                             }
                         }
+
+                        writer.Line();
                     }
 
-                    if (!Configuration.KeepOptionalClientParametersInConstructor)
+                    foreach (var parameter in clientOptions.AdditionalParameters)
                     {
-                        if (clientOptions.ApiVersions is not null)
-                        {
-                            writer.Line();
-                        }
-
-                        foreach (var parameter in clientOptions.AdditionalParameters)
-                        {
-                            writer.WriteXmlDocumentationSummary(parameter.Description);
-                            writer.Line($"public {parameter.Type} {parameter.Name.ToCleanName()} {{ get; set; }}");
-                            writer.Line();
-                        }
+                        writer.WriteXmlDocumentationSummary(parameter.Description);
+                        writer.Line($"public {parameter.Type} {parameter.Name.ToCleanName()} {{ get; set; }}");
+                        writer.Line();
                     }
                 }
             }

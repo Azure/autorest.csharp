@@ -56,7 +56,6 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
                 keepNonOverloadableProtocolSignature: false,
-                keepOptionalClientParametersInConstructor: false,
                 projectFolder: ".",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),

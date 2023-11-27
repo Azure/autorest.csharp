@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<Parameter> GetOptionalParametersInConstructor(IEnumerable<Parameter> optionalParameters)
         {
-            return Configuration.KeepOptionalClientParametersInConstructor? optionalParameters : optionalParameters.Where(
+            return optionalParameters.Where(
                 p => ClientOptions.Type.EqualsIgnoreNullable(p.Type) || p.IsEndpoint); // Endpoint is an exception, even it is optional, still need to be the parameter of constructor
         }
 
