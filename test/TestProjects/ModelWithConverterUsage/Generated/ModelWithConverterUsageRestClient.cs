@@ -53,7 +53,7 @@ namespace ModelWithConverterUsage
             return message;
         }
 
-        /// <param name="value"> The ModelClass to use. </param>
+        /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public async Task<Response<ModelClass>> OperationModelAsync(ModelClass value, CancellationToken cancellationToken = default)
@@ -79,7 +79,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="value"> The ModelClass to use. </param>
+        /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Response<ModelClass> OperationModel(ModelClass value, CancellationToken cancellationToken = default)
@@ -125,7 +125,7 @@ namespace ModelWithConverterUsage
             return message;
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response<ModelStruct>> OperationStructAsync(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -145,7 +145,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response<ModelStruct> OperationStruct(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {

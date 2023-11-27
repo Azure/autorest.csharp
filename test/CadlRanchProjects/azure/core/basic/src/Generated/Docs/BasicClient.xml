@@ -623,6 +623,124 @@ foreach (BinaryData item in client.GetWithPage(null))
 }
 ]]></code></example>
     </member>
+    <member name="GetWithParametersAsync(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)">
+      <example>
+This sample shows how to call GetWithParametersAsync.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+await foreach (User item in client.GetWithParametersAsync(bodyInput))
+{
+}
+]]></code>
+This sample shows how to call GetWithParametersAsync with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+await foreach (User item in client.GetWithParametersAsync(bodyInput, another: ListItemInputExtensibleEnum.First))
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetWithParameters(ListItemInputBody,ListItemInputExtensibleEnum?,CancellationToken)">
+      <example>
+This sample shows how to call GetWithParameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+foreach (User item in client.GetWithParameters(bodyInput))
+{
+}
+]]></code>
+This sample shows how to call GetWithParameters with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+foreach (User item in client.GetWithParameters(bodyInput, another: ListItemInputExtensibleEnum.First))
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetWithParametersAsync(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call GetWithParametersAsync and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    inputName = "<inputName>",
+});
+await foreach (BinaryData item in client.GetWithParametersAsync(content))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+This sample shows how to call GetWithParametersAsync with all parameters and request content and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    inputName = "<inputName>",
+});
+await foreach (BinaryData item in client.GetWithParametersAsync(content, another: "First"))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetWithParameters(RequestContent,string,RequestContext)">
+      <example>
+This sample shows how to call GetWithParameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    inputName = "<inputName>",
+});
+foreach (BinaryData item in client.GetWithParameters(content))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code>
+This sample shows how to call GetWithParameters with all parameters and request content and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    inputName = "<inputName>",
+});
+foreach (BinaryData item in client.GetWithParameters(content, another: "First"))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code></example>
+    </member>
     <member name="GetWithCustomPageModelAsync(CancellationToken)">
       <example>
 This sample shows how to call GetWithCustomPageModelAsync.
@@ -718,6 +836,174 @@ foreach (BinaryData item in client.GetWithCustomPageModel(null))
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
     Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
     Console.WriteLine(result.GetProperty("etag").ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetFirstItemsAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetFirstItemsAsync.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (FirstItem item in client.GetFirstItemsAsync())
+{
+}
+]]></code>
+This sample shows how to call GetFirstItemsAsync with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (FirstItem item in client.GetFirstItemsAsync())
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetFirstItems(CancellationToken)">
+      <example>
+This sample shows how to call GetFirstItems.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (FirstItem item in client.GetFirstItems())
+{
+}
+]]></code>
+This sample shows how to call GetFirstItems with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (FirstItem item in client.GetFirstItems())
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetFirstItemsAsync(RequestContext)">
+      <example>
+This sample shows how to call GetFirstItemsAsync and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (BinaryData item in client.GetFirstItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+}
+]]></code>
+This sample shows how to call GetFirstItemsAsync with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (BinaryData item in client.GetFirstItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetFirstItems(RequestContext)">
+      <example>
+This sample shows how to call GetFirstItems and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (BinaryData item in client.GetFirstItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+}
+]]></code>
+This sample shows how to call GetFirstItems with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (BinaryData item in client.GetFirstItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetSecondItemsAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetSecondItemsAsync.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (SecondItem item in client.GetSecondItemsAsync())
+{
+}
+]]></code>
+This sample shows how to call GetSecondItemsAsync with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (SecondItem item in client.GetSecondItemsAsync())
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetSecondItems(CancellationToken)">
+      <example>
+This sample shows how to call GetSecondItems.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (SecondItem item in client.GetSecondItems())
+{
+}
+]]></code>
+This sample shows how to call GetSecondItems with all parameters.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (SecondItem item in client.GetSecondItems())
+{
+}
+]]></code></example>
+    </member>
+    <member name="GetSecondItemsAsync(RequestContext)">
+      <example>
+This sample shows how to call GetSecondItemsAsync and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (BinaryData item in client.GetSecondItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+This sample shows how to call GetSecondItemsAsync with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+await foreach (BinaryData item in client.GetSecondItemsAsync(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code></example>
+    </member>
+    <member name="GetSecondItems(RequestContext)">
+      <example>
+This sample shows how to call GetSecondItems and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (BinaryData item in client.GetSecondItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+This sample shows how to call GetSecondItems with all parameters and parse the result.
+<code><![CDATA[
+BasicClient client = new BasicClient();
+
+foreach (BinaryData item in client.GetSecondItems(null))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

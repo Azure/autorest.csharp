@@ -48,7 +48,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an image given a prompt. </summary>
-        /// <param name="image"> The CreateImageRequest to use. </param>
+        /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual async Task<Result<ImagesResponse>> CreateAsync(CreateImageRequest image, CancellationToken cancellationToken = default)
@@ -62,7 +62,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an image given a prompt. </summary>
-        /// <param name="image"> The CreateImageRequest to use. </param>
+        /// <param name="image"> The <see cref="CreateImageRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual Result<ImagesResponse> Create(CreateImageRequest image, CancellationToken cancellationToken = default)
@@ -152,7 +152,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageEditRequest to use. </param>
+        /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual async Task<Result<ImagesResponse>> CreateEditAsync(CreateImageEditRequest image, CancellationToken cancellationToken = default)
@@ -166,7 +166,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageEditRequest to use. </param>
+        /// <param name="image"> The <see cref="CreateImageEditRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual Result<ImagesResponse> CreateEdit(CreateImageEditRequest image, CancellationToken cancellationToken = default)
@@ -256,7 +256,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageVariationRequest to use. </param>
+        /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual async Task<Result<ImagesResponse>> CreateVariationAsync(CreateImageVariationRequest image, CancellationToken cancellationToken = default)
@@ -270,7 +270,7 @@ namespace OpenAI
         }
 
         /// <summary> Creates an edited or extended image given an original image and a prompt. </summary>
-        /// <param name="image"> The CreateImageVariationRequest to use. </param>
+        /// <param name="image"> The <see cref="CreateImageVariationRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="image"/> is null. </exception>
         public virtual Result<ImagesResponse> CreateVariation(CreateImageVariationRequest image, CancellationToken cancellationToken = default)

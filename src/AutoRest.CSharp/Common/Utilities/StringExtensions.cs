@@ -200,6 +200,23 @@ namespace AutoRest.CSharp.Utilities
                     span = Span;
                     isLiteral = IsLiteral;
                 }
+
+                public void Deconstruct(out ReadOnlySpan<char> span, out bool isLiteral, out int argumentIndex)
+                {
+                    span = Span;
+                    isLiteral = IsLiteral;
+
+                    if (IsLiteral)
+                    {
+                        argumentIndex = -1;
+                    }
+                    else
+                    {
+                        var formatSeparatorIndex = span.IndexOf(':');
+                        var indexSpan = formatSeparatorIndex == -1 ? span : span.Slice(0, formatSeparatorIndex);
+                        argumentIndex = int.Parse(indexSpan);
+                    }
+                }
             }
         }
 

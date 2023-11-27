@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="SubParentWithNonResChWithLocResource" /> and their operations.
-    /// Each <see cref="SubParentWithNonResChWithLocResource" /> in the collection will belong to the same instance of <see cref="SubscriptionResource" />.
-    /// To get a <see cref="SubParentWithNonResChWithLocCollection" /> instance call the GetSubParentWithNonResChWithLocs method from an instance of <see cref="SubscriptionResource" />.
+    /// A class representing a collection of <see cref="SubParentWithNonResChWithLocResource"/> and their operations.
+    /// Each <see cref="SubParentWithNonResChWithLocResource"/> in the collection will belong to the same instance of <see cref="SubscriptionResource"/>.
+    /// To get a <see cref="SubParentWithNonResChWithLocCollection"/> instance call the GetSubParentWithNonResChWithLocs method from an instance of <see cref="SubscriptionResource"/>.
     /// </summary>
     public partial class SubParentWithNonResChWithLocCollection : ArmCollection, IEnumerable<SubParentWithNonResChWithLocResource>, IAsyncEnumerable<SubParentWithNonResChWithLocResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="SubParentWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="SubParentWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<SubParentWithNonResChWithLocResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChWithLocRestClient.CreateListRequest(Id.SubscriptionId);
@@ -246,7 +246,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="SubParentWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="SubParentWithNonResChWithLocResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<SubParentWithNonResChWithLocResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithNonResChWithLocRestClient.CreateListRequest(Id.SubscriptionId);

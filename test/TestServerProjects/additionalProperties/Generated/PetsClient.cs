@@ -39,7 +39,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPTrue to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPTrue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPTrue>> CreateAPTrueAsync(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
@@ -57,7 +57,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPTrue to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPTrue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPTrue> CreateAPTrue(PetAPTrue createParameters, CancellationToken cancellationToken = default)
         {
@@ -75,7 +75,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The CatAPTrue to use. </param>
+        /// <param name="createParameters"> The <see cref="CatAPTrue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<CatAPTrue>> CreateCatAPTrueAsync(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
@@ -93,7 +93,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a CatAPTrue which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The CatAPTrue to use. </param>
+        /// <param name="createParameters"> The <see cref="CatAPTrue"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<CatAPTrue> CreateCatAPTrue(CatAPTrue createParameters, CancellationToken cancellationToken = default)
         {
@@ -111,7 +111,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPObject to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPObject"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPObject>> CreateAPObjectAsync(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
@@ -129,7 +129,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPObject to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPObject"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPObject> CreateAPObject(PetAPObject createParameters, CancellationToken cancellationToken = default)
         {
@@ -147,7 +147,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPString to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPString"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPString>> CreateAPStringAsync(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
@@ -165,7 +165,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPString to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPString"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPString> CreateAPString(PetAPString createParameters, CancellationToken cancellationToken = default)
         {
@@ -183,7 +183,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPInProperties to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPInProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPInProperties>> CreateAPInPropertiesAsync(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
@@ -201,7 +201,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPInProperties to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPInProperties"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPInProperties> CreateAPInProperties(PetAPInProperties createParameters, CancellationToken cancellationToken = default)
         {
@@ -219,7 +219,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPInPropertiesWithAPString"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<PetAPInPropertiesWithAPString>> CreateAPInPropertiesWithAPStringAsync(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {
@@ -237,7 +237,7 @@ namespace additionalProperties
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The PetAPInPropertiesWithAPString to use. </param>
+        /// <param name="createParameters"> The <see cref="PetAPInPropertiesWithAPString"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<PetAPInPropertiesWithAPString> CreateAPInPropertiesWithAPString(PetAPInPropertiesWithAPString createParameters, CancellationToken cancellationToken = default)
         {

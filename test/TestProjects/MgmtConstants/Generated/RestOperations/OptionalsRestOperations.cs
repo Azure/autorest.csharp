@@ -76,8 +76,8 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
-        /// <param name="optionalBooleanQuery"> The BooleanConstant to use. </param>
+        /// <param name="optionalStringQuery"> The <see cref="StringConstant"/>? to use. </param>
+        /// <param name="optionalBooleanQuery"> The <see cref="bool"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -105,8 +105,8 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
-        /// <param name="optionalBooleanQuery"> The BooleanConstant to use. </param>
+        /// <param name="optionalStringQuery"> The <see cref="StringConstant"/>? to use. </param>
+        /// <param name="optionalBooleanQuery"> The <see cref="bool"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -168,8 +168,8 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
+        /// <param name="optionalIntQuery"> The <see cref="IntConstant"/>? to use. </param>
+        /// <param name="optionalFloatQuery"> The <see cref="FloatConstant"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
@@ -197,8 +197,8 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
+        /// <param name="optionalIntQuery"> The <see cref="IntConstant"/>? to use. </param>
+        /// <param name="optionalFloatQuery"> The <see cref="FloatConstant"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>

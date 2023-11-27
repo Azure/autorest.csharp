@@ -611,15 +611,15 @@ namespace AutoRest.CSharp.Generation.Writers
             if (sampleProvider == null)
                 return;
 
-            var samples = sampleProvider.GetSampleInformation(methodSignature, isAsync);
+            var samples = sampleProvider.GetSampleInformation(methodSignature, isAsync).ToArray();
             // do not write this part when there is no sample for this method
             if (!samples.Any())
+            {
                 return;
+            }
 
-            var docRef = methodSignature.ToStringForDocs();
-            _writer.Line($"/// <include file=\"{XmlDocWriter.Filename}\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-
-            _xmlDocWriter.AddMember(docRef);
+            _writer.WriteXmlDocumentationInclude(XmlDocWriter.Filename, methodSignature, out var memberId);
+            _xmlDocWriter.AddMember(memberId);
             _xmlDocWriter.AddExamples(samples);
         }
 
@@ -668,19 +668,31 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
-            var builder = new StringBuilder();
-            builder.AppendLine($"[Protocol Method] {methodSignature.SummaryText}");
-            builder.AppendLine($"<list type=\"bullet\">");
-            builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
-
+            List<FormattableString> lines = new()
+            {
+                $"[Protocol Method] {methodSignature.SummaryText}",
+                $"<list type=\"bullet\">",
+                $"<item>",
+                $"<description>",
+                $"This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
+                $"</description>",
+                $"</item>"
+            };
             // we only append the relative convenience method information when the convenience method is public
             if (clientMethod.ShouldGenerateConvenienceMethodRef())
             {
-                var convenienceDocRef = clientMethod.ConvenienceMethod!.Signature.WithAsync(async).ToStringForDocs();
-                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+                var convenienceDocRef = clientMethod.ConvenienceMethod!.Signature.WithAsync(async).GetCRef();
+                lines.AddRange(new FormattableString[]
+                {
+                    $"<item>",
+                    $"<description>",
+                    $"Please try the simpler {convenienceDocRef:C} convenience overload with strongly typed models first.",
+                    $"</description>",
+                    $"</item>"
+                });
             }
-            builder.AppendLine($"</list>");
-            return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
+            lines.Add($"</list>");
+            return lines.Join(Environment.NewLine);
         }
 
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
@@ -704,19 +716,19 @@ namespace AutoRest.CSharp.Generation.Writers
             if (clientMethod.PagingInfo != null && clientMethod.LongRunning != null)
             {
                 CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
-                text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
+                text = $"The {typeof(Operation<>):C} from the service that will contain a {pageableType:C} containing a list of {typeof(BinaryData):C} objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
             else if (clientMethod.PagingInfo != null)
             {
-                text = $"The <see cref=\"{returnType.Name}{{T}}\"/> from the service containing a list of <see cref=\"{returnType.Arguments[0]}\"/> objects. Details of the body schema for each item in the collection are in the Remarks section below.";
+                text = $"The {returnType.GetGenericTypeDefinition():C} from the service containing a list of {returnType.Arguments[0]:C} objects. Details of the body schema for each item in the collection are in the Remarks section below.";
             }
             else if (clientMethod.LongRunning != null)
             {
-                text = (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
+                text = $"The {typeof(Operation):C} representing an asynchronous operation on the service.";
             }
             else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse()) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
             {
-                text = (FormattableString)$"The response returned from the service.";
+                text = $"The response returned from the service.";
             }
             else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse(typeof(bool))) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetResponseOfT<bool>()))
             {
@@ -730,138 +742,6 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
-        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientMethod requestMethod, bool isPagingMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
-        {
-            if (requestMethod.Operation.ExternalDocsUrl == null)
-                return;
-
-            var docInfo = requestMethod.Operation.ExternalDocsUrl != null
-                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{requestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
-                : (FormattableString)$"";
-
-            var schemaDesription = "";
-            if (hasRequestRemarks && hasResponseRemarks)
-            {
-                if (isPagingMethod)
-                {
-                    schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
-                }
-                else
-                {
-                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
-                }
-            }
-            else if (hasRequestRemarks)
-            {
-                schemaDesription = "Below is the JSON schema for the request payload.";
-            }
-            else if (hasResponseRemarks)
-            {
-                if (isPagingMethod)
-                {
-                    schemaDesription = "Below is the JSON schema for one item in the pageable response.";
-                }
-                else
-                {
-                    schemaDesription = "Below is the JSON schema for the response payload.";
-                }
-            }
-
-            if (addDescription && !string.IsNullOrEmpty(methodSignature.DescriptionText?.ToString()))
-            {
-                schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
-            }
-
-            writeXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
-        }
-
-        private static void BuildSchemaFromDoc(StringBuilder builder, SchemaDocumentation doc, IDictionary<string, SchemaDocumentation> docDict, int indentation = 0)
-        {
-            foreach (var row in doc.DocumentationRows)
-            {
-                var required = row.Required ? " # Required." : " # Optional.";
-                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # {row.Description}" : $" {row.Description}");
-                var isArray = row.Type.EndsWith("[]");
-                var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
-                builder.AppendIndentation(indentation).Append($"{row.Name}: ");
-                if (isArray)
-                {
-                    if (docDict.ContainsKey(rowType))
-                    {
-                        builder.AppendLine("[");
-                        var docToProcess = docDict[rowType];
-                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
-                        builder.AppendIndentation(indentation + 2).AppendLine("{");
-                        BuildSchemaFromDoc(builder, docToProcess, docDict, indentation + 4);
-                        builder.AppendIndentation(indentation + 2).AppendLine("}");
-                        builder.AppendIndentation(indentation).AppendLine($"],{required}{description}");
-                    }
-                    else
-                        builder.AppendLine($"[{rowType}],{required}{description}");
-                }
-                else
-                {
-                    if (docDict.ContainsKey(rowType))
-                    {
-                        builder.AppendLine("{");
-                        var docToProcess = docDict[rowType];
-                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
-                        BuildSchemaFromDoc(builder, docToProcess, docDict, indentation + 2);
-                        builder.AppendIndentation(indentation).Append("}").AppendLine($",{required}{description}");
-                    }
-                    else
-                        builder.AppendLine($"{rowType},{required}{description}");
-                }
-            }
-        }
-
-        private static string StringifyTypeForTable(InputType type)
-        {
-            static string RemovePrefix(string s, string prefix)
-                => s.StartsWith(prefix) ? s[prefix.Length..] : s;
-
-            return type switch
-            {
-                InputPrimitiveType { IsNumber: true } => "number",
-                InputPrimitiveType { Kind: InputTypeKind.Boolean } => "boolean",
-                InputPrimitiveType { Kind: InputTypeKind.String } => "string",
-                InputPrimitiveType { Kind: InputTypeKind.Object } => "object",
-                InputPrimitiveType { Kind: InputTypeKind.Date } => "string (date)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTime } => "string (date & time)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeISO8601 } => "string (ISO 8601 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC1123 } => "string (RFC1123 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC3339 } => "string (RFC3339 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC7231 } => "string (RFC7231 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeUnix } => "string (Unix Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => "string (duration ISO 8601 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DurationConstant } => "string (duration)",
-                InputPrimitiveType { Kind: InputTypeKind.Time } => "string (time)",
-                InputEnumType enumType => string.Join(" | ", enumType.AllowedValues.Select(c => $"\"{c.Value}\"")),
-                InputDictionaryType dictionaryType => $"Dictionary<string, {StringifyTypeForTable(dictionaryType.ValueType)}>",
-                InputListType listType => $"{StringifyTypeForTable(listType.ElementType)}[]",
-                InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => "any",
-                _ => RemovePrefix(type.Name, "Json")
-            };
-        }
-
-        private class SchemaDocumentation
-        {
-            internal record DocumentationRow(string Name, string Type, bool Required, string Description);
-
-            public string SchemaName { get; }
-            public DocumentationRow[] DocumentationRows { get; }
-
-            public SchemaDocumentation(string schemaName, DocumentationRow[] documentationRows)
-            {
-                SchemaName = schemaName;
-                DocumentationRows = documentationRows;
-            }
-        }
-
-        public override string ToString()
-        {
-            return _writer.ToString();
-        }
+        public override string ToString() => _writer.ToString();
     }
 }

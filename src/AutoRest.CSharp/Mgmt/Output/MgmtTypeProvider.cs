@@ -51,15 +51,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected virtual FormattableString IdParamDescription => $"The identifier of the resource that is the target of operations.";
         public Parameter ResourceIdentifierParameter => new(Name: "id", Description: IdParamDescription, Type: typeof(ResourceIdentifier), DefaultValue: null, ValidationType.None, null);
-        public static Parameter ArmClientParameter => new(Name: "client", Description: $"The client parameters to use in these operations.", Type: typeof(ArmClient), DefaultValue: null, ValidationType.None, null);
-
-        public static Parameter ScopeParameter => new(
-            Name: "scope",
-            Description: $"The scope to use",
-            Type: typeof(ResourceIdentifier),
-            DefaultValue: null,
-            Validation: ValidationType.None,
-            Initializer: null);
 
         public string Accessibility => DefaultAccessibility;
         protected override string DefaultAccessibility => "public";
@@ -151,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new ConstructorSignature(
                 Type,
                 null,
-                Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
+                Description: $"Initializes a new instance of the {Type:C} class for mocking.",
                 Modifiers: Protected,
                 Parameters: Array.Empty<Parameter>());
         }
@@ -339,7 +330,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         BuildDescriptionForSingletonResource(resource),
                         MethodModifiers,
                         resource.Type,
-                        $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                        $"Returns a {resource.Type:C} object.",
                         Array.Empty<Parameter>());
             var methodBody = Snippets.Return(
                 Snippets.New.Instance(

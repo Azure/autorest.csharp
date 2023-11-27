@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtMultipleParentResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="AnotherParentChildResource" /> and their operations.
-    /// Each <see cref="AnotherParentChildResource" /> in the collection will belong to the same instance of <see cref="AnotherParentResource" />.
-    /// To get an <see cref="AnotherParentChildCollection" /> instance call the GetAnotherParentChildren method from an instance of <see cref="AnotherParentResource" />.
+    /// A class representing a collection of <see cref="AnotherParentChildResource"/> and their operations.
+    /// Each <see cref="AnotherParentChildResource"/> in the collection will belong to the same instance of <see cref="AnotherParentResource"/>.
+    /// To get an <see cref="AnotherParentChildCollection"/> instance call the GetAnotherParentChildren method from an instance of <see cref="AnotherParentResource"/>.
     /// </summary>
     public partial class AnotherParentChildCollection : ArmCollection, IEnumerable<AnotherParentChildResource>, IAsyncEnumerable<AnotherParentChildResource>
     {
@@ -226,7 +226,7 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AnotherParentChildResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AnotherParentChildResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AnotherParentChildResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentChildAnotherChildrenRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand);
@@ -249,7 +249,7 @@ namespace MgmtMultipleParentResource
         /// </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AnotherParentChildResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AnotherParentChildResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AnotherParentChildResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _anotherParentChildAnotherChildrenRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand);

@@ -44,7 +44,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Models. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Models GetModelsClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of ModelProperties. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ModelProperties GetModelPropertiesClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Operations. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Operations GetOperationsClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Parameters. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Parameters GetParametersClient(string apiVersion = "1.0.0")
         {

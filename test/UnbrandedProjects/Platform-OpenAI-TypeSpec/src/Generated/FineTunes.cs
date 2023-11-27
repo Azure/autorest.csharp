@@ -54,7 +54,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
-        /// <param name="fineTune"> The CreateFineTuneRequest to use. </param>
+        /// <param name="fineTune"> The <see cref="CreateFineTuneRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
         [Obsolete("deprecated")]
@@ -75,7 +75,7 @@ namespace OpenAI
         ///
         /// [Learn more about fine-tuning](/docs/guides/legacy-fine-tuning)
         /// </summary>
-        /// <param name="fineTune"> The CreateFineTuneRequest to use. </param>
+        /// <param name="fineTune"> The <see cref="CreateFineTuneRequest"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fineTune"/> is null. </exception>
         [Obsolete("deprecated")]

@@ -20,9 +20,9 @@ namespace MgmtSupersetInheritance
 {
     /// <summary>
     /// A Class representing a SupersetModel4 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SupersetModel4Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetSupersetModel4Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetSupersetModel4 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="SupersetModel4Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetSupersetModel4Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetSupersetModel4 method.
     /// </summary>
     public partial class SupersetModel4Resource : ArmResource
     {
@@ -45,7 +45,7 @@ namespace MgmtSupersetInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "SupersetModel4Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel4Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal SupersetModel4Resource(ArmClient client, SupersetModel4Data data) : this(client, data.Id)
@@ -166,7 +166,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The SupersetModel4 to use. </param>
+        /// <param name="data"> The <see cref="SupersetModel4Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<SupersetModel4Resource>> UpdateAsync(WaitUntil waitUntil, SupersetModel4Data data, CancellationToken cancellationToken = default)
@@ -203,7 +203,7 @@ namespace MgmtSupersetInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The SupersetModel4 to use. </param>
+        /// <param name="data"> The <see cref="SupersetModel4Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<SupersetModel4Resource> Update(WaitUntil waitUntil, SupersetModel4Data data, CancellationToken cancellationToken = default)

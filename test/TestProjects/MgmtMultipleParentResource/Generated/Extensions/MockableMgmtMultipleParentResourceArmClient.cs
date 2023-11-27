@@ -37,11 +37,11 @@ namespace MgmtMultipleParentResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="AnotherParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="AnotherParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AnotherParentResource"/> object. </returns>
         public virtual AnotherParentResource GetAnotherParentResource(ResourceIdentifier id)
         {
             AnotherParentResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtMultipleParentResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="AnotherParentChildResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="AnotherParentChildResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParentChildResource" /> object. </returns>
+        /// <returns> Returns a <see cref="AnotherParentChildResource"/> object. </returns>
         public virtual AnotherParentChildResource GetAnotherParentChildResource(ResourceIdentifier id)
         {
             AnotherParentChildResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtMultipleParentResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TheParentSubParentChildResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TheParentSubParentChildResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TheParentSubParentChildResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TheParentSubParentChildResource"/> object. </returns>
         public virtual TheParentSubParentChildResource GetTheParentSubParentChildResource(ResourceIdentifier id)
         {
             TheParentSubParentChildResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtMultipleParentResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="TheParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="TheParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TheParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="TheParentResource"/> object. </returns>
         public virtual TheParentResource GetTheParentResource(ResourceIdentifier id)
         {
             TheParentResource.ValidateResourceId(id);
@@ -85,11 +85,11 @@ namespace MgmtMultipleParentResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubParentResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubParentResource"/> object. </returns>
         public virtual SubParentResource GetSubParentResource(ResourceIdentifier id)
         {
             SubParentResource.ValidateResourceId(id);

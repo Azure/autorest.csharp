@@ -20,9 +20,9 @@ namespace MgmtExactMatchInheritance
 {
     /// <summary>
     /// A Class representing an ExactMatchModel5 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="ExactMatchModel5Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetExactMatchModel5Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetExactMatchModel5 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="ExactMatchModel5Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetExactMatchModel5Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetExactMatchModel5 method.
     /// </summary>
     public partial class ExactMatchModel5Resource : ArmResource
     {
@@ -45,7 +45,7 @@ namespace MgmtExactMatchInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel5Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ExactMatchModel5Resource(ArmClient client, ExactMatchModel5Data data) : this(client, data.Id)
@@ -166,7 +166,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ExactMatchModel5 to use. </param>
+        /// <param name="data"> The <see cref="ExactMatchModel5Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ExactMatchModel5Resource>> UpdateAsync(WaitUntil waitUntil, ExactMatchModel5Data data, CancellationToken cancellationToken = default)
@@ -203,7 +203,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ExactMatchModel5 to use. </param>
+        /// <param name="data"> The <see cref="ExactMatchModel5Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ExactMatchModel5Resource> Update(WaitUntil waitUntil, ExactMatchModel5Data data, CancellationToken cancellationToken = default)

@@ -56,7 +56,7 @@ namespace SubClients_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subParameter"> The String to use. </param>
+        /// <param name="subParameter"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
@@ -91,7 +91,7 @@ namespace SubClients_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="subParameter"> The String to use. </param>
+        /// <param name="subParameter"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>

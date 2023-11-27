@@ -4,9 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Expressions.KnownCodeBlocks;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -16,7 +18,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -43,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"The <see cref=\"{ArmCoreType}\" /> instance the method will execute against.",
                 ArmCoreType,
                 null,
-                ValidationType.None,
+                ValidationType.AssertNotNull,
                 null);
 
             MethodModifiers = IsArmCore ?
@@ -181,10 +182,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             var extensionVariable = (ValueExpression)_generalExtensionParameter;
             var clientVariable = new VariableReference(typeof(ArmClient), "client");
             var body = Snippets.Return(
-                extensionVariable.Invoke(
-                    nameof(ArmResource.GetCachedClient),
-                    new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
-                ));
+                    extensionVariable.Invoke(
+                        nameof(ArmResource.GetCachedClient),
+                        new FuncExpression(new[] { clientVariable.Declaration }, Snippets.New.Instance(MockableExtension.Type, clientVariable, extensionVariable.Property(nameof(ArmResource.Id))))
+                    ));
 
             return new(signature, body);
         }
@@ -194,7 +195,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             $"The resource parameters to use in these operations.",
             typeof(ArmResource),
             null,
-            ValidationType.None,
+            ValidationType.AssertNotNull,
             null);
 
         public MgmtMockableExtension MockableExtension => Cache[ArmCoreType];
@@ -220,17 +221,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var callMethodOnMockingExtension = callFactoryMethod.Invoke(signatureOnMockingExtension);
 
-            var methodBody = Snippets.Return(callMethodOnMockingExtension);
+            var methodBody = new MethodBodyStatement[]
+            {
+                new ParameterValidationBlock(new[] { signature.Parameters[0] }), // we only write validation of the first extension parameter
+                Snippets.Return(callMethodOnMockingExtension)
+            };
 
             return new(signature, methodBody);
         }
 
         protected FormattableString BuildMockingExtraDescription(MethodSignature signatureOnMockingExtension)
         {
-            var methodRef = signatureOnMockingExtension.ToStringForDocs();
+            FormattableString methodRef = $"{MockableExtension.Type}.{signatureOnMockingExtension.GetCRef()}";
             return $@"<item>
 <term>Mocking</term>
-<description>To mock this method, please mock <see cref=""{MockableExtension.Type}.{methodRef}""/> instead.</description>
+<description>To mock this method, please mock {methodRef:C} instead.</description>
 </item>";
         }
 

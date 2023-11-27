@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (property == null)
                 {
                     // if the property is not found, in order not to introduce compilation errors, we need to add a `default` into the argument list
-                    methodArguments.Add(Default);
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, Default));
                     continue;
                 }
 
@@ -229,7 +229,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 methodArguments.Add(expression);
             }
 
-            FormattableString returnDescription = $"A new <see cref=\"{model.Type}\"/> instance for mocking.";
+            FormattableString returnDescription = $"A new {model.Type:C} instance for mocking.";
 
             var signature = new MethodSignature(
                 ctor.Signature.Name,

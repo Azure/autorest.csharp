@@ -49,7 +49,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             _apiVersion = options.Version;
         }
 
-        /// <param name="input"> The Siamese to use. </param>
+        /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PostValidAsync(Siamese,CancellationToken)']/*" />
@@ -63,7 +63,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             return response;
         }
 
-        /// <param name="input"> The Siamese to use. </param>
+        /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PostValid(Siamese,CancellationToken)']/*" />
@@ -243,7 +243,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             }
         }
 
-        /// <param name="input"> The Siamese to use. </param>
+        /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PutValidAsync(Siamese,CancellationToken)']/*" />
@@ -257,7 +257,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
-        /// <param name="input"> The Siamese to use. </param>
+        /// <param name="input"> The <see cref="Siamese"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/NotDiscriminatedClient.xml" path="doc/members/member[@name='PutValid(Siamese,CancellationToken)']/*" />
