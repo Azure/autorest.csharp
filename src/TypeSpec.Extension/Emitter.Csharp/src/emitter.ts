@@ -127,8 +127,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     options["use-overloads-between-protocol-and-convenience"],
                 "keep-non-overloadable-protocol-signature":
                     options["keep-non-overloadable-protocol-signature"],
-                "keep-optional-client-parameters-in-constructor":
-                    options["keep-optional-client-parameters-in-constructor"],
                 "model-namespace": options["model-namespace"],
                 "models-to-treat-empty-string-as-null":
                     options["models-to-treat-empty-string-as-null"],
