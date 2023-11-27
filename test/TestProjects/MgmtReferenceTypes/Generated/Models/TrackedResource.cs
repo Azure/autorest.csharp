@@ -12,7 +12,7 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'. </summary>
     [ReferenceType]
-    public abstract partial class TrackedResource : MgmtReferenceTypesResourceData
+    public abstract partial class TrackedResource : MgmtReferenceTypesResourceDataContent
     {
         /// <summary> Initializes a new instance of <see cref="TrackedResource"/>. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>

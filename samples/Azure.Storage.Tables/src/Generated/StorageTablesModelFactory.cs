@@ -14,15 +14,15 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Model factory for models. </summary>
     public static partial class StorageTablesModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.TableQueryResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableQueryResult"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
-        /// <returns> A new <see cref="Models.TableQueryResponse"/> instance for mocking. </returns>
-        public static TableQueryResponse TableQueryResponse(string odataMetadata = null, IEnumerable<TableResponseProperties> value = null)
+        /// <returns> A new <see cref="Models.TableQueryResult"/> instance for mocking. </returns>
+        public static TableQueryResult TableQueryResult(string odataMetadata = null, IEnumerable<TableResponseProperties> value = null)
         {
             value ??= new List<TableResponseProperties>();
 
-            return new TableQueryResponse(odataMetadata, value?.ToList());
+            return new TableQueryResult(odataMetadata, value?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TableResponseProperties"/>. </summary>
@@ -36,27 +36,27 @@ namespace Azure.Storage.Tables.Models
             return new TableResponseProperties(tableName, odataType, odataId, odataEditLink);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.TableResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableResult"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
         /// <param name="odataEditLink"> The edit link of the table. </param>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
-        /// <returns> A new <see cref="Models.TableResponse"/> instance for mocking. </returns>
-        public static TableResponse TableResponse(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, string odataMetadata = null)
+        /// <returns> A new <see cref="Models.TableResult"/> instance for mocking. </returns>
+        public static TableResult TableResult(string tableName = null, string odataType = null, string odataId = null, string odataEditLink = null, string odataMetadata = null)
         {
-            return new TableResponse(tableName, odataType, odataId, odataEditLink, odataMetadata);
+            return new TableResult(tableName, odataType, odataId, odataEditLink, odataMetadata);
         }
 
-        /// <summary> Initializes a new instance of <see cref="Models.TableEntityQueryResponse"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TableEntityQueryResult"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of table entities. </param>
-        /// <returns> A new <see cref="Models.TableEntityQueryResponse"/> instance for mocking. </returns>
-        public static TableEntityQueryResponse TableEntityQueryResponse(string odataMetadata = null, IEnumerable<IDictionary<string, object>> value = null)
+        /// <returns> A new <see cref="Models.TableEntityQueryResult"/> instance for mocking. </returns>
+        public static TableEntityQueryResult TableEntityQueryResult(string odataMetadata = null, IEnumerable<IDictionary<string, object>> value = null)
         {
             value ??= new List<IDictionary<string, object>>();
 
-            return new TableEntityQueryResponse(odataMetadata, value?.ToList());
+            return new TableEntityQueryResult(odataMetadata, value?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.StorageServiceStats"/>. </summary>
