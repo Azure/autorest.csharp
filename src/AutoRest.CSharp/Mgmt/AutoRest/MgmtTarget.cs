@@ -78,9 +78,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.Models)
             {
-                if (ShouldSkipModelGeneration(model))
-                    continue;
-
                 var name = model.Type.Name;
 
                 if (model is MgmtObjectType mot)
@@ -268,18 +265,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             extensionWriter.Write();
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
-        }
-
-        private static bool ShouldSkipModelGeneration(TypeProvider model)
-        {
-            // since MgmtReferenceType inherits from MgmtObjectType which inherits from SchemaObjectType, we definitely do not want to exclude any generation of ReferenceTypes
-            if (model is SchemaObjectType objSchema && model is not MgmtReferenceType)
-            {
-                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
-                    return true;
-            }
-
-            return false;
         }
 
         private static void WriteArmModel(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string modelFileName, string serializationFileName)

@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Mgmt.Report
     internal class ObjectModelItem : TransformableItem
     {
         public ObjectModelItem(string @namespace, string name, string serializedName, TransformSection transformSection)
-            :base(serializedName, transformSection)
+            : base(serializedName, transformSection)
         {
             FullName = string.IsNullOrEmpty(@namespace) ? name : $"{@namespace}.{name}";
         }
