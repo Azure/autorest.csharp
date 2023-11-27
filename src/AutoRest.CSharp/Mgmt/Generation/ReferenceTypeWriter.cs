@@ -11,13 +11,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ReferenceTypeWriter : ModelWriter
     {
-        public static ModelWriter GetWriter(TypeProvider typeProvider) => typeProvider switch
-        {
-            MgmtReferenceType => new ReferenceTypeWriter(),
-            ResourceData data => new ResourceDataWriter(data),
-            _ => new ModelWriter()
-        };
-
         protected override void AddClassAttributes(CodeWriter writer, ObjectType objectType)
         {
             if (objectType is not SchemaObjectType schema)
