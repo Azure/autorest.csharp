@@ -11,12 +11,12 @@ using Azure.Core;
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Request parameter to train a new custom model. </summary>
-    public partial class TrainRequest
+    public partial class TrainContent
     {
-        /// <summary> Initializes a new instance of TrainRequest. </summary>
+        /// <summary> Initializes a new instance of TrainContent. </summary>
         /// <param name="source"> Source path containing the training documents. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="source"/> is null. </exception>
-        public TrainRequest(string source)
+        public TrainContent(string source)
         {
             Argument.AssertNotNull(source, nameof(source));
 
