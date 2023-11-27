@@ -470,17 +470,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private IEnumerable<TypeProvider>? _models;
-        public IEnumerable<TypeProvider> Models => _models ??= GetModels();
-
-        private IEnumerable<TypeProvider> GetModels()
-        {
-            foreach (var model in SchemaMap.Values)
-            {
-                // we skip all the system object types because they represent the models that get replaced by an existing one.
-                if (model is not SystemObjectType)
-                    yield return model;
-            }
-        }
+        public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Values.Where(m => m is not SystemObjectType);
 
         public ResourceData GetResourceData(string requestPath)
         {
