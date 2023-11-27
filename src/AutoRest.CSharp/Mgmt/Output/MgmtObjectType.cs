@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                             string fullSerializedName = this.GetFullSerializedName(objectTypeProperty, i);
                             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                                 new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
-                               fullSerializedName,
+                                fullSerializedName,
                                 "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
                             objectTypeProperty.ValueType.Arguments[i] = match;
                         }
