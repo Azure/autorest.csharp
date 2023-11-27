@@ -123,7 +123,7 @@ namespace _Specs_.Azure.Core.Traits.Models
         internal static UserActionResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserActionResponse(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUserActionResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

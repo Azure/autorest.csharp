@@ -138,7 +138,7 @@ namespace CustomizationsInTsp.Models
         internal static RenamedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRenamedModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRenamedModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

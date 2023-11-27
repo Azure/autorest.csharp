@@ -123,7 +123,7 @@ namespace _Type.Model.Usage.Models
         internal static OutputRecord FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOutputRecord(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeOutputRecord(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

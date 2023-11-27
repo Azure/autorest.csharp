@@ -123,7 +123,7 @@ namespace CustomizationsInTsp.Models
         internal static ModelToMakeInternal FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToMakeInternal(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelToMakeInternal(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

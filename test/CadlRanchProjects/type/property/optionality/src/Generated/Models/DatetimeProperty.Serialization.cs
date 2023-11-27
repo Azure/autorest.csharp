@@ -130,7 +130,7 @@ namespace _Type.Property.Optionality.Models
         internal static DatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDatetimeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

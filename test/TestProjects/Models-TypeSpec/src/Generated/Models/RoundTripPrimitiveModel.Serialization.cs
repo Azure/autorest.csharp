@@ -217,7 +217,7 @@ namespace ModelsTypeSpec.Models
         internal static new RoundTripPrimitiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripPrimitiveModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRoundTripPrimitiveModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

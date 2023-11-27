@@ -123,7 +123,7 @@ namespace _Type.Union.Models
         internal static SendRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSendRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSendRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

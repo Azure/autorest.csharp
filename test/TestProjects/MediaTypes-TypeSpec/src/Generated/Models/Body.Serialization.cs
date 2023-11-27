@@ -123,7 +123,7 @@ namespace MultipleMediaTypes.Models
         internal static Body FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBody(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBody(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

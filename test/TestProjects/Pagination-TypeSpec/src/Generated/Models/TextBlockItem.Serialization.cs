@@ -142,7 +142,7 @@ namespace Pagination.Models
         internal static TextBlockItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTextBlockItem(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeTextBlockItem(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

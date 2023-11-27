@@ -123,7 +123,7 @@ namespace Encode.Datetime.Models
         internal static Rfc3339DatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRfc3339DatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRfc3339DatetimeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

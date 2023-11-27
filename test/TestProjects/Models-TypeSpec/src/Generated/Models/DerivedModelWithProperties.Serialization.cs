@@ -144,7 +144,7 @@ namespace ModelsTypeSpec.Models
         internal static new DerivedModelWithProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithProperties(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDerivedModelWithProperties(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

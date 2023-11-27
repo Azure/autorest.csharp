@@ -123,7 +123,7 @@ namespace ModelsTypeSpec.Models
         internal static Facet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFacet(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFacet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -146,7 +146,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static UsualModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUsualModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUsualModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

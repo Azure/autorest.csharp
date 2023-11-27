@@ -135,7 +135,7 @@ namespace OpenAI.Models
         internal static CompletionUsage FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCompletionUsage(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCompletionUsage(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

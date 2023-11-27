@@ -116,7 +116,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static AbstractModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAbstractModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeAbstractModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

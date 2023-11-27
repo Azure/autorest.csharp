@@ -141,7 +141,7 @@ namespace ModelsTypeSpec.Models
         internal static ErrorModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeErrorModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeErrorModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

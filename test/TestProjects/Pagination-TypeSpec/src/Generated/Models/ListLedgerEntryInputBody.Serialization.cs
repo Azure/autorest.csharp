@@ -131,7 +131,7 @@ namespace Pagination.Models
         internal static ListLedgerEntryInputBody FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListLedgerEntryInputBody(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeListLedgerEntryInputBody(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

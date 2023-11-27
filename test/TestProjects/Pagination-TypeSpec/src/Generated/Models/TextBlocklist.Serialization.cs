@@ -134,7 +134,7 @@ namespace Pagination.Models
         internal static TextBlocklist FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTextBlocklist(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeTextBlocklist(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

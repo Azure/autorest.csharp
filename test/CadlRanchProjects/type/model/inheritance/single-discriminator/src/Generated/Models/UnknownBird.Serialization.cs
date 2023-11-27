@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new UnknownBird FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownBird(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownBird(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

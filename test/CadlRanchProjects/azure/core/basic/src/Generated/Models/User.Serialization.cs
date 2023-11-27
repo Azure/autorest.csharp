@@ -170,7 +170,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal static User FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUser(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUser(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

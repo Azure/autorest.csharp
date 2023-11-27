@@ -131,7 +131,7 @@ namespace ModelsTypeSpec.Models
         internal static new SecondDerivedOutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSecondDerivedOutputModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSecondDerivedOutputModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

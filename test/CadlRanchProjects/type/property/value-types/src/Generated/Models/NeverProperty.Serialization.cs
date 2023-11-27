@@ -115,7 +115,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static NeverProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNeverProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeNeverProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

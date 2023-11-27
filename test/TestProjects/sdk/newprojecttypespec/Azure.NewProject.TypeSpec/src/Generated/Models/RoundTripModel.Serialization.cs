@@ -557,7 +557,7 @@ namespace Azure.NewProject.TypeSpec.Models
         internal static RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRoundTripModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

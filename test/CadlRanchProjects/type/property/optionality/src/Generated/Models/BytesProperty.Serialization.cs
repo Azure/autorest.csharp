@@ -130,7 +130,7 @@ namespace _Type.Property.Optionality.Models
         internal static BytesProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBytesProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBytesProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

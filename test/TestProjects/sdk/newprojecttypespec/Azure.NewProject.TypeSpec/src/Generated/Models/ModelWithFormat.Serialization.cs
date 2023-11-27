@@ -131,7 +131,7 @@ namespace Azure.NewProject.TypeSpec.Models
         internal static ModelWithFormat FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithFormat(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelWithFormat(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

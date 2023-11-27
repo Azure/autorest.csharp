@@ -153,7 +153,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static new DerivedModelWithUnion FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithUnion(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDerivedModelWithUnion(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

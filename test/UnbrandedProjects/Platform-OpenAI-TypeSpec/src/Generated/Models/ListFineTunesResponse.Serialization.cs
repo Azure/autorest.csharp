@@ -137,7 +137,7 @@ namespace OpenAI.Models
         internal static ListFineTunesResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListFineTunesResponse(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeListFineTunesResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

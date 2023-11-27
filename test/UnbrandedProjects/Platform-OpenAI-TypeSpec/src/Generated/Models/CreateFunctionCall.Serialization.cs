@@ -127,7 +127,7 @@ namespace OpenAI.Models
         internal static CreateFunctionCall FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateFunctionCall(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateFunctionCall(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

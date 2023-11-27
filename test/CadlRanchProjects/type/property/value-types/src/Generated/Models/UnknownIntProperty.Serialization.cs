@@ -130,7 +130,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static UnknownIntProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownIntProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownIntProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

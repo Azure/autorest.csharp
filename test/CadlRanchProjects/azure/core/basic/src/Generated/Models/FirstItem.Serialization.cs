@@ -126,7 +126,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal static FirstItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFirstItem(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFirstItem(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

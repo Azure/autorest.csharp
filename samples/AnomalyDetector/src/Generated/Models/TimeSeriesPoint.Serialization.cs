@@ -138,7 +138,7 @@ namespace AnomalyDetector.Models
         internal static TimeSeriesPoint FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTimeSeriesPoint(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeTimeSeriesPoint(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

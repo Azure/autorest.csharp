@@ -123,7 +123,7 @@ namespace Encode.Duration.Models
         internal static ISO8601DurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeISO8601DurationProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeISO8601DurationProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -123,7 +123,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static NoDecoratorModelInPublic FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNoDecoratorModelInPublic(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeNoDecoratorModelInPublic(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

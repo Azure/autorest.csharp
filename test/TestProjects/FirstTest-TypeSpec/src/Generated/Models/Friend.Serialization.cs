@@ -123,7 +123,7 @@ namespace FirstTestTypeSpec.Models
         internal static Friend FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFriend(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

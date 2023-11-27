@@ -190,7 +190,7 @@ namespace OpenAI.Models
         internal static OpenAIFile FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOpenAIFile(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeOpenAIFile(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -123,7 +123,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal static ListItemInputBody FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListItemInputBody(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeListItemInputBody(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

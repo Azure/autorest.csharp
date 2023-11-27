@@ -123,7 +123,7 @@ namespace SpecialWords
         internal static Yield FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeYield(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeYield(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

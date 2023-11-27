@@ -137,7 +137,7 @@ namespace OpenAI.Models
         internal static ListFineTuningJobEventsResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeListFineTuningJobEventsResponse(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeListFineTuningJobEventsResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

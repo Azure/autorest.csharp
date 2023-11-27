@@ -130,7 +130,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static UnknownArrayProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownArrayProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownArrayProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

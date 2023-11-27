@@ -141,7 +141,7 @@ namespace OpenAI.Models
         internal static Image FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeImage(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeImage(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

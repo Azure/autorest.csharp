@@ -123,7 +123,7 @@ namespace Encode.Datetime.Models
         internal static DefaultDatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDefaultDatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDefaultDatetimeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

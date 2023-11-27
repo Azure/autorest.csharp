@@ -140,7 +140,7 @@ namespace _Type.Property.Optionality.Models
         internal static CollectionsModelProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionsModelProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCollectionsModelProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -141,7 +141,7 @@ namespace AnomalyDetector.Models
         internal static MultivariateLastDetectionOptions FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateLastDetectionOptions(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeMultivariateLastDetectionOptions(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

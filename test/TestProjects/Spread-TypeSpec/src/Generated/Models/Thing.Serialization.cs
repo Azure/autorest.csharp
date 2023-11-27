@@ -131,7 +131,7 @@ namespace SpreadTypeSpec.Models
         internal static Thing FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeThing(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeThing(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

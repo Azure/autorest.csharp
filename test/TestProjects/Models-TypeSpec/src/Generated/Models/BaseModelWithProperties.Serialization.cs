@@ -126,7 +126,7 @@ namespace ModelsTypeSpec.Models
         internal static BaseModelWithProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithProperties(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBaseModelWithProperties(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -143,7 +143,7 @@ namespace _Type.Property.Nullable.Models
         internal static DurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDurationProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDurationProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

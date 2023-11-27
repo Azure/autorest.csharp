@@ -134,7 +134,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static DictionaryStringProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDictionaryStringProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDictionaryStringProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

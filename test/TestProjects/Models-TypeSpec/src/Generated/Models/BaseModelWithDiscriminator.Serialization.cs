@@ -122,7 +122,7 @@ namespace ModelsTypeSpec.Models
         internal static BaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBaseModelWithDiscriminator(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

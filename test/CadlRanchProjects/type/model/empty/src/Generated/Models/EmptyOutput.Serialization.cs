@@ -115,7 +115,7 @@ namespace _Type.Model.Empty.Models
         internal static EmptyOutput FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeEmptyOutput(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeEmptyOutput(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

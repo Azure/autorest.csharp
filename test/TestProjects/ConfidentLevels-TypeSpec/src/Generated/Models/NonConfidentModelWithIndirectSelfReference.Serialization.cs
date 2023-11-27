@@ -148,7 +148,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static NonConfidentModelWithIndirectSelfReference FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNonConfidentModelWithIndirectSelfReference(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeNonConfidentModelWithIndirectSelfReference(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

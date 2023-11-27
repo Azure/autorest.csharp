@@ -131,7 +131,7 @@ namespace _Azure.Lro.Standard.Models
         internal static ExportedUser FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeExportedUser(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeExportedUser(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

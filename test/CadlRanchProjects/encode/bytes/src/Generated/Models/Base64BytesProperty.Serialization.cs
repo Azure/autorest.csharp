@@ -123,7 +123,7 @@ namespace Encode.Bytes.Models
         internal static Base64BytesProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBase64BytesProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBase64BytesProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

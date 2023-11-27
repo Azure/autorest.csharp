@@ -133,7 +133,7 @@ namespace Encode.Duration.Models
         internal static FloatSecondsDurationArrayProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFloatSecondsDurationArrayProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

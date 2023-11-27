@@ -133,7 +133,7 @@ namespace ModelsTypeSpec.Models
         internal static new DerivedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDerivedModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

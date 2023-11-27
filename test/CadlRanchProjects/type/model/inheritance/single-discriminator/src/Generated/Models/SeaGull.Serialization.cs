@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new SeaGull FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSeaGull(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSeaGull(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

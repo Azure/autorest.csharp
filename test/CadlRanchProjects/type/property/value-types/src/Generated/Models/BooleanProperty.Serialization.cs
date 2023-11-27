@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static BooleanProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBooleanProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBooleanProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

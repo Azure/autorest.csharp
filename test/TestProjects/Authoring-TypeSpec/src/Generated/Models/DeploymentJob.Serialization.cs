@@ -201,7 +201,7 @@ namespace AuthoringTypeSpec.Models
         internal static DeploymentJob FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDeploymentJob(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDeploymentJob(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

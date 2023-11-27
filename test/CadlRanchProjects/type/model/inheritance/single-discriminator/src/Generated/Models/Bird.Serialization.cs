@@ -119,7 +119,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static Bird FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBird(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBird(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

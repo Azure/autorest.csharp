@@ -145,7 +145,7 @@ namespace OpenAI.Models
         internal static CreateEmbeddingRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateEmbeddingRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateEmbeddingRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -119,7 +119,7 @@ namespace OpenAI.Models
         internal static ChatCompletionFunctionCallOption FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeChatCompletionFunctionCallOption(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeChatCompletionFunctionCallOption(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -206,7 +206,7 @@ namespace OpenAI.Models
         internal static CreateLogprobs FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateLogprobs(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateLogprobs(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

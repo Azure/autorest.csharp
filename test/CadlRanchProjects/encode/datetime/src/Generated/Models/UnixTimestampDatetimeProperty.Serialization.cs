@@ -123,7 +123,7 @@ namespace Encode.Datetime.Models
         internal static UnixTimestampDatetimeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnixTimestampDatetimeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnixTimestampDatetimeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

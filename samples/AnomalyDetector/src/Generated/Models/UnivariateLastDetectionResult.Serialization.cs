@@ -194,7 +194,7 @@ namespace AnomalyDetector.Models
         internal static UnivariateLastDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateLastDetectionResult(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnivariateLastDetectionResult(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

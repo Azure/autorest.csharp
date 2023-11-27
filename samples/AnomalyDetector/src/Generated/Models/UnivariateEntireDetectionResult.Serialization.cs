@@ -256,7 +256,7 @@ namespace AnomalyDetector.Models
         internal static UnivariateEntireDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateEntireDetectionResult(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnivariateEntireDetectionResult(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

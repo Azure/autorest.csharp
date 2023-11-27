@@ -153,7 +153,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static IndirectSelfReferenceModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeIndirectSelfReferenceModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeIndirectSelfReferenceModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -131,7 +131,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static ModelWithIntegerLiteralTypeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelWithIntegerLiteralTypeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

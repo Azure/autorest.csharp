@@ -127,7 +127,7 @@ namespace UnbrandedTypeSpec.Models
         internal static ModelWithFormat FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithFormat(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelWithFormat(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

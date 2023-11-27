@@ -130,7 +130,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static UnionFloatLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnionFloatLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnionFloatLiteralProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

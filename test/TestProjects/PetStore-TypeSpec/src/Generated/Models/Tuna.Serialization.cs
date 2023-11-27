@@ -139,7 +139,7 @@ namespace PetStore.Models
         internal static new Tuna FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTuna(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeTuna(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

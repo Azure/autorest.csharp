@@ -130,7 +130,7 @@ namespace _Type.Property.Optionality.Models
         internal static FloatLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFloatLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFloatLiteralProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

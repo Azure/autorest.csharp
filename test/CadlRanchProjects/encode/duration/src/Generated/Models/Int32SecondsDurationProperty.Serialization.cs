@@ -123,7 +123,7 @@ namespace Encode.Duration.Models
         internal static Int32SecondsDurationProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInt32SecondsDurationProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeInt32SecondsDurationProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

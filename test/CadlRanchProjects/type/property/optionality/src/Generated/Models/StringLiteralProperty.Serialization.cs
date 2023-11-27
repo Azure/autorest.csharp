@@ -130,7 +130,7 @@ namespace _Type.Property.Optionality.Models
         internal static StringLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeStringLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeStringLiteralProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

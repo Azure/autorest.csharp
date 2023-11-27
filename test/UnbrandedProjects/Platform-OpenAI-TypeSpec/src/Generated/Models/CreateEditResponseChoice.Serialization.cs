@@ -135,7 +135,7 @@ namespace OpenAI.Models
         internal static CreateEditResponseChoice FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateEditResponseChoice(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateEditResponseChoice(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

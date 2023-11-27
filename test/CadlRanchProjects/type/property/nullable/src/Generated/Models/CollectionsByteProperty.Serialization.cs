@@ -165,7 +165,7 @@ namespace _Type.Property.Nullable.Models
         internal static CollectionsByteProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionsByteProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCollectionsByteProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

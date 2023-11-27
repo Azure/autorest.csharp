@@ -141,7 +141,7 @@ namespace ModelsTypeSpec.Models
         internal static new RoundTripOnNoUse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripOnNoUse(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRoundTripOnNoUse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

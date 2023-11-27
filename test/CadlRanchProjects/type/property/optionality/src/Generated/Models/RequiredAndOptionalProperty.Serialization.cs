@@ -134,7 +134,7 @@ namespace _Type.Property.Optionality.Models
         internal static RequiredAndOptionalProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRequiredAndOptionalProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRequiredAndOptionalProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

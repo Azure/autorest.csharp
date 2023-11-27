@@ -109,7 +109,7 @@ namespace ModelsTypeSpec.Models
         internal static SingleBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSingleBase(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSingleBase(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

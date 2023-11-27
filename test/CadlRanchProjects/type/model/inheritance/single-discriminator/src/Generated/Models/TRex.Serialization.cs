@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new TRex FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeTRex(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeTRex(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

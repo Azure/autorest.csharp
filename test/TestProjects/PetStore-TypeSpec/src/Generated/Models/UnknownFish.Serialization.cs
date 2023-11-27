@@ -131,7 +131,7 @@ namespace PetStore.Models
         internal static new UnknownFish FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownFish(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownFish(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

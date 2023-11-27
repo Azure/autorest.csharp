@@ -250,7 +250,7 @@ namespace AnomalyDetector.Models
         internal static ModelInfo FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelInfo(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelInfo(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

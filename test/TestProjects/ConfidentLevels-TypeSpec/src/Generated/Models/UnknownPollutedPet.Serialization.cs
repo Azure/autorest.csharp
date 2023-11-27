@@ -131,7 +131,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static new UnknownPollutedPet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownPollutedPet(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownPollutedPet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

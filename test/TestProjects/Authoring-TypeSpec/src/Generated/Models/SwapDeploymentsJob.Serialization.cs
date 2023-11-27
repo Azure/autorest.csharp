@@ -201,7 +201,7 @@ namespace AuthoringTypeSpec.Models
         internal static SwapDeploymentsJob FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSwapDeploymentsJob(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSwapDeploymentsJob(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -123,7 +123,7 @@ namespace Parameters.BodyOptionality.Models
         internal static BodyModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBodyModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBodyModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

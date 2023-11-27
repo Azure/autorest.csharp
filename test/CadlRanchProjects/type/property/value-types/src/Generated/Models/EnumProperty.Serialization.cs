@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static EnumProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeEnumProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeEnumProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

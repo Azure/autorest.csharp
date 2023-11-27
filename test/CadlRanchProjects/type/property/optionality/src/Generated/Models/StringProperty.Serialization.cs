@@ -126,7 +126,7 @@ namespace _Type.Property.Optionality.Models
         internal static StringProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeStringProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeStringProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

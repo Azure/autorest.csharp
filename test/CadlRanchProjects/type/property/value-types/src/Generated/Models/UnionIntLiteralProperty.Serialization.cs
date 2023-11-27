@@ -130,7 +130,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static UnionIntLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnionIntLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnionIntLiteralProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

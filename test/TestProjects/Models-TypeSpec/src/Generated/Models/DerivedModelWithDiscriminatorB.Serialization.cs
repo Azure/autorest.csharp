@@ -150,7 +150,7 @@ namespace ModelsTypeSpec.Models
         internal static new DerivedModelWithDiscriminatorB FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDerivedModelWithDiscriminatorB(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

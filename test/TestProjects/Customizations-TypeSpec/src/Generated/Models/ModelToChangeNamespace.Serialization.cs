@@ -123,7 +123,7 @@ namespace CustomizationsInTsp.Models
         internal static ModelToChangeNamespace FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToChangeNamespace(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelToChangeNamespace(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

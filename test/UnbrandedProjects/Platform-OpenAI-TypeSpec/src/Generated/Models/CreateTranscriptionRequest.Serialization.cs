@@ -179,7 +179,7 @@ namespace OpenAI.Models
         internal static CreateTranscriptionRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateTranscriptionRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateTranscriptionRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

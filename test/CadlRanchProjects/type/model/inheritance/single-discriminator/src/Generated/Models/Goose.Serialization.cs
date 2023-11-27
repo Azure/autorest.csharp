@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new Goose FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeGoose(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeGoose(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

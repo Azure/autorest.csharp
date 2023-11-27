@@ -134,7 +134,7 @@ namespace ModelsTypeSpec.Models
         internal static CollectionItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCollectionItem(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCollectionItem(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

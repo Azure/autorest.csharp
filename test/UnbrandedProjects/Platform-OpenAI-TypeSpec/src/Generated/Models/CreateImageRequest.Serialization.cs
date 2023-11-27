@@ -183,7 +183,7 @@ namespace OpenAI.Models
         internal static CreateImageRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateImageRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateImageRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

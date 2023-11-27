@@ -131,7 +131,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static new UnknownPet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownPet(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownPet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

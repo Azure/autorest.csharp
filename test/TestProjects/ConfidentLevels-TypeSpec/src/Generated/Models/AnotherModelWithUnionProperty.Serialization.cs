@@ -130,7 +130,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static AnotherModelWithUnionProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnotherModelWithUnionProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeAnotherModelWithUnionProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

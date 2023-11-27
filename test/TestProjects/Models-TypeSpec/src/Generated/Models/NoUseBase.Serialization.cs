@@ -123,7 +123,7 @@ namespace ModelsTypeSpec.Models
         internal static NoUseBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNoUseBase(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeNoUseBase(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -133,7 +133,7 @@ namespace Pagination.Models
         internal static DimensionValueListItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDimensionValueListItem(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDimensionValueListItem(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

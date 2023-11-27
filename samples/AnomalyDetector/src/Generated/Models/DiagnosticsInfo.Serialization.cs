@@ -155,7 +155,7 @@ namespace AnomalyDetector.Models
         internal static DiagnosticsInfo FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDiagnosticsInfo(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDiagnosticsInfo(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

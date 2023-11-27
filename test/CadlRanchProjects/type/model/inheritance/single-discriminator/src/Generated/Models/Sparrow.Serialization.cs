@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new Sparrow FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSparrow(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSparrow(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

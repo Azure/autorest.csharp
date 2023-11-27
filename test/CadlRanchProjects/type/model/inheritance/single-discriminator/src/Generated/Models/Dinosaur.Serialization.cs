@@ -116,7 +116,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static Dinosaur FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDinosaur(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDinosaur(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

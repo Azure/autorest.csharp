@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static IntLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeIntLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeIntLiteralProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

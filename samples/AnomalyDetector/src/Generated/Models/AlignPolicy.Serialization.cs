@@ -160,7 +160,7 @@ namespace AnomalyDetector.Models
         internal static AlignPolicy FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAlignPolicy(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeAlignPolicy(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

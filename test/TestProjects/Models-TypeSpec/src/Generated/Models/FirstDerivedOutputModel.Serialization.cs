@@ -131,7 +131,7 @@ namespace ModelsTypeSpec.Models
         internal static new FirstDerivedOutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFirstDerivedOutputModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFirstDerivedOutputModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

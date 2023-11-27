@@ -123,7 +123,7 @@ namespace Encode.Bytes.Models
         internal static DefaultBytesProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDefaultBytesProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDefaultBytesProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

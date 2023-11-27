@@ -157,7 +157,7 @@ namespace ModelsTypeSpec.Models
         internal static new Int32ValuesFacet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInt32ValuesFacet(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeInt32ValuesFacet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

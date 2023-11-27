@@ -123,7 +123,7 @@ namespace ConvenienceInCadl.Models
         internal static Model FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

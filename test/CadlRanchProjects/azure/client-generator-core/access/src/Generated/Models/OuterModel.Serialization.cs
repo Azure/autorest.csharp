@@ -131,7 +131,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static new OuterModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOuterModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeOuterModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

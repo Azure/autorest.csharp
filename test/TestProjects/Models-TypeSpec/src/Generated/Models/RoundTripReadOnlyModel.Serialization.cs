@@ -568,7 +568,7 @@ namespace ModelsTypeSpec.Models
         internal static RoundTripReadOnlyModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripReadOnlyModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRoundTripReadOnlyModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

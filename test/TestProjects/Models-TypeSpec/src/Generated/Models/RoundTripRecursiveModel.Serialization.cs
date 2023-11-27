@@ -138,7 +138,7 @@ namespace ModelsTypeSpec.Models
         internal static RoundTripRecursiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripRecursiveModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRoundTripRecursiveModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

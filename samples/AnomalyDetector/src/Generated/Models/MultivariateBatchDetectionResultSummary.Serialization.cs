@@ -181,7 +181,7 @@ namespace AnomalyDetector.Models
         internal static MultivariateBatchDetectionResultSummary FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateBatchDetectionResultSummary(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeMultivariateBatchDetectionResultSummary(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

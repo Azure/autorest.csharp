@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal static new UnknownDog FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownDog(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownDog(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

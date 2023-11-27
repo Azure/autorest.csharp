@@ -215,7 +215,7 @@ namespace AnomalyDetector.Models
         internal static ModelState FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelState(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelState(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

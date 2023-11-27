@@ -123,7 +123,7 @@ namespace Authentication.ApiKey.Models
         internal static InvalidAuth FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInvalidAuth(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeInvalidAuth(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

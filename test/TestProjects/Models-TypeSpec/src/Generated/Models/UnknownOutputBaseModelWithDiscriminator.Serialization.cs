@@ -123,7 +123,7 @@ namespace ModelsTypeSpec.Models
         internal static new UnknownOutputBaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownOutputBaseModelWithDiscriminator(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

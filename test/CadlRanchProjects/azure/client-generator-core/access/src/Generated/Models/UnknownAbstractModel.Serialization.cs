@@ -131,7 +131,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static new UnknownAbstractModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownAbstractModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownAbstractModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

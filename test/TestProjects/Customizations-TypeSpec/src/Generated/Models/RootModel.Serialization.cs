@@ -265,7 +265,7 @@ namespace CustomizationsInTsp.Models
         internal static RootModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRootModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRootModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

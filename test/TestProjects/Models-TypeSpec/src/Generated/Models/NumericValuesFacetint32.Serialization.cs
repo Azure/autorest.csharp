@@ -149,7 +149,7 @@ namespace ModelsTypeSpec.Models
         internal static new NumericValuesFacetint32 FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNumericValuesFacetint32(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeNumericValuesFacetint32(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

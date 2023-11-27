@@ -133,7 +133,7 @@ namespace ModelsTypeSpec.Models
         internal static new RecordItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRecordItem(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRecordItem(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

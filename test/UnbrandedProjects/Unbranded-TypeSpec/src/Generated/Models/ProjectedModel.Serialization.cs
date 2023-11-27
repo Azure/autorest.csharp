@@ -119,7 +119,7 @@ namespace UnbrandedTypeSpec.Models
         internal static ProjectedModel FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeProjectedModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeProjectedModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

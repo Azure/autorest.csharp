@@ -139,7 +139,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         internal static new Siamese FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSiamese(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSiamese(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

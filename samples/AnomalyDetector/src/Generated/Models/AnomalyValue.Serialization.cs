@@ -164,7 +164,7 @@ namespace AnomalyDetector.Models
         internal static AnomalyValue FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeAnomalyValue(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeAnomalyValue(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -123,7 +123,7 @@ namespace SpecialWords
         internal static Except FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeExcept(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeExcept(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

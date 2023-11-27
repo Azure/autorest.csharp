@@ -123,7 +123,7 @@ namespace Parameters.Spread.Models
         internal static SpreadAsRequestParameterRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadAsRequestParameterRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSpreadAsRequestParameterRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

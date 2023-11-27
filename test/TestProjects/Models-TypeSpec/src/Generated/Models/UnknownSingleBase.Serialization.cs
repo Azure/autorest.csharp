@@ -131,7 +131,7 @@ namespace ModelsTypeSpec.Models
         internal static new UnknownSingleBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownSingleBase(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownSingleBase(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

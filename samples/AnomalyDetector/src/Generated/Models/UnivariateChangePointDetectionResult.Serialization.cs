@@ -180,7 +180,7 @@ namespace AnomalyDetector.Models
         internal static UnivariateChangePointDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateChangePointDetectionResult(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnivariateChangePointDetectionResult(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

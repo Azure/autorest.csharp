@@ -145,7 +145,7 @@ namespace Pagination.Models
         internal static LedgerEntry FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeLedgerEntry(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeLedgerEntry(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

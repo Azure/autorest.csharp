@@ -135,7 +135,7 @@ namespace OpenAI.Models
         internal static DeleteModelResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDeleteModelResponse(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDeleteModelResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

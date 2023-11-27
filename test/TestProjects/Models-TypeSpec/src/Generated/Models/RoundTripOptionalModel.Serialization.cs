@@ -421,7 +421,7 @@ namespace ModelsTypeSpec.Models
         internal static RoundTripOptionalModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripOptionalModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeRoundTripOptionalModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

@@ -148,7 +148,7 @@ namespace Pagination.Models
         internal static BatchPool FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBatchPool(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBatchPool(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

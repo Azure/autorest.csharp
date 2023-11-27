@@ -123,7 +123,7 @@ namespace Projection.ProjectedName.Models
         internal static JsonProjectedNameModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJsonProjectedNameModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeJsonProjectedNameModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

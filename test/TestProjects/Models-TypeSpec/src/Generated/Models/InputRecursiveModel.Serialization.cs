@@ -138,7 +138,7 @@ namespace ModelsTypeSpec.Models
         internal static InputRecursiveModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInputRecursiveModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeInputRecursiveModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

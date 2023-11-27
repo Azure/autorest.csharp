@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         internal static new UnknownDinosaur FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownDinosaur(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUnknownDinosaur(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

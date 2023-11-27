@@ -123,7 +123,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         internal static OrphanModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOrphanModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeOrphanModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

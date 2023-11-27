@@ -123,7 +123,7 @@ namespace SpecialWords
         internal static Elif FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeElif(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeElif(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

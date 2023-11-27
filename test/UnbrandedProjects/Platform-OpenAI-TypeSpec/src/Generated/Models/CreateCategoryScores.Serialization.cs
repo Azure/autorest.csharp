@@ -199,7 +199,7 @@ namespace OpenAI.Models
         internal static CreateCategoryScores FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateCategoryScores(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateCategoryScores(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

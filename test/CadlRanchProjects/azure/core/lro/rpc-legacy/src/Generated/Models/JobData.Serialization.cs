@@ -123,7 +123,7 @@ namespace _Azure.Lro.RpcLegacy.Models
         internal static JobData FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeJobData(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeJobData(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

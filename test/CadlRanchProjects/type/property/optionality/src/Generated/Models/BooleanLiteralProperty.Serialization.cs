@@ -130,7 +130,7 @@ namespace _Type.Property.Optionality.Models
         internal static BooleanLiteralProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBooleanLiteralProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBooleanLiteralProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

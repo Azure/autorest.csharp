@@ -142,7 +142,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         internal static UserOrder FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUserOrder(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeUserOrder(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

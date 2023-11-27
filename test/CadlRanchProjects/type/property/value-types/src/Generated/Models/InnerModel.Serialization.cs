@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Models
         internal static InnerModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeInnerModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeInnerModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

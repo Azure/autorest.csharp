@@ -119,7 +119,7 @@ namespace UnbrandedTypeSpec.Models
         internal static Friend FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeFriend(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

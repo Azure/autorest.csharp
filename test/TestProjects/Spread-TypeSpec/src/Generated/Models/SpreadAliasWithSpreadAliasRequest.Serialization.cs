@@ -131,7 +131,7 @@ namespace SpreadTypeSpec.Models
         internal static SpreadAliasWithSpreadAliasRequest FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSpreadAliasWithSpreadAliasRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

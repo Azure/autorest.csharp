@@ -139,7 +139,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static new Dog FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDog(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeDog(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

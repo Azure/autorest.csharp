@@ -139,7 +139,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static new Cat FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCat(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCat(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

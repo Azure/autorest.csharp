@@ -123,7 +123,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
         internal static SharedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSharedModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeSharedModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

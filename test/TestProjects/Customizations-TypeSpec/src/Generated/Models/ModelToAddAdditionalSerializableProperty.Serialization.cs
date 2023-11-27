@@ -161,7 +161,7 @@ namespace CustomizationsInTsp.Models
         internal static ModelToAddAdditionalSerializableProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

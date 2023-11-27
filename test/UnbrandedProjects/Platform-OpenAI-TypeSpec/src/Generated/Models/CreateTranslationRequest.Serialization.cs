@@ -168,7 +168,7 @@ namespace OpenAI.Models
         internal static CreateTranslationRequest FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateTranslationRequest(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateTranslationRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

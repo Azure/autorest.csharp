@@ -123,7 +123,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
         internal static OutputModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeOutputModel(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeOutputModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

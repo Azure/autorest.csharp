@@ -153,7 +153,7 @@ namespace OpenAI.Models
         internal static CreateEditResponse FromResponse(PipelineResponse response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateEditResponse(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCreateEditResponse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

@@ -123,7 +123,7 @@ namespace Parameters.Spread.Models
         internal static BodyParameter FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBodyParameter(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeBodyParameter(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

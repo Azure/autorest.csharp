@@ -131,7 +131,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         internal static new Cobra FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCobra(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCobra(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

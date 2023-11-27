@@ -131,7 +131,7 @@ namespace ConfidentLevelsInTsp.Models
         internal static ModelWithFloatLiteralTypeProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithFloatLiteralTypeProperty(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeModelWithFloatLiteralTypeProperty(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

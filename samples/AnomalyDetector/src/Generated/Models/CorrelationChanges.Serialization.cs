@@ -140,7 +140,7 @@ namespace AnomalyDetector.Models
         internal static CorrelationChanges FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCorrelationChanges(document.RootElement, new ModelReaderWriterOptions("W"));
+            return DeserializeCorrelationChanges(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
