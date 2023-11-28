@@ -82,9 +82,13 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
         protected virtual string GetMethodName(DpgOperationSample sample, bool isAsync)
         {
-            var builder = new StringBuilder("Example_").Append(sample.OperationMethodSignature.Name);
+            var builder = new StringBuilder("Example_");
 
-            builder.Append('_').Append(sample.ExampleKey);
+            if (sample.ResourceName is not null)
+                builder.Append(sample.ResourceName).Append("_");
+
+            builder.Append(sample.OperationMethodSignature.Name)
+                .Append('_').Append(sample.ExampleKey);
 
             if (sample.IsConvenienceSample)
             {
