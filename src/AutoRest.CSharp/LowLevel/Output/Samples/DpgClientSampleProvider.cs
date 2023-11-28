@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             if (sample.ResourceName is not null)
                 builder.Append(sample.ResourceName).Append("_");
 
-            builder.Append(sample.OperationMethodSignature.Name)
+            builder.Append(sample.InputOperationName)
                 .Append('_').Append(sample.ExampleKey);
 
             if (sample.IsConvenienceSample)

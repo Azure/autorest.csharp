@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
         public string? ResourceName => _inputOperationExample.Operation.ResourceName;
+        public string InputOperationName => _inputOperationExample.Operation.Name;
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
