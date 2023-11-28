@@ -13,7 +13,7 @@ namespace _Azure.Lro.Standard.Models
     /// <summary> The exported user data. </summary>
     public partial class ExportedUser
     {
-        /// <summary> Initializes a new instance of ExportedUser. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExportedUser"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="resourceUri"> The exported URI. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>

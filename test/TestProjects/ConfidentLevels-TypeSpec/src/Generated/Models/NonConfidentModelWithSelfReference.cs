@@ -15,7 +15,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Non-confident model that contains self reference. </summary>
     public partial class NonConfidentModelWithSelfReference
     {
-        /// <summary> Initializes a new instance of NonConfidentModelWithSelfReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
@@ -31,7 +31,7 @@ namespace ConfidentLevelsInTsp.Models
             UnionProperty = unionProperty;
         }
 
-        /// <summary> Initializes a new instance of NonConfidentModelWithSelfReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
         /// <param name="unionProperty"> The non-confident part. </param>

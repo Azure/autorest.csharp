@@ -10,7 +10,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with extensible enum properties. </summary>
     public partial class ExtensibleEnumProperty
     {
-        /// <summary> Initializes a new instance of ExtensibleEnumProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExtensibleEnumProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public ExtensibleEnumProperty(InnerEnum property)
         {

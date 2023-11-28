@@ -13,13 +13,13 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateEndpoint
     {
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         [InitializationConstructor]
         public PrivateEndpoint()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateEndpoint"/>. </summary>
         /// <param name="id"> The ARM identifier for Private Endpoint. </param>
         [SerializationConstructor]
         protected PrivateEndpoint(ResourceIdentifier id)

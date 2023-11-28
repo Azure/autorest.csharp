@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of DedicatedHostPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
         public DedicatedHostPatch()
         {
             VirtualMachines = new ChangeTrackingList<Resources.Models.SubResource>();

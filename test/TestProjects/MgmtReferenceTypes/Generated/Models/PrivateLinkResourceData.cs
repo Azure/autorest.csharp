@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateLinkResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceData"/>. </summary>
         [InitializationConstructor]
         public PrivateLinkResourceData()
         {
@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Fake.Models
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="requiredMembers"> The private link resource required member names. </param>
         /// <param name="requiredZoneNames"> The private link resource Private link DNS zone name. </param>
         [SerializationConstructor]
-        protected PrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IReadOnlyList<string> requiredZoneNames) : base(id, name, resourceType, systemData)
+        protected PrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IReadOnlyList<string> requiredZoneNames) : base(id, name, resourceType, systemData)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;

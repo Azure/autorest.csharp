@@ -13,7 +13,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Roundtrip model that has property of its own type. </summary>
     public partial class RoundTripRecursiveModel
     {
-        /// <summary> Initializes a new instance of RoundTripRecursiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripRecursiveModel"/>. </summary>
         /// <param name="message"> Message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public RoundTripRecursiveModel(string message)
@@ -23,7 +23,7 @@ namespace ModelsTypeSpec.Models
             Message = message;
         }
 
-        /// <summary> Initializes a new instance of RoundTripRecursiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripRecursiveModel"/>. </summary>
         /// <param name="message"> Message. </param>
         /// <param name="inner"> Required Record. </param>
         internal RoundTripRecursiveModel(string message, RoundTripRecursiveModel inner)

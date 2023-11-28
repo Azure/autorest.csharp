@@ -12,12 +12,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> The Azure event log entries are of type EventData. </summary>
     public partial class EventData
     {
-        /// <summary> Initializes a new instance of EventData. </summary>
+        /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>
         internal EventData()
         {
         }
 
-        /// <summary> Initializes a new instance of EventData. </summary>
+        /// <summary> Initializes a new instance of <see cref="EventData"/>. </summary>
         /// <param name="authorization"> The sender authorization information. </param>
         /// <param name="tenantId"> the Azure tenant Id. </param>
         internal EventData(SenderAuthorization authorization, Guid? tenantId)

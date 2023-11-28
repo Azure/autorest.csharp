@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a property unknown, and the data is a string. </summary>
     public partial class UnknownStringProperty
     {
-        /// <summary> Initializes a new instance of UnknownStringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownStringProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownStringProperty(BinaryData property)

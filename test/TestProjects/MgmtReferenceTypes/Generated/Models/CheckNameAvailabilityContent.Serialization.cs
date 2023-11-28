@@ -12,8 +12,8 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(CheckNameAvailabilityRequestConverter))]
-    public partial class CheckNameAvailabilityRequest : IUtf8JsonSerializable
+    [JsonConverter(typeof(CheckNameAvailabilityContentConverter))]
+    public partial class CheckNameAvailabilityContent : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static CheckNameAvailabilityRequest DeserializeCheckNameAvailabilityRequest(JsonElement element)
+        internal static CheckNameAvailabilityContent DeserializeCheckNameAvailabilityContent(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -56,19 +56,19 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityRequest(name.Value, type);
+            return new CheckNameAvailabilityContent(name.Value, type);
         }
 
-        internal partial class CheckNameAvailabilityRequestConverter : JsonConverter<CheckNameAvailabilityRequest>
+        internal partial class CheckNameAvailabilityContentConverter : JsonConverter<CheckNameAvailabilityContent>
         {
-            public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityRequest model, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityContent model, JsonSerializerOptions options)
             {
                 writer.WriteObjectValue(model);
             }
-            public override CheckNameAvailabilityRequest Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override CheckNameAvailabilityContent Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeCheckNameAvailabilityRequest(document.RootElement);
+                return DeserializeCheckNameAvailabilityContent(document.RootElement);
             }
         }
     }

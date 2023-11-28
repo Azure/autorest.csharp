@@ -14,13 +14,13 @@ namespace MgmtCustomizations.Models
     /// <summary> The list result of the rules. </summary>
     internal partial class PetStoreListResult
     {
-        /// <summary> Initializes a new instance of PetStoreListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>
         internal PetStoreListResult()
         {
             Value = new ChangeTrackingList<PetStoreData>();
         }
 
-        /// <summary> Initializes a new instance of PetStoreListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreListResult"/>. </summary>
         /// <param name="value"> The values. </param>
         internal PetStoreListResult(IReadOnlyList<PetStoreData> value)
         {

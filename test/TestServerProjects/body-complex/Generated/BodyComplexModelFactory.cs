@@ -13,7 +13,7 @@ namespace body_complex.Models
     /// <summary> Model factory for models. </summary>
     public static partial class BodyComplexModelFactory
     {
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DotFish"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
         /// <returns> A new <see cref="Models.DotFish"/> instance for mocking. </returns>
@@ -22,7 +22,7 @@ namespace body_complex.Models
             return new UnknownDotFish(fishType, species);
         }
 
-        /// <summary> Initializes a new instance of DotFishMarket. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DotFishMarket"/>. </summary>
         /// <param name="sampleSalmon"></param>
         /// <param name="salmons"></param>
         /// <param name="sampleFish">
@@ -42,7 +42,7 @@ namespace body_complex.Models
             return new DotFishMarket(sampleSalmon, salmons?.ToList(), sampleFish, fishes?.ToList());
         }
 
-        /// <summary> Initializes a new instance of DotSalmon. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DotSalmon"/>. </summary>
         /// <param name="species"></param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
@@ -52,7 +52,7 @@ namespace body_complex.Models
             return new DotSalmon("DotSalmon", species, location, iswild);
         }
 
-        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ReadonlyObj"/>. </summary>
         /// <param name="id"></param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.ReadonlyObj"/> instance for mocking. </returns>
@@ -61,7 +61,7 @@ namespace body_complex.Models
             return new ReadonlyObj(id, size);
         }
 
-        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MyBaseType"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
@@ -71,7 +71,7 @@ namespace body_complex.Models
             return new UnknownMyBaseType(kind, propB1, propBH1);
         }
 
-        /// <summary> Initializes a new instance of MyDerivedType. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MyDerivedType"/>. </summary>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
         /// <param name="propD1"></param>

@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> A skill to split a string into chunks of text. </summary>
     public partial class SplitSkill : Skill
     {
-        /// <summary> Initializes a new instance of SplitSkill. </summary>
+        /// <summary> Initializes a new instance of <see cref="SplitSkill"/>. </summary>
         /// <param name="inputs"> Inputs of the skills could be a column in the source data set, or the output of an upstream skill. </param>
         /// <param name="outputs"> The output of a skill is either a field in a search index, or a value that can be consumed as an input by another skill. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="inputs"/> or <paramref name="outputs"/> is null. </exception>
@@ -26,7 +26,7 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Skills.Text.SplitSkill";
         }
 
-        /// <summary> Initializes a new instance of SplitSkill. </summary>
+        /// <summary> Initializes a new instance of <see cref="SplitSkill"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the skill. </param>
         /// <param name="name"> The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'. </param>
         /// <param name="description"> The description of the skill which describes the inputs, outputs, and usage of the skill. </param>

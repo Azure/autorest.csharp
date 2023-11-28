@@ -14,13 +14,13 @@ namespace MgmtListMethods.Models
     /// <summary> The List of Fake Configuration operation response. </summary>
     public partial class FakeConfigurationListResult
     {
-        /// <summary> Initializes a new instance of FakeConfigurationListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationListResult"/>. </summary>
         public FakeConfigurationListResult()
         {
             Value = new ChangeTrackingList<FakeConfigurationData>();
         }
 
-        /// <summary> Initializes a new instance of FakeConfigurationListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeConfigurationListResult"/>. </summary>
         /// <param name="value"> The list of Fake Configuration. </param>
         internal FakeConfigurationListResult(IList<FakeConfigurationData> value)
         {

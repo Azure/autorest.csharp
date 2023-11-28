@@ -135,8 +135,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
-
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
@@ -471,35 +469,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return dictionary;
         }
 
-        public IEnumerable<TypeProvider> Models => GetModels();
-
-        private IEnumerable<TypeProvider> GetModels()
-        {
-            var models = SchemaMap.Values;
-
-            //force inheritance evaluation on resourceData
-            foreach (var resourceData in ResourceData)
-            {
-                var temp = resourceData.Inherits;
-                var propTemp = resourceData.Properties;
-            }
-
-            //force inheritance evaluation on models
-            foreach (var typeProvider in models)
-            {
-                if (typeProvider is ObjectType objType)
-                {
-                    var temp = objType.Inherits;
-                    //force property reference type evaluation on MgmtObjectType
-                    if (typeProvider is MgmtObjectType mgmtObjectType)
-                    {
-                        var propTemp = mgmtObjectType.Properties;
-                    }
-                }
-            }
-
-            return models;
-        }
+        private IEnumerable<TypeProvider>? _models;
+        public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Values.Where(m => m is not SystemObjectType);
 
         public ResourceData GetResourceData(string requestPath)
         {

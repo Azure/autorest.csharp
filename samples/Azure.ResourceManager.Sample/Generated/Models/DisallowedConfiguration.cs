@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DisallowedConfiguration
     {
-        /// <summary> Initializes a new instance of DisallowedConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="DisallowedConfiguration"/>. </summary>
         public DisallowedConfiguration()
         {
         }
 
-        /// <summary> Initializes a new instance of DisallowedConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="DisallowedConfiguration"/>. </summary>
         /// <param name="vmDiskType">
         /// VM disk types which are disallowed.
         /// Serialized Name: DisallowedConfiguration.vmDiskType

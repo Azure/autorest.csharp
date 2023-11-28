@@ -16,14 +16,14 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class DiskInstanceView
     {
-        /// <summary> Initializes a new instance of DiskInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskInstanceView"/>. </summary>
         internal DiskInstanceView()
         {
             EncryptionSettings = new ChangeTrackingList<DiskEncryptionSettings>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of DiskInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="DiskInstanceView"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: DiskInstanceView.name

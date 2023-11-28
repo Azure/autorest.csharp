@@ -10,7 +10,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> Foo instance details. </summary>
     public partial class FooPatch
     {
-        /// <summary> Initializes a new instance of FooPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>
         public FooPatch()
         {
         }

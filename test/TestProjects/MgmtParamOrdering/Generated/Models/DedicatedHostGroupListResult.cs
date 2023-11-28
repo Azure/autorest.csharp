@@ -16,7 +16,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> The list dedicated host operation response. </summary>
     internal partial class DedicatedHostGroupListResult
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/>. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal DedicatedHostGroupListResult(IEnumerable<DedicatedHostGroupData> value)
@@ -26,7 +26,7 @@ namespace MgmtParamOrdering.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/>. </summary>
         /// <param name="value"> The list of dedicated hosts. </param>
         /// <param name="nextLink"> The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts. </param>
         internal DedicatedHostGroupListResult(IReadOnlyList<DedicatedHostGroupData> value, string nextLink)

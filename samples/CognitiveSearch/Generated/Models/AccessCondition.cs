@@ -10,7 +10,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class AccessCondition
     {
-        /// <summary> Initializes a new instance of AccessCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessCondition"/>. </summary>
         public AccessCondition()
         {
         }

@@ -13,7 +13,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment What-if operation parameters. </summary>
     public partial class DeploymentWhatIf
     {
-        /// <summary> Initializes a new instance of DeploymentWhatIf. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIf"/>. </summary>
         /// <param name="properties"> The deployment properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public DeploymentWhatIf(DeploymentWhatIfProperties properties)

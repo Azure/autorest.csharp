@@ -63,7 +63,7 @@ namespace Azure.Storage.Tables
             static (List<TableResponseProperties>?, string?) ParseResponse(Response response)
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var items = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement).Value.ToList();
+                var items = TableQueryResult.DeserializeTableQueryResult(document.RootElement).Value.ToList();
                 var nextLink = new TableInternalQueryHeaders(response).XMsContinuationNextTableName;
                 return (items, nextLink);
             }
@@ -82,7 +82,7 @@ namespace Azure.Storage.Tables
             static (List<TableResponseProperties>?, string?) ParseResponse(Response response)
             {
                 using var document = JsonDocument.Parse(response.ContentStream);
-                var items = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement).Value.ToList();
+                var items = TableQueryResult.DeserializeTableQueryResult(document.RootElement).Value.ToList();
                 var nextLink = new TableInternalQueryHeaders(response).XMsContinuationNextTableName;
                 return (items, nextLink);
             }

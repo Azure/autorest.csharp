@@ -13,7 +13,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentError. </summary>
     public partial class DocumentError
     {
-        /// <summary> Initializes a new instance of DocumentError. </summary>
+        /// <summary> Initializes a new instance of <see cref="DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>

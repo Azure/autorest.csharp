@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The for. </summary>
     public partial class For
     {
-        /// <summary> Initializes a new instance of For. </summary>
+        /// <summary> Initializes a new instance of <see cref="For"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public For(string name)

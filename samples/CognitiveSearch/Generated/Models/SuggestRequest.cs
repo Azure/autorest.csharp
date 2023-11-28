@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors. </summary>
     public partial class SuggestRequest
     {
-        /// <summary> Initializes a new instance of SuggestRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SuggestRequest"/>. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>

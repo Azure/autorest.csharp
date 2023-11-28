@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class AutomaticOSUpgradeProperties
     {
-        /// <summary> Initializes a new instance of AutomaticOSUpgradeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="AutomaticOSUpgradeProperties"/>. </summary>
         /// <param name="automaticOSUpgradeSupported">
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported

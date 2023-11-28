@@ -11,18 +11,18 @@ using Azure.Core;
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The properties for the table query response. </summary>
-    public partial class TableQueryResponse
+    public partial class TableQueryResult
     {
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
-        internal TableQueryResponse()
+        /// <summary> Initializes a new instance of <see cref="TableQueryResult"/>. </summary>
+        internal TableQueryResult()
         {
             Value = new ChangeTrackingList<TableResponseProperties>();
         }
 
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="TableQueryResult"/>. </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
-        internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value)
+        internal TableQueryResult(string odataMetadata, IReadOnlyList<TableResponseProperties> value)
         {
             OdataMetadata = odataMetadata;
             Value = value;

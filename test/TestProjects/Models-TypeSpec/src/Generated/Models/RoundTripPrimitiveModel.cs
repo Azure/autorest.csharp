@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used both as input and output with primitive types. </summary>
     public partial class RoundTripPrimitiveModel : BaseModel
     {
-        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
@@ -44,7 +44,7 @@ namespace ModelsTypeSpec.Models
             RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
         }
 
-        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripPrimitiveModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>

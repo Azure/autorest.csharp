@@ -13,7 +13,7 @@ namespace PetStore.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace PetStore.Models
             Age = age;
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="name"></param>
         /// <param name="tag"></param>
         /// <param name="age"></param>

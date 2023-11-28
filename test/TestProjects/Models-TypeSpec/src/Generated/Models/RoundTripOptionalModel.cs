@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     [Obsolete("deprecated for test")]
     public partial class RoundTripOptionalModel
     {
-        /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
         public RoundTripOptionalModel()
         {
             OptionalStringList = new ChangeTrackingList<string>();
@@ -27,7 +27,7 @@ namespace ModelsTypeSpec.Models
             OptionalCollectionWithNullableIntElement = new ChangeTrackingList<int?>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripOptionalModel"/>. </summary>
         /// <param name="optionalString"> Optional string, illustrating an optional reference type property. </param>
         /// <param name="optionalInt"> Optional int, illustrating an optional value type property. </param>
         /// <param name="optionalStringList"> Optional string collection. </param>

@@ -10,12 +10,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with union of string literal property. </summary>
     public partial class UnionStringLiteralProperty
     {
-        /// <summary> Initializes a new instance of UnionStringLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionStringLiteralProperty"/>. </summary>
         public UnionStringLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of UnionStringLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionStringLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal UnionStringLiteralProperty(UnionStringLiteralPropertyProperty? property)
         {

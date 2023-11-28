@@ -13,7 +13,7 @@ namespace body_complex.Models
     /// <summary> The Goblinshark. </summary>
     public partial class Goblinshark : Shark
     {
-        /// <summary> Initializes a new instance of Goblinshark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Goblinshark"/>. </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Goblinshark(float length, DateTimeOffset birthday) : base(length, birthday)
@@ -21,7 +21,7 @@ namespace body_complex.Models
             Fishtype = "goblin";
         }
 
-        /// <summary> Initializes a new instance of Goblinshark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Goblinshark"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

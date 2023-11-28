@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The ListFineTuningJobEventsResponse. </summary>
     public partial class ListFineTuningJobEventsResponse
     {
-        /// <summary> Initializes a new instance of ListFineTuningJobEventsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace OpenAI.Models
             Data = data.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListFineTuningJobEventsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListFineTuningJobEventsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         internal ListFineTuningJobEventsResponse(string @object, IReadOnlyList<FineTuningJobEvent> data)

@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Derived model. </summary>
     public partial class DerivedModel : BaseModel
     {
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="requiredList"> Required collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredList"/> is null. </exception>
         public DerivedModel(IEnumerable<CollectionItem> requiredList)
@@ -25,7 +25,7 @@ namespace ModelsTypeSpec.Models
             RequiredList = requiredList.ToList();
         }
 
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="requiredList"> Required collection. </param>
         internal DerivedModel(IList<CollectionItem> requiredList)
         {

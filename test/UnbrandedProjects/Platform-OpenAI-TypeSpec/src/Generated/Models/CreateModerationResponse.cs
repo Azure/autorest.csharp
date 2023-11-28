@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The CreateModerationResponse. </summary>
     public partial class CreateModerationResponse
     {
-        /// <summary> Initializes a new instance of CreateModerationResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationResponse"/>. </summary>
         /// <param name="id"> The unique identifier for the moderation request. </param>
         /// <param name="model"> The model used to generate the moderation results. </param>
         /// <param name="results"> A list of moderation objects. </param>
@@ -28,7 +28,7 @@ namespace OpenAI.Models
             Results = results.ToList();
         }
 
-        /// <summary> Initializes a new instance of CreateModerationResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationResponse"/>. </summary>
         /// <param name="id"> The unique identifier for the moderation request. </param>
         /// <param name="model"> The model used to generate the moderation results. </param>
         /// <param name="results"> A list of moderation objects. </param>

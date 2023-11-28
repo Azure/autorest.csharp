@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class SubResource
     {
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         public SubResource()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResource"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

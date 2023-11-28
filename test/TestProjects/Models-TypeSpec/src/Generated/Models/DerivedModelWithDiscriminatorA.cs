@@ -13,7 +13,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Deriver model with discriminator property. </summary>
     public partial class DerivedModelWithDiscriminatorA : BaseModelWithDiscriminator
     {
-        /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/>. </summary>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="requiredString"> Required string. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace ModelsTypeSpec.Models
             RequiredString = requiredString;
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithDiscriminatorA"/>. </summary>
         /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>

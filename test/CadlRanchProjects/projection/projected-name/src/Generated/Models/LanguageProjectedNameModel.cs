@@ -10,7 +10,7 @@ namespace Projection.ProjectedName.Models
     /// <summary> The LanguageProjectedNameModel. </summary>
     public partial class LanguageProjectedNameModel
     {
-        /// <summary> Initializes a new instance of LanguageProjectedNameModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageProjectedNameModel"/>. </summary>
         /// <param name="csName"> Pass in true. </param>
         public LanguageProjectedNameModel(bool csName)
         {

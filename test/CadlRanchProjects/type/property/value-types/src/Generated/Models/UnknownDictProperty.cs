@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a property unknown, and the data is a dictionnary. </summary>
     public partial class UnknownDictProperty
     {
-        /// <summary> Initializes a new instance of UnknownDictProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownDictProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownDictProperty(BinaryData property)

@@ -13,7 +13,7 @@ namespace _Specs_.Azure.Core.Traits.Models
     /// <summary> User action response. </summary>
     public partial class UserActionResponse
     {
-        /// <summary> Initializes a new instance of UserActionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="UserActionResponse"/>. </summary>
         /// <param name="userActionResult"> User action result. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionResult"/> is null. </exception>
         internal UserActionResponse(string userActionResult)

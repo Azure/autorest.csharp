@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a property unknown, and the data is a int32. </summary>
     public partial class UnknownIntProperty
     {
-        /// <summary> Initializes a new instance of UnknownIntProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownIntProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownIntProperty(BinaryData property)

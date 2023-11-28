@@ -13,7 +13,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model with a property of literal type of numbers. </summary>
     public partial class ModelWithIntegerLiteralTypeProperty
     {
-        /// <summary> Initializes a new instance of ModelWithIntegerLiteralTypeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithIntegerLiteralTypeProperty"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ModelWithIntegerLiteralTypeProperty(string name)
@@ -23,7 +23,7 @@ namespace ConfidentLevelsInTsp.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of ModelWithIntegerLiteralTypeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithIntegerLiteralTypeProperty"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="id"> The id. </param>
         internal ModelWithIntegerLiteralTypeProperty(string name, ModelWithIntegerLiteralTypePropertyId id)

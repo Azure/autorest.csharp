@@ -11,7 +11,7 @@ namespace OpenAI.Models
     /// <summary> The CreateFineTuneRequest. </summary>
     public partial class CreateFineTuneRequest
     {
-        /// <summary> Initializes a new instance of CreateFineTuneRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
         ///
@@ -33,7 +33,7 @@ namespace OpenAI.Models
             ClassificationBetas = new OptionalList<double>();
         }
 
-        /// <summary> Initializes a new instance of CreateFineTuneRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuneRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
         ///

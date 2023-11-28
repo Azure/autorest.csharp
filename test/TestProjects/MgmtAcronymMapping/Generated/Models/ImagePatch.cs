@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class ImagePatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of ImagePatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagePatch"/>. </summary>
         public ImagePatch()
         {
         }

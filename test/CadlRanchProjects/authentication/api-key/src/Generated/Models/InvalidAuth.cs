@@ -13,7 +13,7 @@ namespace Authentication.ApiKey.Models
     /// <summary> The InvalidAuth. </summary>
     public partial class InvalidAuth
     {
-        /// <summary> Initializes a new instance of InvalidAuth. </summary>
+        /// <summary> Initializes a new instance of <see cref="InvalidAuth"/>. </summary>
         /// <param name="error"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal InvalidAuth(string error)

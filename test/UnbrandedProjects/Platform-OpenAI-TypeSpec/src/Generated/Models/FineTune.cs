@@ -13,7 +13,7 @@ namespace OpenAI.Models
     [Obsolete("deprecated")]
     public partial class FineTune
     {
-        /// <summary> Initializes a new instance of FineTune. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
         /// <param name="updatedAt"> The Unix timestamp (in seconds) for when the fine-tuning job was last updated. </param>
@@ -56,7 +56,7 @@ namespace OpenAI.Models
             Events = new OptionalList<FineTuneEvent>();
         }
 
-        /// <summary> Initializes a new instance of FineTune. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTune"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "fine-tune". </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>

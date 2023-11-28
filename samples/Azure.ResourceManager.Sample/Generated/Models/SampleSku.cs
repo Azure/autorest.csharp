@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SampleSku
     {
-        /// <summary> Initializes a new instance of SampleSku. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         public SampleSku()
         {
         }
 
-        /// <summary> Initializes a new instance of SampleSku. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: Sku.name

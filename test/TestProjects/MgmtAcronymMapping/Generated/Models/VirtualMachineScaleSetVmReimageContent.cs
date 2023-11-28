@@ -13,7 +13,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmReimageContent : VirtualMachineReimageContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmReimageContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmReimageContent"/>. </summary>
         public VirtualMachineScaleSetVmReimageContent()
         {
         }

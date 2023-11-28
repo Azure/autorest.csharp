@@ -10,12 +10,12 @@ namespace MgmtNoTypeReplacement.Models
     /// <summary> The MiddleResourceModel. </summary>
     internal partial class MiddleResourceModel
     {
-        /// <summary> Initializes a new instance of MiddleResourceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="MiddleResourceModel"/>. </summary>
         public MiddleResourceModel()
         {
         }
 
-        /// <summary> Initializes a new instance of MiddleResourceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="MiddleResourceModel"/>. </summary>
         /// <param name="foo"></param>
         internal MiddleResourceModel(NoSubResourceModel2 foo)
         {

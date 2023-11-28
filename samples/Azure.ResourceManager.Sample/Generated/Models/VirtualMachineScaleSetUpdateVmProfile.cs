@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateVmProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVmProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateVmProfile()
         {
         }
