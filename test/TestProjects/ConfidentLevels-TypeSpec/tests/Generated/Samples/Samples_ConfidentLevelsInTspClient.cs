@@ -21,7 +21,7 @@ namespace ConfidentLevelsInTsp.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInRequestProperty_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UnionInRequestProperty_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -37,7 +37,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInRequestProperty_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInRequestProperty_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -53,7 +53,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInRequestProperty_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionInRequestProperty_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -64,7 +64,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInRequestProperty_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInRequestProperty_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -75,7 +75,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInRequestProperty_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UnionInRequestProperty_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -91,7 +91,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInRequestProperty_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInRequestProperty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -107,7 +107,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInRequestProperty_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionInRequestProperty_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -118,7 +118,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInRequestProperty_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInRequestProperty_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -129,7 +129,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInResponseProperty_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UnionInResponseProperty_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -147,7 +147,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInResponseProperty_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInResponseProperty_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -165,7 +165,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInResponseProperty_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionInResponseProperty_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -176,7 +176,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInResponseProperty_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInResponseProperty_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -187,7 +187,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInResponseProperty_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UnionInResponseProperty_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -206,7 +206,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInResponseProperty_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInResponseProperty_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -225,7 +225,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionInResponseProperty_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionInResponseProperty_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -239,7 +239,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionInResponseProperty_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionInResponseProperty_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -253,7 +253,7 @@ namespace ConfidentLevelsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithSelfReference_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UnionWithSelfReference_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -274,7 +274,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithSelfReference_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithSelfReference_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -295,7 +295,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithSelfReference_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionWithSelfReference_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -309,7 +309,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithSelfReference_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithSelfReference_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -323,7 +323,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithSelfReference_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UnionWithSelfReference_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -344,7 +344,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithSelfReference_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithSelfReference_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -365,7 +365,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithSelfReference_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionWithSelfReference_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -379,7 +379,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithSelfReference_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithSelfReference_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -393,7 +393,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithInderict_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UnionWithInderict_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -409,7 +409,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithInderict_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithInderict_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -425,7 +425,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithInderict_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionWithInderict_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -436,7 +436,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithInderict_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithInderict_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -447,7 +447,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithInderict_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UnionWithInderict_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -480,7 +480,7 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithInderict_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithInderict_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -513,7 +513,7 @@ unionProperty = "<unionProperty>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnionWithInderict_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnionWithInderict_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -533,7 +533,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnionWithInderict_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnionWithInderict_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -553,7 +553,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfInteger_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_LiteralOfInteger_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -570,7 +570,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfInteger_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfInteger_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -587,7 +587,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfInteger_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_LiteralOfInteger_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -598,7 +598,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfInteger_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfInteger_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -609,7 +609,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfInteger_AllParameters()
+        public void Example_ConfidentLevelsInTsp_LiteralOfInteger_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -626,7 +626,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfInteger_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfInteger_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -643,7 +643,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfInteger_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_LiteralOfInteger_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -654,7 +654,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfInteger_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfInteger_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -665,7 +665,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfFloat_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_LiteralOfFloat_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -682,7 +682,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfFloat_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfFloat_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -699,7 +699,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfFloat_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_LiteralOfFloat_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -710,7 +710,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfFloat_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfFloat_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -721,7 +721,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfFloat_AllParameters()
+        public void Example_ConfidentLevelsInTsp_LiteralOfFloat_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -738,7 +738,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfFloat_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfFloat_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -755,7 +755,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_LiteralOfFloat_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_LiteralOfFloat_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -766,7 +766,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_LiteralOfFloat_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_LiteralOfFloat_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -777,7 +777,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConfidentOperationWithDiscriminator_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -797,7 +797,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConfidentOperationWithDiscriminator_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -817,7 +817,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConfidentOperationWithDiscriminator_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -828,7 +828,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConfidentOperationWithDiscriminator_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -839,7 +839,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConfidentOperationWithDiscriminator_AllParameters()
+        public void Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -859,7 +859,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConfidentOperationWithDiscriminator_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -879,7 +879,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConfidentOperationWithDiscriminator_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -890,7 +890,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConfidentOperationWithDiscriminator_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_ConfidentOperationWithDiscriminator_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -901,7 +901,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedBaseMethod_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_PollutedBaseMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -922,7 +922,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedBaseMethod_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedBaseMethod_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -943,7 +943,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedBaseMethod_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_PollutedBaseMethod_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -954,7 +954,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedBaseMethod_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedBaseMethod_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -965,7 +965,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedBaseMethod_AllParameters()
+        public void Example_ConfidentLevelsInTsp_PollutedBaseMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -986,7 +986,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedBaseMethod_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedBaseMethod_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1007,7 +1007,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedBaseMethod_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_PollutedBaseMethod_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1018,7 +1018,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedBaseMethod_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedBaseMethod_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1029,7 +1029,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedDerivedMethod_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_PollutedDerivedMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1052,7 +1052,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedDerivedMethod_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedDerivedMethod_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1075,7 +1075,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedDerivedMethod_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_PollutedDerivedMethod_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1086,7 +1086,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedDerivedMethod_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedDerivedMethod_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1097,7 +1097,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedDerivedMethod_AllParameters()
+        public void Example_ConfidentLevelsInTsp_PollutedDerivedMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1120,7 +1120,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedDerivedMethod_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedDerivedMethod_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1143,7 +1143,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PollutedDerivedMethod_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_PollutedDerivedMethod_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1154,7 +1154,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PollutedDerivedMethod_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_PollutedDerivedMethod_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1165,7 +1165,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnpollutedDerivedMethod_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1186,7 +1186,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnpollutedDerivedMethod_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1207,7 +1207,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnpollutedDerivedMethod_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1218,7 +1218,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnpollutedDerivedMethod_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1229,7 +1229,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnpollutedDerivedMethod_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1250,7 +1250,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnpollutedDerivedMethod_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1271,7 +1271,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnpollutedDerivedMethod_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1282,7 +1282,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnpollutedDerivedMethod_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UnpollutedDerivedMethod_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1293,7 +1293,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModel_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1309,7 +1309,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModel_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1325,7 +1325,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModel_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1336,7 +1336,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModel_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1347,7 +1347,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModel_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1365,7 +1365,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModel_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1383,7 +1383,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModel_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1397,7 +1397,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModel_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1411,7 +1411,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModelWithUnion_ShortVersion()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1428,7 +1428,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModelWithUnion_ShortVersion_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1445,7 +1445,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModelWithUnion_ShortVersion_Convenience()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1456,7 +1456,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModelWithUnion_ShortVersion_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1467,7 +1467,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModelWithUnion_AllParameters()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1485,7 +1485,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModelWithUnion_AllParameters_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1503,7 +1503,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UseDerivedModelWithUnion_AllParameters_Convenience()
+        public void Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
@@ -1514,7 +1514,7 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UseDerivedModelWithUnion_AllParameters_Convenience_Async()
+        public async Task Example_ConfidentLevelsInTsp_UseDerivedModelWithUnion_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ConfidentLevelsInTspClient client = new ConfidentLevelsInTspClient(endpoint);
