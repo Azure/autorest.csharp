@@ -81,7 +81,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private SerializableObjectType? _defaultDerivedType;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null && InputModel.GetSelfAndBaseModels().Count() == 1;
 
-
         // TODO: handle this while regen resource manager
         //public bool IsInheritableCommonType => InputModel is { Extensions: {} } && (InputModel.Extensions.MgmtReferenceType || InputModel.Extensions.MgmtTypeReferenceType);
 
@@ -325,7 +324,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            // TODO: Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
             if (!InputModel.IsUnknownDiscriminatorModel)
             {
                 yield return InitializationConstructor;

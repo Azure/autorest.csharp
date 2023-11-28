@@ -224,7 +224,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         string originalName = param.Name;
                         var newParamName = NormalizeParamNames.GetNewName(originalName, inputModel, ResourceDataTypeNameToOperationSets, _renamingMap);
 
-                        // TODO: handle the duplication later
                         if (newParamName != originalName)
                         {
                             _renamingMap[param] = newParamName;
@@ -255,7 +254,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<InputType, TypeProvider> InitializeModels()
         {
             var defaultDerivedTypes = new Dictionary<string, MgmtObjectType>();
-
             // first, construct resource data models
             foreach (var inputModel in _input.Models)
             {
