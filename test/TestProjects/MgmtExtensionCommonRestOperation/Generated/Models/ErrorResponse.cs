@@ -10,12 +10,12 @@ namespace MgmtExtensionCommonRestOperation.Models
     /// <summary> Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. </summary>
     internal partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         internal ErrorResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ErrorResponse"/>. </summary>
         /// <param name="error"> The details of the error. </param>
         internal ErrorResponse(string error)
         {

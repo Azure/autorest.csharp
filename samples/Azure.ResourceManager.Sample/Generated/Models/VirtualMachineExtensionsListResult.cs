@@ -17,13 +17,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineExtensionsListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionsListResult"/>. </summary>
         internal VirtualMachineExtensionsListResult()
         {
             Value = new ChangeTrackingList<VirtualMachineExtensionData>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionsListResult"/>. </summary>
         /// <param name="value">
         /// The list of extensions
         /// Serialized Name: VirtualMachineExtensionsListResult.value

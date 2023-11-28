@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in a public operation, should be generated and exported. </summary>
     public partial class PublicDecoratorModelInPublic
     {
-        /// <summary> Initializes a new instance of PublicDecoratorModelInPublic. </summary>
+        /// <summary> Initializes a new instance of <see cref="PublicDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal PublicDecoratorModelInPublic(string name)

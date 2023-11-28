@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> The result of testing an analyzer on text. </summary>
     public partial class AnalyzeResult
     {
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tokens"/> is null. </exception>
         internal AnalyzeResult(IEnumerable<TokenInfo> tokens)
@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             Tokens = tokens.ToList();
         }
 
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         internal AnalyzeResult(IReadOnlyList<TokenInfo> tokens)
         {

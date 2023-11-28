@@ -12,12 +12,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with a duration property. </summary>
     public partial class DurationProperty
     {
-        /// <summary> Initializes a new instance of DurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DurationProperty"/>. </summary>
         public DurationProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of DurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DurationProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal DurationProperty(TimeSpan? property)
         {

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class AutocompleteOptions
     {
-        /// <summary> Initializes a new instance of AutocompleteOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteOptions"/>. </summary>
         public AutocompleteOptions()
         {
             SearchFields = new ChangeTrackingList<string>();

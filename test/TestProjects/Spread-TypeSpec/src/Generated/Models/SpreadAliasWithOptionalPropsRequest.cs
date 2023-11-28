@@ -15,7 +15,7 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithOptionalPropsRequest. </summary>
     internal partial class SpreadAliasWithOptionalPropsRequest
     {
-        /// <summary> Initializes a new instance of SpreadAliasWithOptionalPropsRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalPropsRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="items"/> is null. </exception>
@@ -29,7 +29,7 @@ namespace SpreadTypeSpec.Models
             Elements = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of SpreadAliasWithOptionalPropsRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithOptionalPropsRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="color"> optional property of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>

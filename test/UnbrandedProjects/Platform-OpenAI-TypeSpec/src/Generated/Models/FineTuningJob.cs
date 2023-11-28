@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The FineTuningJob. </summary>
     public partial class FineTuningJob
     {
-        /// <summary> Initializes a new instance of FineTuningJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJob"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>
         /// <param name="finishedAt">
@@ -78,7 +78,7 @@ namespace OpenAI.Models
             Error = error;
         }
 
-        /// <summary> Initializes a new instance of FineTuningJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJob"/>. </summary>
         /// <param name="id"> The object identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "fine_tuning.job". </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the fine-tuning job was created. </param>

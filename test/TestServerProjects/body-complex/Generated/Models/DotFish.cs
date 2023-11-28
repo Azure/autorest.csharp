@@ -14,12 +14,12 @@ namespace body_complex.Models
     /// </summary>
     public abstract partial class DotFish
     {
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="DotFish"/>. </summary>
         protected DotFish()
         {
         }
 
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="DotFish"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
         internal DotFish(string fishType, string species)

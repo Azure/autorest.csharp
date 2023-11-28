@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelsTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="nonRequiredString"> Optional string. </param>
@@ -64,7 +64,7 @@ namespace ModelsTypeSpec.Models
             return new RoundTripModel(requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="requiredList"> Required collection. </param>
         /// <returns> A new <see cref="Models.DerivedModelWithProperties"/> instance for mocking. </returns>
@@ -75,7 +75,7 @@ namespace ModelsTypeSpec.Models
             return new DerivedModelWithProperties(optionalPropertyOnBase, requiredList?.ToList());
         }
 
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RoundTripReadOnlyModel"/>. </summary>
         /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
         /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
         /// <param name="optionalReadonlyString"> Optional string, illustrating a readonly reference type property. </param>
@@ -121,7 +121,7 @@ namespace ModelsTypeSpec.Models
             return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList());
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
@@ -144,7 +144,7 @@ namespace ModelsTypeSpec.Models
             return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord);
         }
 
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorModel"/>. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>
         /// <returns> A new <see cref="Models.ErrorModel"/> instance for mocking. </returns>
@@ -153,7 +153,7 @@ namespace ModelsTypeSpec.Models
             return new ErrorModel(message, innerError);
         }
 
-        /// <summary> Initializes a new instance of SingleBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
@@ -162,7 +162,7 @@ namespace ModelsTypeSpec.Models
             return new UnknownSingleBase(kind, size);
         }
 
-        /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
         /// <param name="first"></param>
         /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
         public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
@@ -170,7 +170,7 @@ namespace ModelsTypeSpec.Models
             return new FirstDerivedOutputModel("first", first);
         }
 
-        /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
         /// <param name="second"></param>
         /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
         public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)

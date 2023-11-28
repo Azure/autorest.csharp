@@ -10,12 +10,12 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerOneSingle. </summary>
     internal partial class LayerOneSingle
     {
-        /// <summary> Initializes a new instance of LayerOneSingle. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneSingle"/>. </summary>
         public LayerOneSingle()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerOneSingle. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneSingle"/>. </summary>
         /// <param name="layerTwo"> The second single value prop. </param>
         internal LayerOneSingle(LayerTwoSingle layerTwo)
         {

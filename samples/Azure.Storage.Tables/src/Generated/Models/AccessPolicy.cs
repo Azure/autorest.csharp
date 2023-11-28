@@ -13,7 +13,7 @@ namespace Azure.Storage.Tables.Models
     /// <summary> An Access policy. </summary>
     public partial class AccessPolicy
     {
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="AccessPolicy"/>. </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>

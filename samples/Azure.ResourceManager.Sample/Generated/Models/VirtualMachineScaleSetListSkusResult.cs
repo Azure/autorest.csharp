@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListSkusResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListSkusResult"/>. </summary>
         /// <param name="vmssSkus">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.VmssSkus
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
             VmssSkus = vmssSkus.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListSkusResult"/>. </summary>
         /// <param name="vmssSkus">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.VmssSkus

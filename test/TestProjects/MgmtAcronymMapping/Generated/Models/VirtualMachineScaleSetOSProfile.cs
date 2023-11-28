@@ -16,13 +16,13 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetOSProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSProfile"/>. </summary>
         public VirtualMachineScaleSetOSProfile()
         {
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetOSProfile"/>. </summary>
         /// <param name="computerNamePrefix">
         /// Specifies the computer name prefix for all of the virtual machines in the scale set. Computer name prefixes must be 1 to 15 characters long.
         /// Serialized Name: VirtualMachineScaleSetOSProfile.computerNamePrefix

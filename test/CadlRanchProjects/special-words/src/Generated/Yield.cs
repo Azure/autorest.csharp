@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The yield. </summary>
     public partial class Yield
     {
-        /// <summary> Initializes a new instance of Yield. </summary>
+        /// <summary> Initializes a new instance of <see cref="Yield"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Yield(string name)

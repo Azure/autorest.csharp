@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The DeleteModelResponse. </summary>
     public partial class DeleteModelResponse
     {
-        /// <summary> Initializes a new instance of DeleteModelResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeleteModelResponse"/>. </summary>
         /// <param name="id"></param>
         /// <param name="object"></param>
         /// <param name="deleted"></param>

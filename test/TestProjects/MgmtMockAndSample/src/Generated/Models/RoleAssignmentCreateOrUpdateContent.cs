@@ -10,7 +10,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Role assignment create parameters. </summary>
     public partial class RoleAssignmentCreateOrUpdateContent
     {
-        /// <summary> Initializes a new instance of RoleAssignmentCreateOrUpdateContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
         public RoleAssignmentCreateOrUpdateContent()
         {
         }

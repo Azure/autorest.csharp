@@ -13,7 +13,7 @@ namespace Pagination.Models
     /// <summary> The LedgerEntry. </summary>
     public partial class LedgerEntry
     {
-        /// <summary> Initializes a new instance of LedgerEntry. </summary>
+        /// <summary> Initializes a new instance of <see cref="LedgerEntry"/>. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="contents"/> is null. </exception>
         internal LedgerEntry(string contents)
@@ -23,7 +23,7 @@ namespace Pagination.Models
             Contents = contents;
         }
 
-        /// <summary> Initializes a new instance of LedgerEntry. </summary>
+        /// <summary> Initializes a new instance of <see cref="LedgerEntry"/>. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <param name="collectionId"></param>
         /// <param name="transactionId"></param>

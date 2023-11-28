@@ -14,7 +14,7 @@ namespace MgmtXmlDeserialization.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtXmlDeserializationModelFactory
     {
-        /// <summary> Initializes a new instance of XmlInstanceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtXmlDeserialization.XmlInstanceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

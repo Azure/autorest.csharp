@@ -13,7 +13,7 @@ namespace ParametersCadl.Models
     /// <summary> The Result. </summary>
     public partial class Result
     {
-        /// <summary> Initializes a new instance of Result. </summary>
+        /// <summary> Initializes a new instance of <see cref="Result"/>. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         internal Result(string id)

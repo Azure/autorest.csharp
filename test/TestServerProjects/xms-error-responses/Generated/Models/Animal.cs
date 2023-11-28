@@ -10,12 +10,12 @@ namespace xms_error_responses.Models
     /// <summary> The Animal. </summary>
     public partial class Animal
     {
-        /// <summary> Initializes a new instance of Animal. </summary>
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         internal Animal()
         {
         }
 
-        /// <summary> Initializes a new instance of Animal. </summary>
+        /// <summary> Initializes a new instance of <see cref="Animal"/>. </summary>
         /// <param name="aniType"></param>
         internal Animal(string aniType)
         {

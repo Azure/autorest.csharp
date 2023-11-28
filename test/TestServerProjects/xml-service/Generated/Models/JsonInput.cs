@@ -10,7 +10,7 @@ namespace xml_service.Models
     /// <summary> The JsonInput. </summary>
     public partial class JsonInput
     {
-        /// <summary> Initializes a new instance of JsonInput. </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonInput"/>. </summary>
         public JsonInput()
         {
         }

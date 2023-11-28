@@ -13,7 +13,7 @@ namespace OpenAI.Models
     [Obsolete("deprecated")]
     public partial class CreateEditResponse
     {
-        /// <summary> Initializes a new instance of CreateEditResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
         /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
         /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>
         /// <param name="usage"></param>
@@ -28,7 +28,7 @@ namespace OpenAI.Models
             Usage = usage;
         }
 
-        /// <summary> Initializes a new instance of CreateEditResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponse"/>. </summary>
         /// <param name="object"> The object type, which is always `edit`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the edit was created. </param>
         /// <param name="choices"> description: A list of edit choices. Can be more than one if `n` is greater than 1. </param>

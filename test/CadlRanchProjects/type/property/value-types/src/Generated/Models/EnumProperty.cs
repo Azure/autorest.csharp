@@ -10,7 +10,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with enum properties. </summary>
     public partial class EnumProperty
     {
-        /// <summary> Initializes a new instance of EnumProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="EnumProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public EnumProperty(FixedInnerEnum property)
         {

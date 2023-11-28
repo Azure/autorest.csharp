@@ -10,13 +10,13 @@ namespace body_string.Models
     /// <summary> The RefColorConstant. </summary>
     public partial class RefColorConstant
     {
-        /// <summary> Initializes a new instance of RefColorConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="RefColorConstant"/>. </summary>
         public RefColorConstant()
         {
             ColorConstant = ColorConstant.GreenColor;
         }
 
-        /// <summary> Initializes a new instance of RefColorConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="RefColorConstant"/>. </summary>
         /// <param name="colorConstant"> Referenced Color Constant Description. </param>
         /// <param name="field1"> Sample string. </param>
         internal RefColorConstant(ColorConstant colorConstant, string field1)

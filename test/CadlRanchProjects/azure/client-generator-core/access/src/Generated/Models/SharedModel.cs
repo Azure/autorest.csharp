@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used by both public and internal operation. It should be generated and exported. </summary>
     public partial class SharedModel
     {
-        /// <summary> Initializes a new instance of SharedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal SharedModel(string name)

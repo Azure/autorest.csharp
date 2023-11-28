@@ -13,7 +13,7 @@ namespace azure_special_properties.Models
     /// <summary> Parameter group. </summary>
     public partial class HeaderCustomNamedRequestIdParamGroupingParameters
     {
-        /// <summary> Initializes a new instance of HeaderCustomNamedRequestIdParamGroupingParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="HeaderCustomNamedRequestIdParamGroupingParameters"/>. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)

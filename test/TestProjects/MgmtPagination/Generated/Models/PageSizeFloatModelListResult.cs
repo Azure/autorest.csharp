@@ -14,13 +14,13 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeFloatModelListResult. </summary>
     internal partial class PageSizeFloatModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeFloatModelListResult"/>. </summary>
         internal PageSizeFloatModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeFloatModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeFloatModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal PageSizeFloatModelListResult(IReadOnlyList<PageSizeFloatModelData> value, string nextLink)

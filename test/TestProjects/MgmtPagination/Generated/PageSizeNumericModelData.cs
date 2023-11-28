@@ -10,12 +10,12 @@ namespace MgmtPagination
     /// <summary> A class representing the PageSizeNumericModel data model. </summary>
     public partial class PageSizeNumericModelData
     {
-        /// <summary> Initializes a new instance of PageSizeNumericModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeNumericModelData"/>. </summary>
         public PageSizeNumericModelData()
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeNumericModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeNumericModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>

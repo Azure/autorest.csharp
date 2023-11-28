@@ -10,7 +10,7 @@ namespace PublicClientCtor.Models
     /// <summary> . </summary>
     public partial class TestModel
     {
-        /// <summary> Initializes a new instance of TestModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="TestModel"/>. </summary>
         public TestModel()
         {
         }

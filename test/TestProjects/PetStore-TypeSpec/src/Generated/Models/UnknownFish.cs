@@ -10,13 +10,13 @@ namespace PetStore.Models
     /// <summary> Unknown version of Fish. </summary>
     internal partial class UnknownFish : Fish
     {
-        /// <summary> Initializes a new instance of UnknownFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         internal UnknownFish(int size) : base(size)
         {
         }
 
-        /// <summary> Initializes a new instance of UnknownFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownFish"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         internal UnknownFish(string kind, int size) : base(kind, size)

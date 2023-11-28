@@ -10,12 +10,12 @@ namespace paging.Models
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         internal Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="properties"></param>
         internal Product(ProductProperties properties)
         {

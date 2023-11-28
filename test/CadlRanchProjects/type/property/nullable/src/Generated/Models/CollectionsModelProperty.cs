@@ -15,7 +15,7 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model with collection models properties. </summary>
     public partial class CollectionsModelProperty
     {
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -27,7 +27,7 @@ namespace _Type.Property.Nullable.Models
             NullableProperty = nullableProperty?.ToList();
         }
 
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         internal CollectionsModelProperty(string requiredProperty, IReadOnlyList<InnerModel> nullableProperty)

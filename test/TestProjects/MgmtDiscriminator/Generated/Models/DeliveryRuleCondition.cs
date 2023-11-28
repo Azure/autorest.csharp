@@ -14,12 +14,12 @@ namespace MgmtDiscriminator.Models
     /// </summary>
     public abstract partial class DeliveryRuleCondition
     {
-        /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCondition"/>. </summary>
         protected DeliveryRuleCondition()
         {
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         internal DeliveryRuleCondition(MatchVariable name, string foo)

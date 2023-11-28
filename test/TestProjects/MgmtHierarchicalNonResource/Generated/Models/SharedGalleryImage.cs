@@ -14,13 +14,13 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> Specifies information about the gallery image definition that you want to create or update. </summary>
     public partial class SharedGalleryImage : PirSharedGalleryResource
     {
-        /// <summary> Initializes a new instance of SharedGalleryImage. </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImage"/>. </summary>
         internal SharedGalleryImage()
         {
             Features = new ChangeTrackingList<GalleryImageFeature>();
         }
 
-        /// <summary> Initializes a new instance of SharedGalleryImage. </summary>
+        /// <summary> Initializes a new instance of <see cref="SharedGalleryImage"/>. </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>

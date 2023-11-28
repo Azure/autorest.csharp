@@ -15,7 +15,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with collection int properties. </summary>
     public partial class CollectionsIntProperty
     {
-        /// <summary> Initializes a new instance of CollectionsIntProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsIntProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public CollectionsIntProperty(IEnumerable<int> property)
@@ -25,7 +25,7 @@ namespace _Type.Property.ValueTypes.Models
             Property = property.ToList();
         }
 
-        /// <summary> Initializes a new instance of CollectionsIntProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsIntProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal CollectionsIntProperty(IList<int> property)
         {

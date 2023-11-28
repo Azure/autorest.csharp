@@ -10,12 +10,12 @@ namespace _Specs_.Azure.Core.Traits.Models
     /// <summary> Sample Model. </summary>
     public partial class User
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         internal User()
         {
         }
 
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="name"> The user's name. </param>
         internal User(int id, string name)

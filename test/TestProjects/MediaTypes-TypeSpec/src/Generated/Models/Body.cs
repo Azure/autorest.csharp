@@ -13,7 +13,7 @@ namespace MultipleMediaTypes.Models
     /// <summary> The Body. </summary>
     public partial class Body
     {
-        /// <summary> Initializes a new instance of Body. </summary>
+        /// <summary> Initializes a new instance of <see cref="Body"/>. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         public Body(string id)

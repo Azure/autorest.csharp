@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The raise. </summary>
     public partial class Raise
     {
-        /// <summary> Initializes a new instance of Raise. </summary>
+        /// <summary> Initializes a new instance of <see cref="Raise"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Raise(string name)
