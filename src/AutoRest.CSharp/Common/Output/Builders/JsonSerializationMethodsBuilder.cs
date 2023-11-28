@@ -353,13 +353,18 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 SerializeExpression(utf8JsonWriter, additionalProperties.ValueSerialization, item.Value)
             };
 
-            return Serializations.WrapInCheckNotWire(
-                additionalProperties,
-                options.Format,
+            // if it should be excluded in wire serialization, it is a raw data field and we need to check if it is null
+            // otherwise it is the public AdditionalProperties property, we always instantiate it therefore we do not need to check null.
+            statement = additionalProperties.ShouldExcludeInWireSerialization ?
                 new IfStatement(NotEqual(additionalPropertiesExpression, Null))
                 {
                     statement
-                });
+                } : statement;
+
+            return Serializations.WrapInCheckNotWire(
+                additionalProperties,
+                options.Format,
+                statement);
         }
 
         public static MethodBodyStatement SerializeExpression(Utf8JsonWriterExpression utf8JsonWriter, JsonSerialization? serialization, ValueExpression expression)

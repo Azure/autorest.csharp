@@ -39,13 +39,10 @@ namespace additionalProperties.Models
                 writer.WritePropertyName("status"u8);
                 writer.WriteBooleanValue(Status.Value);
             }
-            if (AdditionalProperties != null)
+            foreach (var item in AdditionalProperties)
             {
-                foreach (var item in AdditionalProperties)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
         }

@@ -52,13 +52,10 @@ namespace additionalProperties.Models
                 }
                 writer.WriteEndObject();
             }
-            if (MoreAdditionalProperties != null)
+            foreach (var item in MoreAdditionalProperties)
             {
-                foreach (var item in MoreAdditionalProperties)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
         }
