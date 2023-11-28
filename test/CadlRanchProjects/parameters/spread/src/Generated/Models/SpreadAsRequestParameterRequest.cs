@@ -13,7 +13,7 @@ namespace Parameters.Spread.Models
     /// <summary> The SpreadAsRequestParameterRequest. </summary>
     internal partial class SpreadAsRequestParameterRequest
     {
-        /// <summary> Initializes a new instance of SpreadAsRequestParameterRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAsRequestParameterRequest"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public SpreadAsRequestParameterRequest(string name)

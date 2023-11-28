@@ -10,12 +10,12 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> Second item. </summary>
     public partial class SecondItem
     {
-        /// <summary> Initializes a new instance of SecondItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
         internal SecondItem()
         {
         }
 
-        /// <summary> Initializes a new instance of SecondItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecondItem"/>. </summary>
         /// <param name="name"> The name of the item. </param>
         internal SecondItem(string name)
         {

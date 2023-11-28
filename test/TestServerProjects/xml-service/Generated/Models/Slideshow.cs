@@ -13,13 +13,13 @@ namespace xml_service.Models
     /// <summary> Data about a slideshow. </summary>
     public partial class Slideshow
     {
-        /// <summary> Initializes a new instance of Slideshow. </summary>
+        /// <summary> Initializes a new instance of <see cref="Slideshow"/>. </summary>
         public Slideshow()
         {
             Slides = new ChangeTrackingList<Slide>();
         }
 
-        /// <summary> Initializes a new instance of Slideshow. </summary>
+        /// <summary> Initializes a new instance of <see cref="Slideshow"/>. </summary>
         /// <param name="title"></param>
         /// <param name="date"></param>
         /// <param name="author"></param>

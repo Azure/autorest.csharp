@@ -10,7 +10,7 @@ namespace _Type.Model.Empty.Models
     /// <summary> Empty model used in operation return type. </summary>
     public partial class EmptyOutput
     {
-        /// <summary> Initializes a new instance of EmptyOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="EmptyOutput"/>. </summary>
         internal EmptyOutput()
         {
         }

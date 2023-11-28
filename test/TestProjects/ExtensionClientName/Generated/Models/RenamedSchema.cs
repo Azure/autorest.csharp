@@ -13,13 +13,13 @@ namespace ExtensionClientName.Models
     /// <summary> The RenamedSchema. </summary>
     public partial class RenamedSchema
     {
-        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         public RenamedSchema()
         {
             RenamedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="RenamedSchema"/>. </summary>
         /// <param name="renamedProperty"> A description about the set of tags. </param>
         /// <param name="renamedPropertyString"> A description about the set of tags. </param>
         internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString)

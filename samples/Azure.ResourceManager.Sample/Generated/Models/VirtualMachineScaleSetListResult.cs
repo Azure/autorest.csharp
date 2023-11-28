@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListResult.value
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetListResult"/>. </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListResult.value

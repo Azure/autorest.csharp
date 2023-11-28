@@ -10,7 +10,7 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model moved into custom namespace. </summary>
     public partial class ModelToChangeNamespace
     {
-        /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelToChangeNamespace"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToChangeNamespace(int requiredInt)
         {

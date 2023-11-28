@@ -10,12 +10,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Normal custom object, although marked as azure resource, but it's not recognized by autorest. </summary>
     public partial class CustomModel1
     {
-        /// <summary> Initializes a new instance of CustomModel1. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel1"/>. </summary>
         public CustomModel1()
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel1. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel1"/>. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
         internal CustomModel1(string id, string foo)

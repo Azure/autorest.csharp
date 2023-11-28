@@ -12,7 +12,7 @@ namespace Encode.Datetime.Models
     /// <summary> The DefaultDatetimeProperty. </summary>
     public partial class DefaultDatetimeProperty
     {
-        /// <summary> Initializes a new instance of DefaultDatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DefaultDatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         public DefaultDatetimeProperty(DateTimeOffset value)
         {

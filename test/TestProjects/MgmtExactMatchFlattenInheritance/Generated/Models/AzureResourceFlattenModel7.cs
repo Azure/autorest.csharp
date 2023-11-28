@@ -10,12 +10,12 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> This model is x-ms-azure-resource, and is exactly a WritableSubResource type. </summary>
     public partial class AzureResourceFlattenModel7
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel7"/>. </summary>
         public AzureResourceFlattenModel7()
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel7"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>

@@ -15,7 +15,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The SentimentResponse. </summary>
     public partial class SentimentResponse
     {
-        /// <summary> Initializes a new instance of SentimentResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="SentimentResponse"/>. </summary>
         /// <param name="documents"> Sentiment analysis per document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
             ModelVersion = modelVersion;
         }
 
-        /// <summary> Initializes a new instance of SentimentResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="SentimentResponse"/>. </summary>
         /// <param name="documents"> Sentiment analysis per document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>

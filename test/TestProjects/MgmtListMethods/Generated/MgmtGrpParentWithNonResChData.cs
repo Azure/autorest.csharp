@@ -17,13 +17,13 @@ namespace MgmtListMethods
     /// </summary>
     public partial class MgmtGrpParentWithNonResChData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtGrpParentWithNonResChData"/>. </summary>
         /// <param name="location"> The location. </param>
         public MgmtGrpParentWithNonResChData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtGrpParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

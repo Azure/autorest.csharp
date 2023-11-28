@@ -14,7 +14,7 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model factory for models. </summary>
     public static partial class TypePropertyNullableModelFactory
     {
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.StringProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -29,7 +29,7 @@ namespace _Type.Property.Nullable.Models
             return new StringProperty(requiredProperty, nullableProperty);
         }
 
-        /// <summary> Initializes a new instance of BytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.BytesProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -44,7 +44,7 @@ namespace _Type.Property.Nullable.Models
             return new BytesProperty(requiredProperty, nullableProperty);
         }
 
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DatetimeProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -59,7 +59,7 @@ namespace _Type.Property.Nullable.Models
             return new DatetimeProperty(requiredProperty, nullableProperty);
         }
 
-        /// <summary> Initializes a new instance of DurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DurationProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -74,7 +74,7 @@ namespace _Type.Property.Nullable.Models
             return new DurationProperty(requiredProperty, nullableProperty);
         }
 
-        /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CollectionsByteProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <returns> A new <see cref="Models.CollectionsByteProperty"/> instance for mocking. </returns>
@@ -85,7 +85,7 @@ namespace _Type.Property.Nullable.Models
             return new CollectionsByteProperty(requiredProperty, nullableProperty?.ToList());
         }
 
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CollectionsModelProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <returns> A new <see cref="Models.CollectionsModelProperty"/> instance for mocking. </returns>
@@ -96,7 +96,7 @@ namespace _Type.Property.Nullable.Models
             return new CollectionsModelProperty(requiredProperty, nullableProperty?.ToList());
         }
 
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InnerModel"/>. </summary>
         /// <param name="property"> Inner model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         /// <returns> A new <see cref="Models.InnerModel"/> instance for mocking. </returns>

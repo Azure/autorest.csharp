@@ -13,7 +13,7 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> The body of the input. </summary>
     public partial class ListItemInputBody
     {
-        /// <summary> Initializes a new instance of ListItemInputBody. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListItemInputBody"/>. </summary>
         /// <param name="inputName"> The name of the input. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="inputName"/> is null. </exception>
         public ListItemInputBody(string inputName)

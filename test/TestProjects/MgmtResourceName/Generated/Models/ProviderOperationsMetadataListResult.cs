@@ -14,13 +14,13 @@ namespace MgmtResourceName.Models
     /// <summary> Provider operations metadata list. </summary>
     internal partial class ProviderOperationsMetadataListResult
     {
-        /// <summary> Initializes a new instance of ProviderOperationsMetadataListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProviderOperationsMetadataListResult"/>. </summary>
         internal ProviderOperationsMetadataListResult()
         {
             Value = new ChangeTrackingList<ProviderOperationData>();
         }
 
-        /// <summary> Initializes a new instance of ProviderOperationsMetadataListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProviderOperationsMetadataListResult"/>. </summary>
         /// <param name="value"> The list of providers. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         internal ProviderOperationsMetadataListResult(IReadOnlyList<ProviderOperationData> value, string nextLink)

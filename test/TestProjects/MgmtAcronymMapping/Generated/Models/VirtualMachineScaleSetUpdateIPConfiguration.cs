@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateIPConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateIPConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateIPConfiguration"/>. </summary>
         public VirtualMachineScaleSetUpdateIPConfiguration()
         {
             ApplicationGatewayBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
@@ -26,7 +26,7 @@ namespace MgmtAcronymMapping.Models
             LoadBalancerInboundNatPools = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateIPConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateIPConfiguration"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

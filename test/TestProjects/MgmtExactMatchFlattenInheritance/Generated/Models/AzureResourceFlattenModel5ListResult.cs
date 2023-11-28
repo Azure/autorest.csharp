@@ -13,13 +13,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class AzureResourceFlattenModel5ListResult
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel5ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel5ListResult"/>. </summary>
         internal AzureResourceFlattenModel5ListResult()
         {
             Value = new ChangeTrackingList<AzureResourceFlattenModel5>();
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel5ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel5ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
         internal AzureResourceFlattenModel5ListResult(IReadOnlyList<AzureResourceFlattenModel5> value, string nextLink)

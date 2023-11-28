@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualHardDisk
     {
-        /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualHardDisk"/>. </summary>
         public VirtualHardDisk()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualHardDisk"/>. </summary>
         /// <param name="uri">
         /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri

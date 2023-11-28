@@ -14,7 +14,7 @@ namespace _Type._Dictionary.Models
     /// <summary> Dictionary inner model. </summary>
     public partial class InnerModel
     {
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Required string property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public InnerModel(string property)
@@ -25,7 +25,7 @@ namespace _Type._Dictionary.Models
             Children = new ChangeTrackingDictionary<string, InnerModel>();
         }
 
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Required string property. </param>
         /// <param name="children"></param>
         internal InnerModel(string property, IDictionary<string, InnerModel> children)

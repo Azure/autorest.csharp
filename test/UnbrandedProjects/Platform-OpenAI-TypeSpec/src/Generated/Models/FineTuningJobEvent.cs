@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The FineTuningJobEvent. </summary>
     public partial class FineTuningJobEvent
     {
-        /// <summary> Initializes a new instance of FineTuningJobEvent. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobEvent"/>. </summary>
         /// <param name="id"></param>
         /// <param name="object"></param>
         /// <param name="createdAt"></param>

@@ -13,7 +13,7 @@ namespace xml_service.Models
     /// <summary> Properties of a blob. </summary>
     public partial class BlobProperties
     {
-        /// <summary> Initializes a new instance of BlobProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace xml_service.Models
             Etag = etag;
         }
 
-        /// <summary> Initializes a new instance of BlobProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BlobProperties"/>. </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="contentLength"> Size in bytes. </param>

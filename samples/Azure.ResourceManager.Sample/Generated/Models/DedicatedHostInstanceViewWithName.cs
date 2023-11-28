@@ -15,12 +15,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostInstanceViewWithName : DedicatedHostInstanceView
     {
-        /// <summary> Initializes a new instance of DedicatedHostInstanceViewWithName. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceViewWithName"/>. </summary>
         internal DedicatedHostInstanceViewWithName()
         {
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostInstanceViewWithName. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostInstanceViewWithName"/>. </summary>
         /// <param name="assetId">
         /// Specifies the unique id of the dedicated physical machine on which the dedicated host resides.
         /// Serialized Name: DedicatedHostInstanceView.assetId

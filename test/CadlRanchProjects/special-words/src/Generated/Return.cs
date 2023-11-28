@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The return. </summary>
     public partial class Return
     {
-        /// <summary> Initializes a new instance of Return. </summary>
+        /// <summary> Initializes a new instance of <see cref="Return"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Return(string name)

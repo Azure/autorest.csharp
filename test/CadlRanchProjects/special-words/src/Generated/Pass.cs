@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The pass. </summary>
     public partial class Pass
     {
-        /// <summary> Initializes a new instance of Pass. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pass"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Pass(string name)

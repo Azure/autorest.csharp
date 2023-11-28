@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateImageVariationRequest. </summary>
     public partial class CreateImageVariationRequest
     {
-        /// <summary> Initializes a new instance of CreateImageVariationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/>. </summary>
         /// <param name="image">
         /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
         /// and square.
@@ -23,7 +23,7 @@ namespace OpenAI.Models
             Image = image;
         }
 
-        /// <summary> Initializes a new instance of CreateImageVariationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageVariationRequest"/>. </summary>
         /// <param name="image">
         /// The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB,
         /// and square.

@@ -17,13 +17,13 @@ namespace MgmtListMethods
     /// </summary>
     public partial class TenantParentWithLocData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of TenantParentWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="TenantParentWithLocData"/>. </summary>
         /// <param name="location"> The location. </param>
         public TenantParentWithLocData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="TenantParentWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

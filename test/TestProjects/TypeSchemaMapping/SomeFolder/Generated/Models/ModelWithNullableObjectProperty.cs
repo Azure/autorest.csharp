@@ -12,12 +12,12 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithNullableObjectProperty. </summary>
     internal partial class ModelWithNullableObjectProperty
     {
-        /// <summary> Initializes a new instance of ModelWithNullableObjectProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithNullableObjectProperty"/>. </summary>
         public ModelWithNullableObjectProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithNullableObjectProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithNullableObjectProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         internal ModelWithNullableObjectProperty(JsonElement modelProperty)
         {

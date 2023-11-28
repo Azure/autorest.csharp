@@ -19,7 +19,7 @@ namespace MgmtExpandResourceTypes
     /// </summary>
     public partial class RecordSetData : ResourceData
     {
-        /// <summary> Initializes a new instance of RecordSetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="RecordSetData"/>. </summary>
         public RecordSetData()
         {
             Metadata = new ChangeTrackingDictionary<string, string>();
@@ -33,7 +33,7 @@ namespace MgmtExpandResourceTypes
             CaaRecords = new ChangeTrackingList<CaaRecord>();
         }
 
-        /// <summary> Initializes a new instance of RecordSetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="RecordSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

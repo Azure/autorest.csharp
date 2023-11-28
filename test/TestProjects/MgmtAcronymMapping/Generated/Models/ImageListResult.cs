@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class ImageListResult
     {
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="value">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -32,7 +32,7 @@ namespace MgmtAcronymMapping.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageListResult"/>. </summary>
         /// <param name="value">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value

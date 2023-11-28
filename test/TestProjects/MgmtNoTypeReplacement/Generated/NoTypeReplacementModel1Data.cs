@@ -14,12 +14,12 @@ namespace MgmtNoTypeReplacement
     /// <summary> A class representing the NoTypeReplacementModel1 data model. </summary>
     public partial class NoTypeReplacementModel1Data : ResourceData
     {
-        /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1Data"/>. </summary>
         public NoTypeReplacementModel1Data()
         {
         }
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

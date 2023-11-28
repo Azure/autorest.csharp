@@ -10,12 +10,12 @@ namespace xml_service.Models
     /// <summary> I am a complex type with XML node. </summary>
     public partial class ComplexTypeWithMeta
     {
-        /// <summary> Initializes a new instance of ComplexTypeWithMeta. </summary>
+        /// <summary> Initializes a new instance of <see cref="ComplexTypeWithMeta"/>. </summary>
         public ComplexTypeWithMeta()
         {
         }
 
-        /// <summary> Initializes a new instance of ComplexTypeWithMeta. </summary>
+        /// <summary> Initializes a new instance of <see cref="ComplexTypeWithMeta"/>. </summary>
         /// <param name="id"> The id of the res. </param>
         internal ComplexTypeWithMeta(string id)
         {

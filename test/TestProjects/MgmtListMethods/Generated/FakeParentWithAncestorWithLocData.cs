@@ -17,13 +17,13 @@ namespace MgmtListMethods
     /// </summary>
     public partial class FakeParentWithAncestorWithLocData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeParentWithAncestorWithLocData"/>. </summary>
         /// <param name="location"> The location. </param>
         public FakeParentWithAncestorWithLocData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakeParentWithAncestorWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class AvailabilitySetListResult
     {
-        /// <summary> Initializes a new instance of AvailabilitySetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/>. </summary>
         /// <param name="value">
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetListResult"/>. </summary>
         /// <param name="value">
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value

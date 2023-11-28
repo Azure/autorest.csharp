@@ -14,14 +14,14 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     /// </summary>
     public abstract partial class Snake
     {
-        /// <summary> Initializes a new instance of Snake. </summary>
+        /// <summary> Initializes a new instance of <see cref="Snake"/>. </summary>
         /// <param name="length"> Length of the snake. </param>
         protected Snake(int length)
         {
             Length = length;
         }
 
-        /// <summary> Initializes a new instance of Snake. </summary>
+        /// <summary> Initializes a new instance of <see cref="Snake"/>. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="length"> Length of the snake. </param>
         internal Snake(SnakeKind kind, int length)

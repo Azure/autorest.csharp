@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The not. </summary>
     public partial class Not
     {
-        /// <summary> Initializes a new instance of Not. </summary>
+        /// <summary> Initializes a new instance of <see cref="Not"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Not(string name)

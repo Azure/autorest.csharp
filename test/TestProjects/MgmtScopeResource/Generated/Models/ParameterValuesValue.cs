@@ -12,12 +12,12 @@ namespace MgmtScopeResource.Models
     /// <summary> The value of a parameter. </summary>
     public partial class ParameterValuesValue
     {
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         public ParameterValuesValue()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         /// <param name="value"> The value of the parameter. </param>
         internal ParameterValuesValue(BinaryData value)
         {

@@ -13,7 +13,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The Match. </summary>
     public partial class Match
     {
-        /// <summary> Initializes a new instance of Match. </summary>
+        /// <summary> Initializes a new instance of <see cref="Match"/>. </summary>
         /// <param name="confidenceScore"> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </param>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>

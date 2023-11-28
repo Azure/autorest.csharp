@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The and. </summary>
     public partial class And
     {
-        /// <summary> Initializes a new instance of And. </summary>
+        /// <summary> Initializes a new instance of <see cref="And"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public And(string name)

@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SubResourceWithColocationStatus : SubResource
     {
-        /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceWithColocationStatus"/>. </summary>
         public SubResourceWithColocationStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceWithColocationStatus"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

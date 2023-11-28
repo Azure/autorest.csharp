@@ -15,7 +15,7 @@ namespace required_optional.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArrayWrapper(IEnumerable<string> value)

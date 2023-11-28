@@ -7,7 +7,7 @@ namespace OpenAI.Models
     /// <summary> The CreateCategories. </summary>
     public partial class CreateCategories
     {
-        /// <summary> Initializes a new instance of CreateCategories. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCategories"/>. </summary>
         /// <param name="hate">
         /// Content that expresses, incites, or promotes hate based on race, gender, ethnicity,
         /// religion, nationality, sexual orientation, disability status, or caste. Hateful content

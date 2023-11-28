@@ -10,12 +10,12 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> This model is x-ms-azure-resource, has flatten properties, and WITHOUT enough reference type properties. </summary>
     public partial class AzureResourceFlattenModel4
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         public AzureResourceFlattenModel4()
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel4"/>. </summary>
         /// <param name="foo"> New property. </param>
         /// <param name="id"></param>
         /// <param name="name"></param>

@@ -16,7 +16,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The List bar with subscription response. </summary>
     internal partial class BarListResult
     {
-        /// <summary> Initializes a new instance of BarListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bar. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal BarListResult(IEnumerable<BarData> value)
@@ -26,7 +26,7 @@ namespace MgmtPropertyBag.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of BarListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarListResult"/>. </summary>
         /// <param name="value"> The list of bar. </param>
         /// <param name="nextLink"> The uri to fetch the next page of bar. Call ListNext() with this to fetch the next page. </param>
         internal BarListResult(IReadOnlyList<BarData> value, string nextLink)

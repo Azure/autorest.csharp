@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The ImagesResponse. </summary>
     public partial class ImagesResponse
     {
-        /// <summary> Initializes a new instance of ImagesResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
         /// <param name="created"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
@@ -24,7 +24,7 @@ namespace OpenAI.Models
             Data = data.ToList();
         }
 
-        /// <summary> Initializes a new instance of ImagesResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImagesResponse"/>. </summary>
         /// <param name="created"></param>
         /// <param name="data"></param>
         internal ImagesResponse(DateTimeOffset created, IReadOnlyList<Image> data)

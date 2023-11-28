@@ -15,7 +15,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyBagModelFactory
     {
-        /// <summary> Initializes a new instance of FooData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyBag.FooData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -27,7 +27,7 @@ namespace MgmtPropertyBag.Models
             return new FooData(id, name, resourceType, systemData, details);
         }
 
-        /// <summary> Initializes a new instance of BarData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyBag.BarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -13,7 +13,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The Entity. </summary>
     public partial class Entity
     {
-        /// <summary> Initializes a new instance of Entity. </summary>
+        /// <summary> Initializes a new instance of <see cref="Entity"/>. </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="category"> Entity type, such as Person/Location/Org/SSN etc. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity text. </param>
@@ -32,7 +32,7 @@ namespace CognitiveServices.TextAnalytics.Models
             ConfidenceScore = confidenceScore;
         }
 
-        /// <summary> Initializes a new instance of Entity. </summary>
+        /// <summary> Initializes a new instance of <see cref="Entity"/>. </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="category"> Entity type, such as Person/Location/Org/SSN etc. </param>
         /// <param name="subcategory"> Entity sub type, such as Age/Year/TimeRange etc. </param>

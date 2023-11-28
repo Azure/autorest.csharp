@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Network security rule. </summary>
     public partial class SecurityRule : SubResource
     {
-        /// <summary> Initializes a new instance of SecurityRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecurityRule"/>. </summary>
         public SecurityRule()
         {
             SourceAddressPrefixes = new ChangeTrackingList<string>();
@@ -24,7 +24,7 @@ namespace Azure.Network.Management.Interface.Models
             DestinationPortRanges = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of SecurityRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="SecurityRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

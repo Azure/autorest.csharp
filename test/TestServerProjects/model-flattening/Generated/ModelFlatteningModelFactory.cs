@@ -12,7 +12,7 @@ namespace model_flattening.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelFlatteningModelFactory
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -26,7 +26,7 @@ namespace model_flattening.Models
             return new Resource(id, type, tags, location, name);
         }
 
-        /// <summary> Initializes a new instance of FlattenedProduct. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FlattenedProduct"/>. </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -44,7 +44,7 @@ namespace model_flattening.Models
             return new FlattenedProduct(id, type, tags, location, name, pName, typePropertiesType, provisioningStateValues, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of ProductWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ProductWrapper"/>. </summary>
         /// <param name="value"> the product value. </param>
         /// <returns> A new <see cref="Models.ProductWrapper"/> instance for mocking. </returns>
         public static ProductWrapper ProductWrapper(string value = null)

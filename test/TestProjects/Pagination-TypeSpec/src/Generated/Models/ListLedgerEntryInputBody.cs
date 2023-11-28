@@ -13,7 +13,7 @@ namespace Pagination.Models
     /// <summary> Type for input model body. </summary>
     public partial class ListLedgerEntryInputBody
     {
-        /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListLedgerEntryInputBody"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>

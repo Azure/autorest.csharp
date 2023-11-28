@@ -10,12 +10,12 @@ namespace ModelsTypeSpec.Models
     /// <summary> Base model with properties. </summary>
     public partial class BaseModelWithProperties
     {
-        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
         internal BaseModelWithProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModelWithProperties"/>. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         internal BaseModelWithProperties(string optionalPropertyOnBase)
         {

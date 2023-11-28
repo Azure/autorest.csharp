@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ApiErrorBase
     {
-        /// <summary> Initializes a new instance of ApiErrorBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         internal ApiErrorBase()
         {
         }
 
-        /// <summary> Initializes a new instance of ApiErrorBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="ApiErrorBase"/>. </summary>
         /// <param name="code">
         /// The error code.
         /// Serialized Name: ApiErrorBase.code

@@ -10,7 +10,7 @@ namespace Projection.ProjectedName.Models
     /// <summary> The JsonProjectedNameModel. </summary>
     public partial class JsonProjectedNameModel
     {
-        /// <summary> Initializes a new instance of JsonProjectedNameModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonProjectedNameModel"/>. </summary>
         /// <param name="defaultName"> Pass in true. </param>
         public JsonProjectedNameModel(bool defaultName)
         {

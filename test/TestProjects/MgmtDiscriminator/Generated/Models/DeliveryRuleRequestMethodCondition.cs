@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the RequestMethod condition for the delivery rule. </summary>
     public partial class DeliveryRuleRequestMethodCondition : DeliveryRuleCondition
     {
-        /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRequestMethodCondition"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleRequestMethodCondition(RequestMethodMatchConditionParameters parameters)
@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             Name = MatchVariable.RequestMethod;
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleRequestMethodCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>

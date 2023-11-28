@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetSkuCapacity
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetSkuCapacity. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
         internal VirtualMachineScaleSetSkuCapacity()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetSkuCapacity. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetSkuCapacity"/>. </summary>
         /// <param name="minimum">
         /// The minimum capacity.
         /// Serialized Name: VirtualMachineScaleSetSkuCapacity.minimum

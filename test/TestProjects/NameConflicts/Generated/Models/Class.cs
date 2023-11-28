@@ -10,12 +10,12 @@ namespace NameConflicts.Models
     /// <summary> The Class. </summary>
     public partial class Class
     {
-        /// <summary> Initializes a new instance of Class. </summary>
+        /// <summary> Initializes a new instance of <see cref="Class"/>. </summary>
         public Class()
         {
         }
 
-        /// <summary> Initializes a new instance of Class. </summary>
+        /// <summary> Initializes a new instance of <see cref="Class"/>. </summary>
         /// <param name="abstract"></param>
         /// <param name="add"></param>
         /// <param name="alias"></param>
