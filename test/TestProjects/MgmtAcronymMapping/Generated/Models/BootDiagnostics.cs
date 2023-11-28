@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class BootDiagnostics
     {
-        /// <summary> Initializes a new instance of BootDiagnostics. </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnostics"/>. </summary>
         public BootDiagnostics()
         {
         }
 
-        /// <summary> Initializes a new instance of BootDiagnostics. </summary>
+        /// <summary> Initializes a new instance of <see cref="BootDiagnostics"/>. </summary>
         /// <param name="enabled">
         /// Whether boot diagnostics should be enabled on the Virtual Machine.
         /// Serialized Name: BootDiagnostics.enabled

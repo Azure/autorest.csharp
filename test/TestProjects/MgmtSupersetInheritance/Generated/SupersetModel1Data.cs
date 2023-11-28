@@ -16,12 +16,12 @@ namespace MgmtSupersetInheritance
     /// </summary>
     public partial class SupersetModel1Data : ResourceData
     {
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel1Data"/>. </summary>
         public SupersetModel1Data()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

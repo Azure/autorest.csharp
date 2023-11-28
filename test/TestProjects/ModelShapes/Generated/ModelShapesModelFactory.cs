@@ -14,7 +14,7 @@ namespace ModelShapes.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelShapesModelFactory
     {
-        /// <summary> Initializes a new instance of MixedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MixedModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -56,7 +56,7 @@ namespace ModelShapes.Models
             return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable);
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -98,7 +98,7 @@ namespace ModelShapes.Models
             return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, vector, vectorReadOnly, vectorReadOnlyRequired, vectorRequired, vectorNullable, vectorReadOnlyNullable, vectorReadOnlyRequiredNullable, vectorRequiredNullable);
         }
 
-        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MixedModelWithReadonlyProperty"/>. </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
         /// <returns> A new <see cref="Models.MixedModelWithReadonlyProperty"/> instance for mocking. </returns>
@@ -109,7 +109,7 @@ namespace ModelShapes.Models
             return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ReadonlyModel"/>. </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.ReadonlyModel"/> instance for mocking. </returns>
         public static ReadonlyModel ReadonlyModel(string name = null)

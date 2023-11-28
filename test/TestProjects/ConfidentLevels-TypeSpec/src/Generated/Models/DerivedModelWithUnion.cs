@@ -14,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a derived model with unions. </summary>
     public partial class DerivedModelWithUnion : BaseModel
     {
-        /// <summary> Initializes a new instance of DerivedModelWithUnion. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="unionProperty"> The union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="unionProperty"/> is null. </exception>
@@ -26,7 +26,7 @@ namespace ConfidentLevelsInTsp.Models
             UnionProperty = unionProperty;
         }
 
-        /// <summary> Initializes a new instance of DerivedModelWithUnion. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
         /// <param name="unionProperty"> The union property. </param>

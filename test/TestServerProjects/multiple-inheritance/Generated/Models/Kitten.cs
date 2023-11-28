@@ -13,7 +13,7 @@ namespace multiple_inheritance.Models
     /// <summary> The Kitten. </summary>
     public partial class Kitten : Cat
     {
-        /// <summary> Initializes a new instance of Kitten. </summary>
+        /// <summary> Initializes a new instance of <see cref="Kitten"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Kitten(string name) : base(name)
@@ -21,7 +21,7 @@ namespace multiple_inheritance.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary> Initializes a new instance of Kitten. </summary>
+        /// <summary> Initializes a new instance of <see cref="Kitten"/>. </summary>
         /// <param name="name"></param>
         /// <param name="likesMilk"></param>
         /// <param name="meows"></param>

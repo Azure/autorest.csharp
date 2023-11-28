@@ -13,7 +13,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerOneFooType. </summary>
     public partial class LayerOneFooType : LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of LayerOneFooType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneFooType"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the type. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public LayerOneFooType(string parameters)
@@ -24,7 +24,7 @@ namespace MgmtSafeFlatten.Models
             Name = LayerOneTypeName.LayerOneFoo;
         }
 
-        /// <summary> Initializes a new instance of LayerOneFooType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneFooType"/>. </summary>
         /// <param name="name"></param>
         /// <param name="parameters"> Defines the parameters for the type. </param>
         internal LayerOneFooType(LayerOneTypeName name, string parameters) : base(name)

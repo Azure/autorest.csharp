@@ -13,7 +13,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
     /// <summary> The third level model in the normal multiple levels inheritance. </summary>
     public partial class Siamese : Cat
     {
-        /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <summary> Initializes a new instance of <see cref="Siamese"/>. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
         /// <param name="smart"></param>

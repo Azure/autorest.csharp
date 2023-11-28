@@ -10,12 +10,12 @@ namespace CustomizationsInTsp.Models
     /// <summary> Root RoundTrip model to reference all other types to ensure generation. </summary>
     public partial class RootModel
     {
-        /// <summary> Initializes a new instance of RootModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RootModel"/>. </summary>
         public RootModel()
         {
         }
 
-        /// <summary> Initializes a new instance of RootModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RootModel"/>. </summary>
         /// <param name="propertyExtensibleEnum"> ExtensibleEnumWithOperator. </param>
         /// <param name="propertyModelToMakeInternal"> ModelToMakeInternal. </param>
         /// <param name="propertyModelToRename"> ModelToRename. </param>

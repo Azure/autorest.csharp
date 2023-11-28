@@ -10,12 +10,12 @@ namespace NameConflicts.Models
     /// <summary> The HttpMessage. </summary>
     public partial class HttpMessage
     {
-        /// <summary> Initializes a new instance of HttpMessage. </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         public HttpMessage()
         {
         }
 
-        /// <summary> Initializes a new instance of HttpMessage. </summary>
+        /// <summary> Initializes a new instance of <see cref="HttpMessage"/>. </summary>
         /// <param name="property"></param>
         internal HttpMessage(string property)
         {

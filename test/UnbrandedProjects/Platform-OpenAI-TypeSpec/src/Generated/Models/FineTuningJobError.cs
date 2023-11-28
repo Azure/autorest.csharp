@@ -7,12 +7,12 @@ namespace OpenAI.Models
     /// <summary> The FineTuningJobError. </summary>
     public partial class FineTuningJobError
     {
-        /// <summary> Initializes a new instance of FineTuningJobError. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
         internal FineTuningJobError()
         {
         }
 
-        /// <summary> Initializes a new instance of FineTuningJobError. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobError"/>. </summary>
         /// <param name="message"> A human-readable error message. </param>
         /// <param name="code"> A machine-readable error code. </param>
         /// <param name="param">

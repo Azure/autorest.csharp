@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineExtensionUpdate : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionUpdate. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionUpdate"/>. </summary>
         public VirtualMachineExtensionUpdate()
         {
         }

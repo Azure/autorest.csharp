@@ -12,7 +12,7 @@ namespace Authentication.ApiKey.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AuthenticationApiKeyModelFactory
     {
-        /// <summary> Initializes a new instance of InvalidAuth. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InvalidAuth"/>. </summary>
         /// <param name="error"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         /// <returns> A new <see cref="Models.InvalidAuth"/> instance for mocking. </returns>

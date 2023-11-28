@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateTranscriptionResponse. </summary>
     public partial class CreateTranscriptionResponse
     {
-        /// <summary> Initializes a new instance of CreateTranscriptionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionResponse"/>. </summary>
         /// <param name="text"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal CreateTranscriptionResponse(string text)

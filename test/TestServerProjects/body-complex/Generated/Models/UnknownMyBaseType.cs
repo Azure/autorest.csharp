@@ -10,7 +10,7 @@ namespace body_complex.Models
     /// <summary> The UnknownMyBaseType. </summary>
     internal partial class UnknownMyBaseType : MyBaseType
     {
-        /// <summary> Initializes a new instance of UnknownMyBaseType. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownMyBaseType"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>

@@ -12,7 +12,7 @@ namespace Payload.ContentNegotiation.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PayloadContentNegotiationModelFactory
     {
-        /// <summary> Initializes a new instance of PngImageAsJson. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PngImageAsJson"/>. </summary>
         /// <param name="content"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <returns> A new <see cref="Models.PngImageAsJson"/> instance for mocking. </returns>

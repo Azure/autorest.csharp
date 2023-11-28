@@ -10,7 +10,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostOptionalParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostOptionalParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostOptionalParameters"/>. </summary>
         public ParameterGroupingPostOptionalParameters()
         {
         }

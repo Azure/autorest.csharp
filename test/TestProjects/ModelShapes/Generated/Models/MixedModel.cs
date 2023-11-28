@@ -15,7 +15,7 @@ namespace ModelShapes.Models
     /// <summary> The MixedModel. </summary>
     public partial class MixedModel
     {
-        /// <summary> Initializes a new instance of MixedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -57,7 +57,7 @@ namespace ModelShapes.Models
             VectorRequiredNullable = vectorRequiredNullable;
         }
 
-        /// <summary> Initializes a new instance of MixedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="MixedModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>

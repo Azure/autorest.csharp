@@ -14,14 +14,14 @@ namespace PetStore.Models
     /// </summary>
     public abstract partial class Fish
     {
-        /// <summary> Initializes a new instance of Fish. </summary>
+        /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         protected Fish(int size)
         {
             Size = size;
         }
 
-        /// <summary> Initializes a new instance of Fish. </summary>
+        /// <summary> Initializes a new instance of <see cref="Fish"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         internal Fish(string kind, int size)

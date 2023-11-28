@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmInstanceIds
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceIds. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceIds"/>. </summary>
         public VirtualMachineScaleSetVmInstanceIds()
         {
             InstanceIds = new ChangeTrackingList<string>();

@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class MgmtAcronymMappingPlan
     {
-        /// <summary> Initializes a new instance of MgmtAcronymMappingPlan. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingPlan"/>. </summary>
         public MgmtAcronymMappingPlan()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtAcronymMappingPlan. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingPlan"/>. </summary>
         /// <param name="name">
         /// The plan ID.
         /// Serialized Name: Plan.name

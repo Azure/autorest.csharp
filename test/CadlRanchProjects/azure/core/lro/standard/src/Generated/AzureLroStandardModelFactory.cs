@@ -13,7 +13,7 @@ namespace _Azure.Lro.Standard.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AzureLroStandardModelFactory
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="role"> The role of user. </param>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
@@ -22,7 +22,7 @@ namespace _Azure.Lro.Standard.Models
             return new User(name, role);
         }
 
-        /// <summary> Initializes a new instance of ExportedUser. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ExportedUser"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="resourceUri"> The exported URI. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>

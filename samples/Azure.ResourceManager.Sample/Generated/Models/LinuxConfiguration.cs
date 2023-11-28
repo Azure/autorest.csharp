@@ -15,12 +15,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class LinuxConfiguration
     {
-        /// <summary> Initializes a new instance of LinuxConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         public LinuxConfiguration()
         {
         }
 
-        /// <summary> Initializes a new instance of LinuxConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="LinuxConfiguration"/>. </summary>
         /// <param name="disablePasswordAuthentication">
         /// Specifies whether password authentication should be disabled.
         /// Serialized Name: LinuxConfiguration.disablePasswordAuthentication

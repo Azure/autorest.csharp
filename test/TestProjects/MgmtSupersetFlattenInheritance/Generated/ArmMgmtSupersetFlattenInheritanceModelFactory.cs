@@ -16,7 +16,7 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSupersetFlattenInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of SubResourceModel1. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubResourceModel1"/>. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
         /// <returns> A new <see cref="Models.SubResourceModel1"/> instance for mocking. </returns>
@@ -25,7 +25,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new SubResourceModel1(id, foo);
         }
 
-        /// <summary> Initializes a new instance of SubResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SubResourceModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
@@ -35,7 +35,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new SubResourceModel2(id, idPropertiesId, foo);
         }
 
-        /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetFlattenInheritance.ResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -47,7 +47,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new ResourceModel1Data(id, name, resourceType, systemData, foo);
         }
 
-        /// <summary> Initializes a new instance of ResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -59,7 +59,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new ResourceModel2(id, name, resourceType, systemData, foo);
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetFlattenInheritance.TrackedResourceModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -75,7 +75,7 @@ namespace MgmtSupersetFlattenInheritance.Models
             return new TrackedResourceModel1Data(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of TrackedResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TrackedResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

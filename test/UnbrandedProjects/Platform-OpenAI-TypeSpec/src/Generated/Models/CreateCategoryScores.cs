@@ -7,7 +7,7 @@ namespace OpenAI.Models
     /// <summary> The CreateCategoryScores. </summary>
     public partial class CreateCategoryScores
     {
-        /// <summary> Initializes a new instance of CreateCategoryScores. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCategoryScores"/>. </summary>
         /// <param name="hate"> The score for the category 'hate'. </param>
         /// <param name="hateThreatening"> The score for the category 'hate/threatening'. </param>
         /// <param name="harassment"> The score for the category 'harassment'. </param>

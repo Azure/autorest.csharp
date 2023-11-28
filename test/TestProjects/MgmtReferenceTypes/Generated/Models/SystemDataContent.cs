@@ -14,13 +14,13 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class SystemDataContent
     {
-        /// <summary> Initializes a new instance of SystemDataContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="SystemDataContent"/>. </summary>
         [InitializationConstructor]
         public SystemDataContent()
         {
         }
 
-        /// <summary> Initializes a new instance of SystemDataContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="SystemDataContent"/>. </summary>
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdByType"> The type of identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>

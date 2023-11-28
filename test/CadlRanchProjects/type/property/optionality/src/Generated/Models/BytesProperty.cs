@@ -12,12 +12,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Template type for testing models with optional property. Pass in the type of the property you are looking for. </summary>
     public partial class BytesProperty
     {
-        /// <summary> Initializes a new instance of BytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="BytesProperty"/>. </summary>
         public BytesProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of BytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="BytesProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal BytesProperty(BinaryData property)
         {

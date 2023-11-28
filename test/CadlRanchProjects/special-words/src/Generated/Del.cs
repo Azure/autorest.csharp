@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The del. </summary>
     public partial class Del
     {
-        /// <summary> Initializes a new instance of Del. </summary>
+        /// <summary> Initializes a new instance of <see cref="Del"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Del(string name)

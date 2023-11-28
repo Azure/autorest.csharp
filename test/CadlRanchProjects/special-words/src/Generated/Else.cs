@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The else. </summary>
     public partial class Else
     {
-        /// <summary> Initializes a new instance of Else. </summary>
+        /// <summary> Initializes a new instance of <see cref="Else"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Else(string name)

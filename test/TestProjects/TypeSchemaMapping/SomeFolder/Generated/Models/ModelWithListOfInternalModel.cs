@@ -13,13 +13,13 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithListOfInternalModel. </summary>
     public partial class ModelWithListOfInternalModel
     {
-        /// <summary> Initializes a new instance of ModelWithListOfInternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithListOfInternalModel"/>. </summary>
         internal ModelWithListOfInternalModel()
         {
             InternalListProperty = new ChangeTrackingList<InternalModel>();
         }
 
-        /// <summary> Initializes a new instance of ModelWithListOfInternalModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithListOfInternalModel"/>. </summary>
         /// <param name="stringProperty"></param>
         /// <param name="internalListProperty"></param>
         internal ModelWithListOfInternalModel(string stringProperty, IReadOnlyList<InternalModel> internalListProperty)

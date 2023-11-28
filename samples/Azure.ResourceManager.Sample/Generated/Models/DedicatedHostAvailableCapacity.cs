@@ -16,13 +16,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostAvailableCapacity
     {
-        /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAvailableCapacity"/>. </summary>
         internal DedicatedHostAvailableCapacity()
         {
             AllocatableVms = new ChangeTrackingList<DedicatedHostAllocatableVm>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostAvailableCapacity"/>. </summary>
         /// <param name="allocatableVms">
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs

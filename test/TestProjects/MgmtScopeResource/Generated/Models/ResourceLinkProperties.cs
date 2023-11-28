@@ -13,7 +13,7 @@ namespace MgmtScopeResource.Models
     /// <summary> The resource link properties. </summary>
     public partial class ResourceLinkProperties
     {
-        /// <summary> Initializes a new instance of ResourceLinkProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="targetId"/> is null. </exception>
         public ResourceLinkProperties(string targetId)
@@ -23,7 +23,7 @@ namespace MgmtScopeResource.Models
             TargetId = targetId;
         }
 
-        /// <summary> Initializes a new instance of ResourceLinkProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkProperties"/>. </summary>
         /// <param name="sourceId"> The fully qualified ID of the source resource in the link. </param>
         /// <param name="targetId"> The fully qualified ID of the target resource in the link. </param>
         /// <param name="notes"> Notes about the resource link. </param>

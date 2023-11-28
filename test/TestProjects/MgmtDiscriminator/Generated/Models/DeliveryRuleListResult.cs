@@ -14,13 +14,13 @@ namespace MgmtDiscriminator.Models
     /// <summary> The list result of the rules. </summary>
     internal partial class DeliveryRuleListResult
     {
-        /// <summary> Initializes a new instance of DeliveryRuleListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         internal DeliveryRuleListResult()
         {
             Value = new ChangeTrackingList<DeliveryRuleData>();
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleListResult"/>. </summary>
         /// <param name="value"> The values. </param>
         internal DeliveryRuleListResult(IReadOnlyList<DeliveryRuleData> value)
         {

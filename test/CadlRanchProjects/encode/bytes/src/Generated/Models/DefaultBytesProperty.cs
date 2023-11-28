@@ -13,7 +13,7 @@ namespace Encode.Bytes.Models
     /// <summary> The DefaultBytesProperty. </summary>
     public partial class DefaultBytesProperty
     {
-        /// <summary> Initializes a new instance of DefaultBytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DefaultBytesProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public DefaultBytesProperty(BinaryData value)

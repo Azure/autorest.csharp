@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The global. </summary>
     public partial class Global
     {
-        /// <summary> Initializes a new instance of Global. </summary>
+        /// <summary> Initializes a new instance of <see cref="Global"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Global(string name)

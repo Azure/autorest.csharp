@@ -14,7 +14,7 @@ namespace xml_service.Models
     /// <summary> An enumeration of containers. </summary>
     public partial class ListContainersResponse
     {
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="maxResults"></param>
@@ -33,7 +33,7 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListContainersResponse"/>. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>

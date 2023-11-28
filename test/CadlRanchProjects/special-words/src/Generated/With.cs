@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The with. </summary>
     public partial class With
     {
-        /// <summary> Initializes a new instance of With. </summary>
+        /// <summary> Initializes a new instance of <see cref="With"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public With(string name)

@@ -10,12 +10,12 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The response for a single table. </summary>
     public partial class TableResult : TableResponseProperties
     {
-        /// <summary> Initializes a new instance of TableResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResult"/>. </summary>
         internal TableResult()
         {
         }
 
-        /// <summary> Initializes a new instance of TableResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="TableResult"/>. </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>

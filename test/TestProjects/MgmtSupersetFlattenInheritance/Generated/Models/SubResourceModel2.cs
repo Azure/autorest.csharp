@@ -10,12 +10,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> SubResource with flatten properties. </summary>
     public partial class SubResourceModel2
     {
-        /// <summary> Initializes a new instance of SubResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel2"/>. </summary>
         public SubResourceModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>

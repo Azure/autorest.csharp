@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateTranscriptionRequest. </summary>
     public partial class CreateTranscriptionRequest
     {
-        /// <summary> Initializes a new instance of CreateTranscriptionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
         /// mpeg, mpga, m4a, ogg, wav, or webm.
@@ -25,7 +25,7 @@ namespace OpenAI.Models
             Model = model;
         }
 
-        /// <summary> Initializes a new instance of CreateTranscriptionRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
         /// mpeg, mpga, m4a, ogg, wav, or webm.

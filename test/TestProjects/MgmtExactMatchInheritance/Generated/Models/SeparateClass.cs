@@ -10,12 +10,12 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The SeparateClass. </summary>
     public partial class SeparateClass
     {
-        /// <summary> Initializes a new instance of SeparateClass. </summary>
+        /// <summary> Initializes a new instance of <see cref="SeparateClass"/>. </summary>
         public SeparateClass()
         {
         }
 
-        /// <summary> Initializes a new instance of SeparateClass. </summary>
+        /// <summary> Initializes a new instance of <see cref="SeparateClass"/>. </summary>
         /// <param name="stringProperty"></param>
         /// <param name="modelProperty"></param>
         internal SeparateClass(string stringProperty, ExactMatchModel10 modelProperty)

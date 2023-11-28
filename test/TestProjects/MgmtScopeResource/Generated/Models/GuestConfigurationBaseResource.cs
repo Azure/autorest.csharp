@@ -10,12 +10,12 @@ namespace MgmtScopeResource.Models
     /// <summary> The core properties of ARM resources. </summary>
     public partial class GuestConfigurationBaseResource
     {
-        /// <summary> Initializes a new instance of GuestConfigurationBaseResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         public GuestConfigurationBaseResource()
         {
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationBaseResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="GuestConfigurationBaseResource"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>

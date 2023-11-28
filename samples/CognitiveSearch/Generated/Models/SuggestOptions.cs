@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class SuggestOptions
     {
-        /// <summary> Initializes a new instance of SuggestOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="SuggestOptions"/>. </summary>
         public SuggestOptions()
         {
             OrderBy = new ChangeTrackingList<string>();

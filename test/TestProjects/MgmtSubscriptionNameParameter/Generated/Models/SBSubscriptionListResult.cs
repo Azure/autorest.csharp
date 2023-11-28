@@ -14,13 +14,13 @@ namespace MgmtSubscriptionNameParameter.Models
     /// <summary> The response to the List Subscriptions operation. </summary>
     internal partial class SBSubscriptionListResult
     {
-        /// <summary> Initializes a new instance of SBSubscriptionListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SBSubscriptionListResult"/>. </summary>
         internal SBSubscriptionListResult()
         {
             Value = new ChangeTrackingList<SBSubscriptionData>();
         }
 
-        /// <summary> Initializes a new instance of SBSubscriptionListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SBSubscriptionListResult"/>. </summary>
         /// <param name="value"> Result of the List Subscriptions operation. </param>
         /// <param name="nextLink"> Link to the next set of results. Not empty if Value contains incomplete list of subscriptions. </param>
         internal SBSubscriptionListResult(IReadOnlyList<SBSubscriptionData> value, string nextLink)

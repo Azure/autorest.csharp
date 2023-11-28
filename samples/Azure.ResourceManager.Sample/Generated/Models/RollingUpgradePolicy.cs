@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RollingUpgradePolicy
     {
-        /// <summary> Initializes a new instance of RollingUpgradePolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradePolicy"/>. </summary>
         public RollingUpgradePolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of RollingUpgradePolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="RollingUpgradePolicy"/>. </summary>
         /// <param name="maxBatchInstancePercent">
         /// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability. The default value for this parameter is 20%.
         /// Serialized Name: RollingUpgradePolicy.maxBatchInstancePercent

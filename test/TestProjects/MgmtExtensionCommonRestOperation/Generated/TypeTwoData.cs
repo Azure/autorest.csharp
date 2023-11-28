@@ -17,13 +17,13 @@ namespace MgmtExtensionCommonRestOperation
     /// </summary>
     public partial class TypeTwoData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of TypeTwoData. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/>. </summary>
         /// <param name="location"> The location. </param>
         public TypeTwoData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TypeTwoData. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeTwoData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

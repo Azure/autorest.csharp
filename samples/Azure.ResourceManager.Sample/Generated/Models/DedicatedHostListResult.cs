@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostListResult
     {
-        /// <summary> Initializes a new instance of DedicatedHostListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated hosts
         /// Serialized Name: DedicatedHostListResult.value
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated hosts
         /// Serialized Name: DedicatedHostListResult.value

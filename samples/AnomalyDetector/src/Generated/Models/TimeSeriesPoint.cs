@@ -12,14 +12,14 @@ namespace AnomalyDetector.Models
     /// <summary> The definition of input timeseries points. </summary>
     public partial class TimeSeriesPoint
     {
-        /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>
+        /// <summary> Initializes a new instance of <see cref="TimeSeriesPoint"/>. </summary>
         /// <param name="value"> The measurement of that point, should be float. </param>
         public TimeSeriesPoint(float value)
         {
             Value = value;
         }
 
-        /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>
+        /// <summary> Initializes a new instance of <see cref="TimeSeriesPoint"/>. </summary>
         /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
         /// <param name="value"> The measurement of that point, should be float. </param>
         internal TimeSeriesPoint(DateTimeOffset? timestamp, float value)

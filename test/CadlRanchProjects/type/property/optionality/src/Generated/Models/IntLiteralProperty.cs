@@ -10,12 +10,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with int literal property. </summary>
     public partial class IntLiteralProperty
     {
-        /// <summary> Initializes a new instance of IntLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntLiteralProperty"/>. </summary>
         public IntLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of IntLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal IntLiteralProperty(IntLiteralPropertyProperty? property)
         {
