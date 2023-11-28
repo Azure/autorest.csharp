@@ -21,7 +21,7 @@ namespace AnomalyDetector.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateEntireSeries_ShortVersion()
+        public void Example_Univariate_DetectUnivariateEntireSeries_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -51,7 +51,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateEntireSeries_ShortVersion_Async()
+        public async Task Example_Univariate_DetectUnivariateEntireSeries_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -81,7 +81,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateEntireSeries_ShortVersion_Convenience()
+        public void Example_Univariate_DetectUnivariateEntireSeries_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -96,7 +96,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateEntireSeries_ShortVersion_Convenience_Async()
+        public async Task Example_Univariate_DetectUnivariateEntireSeries_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -111,7 +111,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateEntireSeries_AllParameters()
+        public void Example_Univariate_DetectUnivariateEntireSeries_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -150,7 +150,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateEntireSeries_AllParameters_Async()
+        public async Task Example_Univariate_DetectUnivariateEntireSeries_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -189,7 +189,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateEntireSeries_AllParameters_Convenience()
+        public void Example_Univariate_DetectUnivariateEntireSeries_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -216,7 +216,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateEntireSeries_AllParameters_Convenience_Async()
+        public async Task Example_Univariate_DetectUnivariateEntireSeries_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -243,7 +243,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateLastPoint_ShortVersion()
+        public void Example_Univariate_DetectUnivariateLastPoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -274,7 +274,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateLastPoint_ShortVersion_Async()
+        public async Task Example_Univariate_DetectUnivariateLastPoint_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -305,7 +305,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateLastPoint_ShortVersion_Convenience()
+        public void Example_Univariate_DetectUnivariateLastPoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -320,7 +320,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateLastPoint_ShortVersion_Convenience_Async()
+        public async Task Example_Univariate_DetectUnivariateLastPoint_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -335,7 +335,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateLastPoint_AllParameters()
+        public void Example_Univariate_DetectUnivariateLastPoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -375,7 +375,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateLastPoint_AllParameters_Async()
+        public async Task Example_Univariate_DetectUnivariateLastPoint_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -415,7 +415,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateLastPoint_AllParameters_Convenience()
+        public void Example_Univariate_DetectUnivariateLastPoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -442,7 +442,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateLastPoint_AllParameters_Convenience_Async()
+        public async Task Example_Univariate_DetectUnivariateLastPoint_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -469,7 +469,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateChangePoint_ShortVersion()
+        public void Example_Univariate_DetectUnivariateChangePoint_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -494,7 +494,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateChangePoint_ShortVersion_Async()
+        public async Task Example_Univariate_DetectUnivariateChangePoint_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -519,7 +519,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateChangePoint_ShortVersion_Convenience()
+        public void Example_Univariate_DetectUnivariateChangePoint_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -534,7 +534,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateChangePoint_ShortVersion_Convenience_Async()
+        public async Task Example_Univariate_DetectUnivariateChangePoint_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -549,7 +549,7 @@ new TimeSeriesPoint(123.45F)
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateChangePoint_AllParameters()
+        public void Example_Univariate_DetectUnivariateChangePoint_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -581,7 +581,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateChangePoint_AllParameters_Async()
+        public async Task Example_Univariate_DetectUnivariateChangePoint_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -613,7 +613,7 @@ value = 123.45F,
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectUnivariateChangePoint_AllParameters_Convenience()
+        public void Example_Univariate_DetectUnivariateChangePoint_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -637,7 +637,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectUnivariateChangePoint_AllParameters_Convenience_Async()
+        public async Task Example_Univariate_DetectUnivariateChangePoint_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -661,7 +661,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateBatchDetectionResult_ShortVersion()
+        public void Example_Multivariate_GetMultivariateBatchDetectionResult_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -681,7 +681,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateBatchDetectionResult_ShortVersion_Async()
+        public async Task Example_Multivariate_GetMultivariateBatchDetectionResult_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -701,7 +701,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
+        public void Example_Multivariate_GetMultivariateBatchDetectionResult_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -712,7 +712,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateBatchDetectionResult_ShortVersion_Convenience_Async()
+        public async Task Example_Multivariate_GetMultivariateBatchDetectionResult_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -723,7 +723,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateBatchDetectionResult_AllParameters()
+        public void Example_Multivariate_GetMultivariateBatchDetectionResult_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -758,7 +758,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Async()
+        public async Task Example_Multivariate_GetMultivariateBatchDetectionResult_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -793,7 +793,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateBatchDetectionResult_AllParameters_Convenience()
+        public void Example_Multivariate_GetMultivariateBatchDetectionResult_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -804,7 +804,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateBatchDetectionResult_AllParameters_Convenience_Async()
+        public async Task Example_Multivariate_GetMultivariateBatchDetectionResult_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -815,7 +815,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TrainMultivariateModel_ShortVersion()
+        public void Example_Multivariate_TrainMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -837,7 +837,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TrainMultivariateModel_ShortVersion_Async()
+        public async Task Example_Multivariate_TrainMultivariateModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -859,7 +859,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TrainMultivariateModel_ShortVersion_Convenience()
+        public void Example_Multivariate_TrainMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -871,7 +871,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TrainMultivariateModel_ShortVersion_Convenience_Async()
+        public async Task Example_Multivariate_TrainMultivariateModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -883,7 +883,7 @@ Timestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TrainMultivariateModel_AllParameters()
+        public void Example_Multivariate_TrainMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -969,7 +969,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TrainMultivariateModel_AllParameters_Async()
+        public async Task Example_Multivariate_TrainMultivariateModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1055,7 +1055,7 @@ lastTimestamp = "2022-05-10T14:57:31.2311892-04:00",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TrainMultivariateModel_AllParameters_Convenience()
+        public void Example_Multivariate_TrainMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1097,7 +1097,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TrainMultivariateModel_AllParameters_Convenience_Async()
+        public async Task Example_Multivariate_TrainMultivariateModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1139,7 +1139,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteMultivariateModel_ShortVersion()
+        public void Example_Multivariate_DeleteMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1152,7 +1152,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteMultivariateModel_ShortVersion_Async()
+        public async Task Example_Multivariate_DeleteMultivariateModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1165,7 +1165,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DeleteMultivariateModel_AllParameters()
+        public void Example_Multivariate_DeleteMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1178,7 +1178,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DeleteMultivariateModel_AllParameters_Async()
+        public async Task Example_Multivariate_DeleteMultivariateModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1191,7 +1191,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModel_ShortVersion()
+        public void Example_Multivariate_GetMultivariateModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1207,7 +1207,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModel_ShortVersion_Async()
+        public async Task Example_Multivariate_GetMultivariateModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1223,7 +1223,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModel_ShortVersion_Convenience()
+        public void Example_Multivariate_GetMultivariateModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1234,7 +1234,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModel_ShortVersion_Convenience_Async()
+        public async Task Example_Multivariate_GetMultivariateModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1245,7 +1245,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModel_AllParameters()
+        public void Example_Multivariate_GetMultivariateModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1282,7 +1282,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModel_AllParameters_Async()
+        public async Task Example_Multivariate_GetMultivariateModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1319,7 +1319,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModel_AllParameters_Convenience()
+        public void Example_Multivariate_GetMultivariateModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1330,7 +1330,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModel_AllParameters_Convenience_Async()
+        public async Task Example_Multivariate_GetMultivariateModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1341,7 +1341,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateBatchAnomaly_ShortVersion()
+        public void Example_Multivariate_DetectMultivariateBatchAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1368,7 +1368,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateBatchAnomaly_ShortVersion_Async()
+        public async Task Example_Multivariate_DetectMultivariateBatchAnomaly_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1395,7 +1395,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
+        public void Example_Multivariate_DetectMultivariateBatchAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1407,7 +1407,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateBatchAnomaly_ShortVersion_Convenience_Async()
+        public async Task Example_Multivariate_DetectMultivariateBatchAnomaly_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1419,7 +1419,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateBatchAnomaly_AllParameters()
+        public void Example_Multivariate_DetectMultivariateBatchAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1461,7 +1461,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Async()
+        public async Task Example_Multivariate_DetectMultivariateBatchAnomaly_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1503,7 +1503,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateBatchAnomaly_AllParameters_Convenience()
+        public void Example_Multivariate_DetectMultivariateBatchAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1515,7 +1515,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateBatchAnomaly_AllParameters_Convenience_Async()
+        public async Task Example_Multivariate_DetectMultivariateBatchAnomaly_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1527,7 +1527,7 @@ LastTimestamp = DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"),
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateLastAnomaly_ShortVersion()
+        public void Example_Multivariate_DetectMultivariateLastAnomaly_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1560,7 +1560,7 @@ values = new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateLastAnomaly_ShortVersion_Async()
+        public async Task Example_Multivariate_DetectMultivariateLastAnomaly_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1593,7 +1593,7 @@ values = new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateLastAnomaly_ShortVersion_Convenience()
+        public void Example_Multivariate_DetectMultivariateLastAnomaly_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1608,7 +1608,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateLastAnomaly_ShortVersion_Convenience_Async()
+        public async Task Example_Multivariate_DetectMultivariateLastAnomaly_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1623,7 +1623,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateLastAnomaly_AllParameters()
+        public void Example_Multivariate_DetectMultivariateLastAnomaly_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1669,7 +1669,7 @@ values = new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Async()
+        public async Task Example_Multivariate_DetectMultivariateLastAnomaly_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1715,7 +1715,7 @@ values = new object[]
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_DetectMultivariateLastAnomaly_AllParameters_Convenience()
+        public void Example_Multivariate_DetectMultivariateLastAnomaly_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1730,7 +1730,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_DetectMultivariateLastAnomaly_AllParameters_Convenience_Async()
+        public async Task Example_Multivariate_DetectMultivariateLastAnomaly_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1745,7 +1745,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModels_ShortVersion()
+        public void Example_Multivariate_GetMultivariateModels_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1762,7 +1762,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModels_ShortVersion_Async()
+        public async Task Example_Multivariate_GetMultivariateModels_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1779,7 +1779,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModels_ShortVersion_Convenience()
+        public void Example_Multivariate_GetMultivariateModels_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1792,7 +1792,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModels_ShortVersion_Convenience_Async()
+        public async Task Example_Multivariate_GetMultivariateModels_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1805,7 +1805,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModels_AllParameters()
+        public void Example_Multivariate_GetMultivariateModels_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1843,7 +1843,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModels_AllParameters_Async()
+        public async Task Example_Multivariate_GetMultivariateModels_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1881,7 +1881,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetMultivariateModels_AllParameters_Convenience()
+        public void Example_Multivariate_GetMultivariateModels_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
@@ -1894,7 +1894,7 @@ new VariableValues("<variable>", new string[]{"<timestamps>"}, new float[]{123.4
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMultivariateModels_AllParameters_Convenience_Async()
+        public async Task Example_Multivariate_GetMultivariateModels_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AzureKeyCredential credential = new AzureKeyCredential("<key>");

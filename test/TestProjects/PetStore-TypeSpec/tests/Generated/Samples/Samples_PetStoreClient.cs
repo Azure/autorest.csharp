@@ -21,7 +21,7 @@ namespace PetStore.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_ShortVersion()
+        public void Example_Pets_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -33,7 +33,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_ShortVersion_Async()
+        public async Task Example_Pets_Delete_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -45,7 +45,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
+        public void Example_Pets_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -57,7 +57,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_AllParameters_Async()
+        public async Task Example_Pets_Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -69,7 +69,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read_ShortVersion()
+        public void Example_Pets_Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -83,7 +83,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_ShortVersion_Async()
+        public async Task Example_Pets_Read_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -97,7 +97,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read_ShortVersion_Convenience()
+        public void Example_Pets_Read_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -107,7 +107,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_ShortVersion_Convenience_Async()
+        public async Task Example_Pets_Read_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -117,7 +117,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read_AllParameters()
+        public void Example_Pets_Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -132,7 +132,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_AllParameters_Async()
+        public async Task Example_Pets_Read_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -147,7 +147,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read_AllParameters_Convenience()
+        public void Example_Pets_Read_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -157,7 +157,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_AllParameters_Convenience_Async()
+        public async Task Example_Pets_Read_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -167,7 +167,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_ShortVersion()
+        public void Example_Pets_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -186,7 +186,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_ShortVersion_Async()
+        public async Task Example_Pets_Create_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -205,7 +205,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_ShortVersion_Convenience()
+        public void Example_Pets_Create_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -216,7 +216,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_ShortVersion_Convenience_Async()
+        public async Task Example_Pets_Create_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -227,7 +227,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_AllParameters()
+        public void Example_Pets_Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -248,7 +248,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_AllParameters_Async()
+        public async Task Example_Pets_Create_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -269,7 +269,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_AllParameters_Convenience()
+        public void Example_Pets_Create_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -283,7 +283,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_AllParameters_Convenience_Async()
+        public async Task Example_Pets_Create_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -297,7 +297,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPetByKind_ShortVersion()
+        public void Example_Pets_GetPetByKind_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -311,7 +311,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPetByKind_ShortVersion_Async()
+        public async Task Example_Pets_GetPetByKind_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -325,7 +325,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPetByKind_ShortVersion_Convenience()
+        public void Example_Pets_GetPetByKind_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -335,7 +335,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPetByKind_ShortVersion_Convenience_Async()
+        public async Task Example_Pets_GetPetByKind_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -345,7 +345,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPetByKind_AllParameters()
+        public void Example_Pets_GetPetByKind_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -360,7 +360,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPetByKind_AllParameters_Async()
+        public async Task Example_Pets_GetPetByKind_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -375,7 +375,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPetByKind_AllParameters_Convenience()
+        public void Example_Pets_GetPetByKind_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -385,7 +385,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPetByKind_AllParameters_Convenience_Async()
+        public async Task Example_Pets_GetPetByKind_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -395,7 +395,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFirstPet_ShortVersion()
+        public void Example_Pets_GetFirstPet_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -409,7 +409,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFirstPet_ShortVersion_Async()
+        public async Task Example_Pets_GetFirstPet_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -423,7 +423,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFirstPet_ShortVersion_Convenience()
+        public void Example_Pets_GetFirstPet_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -433,7 +433,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFirstPet_ShortVersion_Convenience_Async()
+        public async Task Example_Pets_GetFirstPet_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -443,7 +443,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFirstPet_AllParameters()
+        public void Example_Pets_GetFirstPet_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -458,7 +458,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFirstPet_AllParameters_Async()
+        public async Task Example_Pets_GetFirstPet_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -473,7 +473,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFirstPet_AllParameters_Convenience()
+        public void Example_Pets_GetFirstPet_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -483,7 +483,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFirstPet_AllParameters_Convenience_Async()
+        public async Task Example_Pets_GetFirstPet_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -493,7 +493,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFish_ShortVersion()
+        public void Example_Pets_GetFish_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -507,7 +507,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFish_ShortVersion_Async()
+        public async Task Example_Pets_GetFish_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -521,7 +521,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFish_ShortVersion_Convenience()
+        public void Example_Pets_GetFish_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -531,7 +531,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFish_ShortVersion_Convenience_Async()
+        public async Task Example_Pets_GetFish_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -541,7 +541,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFish_AllParameters()
+        public void Example_Pets_GetFish_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -555,7 +555,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFish_AllParameters_Async()
+        public async Task Example_Pets_GetFish_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -569,7 +569,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFish_AllParameters_Convenience()
+        public void Example_Pets_GetFish_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
@@ -579,7 +579,7 @@ namespace PetStore.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFish_AllParameters_Convenience_Async()
+        public async Task Example_Pets_GetFish_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             PetStoreClient client = new PetStoreClient(endpoint);
