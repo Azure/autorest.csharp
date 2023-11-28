@@ -471,12 +471,6 @@ namespace AutoRest.CSharp.Output.Models
                 : $"Client options for {_libraryName} library clients.";
 
             IReadOnlyList<string>? apiVersions = _sourceInputModel?.GetServiceVersionOverrides() ?? _rootNamespace.ApiVersions;
-            if (!Configuration.IsBranded)
-            {
-                if (apiVersions.Count > 1)
-                    throw new InvalidOperationException("Multiple API versions are not supported in the unbranded path.");
-                apiVersions = null;
-            }
             return new ClientOptionsTypeProvider(apiVersions, clientOptionsName, _defaultNamespace, description, _sourceInputModel);
         }
 

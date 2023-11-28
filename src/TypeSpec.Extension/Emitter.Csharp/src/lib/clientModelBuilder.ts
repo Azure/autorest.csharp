@@ -83,33 +83,18 @@ export function createModelForService(
     const emitterOptions = resolveOptions(context);
     const program = context.program;
     const sdkContext = createSdkContext(context);
-    const title = service.title;
     const serviceNamespaceType = service.type;
-    const apiVersions: Set<string> = new Set<string>();
-    let version = service.version;
-    if (version && version !== mockApiVersion) {
-        apiVersions.add(version);
-    }
+
+    const apiVersions: Set<string> | undefined = new Set<string>();
+    let defaultApiVersion: string | undefined = undefined;
     const versions = getVersions(program, service.type)[1]?.getVersions();
     if (versions) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
         }
-        version = versions[versions.length - 1].value; //default version
+        defaultApiVersion = versions[versions.length - 1].value;
     }
-
-    if (apiVersions.size === 0) {
-        $lib.reportDiagnostic(program, {
-            code: "No-APIVersion",
-            format: { service: service.type.name },
-            target: NoTarget
-        });
-    }
-    const description = getDoc(program, serviceNamespaceType);
-    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
-
-    const servers = getServers(program, serviceNamespaceType);
-    const apiVersionParam: InputParameter = {
+    const apiVersionParam : InputParameter | undefined = defaultApiVersion ? {
         Name: "apiVersion",
         NameInRequest: "api-version",
         Description: "",
@@ -133,9 +118,14 @@ export function createModelForService(
                 Kind: InputTypeKind.String,
                 IsNullable: false
             } as InputPrimitiveType,
-            Value: version
+            Value: defaultApiVersion
         } as InputConstant
-    };
+    } : undefined;
+
+    const description = getDoc(program, serviceNamespaceType);
+    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
+
+    const servers = getServers(program, serviceNamespaceType);
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
@@ -194,10 +184,18 @@ export function createModelForService(
                 (value: InputParameter) => value.IsApiVersion
             );
             if (apiVersionIndex !== -1) {
+                if (apiVersionParam === undefined) {
+                    $lib.reportDiagnostic(program, {
+                        code: "No-APIVersion",
+                        format: { service: service.type.name },
+                        target: NoTarget
+                    });
+                }
+
                 const apiVersionInOperation = op.Parameters[apiVersionIndex];
                 if (!apiVersionInOperation.DefaultValue?.Value) {
                     apiVersionInOperation.DefaultValue =
-                        apiVersionParam.DefaultValue;
+                        apiVersionParam!.DefaultValue;
                 }
                 /**
                  * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
@@ -212,9 +210,9 @@ export function createModelForService(
                     ) &&
                     apiVersionInOperation.Kind ===
                         InputOperationParameterKind.Client &&
-                    apiVersionInOperation.Location === apiVersionParam.Location
+                    apiVersionInOperation.Location === apiVersionParam!.Location
                 ) {
-                    op.Parameters[apiVersionIndex] = apiVersionParam;
+                    op.Parameters[apiVersionIndex] = apiVersionParam!;
                 }
             }
         }
