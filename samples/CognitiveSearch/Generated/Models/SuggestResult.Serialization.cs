@@ -32,13 +32,10 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("@search.text"u8);
                 writer.WriteStringValue(Text);
             }
-            if (AdditionalProperties != null)
+            foreach (var item in AdditionalProperties)
             {
-                foreach (var item in AdditionalProperties)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
-                }
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
         }

@@ -53,13 +53,10 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndObject();
             }
-            if (AdditionalProperties != null)
+            foreach (var item in AdditionalProperties)
             {
-                foreach (var item in AdditionalProperties)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteObjectValue(item.Value);
-                }
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
         }
