@@ -23,6 +23,75 @@ namespace MgmtAcronymMapping.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        /// <param name="sku">
+        /// The virtual machine scale set sku.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.sku
+        /// </param>
+        /// <param name="plan">
+        /// The purchase plan when deploying a virtual machine scale set from VM Marketplace images.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.plan
+        /// </param>
+        /// <param name="identity">
+        /// The identity of the virtual machine scale set, if configured.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.identity
+        /// </param>
+        /// <param name="upgradePolicy">
+        /// The upgrade policy.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.upgradePolicy
+        /// </param>
+        /// <param name="automaticRepairsPolicy">
+        /// Policy for automatic repairs.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.automaticRepairsPolicy
+        /// </param>
+        /// <param name="virtualMachineProfile">
+        /// The virtual machine profile.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.virtualMachineProfile
+        /// </param>
+        /// <param name="overprovision">
+        /// Specifies whether the Virtual Machine Scale Set should be overprovisioned.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.overprovision
+        /// </param>
+        /// <param name="doNotRunExtensionsOnOverprovisionedVms">
+        /// When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.doNotRunExtensionsOnOverprovisionedVMs
+        /// </param>
+        /// <param name="singlePlacementGroup">
+        /// When true this limits the scale set to a single placement group, of max size 100 virtual machines. NOTE: If singlePlacementGroup is true, it may be modified to false. However, if singlePlacementGroup is false, it may not be modified to true.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.singlePlacementGroup
+        /// </param>
+        /// <param name="additionalCapabilities">
+        /// Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.additionalCapabilities
+        /// </param>
+        /// <param name="scaleInPolicy">
+        /// Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.scaleInPolicy
+        /// </param>
+        /// <param name="proximityPlacementGroup">
+        /// Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
+        /// Serialized Name: VirtualMachineScaleSetUpdate.properties.proximityPlacementGroup
+        /// </param>
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtAcronymMappingSku sku, MgmtAcronymMappingPlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVmProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup) : base(tags)
+        {
+            Sku = sku;
+            Plan = plan;
+            Identity = identity;
+            UpgradePolicy = upgradePolicy;
+            AutomaticRepairsPolicy = automaticRepairsPolicy;
+            VirtualMachineProfile = virtualMachineProfile;
+            Overprovision = overprovision;
+            DoNotRunExtensionsOnOverprovisionedVms = doNotRunExtensionsOnOverprovisionedVms;
+            SinglePlacementGroup = singlePlacementGroup;
+            AdditionalCapabilities = additionalCapabilities;
+            ScaleInPolicy = scaleInPolicy;
+            ProximityPlacementGroup = proximityPlacementGroup;
+        }
+
         /// <summary>
         /// The virtual machine scale set sku.
         /// Serialized Name: VirtualMachineScaleSetUpdate.sku
