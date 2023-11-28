@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> IP rule with specific IP or IP range in CIDR format. </summary>
     public partial class IPRule
     {
-        /// <summary> Initializes a new instance of IPRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ipAddressOrRange"/> is null. </exception>
         public IPRule(string ipAddressOrRange)
@@ -23,7 +23,7 @@ namespace Azure.ResourceManager.Storage.Models
             IPAddressOrRange = ipAddressOrRange;
         }
 
-        /// <summary> Initializes a new instance of IPRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="IPRule"/>. </summary>
         /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
         /// <param name="action"> The action of IP ACL rule. </param>
         internal IPRule(string ipAddressOrRange, Action? action)

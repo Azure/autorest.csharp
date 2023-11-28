@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The ListModelsResponse. </summary>
     public partial class ListModelsResponse
     {
-        /// <summary> Initializes a new instance of ListModelsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListModelsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="object"/> or <paramref name="data"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace OpenAI.Models
             Data = data.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListModelsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListModelsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         internal ListModelsResponse(string @object, IReadOnlyList<Model> data)

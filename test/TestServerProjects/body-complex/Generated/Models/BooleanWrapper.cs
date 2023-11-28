@@ -10,12 +10,12 @@ namespace body_complex.Models
     /// <summary> The BooleanWrapper. </summary>
     public partial class BooleanWrapper
     {
-        /// <summary> Initializes a new instance of BooleanWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanWrapper"/>. </summary>
         public BooleanWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of BooleanWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanWrapper"/>. </summary>
         /// <param name="fieldTrue"></param>
         /// <param name="fieldFalse"></param>
         internal BooleanWrapper(bool? fieldTrue, bool? fieldFalse)

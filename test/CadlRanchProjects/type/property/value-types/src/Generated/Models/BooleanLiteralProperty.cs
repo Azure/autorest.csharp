@@ -10,12 +10,12 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a boolean literal property. </summary>
     public partial class BooleanLiteralProperty
     {
-        /// <summary> Initializes a new instance of BooleanLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanLiteralProperty"/>. </summary>
         public BooleanLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of BooleanLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal BooleanLiteralProperty(bool property)
         {

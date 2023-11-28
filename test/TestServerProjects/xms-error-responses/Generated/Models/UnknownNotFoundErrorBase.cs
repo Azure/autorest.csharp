@@ -10,7 +10,7 @@ namespace xms_error_responses.Models
     /// <summary> The UnknownNotFoundErrorBase. </summary>
     internal partial class UnknownNotFoundErrorBase : NotFoundErrorBase
     {
-        /// <summary> Initializes a new instance of UnknownNotFoundErrorBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownNotFoundErrorBase"/>. </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>

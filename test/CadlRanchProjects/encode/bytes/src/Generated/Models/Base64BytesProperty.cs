@@ -13,7 +13,7 @@ namespace Encode.Bytes.Models
     /// <summary> The Base64BytesProperty. </summary>
     public partial class Base64BytesProperty
     {
-        /// <summary> Initializes a new instance of Base64BytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Base64BytesProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Base64BytesProperty(BinaryData value)

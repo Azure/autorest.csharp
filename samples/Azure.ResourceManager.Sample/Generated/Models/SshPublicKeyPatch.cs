@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SshPublicKeyPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of SshPublicKeyPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyPatch"/>. </summary>
         public SshPublicKeyPatch()
         {
         }

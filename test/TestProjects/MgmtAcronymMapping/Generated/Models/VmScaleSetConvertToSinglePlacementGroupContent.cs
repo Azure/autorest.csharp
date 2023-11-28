@@ -13,7 +13,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VmScaleSetConvertToSinglePlacementGroupContent
     {
-        /// <summary> Initializes a new instance of VmScaleSetConvertToSinglePlacementGroupContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VmScaleSetConvertToSinglePlacementGroupContent"/>. </summary>
         public VmScaleSetConvertToSinglePlacementGroupContent()
         {
         }

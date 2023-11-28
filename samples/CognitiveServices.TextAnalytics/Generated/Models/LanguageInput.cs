@@ -13,7 +13,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LanguageInput. </summary>
     public partial class LanguageInput
     {
-        /// <summary> Initializes a new instance of LanguageInput. </summary>
+        /// <summary> Initializes a new instance of <see cref="LanguageInput"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="text"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="text"/> is null. </exception>

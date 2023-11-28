@@ -17,7 +17,7 @@ namespace ConfidentLevelsInTsp.Models
     /// </summary>
     public abstract partial class PollutedPet
     {
-        /// <summary> Initializes a new instance of PollutedPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedPet"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected PollutedPet(string name)
@@ -27,7 +27,7 @@ namespace ConfidentLevelsInTsp.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of PollutedPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedPet"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         internal PollutedPet(string kind, string name)

@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ProximityPlacementGroupListResult
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of proximity placement groups
         /// Serialized Name: ProximityPlacementGroupListResult.value
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of proximity placement groups
         /// Serialized Name: ProximityPlacementGroupListResult.value

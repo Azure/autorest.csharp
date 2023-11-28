@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The SameAsModel. </summary>
     public partial class SameAsModel
     {
-        /// <summary> Initializes a new instance of SameAsModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="SameAsModel"/>. </summary>
         /// <param name="sameAsModelProperty"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="sameAsModelProperty"/> is null. </exception>
         public SameAsModel(string sameAsModelProperty)

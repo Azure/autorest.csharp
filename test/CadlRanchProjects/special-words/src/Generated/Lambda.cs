@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The lambda. </summary>
     public partial class Lambda
     {
-        /// <summary> Initializes a new instance of Lambda. </summary>
+        /// <summary> Initializes a new instance of <see cref="Lambda"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Lambda(string name)

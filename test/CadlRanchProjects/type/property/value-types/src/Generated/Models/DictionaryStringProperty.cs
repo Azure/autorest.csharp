@@ -14,7 +14,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with dictionary string properties. </summary>
     public partial class DictionaryStringProperty
     {
-        /// <summary> Initializes a new instance of DictionaryStringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DictionaryStringProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public DictionaryStringProperty(IDictionary<string, string> property)

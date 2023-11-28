@@ -14,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Indirect self reference model. </summary>
     public partial class IndirectSelfReferenceModel
     {
-        /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="something"/> or <paramref name="unionProperty"/> is null. </exception>
@@ -27,7 +27,7 @@ namespace ConfidentLevelsInTsp.Models
             UnionProperty = unionProperty;
         }
 
-        /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="reference"> Reference back. </param>
         /// <param name="unionProperty"> The non-confident part. </param>

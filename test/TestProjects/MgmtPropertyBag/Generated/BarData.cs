@@ -16,12 +16,12 @@ namespace MgmtPropertyBag
     /// </summary>
     public partial class BarData : ResourceData
     {
-        /// <summary> Initializes a new instance of BarData. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarData"/>. </summary>
         public BarData()
         {
         }
 
-        /// <summary> Initializes a new instance of BarData. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

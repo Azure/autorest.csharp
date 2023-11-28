@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the url rewrite action for the delivery rule. </summary>
     public partial class UrlRewriteAction : DeliveryRuleAction
     {
-        /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public UrlRewriteAction(UrlRewriteActionParameters parameters)
@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.UrlRewrite;
         }
 
-        /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="UrlRewriteAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>

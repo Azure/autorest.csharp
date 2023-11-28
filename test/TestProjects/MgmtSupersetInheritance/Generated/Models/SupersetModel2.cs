@@ -10,12 +10,12 @@ namespace MgmtSupersetInheritance.Models
     /// <summary> This model does not have id property, it's Non-Resource. </summary>
     public partial class SupersetModel2
     {
-        /// <summary> Initializes a new instance of SupersetModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel2"/>. </summary>
         public SupersetModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="supersetModel2Type"></param>

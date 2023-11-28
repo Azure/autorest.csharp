@@ -11,7 +11,7 @@ namespace OpenAI.Models
     /// <summary> The CreateModerationRequest. </summary>
     public partial class CreateModerationRequest
     {
-        /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public CreateModerationRequest(BinaryData input)
@@ -21,7 +21,7 @@ namespace OpenAI.Models
             Input = input;
         }
 
-        /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <param name="model">
         /// Two content moderations models are available: `text-moderation-stable` and

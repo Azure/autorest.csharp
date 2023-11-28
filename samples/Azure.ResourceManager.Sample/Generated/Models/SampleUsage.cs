@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SampleUsage
     {
-        /// <summary> Initializes a new instance of SampleUsage. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="currentValue">
         /// The current usage of the resource.
         /// Serialized Name: Usage.currentValue
@@ -40,7 +40,7 @@ namespace Azure.ResourceManager.Sample.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of SampleUsage. </summary>
+        /// <summary> Initializes a new instance of <see cref="SampleUsage"/>. </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
         /// Serialized Name: Usage.unit

@@ -14,7 +14,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment operation parameters. </summary>
     public partial class Deployment
     {
-        /// <summary> Initializes a new instance of Deployment. </summary>
+        /// <summary> Initializes a new instance of <see cref="Deployment"/>. </summary>
         /// <param name="properties"> The deployment properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public Deployment(DeploymentProperties properties)

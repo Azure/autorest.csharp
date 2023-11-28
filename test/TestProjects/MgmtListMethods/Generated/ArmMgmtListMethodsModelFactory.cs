@@ -16,7 +16,7 @@ namespace MgmtListMethods.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtListMethodsModelFactory
     {
-        /// <summary> Initializes a new instance of FakeData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -32,7 +32,7 @@ namespace MgmtListMethods.Models
             return new FakeData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithNonResChWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithNonResChWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -48,7 +48,7 @@ namespace MgmtListMethods.Models
             return new FakeParentWithAncestorWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of NonResourceChild. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.NonResourceChild"/>. </summary>
         /// <param name="name"> Name. </param>
         /// <param name="numberOfCores"> Test Desc. </param>
         /// <returns> A new <see cref="Models.NonResourceChild"/> instance for mocking. </returns>
@@ -57,7 +57,7 @@ namespace MgmtListMethods.Models
             return new NonResourceChild(name, numberOfCores);
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -73,7 +73,7 @@ namespace MgmtListMethods.Models
             return new FakeParentWithAncestorWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -89,7 +89,7 @@ namespace MgmtListMethods.Models
             return new FakeParentWithAncestorWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithAncestorData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -105,7 +105,7 @@ namespace MgmtListMethods.Models
             return new FakeParentWithAncestorData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -121,7 +121,7 @@ namespace MgmtListMethods.Models
             return new FakeParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of FakeParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -137,7 +137,7 @@ namespace MgmtListMethods.Models
             return new FakeParentData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithNonResChWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithNonResChWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -153,7 +153,7 @@ namespace MgmtListMethods.Models
             return new ResGrpParentWithAncestorWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -169,7 +169,7 @@ namespace MgmtListMethods.Models
             return new ResGrpParentWithAncestorWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -185,7 +185,7 @@ namespace MgmtListMethods.Models
             return new ResGrpParentWithAncestorWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithAncestorData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithAncestorData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -201,7 +201,7 @@ namespace MgmtListMethods.Models
             return new ResGrpParentWithAncestorData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -217,7 +217,7 @@ namespace MgmtListMethods.Models
             return new ResGrpParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of ResGrpParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.ResGrpParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -233,7 +233,7 @@ namespace MgmtListMethods.Models
             return new ResGrpParentData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of SubParentWithNonResChWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithNonResChWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -249,7 +249,7 @@ namespace MgmtListMethods.Models
             return new SubParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of SubParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -265,7 +265,7 @@ namespace MgmtListMethods.Models
             return new SubParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of SubParentWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -281,7 +281,7 @@ namespace MgmtListMethods.Models
             return new SubParentWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of SubParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.SubParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -297,7 +297,7 @@ namespace MgmtListMethods.Models
             return new SubParentData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithNonResChWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -313,7 +313,7 @@ namespace MgmtListMethods.Models
             return new MgmtGrpParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of MgmtGrpParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -329,7 +329,7 @@ namespace MgmtListMethods.Models
             return new MgmtGrpParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of MgmtGrpParentWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGrpParentWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -345,7 +345,7 @@ namespace MgmtListMethods.Models
             return new MgmtGrpParentWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of MgmtGroupParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.MgmtGroupParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -361,7 +361,7 @@ namespace MgmtListMethods.Models
             return new MgmtGroupParentData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of TenantTestData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantTestData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -377,7 +377,7 @@ namespace MgmtListMethods.Models
             return new TenantTestData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithNonResChWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithNonResChWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -393,7 +393,7 @@ namespace MgmtListMethods.Models
             return new TenantParentWithNonResChWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithNonResChData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithNonResChData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -409,7 +409,7 @@ namespace MgmtListMethods.Models
             return new TenantParentWithNonResChData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithLocData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentWithLocData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -425,7 +425,7 @@ namespace MgmtListMethods.Models
             return new TenantParentWithLocData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of TenantParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.TenantParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -441,7 +441,7 @@ namespace MgmtListMethods.Models
             return new TenantParentData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of UpdateWorkspaceQuotas. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UpdateWorkspaceQuotas"/>. </summary>
         /// <param name="id"> Specifies the resource ID. </param>
         /// <param name="updateWorkspaceQuotasType"> Specifies the resource type. </param>
         /// <param name="limit"> The maximum permitted quota of the resource. </param>
@@ -453,7 +453,7 @@ namespace MgmtListMethods.Models
             return new UpdateWorkspaceQuotas(id, updateWorkspaceQuotasType, limit, unit, status);
         }
 
-        /// <summary> Initializes a new instance of FakeConfigurationData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtListMethods.FakeConfigurationData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

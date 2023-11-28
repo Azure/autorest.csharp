@@ -16,12 +16,12 @@ namespace MgmtXmlDeserialization
     /// </summary>
     public partial class XmlInstanceData : ResourceData
     {
-        /// <summary> Initializes a new instance of XmlInstanceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlInstanceData"/>. </summary>
         public XmlInstanceData()
         {
         }
 
-        /// <summary> Initializes a new instance of XmlInstanceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlInstanceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

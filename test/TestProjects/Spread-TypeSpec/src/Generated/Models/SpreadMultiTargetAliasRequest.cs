@@ -13,7 +13,7 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadMultiTargetAliasRequest. </summary>
     internal partial class SpreadMultiTargetAliasRequest
     {
-        /// <summary> Initializes a new instance of SpreadMultiTargetAliasRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadMultiTargetAliasRequest"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>

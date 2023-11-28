@@ -14,13 +14,13 @@ namespace MgmtXmlDeserialization.Models
     /// <summary> Paged Xml list representation. </summary>
     internal partial class XmlCollection
     {
-        /// <summary> Initializes a new instance of XmlCollection. </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlCollection"/>. </summary>
         internal XmlCollection()
         {
             Value = new ChangeTrackingList<XmlInstanceData>();
         }
 
-        /// <summary> Initializes a new instance of XmlCollection. </summary>
+        /// <summary> Initializes a new instance of <see cref="XmlCollection"/>. </summary>
         /// <param name="value"> Page values. </param>
         /// <param name="count"> Total record count number across all pages. </param>
         /// <param name="nextLink"> Next page link if any. </param>

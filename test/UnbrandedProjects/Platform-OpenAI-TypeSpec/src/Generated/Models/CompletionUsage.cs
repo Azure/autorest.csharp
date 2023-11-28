@@ -7,7 +7,7 @@ namespace OpenAI.Models
     /// <summary> Usage statistics for the completion request. </summary>
     public partial class CompletionUsage
     {
-        /// <summary> Initializes a new instance of CompletionUsage. </summary>
+        /// <summary> Initializes a new instance of <see cref="CompletionUsage"/>. </summary>
         /// <param name="promptTokens"> Number of tokens in the prompt. </param>
         /// <param name="completionTokens"> Number of tokens in the generated completion. </param>
         /// <param name="totalTokens"> Total number of tokens used in the request (prompt + completion). </param>

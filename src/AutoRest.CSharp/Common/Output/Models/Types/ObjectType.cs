@@ -101,9 +101,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     childrenList.Add($"{implementation.Type:C}");
                 }
-                return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}.";
+                return childrenList.Any() ?
+                    (FormattableString)$"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}." :
+                    $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}.";
             }
-            return $"";
+            return FormattableStringHelpers.Empty;
         }
     }
 }

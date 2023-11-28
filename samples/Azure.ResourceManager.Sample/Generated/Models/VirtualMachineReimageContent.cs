@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineReimageContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineReimageContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineReimageContent"/>. </summary>
         public VirtualMachineReimageContent()
         {
         }

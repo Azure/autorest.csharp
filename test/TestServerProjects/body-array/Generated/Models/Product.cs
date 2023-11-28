@@ -10,12 +10,12 @@ namespace body_array.Models
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         public Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
         internal Product(int? integer, string @string)

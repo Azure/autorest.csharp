@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetPublicIPAddressConfiguration
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             IPTags = new ChangeTrackingList<VirtualMachineScaleSetIPTag>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPublicIPAddressConfiguration"/>. </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfiguration.name

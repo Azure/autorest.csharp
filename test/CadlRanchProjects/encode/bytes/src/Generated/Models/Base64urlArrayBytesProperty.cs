@@ -15,7 +15,7 @@ namespace Encode.Bytes.Models
     /// <summary> The Base64urlArrayBytesProperty. </summary>
     public partial class Base64urlArrayBytesProperty
     {
-        /// <summary> Initializes a new instance of Base64urlArrayBytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Base64urlArrayBytesProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public Base64urlArrayBytesProperty(IEnumerable<BinaryData> value)
@@ -25,7 +25,7 @@ namespace Encode.Bytes.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of Base64urlArrayBytesProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Base64urlArrayBytesProperty"/>. </summary>
         /// <param name="value"></param>
         internal Base64urlArrayBytesProperty(IList<BinaryData> value)
         {

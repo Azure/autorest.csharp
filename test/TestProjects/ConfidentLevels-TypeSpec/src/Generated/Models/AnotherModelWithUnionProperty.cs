@@ -14,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is another model with union types. </summary>
     public partial class AnotherModelWithUnionProperty
     {
-        /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnotherModelWithUnionProperty"/>. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
         internal AnotherModelWithUnionProperty(BinaryData unionProperty)

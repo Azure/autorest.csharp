@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RequestRateByIntervalContent : LogAnalyticsInputBase
     {
-        /// <summary> Initializes a new instance of RequestRateByIntervalContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri

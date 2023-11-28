@@ -18,12 +18,12 @@ namespace Inheritance.Models
     /// </summary>
     public partial class BaseClassWithDiscriminator : BaseClass
     {
-        /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithDiscriminator"/>. </summary>
         public BaseClassWithDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseClassWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseClassWithDiscriminator"/>. </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>

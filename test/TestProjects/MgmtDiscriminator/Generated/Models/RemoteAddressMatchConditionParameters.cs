@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for RemoteAddress match conditions. </summary>
     public partial class RemoteAddressMatchConditionParameters
     {
-        /// <summary> Initializes a new instance of RemoteAddressMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         public RemoteAddressMatchConditionParameters(RemoteAddressMatchConditionParametersTypeName typeName, RemoteAddressOperator @operator)
@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             Transforms = new ChangeTrackingList<Transform>();
         }
 
-        /// <summary> Initializes a new instance of RemoteAddressMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="RemoteAddressMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>

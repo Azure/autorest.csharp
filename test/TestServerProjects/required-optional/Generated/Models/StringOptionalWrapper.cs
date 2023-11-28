@@ -10,7 +10,7 @@ namespace required_optional.Models
     /// <summary> The StringOptionalWrapper. </summary>
     public partial class StringOptionalWrapper
     {
-        /// <summary> Initializes a new instance of StringOptionalWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringOptionalWrapper"/>. </summary>
         public StringOptionalWrapper()
         {
         }

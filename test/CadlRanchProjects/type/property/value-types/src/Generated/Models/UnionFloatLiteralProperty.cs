@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a union of float literal as property. </summary>
     public partial class UnionFloatLiteralProperty
     {
-        /// <summary> Initializes a new instance of UnionFloatLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionFloatLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnionFloatLiteralProperty(BinaryData property)

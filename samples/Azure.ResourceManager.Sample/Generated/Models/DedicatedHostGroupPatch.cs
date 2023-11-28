@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostGroupPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupPatch"/>. </summary>
         public DedicatedHostGroupPatch()
         {
             Zones = new ChangeTrackingList<string>();

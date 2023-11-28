@@ -13,13 +13,13 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with collection models properties. </summary>
     public partial class CollectionsModelProperty
     {
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
         public CollectionsModelProperty()
         {
             Property = new ChangeTrackingList<StringProperty>();
         }
 
-        /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsModelProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal CollectionsModelProperty(IList<StringProperty> property)
         {

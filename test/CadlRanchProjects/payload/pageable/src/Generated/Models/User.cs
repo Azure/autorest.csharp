@@ -13,7 +13,7 @@ namespace Payload.Pageable.Models
     /// <summary> User model. </summary>
     public partial class User
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="name"> User name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal User(string name)

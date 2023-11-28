@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameters for fuzzy matching, and other autocomplete query behaviors. </summary>
     public partial class AutocompleteRequest
     {
-        /// <summary> Initializes a new instance of AutocompleteRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="AutocompleteRequest"/>. </summary>
         /// <param name="searchText"> The search text on which to base autocomplete results. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>

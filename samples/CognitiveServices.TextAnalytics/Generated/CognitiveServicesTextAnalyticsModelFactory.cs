@@ -14,7 +14,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Model factory for models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
-        /// <summary> Initializes a new instance of EntitiesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.EntitiesResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
@@ -28,7 +28,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new EntitiesResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes a new instance of DocumentEntities. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentEntities"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
@@ -42,7 +42,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes a new instance of Entity. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Entity"/>. </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="category"> Entity type, such as Person/Location/Org/SSN etc. </param>
         /// <param name="subcategory"> Entity sub type, such as Age/Year/TimeRange etc. </param>
@@ -55,7 +55,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new Entity(text, category, subcategory, offset, length, confidenceScore);
         }
 
-        /// <summary> Initializes a new instance of TextAnalyticsWarning. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TextAnalyticsWarning"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>
@@ -65,7 +65,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new TextAnalyticsWarning(code, message, targetRef);
         }
 
-        /// <summary> Initializes a new instance of DocumentStatistics. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentStatistics"/>. </summary>
         /// <param name="charactersCount"> Number of text elements recognized in the document. </param>
         /// <param name="transactionsCount"> Number of transactions for the document. </param>
         /// <returns> A new <see cref="Models.DocumentStatistics"/> instance for mocking. </returns>
@@ -74,7 +74,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentStatistics(charactersCount, transactionsCount);
         }
 
-        /// <summary> Initializes a new instance of DocumentError. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentError"/>. </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>
@@ -93,7 +93,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentError(id, error);
         }
 
-        /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TextAnalyticsError"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <param name="target"> Error target. </param>
@@ -107,7 +107,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new TextAnalyticsError(code, message, target, innererror, details?.ToList());
         }
 
-        /// <summary> Initializes a new instance of InnerError. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.InnerError"/>. </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <param name="details"> Error details. </param>
@@ -121,7 +121,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new InnerError(code, message, details, target, innererror);
         }
 
-        /// <summary> Initializes a new instance of RequestStatistics. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.RequestStatistics"/>. </summary>
         /// <param name="documentsCount"> Number of documents submitted in the request. </param>
         /// <param name="validDocumentsCount"> Number of valid documents. This excludes empty, over-size limit or non-supported languages documents. </param>
         /// <param name="erroneousDocumentsCount"> Number of invalid documents. This includes empty, over-size limit or non-supported languages documents. </param>
@@ -132,7 +132,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
         }
 
-        /// <summary> Initializes a new instance of EntityLinkingResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.EntityLinkingResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
@@ -146,7 +146,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new EntityLinkingResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes a new instance of DocumentLinkedEntities. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentLinkedEntities"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized well-known entities in the document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
@@ -160,7 +160,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentLinkedEntities(id, entities?.ToList(), warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes a new instance of LinkedEntity. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.LinkedEntity"/>. </summary>
         /// <param name="name"> Entity Linking formal name. </param>
         /// <param name="matches"> List of instances this entity appears in the text. </param>
         /// <param name="language"> Language used in the data source. </param>
@@ -175,7 +175,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new LinkedEntity(name, matches?.ToList(), language, id, url, dataSource);
         }
 
-        /// <summary> Initializes a new instance of Match. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Match"/>. </summary>
         /// <param name="confidenceScore"> If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned. </param>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity match text. </param>
@@ -192,7 +192,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new Match(confidenceScore, text, offset, length);
         }
 
-        /// <summary> Initializes a new instance of KeyPhraseResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.KeyPhraseResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
@@ -206,7 +206,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new KeyPhraseResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes a new instance of DocumentKeyPhrases. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentKeyPhrases"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="keyPhrases"> A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
@@ -220,7 +220,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentKeyPhrases(id, keyPhrases?.ToList(), warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes a new instance of LanguageResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.LanguageResult"/>. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
@@ -234,7 +234,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new LanguageResult(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes a new instance of DocumentLanguage. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentLanguage"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguage"> Detected Language. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
@@ -247,7 +247,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentLanguage(id, detectedLanguage, warnings?.ToList(), statistics);
         }
 
-        /// <summary> Initializes a new instance of DetectedLanguage. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DetectedLanguage"/>. </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
@@ -267,7 +267,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DetectedLanguage(name, iso6391Name, confidenceScore);
         }
 
-        /// <summary> Initializes a new instance of SentimentResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SentimentResponse"/>. </summary>
         /// <param name="documents"> Sentiment analysis per document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
@@ -281,7 +281,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new SentimentResponse(documents?.ToList(), errors?.ToList(), statistics, modelVersion);
         }
 
-        /// <summary> Initializes a new instance of DocumentSentiment. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DocumentSentiment"/>. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
@@ -297,7 +297,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new DocumentSentiment(id, sentiment, statistics, confidenceScores, sentences?.ToList(), warnings?.ToList());
         }
 
-        /// <summary> Initializes a new instance of SentimentConfidenceScorePerLabel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SentimentConfidenceScorePerLabel"/>. </summary>
         /// <param name="positive"></param>
         /// <param name="neutral"></param>
         /// <param name="negative"></param>
@@ -307,7 +307,7 @@ namespace CognitiveServices.TextAnalytics.Models
             return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
         }
 
-        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SentenceSentiment"/>. </summary>
         /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>

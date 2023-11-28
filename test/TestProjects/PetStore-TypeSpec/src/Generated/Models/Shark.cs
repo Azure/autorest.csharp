@@ -13,7 +13,7 @@ namespace PetStore.Models
     /// <summary> Shark is a fish. </summary>
     public partial class Shark : Fish
     {
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Shark"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="bite"> The bite of the shark. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bite"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace PetStore.Models
             Bite = bite;
         }
 
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Shark"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="bite"> The bite of the shark. </param>

@@ -15,7 +15,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> The DerivedModel. </summary>
     public partial class DerivedModel : BaseModel
     {
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="requiredCollection"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
         public DerivedModel(IEnumerable<string> requiredCollection)
@@ -25,7 +25,7 @@ namespace MgmtDiscriminator.Models
             RequiredCollection = requiredCollection.ToList();
         }
 
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="optionalString"></param>
         /// <param name="requiredCollection"></param>
         internal DerivedModel(string optionalString, IList<string> requiredCollection) : base(optionalString)

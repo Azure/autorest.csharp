@@ -13,13 +13,13 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The Model5. </summary>
     public partial class Model5
     {
-        /// <summary> Initializes a new instance of Model5. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         public Model5()
         {
             Modelqs = new ChangeTrackingList<ModelQ>();
         }
 
-        /// <summary> Initializes a new instance of Model5. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model5"/>. </summary>
         /// <param name="id"></param>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>
