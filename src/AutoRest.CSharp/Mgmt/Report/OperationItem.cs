@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Utilities;
@@ -13,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class OperationItem : TransformableItem
     {
-        public OperationItem(MgmtRestOperation operation, TransformSection transformSection)
+        public OperationItem(MgmtRestOperation operation, TransformSection transformSection, IReadOnlyDictionary<object, string>? renamingMap)
             : base(operation.Operation.Name, transformSection)
         {
             OperationName = operation.Operation.Name;
@@ -32,15 +33,19 @@ namespace AutoRest.CSharp.Mgmt.Report
                     string warning = $"Can't find corresponding RequestParameter for Parameter {operation.OperationName}.{bodyParam.Name}. OperationName = {operation.Operation.Name}. Try to use Parameter.Name to parse fullSerializedName as {paramFullSerializedName}";
                     AutoRestLogger.Warning(warning).Wait();
                 }
-                else if (bodyRequestParam.CSharpName() != bodyParam.Name)
-                {
-                    paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
-                    string warning = $"Name mismatch between Parameter and RequestParameter. OperationName = {operation.Operation.Name}. Parameter.Name = {bodyParam.Name}, RequestParameter.CSharpName = {bodyRequestParam.CSharpName()}. Try to use RequestParameter to parse fullSerializedName as {paramFullSerializedName}";
-                    AutoRestLogger.Warning(warning).Wait();
-                }
                 else
                 {
-                    paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
+                    var paramName = renamingMap != null && renamingMap.TryGetValue(bodyRequestParam, out var newName) ? newName : bodyRequestParam.CSharpName();
+                    if (paramName != bodyParam.Name)
+                    {
+                        paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
+                        string warning = $"Name mismatch between Parameter and RequestParameter. OperationName = {operation.Operation.Name}. Parameter.Name = {bodyParam.Name}, RequestParameter.CSharpName = {bodyRequestParam.CSharpName()}. Try to use RequestParameter to parse fullSerializedName as {paramFullSerializedName}";
+                        AutoRestLogger.Warning(warning).Wait();
+                    }
+                    else
+                    {
+                        paramFullSerializedName = operation.Operation.GetFullSerializedName(bodyRequestParam);
+                    }
                 }
                 BodyParameter = new ParameterItem(bodyParam, paramFullSerializedName, transformSection);
             }

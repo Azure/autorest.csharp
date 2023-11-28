@@ -49,7 +49,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             while (type != null)
             {
                 yield return type;
-                type = type.GetBaseObjectType();
+
+                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
+                {
+                    type = o;
+                }
+                else
+                {
+                    type = null;
+                }
             }
         }
 

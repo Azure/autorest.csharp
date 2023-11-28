@@ -22,9 +22,9 @@ namespace AutoRest.CSharp.Output.Models
                 .Distinct()
                 .ToList();
 
-        public static Parameter BuildConstructorParameter(InputParameter inputParameter, TypeFactory typeFactory)
+        public static Parameter BuildConstructorParameter(InputParameter inputParameter, TypeFactory typeFactory, IReadOnlyDictionary<object, string>? renamingMap = null)
         {
-            var parameter = Parameter.FromInputParameter(inputParameter, false, typeFactory);
+            var parameter = Parameter.FromInputParameter(inputParameter, false, typeFactory, renamingMap);
             if (!inputParameter.IsEndpoint)
             {
                 return parameter;

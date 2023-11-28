@@ -19,8 +19,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private IReadOnlyList<Resource>? _resources;
         private readonly MgmtOutputLibrary _library;
 
-        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, IReadOnlyList<InputOperation> operations, string clientName, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
-            : base(new ClientMethodsBuilder(inputClient.Operations, library, sourceInputModel, library.TypeFactory), clientParameters, restClientParameters, clientName, Configuration.Namespace, inputClient.Key, sourceInputModel)
+        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, IReadOnlyList<InputOperation> operations, string clientName, MgmtOutputLibrary library, SourceInputModel? sourceInputModel, IReadOnlyDictionary<object, string> renamingMap)
+            : base(new ClientMethodsBuilder(inputClient.Operations, library, sourceInputModel, library.TypeFactory, renamingMap), clientParameters, restClientParameters, clientName, Configuration.Namespace, inputClient.Key, sourceInputModel)
         {
             _library = library;
             _operations = operations;

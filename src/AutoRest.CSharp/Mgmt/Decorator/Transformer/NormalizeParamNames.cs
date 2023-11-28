@@ -3,10 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
@@ -14,31 +11,32 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class NormalizeParamNames
     {
-        internal static string GetNewName(string paramName, string schemaName, IDictionary<string, HashSet<OperationSet>> dataSchemaHash)
+        internal static string GetNewName(string paramName, InputType inputType, IDictionary<string, HashSet<OperationSet>> dataSchemaHash, IReadOnlyDictionary<object, string> renamingMap)
         {
-            if (schemaName.EndsWith("Options", StringComparison.Ordinal))
+            var typeName = renamingMap.TryGetValue(inputType, out var newName) ? newName : inputType.Name;
+            if (typeName.EndsWith("Options", StringComparison.Ordinal))
                 return "options";
 
-            if (schemaName.EndsWith("Info", StringComparison.Ordinal))
+            if (typeName.EndsWith("Info", StringComparison.Ordinal))
                 return "info";
 
-            if (schemaName.EndsWith("Details", StringComparison.Ordinal))
+            if (typeName.EndsWith("Details", StringComparison.Ordinal))
                 return "details";
 
-            if (schemaName.EndsWith("Content", StringComparison.Ordinal))
+            if (typeName.EndsWith("Content", StringComparison.Ordinal))
                 return "content";
 
-            if (schemaName.EndsWith("Patch", StringComparison.Ordinal))
+            if (typeName.EndsWith("Patch", StringComparison.Ordinal))
                 return "patch";
 
-            if (schemaName.EndsWith("Input", StringComparison.Ordinal))
+            if (typeName.EndsWith("Input", StringComparison.Ordinal))
                 return "input";
 
-            if (schemaName.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(schemaName))
+            if (typeName.EndsWith("Data", StringComparison.Ordinal) || dataSchemaHash.ContainsKey(typeName))
                 return "data";
 
             if (paramName.Equals("parameters", StringComparison.OrdinalIgnoreCase))
-                return schemaName.FirstCharToLowerCase();
+                return typeName.FirstCharToLowerCase();
 
             return paramName;
         }

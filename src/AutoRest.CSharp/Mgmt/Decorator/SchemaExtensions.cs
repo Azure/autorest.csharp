@@ -6,9 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Decorator;
 
@@ -17,11 +15,11 @@ internal static class SchemaExtensions
     /// <summary>
     /// Union all the properties on myself and all the properties from my parents
     /// </summary>
-    /// <param name="inputModelType"></param>
+    /// <param name="inputModel"></param>
     /// <returns></returns>
-    internal static IEnumerable<InputModelProperty> GetAllProperties(this InputModelType inputModelType)
+    internal static IEnumerable<InputModelProperty> GetAllProperties(this InputModelType inputModel)
     {
-        return inputModelType.DerivedModels!.OfType<InputModelType>().SelectMany(parentInputModelType => parentInputModelType.Properties).Concat(inputModelType.Properties);
+        return inputModel.GetSelfAndBaseModels().SelectMany(parentInputModelType => parentInputModelType.Properties).Concat(inputModel.Properties);
     }
 
     /// <summary>
@@ -73,7 +71,7 @@ internal static class SchemaExtensions
                         idPropertyFound = true;
                     continue;
                 case "type":
-                    if (property.Type is InputPrimitiveType inputPrimitive && inputPrimitive.Kind == InputTypeKind.String)
+                    if (property.Type is InputPrimitiveType inputPrimitive && (inputPrimitive.Kind == InputTypeKind.ResourceType || inputPrimitive.Kind == InputTypeKind.String))
                         typePropertyFound = true;
                     continue;
                 case "name":

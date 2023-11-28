@@ -98,14 +98,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             ConvenienceModifiers = GetAccessibility(Operation.Accessibility);
         }
 
-        public RestClientOperationMethods Build()
+        public RestClientOperationMethods Build(IReadOnlyDictionary<object, string>? renamingMap)
         {
             if (!GenerateProtocolMethods && (Configuration.Generation1ConvenienceClient || Configuration.AzureArm))
             {
-                return BuildLegacy();
+                return BuildLegacy(renamingMap);
             }
 
-            var parameters = _parametersBuilder.BuildParameters(true);
+            var parameters = _parametersBuilder.BuildParameters(true, renamingMap);
 
             var convenienceMethodIsMeaningless = IsConvenienceMethodMeaningless(parameters);
             if (MakeAllProtocolParametersRequired(parameters, convenienceMethodIsMeaningless))
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, parameters.RequestParts);
-            var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
+            var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage, renamingMap);
             var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters);
 
             string? protocolMethodNonDocumentComment = null;
@@ -215,11 +215,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                    parameters.HasAmbiguityBetweenProtocolAndConvenience;
         }
 
-        private RestClientOperationMethods BuildLegacy()
+        private RestClientOperationMethods BuildLegacy(IReadOnlyDictionary<object, string>? renamingMap)
         {
-            var parameters = _parametersBuilder.BuildParameters(false);
+            var parameters = _parametersBuilder.BuildParameters(false, renamingMap);
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, parameters.RequestParts);
-            var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
+            var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage, renamingMap);
             var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters);
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return body is not null ? new Method(signature, body) : null;
         }
 
-        protected abstract MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters);
+        protected abstract MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters, IReadOnlyDictionary<object, string>? renamingMap);
 
         protected abstract MethodBodyStatement? BuildCreateNextPageMessageMethodBody(RequestParts requestParts, MethodSignature signature);
 

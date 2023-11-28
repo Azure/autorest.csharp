@@ -46,16 +46,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 typeName = typeName.ReplaceLast("Info", Content);
             if (typeName.EndsWith("Input", StringComparison.Ordinal))
                 typeName = typeName.ReplaceLast("Input", Content);
-            var paramNewName = NormalizeParamNames.GetNewName(bodyParameter.Name, typeName, resourceDataDictionary);
+            var paramNewName = NormalizeParamNames.GetNewName(bodyParameter.Name, bodyParameter.Type, resourceDataDictionary, renamingMap);
             // TODO -- we need to add a check here to see if this rename introduces parameter name collisions
             UpdateRequestParameter(bodyParameter, paramNewName, typeName, operation, renamingMap);
         }
 
-        internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, Dictionary<object, string> parameterRenaming)
+        internal static void UpdateParameterNameOnly(InputParameter bodyParam, IDictionary<string, HashSet<OperationSet>> resourceDataDictionary, InputOperation operation, Dictionary<object, string> renamingMap)
         {
             string oriName = bodyParam.Name;
-            var newName = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type.Name, resourceDataDictionary);
-            parameterRenaming.Add(bodyParam, newName);
+            var newName = NormalizeParamNames.GetNewName(bodyParam.Name, bodyParam.Type, resourceDataDictionary, renamingMap);
+            renamingMap.Add(bodyParam, newName);
             string fullSerializedName = operation.GetFullSerializedName(bodyParam);
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
@@ -71,15 +71,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
                 fullSerializedName, "UpdateParameterName", oriParameterName, parameterNewName);
 
-            string oriSchemaName = parameter.Type.Name;
+            string originalSchemaName = parameter.Type.Name;
             renamingMap.Add(parameter.Type, typeNewName);
             fullSerializedName = parameter.Type.GetFullSerializedName();
             MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
                 new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                fullSerializedName, "UpdateParameterSchemaName", oriSchemaName, parameter.Type.Name);
+                fullSerializedName, "UpdateParameterSchemaName", originalSchemaName, parameter.Type.Name);
 
-            if (parameter.Type is InputEnumType ||
-                parameter.Type is InputModelType)
+            if (parameter.Type is InputEnumType || parameter.Type is InputModelType)
                 SchemaNameAndFormatUpdater.UpdateAcronym(parameter.Type, renamingMap);
         }
 

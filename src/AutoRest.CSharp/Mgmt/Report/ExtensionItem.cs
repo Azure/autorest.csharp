@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class ExtensionItem
     {
-        public ExtensionItem(MgmtExtension extension, TransformSection transformSection)
+        public ExtensionItem(MgmtExtension extension, TransformSection transformSection, IReadOnlyDictionary<object, string>? renamingMap)
         {
             this.Name = extension.ResourceName;
             this.ContextPaths =
@@ -22,10 +22,10 @@ namespace AutoRest.CSharp.Mgmt.Report
                 .OrderBy(g => g.Key)
                 .ToDictionary(
                     g => g.Key,
-                    g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
+                    g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection, renamingMap))).Distinct().ToList());
         }
 
-        public ExtensionItem(MgmtMockableExtension mockableExtension, TransformSection transformSection)
+        public ExtensionItem(MgmtMockableExtension mockableExtension, TransformSection transformSection, IReadOnlyDictionary<object, string>? renamingMap)
         {
             this.Name = mockableExtension.ResourceName;
             this.ContextPaths =
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Report
                 .GroupBy(op => op.MethodSignature.Name)
                 .ToDictionary(
                     g => g.Key,
-                    g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
+                    g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection, renamingMap))).Distinct().ToList());
         }
 
         [YamlIgnore]

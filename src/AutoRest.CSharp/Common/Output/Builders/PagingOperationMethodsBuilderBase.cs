@@ -63,11 +63,11 @@ namespace AutoRest.CSharp.Output.Models
             return BuildConvenienceMethod(methodSignature, CreateLegacyConvenienceMethodBody(createRequestMethod.Signature, _nextPageStatusCodeSwitchBuilder, async), async);
         }
 
-        protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters)
+        protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters, IReadOnlyDictionary<object, string>? renamingMap)
         {
             var (methodName, parameters) = Paging switch {
                 { SelfNextLink: true } => ($"Create{Operation.CleanName}Request", createMessageParameters),
-                { NextLinkOperation: { } nextLinkOperation } => ($"Create{nextLinkOperation.CleanName}Request", BuildNextLinkOperationCreateMessageParameters(nextLinkOperation)),
+                { NextLinkOperation: { } nextLinkOperation } => ($"Create{nextLinkOperation.CleanName}Request", BuildNextLinkOperationCreateMessageParameters(nextLinkOperation, renamingMap)),
                 { NextLinkName: { }} => ($"Create{ProtocolMethodName}NextPageRequest", createMessageParameters.Prepend(KnownParameters.NextLink).ToArray()),
                 _ => (null, Array.Empty<Parameter>())
             };
@@ -77,8 +77,8 @@ namespace AutoRest.CSharp.Output.Models
                 : null;
         }
 
-        private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
-            => new MethodParametersBuilder(nextLinkOperation, null, _typeFactory).BuildParameters(GenerateProtocolMethods).CreateMessage;
+        private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation, IReadOnlyDictionary<object, string>? renamingMap)
+            => new MethodParametersBuilder(nextLinkOperation, null, _typeFactory).BuildParameters(GenerateProtocolMethods, renamingMap).CreateMessage;
 
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(RequestParts requestParts, MethodSignature signature)
         {

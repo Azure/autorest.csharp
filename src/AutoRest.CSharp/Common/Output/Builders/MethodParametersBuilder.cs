@@ -71,12 +71,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
             _requestPartsBuilder = new RequestPartBuilder();
         }
 
-        public RestClientMethodParameters BuildParameters(bool buildParametersForProtocolMethods)
+        public RestClientMethodParameters BuildParameters(bool buildParametersForProtocolMethods, IReadOnlyDictionary<object, string>? renamingMap)
         {
             var sortedForProtocolMethod = GetSortedParameters();
             if (!buildParametersForProtocolMethods)
             {
-                return BuildParametersLegacy(Configuration.Generation1ConvenienceClient ? GetLegacySortedParameters() : sortedForProtocolMethod);
+                return BuildParametersLegacy(Configuration.Generation1ConvenienceClient ? GetLegacySortedParameters() : sortedForProtocolMethod, renamingMap);
             }
 
             bool bodyIsAdded = false;
@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
-        private RestClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> sortedParameters)
+        private RestClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> sortedParameters, IReadOnlyDictionary<object, string>? renamingMap)
         {
             var parameters = new Dictionary<InputParameter, Parameter>();
             foreach (var inputParameter in sortedParameters)
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 }
                 else
                 {
-                    var parameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory);
+                    var parameter = Parameter.FromInputParameter(inputParameter, _keepClientDefaultValue, _typeFactory, renamingMap);
                     // Grouped and flattened parameters shouldn't be added to methods
                     if (inputParameter.Kind == InputOperationParameterKind.Method)
                     {

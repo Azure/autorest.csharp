@@ -25,15 +25,22 @@ namespace AutoRest.CSharp.Common.Input
         /// </summary>
         public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
 
-        public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
+        public IReadOnlyList<InputModelType> GetSelfAndBaseModels() => EnsureSelfAndBaseModels(this);
 
         public InputModelType GetNotNullable() => IsNullable ? this with { IsNullable = false } : this;
 
-        private static IEnumerable<InputModelType> EnumerateBase(InputModelType? model)
+        private static IReadOnlyList<InputModelType> EnsureSelfAndBaseModels(InputModelType? model)
+        {
+            var result = new List<InputModelType>();
+            EnumerateBase(model, result);
+            return result;
+        }
+
+        private static void EnumerateBase(InputModelType? model, IList<InputModelType> result)
         {
             while (model != null)
             {
-                yield return model;
+                result.Add(model);
                 model = model.BaseModel;
             }
         }

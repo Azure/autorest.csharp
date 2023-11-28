@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
@@ -20,13 +19,15 @@ namespace AutoRest.CSharp.Common.Output.Builders
         private readonly TypeFactory _typeFactory;
         private readonly OutputLibrary? _library;
         private readonly SourceInputModel? _sourceInputModel;
+        private readonly IReadOnlyDictionary<object, string>? _renamingMap;
 
-        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, SourceInputModel? sourceInputModel, TypeFactory typeFactory)
+        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, SourceInputModel? sourceInputModel, TypeFactory typeFactory, IReadOnlyDictionary<object, string>? renamingMap = null)
         {
             _operations = operations;
             _library = library;
             _sourceInputModel = sourceInputModel;
             _typeFactory = typeFactory;
+            _renamingMap = renamingMap;
         }
 
         public IEnumerable<RestClientOperationMethods> Build(ClientFields fields, DpgOperationSampleBuilder sampleBuilder, string clientName, string clientNamespace, string clientKey)
@@ -39,7 +40,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 var generateProtocolMethods = !Configuration.AzureArm && !Configuration.Generation1ConvenienceClient || requireProtocolMethods.Contains(operation);
                 var builder = SelectBuilder(operation, fields, sampleBuilder, clientName, clientNamespace, generateProtocolMethods);
-                yield return builder.Build();
+                yield return builder.Build(_renamingMap);
             }
         }
 

@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Report
                 .OrderBy(g => g.Key)
                 .ToDictionary(
                     g => g.Key,
-                    g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection))).Distinct().ToList());
+                    g => g.SelectMany(op => op.Select(mrop => new OperationItem(mrop, transformSection, library._renamingMap))).Distinct().ToList());
             // assume there is no circle in resource hirachy. TODO: handle it if it's not true
             ChildResources = resource.ChildResources.Select(r => r.ResourceName).ToList();
             ParentResources = resource.GetParents(library).Select(r => r.ResourceName).ToList();

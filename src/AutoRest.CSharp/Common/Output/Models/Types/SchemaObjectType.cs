@@ -79,7 +79,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
         private SerializableObjectType? _defaultDerivedType;
-        private bool _hasCalculatedDefaultDerivedType;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && InputModel.DiscriminatorPropertyName != null && InputModel.GetSelfAndBaseModels().Count() == 1;
+
 
         // TODO: handle this while regen resource manager
         //public bool IsInheritableCommonType => InputModel is { Extensions: {} } && (InputModel.Extensions.MgmtReferenceType || InputModel.Extensions.MgmtTypeReferenceType);
@@ -175,7 +176,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Type,
                 // TODO: handle this while regen resource manager
                 //IsInheritableCommonType ? Protected : Internal,
-                Protected,
+                Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
@@ -325,7 +326,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             // TODO: Skip initialization ctor if this instance is used to support forward compatibility in polymorphism.
-            yield return InitializationConstructor;
+            if (!InputModel.IsUnknownDiscriminatorModel)
+            {
+                yield return InitializationConstructor;
+            }
 
             // Skip serialization ctor if they are the same
             if (!SkipSerializerConstructor && InitializationConstructor != SerializationConstructor)
@@ -336,14 +340,22 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
+            var discriminatorPropertyName = InputModel.DiscriminatorPropertyName;
+            if (discriminatorPropertyName is null)
+            {
+                discriminatorPropertyName = InputModel.GetSelfAndBaseModels().Skip(1).FirstOrDefault(m => m.DiscriminatorPropertyName != null)?.DiscriminatorPropertyName;
+            }
+            if (discriminatorPropertyName is null)
+            {
+                return null;
+            }
+
             var parentDiscriminator = GetBaseObjectType()?.Discriminator;
             var property = Properties.FirstOrDefault(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator)
                 ?? parentDiscriminator?.Property;
 
-            var discriminatorPropertyName = InputModel.DiscriminatorPropertyName ?? parentDiscriminator?.SerializedName;
-
             //neither me nor my parent are discriminators so I can bail
-            if (property is null || discriminatorPropertyName is null)
+            if (property is null)
             {
                 return null;
             }
@@ -485,11 +497,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                               !_usage.HasFlag(InputModelTypeUsage.Output);
             }
 
-            // we should remove the setter of required constant
-            if (property.Type is InputModelType && property.IsRequired)
-            {
-                propertyShouldOmitSetter = true;
-            }
+            // TODO: we should remove the setter of required constant
+            //if (property.Type is InputPrimitiveType && property.IsRequired)
+            //{
+            //    propertyShouldOmitSetter = true;
+            //}
 
             if (property.IsDiscriminator == true)
             {
@@ -522,51 +534,23 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        protected internal IEnumerable<InputModelType> GetCombinedSchemas()
-        {
-            yield return InputModel;
-
-            foreach (var parent in InputModel.CompositionModels)
-            {
-                yield return parent;
-            }
-        }
+        protected internal IReadOnlyList<InputModelType> GetCombinedSchemas()
+            => InputModel.GetSelfAndBaseModels();
 
         protected override CSharpType? CreateInheritedType()
         {
-            var sourceBaseType = ExistingType?.BaseType;
-            if (sourceBaseType != null &&
-                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
-                sourceBaseType.SpecialType != SpecialType.System_Object &&
-                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            if (GetSourceBaseType() is { } sourceBaseType && _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
             {
                 return baseType;
             }
 
-            var objectSchemas = InputModel.DerivedModels.OfType<InputModelType>();
-
-            InputModelType? selectedType = null;
-
-            foreach (var objectSchema in objectSchemas)
-            {
-                // Take first schema or the one with discriminator
-                selectedType ??= objectSchema;
-
-                if (objectSchema.DiscriminatorPropertyName != null)
-                {
-                    selectedType = objectSchema;
-                    break;
-                }
-            }
-
-            if (selectedType != null)
-            {
-                CSharpType type = _typeFactory.CreateType(selectedType);
-                Debug.Assert(!type.IsFrameworkType);
-                return type;
-            }
-            return null;
+            return InputModel.BaseModel is { } baseModel
+                ? _typeFactory.CreateType(baseModel)
+                : null;
         }
+
+        private INamedTypeSymbol? GetSourceBaseType()
+            => ExistingType?.BaseType is { } sourceBaseType && sourceBaseType.SpecialType != SpecialType.System_ValueType && sourceBaseType.SpecialType != SpecialType.System_Object ? sourceBaseType : null;
 
         private CSharpType? CreateInheritedDictionaryType()
         {
@@ -654,20 +638,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var serializationName = InputModel.Serialization?.Xml?.Name ?? InputModel.Name;
             return SerializationBuilder.BuildXmlObjectSerialization(serializationName, this, _typeFactory);
-        }
-
-        private SerializableObjectType? BuildDefaultDerivedType()
-        {
-            if (_hasCalculatedDefaultDerivedType)
-                return _defaultDerivedType;
-
-            _hasCalculatedDefaultDerivedType = true;
-
-            var defaultDerivedType = InputModel.BaseModel;
-            if (defaultDerivedType is null)
-                return null;
-
-            return _library.FindTypeProviderForInputType(defaultDerivedType) as SerializableObjectType;
         }
 
         private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)

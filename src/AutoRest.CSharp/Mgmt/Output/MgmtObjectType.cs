@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(library, inputModelType, typeFactory, sourceInputModel, newName, defaultDerivedType)
         {
             _typeFactory = typeFactory;
-            _defaultName = name;
+            _defaultName = newName ?? name;
             _defaultNamespace = nameSpace;
         }
 

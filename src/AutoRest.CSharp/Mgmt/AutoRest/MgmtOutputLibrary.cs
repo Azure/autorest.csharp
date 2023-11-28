@@ -84,7 +84,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private readonly Dictionary<InputClient, IEnumerable<string>> _operationGroupToRequestPaths = new();
 
-        private readonly Dictionary<object, string> _renamingMap = new();
+        internal readonly Dictionary<object, string> _renamingMap = new();
 
         /// <summary>
         /// This is a collection that contains all the models from property bag, we use HashSet here to avoid potential duplicates
@@ -102,27 +102,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataTypeNameToOperationSets = DecorateOperationSets();
-            //_schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
 
             AllEnumMap = EnsureAllEnumMap();
+
+            //this is where we construct renaming map
+            UpdateBodyParameters();
+
             AllInputTypeMap = InitializeModels();
 
             // others are populated later
-            OperationsToRequestPaths = new CachedDictionary<InputOperation, RequestPath>(() => PopulateOperationsToRequestPaths());
+            OperationsToRequestPaths = new CachedDictionary<InputOperation, RequestPath>(PopulateOperationsToRequestPaths);
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
+            ResourceTypeMap = new CachedDictionary<InputType, TypeProvider>(EnsureResourceSchemaMap);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
             OperationMethods = new CachedDictionary<InputOperation, RestClientOperationMethods>(EnsureRestClientMethods);
-            ResourceTypeMap = new CachedDictionary<InputType, TypeProvider>(EnsureResourceSchemaMap);
             InputTypeMap = new CachedDictionary<InputType, TypeProvider>(EnsureSchemaMap);
             ChildOperations = new CachedDictionary<RequestPath, HashSet<InputOperation>>(EnsureResourceChildOperations);
 
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
-
-            //this is where we construct renaming map
-            UpdateBodyParameters();
         }
 
         public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
@@ -161,11 +161,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // run second pass to rename the ones based on the schema usage count
-            foreach (var operationGroup in _input.Clients)
+            foreach (var client in _input.Clients)
             {
-                foreach (var operation in operationGroup.Operations)
+                foreach (var operation in client.Operations)
                 {
-                    if (operation.HttpMethod!= RequestMethod.Patch && operation.HttpMethod != RequestMethod.Put && operation.HttpMethod != RequestMethod.Post)
+                    if (operation.HttpMethod != RequestMethod.Patch && operation.HttpMethod != RequestMethod.Put && operation.HttpMethod != RequestMethod.Post)
                         continue;
 
                     var bodyParam = operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body);
@@ -176,7 +176,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         continue;
 
                     // get the request path and operation set
-                    RequestPath requestPath = RequestPath.FromOperation(operation, operationGroup, TypeFactory);
+                    RequestPath requestPath = RequestPath.FromOperation(operation, client, TypeFactory);
                     var operationSet = RawRequestPathToOperationSets[requestPath];
                     if (operationSet.TryGetResourceDataSchema(out var resourceDataSchema, _input))
                     {
@@ -197,7 +197,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         //types use the same model they should have a common name, but since this case doesn't exist yet
                         //we don't know for sure
                         if (requestPath.IsExpandable)
-                            throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CleanName} : {requestPath}");
+                            throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {client.Key}.{operation.CleanName} : {requestPath}");
                         var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
                         BodyParameterNormalizer.Update(operation.HttpMethod, bodyParam, name, operation, _renamingMap);
                     }
@@ -221,16 +221,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (param.Type is not InputModelType inputModel)
                             continue;
 
-                        string oriName = param.Name;
-                        var newParamName = NormalizeParamNames.GetNewName(param.Name, inputModel.Name, ResourceDataTypeNameToOperationSets);
+                        string originalName = param.Name;
+                        var newParamName = NormalizeParamNames.GetNewName(originalName, inputModel, ResourceDataTypeNameToOperationSets, _renamingMap);
 
                         // TODO: handle the duplication later
-                        _renamingMap[param] = newParamName;
+                        if (newParamName != originalName)
+                        {
+                            _renamingMap[param] = newParamName;
 
-                        string fullSerializedName = operation.GetFullSerializedName(param);
-                        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
-                            new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
-                            fullSerializedName, "SetBodyParameterNameOnThirdPass", oriName, newParamName);
+                            string fullSerializedName = operation.GetFullSerializedName(param);
+                            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
+                                fullSerializedName, "SetBodyParameterNameOnThirdPass", originalName, newParamName);
+                        }
                     }
                 }
             }
@@ -252,12 +255,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<InputType, TypeProvider> InitializeModels()
         {
             var defaultDerivedTypes = new Dictionary<string, MgmtObjectType>();
+
             // first, construct resource data models
             foreach (var inputModel in _input.Models)
             {
                 var defaultDerivedType = GetDefaultDerivedType(inputModel, defaultDerivedTypes);
                 var model = ResourceDataTypeNameToOperationSets.ContainsKey(inputModel.Name) ? BuildResourceData(inputModel, defaultDerivedType) : BuildModel(inputModel, defaultDerivedType);
                 _schemaOrNameToModels.Add(inputModel, model);
+            }
+
+            foreach (var inputEnum in _input.Enums)
+            {
+                var model = BuildModel(inputEnum);
+                _schemaOrNameToModels.Add(inputEnum, model);
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
@@ -333,8 +343,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     "internal",
                     null,
                     // [TODO]: Condition is added to minimize change
-                    Configuration.Generation1ConvenienceClient ? $"The {defaultDerivedName}" : $"Unknown version of {actualBase.Name}",
-                    Configuration.Generation1ConvenienceClient ? actualBase.Usage : InputModelTypeUsage.Output,
+                    $"The {defaultDerivedName}",
+                    actualBase.Usage,
                     Array.Empty<InputModelProperty>(),
                     actualBase,
                     Array.Empty<InputModelType>(),
@@ -465,7 +475,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, Configuration.Namespace, "public", TypeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer);
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, TypeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer);
 
         public IEnumerable<TypeProvider> Models => GetModels();
 
@@ -549,8 +559,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     .SelectMany(op => op.Parameters)
                     .Where(p => p.Kind == InputOperationParameterKind.Client)
                     .GroupBy(p => p.Name)
-                    .Select(g => RestClientBuilder.BuildConstructorParameter(g.First(), TypeFactory))
-                    .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue is {} defaultValue ? new ConstantExpression(defaultValue) : null } : p)
+                    .Select(g => RestClientBuilder.BuildConstructorParameter(g.First(), TypeFactory, _renamingMap))
+                    .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue is { } defaultValue ? new ConstantExpression(defaultValue) : null } : p)
                     .OrderBy(p => p.IsOptionalInSignature)
                     .ToList();
 
@@ -558,7 +568,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var restClientParameters = new[] { KnownParameters.Pipeline, KnownParameters.ApplicationId }.Union(ctorParameters).ToList();
                 var operations = inputClient.Operations;
                 var clientName = string.IsNullOrEmpty(inputClient.Name) ? _input.Name : inputClient.Name;
-                var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations, clientName, this, _sourceInputModel);
+                var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations, clientName, this, _sourceInputModel, _renamingMap);
 
                 foreach (var operation in inputClient.Operations)
                 {
@@ -864,12 +874,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             if (inputType is InputModelType inputModel)
             {
-                string? newName = GetNewName(inputType);
                 if (inputModel.IsEmpty)
                 {
-                    return new EmptyResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName);
+                    return new EmptyResourceData(this, inputModel, TypeFactory, _sourceInputModel);
                 }
-                return new ResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName, defaultDerivedType: defaultDerivedType);
+                return new ResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName: GetNewName(inputType), defaultDerivedType: defaultDerivedType);
             }
             throw new NotImplementedException();
         }
@@ -886,7 +895,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // skip this step if the configuration is set to keep this plural
                     if (!Configuration.MgmtConfiguration.KeepPluralResourceData.Contains(typeName))
                     {
-                        _renamingMap.Add(resourceDataType, typeName.LastWordToSingular(false));
+                        var newName = typeName.LastWordToSingular(false);
+                        if (newName != typeName)
+                        {
+                            _renamingMap.Add(resourceDataType, newName);
+                        }
                     }
                     else
                     {

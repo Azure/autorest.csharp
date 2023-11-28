@@ -5,14 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
@@ -21,12 +17,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public static Parameter FromInputParameter(in InputParameter operationParameter, bool keepClientDefaultValue, TypeFactory typeFactory)
-            => FromInputParameter(operationParameter, typeFactory.CreateType(operationParameter.Type), keepClientDefaultValue, typeFactory);
+        public static Parameter FromInputParameter(in InputParameter operationParameter, bool keepClientDefaultValue, TypeFactory typeFactory, IReadOnlyDictionary<object, string>? renamingMap = null)
+            => FromInputParameter(operationParameter, typeFactory.CreateType(operationParameter.Type), keepClientDefaultValue, typeFactory, renamingMap);
 
-        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, bool keepClientDefaultValue, TypeFactory typeFactory)
+        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, bool keepClientDefaultValue, TypeFactory typeFactory, IReadOnlyDictionary<object, string>? renamingMap = null)
         {
-            var name = operationParameter.Name.ToVariableName();
+
+            var name = renamingMap != null && renamingMap.TryGetValue(operationParameter, out var newName) ? newName : operationParameter.Name.ToVariableName();
             var requestLocation = operationParameter.Location;
             var isConstant = operationParameter.Kind == InputOperationParameterKind.Constant;
             var isRequired = operationParameter.IsRequired;

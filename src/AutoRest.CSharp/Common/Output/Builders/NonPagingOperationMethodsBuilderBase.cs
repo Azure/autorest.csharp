@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
         }
 
-        protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters) => null;
+        protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters, IReadOnlyDictionary<object, string>? renamingMap) => null;
 
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(RequestParts requestParts, MethodSignature signature) => null;
 
