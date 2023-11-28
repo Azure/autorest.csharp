@@ -21,6 +21,108 @@ namespace _Azure.Lro.RpcLegacy.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetJob_ShortVersion()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response response = client.GetJob("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetJob_ShortVersion_Async()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response response = await client.GetJobAsync("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetJob_ShortVersion_Convenience()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response<JobResult> response = client.GetJob("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetJob_ShortVersion_Convenience_Async()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response<JobResult> response = await client.GetJobAsync("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetJob_AllParameters()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response response = client.GetJob("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("results")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetJob_AllParameters_Async()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response response = await client.GetJobAsync("<jobId>", null);
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("jobId").ToString());
+            Console.WriteLine(result.GetProperty("comment").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("errors")[0].GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("results")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetJob_AllParameters_Convenience()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response<JobResult> response = client.GetJob("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetJob_AllParameters_Convenience_Async()
+        {
+            LegacyClient client = new LegacyClient();
+
+            Response<JobResult> response = await client.GetJobAsync("<jobId>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_CreateJob_ShortVersion()
         {
             LegacyClient client = new LegacyClient();
