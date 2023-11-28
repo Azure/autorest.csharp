@@ -13,23 +13,23 @@ namespace AutoRest.CSharp.Mgmt.Report
 {
     internal class MgmtReport
     {
-        public static MgmtReport Instance { get; private set; } = new MgmtReport();
+        public static MgmtReport Instance { get; } = new MgmtReport();
 
         public MgmtReport()
         {
-            this._sections.Add(this.ObjectModelSection);
-            this._sections.Add(this.EnumModelSection);
-            this._sections.Add(this.ResourceSection);
-            this._sections.Add(this.ResourceCollectionSection);
-            this._sections.Add(this.ExtensionSection);
-            this._sections.Add(this.TransformSection);
-            this._sections.Add(this.HelpMessage);
+            _sections.Add(ModelSection);
+            _sections.Add(EnumSection);
+            _sections.Add(ResourceSection);
+            _sections.Add(ResourceCollectionSection);
+            _sections.Add(ExtensionSection);
+            _sections.Add(TransformSection);
+            _sections.Add(HelpMessage);
         }
 
         private List<ReportSection> _sections = new List<ReportSection>();
 
-        public DictionaryReportSection<ObjectModelItem> ObjectModelSection { get; } = new DictionaryReportSection<ObjectModelItem>("ObjectModels");
-        public DictionaryReportSection<EnumModelItem> EnumModelSection { get; } = new DictionaryReportSection<EnumModelItem>("EnumModels");
+        public DictionaryReportSection<ModelItem> ModelSection { get; } = new DictionaryReportSection<ModelItem>("ObjectModels");
+        public DictionaryReportSection<EnumItem> EnumSection { get; } = new DictionaryReportSection<EnumItem>("EnumModels");
         public DictionaryReportSection<ResourceItem> ResourceSection { get; } = new DictionaryReportSection<ResourceItem>("Resources");
         public DictionaryReportSection<ResourceItem> ResourceCollectionSection { get; } = new DictionaryReportSection<ResourceItem>("ResourceCollections");
         public DictionaryReportSection<ExtensionItem> ExtensionSection { get; } = new DictionaryReportSection<ExtensionItem>("Extensions");
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Report
 
         public string GenerateReport(string format)
         {
-            var reportObj = this._sections.ToDictionary(s => s.Name, s => s.GenerateSection());
+            var reportObj = _sections.ToDictionary(s => s.Name, s => s.GenerateSection());
 
             switch (format.ToLower())
             {
@@ -59,8 +59,8 @@ namespace AutoRest.CSharp.Mgmt.Report
                 case "yaml":
                 case "":
                     var serializer = new SerializerBuilder()
-                     .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                     .Build();
+                        .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                        .Build();
                     return serializer.Serialize(reportObj);
                 default:
                     throw new ArgumentException($"Unknown Report Format '{format}'. Only 'json' and 'yaml' is supported now");
