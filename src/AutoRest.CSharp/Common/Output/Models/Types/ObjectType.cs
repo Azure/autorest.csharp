@@ -103,10 +103,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         continue;
                     childrenList.Add($"{implementation.Type:C}");
                 }
-                if (childrenList.Count > 0)
-                    return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}.";
-                else
-                    return $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}";
+                return childrenList.Count > 0 ?
+                    (FormattableString)$"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}{Environment.NewLine}{DiscriminatorDescFixedPart[2]}{childrenList.Join(", ", " and ")}." :
+                    $"{Environment.NewLine}{DiscriminatorDescFixedPart[0]}{Type:C}{DiscriminatorDescFixedPart[1]}.";
             }
             return FormattableStringHelpers.Empty;
         }
