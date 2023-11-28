@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateResult. </summary>
     public partial class CreateResult
     {
-        /// <summary> Initializes a new instance of CreateResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateResult"/>. </summary>
         /// <param name="flagged"> Whether the content violates [OpenAI's usage policies](/policies/usage-policies). </param>
         /// <param name="categories"> A list of the categories, and whether they are flagged or not. </param>
         /// <param name="categoryScores"> A list of the categories along with their scores as predicted by model. </param>

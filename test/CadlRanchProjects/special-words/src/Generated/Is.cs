@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The is. </summary>
     public partial class Is
     {
-        /// <summary> Initializes a new instance of Is. </summary>
+        /// <summary> Initializes a new instance of <see cref="Is"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Is(string name)

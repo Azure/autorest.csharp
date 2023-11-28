@@ -16,14 +16,14 @@ namespace body_complex.Models
     /// </summary>
     public partial class Salmon : Fish
     {
-        /// <summary> Initializes a new instance of Salmon. </summary>
+        /// <summary> Initializes a new instance of <see cref="Salmon"/>. </summary>
         /// <param name="length"></param>
         public Salmon(float length) : base(length)
         {
             Fishtype = "salmon";
         }
 
-        /// <summary> Initializes a new instance of Salmon. </summary>
+        /// <summary> Initializes a new instance of <see cref="Salmon"/>. </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>

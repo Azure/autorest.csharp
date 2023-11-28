@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a get service statistics request. If successful, it includes service level counters and limits. </summary>
     public partial class ServiceStatistics
     {
-        /// <summary> Initializes a new instance of ServiceStatistics. </summary>
+        /// <summary> Initializes a new instance of <see cref="ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>

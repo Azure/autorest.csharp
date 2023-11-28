@@ -11,19 +11,19 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The check availability request body. </summary>
     [PropertyReferenceType]
-    public partial class CheckNameAvailabilityRequest
+    public partial class CheckNameAvailabilityContent
     {
-        /// <summary> Initializes a new instance of CheckNameAvailabilityRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityContent"/>. </summary>
         [InitializationConstructor]
-        public CheckNameAvailabilityRequest()
+        public CheckNameAvailabilityContent()
         {
         }
 
-        /// <summary> Initializes a new instance of CheckNameAvailabilityRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityContent"/>. </summary>
         /// <param name="name"> The name of the resource for which availability needs to be checked. </param>
         /// <param name="resourceType"> The resource type. </param>
         [SerializationConstructor]
-        internal CheckNameAvailabilityRequest(string name, ResourceType resourceType)
+        internal CheckNameAvailabilityContent(string name, ResourceType resourceType)
         {
             Name = name;
             ResourceType = resourceType;

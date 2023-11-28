@@ -7,7 +7,7 @@ namespace OpenAI.Models
     /// <summary> The ChatCompletionRequestMessage. </summary>
     public partial class ChatCompletionRequestMessage
     {
-        /// <summary> Initializes a new instance of ChatCompletionRequestMessage. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionRequestMessage"/>. </summary>
         /// <param name="role"> The role of the messages author. One of `system`, `user`, `assistant`, or `function`. </param>
         /// <param name="content">
         /// The contents of the message. `content` is required for all messages, and may be null for
@@ -19,7 +19,7 @@ namespace OpenAI.Models
             Content = content;
         }
 
-        /// <summary> Initializes a new instance of ChatCompletionRequestMessage. </summary>
+        /// <summary> Initializes a new instance of <see cref="ChatCompletionRequestMessage"/>. </summary>
         /// <param name="role"> The role of the messages author. One of `system`, `user`, `assistant`, or `function`. </param>
         /// <param name="content">
         /// The contents of the message. `content` is required for all messages, and may be null for

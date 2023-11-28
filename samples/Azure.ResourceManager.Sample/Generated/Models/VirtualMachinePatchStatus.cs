@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachinePatchStatus
     {
-        /// <summary> Initializes a new instance of VirtualMachinePatchStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         internal VirtualMachinePatchStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachinePatchStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachinePatchStatus"/>. </summary>
         /// <param name="availablePatchSummary">
         /// The available patch summary of the latest assessment operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.availablePatchSummary

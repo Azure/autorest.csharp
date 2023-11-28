@@ -10,12 +10,12 @@ namespace xml_service.Models
     /// <summary> Contans property. </summary>
     public partial class ObjectWithXMsTextProperty
     {
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         internal ObjectWithXMsTextProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ObjectWithXMsTextProperty"/>. </summary>
         /// <param name="language"> Returned value should be 'english'. </param>
         /// <param name="content"> Returned value should be 'I am text'. </param>
         internal ObjectWithXMsTextProperty(string language, string content)

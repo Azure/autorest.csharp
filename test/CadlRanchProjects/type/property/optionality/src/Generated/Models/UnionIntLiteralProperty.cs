@@ -12,12 +12,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with union of int literal property. </summary>
     public partial class UnionIntLiteralProperty
     {
-        /// <summary> Initializes a new instance of UnionIntLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionIntLiteralProperty"/>. </summary>
         public UnionIntLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of UnionIntLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionIntLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal UnionIntLiteralProperty(BinaryData property)
         {

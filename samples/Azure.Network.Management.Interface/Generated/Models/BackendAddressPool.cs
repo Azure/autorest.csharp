@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Pool of backend IP addresses. </summary>
     public partial class BackendAddressPool : SubResource
     {
-        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="BackendAddressPool"/>. </summary>
         public BackendAddressPool()
         {
             BackendIPConfigurations = new ChangeTrackingList<NetworkInterfaceIPConfiguration>();
@@ -21,7 +21,7 @@ namespace Azure.Network.Management.Interface.Models
             OutboundRules = new ChangeTrackingList<SubResource>();
         }
 
-        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <summary> Initializes a new instance of <see cref="BackendAddressPool"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

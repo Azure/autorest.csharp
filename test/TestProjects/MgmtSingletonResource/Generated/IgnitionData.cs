@@ -13,12 +13,12 @@ namespace MgmtSingletonResource
     /// <summary> A class representing the Ignition data model. </summary>
     public partial class IgnitionData : ResourceData
     {
-        /// <summary> Initializes a new instance of IgnitionData. </summary>
+        /// <summary> Initializes a new instance of <see cref="IgnitionData"/>. </summary>
         internal IgnitionData()
         {
         }
 
-        /// <summary> Initializes a new instance of IgnitionData. </summary>
+        /// <summary> Initializes a new instance of <see cref="IgnitionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

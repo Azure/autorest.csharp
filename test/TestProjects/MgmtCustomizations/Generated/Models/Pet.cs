@@ -16,12 +16,12 @@ namespace MgmtCustomizations.Models
     /// </summary>
     public abstract partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         protected Pet()
         {
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">

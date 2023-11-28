@@ -14,7 +14,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The FooCollectionExistsOptions. </summary>
     public partial class FooCollectionExistsOptions
     {
-        /// <summary> Initializes a new instance of FooCollectionExistsOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="FooCollectionExistsOptions"/>. </summary>
         /// <param name="fooName"> The foo name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fooName"/> is null. </exception>
         public FooCollectionExistsOptions(string fooName)

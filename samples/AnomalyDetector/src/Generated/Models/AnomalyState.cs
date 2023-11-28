@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> Anomaly status and information. </summary>
     public partial class AnomalyState
     {
-        /// <summary> Initializes a new instance of AnomalyState. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnomalyState"/>. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         internal AnomalyState(DateTimeOffset timestamp)
         {
@@ -22,7 +22,7 @@ namespace AnomalyDetector.Models
             Errors = new ChangeTrackingList<ErrorResponse>();
         }
 
-        /// <summary> Initializes a new instance of AnomalyState. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnomalyState"/>. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         /// <param name="value"> The detailed value of this anomalous timestamp. </param>
         /// <param name="errors"> Error message for the current timestamp. </param>

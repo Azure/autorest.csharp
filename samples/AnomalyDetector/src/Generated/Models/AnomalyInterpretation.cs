@@ -10,12 +10,12 @@ namespace AnomalyDetector.Models
     /// <summary> Interpretation of the anomalous timestamp. </summary>
     public partial class AnomalyInterpretation
     {
-        /// <summary> Initializes a new instance of AnomalyInterpretation. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnomalyInterpretation"/>. </summary>
         internal AnomalyInterpretation()
         {
         }
 
-        /// <summary> Initializes a new instance of AnomalyInterpretation. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnomalyInterpretation"/>. </summary>
         /// <param name="variable"> Variable. </param>
         /// <param name="contributionScore">
         /// This score shows the percentage contributing to the anomalous timestamp. A

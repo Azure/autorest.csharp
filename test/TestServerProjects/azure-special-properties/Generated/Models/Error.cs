@@ -10,13 +10,13 @@ namespace azure_special_properties.Models
     /// <summary> The Error. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         internal Error()
         {
             ConstantId = ErrorConstantId._1;
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary> Initializes a new instance of <see cref="Error"/>. </summary>
         /// <param name="status"></param>
         /// <param name="constantId"></param>
         /// <param name="message"></param>

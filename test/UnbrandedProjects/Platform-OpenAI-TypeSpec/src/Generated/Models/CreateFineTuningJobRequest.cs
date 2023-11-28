@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateFineTuningJobRequest. </summary>
     public partial class CreateFineTuningJobRequest
     {
-        /// <summary> Initializes a new instance of CreateFineTuningJobRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
         ///
@@ -34,7 +34,7 @@ namespace OpenAI.Models
             Model = model;
         }
 
-        /// <summary> Initializes a new instance of CreateFineTuningJobRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
         ///

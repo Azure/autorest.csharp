@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineCaptureContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineCaptureContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureContent"/>. </summary>
         /// <param name="vhdPrefix">
         /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix

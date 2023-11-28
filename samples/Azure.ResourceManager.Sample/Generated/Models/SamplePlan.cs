@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SamplePlan
     {
-        /// <summary> Initializes a new instance of SamplePlan. </summary>
+        /// <summary> Initializes a new instance of <see cref="SamplePlan"/>. </summary>
         public SamplePlan()
         {
         }
 
-        /// <summary> Initializes a new instance of SamplePlan. </summary>
+        /// <summary> Initializes a new instance of <see cref="SamplePlan"/>. </summary>
         /// <param name="name">
         /// The plan ID.
         /// Serialized Name: Plan.name

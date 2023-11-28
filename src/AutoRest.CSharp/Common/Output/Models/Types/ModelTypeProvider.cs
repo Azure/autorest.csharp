@@ -105,7 +105,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
 
-            FormattableString summary = $"Initializes a new instance of {Declaration.Name}";
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
                 : MethodSignatureModifiers.Internal;
@@ -117,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                summary,
+                $"Initializes a new instance of {Type:C}",
                 null,
                 accessibility,
                 fullParameterList,
@@ -133,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of {Declaration.Name}",
+                $"Initializes a new instance of {Type:C}",
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,

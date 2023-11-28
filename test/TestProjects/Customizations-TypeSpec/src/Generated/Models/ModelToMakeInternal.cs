@@ -10,7 +10,7 @@ namespace CustomizationsInTsp.Models
     /// <summary> Public model made internal. </summary>
     internal partial class ModelToMakeInternal
     {
-        /// <summary> Initializes a new instance of ModelToMakeInternal. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelToMakeInternal"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToMakeInternal(int requiredInt)
         {

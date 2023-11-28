@@ -13,7 +13,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Information about a container with data for a given resource. </summary>
     public partial class DataContainer
     {
-        /// <summary> Initializes a new instance of DataContainer. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataContainer"/>. </summary>
         /// <param name="workspace"> Log Analytics workspace information. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="workspace"/> is null. </exception>
         internal DataContainer(WorkspaceInfo workspace)

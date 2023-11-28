@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for QueryString match conditions. </summary>
     public partial class QueryStringMatchConditionParameters
     {
-        /// <summary> Initializes a new instance of QueryStringMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="QueryStringMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         public QueryStringMatchConditionParameters(QueryStringMatchConditionParametersTypeName typeName, QueryStringOperator @operator)
@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             Transforms = new ChangeTrackingList<Transform>();
         }
 
-        /// <summary> Initializes a new instance of QueryStringMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="QueryStringMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>

@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents an index action that operates on a document. </summary>
     public partial class IndexAction
     {
-        /// <summary> Initializes a new instance of IndexAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndexAction"/>. </summary>
         public IndexAction()
         {
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();

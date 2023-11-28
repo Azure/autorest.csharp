@@ -15,7 +15,7 @@ namespace _Azure.Lro.RpcLegacy.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AzureLroRpcLegacyModelFactory
     {
-        /// <summary> Initializes a new instance of JobResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.JobResult"/>. </summary>
         /// <param name="jobId"> A processing job identifier. </param>
         /// <param name="comment"> Comment. </param>
         /// <param name="status"> The status of the processing job. </param>
@@ -30,7 +30,7 @@ namespace _Azure.Lro.RpcLegacy.Models
             return new JobResult(jobId, comment, status, errors?.ToList(), results?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ErrorResponse"/>. </summary>
         /// <param name="error"> The error object. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         /// <returns> A new <see cref="Models.ErrorResponse"/> instance for mocking. </returns>

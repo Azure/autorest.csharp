@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used only as output. </summary>
     public partial class OutputModel
     {
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
@@ -40,7 +40,7 @@ namespace ModelsTypeSpec.Models
             OptionalNullableRecord = new ChangeTrackingDictionary<string, RecordItem>();
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>

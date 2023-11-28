@@ -13,7 +13,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Base model. </summary>
     public partial class NoUseBase
     {
-        /// <summary> Initializes a new instance of NoUseBase. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoUseBase"/>. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
         internal NoUseBase(string baseModelProp)

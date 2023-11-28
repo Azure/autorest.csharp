@@ -144,7 +144,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     // Ignore any errors while trying to output crash information
                 }
-
                 throw;
             }
 

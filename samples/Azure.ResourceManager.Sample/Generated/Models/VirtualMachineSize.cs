@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineSize
     {
-        /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         internal VirtualMachineSize()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineSize"/>. </summary>
         /// <param name="name">
         /// The name of the virtual machine size.
         /// Serialized Name: VirtualMachineSize.name

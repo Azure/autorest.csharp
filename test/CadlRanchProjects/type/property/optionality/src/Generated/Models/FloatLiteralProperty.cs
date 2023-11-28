@@ -10,12 +10,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with float literal property. </summary>
     public partial class FloatLiteralProperty
     {
-        /// <summary> Initializes a new instance of FloatLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatLiteralProperty"/>. </summary>
         public FloatLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of FloatLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal FloatLiteralProperty(FloatLiteralPropertyProperty? property)
         {

@@ -10,12 +10,12 @@ namespace CognitiveSearch.Models
     /// <summary> Represents credentials that can be used to connect to a datasource. </summary>
     public partial class DataSourceCredentials
     {
-        /// <summary> Initializes a new instance of DataSourceCredentials. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSourceCredentials"/>. </summary>
         public DataSourceCredentials()
         {
         }
 
-        /// <summary> Initializes a new instance of DataSourceCredentials. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataSourceCredentials"/>. </summary>
         /// <param name="connectionString"> The connection string for the datasource. </param>
         internal DataSourceCredentials(string connectionString)
         {

@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateEditResponseChoice. </summary>
     public partial class CreateEditResponseChoice
     {
-        /// <summary> Initializes a new instance of CreateEditResponseChoice. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditResponseChoice"/>. </summary>
         /// <param name="text"> The edited result. </param>
         /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="finishReason">

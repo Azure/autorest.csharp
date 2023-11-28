@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> A list of skills. </summary>
     public partial class Skillset
     {
-        /// <summary> Initializes a new instance of Skillset. </summary>
+        /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
             Skills = skills.ToList();
         }
 
-        /// <summary> Initializes a new instance of Skillset. </summary>
+        /// <summary> Initializes a new instance of <see cref="Skillset"/>. </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">

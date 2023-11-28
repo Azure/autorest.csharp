@@ -16,7 +16,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExactMatchFlattenInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtExactMatchFlattenInheritance.AzureResourceFlattenModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -34,7 +34,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return new AzureResourceFlattenModel1Data(id, name, resourceType, systemData, tags, location, foo, fooPropertiesFoo, idPropertiesId);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -50,7 +50,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return new AzureResourceFlattenModel2(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel3. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel3"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -66,7 +66,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel5. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AzureResourceFlattenModel5"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -78,7 +78,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
             return new AzureResourceFlattenModel5(id, name, resourceType, systemData, foo);
         }
 
-        /// <summary> Initializes a new instance of CustomModel2Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtExactMatchFlattenInheritance.CustomModel2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

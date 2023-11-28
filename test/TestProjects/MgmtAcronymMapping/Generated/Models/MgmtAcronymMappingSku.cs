@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class MgmtAcronymMappingSku
     {
-        /// <summary> Initializes a new instance of MgmtAcronymMappingSku. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingSku"/>. </summary>
         public MgmtAcronymMappingSku()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtAcronymMappingSku. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtAcronymMappingSku"/>. </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: Sku.name

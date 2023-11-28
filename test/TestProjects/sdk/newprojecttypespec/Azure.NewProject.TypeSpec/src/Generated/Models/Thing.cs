@@ -14,7 +14,7 @@ namespace Azure.NewProject.TypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
@@ -30,7 +30,7 @@ namespace Azure.NewProject.TypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
         }
 
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>

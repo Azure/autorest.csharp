@@ -17,12 +17,12 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class ResourceLinkData : ResourceData
     {
-        /// <summary> Initializes a new instance of ResourceLinkData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkData"/>. </summary>
         public ResourceLinkData()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceLinkData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceLinkData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

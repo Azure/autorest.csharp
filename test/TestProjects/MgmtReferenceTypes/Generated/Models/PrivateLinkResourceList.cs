@@ -14,14 +14,14 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateLinkResourceList
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceList"/>. </summary>
         [InitializationConstructor]
         public PrivateLinkResourceList()
         {
             Value = new ChangeTrackingList<PrivateLinkResourceData>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkResourceList"/>. </summary>
         /// <param name="value"> Array of private link resources. </param>
         [SerializationConstructor]
         protected PrivateLinkResourceList(IReadOnlyList<PrivateLinkResourceData> value)

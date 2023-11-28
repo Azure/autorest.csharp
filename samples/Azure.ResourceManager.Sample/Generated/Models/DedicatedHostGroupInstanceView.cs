@@ -16,13 +16,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostGroupInstanceView
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupInstanceView"/>. </summary>
         internal DedicatedHostGroupInstanceView()
         {
             Hosts = new ChangeTrackingList<DedicatedHostInstanceViewWithName>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupInstanceView"/>. </summary>
         /// <param name="hosts">
         /// List of instance view of the dedicated hosts under the dedicated host group.
         /// Serialized Name: DedicatedHostGroupInstanceView.hosts

@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The if. </summary>
     public partial class If
     {
-        /// <summary> Initializes a new instance of If. </summary>
+        /// <summary> Initializes a new instance of <see cref="If"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public If(string name)

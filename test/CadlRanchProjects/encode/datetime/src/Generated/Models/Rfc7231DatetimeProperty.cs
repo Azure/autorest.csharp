@@ -12,7 +12,7 @@ namespace Encode.Datetime.Models
     /// <summary> The Rfc7231DatetimeProperty. </summary>
     public partial class Rfc7231DatetimeProperty
     {
-        /// <summary> Initializes a new instance of Rfc7231DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Rfc7231DatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         public Rfc7231DatetimeProperty(DateTimeOffset value)
         {

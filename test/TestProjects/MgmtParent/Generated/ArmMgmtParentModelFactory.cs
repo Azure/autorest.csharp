@@ -15,7 +15,7 @@ namespace MgmtParent.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtParentModelFactory
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.AvailabilitySetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,7 +31,7 @@ namespace MgmtParent.Models
             return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostGroupData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -47,7 +47,7 @@ namespace MgmtParent.Models
             return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.DedicatedHostData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -63,7 +63,7 @@ namespace MgmtParent.Models
             return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtParent.VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

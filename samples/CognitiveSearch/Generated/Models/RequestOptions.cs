@@ -12,7 +12,7 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class RequestOptions
     {
-        /// <summary> Initializes a new instance of RequestOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
         public RequestOptions()
         {
         }

@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in internal operations, should be generated but not exported. </summary>
     internal partial class InnerModel
     {
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal InnerModel(string name)

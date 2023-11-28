@@ -10,12 +10,12 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The ModelZ. </summary>
     public partial class ModelZ
     {
-        /// <summary> Initializes a new instance of ModelZ. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         public ModelZ()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelZ. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelZ"/>. </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>
         internal ModelZ(string h, string i)

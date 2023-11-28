@@ -13,14 +13,14 @@ namespace _Azure.Lro.RpcLegacy.Models
     /// <summary> Result of the job. </summary>
     public partial class JobResult
     {
-        /// <summary> Initializes a new instance of JobResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="JobResult"/>. </summary>
         internal JobResult()
         {
             Errors = new ChangeTrackingList<ErrorResponse>();
             Results = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of JobResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="JobResult"/>. </summary>
         /// <param name="jobId"> A processing job identifier. </param>
         /// <param name="comment"> Comment. </param>
         /// <param name="status"> The status of the processing job. </param>

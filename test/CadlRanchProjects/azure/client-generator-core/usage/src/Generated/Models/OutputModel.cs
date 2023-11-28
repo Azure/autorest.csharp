@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
     /// <summary> Usage override to roundtrip. </summary>
     public partial class OutputModel
     {
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public OutputModel(string name)

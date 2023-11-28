@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class LogAnalyticsOutput
     {
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsOutput"/>. </summary>
         internal LogAnalyticsOutput()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="LogAnalyticsOutput"/>. </summary>
         /// <param name="output">
         /// Output file Uri path to blob container.
         /// Serialized Name: LogAnalyticsOutput.output

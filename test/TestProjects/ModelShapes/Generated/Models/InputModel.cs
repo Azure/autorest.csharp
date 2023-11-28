@@ -15,7 +15,7 @@ namespace ModelShapes.Models
     /// <summary> The InputModel. </summary>
     public partial class InputModel
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>

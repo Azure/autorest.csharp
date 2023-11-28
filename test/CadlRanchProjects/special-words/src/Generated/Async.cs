@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The async. </summary>
     public partial class Async
     {
-        /// <summary> Initializes a new instance of Async. </summary>
+        /// <summary> Initializes a new instance of <see cref="Async"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Async(string name)

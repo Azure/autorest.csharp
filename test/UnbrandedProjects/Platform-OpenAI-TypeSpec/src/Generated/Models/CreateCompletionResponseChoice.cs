@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateCompletionResponseChoice. </summary>
     public partial class CreateCompletionResponseChoice
     {
-        /// <summary> Initializes a new instance of CreateCompletionResponseChoice. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateCompletionResponseChoice"/>. </summary>
         /// <param name="index"></param>
         /// <param name="text"></param>
         /// <param name="logprobs"></param>

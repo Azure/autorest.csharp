@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AvailabilitySetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of AvailabilitySetPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
         public AvailabilitySetPatch()
         {
             VirtualMachines = new ChangeTrackingList<WritableSubResource>();

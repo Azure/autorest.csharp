@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The as. </summary>
     public partial class As
     {
-        /// <summary> Initializes a new instance of As. </summary>
+        /// <summary> Initializes a new instance of <see cref="As"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public As(string name)

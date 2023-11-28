@@ -15,7 +15,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Parameters for creating or updating a vault. </summary>
     public partial class VaultCreateOrUpdateContent
     {
-        /// <summary> Initializes a new instance of VaultCreateOrUpdateContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCreateOrUpdateContent"/>. </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>

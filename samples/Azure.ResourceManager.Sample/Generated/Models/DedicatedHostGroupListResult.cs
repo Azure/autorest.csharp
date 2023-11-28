@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostGroupListResult
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated host groups
         /// Serialized Name: DedicatedHostGroupListResult.value
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of dedicated host groups
         /// Serialized Name: DedicatedHostGroupListResult.value

@@ -16,12 +16,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetManagedDiskParameters
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetManagedDiskParameters"/>. </summary>
         public VirtualMachineScaleSetManagedDiskParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetManagedDiskParameters"/>. </summary>
         /// <param name="storageAccountType">
         /// Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.
         /// Serialized Name: VirtualMachineScaleSetManagedDiskParameters.storageAccountType

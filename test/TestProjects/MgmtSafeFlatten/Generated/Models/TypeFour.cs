@@ -10,7 +10,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The TypeFour. </summary>
     internal partial class TypeFour
     {
-        /// <summary> Initializes a new instance of TypeFour. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         internal TypeFour()
         {
         }

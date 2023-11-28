@@ -10,7 +10,7 @@ namespace MgmtConstants.Models
     /// <summary> Describes a Virtual Machine Update. </summary>
     public partial class OptionalMachinePatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of OptionalMachinePatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="OptionalMachinePatch"/>. </summary>
         public OptionalMachinePatch()
         {
         }

@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableResponse
+    public partial class TableResult
     {
-        internal static TableResponse DeserializeTableResponse(JsonElement element)
+        internal static TableResult DeserializeTableResult(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -51,7 +51,7 @@ namespace Azure.Storage.Tables.Models
                     continue;
                 }
             }
-            return new TableResponse(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value, odataMetadata.Value);
+            return new TableResult(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value, odataMetadata.Value);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace MgmtConstants.Models
     /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
     public partial class ModelWithRequiredConstant
     {
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         public ModelWithRequiredConstant()
         {
             RequiredStringConstant = StringConstant.Default;
@@ -19,7 +19,7 @@ namespace MgmtConstants.Models
             RequiredFloatConstant = FloatConstant._314;
         }
 
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithRequiredConstant"/>. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>

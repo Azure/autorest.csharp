@@ -13,7 +13,7 @@ namespace model_flattening.Models
     /// <summary> Parameter group. </summary>
     public partial class FlattenParameterGroup
     {
-        /// <summary> Initializes a new instance of FlattenParameterGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="FlattenParameterGroup"/>. </summary>
         /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="productId"/> is null. </exception>

@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a string property. </summary>
     public partial class StringProperty
     {
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public StringProperty(string property)

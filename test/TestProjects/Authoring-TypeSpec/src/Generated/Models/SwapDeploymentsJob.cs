@@ -16,7 +16,7 @@ namespace AuthoringTypeSpec.Models
     /// <summary> The SwapDeploymentsJob. </summary>
     public partial class SwapDeploymentsJob
     {
-        /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="SwapDeploymentsJob"/>. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="status"> The job status. </param>
         /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
@@ -34,7 +34,7 @@ namespace AuthoringTypeSpec.Models
             Errors = errors;
         }
 
-        /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="SwapDeploymentsJob"/>. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="createdDateTime"> The creation date time of the job. </param>
         /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
