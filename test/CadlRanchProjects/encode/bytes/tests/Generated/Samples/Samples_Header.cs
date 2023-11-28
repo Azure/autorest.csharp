@@ -18,7 +18,7 @@ namespace Encode.Bytes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_ShortVersion()
+        public void Example_Header_Default_ShortVersion()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -29,7 +29,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_ShortVersion_Async()
+        public async Task Example_Header_Default_ShortVersion_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -40,7 +40,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public void Example_Header_Default_AllParameters()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -51,7 +51,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Async()
+        public async Task Example_Header_Default_AllParameters_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -62,7 +62,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64_ShortVersion()
+        public void Example_Header_Base64_ShortVersion()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -73,7 +73,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_ShortVersion_Async()
+        public async Task Example_Header_Base64_ShortVersion_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -84,7 +84,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64_AllParameters()
+        public void Example_Header_Base64_AllParameters()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -95,7 +95,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_AllParameters_Async()
+        public async Task Example_Header_Base64_AllParameters_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -106,7 +106,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url_ShortVersion()
+        public void Example_Header_Base64url_ShortVersion()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -117,7 +117,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_ShortVersion_Async()
+        public async Task Example_Header_Base64url_ShortVersion_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -128,7 +128,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url_AllParameters()
+        public void Example_Header_Base64url_AllParameters()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -139,7 +139,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_AllParameters_Async()
+        public async Task Example_Header_Base64url_AllParameters_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -150,7 +150,7 @@ namespace Encode.Bytes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray_ShortVersion()
+        public void Example_Header_Base64urlArray_ShortVersion()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -164,7 +164,7 @@ BinaryData.FromObjectAsJson(new object())
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_ShortVersion_Async()
+        public async Task Example_Header_Base64urlArray_ShortVersion_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -178,7 +178,7 @@ BinaryData.FromObjectAsJson(new object())
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray_AllParameters()
+        public void Example_Header_Base64urlArray_AllParameters()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 
@@ -192,7 +192,7 @@ BinaryData.FromObjectAsJson(new object())
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_AllParameters_Async()
+        public async Task Example_Header_Base64urlArray_AllParameters_Async()
         {
             Header client = new BytesClient().GetHeaderClient(apiVersion: "1.0.0");
 

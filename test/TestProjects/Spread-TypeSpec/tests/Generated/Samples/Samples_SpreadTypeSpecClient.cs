@@ -20,7 +20,7 @@ namespace SpreadTypeSpec.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadModel_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -37,7 +37,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadModel_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -54,7 +54,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadModel_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -65,7 +65,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadModel_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -76,7 +76,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadModel_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -93,7 +93,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadModel_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -110,7 +110,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadModel_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -121,7 +121,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadModel_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -132,7 +132,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAlias_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -149,7 +149,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAlias_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAlias_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -166,7 +166,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAlias_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -176,7 +176,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAlias_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAlias_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -186,7 +186,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAlias_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -203,7 +203,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAlias_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAlias_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -220,7 +220,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAlias_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -230,7 +230,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAlias_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAlias_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -240,7 +240,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadMultiTargetAlias_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadMultiTargetAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -257,7 +257,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadMultiTargetAlias_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadMultiTargetAlias_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -274,7 +274,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadMultiTargetAlias_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadMultiTargetAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -284,7 +284,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadMultiTargetAlias_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadMultiTargetAlias_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -294,7 +294,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadMultiTargetAlias_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadMultiTargetAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -311,7 +311,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadMultiTargetAlias_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadMultiTargetAlias_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -328,7 +328,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadMultiTargetAlias_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadMultiTargetAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -338,7 +338,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadMultiTargetAlias_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadMultiTargetAlias_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -348,7 +348,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithModel_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadAliasWithModel_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -365,7 +365,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithModel_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithModel_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -382,7 +382,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithModel_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithModel_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -393,7 +393,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithModel_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithModel_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -404,7 +404,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithModel_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadAliasWithModel_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -421,7 +421,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithModel_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithModel_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -438,7 +438,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithModel_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithModel_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -449,7 +449,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithModel_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithModel_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -460,7 +460,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithSpreadAlias_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -477,7 +477,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithSpreadAlias_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -494,7 +494,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithSpreadAlias_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -504,7 +504,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithSpreadAlias_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -514,7 +514,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithSpreadAlias_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -531,7 +531,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithSpreadAlias_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -548,7 +548,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithSpreadAlias_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -558,7 +558,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithSpreadAlias_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithSpreadAlias_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -568,7 +568,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithOptionalProps_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -588,7 +588,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithOptionalProps_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -608,7 +608,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithOptionalProps_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -618,7 +618,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithOptionalProps_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -628,7 +628,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithOptionalProps_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -654,7 +654,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithOptionalProps_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -680,7 +680,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithOptionalProps_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -690,7 +690,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithOptionalProps_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithOptionalProps_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -700,7 +700,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithCollections_ShortVersion()
+        public void Example_SpreadTypeSpec_SpreadAliasWithCollections_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -719,7 +719,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithCollections_ShortVersion_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithCollections_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -738,7 +738,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithCollections_ShortVersion_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithCollections_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -748,7 +748,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithCollections_ShortVersion_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithCollections_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -758,7 +758,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithCollections_AllParameters()
+        public void Example_SpreadTypeSpec_SpreadAliasWithCollections_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -781,7 +781,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithCollections_AllParameters_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithCollections_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -804,7 +804,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_SpreadAliasWithCollections_AllParameters_Convenience()
+        public void Example_SpreadTypeSpec_SpreadAliasWithCollections_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
@@ -814,7 +814,7 @@ namespace SpreadTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SpreadAliasWithCollections_AllParameters_Convenience_Async()
+        public async Task Example_SpreadTypeSpec_SpreadAliasWithCollections_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SpreadTypeSpecClient client = new SpreadTypeSpecClient(endpoint);
