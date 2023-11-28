@@ -33,5 +33,8 @@ namespace url_LowLevel
                 _ => throw new NotSupportedException()
             };
         }
+
+        /// <summary> should contain value null. </summary>
+        public string GlobalStringQuery { get; set; }
     }
 }
