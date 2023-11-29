@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetFloatsOnlyAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetFloatsOnlyAsync.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response<object> response = await client.GetFloatsOnlyAsync();
+]]></code>
+This sample shows how to call GetFloatsOnlyAsync with all parameters.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response<object> response = await client.GetFloatsOnlyAsync();
+]]></code></example>
+    </member>
+    <member name="GetFloatsOnly(CancellationToken)">
+      <example>
+This sample shows how to call GetFloatsOnly.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response<object> response = client.GetFloatsOnly();
+]]></code>
+This sample shows how to call GetFloatsOnly with all parameters.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response<object> response = client.GetFloatsOnly();
+]]></code></example>
+    </member>
+    <member name="GetFloatsOnlyAsync(RequestContext)">
+      <example>
+This sample shows how to call GetFloatsOnlyAsync and parse the result.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = await client.GetFloatsOnlyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code>
+This sample shows how to call GetFloatsOnlyAsync with all parameters and parse the result.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = await client.GetFloatsOnlyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code></example>
+    </member>
+    <member name="GetFloatsOnly(RequestContext)">
+      <example>
+This sample shows how to call GetFloatsOnly and parse the result.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = client.GetFloatsOnly(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code>
+This sample shows how to call GetFloatsOnly with all parameters and parse the result.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = client.GetFloatsOnly(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").ToString());
+]]></code></example>
+    </member>
+    <member name="SendAsync(SendRequestProp,CancellationToken)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = await client.SendAsync(SendRequestProp.A);
+]]></code>
+This sample shows how to call SendAsync with all parameters.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = await client.SendAsync(SendRequestProp.A);
+]]></code></example>
+    </member>
+    <member name="Send(SendRequestProp,CancellationToken)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = client.Send(SendRequestProp.A);
+]]></code>
+This sample shows how to call Send with all parameters.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+Response response = client.Send(SendRequestProp.A);
+]]></code></example>
+    </member>
+    <member name="SendAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = await client.SendAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SendAsync with all request content.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = await client.SendAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Send(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = client.Send(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Send with all request content.
+<code><![CDATA[
+FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = client.Send(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

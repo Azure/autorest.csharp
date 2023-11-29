@@ -13,7 +13,7 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The SentenceSentiment. </summary>
     public partial class SentenceSentiment
     {
-        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
+        /// <summary> Initializes a new instance of <see cref="SentenceSentiment"/>. </summary>
         /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>

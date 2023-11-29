@@ -10,12 +10,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Template type for testing models with optional property. Pass in the type of the property you are looking for. </summary>
     public partial class StringProperty
     {
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
         public StringProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal StringProperty(string property)
         {

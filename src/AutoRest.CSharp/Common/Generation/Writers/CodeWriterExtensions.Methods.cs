@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Expressions.ValueExpressions.SwitchExpression;
 
@@ -46,36 +47,40 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case IfStatement ifStatement:
-                    writer.WriteMethodBodyStatement(new IfElseStatement(ifStatement.Condition, ifStatement.Body, null));
-                    break;
-                case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline):
                     writer.AppendRaw("if (");
-                    writer.WriteValueExpression(condition);
+                    writer.WriteValueExpression(ifStatement.Condition);
 
-                    if (inline)
+                    if (ifStatement.Inline)
                     {
                         writer.AppendRaw(") ");
                         using (writer.AmbientScope())
                         {
-                            WriteMethodBodyStatement(writer, ifBlock);
+                            WriteMethodBodyStatement(writer, ifStatement.Body);
                         }
                     }
                     else
                     {
                         writer.LineRaw(")");
-                        using (writer.Scope())
+                        using (ifStatement.AddBraces ? writer.Scope() : writer.AmbientScope())
                         {
-                            WriteMethodBodyStatement(writer, ifBlock);
+                            WriteMethodBodyStatement(writer, ifStatement.Body);
                         }
                     }
 
+                    break;
+                case IfElseStatement(var ifBlock, var elseBlock):
+                    writer.WriteMethodBodyStatement(ifBlock);
                     if (elseBlock is not null)
                     {
-                        if (inline)
+                        if (ifBlock.Inline || !ifBlock.AddBraces)
                         {
                             using (writer.AmbientScope())
                             {
                                 writer.AppendRaw("else ");
+                                if (!ifBlock.Inline)
+                                {
+                                    writer.Line();
+                                }
                                 WriteMethodBodyStatement(writer, elseBlock);
                             }
                         }
@@ -119,6 +124,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.LineRaw("}");
                     }
 
+                    break;
+                case UsingScopeStatement usingStatement:
+                    using (writer.AmbientScope())
+                    {
+                        writer.AppendRaw("using (");
+                        if (usingStatement.Type == null)
+                            writer.AppendRaw("var ");
+                        else
+                            writer.Append($"{usingStatement.Type} ");
+                        writer.Append($"{usingStatement.Variable:D} = ");
+                        writer.WriteValueExpression(usingStatement.Value);
+                        writer.LineRaw(")");
+                        writer.LineRaw("{");
+                        WriteMethodBodyStatement(writer, usingStatement.Body.AsStatement());
+                        writer.LineRaw("}");
+                    }
                     break;
                 case DeclarationStatement line:
                     writer.WriteDeclaration(line);
@@ -200,6 +221,11 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (declaration)
             {
+                case AssignValueIfNullStatement setValue:
+                    writer.WriteValueExpression(setValue.To);
+                    writer.AppendRaw(" ??= ");
+                    writer.WriteValueExpression(setValue.From);
+                    break;
                 case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
@@ -231,6 +257,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.AppendRaw(") => ");
                     writer.WriteValueExpression(localFunction.Body);
+                    break;
+                case UnaryOperatorStatement unaryOperatorStatement:
+                    writer.WriteValueExpression(unaryOperatorStatement.Expression);
                     break;
             }
 
@@ -493,7 +522,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
 
-                case NewArrayExpression(var type, var items):
+                case NewArrayExpression(var type, var items, var size):
+                    if (size is not null)
+                    {
+                        writer.Append($"new {type?.FrameworkType}");
+                        writer.AppendRaw("[");
+                        writer.WriteValueExpression(size);
+                        writer.AppendRaw("]");
+                        break;
+                    }
+
                     if (items is { Elements.Count: > 0 })
                     {
                         if (type is null)
@@ -574,6 +612,32 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case StringLiteralExpression(var literal, false):
                     writer.Literal(literal);
+                    break;
+                case FormattableStringExpression(var format, var args):
+                    writer.AppendRaw("$\"");
+                    var argumentCount = 0;
+                    foreach ((var span, bool isLiteral) in StringExtensions.GetPathParts(format))
+                    {
+                        if (isLiteral)
+                        {
+                            writer.AppendRaw(span.ToString());
+                            continue;
+                        }
+
+                        var arg = args[argumentCount];
+                        argumentCount++;
+                        // append the argument
+                        writer.AppendRaw("{");
+                        writer.WriteValueExpression(arg);
+                        writer.AppendRaw("}");
+                    }
+                    writer.AppendRaw("\"");
+                    break;
+                case ArrayElementExpression(var array, var index):
+                    writer.WriteValueExpression(array);
+                    writer.AppendRaw("[");
+                    writer.WriteValueExpression(index);
+                    writer.AppendRaw("]");
                     break;
             }
 

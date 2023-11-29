@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 
@@ -12,15 +13,15 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
         public FrameworkTypeExpression ToObjectFromJson(Type responseType)
             => new(responseType, new InvokeInstanceMethodExpression(Untyped, nameof(BinaryData.ToObjectFromJson), Array.Empty<ValueExpression>(), new[] { new CSharpType(responseType) }, false));
 
-        public static BinaryDataExpression FromStream(ResponseExpression response, bool async)
+        public static BinaryDataExpression FromStream(StreamExpression stream, bool async)
         {
             var methodName = async ? nameof(BinaryData.FromStreamAsync) : nameof(BinaryData.FromStream);
-            return new BinaryDataExpression(InvokeStatic(methodName, response.ContentStream, async));
+            return new BinaryDataExpression(InvokeStatic(methodName, stream, async));
         }
 
         public StreamExpression ToStream() => new(Invoke(nameof(BinaryData.ToStream)));
 
-        public ValueExpression ToArray() => Invoke(nameof(BinaryData.ToArray));
+        public ListExpression ToArray() => new(typeof(byte[]), Invoke(nameof(BinaryData.ToArray)));
 
         public static BinaryDataExpression FromBytes(ValueExpression data)
             => new(InvokeStatic(nameof(BinaryData.FromBytes), data));

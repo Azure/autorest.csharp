@@ -43,34 +43,44 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Operation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <summary> Initializes a new instance of Models. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Operation GetOperationClient(string apiVersion = "1.0.0")
+        public virtual Models GetModelsClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Operation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new Models(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
-        /// <summary> Initializes a new instance of Parameter. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <summary> Initializes a new instance of ModelProperties. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Parameter GetParameterClient(string apiVersion = "1.0.0")
+        public virtual ModelProperties GetModelPropertiesClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Parameter(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new ModelProperties(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <summary> Initializes a new instance of Operations. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Model GetModelClient(string apiVersion = "1.0.0")
+        public virtual Operations GetOperationsClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Model(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new Operations(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
+
+        /// <summary> Initializes a new instance of Parameters. </summary>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual Parameters GetParametersClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new Parameters(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
     }
 }

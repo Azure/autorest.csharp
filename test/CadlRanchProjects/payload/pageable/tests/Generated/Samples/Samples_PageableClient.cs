@@ -8,6 +8,7 @@
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Identity;
 using NUnit.Framework;
 using Payload.Pageable;
@@ -19,7 +20,7 @@ namespace Payload.Pageable.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPageables_ShortVersion()
+        public void Example_Pageable_GetPageables_ShortVersion()
         {
             PageableClient client = new PageableClient();
 
@@ -32,7 +33,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPageables_ShortVersion_Async()
+        public async Task Example_Pageable_GetPageables_ShortVersion_Async()
         {
             PageableClient client = new PageableClient();
 
@@ -45,7 +46,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPageables_ShortVersion_Convenience()
+        public void Example_Pageable_GetPageables_ShortVersion_Convenience()
         {
             PageableClient client = new PageableClient();
 
@@ -56,7 +57,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPageables_ShortVersion_Convenience_Async()
+        public async Task Example_Pageable_GetPageables_ShortVersion_Convenience_Async()
         {
             PageableClient client = new PageableClient();
 
@@ -67,7 +68,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPageables_AllParameters()
+        public void Example_Pageable_GetPageables_AllParameters()
         {
             PageableClient client = new PageableClient();
 
@@ -80,7 +81,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPageables_AllParameters_Async()
+        public async Task Example_Pageable_GetPageables_AllParameters_Async()
         {
             PageableClient client = new PageableClient();
 
@@ -93,7 +94,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPageables_AllParameters_Convenience()
+        public void Example_Pageable_GetPageables_AllParameters_Convenience()
         {
             PageableClient client = new PageableClient();
 
@@ -104,7 +105,7 @@ namespace Payload.Pageable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPageables_AllParameters_Convenience_Async()
+        public async Task Example_Pageable_GetPageables_AllParameters_Convenience_Async()
         {
             PageableClient client = new PageableClient();
 

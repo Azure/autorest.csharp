@@ -6,11 +6,11 @@ import {
     typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost,
-    navigateModels
+    navigateModels,
+    createNetSdkContext
 } from "./utils/TestUtil.js";
 import isEqual from "lodash.isequal";
 import { InputEnumType, InputModelType } from "../../src/type/inputType.js";
-import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import { getAllHttpServices } from "@typespec/http";
 
 describe("Discriminator property", () => {
@@ -152,7 +152,7 @@ op test(@body input: Pet): Pet;
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();
@@ -284,7 +284,7 @@ op test(@body input: Pet): Pet;
             runner
         );
         const context = createEmitterContext(program);
-        const sdkContext = createSdkContext(context);
+        const sdkContext = createNetSdkContext(context);
         const [services] = getAllHttpServices(program);
         const modelMap = new Map<string, InputModelType>();
         const enumMap = new Map<string, InputEnumType>();

@@ -13,7 +13,7 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Inner model used in collections model property. </summary>
     public partial class InnerModel
     {
-        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InnerModel"/>. </summary>
         /// <param name="property"> Inner model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         internal InnerModel(string property)

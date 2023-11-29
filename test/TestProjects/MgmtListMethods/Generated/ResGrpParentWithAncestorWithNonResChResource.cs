@@ -22,13 +22,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a ResGrpParentWithAncestorWithNonResCh along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResGrpParentWithAncestorWithNonResChResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetResGrpParentWithAncestorWithNonResChResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetResGrpParentWithAncestorWithNonResCh method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ResGrpParentWithAncestorWithNonResChResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetResGrpParentWithAncestorWithNonResChResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetResGrpParentWithAncestorWithNonResCh method.
     /// </summary>
     public partial class ResGrpParentWithAncestorWithNonResChResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentWithAncestorWithNonResChResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="resGrpParentWithAncestorWithNonResChName"> The resGrpParentWithAncestorWithNonResChName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentWithAncestorWithNonResChName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithAncestorWithNonResChes/{resGrpParentWithAncestorWithNonResChName}";
@@ -44,7 +47,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ResGrpParentWithAncestorWithNonResChResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithAncestorWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ResGrpParentWithAncestorWithNonResChResource(ArmClient client, ResGrpParentWithAncestorWithNonResChData data) : this(client, data.Id)
@@ -244,7 +247,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithAncestorWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -265,7 +268,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithAncestorWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

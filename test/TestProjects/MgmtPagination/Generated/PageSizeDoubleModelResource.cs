@@ -19,13 +19,16 @@ namespace MgmtPagination
 {
     /// <summary>
     /// A Class representing a PageSizeDoubleModel along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="PageSizeDoubleModelResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetPageSizeDoubleModelResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetPageSizeDoubleModel method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="PageSizeDoubleModelResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetPageSizeDoubleModelResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetPageSizeDoubleModel method.
     /// </summary>
     public partial class PageSizeDoubleModelResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="PageSizeDoubleModelResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="name"> The name. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/pageSizeDoubleModel/{name}";
@@ -41,7 +44,7 @@ namespace MgmtPagination
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "PageSizeDoubleModelResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PageSizeDoubleModelResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal PageSizeDoubleModelResource(ArmClient client, PageSizeDoubleModelData data) : this(client, new ResourceIdentifier(data.Id))
@@ -162,7 +165,7 @@ namespace MgmtPagination
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The PageSizeDoubleModel to use. </param>
+        /// <param name="data"> The <see cref="PageSizeDoubleModelData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<PageSizeDoubleModelResource>> UpdateAsync(WaitUntil waitUntil, PageSizeDoubleModelData data, CancellationToken cancellationToken = default)
@@ -199,7 +202,7 @@ namespace MgmtPagination
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The PageSizeDoubleModel to use. </param>
+        /// <param name="data"> The <see cref="PageSizeDoubleModelData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<PageSizeDoubleModelResource> Update(WaitUntil waitUntil, PageSizeDoubleModelData data, CancellationToken cancellationToken = default)

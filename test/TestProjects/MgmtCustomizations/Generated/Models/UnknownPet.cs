@@ -12,7 +12,7 @@ namespace MgmtCustomizations.Models
     /// <summary> The UnknownPet. </summary>
     internal partial class UnknownPet : Pet
     {
-        /// <summary> Initializes a new instance of UnknownPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">

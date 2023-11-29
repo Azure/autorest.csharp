@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using YamlDotNet.Serialization;
@@ -115,6 +116,8 @@ namespace AutoRest.CSharp.Input
         public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
         public string? Usage => TryGetValue("x-csharp-usage", out object? value) ? value?.ToString() : null;
+
+        public bool IsEmbeddingsVector => TryGetValue("x-ms-embedding-vector", out var value) && Convert.ToBoolean(value);
 
         public string[] Formats
         {

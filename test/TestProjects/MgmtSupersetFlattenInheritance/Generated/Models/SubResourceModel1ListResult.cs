@@ -13,13 +13,13 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class SubResourceModel1ListResult
     {
-        /// <summary> Initializes a new instance of SubResourceModel1ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel1ListResult"/>. </summary>
         internal SubResourceModel1ListResult()
         {
             Value = new ChangeTrackingList<SubResourceModel1>();
         }
 
-        /// <summary> Initializes a new instance of SubResourceModel1ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceModel1ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
         internal SubResourceModel1ListResult(IReadOnlyList<SubResourceModel1> value, string nextLink)

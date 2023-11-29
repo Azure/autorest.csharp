@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An A record. </summary>
     public partial class ARecord
     {
-        /// <summary> Initializes a new instance of ARecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="ARecord"/>. </summary>
         public ARecord()
         {
         }
 
-        /// <summary> Initializes a new instance of ARecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="ARecord"/>. </summary>
         /// <param name="ipv4Address"> The IPv4 address of this A record. </param>
         internal ARecord(string ipv4Address)
         {

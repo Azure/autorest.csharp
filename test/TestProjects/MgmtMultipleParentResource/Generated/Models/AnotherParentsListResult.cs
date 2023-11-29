@@ -16,7 +16,7 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> The List run command operation response. </summary>
     internal partial class AnotherParentsListResult
     {
-        /// <summary> Initializes a new instance of AnotherParentsListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnotherParentsListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal AnotherParentsListResult(IEnumerable<AnotherParentData> value)
@@ -26,7 +26,7 @@ namespace MgmtMultipleParentResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of AnotherParentsListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnotherParentsListResult"/>. </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
         internal AnotherParentsListResult(IReadOnlyList<AnotherParentData> value, string nextLink)

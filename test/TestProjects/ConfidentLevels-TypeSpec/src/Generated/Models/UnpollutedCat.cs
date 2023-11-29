@@ -11,9 +11,9 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The cat without a union type. </summary>
-    internal partial class UnpollutedCat : PollutedPet
+    public partial class UnpollutedCat : PollutedPet
     {
-        /// <summary> Initializes a new instance of UnpollutedCat. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpollutedCat"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="meow"> Meow. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="meow"/> is null. </exception>
@@ -26,7 +26,7 @@ namespace ConfidentLevelsInTsp.Models
             Meow = meow;
         }
 
-        /// <summary> Initializes a new instance of UnpollutedCat. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnpollutedCat"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="meow"> Meow. </param>

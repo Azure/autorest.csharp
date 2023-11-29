@@ -5,13 +5,13 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class AnotherModelWithUnionProperty
+    public partial class AnotherModelWithUnionProperty
     {
         internal static AnotherModelWithUnionProperty DeserializeAnotherModelWithUnionProperty(JsonElement element)
         {
@@ -19,12 +19,12 @@ namespace ConfidentLevelsInTsp.Models
             {
                 return null;
             }
-            object unionProperty = default;
+            BinaryData unionProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unionProperty"u8))
                 {
-                    unionProperty = property.Value.GetObject();
+                    unionProperty = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
             }

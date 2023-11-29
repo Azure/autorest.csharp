@@ -4,7 +4,6 @@
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
@@ -13,14 +12,15 @@ namespace AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions
     {
         public JsonElementExpression RootElement => new(Property(nameof(JsonDocument.RootElement)));
 
-        public static JsonDocumentExpression Parse(ValueExpression json) => new(InvokeStatic(nameof(JsonDocument.Parse), json));
+        public static JsonDocumentExpression Parse(BinaryDataExpression binaryData) => new(InvokeStatic(nameof(JsonDocument.Parse), binaryData));
+        public static JsonDocumentExpression Parse(StreamExpression stream) => new(InvokeStatic(nameof(JsonDocument.Parse), stream));
 
-        public static JsonDocumentExpression Parse(ResponseExpression response, bool async)
+        public static JsonDocumentExpression Parse(StreamExpression stream, bool async)
         {
             // Sync and async methods have different set of parameters
             return async
-                ? new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.ParseAsync), new[] { response.ContentStream, Snippets.Default, KnownParameters.CancellationTokenParameter }, true))
-                : new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.Parse), response.ContentStream));
+                ? new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.ParseAsync), new[] { stream, Snippets.Default, KnownParameters.CancellationTokenParameter }, true))
+                : new JsonDocumentExpression(InvokeStatic(nameof(JsonDocument.Parse), stream));
         }
     }
 }

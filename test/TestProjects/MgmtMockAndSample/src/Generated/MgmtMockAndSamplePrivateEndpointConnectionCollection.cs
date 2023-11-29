@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtMockAndSample
 {
     /// <summary>
-    /// A class representing a collection of <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> and their operations.
-    /// Each <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> in the collection will belong to the same instance of <see cref="VaultResource" />.
-    /// To get a <see cref="MgmtMockAndSamplePrivateEndpointConnectionCollection" /> instance call the GetMgmtMockAndSamplePrivateEndpointConnections method from an instance of <see cref="VaultResource" />.
+    /// A class representing a collection of <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> and their operations.
+    /// Each <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> in the collection will belong to the same instance of <see cref="VaultResource"/>.
+    /// To get a <see cref="MgmtMockAndSamplePrivateEndpointConnectionCollection"/> instance call the GetMgmtMockAndSamplePrivateEndpointConnections method from an instance of <see cref="VaultResource"/>.
     /// </summary>
     public partial class MgmtMockAndSamplePrivateEndpointConnectionCollection : ArmCollection, IEnumerable<MgmtMockAndSamplePrivateEndpointConnectionResource>, IAsyncEnumerable<MgmtMockAndSamplePrivateEndpointConnectionResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MgmtMockAndSamplePrivateEndpointConnectionResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -245,7 +245,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MgmtMockAndSamplePrivateEndpointConnectionResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

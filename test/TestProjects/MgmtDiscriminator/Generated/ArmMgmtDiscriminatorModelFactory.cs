@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtDiscriminatorModelFactory
     {
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtDiscriminator.DeliveryRuleData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -28,7 +28,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleData(id, name, resourceType, systemData, properties);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleProperties"/>. </summary>
         /// <param name="order"> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </param>
         /// <param name="conditions">
         /// The condition that must be matched for the actions to be executed
@@ -60,7 +60,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo, pet, foo);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCondition"/>. </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
@@ -69,7 +69,7 @@ namespace MgmtDiscriminator.Models
             return new UnknownDeliveryRuleCondition(name, foo);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
@@ -78,7 +78,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleAction(name, foo);
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string id = null)
@@ -86,7 +86,7 @@ namespace MgmtDiscriminator.Models
             return new UnknownPet(default, id);
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
@@ -95,7 +95,7 @@ namespace MgmtDiscriminator.Models
             return new Cat(PetKind.Cat, id, meow);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
@@ -104,7 +104,7 @@ namespace MgmtDiscriminator.Models
             return new Dog(PetKind.Dog, id, bark);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRemoteAddressCondition"/>. </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRemoteAddressCondition"/> instance for mocking. </returns>
@@ -113,7 +113,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRequestMethodCondition"/>. </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestMethodCondition"/> instance for mocking. </returns>
@@ -122,7 +122,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleQueryStringCondition. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleQueryStringCondition"/>. </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleQueryStringCondition"/> instance for mocking. </returns>
@@ -131,7 +131,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UrlRedirectAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRedirectAction"/> instance for mocking. </returns>
@@ -140,7 +140,7 @@ namespace MgmtDiscriminator.Models
             return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlSigningAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UrlSigningAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlSigningAction"/> instance for mocking. </returns>
@@ -149,7 +149,7 @@ namespace MgmtDiscriminator.Models
             return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of OriginGroupOverrideAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OriginGroupOverrideAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.OriginGroupOverrideAction"/> instance for mocking. </returns>
@@ -158,7 +158,7 @@ namespace MgmtDiscriminator.Models
             return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UrlRewriteAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRewriteAction"/> instance for mocking. </returns>
@@ -167,7 +167,7 @@ namespace MgmtDiscriminator.Models
             return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRequestHeaderAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestHeaderAction"/> instance for mocking. </returns>
@@ -176,7 +176,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleResponseHeaderAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleResponseHeaderAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleResponseHeaderAction"/> instance for mocking. </returns>
@@ -185,7 +185,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheExpirationAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCacheExpirationAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheExpirationAction"/> instance for mocking. </returns>
@@ -194,7 +194,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheKeyQueryStringAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> instance for mocking. </returns>
@@ -203,7 +203,7 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/>. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/> instance for mocking. </returns>

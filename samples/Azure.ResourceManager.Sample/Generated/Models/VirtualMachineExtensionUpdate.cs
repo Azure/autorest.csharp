@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineExtensionUpdate : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionUpdate. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionUpdate"/>. </summary>
         public VirtualMachineExtensionUpdate()
         {
         }
@@ -57,7 +57,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

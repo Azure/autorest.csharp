@@ -18,7 +18,7 @@ namespace MgmtCustomizations.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtCustomizationsModelFactory
     {
-        /// <summary> Initializes a new instance of PetStoreData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtCustomizations.PetStoreData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -30,7 +30,7 @@ namespace MgmtCustomizations.Models
             return new PetStoreData(id, name, resourceType, systemData, properties);
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -43,7 +43,7 @@ namespace MgmtCustomizations.Models
             return new UnknownPet(default, name, size, dateOfBirth);
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -59,7 +59,7 @@ namespace MgmtCustomizations.Models
             return new Cat(PetKind.Cat, name, size, dateOfBirth, sleep, jump, meow);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:

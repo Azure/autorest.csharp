@@ -16533,15 +16533,7 @@ operationGroups:
                       protected5:
                         protectedInner: something else
                     rawMessage: PFX-or-PEM-blob
-                    settings:
-                      config1: value1
-                      config2: 8427
-                      config3: false
-                      config4:
-                        - '1'
-                        - '2'
-                      config5:
-                        inner: something
+                    settings: '{"config1":"value1","config2":8427,"config3":false,"config4":["1","2"],"config5":{"inner":"something"}}'
                     softDeleteRetentionInDays: 90
                     tenantId: 00000000-0000-0000-0000-000000000000
                   sku:

@@ -20,13 +20,15 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a SubParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SubParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetSubParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" /> using the GetSubParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="SubParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetSubParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource"/> using the GetSubParent method.
     /// </summary>
     public partial class SubParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SubParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="subParentName"> The subParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string subParentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParents/{subParentName}";
@@ -42,7 +44,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "SubParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal SubParentResource(ArmClient client, SubParentData data) : this(client, data.Id)

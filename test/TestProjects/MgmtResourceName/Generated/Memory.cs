@@ -19,13 +19,16 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A Class representing a Memory along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="Memory" />
-    /// from an instance of <see cref="ArmClient" /> using the GetMemory method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetMemory method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="Memory"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetMemory method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetMemory method.
     /// </summary>
     public partial class Memory : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Memory"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="memoryResourceName"> The memoryResourceName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string memoryResourceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/memoryResources/{memoryResourceName}";
@@ -41,7 +44,7 @@ namespace MgmtResourceName
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "Memory"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Memory"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal Memory(ArmClient client, MemoryData data) : this(client, data.Id)
@@ -162,7 +165,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The Memory to use. </param>
+        /// <param name="data"> The <see cref="MemoryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Memory>> UpdateAsync(WaitUntil waitUntil, MemoryData data, CancellationToken cancellationToken = default)
@@ -199,7 +202,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The Memory to use. </param>
+        /// <param name="data"> The <see cref="MemoryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Memory> Update(WaitUntil waitUntil, MemoryData data, CancellationToken cancellationToken = default)

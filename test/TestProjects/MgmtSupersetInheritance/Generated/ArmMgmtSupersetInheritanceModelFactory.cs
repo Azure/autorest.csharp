@@ -17,7 +17,7 @@ namespace MgmtSupersetInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSupersetInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -29,7 +29,7 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel1Data(id, name, resourceType, systemData, @new);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel4Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -45,7 +45,7 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel4Data(id, name, resourceType, systemData, tags, location, @new);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel6Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel6Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -57,7 +57,7 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel6Data(id, name, resourceType, systemData, @new);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtSupersetInheritance.SupersetModel7Data"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
@@ -69,7 +69,7 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel7Data(id, name, resourceType, @new, systemData);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7SystemData. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SupersetModel7SystemData"/>. </summary>
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>
         /// <param name="lastModifiedBy"> The identity that last modified the resource. </param>
@@ -79,7 +79,7 @@ namespace MgmtSupersetInheritance.Models
             return new SupersetModel7SystemData(createdBy, createdOn, lastModifiedBy);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel5. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SupersetModel5"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

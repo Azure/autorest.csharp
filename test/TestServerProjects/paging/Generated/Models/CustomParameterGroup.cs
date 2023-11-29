@@ -13,7 +13,7 @@ namespace paging.Models
     /// <summary> Parameter group. </summary>
     public partial class CustomParameterGroup
     {
-        /// <summary> Initializes a new instance of CustomParameterGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomParameterGroup"/>. </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>

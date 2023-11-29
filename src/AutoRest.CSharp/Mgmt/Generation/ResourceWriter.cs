@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -49,38 +49,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResourceIdentifierMethods()
         {
-            var requestPath = This.RequestPath;
-            var method = This.CreateResourceIdentifierMethodSignature;
-            _writer.WriteXmlDocumentationSummary($"{method.Description}");
-            using (_writer.WriteMethodDeclaration(method))
-            {
-                // Storage has inconsistent definitions:
-                // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L58
-                // - https://github.com/Azure/azure-rest-api-specs/blob/719b74f77b92eb1ec3814be6c4488bcf6b651733/specification/storage/resource-manager/Microsoft.Storage/stable/2021-04-01/blob.json#L146
-                // so here we have to use `Seqment.BuildSerializedSegments` instead of `RequestPath.SerializedPath` which could be from `RestClientMethod.Operation.GetHttpPath`
-                var resourceId = new CodeWriterDeclaration("resourceId");
-                _writer.Append($"var {resourceId:D} = ");
-                _writer.AppendRaw("$\"");
-                var first = true;
-                foreach (var segment in requestPath)
-                {
-                    if (first)
-                    {
-                        first = false;
-                        // If first segment is "{var}", then we should not add leading "/". Instead, we should let callers to specify, e.g. "{scope}/providers/Microsoft.Resources/..." v.s. "/subscriptions/{subscriptionId}/..."
-                        if (!requestPath.Any() || requestPath.First().IsConstant)
-                            _writer.AppendRaw("/");
-                    }
-                    else
-                        _writer.AppendRaw("/");
-                    if (segment.IsConstant)
-                        _writer.AppendRaw(segment.ConstantValue);
-                    else
-                        _writer.Append($"{{{segment.ReferenceName:I}}}");
-                }
-                _writer.LineRaw("\";");
-                _writer.Line($"return new {method.ReturnType?.Name}({resourceId:I});");
-            }
+            var method = This.CreateResourceIdentifierMethod;
+            _writer.WriteMethodDocumentation(method.Signature);
+            _writer.WriteMethod(method);
         }
 
         protected override void WriteProperties()
@@ -254,7 +225,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue(result.Value, result.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
             }
             else
@@ -300,7 +271,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
             if (valueConverter != null)
             {
-                _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
+                _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {originalResponse}.{Configuration.ApiTypes.GetRawResponseName}());");
             }
             else
             {

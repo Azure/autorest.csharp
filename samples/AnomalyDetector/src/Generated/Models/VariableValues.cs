@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     /// <summary> Variable values. </summary>
     public partial class VariableValues
     {
-        /// <summary> Initializes a new instance of VariableValues. </summary>
+        /// <summary> Initializes a new instance of <see cref="VariableValues"/>. </summary>
         /// <param name="variable"> Variable name of last detection request. </param>
         /// <param name="timestamps"> Timestamps of last detection request. </param>
         /// <param name="values"> Values of variables. </param>
@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             Values = values.ToList();
         }
 
-        /// <summary> Initializes a new instance of VariableValues. </summary>
+        /// <summary> Initializes a new instance of <see cref="VariableValues"/>. </summary>
         /// <param name="variable"> Variable name of last detection request. </param>
         /// <param name="timestamps"> Timestamps of last detection request. </param>
         /// <param name="values"> Values of variables. </param>

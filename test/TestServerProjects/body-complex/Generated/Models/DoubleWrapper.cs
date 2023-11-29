@@ -10,12 +10,12 @@ namespace body_complex.Models
     /// <summary> The DoubleWrapper. </summary>
     public partial class DoubleWrapper
     {
-        /// <summary> Initializes a new instance of DoubleWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="DoubleWrapper"/>. </summary>
         public DoubleWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of DoubleWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="DoubleWrapper"/>. </summary>
         /// <param name="field1"></param>
         /// <param name="field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose"></param>
         internal DoubleWrapper(double? field1, double? field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose)

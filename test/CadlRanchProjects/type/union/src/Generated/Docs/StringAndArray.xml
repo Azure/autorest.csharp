@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetStringAndArrayAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetStringAndArrayAsync.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response<object> response = await client.GetStringAndArrayAsync();
+]]></code>
+This sample shows how to call GetStringAndArrayAsync with all parameters.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response<object> response = await client.GetStringAndArrayAsync();
+]]></code></example>
+    </member>
+    <member name="GetStringAndArray(CancellationToken)">
+      <example>
+This sample shows how to call GetStringAndArray.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response<object> response = client.GetStringAndArray();
+]]></code>
+This sample shows how to call GetStringAndArray with all parameters.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response<object> response = client.GetStringAndArray();
+]]></code></example>
+    </member>
+    <member name="GetStringAndArrayAsync(RequestContext)">
+      <example>
+This sample shows how to call GetStringAndArrayAsync and parse the result.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = await client.GetStringAndArrayAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
+]]></code>
+This sample shows how to call GetStringAndArrayAsync with all parameters and parse the result.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = await client.GetStringAndArrayAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
+]]></code></example>
+    </member>
+    <member name="GetStringAndArray(RequestContext)">
+      <example>
+This sample shows how to call GetStringAndArray and parse the result.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = client.GetStringAndArray(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
+]]></code>
+This sample shows how to call GetStringAndArray with all parameters and parse the result.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = client.GetStringAndArray(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("string").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("array").ToString());
+]]></code></example>
+    </member>
+    <member name="SendAsync(SendRequestProp,CancellationToken)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = await client.SendAsync(SendRequestProp.A);
+]]></code>
+This sample shows how to call SendAsync with all parameters.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = await client.SendAsync(SendRequestProp.A);
+]]></code></example>
+    </member>
+    <member name="Send(SendRequestProp,CancellationToken)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = client.Send(SendRequestProp.A);
+]]></code>
+This sample shows how to call Send with all parameters.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+Response response = client.Send(SendRequestProp.A);
+]]></code></example>
+    </member>
+    <member name="SendAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = await client.SendAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SendAsync with all request content.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = await client.SendAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Send(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = client.Send(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Send with all request content.
+<code><![CDATA[
+StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = client.Send(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

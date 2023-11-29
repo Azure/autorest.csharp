@@ -10,7 +10,7 @@ namespace body_complex.Models
     /// <summary> The UnknownDotFish. </summary>
     internal partial class UnknownDotFish : DotFish
     {
-        /// <summary> Initializes a new instance of UnknownDotFish. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownDotFish"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
         internal UnknownDotFish(string fishType, string species) : base(fishType, species)

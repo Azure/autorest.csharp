@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Fake.Models
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<ResourceManager.Models.SystemData> systemData = default;
+            Optional<SystemData> systemData = default;
             Optional<PrivateEndpoint> privateEndpoint = default;
             Optional<MgmtReferenceTypesPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtReferenceTypesPrivateEndpointConnectionProvisioningState> provisioningState = default;
@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Fake.Models
                     {
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<ResourceManager.Models.SystemData>(property.Value.GetRawText());
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("properties"u8))

@@ -21,13 +21,16 @@ namespace MgmtLRO
 {
     /// <summary>
     /// A Class representing a Bar along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="BarResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetBarResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetBar method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="BarResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetBarResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetBar method.
     /// </summary>
     public partial class BarResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="BarResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="barName"> The barName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string barName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}";
@@ -43,7 +46,7 @@ namespace MgmtLRO
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "BarResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BarResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal BarResource(ArmClient client, BarData data) : this(client, data.Id)

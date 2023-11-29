@@ -19,13 +19,16 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a DeletedVault along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DeletedVaultResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetDeletedVaultResource method.
-    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" /> using the GetDeletedVault method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="DeletedVaultResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetDeletedVaultResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource"/> using the GetDeletedVault method.
     /// </summary>
     public partial class DeletedVaultResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DeletedVaultResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="vaultName"> The vaultName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, AzureLocation location, string vaultName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}";
@@ -41,7 +44,7 @@ namespace MgmtMockAndSample
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "DeletedVaultResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeletedVaultResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal DeletedVaultResource(ArmClient client, DeletedVaultData data) : this(client, data.Id)

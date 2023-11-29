@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSDisk"/>. </summary>
         public VirtualMachineScaleSetUpdateOSDisk()
         {
             VhdContainers = new ChangeTrackingList<string>();

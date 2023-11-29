@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateOSProfile"/>. </summary>
         public VirtualMachineScaleSetUpdateOSProfile()
         {
             Secrets = new ChangeTrackingList<VaultSecretGroup>();

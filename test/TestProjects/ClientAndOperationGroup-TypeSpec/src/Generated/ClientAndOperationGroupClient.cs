@@ -34,14 +34,14 @@ namespace ClientAndOperationGroup
         }
 
         /// <summary> Initializes a new instance of ClientAndOperationGroupClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ClientAndOperationGroupClient(Uri endpoint) : this(endpoint, new ClientAndOperationGroupClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ClientAndOperationGroupClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ClientAndOperationGroupClient(Uri endpoint, ClientAndOperationGroupClientOptions options)

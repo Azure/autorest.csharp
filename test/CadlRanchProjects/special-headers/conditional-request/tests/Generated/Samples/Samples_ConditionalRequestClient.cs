@@ -18,7 +18,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostIfMatch_ShortVersion()
+        public void Example_ConditionalRequest_PostIfMatch_ShortVersion()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -29,7 +29,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostIfMatch_ShortVersion_Async()
+        public async Task Example_ConditionalRequest_PostIfMatch_ShortVersion_Async()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -40,7 +40,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostIfMatch_AllParameters()
+        public void Example_ConditionalRequest_PostIfMatch_AllParameters()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -51,7 +51,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostIfMatch_AllParameters_Async()
+        public async Task Example_ConditionalRequest_PostIfMatch_AllParameters_Async()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -62,7 +62,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostIfNoneMatch_ShortVersion()
+        public void Example_ConditionalRequest_PostIfNoneMatch_ShortVersion()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -73,7 +73,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostIfNoneMatch_ShortVersion_Async()
+        public async Task Example_ConditionalRequest_PostIfNoneMatch_ShortVersion_Async()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -84,7 +84,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PostIfNoneMatch_AllParameters()
+        public void Example_ConditionalRequest_PostIfNoneMatch_AllParameters()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 
@@ -95,7 +95,7 @@ namespace SpecialHeaders.ConditionalRequest.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostIfNoneMatch_AllParameters_Async()
+        public async Task Example_ConditionalRequest_PostIfNoneMatch_AllParameters_Async()
         {
             ConditionalRequestClient client = new ConditionalRequestClient();
 

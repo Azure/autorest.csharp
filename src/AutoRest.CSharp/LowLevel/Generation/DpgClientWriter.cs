@@ -5,27 +5,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.Statements;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
-using Response = Azure.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -102,7 +105,17 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteCancellationTokenToRequestContextMethod();
                     }
                     WriteResponseClassifierMethod(_writer, _client.ResponseClassifierTypes);
+                    WriteLongRunningResultRetrievalMethods();
                 }
+            }
+        }
+
+        private void WriteLongRunningResultRetrievalMethods()
+        {
+            foreach (var method in _client.ClientMethods.Select(c => c.LongRunningResultRetrievalMethod).WhereNotNull())
+            {
+                _writer.Line();
+                WriteLroResultRetrievalMethod(method);
             }
         }
 
@@ -169,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer
                 .Line()
                 .WriteXmlDocumentationSummary($"The HTTP pipeline for sending and receiving REST requests and responses.")
-                .Line($"public virtual {typeof(HttpPipeline)} Pipeline => {_client.Fields.PipelineField.Name};");
+                .Line($"public virtual {Configuration.ApiTypes.HttpPipelineType} Pipeline => {_client.Fields.PipelineField.Name};");
 
             _writer.Line();
         }
@@ -212,8 +225,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var clientOptionsParameter = signature.Parameters.Last(p => p.Type.EqualsIgnoreNullable(_client.ClientOptions.Type));
                 _writer.Line($"{_client.Fields.ClientDiagnosticsProperty.Name:I} = new {_client.Fields.ClientDiagnosticsProperty.Type}({clientOptionsParameter.Name:I}, true);");
 
-                FormattableString perCallPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
-                FormattableString perRetryPolicies = $"Array.Empty<{typeof(HttpPipelinePolicy)}>()";
+                FormattableString perCallPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
+                FormattableString perRetryPolicies = $"Array.Empty<{Configuration.ApiTypes.HttpPipelinePolicyType}>()";
 
                 var credentialParameter = signature.Parameters.FirstOrDefault(p => p.Name == "credential");
                 if (credentialParameter != null)
@@ -223,19 +236,19 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         var fieldName = credentialField.Name;
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
-                        if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
+                        if (credentialField.Type.Equals(Configuration.ApiTypes.KeyCredentialType))
                         {
                             string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.KeyCredentialPolicyType}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(BearerTokenAuthenticationPolicy)}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
+                            perRetryPolicies = $"new {Configuration.ApiTypes.HttpPipelinePolicyType}[] {{new {Configuration.ApiTypes.BearerAuthenticationPolicyType}({fieldName:I}, {_client.Fields.ScopesConstant!.Name})}}";
                         }
                     }
                 }
 
-                _writer.Line($"{_client.Fields.PipelineField.Name:I} = {typeof(HttpPipelineBuilder)}.{nameof(HttpPipelineBuilder.Build)}({clientOptionsParameter.Name:I}, {perCallPolicies}, {perRetryPolicies}, new {typeof(ResponseClassifier)}());");
+                _writer.Line(Configuration.ApiTypes.GetHttpPipelineClassifierString(_client.Fields.PipelineField.Name, clientOptionsParameter.Name, perCallPolicies, perRetryPolicies));
 
                 foreach (var parameter in _client.Parameters)
                 {
@@ -245,6 +258,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         if (parameter.IsApiVersionParameter)
                         {
                             _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.Version;");
+                        }
+                        else if (_client.ClientOptions.AdditionalParameters.Contains(parameter))
+                        {
+                            _writer.Line($"{field.Name:I} = {clientOptionsParameter.Name:I}.{parameter.Name.ToCleanName()};");
                         }
                         else
                         {
@@ -287,44 +304,42 @@ namespace AutoRest.CSharp.Generation.Writers
                 // write whatever we need to convert the parameters
                 converter(_writer);
 
-                var responseVariable = new CodeWriterDeclaration("response");
+                var response = new VariableReference(clientMethod.ProtocolMethodSignature.ReturnType!, Configuration.ApiTypes.ResponseParameterName);
                 _writer
-                    .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
+                    .Append($"{response.Type} {response.Declaration:D} = ")
                     .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                     .LineRaw(";");
 
                 var responseType = convenienceMethod.ResponseType;
-                if (responseType == null)
+                if (responseType is null)
                 {
-                    _writer.Line($"return {responseVariable:I};");
+                    _writer.WriteMethodBodyStatement(Return(response));
                 }
-                else if (TypeFactory.IsReadOnlyList(responseType) || TypeFactory.IsReadOnlyDictionary(responseType))
+                else if (responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
                 {
-                    ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromModel(serializableObjectType, response)));
                 }
-                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType })
+                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType})
                 {
-                    string declaredTypeName = enumType.Declaration.Name;
-                    if (enumType.IsExtensible)
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromEnum(enumType, response)));
+                }
+                else if (TypeFactory.IsCollectionType(responseType))
+                {
+                    var firstResponseBodyType = clientMethod.ResponseBodyType!;
+                    var serializationFormat =  SerializationBuilder.GetSerializationFormat(firstResponseBodyType, responseType);
+                    var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType, responseType, false, serializationFormat);
+                    var value = new VariableReference(responseType, "value");
+
+                    _writer.WriteMethodBodyStatement(new[]
                     {
-                        _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}(new {declaredTypeName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>()), {responseVariable:I});");
-                    }
-                    else
-                    {
-                        _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
-                    }
+                        new DeclareVariableStatement(value.Type, value.Declaration, Default),
+                        JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, new ResponseExpression(response).ContentStream, false),
+                        Return(Extensible.RestOperations.GetTypedResponseFromValue(value, response))
+                    });
                 }
-                else if (responseType.IsFrameworkType && responseType.FrameworkType == typeof(BinaryData))
+                else if (responseType is { IsFrameworkType: true })
                 {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content, {responseVariable:I});");
-                }
-                else if (responseType.IsFrameworkType)
-                {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
-                }
-                else
-                {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
+                    _writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.GetTypedResponseFromBinaryDate(responseType.FrameworkType, response)));
                 }
             }
             _writer.Line();
@@ -353,17 +368,35 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     // Operation<BinaryData> response = [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
-                    var responseVariable = new CodeWriterDeclaration("response");
+                    var responseVariable = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                     _writer
                         .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
                         .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                         .LineRaw(";");
                     // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
                     var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {responseType}.FromResponse, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
+                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {GetConversionMethodStatement(clientMethod.LongRunningResultRetrievalMethod, responseType)}, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
                 }
             }
             _writer.Line();
+        }
+
+        private FormattableString GetConversionMethodStatement(LongRunningResultRetrievalMethod? convertMethod, CSharpType responseType)
+        {
+            if (convertMethod is null)
+            {
+                return $"{responseType}.FromResponse";
+            }
+            return $"{convertMethod.MethodSignature.Name}";
+        }
+
+        private void WriteLroResultRetrievalMethod(LongRunningResultRetrievalMethod method)
+        {
+            using (_writer.WriteMethodDeclaration(method.MethodSignature))
+            {
+                _writer.Line($"var resultJsonElement = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{nameof(Response.Content)}).{nameof(JsonDocument.RootElement)}.{nameof(JsonElement.GetProperty)}(\"{method.ResultPath}\");");
+                _writer.Line($"return {method.ReturnType}.Deserialize{method.ReturnType.Name}(resultJsonElement);");
+            }
         }
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
@@ -396,7 +429,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var processMessageParameters = (FormattableString)$"{fields.PipelineField.Name:I}, {messageVariable}, {fields.ClientDiagnosticsProperty.Name:I}, {scopeName:L}, {typeof(OperationFinalStateVia)}.{finalStateVia}, {KnownParameters.RequestContext.Name:I}, {KnownParameters.WaitForCompletion.Name:I}";
 
                     writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
+                        .Line($"using {Configuration.ApiTypes.HttpMessageType} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(startMethod.Name)}({startMethod.Parameters.GetIdentifiersFormattable()});")
                         .AppendRaw("return ")
                         .WriteMethodCall(async, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodAsyncName : LroProcessMessageWithoutResponseValueMethodAsyncName, clientMethod.ResponseBodyType != null ? LroProcessMessageMethodName : LroProcessMessageWithoutResponseValueMethodName, processMessageParameters);
                 }
@@ -420,20 +453,21 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                 {
-                    var messageVariable = new CodeWriterDeclaration("message");
-                    writer
-                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});")
-                        .WriteEnableHttpRedirectIfNecessary(clientMethod.RequestMethod, messageVariable);
-
-                    var methodName = async
-                        ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
-                        : headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessage) : nameof(HttpPipelineExtensions.ProcessMessage);
-
-                    FormattableString paramString = headAsBoolean
-                        ? (FormattableString)$"{messageVariable}, {fields.ClientDiagnosticsProperty.Name}, {KnownParameters.RequestContext.Name:I}"
-                        : (FormattableString)$"{messageVariable}, {KnownParameters.RequestContext.Name:I}";
-
-                    writer.AppendRaw("return ").WriteMethodCall(async, $"{fields.PipelineField.Name:I}.{methodName}", paramString);
+                    var createMessageSignature = new MethodSignature(RequestWriterHelpers.CreateRequestMethodName(restMethod), null, null, Internal, null, null, restMethod.Parameters);
+                    if (headAsBoolean)
+                    {
+                        writer.WriteMethodBodyStatement(new[]
+                        {
+                            Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message),
+                            Extensible.RestOperations.InvokeServiceOperationCallAndReturnHeadAsBool(fields.PipelineField, message, fields.ClientDiagnosticsProperty, async)
+                        });
+                    }
+                    else
+                    {
+                        writer.WriteMethodBodyStatement(Extensible.RestOperations.DeclareHttpMessage(createMessageSignature, out var message));
+                        writer.WriteEnableHttpRedirectIfNecessary(restMethod, message);
+                        writer.WriteMethodBodyStatement(Return(Extensible.RestOperations.InvokeServiceOperationCall(fields.PipelineField, message, async)));
+                    }
                 }
             }
             writer.Line();
@@ -498,11 +532,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (hasStatusCodeRanges)
             {
                 // After fixing https://github.com/Azure/autorest.csharp/issues/2018 issue remove "hasStatusCodeRanges" condition and this class
-                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {typeof(ResponseClassifier)}"))
+                using (writer.Scope($"private sealed class {responseClassifierTypeName}Override : {Configuration.ApiTypes.ResponseClassifierType}"))
                 {
-                    using (writer.Scope($"public override bool {nameof(ResponseClassifier.IsErrorResponse)}({typeof(HttpMessage)} message)"))
+                    using (writer.Scope($"public override bool {Configuration.ApiTypes.ResponseClassifierIsErrorResponseName}({Configuration.ApiTypes.HttpMessageType} message)"))
                     {
-                        using (writer.Scope($"return message.{nameof(HttpMessage.Response)}.{nameof(Response.Status)} switch", end: "};"))
+                        using (writer.Scope($"return message.{Configuration.ApiTypes.HttpMessageResponseName}.{Configuration.ApiTypes.HttpMessageResponseStatusName} switch", end: "};"))
                         {
                             foreach (var statusCode in statusCodes)
                             {
@@ -516,15 +550,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
             }
 
-            writer.Line($"private static {typeof(ResponseClassifier)} _{responseClassifierTypeName.FirstCharToLowerCase()};");
-            writer.Append($"private static {typeof(ResponseClassifier)} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
+            writer.Line($"private static {Configuration.ApiTypes.ResponseClassifierType} _{responseClassifierTypeName.FirstCharToLowerCase()};");
+            writer.Append($"private static {Configuration.ApiTypes.ResponseClassifierType} {responseClassifierTypeName} => _{responseClassifierTypeName.FirstCharToLowerCase()} ??= new ");
             if (hasStatusCodeRanges)
             {
                 writer.Line($"{responseClassifierTypeName}Override();");
             }
             else
             {
-                writer.Append($"{typeof(StatusCodeClassifier)}(stackalloc ushort[]{{");
+                writer.Append($"{Configuration.ApiTypes.StatusCodeClassifierType}(stackalloc ushort[]{{");
                 foreach (var statusCode in statusCodes)
                 {
                     if (statusCode.Code != null)
@@ -569,31 +603,24 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSampleRefsIfNecessary(MethodSignature methodSignature, bool isAsync)
         {
+            if (!Configuration.IsBranded)
+                return;
+
             var sampleProvider = _library.GetSampleForClient(_client);
             // do not write this part when there is no sample provider
             if (sampleProvider == null)
                 return;
 
-            var samples = sampleProvider.GetSampleInformation(methodSignature, isAsync);
+            var samples = sampleProvider.GetSampleInformation(methodSignature, isAsync).ToArray();
             // do not write this part when there is no sample for this method
             if (!samples.Any())
+            {
                 return;
+            }
 
-            var docRef = GetMethodSignatureString(methodSignature);
-            _writer.Line($"/// <include file=\"{XmlDocWriter.Filename}\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-
-            _xmlDocWriter.AddMember(docRef);
+            _writer.WriteXmlDocumentationInclude(XmlDocWriter.Filename, methodSignature, out var memberId);
+            _xmlDocWriter.AddMember(memberId);
             _xmlDocWriter.AddExamples(samples);
-        }
-
-        private static string GetMethodSignatureString(MethodSignature signature)
-        {
-            var builder = new StringBuilder(signature.Name);
-            builder.Append("(");
-            var paramList = signature.Parameters.Select(p => p.Type.ToStringForDocs());
-            builder.Append(string.Join(",", paramList));
-            builder.Append(")");
-            return builder.ToString();
         }
 
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, bool isAsync)
@@ -624,9 +651,9 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteCancellationTokenToRequestContextMethod()
         {
             var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
-            _writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
+            _writer.Line($"private static {Configuration.ApiTypes.RequestContextType} {defaultRequestContext:D} = new {Configuration.ApiTypes.RequestContextType}();");
 
-            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, Configuration.ApiTypes.RequestContextType, null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
             using (_writer.WriteMethodDeclaration(methodSignature))
             {
                 using (_writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
@@ -634,32 +661,44 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.Line($"return {defaultRequestContext:I};");
                 }
 
-                _writer.Line().Line($"return new {typeof(RequestContext)}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
+                _writer.Line().Line($"return new {Configuration.ApiTypes.RequestContextType}() {{ CancellationToken = {KnownParameters.CancellationTokenParameter.Name} }};");
             }
             _writer.Line();
         }
 
         private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
-            var builder = new StringBuilder();
-            builder.AppendLine($"[Protocol Method] {methodSignature.SummaryText}");
-            builder.AppendLine($"<list type=\"bullet\">");
-            builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
-
+            List<FormattableString> lines = new()
+            {
+                $"[Protocol Method] {methodSignature.SummaryText}",
+                $"<list type=\"bullet\">",
+                $"<item>",
+                $"<description>",
+                $"This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.",
+                $"</description>",
+                $"</item>"
+            };
             // we only append the relative convenience method information when the convenience method is public
             if (clientMethod.ShouldGenerateConvenienceMethodRef())
             {
-                var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod!.Signature.WithAsync(async));
-                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+                var convenienceDocRef = clientMethod.ConvenienceMethod!.Signature.WithAsync(async).GetCRef();
+                lines.AddRange(new FormattableString[]
+                {
+                    $"<item>",
+                    $"<description>",
+                    $"Please try the simpler {convenienceDocRef:C} convenience overload with strongly typed models first.",
+                    $"</description>",
+                    $"</item>"
+                });
             }
-            builder.AppendLine($"</list>");
-            return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
+            lines.Add($"</list>");
+            return lines.Join(Environment.NewLine);
         }
 
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool async)
         {
             codeWriter.WriteMethodDocumentation(methodSignature, BuildProtocolMethodSummary(methodSignature, clientMethod, async));
-            codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
+            codeWriter.WriteXmlDocumentationException(Configuration.ApiTypes.RequestFailedExceptionType, $"Service returned a non-success status code.");
 
             if (methodSignature.ReturnType == null)
             {
@@ -677,21 +716,21 @@ namespace AutoRest.CSharp.Generation.Writers
             if (clientMethod.PagingInfo != null && clientMethod.LongRunning != null)
             {
                 CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
-                text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
+                text = $"The {typeof(Operation<>):C} from the service that will contain a {pageableType:C} containing a list of {typeof(BinaryData):C} objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
             else if (clientMethod.PagingInfo != null)
             {
-                text = $"The <see cref=\"{returnType.Name}{{T}}\"/> from the service containing a list of <see cref=\"{returnType.Arguments[0]}\"/> objects. Details of the body schema for each item in the collection are in the Remarks section below.";
+                text = $"The {returnType.GetGenericTypeDefinition():C} from the service containing a list of {returnType.Arguments[0]:C} objects. Details of the body schema for each item in the collection are in the Remarks section below.";
             }
             else if (clientMethod.LongRunning != null)
             {
-                text = (FormattableString)$"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
+                text = $"The {typeof(Operation):C} representing an asynchronous operation on the service.";
             }
-            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response>)) || returnType.EqualsIgnoreNullable(typeof(Response)))
+            else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse()) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
             {
-                text = (FormattableString)$"The response returned from the service.";
+                text = $"The response returned from the service.";
             }
-            else if (returnType.EqualsIgnoreNullable(typeof(Task<Response<bool>>)) || returnType.EqualsIgnoreNullable(typeof(Response<bool>)))
+            else if (returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetTaskOfResponse(typeof(bool))) || returnType.EqualsIgnoreNullable(Configuration.ApiTypes.GetResponseOfT<bool>()))
             {
                 text = $"The response returned from the service.";
             }
@@ -703,138 +742,6 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
-        //TODO: We should be able to deep link to the service schema documentation instead of creating our own.  Keeping this function here until we confirm
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientMethod requestMethod, bool isPagingMethod, MethodSignature methodSignature, IReadOnlyCollection<FormattableString> schemas, bool hasRequestRemarks, bool hasResponseRemarks, bool addDescription)
-        {
-            if (requestMethod.Operation.ExternalDocsUrl == null)
-                return;
-
-            var docInfo = requestMethod.Operation.ExternalDocsUrl != null
-                ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{requestMethod.Operation.ExternalDocsUrl}{Environment.NewLine}"
-                : (FormattableString)$"";
-
-            var schemaDesription = "";
-            if (hasRequestRemarks && hasResponseRemarks)
-            {
-                if (isPagingMethod)
-                {
-                    schemaDesription = "Below is the JSON schema for the request payload and one item in the pageable response.";
-                }
-                else
-                {
-                    schemaDesription = "Below is the JSON schema for the request and response payloads.";
-                }
-            }
-            else if (hasRequestRemarks)
-            {
-                schemaDesription = "Below is the JSON schema for the request payload.";
-            }
-            else if (hasResponseRemarks)
-            {
-                if (isPagingMethod)
-                {
-                    schemaDesription = "Below is the JSON schema for one item in the pageable response.";
-                }
-                else
-                {
-                    schemaDesription = "Below is the JSON schema for the response payload.";
-                }
-            }
-
-            if (addDescription && !string.IsNullOrEmpty(methodSignature.DescriptionText?.ToString()))
-            {
-                schemaDesription = $"{methodSignature.DescriptionText}{Environment.NewLine}{Environment.NewLine}{schemaDesription}";
-            }
-
-            writeXmlDocumentation("remarks", $"{schemaDesription}{Environment.NewLine}{docInfo}{schemas}");
-        }
-
-        private static void BuildSchemaFromDoc(StringBuilder builder, SchemaDocumentation doc, IDictionary<string, SchemaDocumentation> docDict, int indentation = 0)
-        {
-            foreach (var row in doc.DocumentationRows)
-            {
-                var required = row.Required ? " # Required." : " # Optional.";
-                var description = row.Description.IsNullOrEmpty() ? string.Empty : (required.IsNullOrEmpty() ? $" # {row.Description}" : $" {row.Description}");
-                var isArray = row.Type.EndsWith("[]");
-                var rowType = isArray ? row.Type.Substring(0, row.Type.Length - 2) : row.Type;
-                builder.AppendIndentation(indentation).Append($"{row.Name}: ");
-                if (isArray)
-                {
-                    if (docDict.ContainsKey(rowType))
-                    {
-                        builder.AppendLine("[");
-                        var docToProcess = docDict[rowType];
-                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
-                        builder.AppendIndentation(indentation + 2).AppendLine("{");
-                        BuildSchemaFromDoc(builder, docToProcess, docDict, indentation + 4);
-                        builder.AppendIndentation(indentation + 2).AppendLine("}");
-                        builder.AppendIndentation(indentation).AppendLine($"],{required}{description}");
-                    }
-                    else
-                        builder.AppendLine($"[{rowType}],{required}{description}");
-                }
-                else
-                {
-                    if (docDict.ContainsKey(rowType))
-                    {
-                        builder.AppendLine("{");
-                        var docToProcess = docDict[rowType];
-                        docDict.Remove(rowType); // In the case of cyclic reference where A has a property type of A itself, we just show the type A if it's not the first time we meet A.
-                        BuildSchemaFromDoc(builder, docToProcess, docDict, indentation + 2);
-                        builder.AppendIndentation(indentation).Append("}").AppendLine($",{required}{description}");
-                    }
-                    else
-                        builder.AppendLine($"{rowType},{required}{description}");
-                }
-            }
-        }
-
-        private static string StringifyTypeForTable(InputType type)
-        {
-            static string RemovePrefix(string s, string prefix)
-                => s.StartsWith(prefix) ? s[prefix.Length..] : s;
-
-            return type switch
-            {
-                InputPrimitiveType { IsNumber: true } => "number",
-                InputPrimitiveType { Kind: InputTypeKind.Boolean } => "boolean",
-                InputPrimitiveType { Kind: InputTypeKind.String } => "string",
-                InputPrimitiveType { Kind: InputTypeKind.Object } => "object",
-                InputPrimitiveType { Kind: InputTypeKind.Date } => "string (date)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTime } => "string (date & time)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeISO8601 } => "string (ISO 8601 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC1123 } => "string (RFC1123 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC3339 } => "string (RFC3339 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC7231 } => "string (RFC7231 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DateTimeUnix } => "string (Unix Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => "string (duration ISO 8601 Format)",
-                InputPrimitiveType { Kind: InputTypeKind.DurationConstant } => "string (duration)",
-                InputPrimitiveType { Kind: InputTypeKind.Time } => "string (time)",
-                InputEnumType enumType => string.Join(" | ", enumType.AllowedValues.Select(c => $"\"{c.Value}\"")),
-                InputDictionaryType dictionaryType => $"Dictionary<string, {StringifyTypeForTable(dictionaryType.ValueType)}>",
-                InputListType listType => $"{StringifyTypeForTable(listType.ElementType)}[]",
-                InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => "any",
-                _ => RemovePrefix(type.Name, "Json")
-            };
-        }
-
-        private class SchemaDocumentation
-        {
-            internal record DocumentationRow(string Name, string Type, bool Required, string Description);
-
-            public string SchemaName { get; }
-            public DocumentationRow[] DocumentationRows { get; }
-
-            public SchemaDocumentation(string schemaName, DocumentationRow[] documentationRows)
-            {
-                SchemaName = schemaName;
-                DocumentationRows = documentationRows;
-            }
-        }
-
-        public override string ToString()
-        {
-            return _writer.ToString();
-        }
+        public override string ToString() => _writer.ToString();
     }
 }

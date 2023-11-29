@@ -20,13 +20,14 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a TenantTest along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TenantTestResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTenantTestResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TenantResource" /> using the GetTenantTest method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TenantTestResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTenantTestResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantResource"/> using the GetTenantTest method.
     /// </summary>
     public partial class TenantTestResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantTestResource"/> instance. </summary>
+        /// <param name="tenantTestName"> The tenantTestName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName)
         {
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}";
@@ -42,7 +43,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TenantTestResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantTestResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TenantTestResource(ArmClient client, TenantTestData data) : this(client, data.Id)
@@ -92,7 +93,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithNonResChWithLocResources and their operations over a TenantParentWithNonResChWithLocResource. </returns>
         public virtual TenantParentWithNonResChWithLocCollection GetTenantParentWithNonResChWithLocs()
         {
-            return GetCachedClient(Client => new TenantParentWithNonResChWithLocCollection(Client, Id));
+            return GetCachedClient(client => new TenantParentWithNonResChWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -110,8 +111,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TenantParentWithNonResChWithLocResource>> GetTenantParentWithNonResChWithLocAsync(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -133,8 +134,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TenantParentWithNonResChWithLocResource> GetTenantParentWithNonResChWithLoc(string tenantParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -145,7 +146,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithNonResChResources and their operations over a TenantParentWithNonResChResource. </returns>
         public virtual TenantParentWithNonResChCollection GetTenantParentWithNonResChes()
         {
-            return GetCachedClient(Client => new TenantParentWithNonResChCollection(Client, Id));
+            return GetCachedClient(client => new TenantParentWithNonResChCollection(client, Id));
         }
 
         /// <summary>
@@ -163,8 +164,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TenantParentWithNonResChResource>> GetTenantParentWithNonResChAsync(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -186,8 +187,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithNonResChName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TenantParentWithNonResChResource> GetTenantParentWithNonResCh(string tenantParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -198,7 +199,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentWithLocResources and their operations over a TenantParentWithLocResource. </returns>
         public virtual TenantParentWithLocCollection GetTenantParentWithLocs()
         {
-            return GetCachedClient(Client => new TenantParentWithLocCollection(Client, Id));
+            return GetCachedClient(client => new TenantParentWithLocCollection(client, Id));
         }
 
         /// <summary>
@@ -216,8 +217,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TenantParentWithLocResource>> GetTenantParentWithLocAsync(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
@@ -239,8 +240,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentWithLocName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TenantParentWithLocResource> GetTenantParentWithLoc(string tenantParentWithLocName, CancellationToken cancellationToken = default)
         {
@@ -251,7 +252,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantParentResources and their operations over a TenantParentResource. </returns>
         public virtual TenantParentCollection GetTenantParents()
         {
-            return GetCachedClient(Client => new TenantParentCollection(Client, Id));
+            return GetCachedClient(client => new TenantParentCollection(client, Id));
         }
 
         /// <summary>
@@ -269,8 +270,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TenantParentResource>> GetTenantParentAsync(string tenantParentName, CancellationToken cancellationToken = default)
         {
@@ -292,8 +293,8 @@ namespace MgmtListMethods
         /// </summary>
         /// <param name="tenantParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="tenantParentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="tenantParentName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<TenantParentResource> GetTenantParent(string tenantParentName, CancellationToken cancellationToken = default)
         {

@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtExactMatchInheritance
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ExactMatchModel5Resource" /> and their operations.
-    /// Each <see cref="ExactMatchModel5Resource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get an <see cref="ExactMatchModel5Collection" /> instance call the GetExactMatchModel5s method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ExactMatchModel5Resource"/> and their operations.
+    /// Each <see cref="ExactMatchModel5Resource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get an <see cref="ExactMatchModel5Collection"/> instance call the GetExactMatchModel5s method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ExactMatchModel5Collection : ArmCollection, IEnumerable<ExactMatchModel5Resource>, IAsyncEnumerable<ExactMatchModel5Resource>
     {
@@ -67,8 +67,8 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
-        /// <param name="data"> The ExactMatchModel5 to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="ExactMatchModel5Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="data"/> is null. </exception>
@@ -107,8 +107,8 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
-        /// <param name="data"> The ExactMatchModel5 to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="ExactMatchModel5Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> or <paramref name="data"/> is null. </exception>
@@ -146,7 +146,7 @@ namespace MgmtExactMatchInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
@@ -182,7 +182,7 @@ namespace MgmtExactMatchInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
@@ -219,7 +219,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ExactMatchModel5Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ExactMatchModel5Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ExactMatchModel5Resource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel5RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -239,7 +239,7 @@ namespace MgmtExactMatchInheritance
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ExactMatchModel5Resource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ExactMatchModel5Resource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ExactMatchModel5Resource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _exactMatchModel5RestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -259,7 +259,7 @@ namespace MgmtExactMatchInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
@@ -294,7 +294,7 @@ namespace MgmtExactMatchInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
@@ -329,7 +329,7 @@ namespace MgmtExactMatchInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
@@ -366,7 +366,7 @@ namespace MgmtExactMatchInheritance
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="exactMatchModel5SName"> The String to use. </param>
+        /// <param name="exactMatchModel5SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>

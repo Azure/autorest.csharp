@@ -14,13 +14,13 @@ namespace MgmtNoTypeReplacement.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class NoTypeReplacementModel1ListResult
     {
-        /// <summary> Initializes a new instance of NoTypeReplacementModel1ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1ListResult"/>. </summary>
         internal NoTypeReplacementModel1ListResult()
         {
             Value = new ChangeTrackingList<NoTypeReplacementModel1Data>();
         }
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel1ListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoTypeReplacementModel1ListResult"/>. </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
         internal NoTypeReplacementModel1ListResult(IReadOnlyList<NoTypeReplacementModel1Data> value, string nextLink)

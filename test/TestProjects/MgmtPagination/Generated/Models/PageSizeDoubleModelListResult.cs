@@ -14,13 +14,13 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeDoubleModelListResult. </summary>
     internal partial class PageSizeDoubleModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeDoubleModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelListResult"/>. </summary>
         internal PageSizeDoubleModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeDoubleModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeDoubleModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDoubleModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal PageSizeDoubleModelListResult(IReadOnlyList<PageSizeDoubleModelData> value, string nextLink)

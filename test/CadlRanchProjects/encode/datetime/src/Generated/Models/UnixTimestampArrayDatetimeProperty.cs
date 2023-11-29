@@ -15,7 +15,7 @@ namespace Encode.Datetime.Models
     /// <summary> The UnixTimestampArrayDatetimeProperty. </summary>
     public partial class UnixTimestampArrayDatetimeProperty
     {
-        /// <summary> Initializes a new instance of UnixTimestampArrayDatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampArrayDatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public UnixTimestampArrayDatetimeProperty(IEnumerable<DateTimeOffset> value)
@@ -25,7 +25,7 @@ namespace Encode.Datetime.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of UnixTimestampArrayDatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampArrayDatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         internal UnixTimestampArrayDatetimeProperty(IList<DateTimeOffset> value)
         {

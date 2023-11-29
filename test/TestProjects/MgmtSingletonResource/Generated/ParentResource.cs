@@ -20,13 +20,16 @@ namespace MgmtSingletonResource
 {
     /// <summary>
     /// A Class representing a ParentResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetParentResource method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetParentResource method.
     /// </summary>
     public partial class ParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="parentName"> The parentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string parentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}";
@@ -42,7 +45,7 @@ namespace MgmtSingletonResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ParentResource(ArmClient client, ParentResourceData data) : this(client, data.Id)
@@ -89,7 +92,7 @@ namespace MgmtSingletonResource
         }
 
         /// <summary> Gets an object representing a SingletonResource along with the instance operations that can be performed on it in the ParentResource. </summary>
-        /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SingletonResource"/> object. </returns>
         public virtual SingletonResource GetSingletonResource()
         {
             return new SingletonResource(Client, Id.AppendChildResource("singletonResources", "current"));
@@ -172,7 +175,7 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ParentResource to use. </param>
+        /// <param name="data"> The <see cref="ParentResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ParentResource>> UpdateAsync(WaitUntil waitUntil, ParentResourceData data, CancellationToken cancellationToken = default)
@@ -209,7 +212,7 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ParentResource to use. </param>
+        /// <param name="data"> The <see cref="ParentResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ParentResource> Update(WaitUntil waitUntil, ParentResourceData data, CancellationToken cancellationToken = default)

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class KeyVaultKeyReference
     {
-        /// <summary> Initializes a new instance of KeyVaultKeyReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultKeyReference"/>. </summary>
         /// <param name="keyUri">
         /// The URL referencing a key encryption key in Key Vault.
         /// Serialized Name: KeyVaultKeyReference.keyUrl

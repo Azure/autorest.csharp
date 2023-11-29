@@ -5,8 +5,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -27,17 +29,28 @@ namespace AutoRest.CSharp.Mgmt.Models
     internal class MgmtClientOperation : IReadOnlyList<MgmtRestOperation>
     {
         private const int PropertyBagThreshold = 5;
-        private const string IdVariableName = "Id";
         private readonly Parameter? _extensionParameter;
-        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations)
+        public static MgmtClientOperation? FromOperations(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
         {
             if (operations.Count > 0)
             {
-                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), null);
+                return new MgmtClientOperation(operations.OrderBy(operation => operation.Name).ToArray(), idVariableName, extensionParameter, isConvenientOperation);
             }
 
             return null;
         }
+
+        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false)
+        {
+            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, idVariableName, extensionParameter, isConvenientOperation);
+        }
+
+        public static MgmtClientOperation FromClientOperation(MgmtClientOperation other, FormattableString idVariableName, Parameter? extensionParameter = null, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null)
+        {
+            return new MgmtClientOperation(other._operations, idVariableName, extensionParameter, isConvenientOperation, parameterOverride);
+        }
+
+        internal FormattableString IdVariableName { get; }
 
         public Func<bool, FormattableString>? ReturnsDescription => _operations.First().ReturnsDescription;
 
@@ -51,18 +64,20 @@ namespace AutoRest.CSharp.Mgmt.Models
         public IReadOnlyList<Parameter> MethodParameters => _methodParameters ??= EnsureMethodParameters();
 
         public IReadOnlyList<Parameter> PropertyBagUnderlyingParameters => IsPropertyBagOperation ? _passThroughParams : Array.Empty<Parameter>();
-        public static MgmtClientOperation FromOperation(MgmtRestOperation operation, Parameter? extensionParameter = null, bool isConvenientOperation = false)
-        {
-            return new MgmtClientOperation(new List<MgmtRestOperation> { operation }, extensionParameter, isConvenientOperation);
-        }
 
         private readonly IReadOnlyList<MgmtRestOperation> _operations;
 
-        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, Parameter? extensionParameter, bool isConvenientOperation = false)
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter, bool isConvenientOperation = false)
         {
             _operations = operations;
             _extensionParameter = extensionParameter;
+            IdVariableName = idVariableName;
             IsConvenientOperation = isConvenientOperation;
+        }
+
+        private MgmtClientOperation(IReadOnlyList<MgmtRestOperation> operations, FormattableString idVariableName, Parameter? extensionParameter, bool isConvenientOperation = false, IReadOnlyList<Parameter>? parameterOverride = null) : this(operations, idVariableName, extensionParameter, isConvenientOperation)
+        {
+            _methodParameters = parameterOverride;
         }
 
         public bool IsConvenientOperation { get; }
@@ -104,10 +119,30 @@ namespace AutoRest.CSharp.Mgmt.Models
             pathInformation = $@"<list type=""bullet"">
 {pathInformation}
 </list>";
+            FormattableString? mockingInformation;
+            if (_extensionParameter == null)
+            {
+                mockingInformation = null;
+            }
+            else
+            {
+                // find the corresponding extension of this method
+                var extendType = _extensionParameter.Type;
+                var mockingExtensionTypeName = MgmtMockableExtension.GetMockableExtensionDefaultName(extendType.Name);
+
+                // construct the cref name
+                FormattableString methodSignature = $"{mockingExtensionTypeName}.{Name}({MethodParameters.Skip(1).GetTypesFormattable(MethodParameters.Count - 1)})";
+                mockingInformation = $@"<item>
+<term>Mocking</term>
+<description>To mock this method, please mock {methodSignature:C} instead.</description>
+</item>";
+            }
+
+            FormattableString extraInformation = mockingInformation != null ? $"{pathInformation}{Environment.NewLine}{mockingInformation}" : pathInformation;
             var descriptionOfOperation = _operations.First().Description;
             if (descriptionOfOperation != null)
-                return $"{descriptionOfOperation}\n{pathInformation}";
-            return pathInformation;
+                return $"{descriptionOfOperation}{Environment.NewLine}{extraInformation}";
+            return extraInformation;
         }
 
         // TODO -- we need a better way to get this

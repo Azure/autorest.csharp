@@ -15,7 +15,7 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithCollectionsRequest. </summary>
     internal partial class SpreadAliasWithCollectionsRequest
     {
-        /// <summary> Initializes a new instance of SpreadAliasWithCollectionsRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/>. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
         public SpreadAliasWithCollectionsRequest(IEnumerable<string> requiredStringList)
@@ -26,7 +26,7 @@ namespace SpreadTypeSpec.Models
             OptionalStringList = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of SpreadAliasWithCollectionsRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SpreadAliasWithCollectionsRequest"/>. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <param name="optionalStringList"> optional list. </param>
         internal SpreadAliasWithCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList)

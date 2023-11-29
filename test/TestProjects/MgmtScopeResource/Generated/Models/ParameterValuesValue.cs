@@ -12,12 +12,12 @@ namespace MgmtScopeResource.Models
     /// <summary> The value of a parameter. </summary>
     public partial class ParameterValuesValue
     {
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         public ParameterValuesValue()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterValuesValue"/>. </summary>
         /// <param name="value"> The value of the parameter. </param>
         internal ParameterValuesValue(BinaryData value)
         {
@@ -30,7 +30,7 @@ namespace MgmtScopeResource.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

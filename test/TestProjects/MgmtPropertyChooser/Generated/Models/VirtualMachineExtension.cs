@@ -15,13 +15,13 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Describes a Virtual Machine Extension. </summary>
     public partial class VirtualMachineExtension : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/>. </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineExtension(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtension"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -68,7 +68,7 @@ namespace MgmtPropertyChooser.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -99,7 +99,7 @@ namespace MgmtPropertyChooser.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

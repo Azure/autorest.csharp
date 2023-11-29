@@ -21,13 +21,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a FakeParentWithNonResCh along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentWithNonResChResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentWithNonResChResource method.
-    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParentWithNonResCh method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeParentWithNonResChResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeParentWithNonResChResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource"/> using the GetFakeParentWithNonResCh method.
     /// </summary>
     public partial class FakeParentWithNonResChResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithNonResChResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="fakeName"> The fakeName. </param>
+        /// <param name="fakeParentWithNonResChName"> The fakeParentWithNonResChName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string fakeParentWithNonResChName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithNonResChes/{fakeParentWithNonResChName}";
@@ -43,7 +46,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeParentWithNonResChResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeParentWithNonResChResource(ArmClient client, FakeParentWithNonResChData data) : this(client, data.Id)
@@ -243,7 +246,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name);
@@ -264,7 +267,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name);

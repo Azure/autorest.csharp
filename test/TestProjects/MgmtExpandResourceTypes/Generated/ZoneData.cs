@@ -19,7 +19,7 @@ namespace MgmtExpandResourceTypes
     /// </summary>
     public partial class ZoneData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of ZoneData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ZoneData"/>. </summary>
         /// <param name="location"> The location. </param>
         public ZoneData(AzureLocation location) : base(location)
         {
@@ -28,7 +28,7 @@ namespace MgmtExpandResourceTypes
             ResolutionVirtualNetworks = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of ZoneData. </summary>
+        /// <summary> Initializes a new instance of <see cref="ZoneData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

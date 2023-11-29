@@ -13,13 +13,13 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Response for the ListNetworkInterface API service call. </summary>
     internal partial class NetworkInterfaceListResult
     {
-        /// <summary> Initializes a new instance of NetworkInterfaceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceListResult"/>. </summary>
         internal NetworkInterfaceListResult()
         {
             Value = new ChangeTrackingList<NetworkInterface>();
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkInterfaceListResult"/>. </summary>
         /// <param name="value"> A list of network interfaces in a resource group. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         internal NetworkInterfaceListResult(IReadOnlyList<NetworkInterface> value, string nextLink)

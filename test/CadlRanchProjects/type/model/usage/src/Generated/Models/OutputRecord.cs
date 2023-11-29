@@ -13,7 +13,7 @@ namespace _Type.Model.Usage.Models
     /// <summary> Record used in operation return type. </summary>
     public partial class OutputRecord
     {
-        /// <summary> Initializes a new instance of OutputRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputRecord"/>. </summary>
         /// <param name="requiredProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
         internal OutputRecord(string requiredProp)

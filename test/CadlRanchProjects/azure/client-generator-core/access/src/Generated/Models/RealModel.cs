@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in internal operations, should be generated but not exported. </summary>
     internal partial class RealModel : AbstractModel
     {
-        /// <summary> Initializes a new instance of RealModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RealModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal RealModel(string name) : base(name)
@@ -23,7 +23,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Kind = "real";
         }
 
-        /// <summary> Initializes a new instance of RealModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RealModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"></param>
         internal RealModel(string kind, string name) : base(kind, name)

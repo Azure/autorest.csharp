@@ -21,13 +21,16 @@ namespace MgmtOperations
 {
     /// <summary>
     /// A Class representing an AvailabilitySet along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AvailabilitySetResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAvailabilitySetResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetAvailabilitySet method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AvailabilitySetResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAvailabilitySetResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetAvailabilitySet method.
     /// </summary>
     public partial class AvailabilitySetResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AvailabilitySetResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="availabilitySetName"> The availabilitySetName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string availabilitySetName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}";
@@ -43,7 +46,7 @@ namespace MgmtOperations
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AvailabilitySetResource(ArmClient client, AvailabilitySetData data) : this(client, data.Id)
@@ -93,7 +96,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetChildResources and their operations over a AvailabilitySetChildResource. </returns>
         public virtual AvailabilitySetChildCollection GetAvailabilitySetChildren()
         {
-            return GetCachedClient(Client => new AvailabilitySetChildCollection(Client, Id));
+            return GetCachedClient(client => new AvailabilitySetChildCollection(client, Id));
         }
 
         /// <summary>
@@ -111,8 +114,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AvailabilitySetChildResource>> GetAvailabilitySetChildAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +137,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AvailabilitySetChildResource> GetAvailabilitySetChild(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {

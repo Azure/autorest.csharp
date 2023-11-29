@@ -167,7 +167,8 @@ namespace AutoRest.CSharp.Common.Input
 
             return new OperationLongRunning(
                 FinalStateVia: operation.LongRunningFinalStateVia,
-                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse)
+                FinalResponse: CreateOperationResponse(operation.LongRunningFinalResponse),
+                ResultPath: null
             );
         }
 
@@ -451,6 +452,11 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (parameter.ClientDefaultValue != null)
             {
+                if (parameter.Origin == "modelerfour:synthesized/host" && (string)parameter.ClientDefaultValue == "")
+                {
+                    return null;
+                }
+
                 return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 

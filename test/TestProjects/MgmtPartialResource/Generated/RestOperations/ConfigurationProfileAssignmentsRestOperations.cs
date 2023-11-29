@@ -64,7 +64,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Creates an association between a VM and Automanage configuration profile. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="configurationProfileAssignmentName"> Name of the configuration profile assignment. Only default is supported. </param>
@@ -98,7 +98,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Creates an association between a VM and Automanage configuration profile. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="configurationProfileAssignmentName"> Name of the configuration profile assignment. Only default is supported. </param>
@@ -154,7 +154,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Get information about a configuration profile assignment. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
@@ -187,7 +187,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Get information about a configuration profile assignment. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="configurationProfileAssignmentName"> The configuration profile assignment name. </param>
@@ -241,7 +241,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Delete a configuration profile assignment. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="configurationProfileAssignmentName"> Name of the configuration profile assignment. </param>
@@ -268,7 +268,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Delete a configuration profile assignment. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="configurationProfileAssignmentName"> Name of the configuration profile assignment. </param>
@@ -316,7 +316,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Get list of configuration profile assignments. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -345,7 +345,7 @@ namespace MgmtPartialResource
         }
 
         /// <summary> Get list of configuration profile assignments. </summary>
-        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

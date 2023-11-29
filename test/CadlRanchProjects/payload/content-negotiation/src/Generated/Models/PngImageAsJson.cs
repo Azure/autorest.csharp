@@ -13,7 +13,7 @@ namespace Payload.ContentNegotiation.Models
     /// <summary> The PngImageAsJson. </summary>
     public partial class PngImageAsJson
     {
-        /// <summary> Initializes a new instance of PngImageAsJson. </summary>
+        /// <summary> Initializes a new instance of <see cref="PngImageAsJson"/>. </summary>
         /// <param name="content"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         internal PngImageAsJson(BinaryData content)

@@ -10,7 +10,7 @@ namespace paging.Models
     /// <summary> Parameter group. </summary>
     public partial class PagingGetMultiplePagesWithOffsetOptions
     {
-        /// <summary> Initializes a new instance of PagingGetMultiplePagesWithOffsetOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesWithOffsetOptions"/>. </summary>
         /// <param name="offset"> Offset of return value. </param>
         public PagingGetMultiplePagesWithOffsetOptions(int offset)
         {

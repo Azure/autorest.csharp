@@ -10,14 +10,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// <summary> The second level legacy model in polymorphic single level inheritance. </summary>
     public partial class TRex : Dinosaur
     {
-        /// <summary> Initializes a new instance of TRex. </summary>
+        /// <summary> Initializes a new instance of <see cref="TRex"/>. </summary>
         /// <param name="size"></param>
         internal TRex(int size) : base(size)
         {
             Kind = "t-rex";
         }
 
-        /// <summary> Initializes a new instance of TRex. </summary>
+        /// <summary> Initializes a new instance of <see cref="TRex"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         internal TRex(string kind, int size) : base(kind, size)

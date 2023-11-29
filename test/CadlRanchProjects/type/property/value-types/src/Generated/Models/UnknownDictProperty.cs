@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a property unknown, and the data is a dictionnary. </summary>
     public partial class UnknownDictProperty
     {
-        /// <summary> Initializes a new instance of UnknownDictProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownDictProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownDictProperty(BinaryData property)
@@ -29,7 +29,7 @@ namespace _Type.Property.ValueTypes.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

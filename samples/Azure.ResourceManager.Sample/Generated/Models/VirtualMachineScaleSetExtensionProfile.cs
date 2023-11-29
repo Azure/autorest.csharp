@@ -17,13 +17,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetExtensionProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionProfile"/>. </summary>
         public VirtualMachineScaleSetExtensionProfile()
         {
             Extensions = new ChangeTrackingList<VirtualMachineScaleSetExtensionData>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionProfile. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionProfile"/>. </summary>
         /// <param name="extensions">
         /// The virtual machine scale set child extension resources.
         /// Serialized Name: VirtualMachineScaleSetExtensionProfile.extensions

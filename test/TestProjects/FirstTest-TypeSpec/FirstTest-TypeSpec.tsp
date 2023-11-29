@@ -406,3 +406,19 @@ op returnUnknown(
   body: unknown;
 };
 
+interface Entity {
+    @route("/entity/doSomething")
+    @doc("doSomething for entity")
+    @get
+    @convenientAPI(true)
+    op doSomething(@path p2: string): Thing;
+}
+
+interface Glossary {
+    @route("/glossary/doSomething")
+    @doc("doSomething for glossary")
+    @get
+    @convenientAPI(true)
+    op doSomething(@path id: string, @header h1: string): Thing;
+}
+

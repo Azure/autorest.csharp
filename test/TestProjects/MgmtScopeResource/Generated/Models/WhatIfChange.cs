@@ -13,7 +13,7 @@ namespace MgmtScopeResource.Models
     /// <summary> Information about a single resource change predicted by What-If operation. </summary>
     public partial class WhatIfChange
     {
-        /// <summary> Initializes a new instance of WhatIfChange. </summary>
+        /// <summary> Initializes a new instance of <see cref="WhatIfChange"/>. </summary>
         /// <param name="resourceId"> Resource ID. </param>
         /// <param name="changeType"> Type of change that will be made to the resource when the deployment is executed. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace MgmtScopeResource.Models
             ChangeType = changeType;
         }
 
-        /// <summary> Initializes a new instance of WhatIfChange. </summary>
+        /// <summary> Initializes a new instance of <see cref="WhatIfChange"/>. </summary>
         /// <param name="resourceId"> Resource ID. </param>
         /// <param name="changeType"> Type of change that will be made to the resource when the deployment is executed. </param>
         /// <param name="unsupportedReason"> The explanation about why the resource is unsupported by What-If. </param>
@@ -52,7 +52,7 @@ namespace MgmtScopeResource.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -83,7 +83,7 @@ namespace MgmtScopeResource.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

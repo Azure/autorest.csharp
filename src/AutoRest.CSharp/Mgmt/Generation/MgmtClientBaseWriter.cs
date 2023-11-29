@@ -7,26 +7,22 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Output.Models;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -44,6 +40,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected virtual string ArmClientReference { get; } = "Client";
 
         protected virtual bool UseField => true;
+
+        protected virtual bool SkipParameterValidation => false;
 
         public string FileName { get; }
 
@@ -80,7 +78,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WritePrivateHelpers();
 
-            WriteChildResourceEntries();
+            _writer.Line(); // TODO -- add this here to minimize the amount of code changes, this could be removed after future refactor
+            foreach (var method in This.ChildResourceEntryMethods)
+            {
+                _writer.WriteMethodDocumentation(method.Signature);
+                _writer.WriteMethod(method);
+            }
 
             WriteOperations();
 
@@ -246,144 +249,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return null;
         }
 
-        protected virtual void WriteChildResourceEntries()
-        {
-            foreach (var resource in This.ChildResources)
-            {
-                _writer.Line();
-                if (resource.IsSingleton)
-                {
-                    WriteSingletonResourceGetMethod(resource);
-                }
-                else if (resource.ResourceCollection is not null)
-                {
-                    WriteResourceCollectionGetMethod(resource);
-
-                    if (This.HasChildResourceGetMethods)
-                    {
-                        WriteChildResourceGetMethod(resource.ResourceCollection, true);
-                        WriteChildResourceGetMethod(resource.ResourceCollection, false);
-                    }
-                }
-            }
-            _writer.Line();
-        }
-
-        protected virtual void WriteSingletonResourceGetMethod(Resource resource)
-        {
-            var signature = new MethodSignature(
-                $"Get{resource.ResourceName}",
-                null,
-                $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.ResourceName}.",
-                GetMethodModifiers(),
-                resource.Type,
-                $"Returns a <see cref=\"{resource.Type}\" /> object.",
-                GetParametersForSingletonEntry());
-            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
-            {
-                WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
-            }
-        }
-
-        protected virtual void WriteResourceCollectionGetMethod(Resource resource)
-        {
-            var resourceCollection = resource.ResourceCollection!;
-            var signature = new MethodSignature(
-                $"{GetResourceCollectionMethodName(resourceCollection)}",
-                null,
-                $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {This.ResourceName}.",
-                GetMethodModifiers(),
-                resourceCollection.Type,
-                $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
-                GetParametersForCollectionEntry(resourceCollection));
-            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
-            {
-                WriteResourceCollectionEntry(resourceCollection, signature);
-            }
-        }
-
-        protected virtual void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
-        {
-            var getOperation = resourceCollection.GetOperation;
-            // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
-            var methodSignature = getOperation.MethodSignature with
-            {
-                // name after `Get{ResourceName}`
-                Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
-                Modifiers = GetMethodModifiers(),
-                // There could be parameters to get resource collection
-                Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).Distinct().ToArray(),
-                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
-            };
-
-            _writer.Line();
-            using (_writer.WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription?.Invoke(isAsync), isAsync, This.Accessibility == "public"))
-            {
-                WriteResourceEntry(resourceCollection, isAsync);
-            }
-        }
-
-        protected virtual void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
-        {
-            var operation = resourceCollection.GetOperation;
-            string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
-            string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
-            var arguments = string.Join(", ", operation.MethodSignature.Parameters.Select(p => p.Name));
-            _writer.Line($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}({arguments}){configureAwait};");
-        }
-
-        protected string GetResourceCollectionMethodName(ResourceCollection resourceCollection)
-        {
-            return $"Get{resourceCollection.Resource.ResourceName.ResourceNameToPlural()}";
-        }
-
-        protected string GetResourceCollectionMethodArgumentList(ResourceCollection resourceCollection)
-        {
-            return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
-        }
-
-        protected virtual void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
-        {
-            // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
-            // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"Id")});");
-        }
-
-        protected virtual MethodSignatureModifiers GetMethodModifiers() => Public | Virtual;
-
-        protected virtual Parameter[] GetParametersForSingletonEntry() => Array.Empty<Parameter>();
-
-        protected virtual Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
-        {
-            return resourceCollection.ExtraConstructorParameters.ToArray();
-        }
-
-        protected Parameter[] GetParametersForResourceEntry(ResourceCollection resourceCollection)
-        {
-            return resourceCollection.GetOperation.MethodSignature.Parameters.ToArray();
-        }
-
-        protected virtual void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
-        {
-            // TODO: can we cache collection with extra constructor parameters
-            if (resourceCollection.ExtraConstructorParameters.Any())
-            {
-                _writer.Append($"return new {resourceCollection.Type.Name}({ArmClientReference}, Id, ");
-                foreach (var parameter in resourceCollection.ExtraConstructorParameters)
-                {
-                    _writer.Append($"{parameter.Name}, ");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.Line($");");
-            }
-            else
-            {
-                // for collections without extra constructor parameter, we can return a cached instance
-                _writer.Line($"return GetCachedClient({ArmClientReference} => new {resourceCollection.Type.Name}({ArmClientReference}, Id));");
-            }
-        }
-
         protected void WriteStaticValidate(FormattableString validResourceType)
         {
             using (_writer.Scope($"internal static void ValidateResourceId({typeof(Azure.Core.ResourceIdentifier)} id)"))
@@ -419,7 +284,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
-            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
+            return $"new {Configuration.ApiTypes.ClientDiagnosticsType}(\"{This.DiagnosticNamespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
@@ -449,7 +314,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return UseField ? names.RestField : names.RestProperty;
         }
 
-        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), typeof(ClientDiagnostics));
+        protected Reference GetDiagnosticReference(MgmtRestOperation operation) => new Reference(GetDiagnosticName(operation.RestClient, operation.Resource), Configuration.ApiTypes.ClientDiagnosticsType);
         private string GetDiagnosticName(MgmtRestClient client, Resource? resource)
         {
             var names = This.GetRestDiagNames(new NameSetKey(client, resource));
@@ -540,11 +405,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
         }
 
-        protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
+        protected virtual IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);
-            return _writer.WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync, This.Accessibility == "public");
+            return _writer.WriteCommonMethod(clientOperation.MethodSignature, returnDescription, isAsync, This.Accessibility == "public", SkipParameterValidation);
         }
 
         #region PagingMethod
@@ -609,7 +474,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             FormattableString firstPageRequest = $"{GetRestClientName(operation)}.Create{pagingMethod.Method.Name}Request({firstPageRequestArguments})";
             FormattableString? nextPageRequest = pagingMethod.NextPageMethod != null ? $"{GetRestClientName(operation)}.Create{pagingMethod.NextPageMethod.Name}Request({nextPageRequestArguments})" : (FormattableString?)null;
-            var pipelineReference = new Reference("Pipeline", typeof(HttpPipeline));
+            var pipelineReference = new Reference("Pipeline", Configuration.ApiTypes.HttpPipelineType);
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
@@ -619,7 +484,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString CreateResourceIdentifierExpression(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, FormattableString dataExpression)
         {
-            var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
+            var methodWithLeastParameters = resource.CreateResourceIdentifierMethod.Signature;
             var cache = new List<ParameterMapping>(parameterMappings);
 
             var parameterInvocations = new List<FormattableString>();
@@ -667,7 +532,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(operation)))
             {
-                var response = new CodeWriterDeclaration("response");
+                var response = new CodeWriterDeclaration(Configuration.ApiTypes.ResponseParameterName);
                 _writer
                     .Append($"var {response:D} = {GetAwait(async)} ")
                     .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
@@ -678,7 +543,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer
                         .Line($"if ({response}.Value == null)")
-                        .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
+                        .Line($"throw new {Configuration.ApiTypes.RequestFailedExceptionType}({response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
@@ -690,7 +555,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{response}.Value");
                 if (valueConverter != null)
                 {
-                    _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {response}.GetRawResponse());");
+                    _writer.Line($"return {Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {response}.{Configuration.ApiTypes.GetRawResponseName}());");
                 }
                 else
                 {
@@ -758,7 +623,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"var {Configuration.ApiTypes.ResponseParameterName} = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -782,14 +647,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
+                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"{Configuration.ApiTypes.ResponseParameterName}");
                 if (valueConverter != null)
                 {
-                    _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");
+                    _writer.Append($"{Configuration.ApiTypes.ResponseType}.FromValue({valueConverter}, {Configuration.ApiTypes.ResponseParameterName}.{Configuration.ApiTypes.GetRawResponseName}())");
                 }
                 else
                 {
-                    _writer.Append($"response");
+                    _writer.Append($"{Configuration.ApiTypes.ResponseParameterName}");
                 }
             }
             else
@@ -804,7 +669,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
+                _writer.Append($").Request, {Configuration.ApiTypes.ResponseParameterName}, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
 
                 if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
                 {

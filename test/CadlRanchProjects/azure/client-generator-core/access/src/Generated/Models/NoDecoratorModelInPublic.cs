@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in a public operation, should be generated and exported. </summary>
     public partial class NoDecoratorModelInPublic
     {
-        /// <summary> Initializes a new instance of NoDecoratorModelInPublic. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal NoDecoratorModelInPublic(string name)

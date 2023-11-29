@@ -10,7 +10,7 @@ namespace paging.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PagingModelFactory
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Product"/>. </summary>
         /// <param name="properties"></param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(ProductProperties properties = null)
@@ -18,7 +18,7 @@ namespace paging.Models
             return new Product(properties);
         }
 
-        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ProductProperties"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.ProductProperties"/> instance for mocking. </returns>

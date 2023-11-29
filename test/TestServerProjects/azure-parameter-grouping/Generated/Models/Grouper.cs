@@ -10,7 +10,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class Grouper
     {
-        /// <summary> Initializes a new instance of Grouper. </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         public Grouper()
         {
         }

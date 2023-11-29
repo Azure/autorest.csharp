@@ -10,7 +10,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a float property. </summary>
     public partial class FloatProperty
     {
-        /// <summary> Initializes a new instance of FloatProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public FloatProperty(float property)
         {

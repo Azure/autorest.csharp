@@ -13,14 +13,12 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager;
-using Azure.ResourceManager.ManagementGroups;
-using Azure.ResourceManager.Resources;
 using Humanizer.Inflections;
 using static AutoRest.CSharp.Mgmt.Decorator.Transformer.PartialResourceResolver;
 
@@ -137,8 +135,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
         }
 
-        public bool IsArmCore => Configuration.MgmtConfiguration.IsArmCore;
-
         public Dictionary<CSharpType, OperationSource> CSharpTypeToOperationSource { get; } = new Dictionary<CSharpType, OperationSource>();
         public IEnumerable<OperationSource> OperationSources => CSharpTypeToOperationSource.Values;
 
@@ -209,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (count != 1)
                         {
                             //even if it has multiple uses for a model type we should normalize the param name just not change the type
-                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets);
+                            BodyParameterNormalizer.UpdateParameterNameOnly(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
                             continue;
                         }
                         if (resourceDataSchema is not null)
@@ -221,11 +217,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                                 throw new InvalidOperationException($"Found expandable path in UpdatePatchParameterNames for {operationGroup.Key}.{operation.CSharpName()} : {requestPath}");
                             var name = GetResourceName(resourceDataSchema.Name, operationSet, requestPath);
                             updatedModels.Add(bodyParam.Schema);
-                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name);
+                            BodyParameterNormalizer.Update(httpRequest.Method, operation.CSharpName(), bodyParam, name, operation);
                         }
                         else
                         {
-                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets);
+                            BodyParameterNormalizer.UpdateUsingReplacement(bodyParam, ResourceDataSchemaNameToOperationSets, operation);
                         }
                     }
                 }
@@ -246,7 +242,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             if (param.Schema is not ObjectSchema objectSchema)
                                 continue;
 
+                            string oriName = param.Language.Default.Name;
                             param.Language.Default.Name = NormalizeParamNames.GetNewName(param.Language.Default.Name, objectSchema.Name, ResourceDataSchemaNameToOperationSets);
+
+                            string fullSerializedName = operation.GetFullSerializedName(param);
+                            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                                new TransformItem(TransformTypeName.UpdateBodyParameter, fullSerializedName),
+                                fullSerializedName, "SetBodyParameterNameOnThirdPass", oriName, param.Language.Default.Name);
+
                         }
                     }
                 }
@@ -285,12 +288,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // second, collect any model which can be replaced as whole (not as a property or as a base class)
-            var replacedTypes = new List<MgmtObjectType>();
+            var replacedTypes = new Dictionary<ObjectSchema, TypeProvider>();
             foreach (var schema in MgmtContext.CodeModel.Schemas.Objects)
             {
-                TypeProvider? type;
-
-                if (_schemaOrNameToModels.TryGetValue(schema, out type))
+                if (_schemaOrNameToModels.TryGetValue(schema, out var type))
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
@@ -300,14 +301,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
                             switch (mgmtObjectType)
                             {
-                                case ResourceData resourceData:
-                                    replacedTypes.Add(new ResourceData(schema, csharpType.Name, csharpType.Namespace));
-                                    break;
                                 case MgmtReferenceType referenceType:
-                                    replacedTypes.Add(new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
+                                    // when we get a reference type, we should still wrap it into a reference type
+                                    replacedTypes.Add(schema, new MgmtReferenceType(schema, csharpType.Name, csharpType.Namespace));
                                     break;
                                 default:
-                                    replacedTypes.Add(new MgmtObjectType(schema, csharpType.Name, csharpType.Namespace));
+                                    // other types will go into SystemObjectType
+                                    replacedTypes.Add(schema, csharpType.Implementation);
                                     break;
                             }
                         }
@@ -316,9 +316,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             // third, update the entries in cache maps with the new model instances
-            foreach (var replacedType in replacedTypes)
+            foreach (var (schema, replacedType) in replacedTypes)
             {
-                _schemaOrNameToModels[replacedType.ObjectSchema] = replacedType;
+                var originalModel = _schemaOrNameToModels[schema];
+                _schemaOrNameToModels[schema] = replacedType;
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.ReplaceTypeWhenInitializingModel, schema.GetFullSerializedName()),
+                    schema.GetFullSerializedName(),
+                    "ReplaceType", originalModel.Declaration.FullName, replacedType.Declaration.FullName);
             }
 
             return _schemaOrNameToModels;
@@ -418,7 +423,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             => !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
-        public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
+        public IEnumerable<MgmtMockableExtension> MockableExtensions => ExtensionBuilder.MockableExtensions;
         public MgmtExtensionWrapper ExtensionWrapper => ExtensionBuilder.ExtensionWrapper;
 
         public MgmtExtension GetExtension(Type armCoreType) => ExtensionBuilder.GetExtension(armCoreType);
@@ -464,35 +469,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return dictionary;
         }
 
-        public IEnumerable<TypeProvider> Models => GetModels();
-
-        private IEnumerable<TypeProvider> GetModels()
-        {
-            var models = SchemaMap.Values;
-
-            //force inheritance evaluation on resourceData
-            foreach (var resourceData in ResourceData)
-            {
-                var temp = resourceData.Inherits;
-                var propTemp = resourceData.Properties;
-            }
-
-            //force inheritance evaluation on models
-            foreach (var typeProvider in models)
-            {
-                if (typeProvider is ObjectType objType)
-                {
-                    var temp = objType.Inherits;
-                    //force property reference type evaluation on MgmtObjectType
-                    if (typeProvider is MgmtObjectType mgmtObjectType)
-                    {
-                        var propTemp = mgmtObjectType.Properties;
-                    }
-                }
-            }
-
-            return models;
-        }
+        private IEnumerable<TypeProvider>? _models;
+        public IEnumerable<TypeProvider> Models => _models ??= SchemaMap.Values.Where(m => m is not SystemObjectType);
 
         public ResourceData GetResourceData(string requestPath)
         {
@@ -864,6 +842,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         resourceDataSchema.Language.Default.SerializedName ??= schemaName;
                         schemaName = schemaName.LastWordToSingular(false);
                         resourceDataSchema.Language.Default.Name = schemaName;
+                    }
+                    else
+                    {
+                        MgmtReport.Instance.TransformSection.AddTransformLog(
+                            new TransformItem(TransformTypeName.KeepPluralResourceData, schemaName),
+                            resourceDataSchema.GetFullSerializedName(), $"Keep ObjectName as Plural: {schemaName}");
                     }
                     // if this operation set corresponds to a SDK resource, we add it to the map
                     if (!resourceDataSchemaNameToOperationSets.TryGetValue(schemaName, out HashSet<OperationSet>? result))

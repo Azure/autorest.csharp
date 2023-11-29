@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> A private link resource. </summary>
     public partial class MgmtMockAndSamplePrivateLinkResource : ResourceData
     {
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResource"/>. </summary>
         public MgmtMockAndSamplePrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
@@ -22,7 +22,7 @@ namespace MgmtMockAndSample.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSamplePrivateLinkResource"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
