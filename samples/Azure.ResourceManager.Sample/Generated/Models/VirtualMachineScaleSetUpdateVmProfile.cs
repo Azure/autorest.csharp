@@ -18,56 +18,6 @@ namespace Azure.ResourceManager.Sample.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetUpdateVmProfile"/>. </summary>
-        /// <param name="osProfile">
-        /// The virtual machine scale set OS profile.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
-        /// </param>
-        /// <param name="storageProfile">
-        /// The virtual machine scale set storage profile.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.storageProfile
-        /// </param>
-        /// <param name="networkProfile">
-        /// The virtual machine scale set network profile.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.networkProfile
-        /// </param>
-        /// <param name="securityProfile">
-        /// The virtual machine scale set Security profile
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.securityProfile
-        /// </param>
-        /// <param name="diagnosticsProfile">
-        /// The virtual machine scale set diagnostics profile.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.diagnosticsProfile
-        /// </param>
-        /// <param name="extensionProfile">
-        /// The virtual machine scale set extension profile.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.extensionProfile
-        /// </param>
-        /// <param name="licenseType">
-        /// The license type, which is for bring your own license scenario.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.licenseType
-        /// </param>
-        /// <param name="billingProfile">
-        /// Specifies the billing related details of a Azure Spot VMSS. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.billingProfile
-        /// </param>
-        /// <param name="scheduledEventsProfile">
-        /// Specifies Scheduled Event related configurations.
-        /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.scheduledEventsProfile
-        /// </param>
-        internal VirtualMachineScaleSetUpdateVmProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
-        {
-            OSProfile = osProfile;
-            StorageProfile = storageProfile;
-            NetworkProfile = networkProfile;
-            SecurityProfile = securityProfile;
-            DiagnosticsProfile = diagnosticsProfile;
-            ExtensionProfile = extensionProfile;
-            LicenseType = licenseType;
-            BillingProfile = billingProfile;
-            ScheduledEventsProfile = scheduledEventsProfile;
-        }
-
         /// <summary>
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile

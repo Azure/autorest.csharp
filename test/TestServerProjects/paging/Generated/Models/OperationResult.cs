@@ -15,13 +15,6 @@ namespace paging.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="OperationResult"/>. </summary>
-        /// <param name="status"> The status of the request. </param>
-        internal OperationResult(OperationResultStatus? status)
-        {
-            Status = status;
-        }
-
         /// <summary> The status of the request. </summary>
         public OperationResultStatus? Status { get; }
     }

@@ -24,15 +24,6 @@ namespace MgmtMockAndSample.Models
             ResourceType = EncryptionType.MicrosoftKeyVaultVaults;
         }
 
-        /// <summary> Initializes a new instance of <see cref="VaultCheckNameAvailabilityContent"/>. </summary>
-        /// <param name="name"> The vault name. </param>
-        /// <param name="resourceType"> The type of resource, Microsoft.KeyVault/vaults. </param>
-        internal VaultCheckNameAvailabilityContent(string name, EncryptionType resourceType)
-        {
-            Name = name;
-            ResourceType = resourceType;
-        }
-
         /// <summary> The vault name. </summary>
         public string Name { get; }
         /// <summary> The type of resource, Microsoft.KeyVault/vaults. </summary>

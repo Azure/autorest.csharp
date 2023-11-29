@@ -15,13 +15,6 @@ namespace MgmtPropertyBag.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="FooPatch"/>. </summary>
-        /// <param name="details"> The details of the resource. </param>
-        internal FooPatch(string details)
-        {
-            Details = details;
-        }
-
         /// <summary> The details of the resource. </summary>
         public string Details { get; set; }
     }

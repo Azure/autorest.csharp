@@ -31,16 +31,6 @@ namespace MgmtAcronymMapping.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmInstanceRequiredIds"/>. </summary>
-        /// <param name="instanceIds">
-        /// The virtual machine scale set instance ids.
-        /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
-        /// </param>
-        internal VirtualMachineScaleSetVmInstanceRequiredIds(IList<string> instanceIds)
-        {
-            InstanceIds = instanceIds;
-        }
-
         /// <summary>
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
