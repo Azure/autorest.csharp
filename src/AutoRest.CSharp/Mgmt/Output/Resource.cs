@@ -173,7 +173,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                         Throw(Snippets.New.Instance(typeof(InvalidOperationException), Literal("The current instance does not have data, you must call Get first.")))
                     },
                     Return(new MemberExpression(null, DataFieldName))
-                }));
+                }),
+                exceptions: new Dictionary<CSharpType, FormattableString>()
+                {
+                    [typeof(InvalidOperationException)] = $"Throws if there is no data loaded in the current instance."
+                });
 
             yield return dataProperty;
         }

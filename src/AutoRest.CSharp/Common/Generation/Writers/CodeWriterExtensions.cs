@@ -671,9 +671,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteProperty(this CodeWriter writer, PropertyDeclaration property)
         {
-            if (property.Description != null)
+            if (property.Description is not null)
             {
                 writer.Line().WriteXmlDocumentationSummary(property.Description);
+            }
+
+            if (property.Exceptions is not null)
+            {
+                foreach (var (exceptionType, description) in property.Exceptions)
+                {
+                    writer.WriteXmlDocumentationException(exceptionType, description);
+                }
             }
 
             var modifiers = property.Modifiers;
