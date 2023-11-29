@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void Write()
         {
-            using (_writer.Namespace(Configuration.Namespace))
+            using (_writer.Namespace(MgmtContext.Context.DefaultNamespace))
             {
                 using (_writer.Scope($"internal static class ProviderConstants"))
                 {

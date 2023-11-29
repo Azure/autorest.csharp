@@ -106,7 +106,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             //var inputNamespace = codeModelConverter.CreateNamespace();
             var config = CSharpProjConfiguration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
             bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<KeySecurityScheme>().Any();
-            Execute(Configuration.Namespace, needAzureKeyAuth, async (filename, text) =>
+            var context = new BuildContext(codeModel, null, config.Namespace);
+            Execute(context.DefaultNamespace, needAzureKeyAuth, async (filename, text) =>
             {
                 await autoRest.WriteFile(Path.Combine(config.RelativeProjectFolder, filename), text, "source-file-csharp");
             }, codeModelYaml.Contains("x-ms-format: dfe-"), config);

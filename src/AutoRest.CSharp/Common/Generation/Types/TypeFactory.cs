@@ -87,6 +87,11 @@ namespace AutoRest.CSharp.Generation.Types
             _ => throw new Exception("Unknown type")
         };
 
+        private Type GetListType(Schema schema)
+        {
+            return schema.Extensions is not null && schema.Extensions.IsEmbeddingsVector ? typeof(ReadOnlyMemory<>) : typeof(IList<>);
+        }
+
         public static CSharpType GetImplementationType(CSharpType type)
         {
             if (type.IsFrameworkType)

@@ -20,6 +20,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private FormattableString? _description;
         private ObjectTypeDiscriminator? _discriminator;
 
+        protected ObjectType(BuildContext context)
+            : base(context)
+        {
+        }
+
         protected ObjectType(string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {

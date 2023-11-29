@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [TestCase("BuiltInPolicyDefinitionResource", "TenantResourceExtensions")]
         public void TestExtensionResource(string resourceName, string parentName)
         {
-            var resource = _library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
+            var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.NotNull(resource);
             var parents = resource.GetParents();
             Assert.IsTrue(parents.Any(p => p.Type.Name == parentName));

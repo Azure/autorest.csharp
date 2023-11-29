@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
@@ -213,7 +212,7 @@ namespace AutoRest.CSharp.Generation.Types
         }
 
         internal static CSharpType FromSystemType(BuildContext context, Type type)
-            => FromSystemType(type, Configuration.Namespace, context.SourceInputModel);
+            => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel);
 
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {
