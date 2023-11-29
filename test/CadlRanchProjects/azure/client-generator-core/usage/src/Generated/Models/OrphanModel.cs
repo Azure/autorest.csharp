@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Models
     /// <summary> Not used anywhere, but access is override to public so still need to be generated and exported with serialization. </summary>
     public partial class OrphanModel
     {
-        /// <summary> Initializes a new instance of OrphanModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrphanModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public OrphanModel(string name)

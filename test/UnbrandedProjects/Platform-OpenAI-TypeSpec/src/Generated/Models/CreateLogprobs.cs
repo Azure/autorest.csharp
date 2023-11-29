@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The CreateLogprobs. </summary>
     public partial class CreateLogprobs
     {
-        /// <summary> Initializes a new instance of CreateLogprobs. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateLogprobs"/>. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>
@@ -31,7 +31,7 @@ namespace OpenAI.Models
             TextOffset = textOffset.ToList();
         }
 
-        /// <summary> Initializes a new instance of CreateLogprobs. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateLogprobs"/>. </summary>
         /// <param name="tokens"></param>
         /// <param name="tokenLogprobs"></param>
         /// <param name="topLogprobs"></param>

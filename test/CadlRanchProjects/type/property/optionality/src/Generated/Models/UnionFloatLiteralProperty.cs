@@ -12,12 +12,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with union of float literal property. </summary>
     public partial class UnionFloatLiteralProperty
     {
-        /// <summary> Initializes a new instance of UnionFloatLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionFloatLiteralProperty"/>. </summary>
         public UnionFloatLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of UnionFloatLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionFloatLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal UnionFloatLiteralProperty(BinaryData property)
         {

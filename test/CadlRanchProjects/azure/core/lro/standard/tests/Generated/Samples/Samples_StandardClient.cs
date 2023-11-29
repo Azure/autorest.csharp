@@ -21,7 +21,7 @@ namespace _Azure.Lro.Standard.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_ShortVersion()
+        public void Example_User_CreateOrReplace_ShortVersion()
         {
             StandardClient client = new StandardClient();
 
@@ -39,7 +39,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_ShortVersion_Async()
+        public async Task Example_User_CreateOrReplace_ShortVersion_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -57,7 +57,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_ShortVersion_Convenience()
+        public void Example_User_CreateOrReplace_ShortVersion_Convenience()
         {
             StandardClient client = new StandardClient();
 
@@ -68,7 +68,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_ShortVersion_Convenience_Async()
+        public async Task Example_User_CreateOrReplace_ShortVersion_Convenience_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -79,7 +79,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_AllParameters()
+        public void Example_User_CreateOrReplace_AllParameters()
         {
             StandardClient client = new StandardClient();
 
@@ -97,7 +97,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_AllParameters_Async()
+        public async Task Example_User_CreateOrReplace_AllParameters_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -115,7 +115,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_AllParameters_Convenience()
+        public void Example_User_CreateOrReplace_AllParameters_Convenience()
         {
             StandardClient client = new StandardClient();
 
@@ -126,7 +126,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_AllParameters_Convenience_Async()
+        public async Task Example_User_CreateOrReplace_AllParameters_Convenience_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -137,7 +137,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_ShortVersion()
+        public void Example_User_Delete_ShortVersion()
         {
             StandardClient client = new StandardClient();
 
@@ -146,7 +146,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_ShortVersion_Async()
+        public async Task Example_User_Delete_ShortVersion_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -155,7 +155,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
+        public void Example_User_Delete_AllParameters()
         {
             StandardClient client = new StandardClient();
 
@@ -164,7 +164,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_AllParameters_Async()
+        public async Task Example_User_Delete_AllParameters_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -173,7 +173,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_ShortVersion()
+        public void Example_Standard_Export_ShortVersion()
         {
             StandardClient client = new StandardClient();
 
@@ -187,7 +187,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_ShortVersion_Async()
+        public async Task Example_Standard_Export_ShortVersion_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -201,7 +201,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_ShortVersion_Convenience()
+        public void Example_Standard_Export_ShortVersion_Convenience()
         {
             StandardClient client = new StandardClient();
 
@@ -211,7 +211,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_ShortVersion_Convenience_Async()
+        public async Task Example_Standard_Export_ShortVersion_Convenience_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -221,7 +221,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters()
+        public void Example_Standard_Export_AllParameters()
         {
             StandardClient client = new StandardClient();
 
@@ -235,7 +235,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_AllParameters_Async()
+        public async Task Example_Standard_Export_AllParameters_Async()
         {
             StandardClient client = new StandardClient();
 
@@ -249,7 +249,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters_Convenience()
+        public void Example_Standard_Export_AllParameters_Convenience()
         {
             StandardClient client = new StandardClient();
 
@@ -259,7 +259,7 @@ namespace _Azure.Lro.Standard.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_AllParameters_Convenience_Async()
+        public async Task Example_Standard_Export_AllParameters_Convenience_Async()
         {
             StandardClient client = new StandardClient();
 

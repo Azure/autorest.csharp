@@ -17,7 +17,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class KeyVaultSecretReference
     {
-        /// <summary> Initializes a new instance of KeyVaultSecretReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyVaultSecretReference"/>. </summary>
         /// <param name="secretUri">
         /// The URL referencing a secret in a Key Vault.
         /// Serialized Name: KeyVaultSecretReference.secretUrl

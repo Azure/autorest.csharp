@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The FineTuneEvent. </summary>
     public partial class FineTuneEvent
     {
-        /// <summary> Initializes a new instance of FineTuneEvent. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuneEvent"/>. </summary>
         /// <param name="object"></param>
         /// <param name="createdAt"></param>
         /// <param name="level"></param>

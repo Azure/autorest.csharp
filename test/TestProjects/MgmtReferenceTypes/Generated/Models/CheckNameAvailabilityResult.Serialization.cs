@@ -12,8 +12,8 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
 {
-    [JsonConverter(typeof(CheckNameAvailabilityResponseConverter))]
-    public partial class CheckNameAvailabilityResponse : IUtf8JsonSerializable
+    [JsonConverter(typeof(CheckNameAvailabilityResultConverter))]
+    public partial class CheckNameAvailabilityResult : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static CheckNameAvailabilityResponse DeserializeCheckNameAvailabilityResponse(JsonElement element)
+        internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -71,19 +71,19 @@ namespace Azure.ResourceManager.Fake.Models
                     continue;
                 }
             }
-            return new CheckNameAvailabilityResponse(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
+            return new CheckNameAvailabilityResult(Optional.ToNullable(nameAvailable), Optional.ToNullable(reason), message.Value);
         }
 
-        internal partial class CheckNameAvailabilityResponseConverter : JsonConverter<CheckNameAvailabilityResponse>
+        internal partial class CheckNameAvailabilityResultConverter : JsonConverter<CheckNameAvailabilityResult>
         {
-            public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityResponse model, JsonSerializerOptions options)
+            public override void Write(Utf8JsonWriter writer, CheckNameAvailabilityResult model, JsonSerializerOptions options)
             {
                 writer.WriteObjectValue(model);
             }
-            public override CheckNameAvailabilityResponse Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override CheckNameAvailabilityResult Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
                 using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeCheckNameAvailabilityResponse(document.RootElement);
+                return DeserializeCheckNameAvailabilityResult(document.RootElement);
             }
         }
     }

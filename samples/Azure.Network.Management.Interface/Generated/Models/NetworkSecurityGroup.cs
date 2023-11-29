@@ -13,7 +13,7 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> NetworkSecurityGroup resource. </summary>
     public partial class NetworkSecurityGroup : Resource
     {
-        /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkSecurityGroup"/>. </summary>
         public NetworkSecurityGroup()
         {
             SecurityRules = new ChangeTrackingList<SecurityRule>();
@@ -22,7 +22,7 @@ namespace Azure.Network.Management.Interface.Models
             Subnets = new ChangeTrackingList<Subnet>();
         }
 
-        /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkSecurityGroup"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

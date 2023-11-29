@@ -18,13 +18,13 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class representing the ExactMatchModel1 data model. </summary>
     public partial class ExactMatchModel1Data : ResourceData
     {
-        /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel1Data"/>. </summary>
         public ExactMatchModel1Data()
         {
             SupportingUris = new ChangeTrackingList<Uri>();
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

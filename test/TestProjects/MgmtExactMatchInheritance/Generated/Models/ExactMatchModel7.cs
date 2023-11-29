@@ -10,12 +10,12 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The ExactMatchModel7. </summary>
     public partial class ExactMatchModel7
     {
-        /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel7"/>. </summary>
         public ExactMatchModel7()
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
+        /// <summary> Initializes a new instance of <see cref="ExactMatchModel7"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="exactMatchModel7Type"></param>

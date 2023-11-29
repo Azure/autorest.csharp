@@ -13,7 +13,7 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> UserOrder for testing list with expand. </summary>
     public partial class UserOrder
     {
-        /// <summary> Initializes a new instance of UserOrder. </summary>
+        /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
         /// <param name="userId"> The user's id. </param>
         /// <param name="detail"> The user's order detail. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="detail"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             Detail = detail;
         }
 
-        /// <summary> Initializes a new instance of UserOrder. </summary>
+        /// <summary> Initializes a new instance of <see cref="UserOrder"/>. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="userId"> The user's id. </param>
         /// <param name="detail"> The user's order detail. </param>

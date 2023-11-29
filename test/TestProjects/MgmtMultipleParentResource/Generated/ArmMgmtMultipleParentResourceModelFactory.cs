@@ -16,7 +16,7 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtMultipleParentResourceModelFactory
     {
-        /// <summary> Initializes a new instance of AnotherParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.AnotherParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -38,7 +38,7 @@ namespace MgmtMultipleParentResource.Models
             return new AnotherParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of ChildBodyData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.ChildBodyData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -60,7 +60,7 @@ namespace MgmtMultipleParentResource.Models
             return new ChildBodyData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of TheParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.TheParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -82,7 +82,7 @@ namespace MgmtMultipleParentResource.Models
             return new TheParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of SubParentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMultipleParentResource.SubParentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

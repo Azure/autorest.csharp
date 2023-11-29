@@ -12,7 +12,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The FooCollectionGetAllOptions. </summary>
     public partial class FooCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of FooCollectionGetAllOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="FooCollectionGetAllOptions"/>. </summary>
         public FooCollectionGetAllOptions()
         {
         }

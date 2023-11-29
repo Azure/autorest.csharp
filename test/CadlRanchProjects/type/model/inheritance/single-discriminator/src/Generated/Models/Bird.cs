@@ -14,14 +14,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// </summary>
     public abstract partial class Bird
     {
-        /// <summary> Initializes a new instance of Bird. </summary>
+        /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
         /// <param name="wingspan"></param>
         protected Bird(int wingspan)
         {
             Wingspan = wingspan;
         }
 
-        /// <summary> Initializes a new instance of Bird. </summary>
+        /// <summary> Initializes a new instance of <see cref="Bird"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         internal Bird(string kind, int wingspan)

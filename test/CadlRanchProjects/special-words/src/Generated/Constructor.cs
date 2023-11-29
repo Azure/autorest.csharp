@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The constructor. </summary>
     public partial class Constructor
     {
-        /// <summary> Initializes a new instance of Constructor. </summary>
+        /// <summary> Initializes a new instance of <see cref="Constructor"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Constructor(string name)

@@ -13,7 +13,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The base model. </summary>
     public partial class BaseModel
     {
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal BaseModel(string name)
@@ -23,7 +23,7 @@ namespace ConfidentLevelsInTsp.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
         internal BaseModel(string name, double? size)

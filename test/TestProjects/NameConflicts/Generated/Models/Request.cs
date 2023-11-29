@@ -10,12 +10,12 @@ namespace NameConflicts.Models
     /// <summary> The Request. </summary>
     public partial class Request
     {
-        /// <summary> Initializes a new instance of Request. </summary>
+        /// <summary> Initializes a new instance of <see cref="Request"/>. </summary>
         public Request()
         {
         }
 
-        /// <summary> Initializes a new instance of Request. </summary>
+        /// <summary> Initializes a new instance of <see cref="Request"/>. </summary>
         /// <param name="property"></param>
         internal Request(string property)
         {

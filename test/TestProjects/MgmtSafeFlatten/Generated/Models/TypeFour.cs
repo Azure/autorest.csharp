@@ -10,9 +10,18 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The TypeFour. </summary>
     internal partial class TypeFour
     {
-        /// <summary> Initializes a new instance of TypeFour. </summary>
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
         internal TypeFour()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="TypeFour"/>. </summary>
+        /// <param name="myType"> The details of the type. </param>
+        /// <param name="properties"> The single value prop. </param>
+        internal TypeFour(string myType, LayerOneProperties properties)
+        {
+            MyType = myType;
+            Properties = properties;
         }
 
         /// <summary> The details of the type. </summary>

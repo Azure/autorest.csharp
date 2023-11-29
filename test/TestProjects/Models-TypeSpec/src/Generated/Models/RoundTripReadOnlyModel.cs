@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Output model with readonly properties. </summary>
     public partial class RoundTripReadOnlyModel
     {
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>
         /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
         /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
         /// <param name="requiredCollectionWithNullableIntElement"> Required collection of which the element is a nullable int. </param>
@@ -42,7 +42,7 @@ namespace ModelsTypeSpec.Models
             OptionalCollectionWithNullableBooleanElement = new ChangeTrackingList<bool?>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripReadOnlyModel"/>. </summary>
         /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
         /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
         /// <param name="optionalReadonlyString"> Optional string, illustrating a readonly reference type property. </param>

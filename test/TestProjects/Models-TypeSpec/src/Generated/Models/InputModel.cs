@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used only as input. </summary>
     public partial class InputModel
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>
@@ -67,7 +67,7 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
         }
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>

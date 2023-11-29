@@ -10,7 +10,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Base model. </summary>
     public partial class BaseModel
     {
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         public BaseModel()
         {
         }

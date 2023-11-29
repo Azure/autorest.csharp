@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(
                  new ConstructorSignature(
                      type,
-                     $"Initializes a new instance of {type.Name}",
+                     $"Initializes a new instance of {type:C}",
                      null,
                      modifiers,
                      parameters,

@@ -14,13 +14,13 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with collection bytes properties. </summary>
     public partial class CollectionsByteProperty
     {
-        /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
         public CollectionsByteProperty()
         {
             Property = new ChangeTrackingList<BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal CollectionsByteProperty(IList<BinaryData> property)
         {

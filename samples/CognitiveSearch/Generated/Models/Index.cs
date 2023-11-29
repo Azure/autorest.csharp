@@ -15,7 +15,7 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a search index definition, which describes the fields and search behavior of an index. </summary>
     public partial class Index
     {
-        /// <summary> Initializes a new instance of Index. </summary>
+        /// <summary> Initializes a new instance of <see cref="Index"/>. </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="fields"/> is null. </exception>
@@ -34,7 +34,7 @@ namespace CognitiveSearch.Models
             CharFilters = new ChangeTrackingList<CharFilter>();
         }
 
-        /// <summary> Initializes a new instance of Index. </summary>
+        /// <summary> Initializes a new instance of <see cref="Index"/>. </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
         /// <param name="scoringProfiles"> The scoring profiles for the index. </param>

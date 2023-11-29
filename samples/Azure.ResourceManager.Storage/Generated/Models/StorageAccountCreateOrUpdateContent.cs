@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The parameters used when creating a storage account. </summary>
     public partial class StorageAccountCreateOrUpdateContent
     {
-        /// <summary> Initializes a new instance of StorageAccountCreateOrUpdateContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/>. </summary>
         /// <param name="sku"> Required. Gets or sets the SKU name. </param>
         /// <param name="kind"> Required. Indicates the type of storage account. </param>
         /// <param name="location"> Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed. </param>
@@ -29,6 +29,61 @@ namespace Azure.ResourceManager.Storage.Models
             Kind = kind;
             Location = location;
             Tags = new ChangeTrackingDictionary<string, string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="StorageAccountCreateOrUpdateContent"/>. </summary>
+        /// <param name="sku"> Required. Gets or sets the SKU name. </param>
+        /// <param name="kind"> Required. Indicates the type of storage account. </param>
+        /// <param name="location"> Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed. </param>
+        /// <param name="extendedLocation"> Optional. Set the extended location of the resource. If not set, the storage account will be created in Azure main region. Otherwise it will be created in the specified extended location. </param>
+        /// <param name="tags"> Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters. </param>
+        /// <param name="identity"> The identity of the resource. </param>
+        /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'. </param>
+        /// <param name="sasPolicy"> SasPolicy assigned to the storage account. </param>
+        /// <param name="keyPolicy"> KeyPolicy assigned to the storage account. </param>
+        /// <param name="customDomain"> User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property. </param>
+        /// <param name="encryption"> Not applicable. Azure Storage encryption is enabled for all storage accounts and cannot be disabled. </param>
+        /// <param name="networkRuleSet"> Network rule set. </param>
+        /// <param name="accessTier"> Required for storage accounts where kind = BlobStorage. The access tier used for billing. </param>
+        /// <param name="azureFilesIdentityBasedAuthentication"> Provides the identity based authentication settings for Azure Files. </param>
+        /// <param name="enableHttpsTrafficOnly"> Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01. </param>
+        /// <param name="isHnsEnabled"> Account HierarchicalNamespace enabled if sets to true. </param>
+        /// <param name="largeFileSharesState"> Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled. </param>
+        /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
+        /// <param name="allowBlobPublicAccess"> Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property. </param>
+        /// <param name="minimumTlsVersion"> Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. </param>
+        /// <param name="allowSharedKeyAccess"> Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true. </param>
+        /// <param name="enableNfsV3"> NFS 3.0 protocol support enabled if set to true. </param>
+        /// <param name="allowCrossTenantReplication"> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </param>
+        /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
+        /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the new containers in the account by default. </param>
+        internal StorageAccountCreateOrUpdateContent(StorageSku sku, StorageKind kind, AzureLocation location, ExtendedLocation extendedLocation, IDictionary<string, string> tags, ManagedServiceIdentity identity, PublicNetworkAccess? publicNetworkAccess, SasPolicy sasPolicy, KeyPolicy keyPolicy, CustomDomain customDomain, Encryption encryption, NetworkRuleSet networkRuleSet, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, bool? isHnsEnabled, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? enableNfsV3, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, ImmutableStorageAccount immutableStorageWithVersioning)
+        {
+            Sku = sku;
+            Kind = kind;
+            Location = location;
+            ExtendedLocation = extendedLocation;
+            Tags = tags;
+            Identity = identity;
+            PublicNetworkAccess = publicNetworkAccess;
+            SasPolicy = sasPolicy;
+            KeyPolicy = keyPolicy;
+            CustomDomain = customDomain;
+            Encryption = encryption;
+            NetworkRuleSet = networkRuleSet;
+            AccessTier = accessTier;
+            AzureFilesIdentityBasedAuthentication = azureFilesIdentityBasedAuthentication;
+            EnableHttpsTrafficOnly = enableHttpsTrafficOnly;
+            IsHnsEnabled = isHnsEnabled;
+            LargeFileSharesState = largeFileSharesState;
+            RoutingPreference = routingPreference;
+            AllowBlobPublicAccess = allowBlobPublicAccess;
+            MinimumTlsVersion = minimumTlsVersion;
+            AllowSharedKeyAccess = allowSharedKeyAccess;
+            EnableNfsV3 = enableNfsV3;
+            AllowCrossTenantReplication = allowCrossTenantReplication;
+            DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
+            ImmutableStorageWithVersioning = immutableStorageWithVersioning;
         }
 
         /// <summary> Required. Gets or sets the SKU name. </summary>

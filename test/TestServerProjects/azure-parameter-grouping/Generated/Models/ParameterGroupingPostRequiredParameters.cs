@@ -13,7 +13,7 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostRequiredParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostRequiredParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
         /// <param name="path"> Path parameter. </param>
         /// <param name="body"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="path"/> is null. </exception>
@@ -21,6 +21,19 @@ namespace azure_parameter_grouping.Models
         {
             Argument.AssertNotNull(path, nameof(path));
 
+            Path = path;
+            Body = body;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostRequiredParameters"/>. </summary>
+        /// <param name="customHeader"></param>
+        /// <param name="query"> Query parameter with default. </param>
+        /// <param name="path"> Path parameter. </param>
+        /// <param name="body"></param>
+        internal ParameterGroupingPostRequiredParameters(string customHeader, int? query, string path, int body)
+        {
+            CustomHeader = customHeader;
+            Query = query;
             Path = path;
             Body = body;
         }

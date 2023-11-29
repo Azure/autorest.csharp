@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateEditRequest. </summary>
     public partial class CreateEditRequest
     {
-        /// <summary> Initializes a new instance of CreateEditRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
         /// model with this endpoint.
@@ -25,7 +25,7 @@ namespace OpenAI.Models
             Instruction = instruction;
         }
 
-        /// <summary> Initializes a new instance of CreateEditRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateEditRequest"/>. </summary>
         /// <param name="model">
         /// ID of the model to use. You can use the `text-davinci-edit-001` or `code-davinci-edit-001`
         /// model with this endpoint.

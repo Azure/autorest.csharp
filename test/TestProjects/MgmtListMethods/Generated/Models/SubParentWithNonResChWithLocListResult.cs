@@ -16,7 +16,7 @@ namespace MgmtListMethods.Models
     /// <summary> The List operation response. </summary>
     internal partial class SubParentWithNonResChWithLocListResult
     {
-        /// <summary> Initializes a new instance of SubParentWithNonResChWithLocListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentWithNonResChWithLocListResult"/>. </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SubParentWithNonResChWithLocListResult(IEnumerable<SubParentWithNonResChWithLocData> value)
@@ -26,7 +26,7 @@ namespace MgmtListMethods.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SubParentWithNonResChWithLocListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubParentWithNonResChWithLocListResult"/>. </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
         internal SubParentWithNonResChWithLocListResult(IReadOnlyList<SubParentWithNonResChWithLocData> value, string nextLink)

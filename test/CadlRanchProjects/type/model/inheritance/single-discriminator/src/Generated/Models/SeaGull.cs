@@ -10,14 +10,14 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// <summary> The second level model in polymorphic single level inheritance. </summary>
     public partial class SeaGull : Bird
     {
-        /// <summary> Initializes a new instance of SeaGull. </summary>
+        /// <summary> Initializes a new instance of <see cref="SeaGull"/>. </summary>
         /// <param name="wingspan"></param>
         public SeaGull(int wingspan) : base(wingspan)
         {
             Kind = "seagull";
         }
 
-        /// <summary> Initializes a new instance of SeaGull. </summary>
+        /// <summary> Initializes a new instance of <see cref="SeaGull"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         internal SeaGull(string kind, int wingspan) : base(kind, wingspan)

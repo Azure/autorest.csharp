@@ -16,13 +16,13 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmExtensionsSummary
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmExtensionsSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
         internal VirtualMachineScaleSetVmExtensionsSummary()
         {
             StatusesSummary = new ChangeTrackingList<VirtualMachineStatusCodeCount>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmExtensionsSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmExtensionsSummary"/>. </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name

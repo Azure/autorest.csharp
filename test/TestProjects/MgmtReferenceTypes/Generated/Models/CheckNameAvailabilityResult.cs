@@ -11,20 +11,20 @@ namespace Azure.ResourceManager.Fake.Models
 {
     /// <summary> The check availability result. </summary>
     [PropertyReferenceType]
-    public partial class CheckNameAvailabilityResponse
+    public partial class CheckNameAvailabilityResult
     {
-        /// <summary> Initializes a new instance of CheckNameAvailabilityResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityResult"/>. </summary>
         [InitializationConstructor]
-        public CheckNameAvailabilityResponse()
+        public CheckNameAvailabilityResult()
         {
         }
 
-        /// <summary> Initializes a new instance of CheckNameAvailabilityResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CheckNameAvailabilityResult"/>. </summary>
         /// <param name="nameAvailable"> Indicates if the resource name is available. </param>
         /// <param name="reason"> The reason why the given name is not available. </param>
         /// <param name="message"> Detailed reason why the given name is available. </param>
         [SerializationConstructor]
-        internal CheckNameAvailabilityResponse(bool? nameAvailable, CheckNameAvailabilityReason? reason, string message)
+        internal CheckNameAvailabilityResult(bool? nameAvailable, CheckNameAvailabilityReason? reason, string message)
         {
             NameAvailable = nameAvailable;
             Reason = reason;

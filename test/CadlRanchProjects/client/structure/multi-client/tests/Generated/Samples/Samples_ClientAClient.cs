@@ -18,7 +18,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RenamedOne_ShortVersion()
+        public void Example_ClientA_RenamedOne_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -30,7 +30,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RenamedOne_ShortVersion_Async()
+        public async Task Example_ClientA_RenamedOne_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -42,7 +42,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RenamedOne_AllParameters()
+        public void Example_ClientA_RenamedOne_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -54,7 +54,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RenamedOne_AllParameters_Async()
+        public async Task Example_ClientA_RenamedOne_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -66,7 +66,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RenamedThree_ShortVersion()
+        public void Example_ClientA_RenamedThree_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -78,7 +78,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RenamedThree_ShortVersion_Async()
+        public async Task Example_ClientA_RenamedThree_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -90,7 +90,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RenamedThree_AllParameters()
+        public void Example_ClientA_RenamedThree_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -102,7 +102,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RenamedThree_AllParameters_Async()
+        public async Task Example_ClientA_RenamedThree_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -114,7 +114,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RenamedFive_ShortVersion()
+        public void Example_ClientA_RenamedFive_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -126,7 +126,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RenamedFive_ShortVersion_Async()
+        public async Task Example_ClientA_RenamedFive_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -138,7 +138,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RenamedFive_AllParameters()
+        public void Example_ClientA_RenamedFive_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");
@@ -150,7 +150,7 @@ namespace Client.Structure.Service.Multiple.Client.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RenamedFive_AllParameters_Async()
+        public async Task Example_ClientA_RenamedFive_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAClient client = new ClientAClient(endpoint, "default");

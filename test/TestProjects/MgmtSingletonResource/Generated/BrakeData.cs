@@ -13,12 +13,12 @@ namespace MgmtSingletonResource
     /// <summary> A class representing the Brake data model. </summary>
     public partial class BrakeData : ResourceData
     {
-        /// <summary> Initializes a new instance of BrakeData. </summary>
+        /// <summary> Initializes a new instance of <see cref="BrakeData"/>. </summary>
         internal BrakeData()
         {
         }
 
-        /// <summary> Initializes a new instance of BrakeData. </summary>
+        /// <summary> Initializes a new instance of <see cref="BrakeData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

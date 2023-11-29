@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetDataDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.lun
@@ -28,7 +28,7 @@ namespace Azure.ResourceManager.Sample.Models
             CreateOption = createOption;
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetDataDisk"/>. </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.name

@@ -12,7 +12,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public DatetimeProperty(DateTimeOffset property)
         {

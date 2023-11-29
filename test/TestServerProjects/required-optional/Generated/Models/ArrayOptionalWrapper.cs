@@ -13,10 +13,17 @@ namespace required_optional.Models
     /// <summary> The ArrayOptionalWrapper. </summary>
     public partial class ArrayOptionalWrapper
     {
-        /// <summary> Initializes a new instance of ArrayOptionalWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="ArrayOptionalWrapper"/>. </summary>
         public ArrayOptionalWrapper()
         {
             Value = new ChangeTrackingList<string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ArrayOptionalWrapper"/>. </summary>
+        /// <param name="value"></param>
+        internal ArrayOptionalWrapper(IList<string> value)
+        {
+            Value = value;
         }
 
         /// <summary> Gets the value. </summary>

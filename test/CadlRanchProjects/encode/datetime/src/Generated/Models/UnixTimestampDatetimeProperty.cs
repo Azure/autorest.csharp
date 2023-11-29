@@ -12,7 +12,7 @@ namespace Encode.Datetime.Models
     /// <summary> The UnixTimestampDatetimeProperty. </summary>
     public partial class UnixTimestampDatetimeProperty
     {
-        /// <summary> Initializes a new instance of UnixTimestampDatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnixTimestampDatetimeProperty"/>. </summary>
         /// <param name="value"></param>
         public UnixTimestampDatetimeProperty(DateTimeOffset value)
         {

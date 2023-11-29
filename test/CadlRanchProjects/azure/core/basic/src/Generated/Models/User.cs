@@ -14,7 +14,7 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> Details about a user. </summary>
     public partial class User
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="name"> The user's name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public User(string name)
@@ -25,7 +25,7 @@ namespace _Specs_.Azure.Core.Basic.Models
             Orders = new ChangeTrackingList<UserOrder>();
         }
 
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="name"> The user's name. </param>
         /// <param name="orders"> The user's order list. </param>

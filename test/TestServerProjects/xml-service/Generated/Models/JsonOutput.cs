@@ -10,12 +10,12 @@ namespace xml_service.Models
     /// <summary> The JsonOutput. </summary>
     public partial class JsonOutput
     {
-        /// <summary> Initializes a new instance of JsonOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonOutput"/>. </summary>
         internal JsonOutput()
         {
         }
 
-        /// <summary> Initializes a new instance of JsonOutput. </summary>
+        /// <summary> Initializes a new instance of <see cref="JsonOutput"/>. </summary>
         /// <param name="id"></param>
         internal JsonOutput(int? id)
         {

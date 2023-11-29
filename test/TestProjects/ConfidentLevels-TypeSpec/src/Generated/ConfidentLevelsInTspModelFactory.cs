@@ -12,7 +12,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ConfidentLevelsInTspModelFactory
     {
-        /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AnotherModelWithUnionProperty"/>. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
         /// <returns> A new <see cref="Models.AnotherModelWithUnionProperty"/> instance for mocking. </returns>

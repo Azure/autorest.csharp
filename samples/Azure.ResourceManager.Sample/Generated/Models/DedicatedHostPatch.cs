@@ -18,10 +18,59 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of DedicatedHostPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
         public DedicatedHostPatch()
         {
             VirtualMachines = new ChangeTrackingList<Resources.Models.SubResource>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DedicatedHostPatch"/>. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        /// <param name="platformFaultDomain">
+        /// Fault domain of the dedicated host within a dedicated host group.
+        /// Serialized Name: DedicatedHostUpdate.properties.platformFaultDomain
+        /// </param>
+        /// <param name="autoReplaceOnFailure">
+        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
+        /// Serialized Name: DedicatedHostUpdate.properties.autoReplaceOnFailure
+        /// </param>
+        /// <param name="hostId">
+        /// A unique id generated and assigned to the dedicated host by the platform. &lt;br&gt;&lt;br&gt; Does not change throughout the lifetime of the host.
+        /// Serialized Name: DedicatedHostUpdate.properties.hostId
+        /// </param>
+        /// <param name="virtualMachines">
+        /// A list of references to all virtual machines in the Dedicated Host.
+        /// Serialized Name: DedicatedHostUpdate.properties.virtualMachines
+        /// </param>
+        /// <param name="licenseType">
+        /// Specifies the software license type that will be applied to the VMs deployed on the dedicated host. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **Windows_Server_Hybrid** &lt;br&gt;&lt;br&gt; **Windows_Server_Perpetual** &lt;br&gt;&lt;br&gt; Default: **None**
+        /// Serialized Name: DedicatedHostUpdate.properties.licenseType
+        /// </param>
+        /// <param name="provisioningOn">
+        /// The date when the host was first provisioned.
+        /// Serialized Name: DedicatedHostUpdate.properties.provisioningTime
+        /// </param>
+        /// <param name="provisioningState">
+        /// The provisioning state, which only appears in the response.
+        /// Serialized Name: DedicatedHostUpdate.properties.provisioningState
+        /// </param>
+        /// <param name="instanceView">
+        /// The dedicated host instance view.
+        /// Serialized Name: DedicatedHostUpdate.properties.instanceView
+        /// </param>
+        internal DedicatedHostPatch(IDictionary<string, string> tags, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(tags)
+        {
+            PlatformFaultDomain = platformFaultDomain;
+            AutoReplaceOnFailure = autoReplaceOnFailure;
+            HostId = hostId;
+            VirtualMachines = virtualMachines;
+            LicenseType = licenseType;
+            ProvisioningOn = provisioningOn;
+            ProvisioningState = provisioningState;
+            InstanceView = instanceView;
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateChoice. </summary>
     public partial class CreateChoice
     {
-        /// <summary> Initializes a new instance of CreateChoice. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChoice"/>. </summary>
         /// <param name="index"> The index of the choice in the list of choices. </param>
         /// <param name="message"></param>
         /// <param name="finishReason">

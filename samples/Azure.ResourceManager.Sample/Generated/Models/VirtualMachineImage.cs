@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineImage : VirtualMachineImageResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/>. </summary>
         /// <param name="name">
         /// The name of the resource.
         /// Serialized Name: VirtualMachineImageResource.name
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             DataDiskImages = new ChangeTrackingList<DataDiskImage>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineImage"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

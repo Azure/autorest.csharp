@@ -10,7 +10,7 @@ namespace _Type.Union.Models
     /// <summary> The SendRequest. </summary>
     internal partial class SendRequest
     {
-        /// <summary> Initializes a new instance of SendRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="SendRequest"/>. </summary>
         /// <param name="prop"></param>
         public SendRequest(SendRequestProp prop)
         {

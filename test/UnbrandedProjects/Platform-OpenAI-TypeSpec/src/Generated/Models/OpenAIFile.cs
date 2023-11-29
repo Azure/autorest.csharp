@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The `File` object represents a document that has been uploaded to OpenAI. </summary>
     public partial class OpenAIFile
     {
-        /// <summary> Initializes a new instance of OpenAIFile. </summary>
+        /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
         /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
         /// <param name="bytes"> The size of the file in bytes. </param>
         /// <param name="createdAt"> The Unix timestamp (in seconds) for when the file was created. </param>
@@ -35,7 +35,7 @@ namespace OpenAI.Models
             Status = status;
         }
 
-        /// <summary> Initializes a new instance of OpenAIFile. </summary>
+        /// <summary> Initializes a new instance of <see cref="OpenAIFile"/>. </summary>
         /// <param name="id"> The file identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "file". </param>
         /// <param name="bytes"> The size of the file in bytes. </param>

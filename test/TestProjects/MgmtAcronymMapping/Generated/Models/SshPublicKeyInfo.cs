@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class SshPublicKeyInfo
     {
-        /// <summary> Initializes a new instance of SshPublicKeyInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         public SshPublicKeyInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeyInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeyInfo"/>. </summary>
         /// <param name="path">
         /// Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys
         /// Serialized Name: SshPublicKey.path

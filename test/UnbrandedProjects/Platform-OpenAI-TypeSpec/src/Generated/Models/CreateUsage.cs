@@ -7,7 +7,7 @@ namespace OpenAI.Models
     /// <summary> The CreateUsage. </summary>
     public partial class CreateUsage
     {
-        /// <summary> Initializes a new instance of CreateUsage. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateUsage"/>. </summary>
         /// <param name="promptTokens"> The number of tokens used by the prompt. </param>
         /// <param name="totalTokens"> The total number of tokens used by the request. </param>
         internal CreateUsage(long promptTokens, long totalTokens)

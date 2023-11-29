@@ -10,12 +10,12 @@ namespace MgmtCustomizations.Models
     /// <summary> The properties. </summary>
     public partial class PetStoreProperties
     {
-        /// <summary> Initializes a new instance of PetStoreProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         public PetStoreProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of PetStoreProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="PetStoreProperties"/>. </summary>
         /// <param name="order"> The order. </param>
         /// <param name="pet">
         /// A pet

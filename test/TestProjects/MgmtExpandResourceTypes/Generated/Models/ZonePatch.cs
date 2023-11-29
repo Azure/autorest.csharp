@@ -13,10 +13,17 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Describes a request to update a DNS zone. </summary>
     public partial class ZonePatch
     {
-        /// <summary> Initializes a new instance of ZonePatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="ZonePatch"/>. </summary>
         public ZonePatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ZonePatch"/>. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        internal ZonePatch(IDictionary<string, string> tags)
+        {
+            Tags = tags;
         }
 
         /// <summary> Resource tags. </summary>

@@ -13,8 +13,17 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmReimageContent : VirtualMachineReimageContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmReimageContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmReimageContent"/>. </summary>
         public VirtualMachineScaleSetVmReimageContent()
+        {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVmReimageContent"/>. </summary>
+        /// <param name="tempDisk">
+        /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
+        /// Serialized Name: VirtualMachineReimageParameters.tempDisk
+        /// </param>
+        internal VirtualMachineScaleSetVmReimageContent(bool? tempDisk) : base(tempDisk)
         {
         }
     }

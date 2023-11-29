@@ -10,12 +10,12 @@ namespace xms_error_responses.Models
     /// <summary> The BaseError. </summary>
     internal partial class BaseError
     {
-        /// <summary> Initializes a new instance of BaseError. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>
         internal BaseError()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseError. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseError"/>. </summary>
         /// <param name="someBaseProp"></param>
         internal BaseError(string someBaseProp)
         {

@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> Represents a chat completion response returned by model, based on the provided input. </summary>
     public partial class CreateChatCompletionResponse
     {
-        /// <summary> Initializes a new instance of CreateChatCompletionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the chat completion. </param>
         /// <param name="object"> The object type, which is always `chat.completion`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>
@@ -33,7 +33,7 @@ namespace OpenAI.Models
             Choices = choices.ToList();
         }
 
-        /// <summary> Initializes a new instance of CreateChatCompletionResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateChatCompletionResponse"/>. </summary>
         /// <param name="id"> A unique identifier for the chat completion. </param>
         /// <param name="object"> The object type, which is always `chat.completion`. </param>
         /// <param name="created"> The Unix timestamp (in seconds) of when the chat completion was created. </param>

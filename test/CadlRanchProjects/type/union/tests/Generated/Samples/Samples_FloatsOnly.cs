@@ -21,7 +21,7 @@ namespace _Type.Union.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatsOnly_ShortVersion()
+        public void Example_FloatsOnly_GetFloatsOnly_ShortVersion()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatsOnly_ShortVersion_Async()
+        public async Task Example_FloatsOnly_GetFloatsOnly_ShortVersion_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatsOnly_ShortVersion_Convenience()
+        public void Example_FloatsOnly_GetFloatsOnly_ShortVersion_Convenience()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatsOnly_ShortVersion_Convenience_Async()
+        public async Task Example_FloatsOnly_GetFloatsOnly_ShortVersion_Convenience_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatsOnly_AllParameters()
+        public void Example_FloatsOnly_GetFloatsOnly_AllParameters()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatsOnly_AllParameters_Async()
+        public async Task Example_FloatsOnly_GetFloatsOnly_AllParameters_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloatsOnly_AllParameters_Convenience()
+        public void Example_FloatsOnly_GetFloatsOnly_AllParameters_Convenience()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloatsOnly_AllParameters_Convenience_Async()
+        public async Task Example_FloatsOnly_GetFloatsOnly_AllParameters_Convenience_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_ShortVersion()
+        public void Example_FloatsOnly_Send_ShortVersion()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -120,7 +120,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_ShortVersion_Async()
+        public async Task Example_FloatsOnly_Send_ShortVersion_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_ShortVersion_Convenience()
+        public void Example_FloatsOnly_Send_ShortVersion_Convenience()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_ShortVersion_Convenience_Async()
+        public async Task Example_FloatsOnly_Send_ShortVersion_Convenience_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -153,7 +153,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_AllParameters()
+        public void Example_FloatsOnly_Send_AllParameters()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -168,7 +168,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_AllParameters_Async()
+        public async Task Example_FloatsOnly_Send_AllParameters_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -183,7 +183,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_AllParameters_Convenience()
+        public void Example_FloatsOnly_Send_AllParameters_Convenience()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 
@@ -192,7 +192,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_AllParameters_Convenience_Async()
+        public async Task Example_FloatsOnly_Send_AllParameters_Convenience_Async()
         {
             FloatsOnly client = new UnionClient().GetFloatsOnlyClient(apiVersion: "1.0.0");
 

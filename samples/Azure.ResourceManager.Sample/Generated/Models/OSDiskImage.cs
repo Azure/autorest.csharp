@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class OSDiskImage
     {
-        /// <summary> Initializes a new instance of OSDiskImage. </summary>
+        /// <summary> Initializes a new instance of <see cref="OSDiskImage"/>. </summary>
         /// <param name="operatingSystem">
         /// The operating system of the osDiskImage.
         /// Serialized Name: OSDiskImage.operatingSystem

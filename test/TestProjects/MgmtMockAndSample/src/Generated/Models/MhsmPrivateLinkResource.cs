@@ -14,7 +14,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> A private link resource. </summary>
     public partial class MhsmPrivateLinkResource : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResource"/>. </summary>
         /// <param name="location"> The location. </param>
         public MhsmPrivateLinkResource(AzureLocation location) : base(location)
         {
@@ -22,7 +22,7 @@ namespace MgmtMockAndSample.Models
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="MhsmPrivateLinkResource"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

@@ -10,12 +10,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with string literal property. </summary>
     public partial class StringLiteralProperty
     {
-        /// <summary> Initializes a new instance of StringLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringLiteralProperty"/>. </summary>
         public StringLiteralProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of StringLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal StringLiteralProperty(StringLiteralPropertyProperty? property)
         {

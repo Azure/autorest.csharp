@@ -10,12 +10,12 @@ namespace AnomalyDetector.Models
     /// <summary> An optional field, indicating the manner to align multiple variables. </summary>
     public partial class AlignPolicy
     {
-        /// <summary> Initializes a new instance of AlignPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="AlignPolicy"/>. </summary>
         public AlignPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of AlignPolicy. </summary>
+        /// <summary> Initializes a new instance of <see cref="AlignPolicy"/>. </summary>
         /// <param name="alignMode">
         /// An optional field, indicating how to align different variables to the same
         /// time-range. Either Inner or Outer.

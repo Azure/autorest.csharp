@@ -21,7 +21,7 @@ namespace _Type.Union.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringAndArray_ShortVersion()
+        public void Example_StringAndArray_GetStringAndArray_ShortVersion()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringAndArray_ShortVersion_Async()
+        public async Task Example_StringAndArray_GetStringAndArray_ShortVersion_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -47,7 +47,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringAndArray_ShortVersion_Convenience()
+        public void Example_StringAndArray_GetStringAndArray_ShortVersion_Convenience()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -56,7 +56,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringAndArray_ShortVersion_Convenience_Async()
+        public async Task Example_StringAndArray_GetStringAndArray_ShortVersion_Convenience_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -65,7 +65,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringAndArray_AllParameters()
+        public void Example_StringAndArray_GetStringAndArray_AllParameters()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -78,7 +78,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringAndArray_AllParameters_Async()
+        public async Task Example_StringAndArray_GetStringAndArray_AllParameters_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -91,7 +91,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringAndArray_AllParameters_Convenience()
+        public void Example_StringAndArray_GetStringAndArray_AllParameters_Convenience()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -100,7 +100,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringAndArray_AllParameters_Convenience_Async()
+        public async Task Example_StringAndArray_GetStringAndArray_AllParameters_Convenience_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_ShortVersion()
+        public void Example_StringAndArray_Send_ShortVersion()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -124,7 +124,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_ShortVersion_Async()
+        public async Task Example_StringAndArray_Send_ShortVersion_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -139,7 +139,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_ShortVersion_Convenience()
+        public void Example_StringAndArray_Send_ShortVersion_Convenience()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -148,7 +148,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_ShortVersion_Convenience_Async()
+        public async Task Example_StringAndArray_Send_ShortVersion_Convenience_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -157,7 +157,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_AllParameters()
+        public void Example_StringAndArray_Send_AllParameters()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -172,7 +172,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_AllParameters_Async()
+        public async Task Example_StringAndArray_Send_AllParameters_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -187,7 +187,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Send_AllParameters_Convenience()
+        public void Example_StringAndArray_Send_AllParameters_Convenience()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 
@@ -196,7 +196,7 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Send_AllParameters_Convenience_Async()
+        public async Task Example_StringAndArray_Send_AllParameters_Convenience_Async()
         {
             StringAndArray client = new UnionClient().GetStringAndArrayClient(apiVersion: "1.0.0");
 

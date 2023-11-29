@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a union of int literal as property. </summary>
     public partial class UnionIntLiteralProperty
     {
-        /// <summary> Initializes a new instance of UnionIntLiteralProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnionIntLiteralProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnionIntLiteralProperty(BinaryData property)

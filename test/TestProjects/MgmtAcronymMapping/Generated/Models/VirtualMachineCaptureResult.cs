@@ -17,13 +17,13 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineCaptureResult : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureResult"/>. </summary>
         public VirtualMachineCaptureResult()
         {
             Resources = new ChangeTrackingList<BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineCaptureResult"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

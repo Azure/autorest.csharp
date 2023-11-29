@@ -13,14 +13,14 @@ namespace xml_service.Models
     /// <summary> The Blobs. </summary>
     public partial class Blobs
     {
-        /// <summary> Initializes a new instance of Blobs. </summary>
+        /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         internal Blobs()
         {
             BlobPrefix = new ChangeTrackingList<BlobPrefix>();
             Blob = new ChangeTrackingList<Blob>();
         }
 
-        /// <summary> Initializes a new instance of Blobs. </summary>
+        /// <summary> Initializes a new instance of <see cref="Blobs"/>. </summary>
         /// <param name="blobPrefix"></param>
         /// <param name="blob"></param>
         internal Blobs(IReadOnlyList<BlobPrefix> blobPrefix, IReadOnlyList<Blob> blob)

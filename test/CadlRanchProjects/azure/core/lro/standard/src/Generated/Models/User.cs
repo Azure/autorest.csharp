@@ -13,7 +13,7 @@ namespace _Azure.Lro.Standard.Models
     /// <summary> Details about a user. </summary>
     public partial class User
     {
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="role"> The role of user. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="role"/> is null. </exception>
         public User(string role)
@@ -23,7 +23,7 @@ namespace _Azure.Lro.Standard.Models
             Role = role;
         }
 
-        /// <summary> Initializes a new instance of User. </summary>
+        /// <summary> Initializes a new instance of <see cref="User"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="role"> The role of user. </param>
         internal User(string name, string role)

@@ -16,12 +16,12 @@ namespace MgmtSingletonResource
     /// </summary>
     public partial class SingletonResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="SingletonResourceData"/>. </summary>
         public SingletonResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="SingletonResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

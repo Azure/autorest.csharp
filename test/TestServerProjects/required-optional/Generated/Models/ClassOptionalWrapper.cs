@@ -10,9 +10,16 @@ namespace required_optional.Models
     /// <summary> The ClassOptionalWrapper. </summary>
     public partial class ClassOptionalWrapper
     {
-        /// <summary> Initializes a new instance of ClassOptionalWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassOptionalWrapper"/>. </summary>
         public ClassOptionalWrapper()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ClassOptionalWrapper"/>. </summary>
+        /// <param name="value"></param>
+        internal ClassOptionalWrapper(Product value)
+        {
+            Value = value;
         }
 
         /// <summary> Gets or sets the value. </summary>

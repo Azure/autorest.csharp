@@ -10,7 +10,7 @@ namespace CognitiveSearch.Models
     /// <summary> The UnknownSimilarity. </summary>
     internal partial class UnknownSimilarity : Similarity
     {
-        /// <summary> Initializes a new instance of UnknownSimilarity. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownSimilarity"/>. </summary>
         /// <param name="odataType"></param>
         internal UnknownSimilarity(string odataType) : base(odataType)
         {

@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
     /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
     public partial class VirtualMachineScaleSetVMInstanceRequiredIDs
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/>. </summary>
         /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceIds"/> is null. </exception>
         public VirtualMachineScaleSetVMInstanceRequiredIDs(IEnumerable<string> instanceIds)
@@ -23,6 +23,13 @@ namespace MgmtParamOrdering.Models
             Argument.AssertNotNull(instanceIds, nameof(instanceIds));
 
             InstanceIds = instanceIds.ToList();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetVMInstanceRequiredIDs"/>. </summary>
+        /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>
+        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds)
+        {
+            InstanceIds = instanceIds;
         }
 
         /// <summary> The virtual machine scale set instance ids. </summary>

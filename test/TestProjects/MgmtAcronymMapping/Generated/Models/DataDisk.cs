@@ -15,7 +15,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class DataDisk
     {
-        /// <summary> Initializes a new instance of DataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun
@@ -30,7 +30,7 @@ namespace MgmtAcronymMapping.Models
             CreateOption = createOption;
         }
 
-        /// <summary> Initializes a new instance of DataDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="DataDisk"/>. </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: DataDisk.lun

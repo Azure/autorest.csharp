@@ -10,14 +10,14 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a resource's usage and quota. </summary>
     public partial class ResourceCounter
     {
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         internal ResourceCounter(long usage)
         {
             Usage = usage;
         }
 
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
         internal ResourceCounter(long usage, long? quota)

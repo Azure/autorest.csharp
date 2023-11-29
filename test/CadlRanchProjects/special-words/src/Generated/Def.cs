@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The def. </summary>
     public partial class Def
     {
-        /// <summary> Initializes a new instance of Def. </summary>
+        /// <summary> Initializes a new instance of <see cref="Def"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Def(string name)

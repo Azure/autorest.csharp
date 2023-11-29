@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VaultCertificate
     {
-        /// <summary> Initializes a new instance of VaultCertificate. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCertificate"/>. </summary>
         public VaultCertificate()
         {
         }
 
-        /// <summary> Initializes a new instance of VaultCertificate. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultCertificate"/>. </summary>
         /// <param name="certificateUri">
         /// This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: &lt;br&gt;&lt;br&gt; {&lt;br&gt;  "data":"&lt;Base64-encoded-certificate&gt;",&lt;br&gt;  "dataType":"pfx",&lt;br&gt;  "password":"&lt;pfx-file-password&gt;"&lt;br&gt;}
         /// Serialized Name: VaultCertificate.certificateUrl

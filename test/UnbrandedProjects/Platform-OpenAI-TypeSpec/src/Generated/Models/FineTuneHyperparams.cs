@@ -7,7 +7,7 @@ namespace OpenAI.Models
     /// <summary> The FineTuneHyperparams. </summary>
     public partial class FineTuneHyperparams
     {
-        /// <summary> Initializes a new instance of FineTuneHyperparams. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuneHyperparams"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
@@ -26,7 +26,7 @@ namespace OpenAI.Models
             LearningRateMultiplier = learningRateMultiplier;
         }
 
-        /// <summary> Initializes a new instance of FineTuneHyperparams. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuneHyperparams"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.

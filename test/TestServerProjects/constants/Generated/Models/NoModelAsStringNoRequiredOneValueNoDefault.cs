@@ -10,9 +10,16 @@ namespace constants.Models
     /// <summary> The NoModelAsStringNoRequiredOneValueNoDefault. </summary>
     internal partial class NoModelAsStringNoRequiredOneValueNoDefault
     {
-        /// <summary> Initializes a new instance of NoModelAsStringNoRequiredOneValueNoDefault. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringNoRequiredOneValueNoDefault"/>. </summary>
         internal NoModelAsStringNoRequiredOneValueNoDefault()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringNoRequiredOneValueNoDefault"/>. </summary>
+        /// <param name="parameter"></param>
+        internal NoModelAsStringNoRequiredOneValueNoDefault(NoModelAsStringNoRequiredOneValueNoDefaultEnum? parameter)
+        {
+            Parameter = parameter;
         }
 
         /// <summary> Gets the parameter. </summary>
