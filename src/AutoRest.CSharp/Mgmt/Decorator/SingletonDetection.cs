@@ -5,7 +5,6 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
 
@@ -17,18 +16,18 @@ internal static class SingletonDetection
 
     private static ConcurrentDictionary<OperationSet, SingletonResourceSuffix?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, SingletonResourceSuffix?>();
 
-    public static bool IsSingletonResource(this OperationSet operationSet, MgmtOutputLibrary library)
+    public static bool IsSingletonResource(this OperationSet operationSet)
     {
-        return operationSet.TryGetSingletonResourceSuffix(library, out _);
+        return operationSet.TryGetSingletonResourceSuffix(out _);
     }
 
-    public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, MgmtOutputLibrary library, [MaybeNullWhen(false)] out SingletonResourceSuffix suffix)
+    public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, [MaybeNullWhen(false)] out SingletonResourceSuffix suffix)
     {
         suffix = null;
         if (_singletonResourceCache.TryGetValue(operationSet, out suffix))
             return suffix != null;
 
-        bool result = IsSingleton(operationSet, library, out var singletonIdSuffix);
+        bool result = IsSingleton(operationSet, out var singletonIdSuffix);
         suffix = ParseSingletonIdSuffix(operationSet, singletonIdSuffix);
         _singletonResourceCache.TryAdd(operationSet, suffix);
         return result;
@@ -50,7 +49,7 @@ internal static class SingletonDetection
         return SingletonResourceSuffix.Parse(segments);
     }
 
-    private static bool IsSingleton(OperationSet operationSet, MgmtOutputLibrary library, [MaybeNullWhen(false)] out string singletonIdSuffix)
+    private static bool IsSingleton(OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
     {
         // we should first check the configuration for the singleton settings
         if (Configuration.MgmtConfiguration.RequestPathToSingletonResource.TryGetValue(operationSet.RequestPath, out singletonIdSuffix))
@@ -68,7 +67,7 @@ internal static class SingletonDetection
         var currentRequestPath = operationSet.GetRequestPath();
         // if we are a singleton resource,
         // we need to find the suffix which should be the difference between our path and our parent resource
-        var parentRequestPath = currentRequestPath.ParentRequestPath(library);
+        var parentRequestPath = currentRequestPath.ParentRequestPath();
         var diff = parentRequestPath.TrimAncestorFrom(currentRequestPath);
         // if not all of the segment in difference are constant, we cannot be a singleton resource
         if (!diff.Any() || !diff.All(s => s.IsConstant))

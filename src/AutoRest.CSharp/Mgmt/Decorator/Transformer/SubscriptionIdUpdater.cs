@@ -2,16 +2,19 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class SubscriptionIdUpdater
     {
-        public static void Update(CodeModel codeModel)
+        public static void Update()
         {
             bool setSubParam = false;
-            foreach (var operationGroup in codeModel.OperationGroups)
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
             {
                 foreach (var op in operationGroup.Operations)
                 {

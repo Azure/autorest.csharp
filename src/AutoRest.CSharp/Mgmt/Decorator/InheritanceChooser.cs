@@ -9,6 +9,7 @@ using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -58,7 +59,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static CSharpType GetCSharpType(Type parentType, SourceInputModel? sourceInputModel)
         {
-            return CSharpType.FromSystemType(sourceInputModel, parentType);
+            return CSharpType.FromSystemType(MgmtContext.Context, parentType);
         }
 
         private static List<PropertyInfo> GetParentPropertiesToCompare(Type parentType, ObjectTypeProperty[] properties)

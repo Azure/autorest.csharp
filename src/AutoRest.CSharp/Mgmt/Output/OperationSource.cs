@@ -4,7 +4,6 @@
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -17,7 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class OperationSource : TypeProvider
     {
-        public OperationSource(CSharpType returnType, Resource? resource, InputType inputType, SourceInputModel? sourceInputModel) : base(Configuration.Namespace, sourceInputModel)
+        public OperationSource(CSharpType returnType, Resource? resource, InputType inputType) : base(MgmtContext.Context)
         {
             ReturnType = returnType;
             DefaultName = $"{(resource != null ? resource.ResourceName : returnType.Name)}OperationSource";

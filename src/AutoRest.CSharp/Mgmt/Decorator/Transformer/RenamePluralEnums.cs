@@ -4,6 +4,7 @@
 using System.Collections.Immutable;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 
@@ -11,11 +12,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class RenamePluralEnums
     {
-        public static void Update(CodeModel codeModel)
+        public static void Update()
         {
             ImmutableHashSet<string> enumsToKeepPlural = Configuration.MgmtConfiguration.KeepPluralEnums.ToImmutableHashSet();
 
-            foreach (var schema in codeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema && schema is not ChoiceSchema)
                     continue;

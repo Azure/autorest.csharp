@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 
@@ -11,7 +10,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private MgmtExtensionWrapper This { get; }
 
-        public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionWrapper, IEnumerable<Resource> armResources) : base(new CodeWriter(), extensionWrapper, armResources)
+        public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionWrapper) : base(new CodeWriter(), extensionWrapper)
         {
             This = extensionWrapper;
         }
@@ -40,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (extension.IsEmpty)
                     continue;
 
-                MgmtExtensionWriter.GetWriter(_writer, extension, _armResources).WriteImplementations();
+                MgmtExtensionWriter.GetWriter(_writer, extension).WriteImplementations();
                 _writer.Line();
             }
         }

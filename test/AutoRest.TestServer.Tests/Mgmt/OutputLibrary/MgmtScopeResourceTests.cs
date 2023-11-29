@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             var resource = _library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.NotNull(resource);
-            var parents = resource.GetParents(_library);
+            var parents = resource.GetParents();
             Assert.IsTrue(parents.Any(p => p.Type.Name == parentName));
         }
     }

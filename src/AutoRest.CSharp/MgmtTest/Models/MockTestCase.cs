@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -25,11 +24,8 @@ namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class MockTestCase : OperationExample
     {
-        private readonly MgmtOutputLibrary _library;
-
-        public MockTestCase(string operationName, MgmtTypeProvider carrier, MgmtClientOperation operation, InputClientExample example, MgmtOutputLibrary library) : base(operationName, carrier, operation, example)
+        public MockTestCase(string operationName, MgmtTypeProvider carrier, MgmtClientOperation operation, InputClientExample example) : base(operationName, carrier, operation, example)
         {
-            _library = library;
         }
 
         protected virtual string GetMethodName(bool hasSuffix)
@@ -51,7 +47,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         {
             if (Carrier is not Resource resource)
                 return null;
-            var parents = resource.GetParents(_library);
+            var parents = resource.GetParents();
             // TODO -- find a way to determine which parent to use. Only for prototype, here we use the first
             // Only when this resource is a "scope resource", we could have multiple parents
             // We could use the value of the scope variable, get the resource type from it to know which resource we should use as a parent here

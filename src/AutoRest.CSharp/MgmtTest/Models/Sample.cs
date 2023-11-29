@@ -3,13 +3,12 @@
 
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.MgmtTest.Models
 {
     internal class Sample : MockTestCase
     {
-        public Sample(MockTestCase testCase, MgmtOutputLibrary library) : base(testCase.OperationName, testCase.Carrier, testCase.Operation, testCase._example, library)
+        public Sample(MockTestCase testCase) : base(testCase.OperationName, testCase.Carrier, testCase.Operation, testCase._example)
         {
         }
 

@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -24,8 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtMockableArmClient : MgmtMockableExtension
     {
-        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
-            : base(resourceType, operations, extensionForChildResources, library, sourceInputModel)
+        public MgmtMockableArmClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources) : base(resourceType, operations, extensionForChildResources)
         {
         }
 
@@ -33,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override FormattableString BranchIdVariableName => $"scope";
 
-        public override bool IsEmpty => !ClientOperations.Any() && !_library.ArmResources.Any();
+        public override bool IsEmpty => !ClientOperations.Any() && !MgmtContext.Library.ArmResources.Any();
 
         protected override Method BuildGetSingletonResourceMethod(Resource resource)
         {
@@ -118,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<Method> BuildArmResourceMethods()
         {
-            foreach (var resource in _library.ArmResources)
+            foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 yield return BuildArmResourceMethod(resource);
             }

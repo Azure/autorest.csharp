@@ -14,7 +14,6 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -27,7 +26,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class SchemaObjectType : SerializableObjectType
     {
-        private readonly MgmtOutputLibrary _library;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly InputModelTypeUsage _usage;
@@ -38,10 +36,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        protected SchemaObjectType(MgmtOutputLibrary library, InputModelType inputModel, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? newName = default, SerializableObjectType? defaultDerivedType = null)
-            : base(Configuration.Namespace, sourceInputModel)
+        protected SchemaObjectType(InputModelType inputModel, TypeFactory typeFactory, BuildContext context, string? newName = default, SerializableObjectType? defaultDerivedType = null)
+            : base(context.DefaultNamespace, context.SourceInputModel)
         {
-            _library = library;
             DefaultName = (newName ?? inputModel.Name).ToCleanName();
             DefaultNamespace = GetDefaultModelNamespace(inputModel.Namespace, Configuration.Namespace);
             InputModel = inputModel;
@@ -54,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = inputModel.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
+            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
             if (_sourceTypeMapping?.Usage != null)

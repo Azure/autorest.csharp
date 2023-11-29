@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,7 +18,6 @@ using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -27,8 +25,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private const string _suffixValue = "Collection";
 
-        public ResourceCollection(OperationSet operationSet, IEnumerable<InputOperation> operations, Resource resource, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
-            : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition, library, sourceInputModel)
+        public ResourceCollection(OperationSet operationSet, IEnumerable<InputOperation> operations, Resource resource)
+            : base(operationSet, operations, resource.ResourceName, resource.ResourceType, resource.ResourceData, CollectionPosition)
         {
             Resource = resource;
         }
@@ -96,13 +94,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (op is null)
                 return result;
 
-            var method = _library.GetRestClientPublicMethodSignature(op);
+            var method = MgmtContext.Library.GetRestClientPublicMethodSignature(op);
             // calculate the ResourceType from the RequestPath of this resource
             var resourceTypeSegments = ResourceType.Select((segment, index) => (segment, index)).Where(tuple => tuple.segment.IsReference).ToList();
             // iterate over all the reference segments in the diff of this GetAll operation
             var candidatesOfParameters = new List<Parameter>(method.Parameters);
 
-            var opRequestPath = op.GetRequestPath(_library, ResourceType);
+            var opRequestPath = op.GetRequestPath(ResourceType);
             foreach (var segment in GetDiffFromRequestPath(opRequestPath, GetContextualPath(OperationSet, opRequestPath)))
             {
                 var index = resourceTypeSegments.FindIndex(tuple => tuple.segment == segment);
@@ -202,7 +200,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected override RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.ParentRequestPath(ResourceType, _library);
+            var contextualPath = operationSet.ParentRequestPath(ResourceType);
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -218,7 +216,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parents = Resource.GetParents(_library);
+            var parents = Resource.GetParents();
             var parentTypes = parents.Select(parent => parent.TypeAsResource).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
@@ -250,16 +248,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Exists",
                         typeof(bool),
                         $"Checks to see if the resource exists in azure."),
-                    IdVariable
-                    , _library));
+                    IdVariable));
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "GetIfExists",
                         getMgmtRestOperation.MgmtReturnType,
                         $"Tries to get details for this resource from the service."),
-                    IdVariable
-                    , _library));
+                    IdVariable));
             }
 
             return result;

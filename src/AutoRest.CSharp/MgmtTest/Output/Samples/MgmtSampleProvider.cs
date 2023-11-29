@@ -3,11 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.MgmtTest.Output.Samples
 {

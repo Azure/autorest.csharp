@@ -10,6 +10,8 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -33,30 +35,30 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         /// <param name="type"></param>
         /// <param name="includeCollectionInitialization"></param>
         /// <returns></returns>
-        private static CodeWriter AppendExampleValue(this CodeWriter writer, TypeFactory typeFactory, InputExampleValue exampleValue, CSharpType? type = null, bool includeCollectionInitialization = true)
+        public static CodeWriter AppendExampleValue(this CodeWriter writer, InputExampleValue exampleValue, CSharpType? type = null, bool includeCollectionInitialization = true)
         {
             // get the type of this schema in the type factory if the type is not specified
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
-            type ??= typeFactory.CreateType(exampleValue.Type);
+            type ??= MgmtContext.Context.Library.TypeFactory.CreateType(exampleValue.Type);
 
             if (exampleValue.Type != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Type, out CSharpType? replaceType) && replaceType != null)
                 type = replaceType;
 
             return type!.IsFrameworkType ?
-                writer.AppendFrameworkTypeValue(typeFactory, type, exampleValue, includeCollectionInitialization) :
-                writer.AppendTypeProviderValue(typeFactory, type, exampleValue);
+                writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
+                writer.AppendTypeProviderValue(type, exampleValue);
         }
 
-        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, TypeFactory typeFactory, Parameter parameter, ExampleParameterValue exampleParameterValue)
+        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, Parameter parameter, ExampleParameterValue exampleParameterValue)
         {
             // for optional parameter, we write the parameter name here
             if (parameter.DefaultValue != null)
                 writer.Append($"{parameter.Name}: ");
 
-            return writer.AppendExampleParameterValue(typeFactory, exampleParameterValue);
+            return writer.AppendExampleParameterValue(exampleParameterValue);
         }
 
-        public static CodeWriter AppendExamplePropertyBagParamValue(this CodeWriter writer, TypeFactory typeFactory, Parameter parameter, Dictionary<string, ExampleParameterValue> exampleParameterValue)
+        public static CodeWriter AppendExamplePropertyBagParamValue(this CodeWriter writer, Parameter parameter, Dictionary<string, ExampleParameterValue> exampleParameterValue)
         {
             writer.Append($"new {parameter.Type}(");
             var mgmtObject = parameter.Type.Implementation as ModelTypeProvider;
@@ -68,7 +70,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (exampleParameterValue.TryGetValue(parameterName, out ExampleParameterValue? value))
                 {
                     writer.Append($"{parameterName}: ");
-                    writer.AppendExampleParameterValue(typeFactory, value);
+                    writer.AppendExampleParameterValue(value);
                     writer.Append($", ");
                 }
             }
@@ -80,7 +82,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 if (exampleParameterValue.TryGetValue(parameterName, out ExampleParameterValue? value))
                 {
                     writer.Append($"{property.Declaration.Name} = ");
-                    writer.AppendExampleParameterValue(typeFactory, value);
+                    writer.AppendExampleParameterValue(value);
                     writer.Append($", ");
                 }
             }
@@ -88,35 +90,35 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer.Append($"}}");
         }
 
-        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, TypeFactory typeFactory, ExampleParameterValue exampleParameterValue)
+        public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, ExampleParameterValue exampleParameterValue)
         {
             if (exampleParameterValue.Value != null)
-                return writer.AppendExampleValue(typeFactory, exampleParameterValue.Value, exampleParameterValue.Type);
+                return writer.AppendExampleValue(exampleParameterValue.Value, exampleParameterValue.Type);
             else
                 return writer.Append(exampleParameterValue.Expression!);
         }
 
-        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, TypeFactory typeFactory, CSharpType type, InputExampleValue exampleValue, bool includeCollectionInitialization = true)
+        private static CodeWriter AppendFrameworkTypeValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeCollectionInitialization = true)
         {
             if (TypeFactory.IsList(type))
-                return writer.AppendListValue(typeFactory, type, exampleValue as InputExampleListValue, includeCollectionInitialization);
+                return writer.AppendListValue(type, exampleValue as InputExampleListValue, includeCollectionInitialization);
 
             if (TypeFactory.IsDictionary(type))
-                return writer.AppendDictionaryValue(typeFactory, type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
+                return writer.AppendDictionaryValue(type, exampleValue as InputExampleObjectValue, includeCollectionInitialization);
 
             if (type.FrameworkType == typeof(BinaryData))
-                return writer.AppendBinaryData(typeFactory, exampleValue);
+                return writer.AppendBinaryData(exampleValue);
 
             if (type.FrameworkType == typeof(DataFactoryElement<>))
-                return writer.AppendDataFactoryElementValue(typeFactory, type, exampleValue);
+                return writer.AppendDataFactoryElementValue(type, exampleValue);
 
             if (exampleValue.Type is InputModelType)
-                return writer.AppendComplexFrameworkTypeValue(typeFactory, type.FrameworkType, exampleValue);
+                return writer.AppendComplexFrameworkTypeValue(type.FrameworkType, exampleValue);
 
             return writer.AppendRawValue((exampleValue as InputExampleRawValue)?.RawValue, type.FrameworkType, exampleValue.Type);
         }
 
-        private static CodeWriter AppendDataFactoryElementValue(this CodeWriter writer, TypeFactory typeFactory, CSharpType type, InputExampleValue exampleValue)
+        private static CodeWriter AppendDataFactoryElementValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue)
         {
             if (type.FrameworkType != typeof(DataFactoryElement<>))
                 throw new ArgumentException("DataFactoryElement<> is expected but got: " + type.ToString());
@@ -140,18 +142,18 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 };
 
                 writer.Append($"{type: L}.{createMethodName}(");
-                writer.AppendExampleValue(typeFactory, dfeValue, typeof(DataFactoryKeyVaultSecretReference));
+                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecretReference));
                 writer.AppendRaw(")");
             }
             else
             {
                 CSharpType literlType = type.Arguments.First();
-                writer.AppendExampleValue(typeFactory, exampleValue, literlType);
+                writer.AppendExampleValue(exampleValue, literlType);
             }
             return writer;
         }
 
-        private static CodeWriter AppendListValue(this CodeWriter writer, TypeFactory typeFactory, CSharpType type, InputExampleListValue? exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, InputExampleListValue? exampleValue, bool includeInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             var elements = exampleValue?.Values ?? Enumerable.Empty<InputExampleValue>();
@@ -163,7 +165,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 foreach (var itemValue in elements)
                 {
                     // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
-                    writer.AppendExampleValue(typeFactory, itemValue, elementType);
+                    writer.AppendExampleValue(itemValue, elementType);
                     if (type.IsFrameworkType)
                         writer.AppendRaw(",");
                     else
@@ -175,7 +177,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, TypeFactory typeFactory, CSharpType type, InputExampleObjectValue? exampleValue, bool includeInitialization = true)
+        private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, InputExampleObjectValue? exampleValue, bool includeInitialization = true)
         {
             // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
             var keyValues = exampleValue?.Values ?? new Dictionary<string, InputExampleValue>();
@@ -193,25 +195,25 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 {
                     // write key
                     writer.AppendRaw("[");
-                    writer.AppendExampleValue(typeFactory, new InputExampleRawValue(InputPrimitiveType.String, key), keyType);
+                    writer.AppendExampleValue(new InputExampleRawValue(InputPrimitiveType.String, key), keyType);
                     writer.AppendRaw("] = ");
-                    writer.AppendExampleValue(typeFactory, value, valueType);
+                    writer.AppendExampleValue(value, valueType);
                     writer.LineRaw(", ");
                 }
             }
             return writer;
         }
 
-        private static CodeWriter AppendBinaryData(this CodeWriter writer, TypeFactory typeFactory, InputExampleValue exampleValue)
+        private static CodeWriter AppendBinaryData(this CodeWriter writer, InputExampleValue exampleValue)
         {
             // determine which method on BinaryData we want to use to serialize this BinaryData
             string method = exampleValue is InputExampleRawValue exampleRawValue && exampleRawValue?.RawValue != null && exampleRawValue.RawValue is string ? "FromString" : "FromObjectAsJson";
             writer.Append($"{typeof(BinaryData)}.{method}(");
-            writer.AppendAnonymousObject(typeFactory, exampleValue);
+            writer.AppendAnonymousObject(exampleValue);
             return writer.AppendRaw(")");
         }
 
-        private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, TypeFactory typeFactory, Type type, InputExampleValue exampleValue)
+        private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, Type type, InputExampleValue exampleValue)
         {
             if (exampleValue is not InputExampleObjectValue exampleObjectValue)
             {
@@ -227,7 +229,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             {
                 // we here assume the parameter name is the same as the serialized name of the property. This is not 100% solid
                 var value = exampleObjectValue.Values[parameter.Name!];
-                writer.AppendExampleValue(typeFactory, value, parameter.ParameterType);
+                writer.AppendExampleValue(value, parameter.ParameterType);
                 writer.AppendRaw(",");
             }
             writer.RemoveTrailingComma();
@@ -251,7 +253,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     foreach ((var propertyName, var value) in optionalProperties)
                     {
                         writer.Append($"{propertyName} = ");
-                        writer.AppendExampleValue(typeFactory, value);
+                        writer.AppendExampleValue(value);
                         writer.LineRaw(",");
                     }
                     writer.RemoveTrailingComma();
@@ -261,7 +263,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer;
         }
 
-        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, TypeFactory typeFactory, InputExampleValue exampleValue)
+        private static CodeWriter AppendAnonymousObject(this CodeWriter writer, InputExampleValue exampleValue)
         {
             // check if this is simple type
             if (exampleValue is InputExampleRawValue exampleRawValue)
@@ -271,7 +273,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // check if this is an array
             if (exampleValue is InputExampleListValue exampleListValue)
             {
-                return writer.AppendListValue(typeFactory, typeof(object), exampleListValue);
+                return writer.AppendListValue(typeof(object), exampleListValue);
             }
             // fallback to complex object
             if (exampleValue is InputExampleObjectValue exampleObjectValue)
@@ -281,7 +283,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     foreach ((var key, var value) in exampleObjectValue.Values)
                     {
                         writer.Append($"[{key:L}] = ");
-                        writer.AppendAnonymousObject(typeFactory, value);
+                        writer.AppendAnonymousObject(value);
                     }
                 }
             }
@@ -375,12 +377,12 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             typeof(IPAddress)
         };
 
-        private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, TypeFactory typeFactory, CSharpType type, InputExampleValue exampleValue)
+        private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue)
         {
             switch (type.Implementation)
             {
                 case ObjectType objectType:
-                    return writer.AppendObjectTypeValue(typeFactory, objectType, (exampleValue as InputExampleObjectValue)?.Values);
+                    return writer.AppendObjectTypeValue(objectType, (exampleValue as InputExampleObjectValue)?.Values);
                 case EnumType enumType:
                     return writer.AppendEnumTypeValue(enumType, (exampleValue as InputExampleRawValue)?.RawValue!);
             }
@@ -408,7 +410,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return (ObjectType)implementation.Type.Implementation;
         }
 
-        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, TypeFactory typeFactory, ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue>? valueDict)
+        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, IReadOnlyDictionary<string, InputExampleValue>? valueDict)
         {
             if (valueDict == null)
             {
@@ -446,7 +448,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                         throw new InvalidOperationException($"Example value for required property {property.InputModelProperty.SerializedName} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
-                writer.AppendExampleValue(typeFactory, exampleValue, type: property.Declaration.Type).AppendRaw(",");
+                writer.AppendExampleValue(exampleValue, type: property.Declaration.Type).AppendRaw(",");
             }
             writer.RemoveTrailingComma();
             writer.AppendRaw(")");
@@ -459,7 +461,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                     {
                         writer.Append($"{propertyName} = ");
                         // we need to pass in the current type of this property to make sure its initialization is correct
-                        writer.AppendExampleValue(typeFactory, exampleValue, type: propertyType, includeCollectionInitialization: false);
+                        writer.AppendExampleValue(exampleValue, type: propertyType, includeCollectionInitialization: false);
                         writer.LineRaw(",");
                     }
                 }

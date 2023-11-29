@@ -30,21 +30,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        public static IEnumerable<MgmtTypeProvider> GetParents(this Resource resource, MgmtOutputLibrary library)
+        public static IEnumerable<MgmtTypeProvider> GetParents(this Resource resource)
         {
             if (_resourceParentCache.TryGetValue(resource, out var parentList))
                 return parentList;
 
-            parentList = resource.DoGetParents(library);
+            parentList = resource.DoGetParents();
             _resourceParentCache.TryAdd(resource, parentList);
             return parentList;
         }
 
-        private static IEnumerable<MgmtTypeProvider> DoGetParents(this Resource resource, MgmtOutputLibrary library)
+        private static IEnumerable<MgmtTypeProvider> DoGetParents(this Resource resource)
         {
             var scope = resource.RequestPath.GetScopePath();
             var resourceOperationSet = resource.OperationSet;
-            var parentRequestPath = resourceOperationSet.ParentRequestPath(resource.ResourceType, library);
+            var parentRequestPath = resourceOperationSet.ParentRequestPath(resource.ResourceType);
 
             if (parentRequestPath.Equals(resourceOperationSet.GetRequestPath()))
             {
@@ -57,68 +57,68 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
                 var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
-                return FindScopeParents(types, library).Distinct();
+                return FindScopeParents(types).Distinct();
             }
 
-            if (library.TryGetArmResource(parentRequestPath, out var parent))
+            if (MgmtContext.Library.TryGetArmResource(parentRequestPath, out var parent))
             {
                 return parent.AsIEnumerable();
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))
-                return library.GetExtension(typeof(ManagementGroupResource)).AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.ResourceGroup))
-                return library.GetExtension(typeof(ResourceGroupResource)).AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.Subscription))
-                return library.GetExtension(typeof(SubscriptionResource)).AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AsIEnumerable();
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             scope = parentRequestPath.GetScopePath(); // we do this because some request path its scope is the same as itself
             if (scope.IsParameterizedScope())
             {
                 // we already verified that the scope is parameterized, therefore we assert the type can never be null
                 var types = resource.RequestPath.GetParameterizedScopeResourceTypes()!;
-                return FindScopeParents(types, library).Distinct();
+                return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
-            return library.GetExtension(typeof(TenantResource)).AsIEnumerable();
+            return MgmtContext.Library.GetExtension(typeof(TenantResource)).AsIEnumerable();
         }
 
         // TODO -- enhence this to support the new arm-id format
-        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes, MgmtOutputLibrary library)
+        private static IEnumerable<MgmtTypeProvider> FindScopeParents(ResourceTypeSegment[] parameterizedScopeTypes)
         {
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
             {
-                yield return library.GetExtension(typeof(ArmResource));
+                yield return MgmtContext.Library.GetExtension(typeof(ArmResource));
                 yield break;
             }
 
             foreach (var type in parameterizedScopeTypes)
             {
                 if (type == ResourceTypeSegment.ManagementGroup)
-                    yield return library.GetExtension(typeof(ManagementGroupResource));
+                    yield return MgmtContext.Library.GetExtension(typeof(ManagementGroupResource));
                 else if (type == ResourceTypeSegment.ResourceGroup)
-                    yield return library.GetExtension(typeof(ResourceGroupResource));
+                    yield return MgmtContext.Library.GetExtension(typeof(ResourceGroupResource));
                 else if (type == ResourceTypeSegment.Subscription)
-                    yield return library.GetExtension(typeof(SubscriptionResource));
+                    yield return MgmtContext.Library.GetExtension(typeof(SubscriptionResource));
                 else if (type == ResourceTypeSegment.Tenant)
-                    yield return library.GetExtension(typeof(TenantResource));
+                    yield return MgmtContext.Library.GetExtension(typeof(TenantResource));
                 else
-                    yield return library.GetExtension(typeof(ArmResource)); // we return anything unrecognized scope parent resource type as ArmResourceExtension
+                    yield return MgmtContext.Library.GetExtension(typeof(ArmResource)); // we return anything unrecognized scope parent resource type as ArmResourceExtension
             }
         }
 
-        public static RequestPath ParentRequestPath(this OperationSet operationSet, ResourceTypeSegment resourceTypeHint, MgmtOutputLibrary library)
+        public static RequestPath ParentRequestPath(this OperationSet operationSet, ResourceTypeSegment resourceTypeHint)
         {
             // escape the calculation if this is configured in the configuration
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operationSet.RequestPath, out var rawPath))
-                return GetRequestPathFromRawPath(rawPath, library);
+                return GetRequestPathFromRawPath(rawPath);
 
-            return operationSet.GetRequestPath(resourceTypeHint).ParentRequestPath(library);
+            return operationSet.GetRequestPath(resourceTypeHint).ParentRequestPath();
         }
 
-        private static RequestPath GetRequestPathFromRawPath(string rawPath, MgmtOutputLibrary library)
+        private static RequestPath GetRequestPathFromRawPath(string rawPath)
         {
-            var parentSet = library.GetOperationSet(rawPath);
+            var parentSet = MgmtContext.Library.GetOperationSet(rawPath);
             return parentSet.GetRequestPath();
         }
 
@@ -130,50 +130,50 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="operation"></param>
         /// <returns></returns>
-        public static RequestPath ParentRequestPath(this InputOperation operation, InputNamespace inputNamespace, MgmtOutputLibrary library)
+        public static RequestPath ParentRequestPath(this InputOperation operation, InputNamespace inputNamespace)
         {
             if (_inputOperationToParentRequestPathCache.TryGetValue(operation, out var result))
                 return result;
 
-            result = GetParentRequestPath(operation, inputNamespace, library);
+            result = GetParentRequestPath(operation, inputNamespace);
             _inputOperationToParentRequestPathCache.TryAdd(operation, result);
             return result;
         }
 
-        private static RequestPath GetParentRequestPath(InputOperation operation, InputNamespace inputNamespace, MgmtOutputLibrary library)
+        private static RequestPath GetParentRequestPath(InputOperation operation, InputNamespace inputNamespace)
         {
             // escape the calculation if this is configured in the configuration
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(operation.Uri, out var rawPath))
-                return GetRequestPathFromRawPath(rawPath, library);
+                return GetRequestPathFromRawPath(rawPath);
 
-            var currentRequestPath = operation.GetRequestPath(library);
-            var currentOperationSet = library.GetOperationSet(currentRequestPath);
+            var currentRequestPath = operation.GetRequestPath();
+            var currentOperationSet = MgmtContext.Library.GetOperationSet(currentRequestPath);
             // if this operation comes from a resource, return itself
             if (currentOperationSet.IsResource(inputNamespace))
                 return currentRequestPath;
 
             // if this operation corresponds to a collection operation of a resource, return the path of the resource
-            if (operation.IsResourceCollectionOperation(library, out var operationSetOfResource))
+            if (operation.IsResourceCollectionOperation(out var operationSetOfResource))
                 return operationSetOfResource.GetRequestPath();
 
             // if neither of the above, we find a request path that is the longest parent of this, and belongs to a resource
-            return currentRequestPath.ParentRequestPath(library);
+            return currentRequestPath.ParentRequestPath();
         }
 
-        internal static RequestPath ParentRequestPath(this RequestPath requestPath, MgmtOutputLibrary library)
+        internal static RequestPath ParentRequestPath(this RequestPath requestPath)
         {
             if (_requestPathToParentCache.TryGetValue(requestPath, out var result))
             {
                 return result;
             }
 
-            result = requestPath.GetParent(library);
+            result = requestPath.GetParent();
             _requestPathToParentCache.TryAdd(requestPath, result);
 
             return result;
         }
 
-        private static RequestPath GetParent(this RequestPath requestPath, MgmtOutputLibrary library)
+        private static RequestPath GetParent(this RequestPath requestPath)
         {
             // find a parent resource in the resource list
             // we are taking the resource with a path that is the child of this operationSet and taking the longest candidate
@@ -181,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             // NOTE that we are always using fuzzy match in the IsAncestorOf method, we need to block the ById operations - they literally can be anyone's ancestor when there is no better choice.
             // We will never want this
             var scope = requestPath.GetScopePath();
-            var candidates = library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
+            var candidates = MgmtContext.Library.ResourceOperationSets.Select(operationSet => operationSet.GetRequestPath())
                 .Concat(new List<RequestPath> { RequestPath.ResourceGroup, RequestPath.Subscription, RequestPath.ManagementGroup }) // When generating management group in management.json, the path is /providers/Microsoft.Management/managementGroups/{groupId} while RequestPath.ManagementGroup is /providers/Microsoft.Management/managementGroups/{managementGroupId}. We pick the first one.
                 .Concat(Configuration.MgmtConfiguration.ParameterizedScopes)
                 .Where(r => r.IsAncestorOf(requestPath)).OrderByDescending(r => r.Count);

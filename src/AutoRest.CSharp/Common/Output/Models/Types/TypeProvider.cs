@@ -28,6 +28,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             _existingType = new Lazy<INamedTypeSymbol?>(() => sourceInputModel?.FindForType(DefaultNamespace, DefaultName));
         }
 
+        protected TypeProvider(BuildContext context) : this(context.DefaultNamespace, context.SourceInputModel) { }
+
         public CSharpType Type => new(this, TypeKind is TypeKind.Struct or TypeKind.Enum, this is EnumType);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
@@ -68,8 +70,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             return defaultNamespace;
         }
 
-        public static string GetDefaultNamespace(string? namespaceExtension)
-            => GetDefaultModelNamespace(namespaceExtension, Configuration.Namespace);
+        public static string GetDefaultNamespace(string? namespaceExtension, BuildContext context)
+            => GetDefaultModelNamespace(namespaceExtension, context.DefaultNamespace);
 
         public override bool Equals(object? obj)
         {

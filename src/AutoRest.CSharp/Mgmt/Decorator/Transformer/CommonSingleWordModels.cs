@@ -38,13 +38,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             "PrivateLinkResourceListResult"
         };
 
-        public static void Update(CodeModel codeModel)
+        public static void Update()
         {
             foreach (var schemaName in Configuration.MgmtConfiguration.PrependRPPrefix)
             {
                 _schemasToChange.Add(schemaName);
             }
-            foreach (var schema in codeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 string serializedName = schema.Language.Default.SerializedName ?? schema.Language.Default.Name;
                 if (_schemasToChange.Contains(serializedName))

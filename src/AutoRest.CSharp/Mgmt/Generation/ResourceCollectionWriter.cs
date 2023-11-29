@@ -31,12 +31,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private ResourceCollection This { get; }
 
-        public ResourceCollectionWriter(ResourceCollection resourceCollection, IEnumerable<Resource> resources) : this(new CodeWriter(), resourceCollection, resources)
+        public ResourceCollectionWriter(ResourceCollection resourceCollection) : this(new CodeWriter(), resourceCollection)
         {
         }
 
-        protected ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection, IEnumerable<Resource> resources)
-            : base(writer, resourceCollection, resources)
+        protected ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection)
+            : base(writer, resourceCollection)
         {
             This = resourceCollection;
             _customMethods.Add(nameof(WriteExistsBody), WriteExistsBody);

@@ -13,12 +13,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        public static MgmtExtensionWriter GetWriter(MgmtExtension extension, IEnumerable<Resource> armResources) => GetWriter(new CodeWriter(), extension, armResources);
+        public static MgmtExtensionWriter GetWriter(MgmtExtension extension) => GetWriter(new CodeWriter(), extension);
 
-        public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension, IEnumerable<Resource> armResources) => extension switch
+        public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension) => extension switch
         {
-            ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension, armResources),
-            _ => new MgmtExtensionWriter(writer, extension, armResources)
+            ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension),
+            _ => new MgmtExtensionWriter(writer, extension)
         };
 
         protected override bool SkipParameterValidation => true;
@@ -26,12 +26,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtension extensions, IEnumerable<Resource> armResources) : this(new CodeWriter(), extensions, armResources)
+        public MgmtExtensionWriter(MgmtExtension extensions) : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions, IEnumerable<Resource> armResources) : base(writer, extensions, armResources)
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions) : base(writer, extensions)
         {
             This = extensions;
         }

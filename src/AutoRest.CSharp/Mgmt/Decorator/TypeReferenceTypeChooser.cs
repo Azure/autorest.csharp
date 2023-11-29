@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="typeToReplace">Type to check</param>
         /// <returns>Matched external type or null if not found</returns>
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, SourceInputModel? sourceInputModel)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
         {
             if (_valueCache.TryGetValue(typeToReplace.InputModel, out var result))
                 return result;
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace))
                 {
-                    var csharpType = CSharpType.FromSystemType(sourceInputModel, replacementType);
+                    var csharpType = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
                     _valueCache.TryAdd(typeToReplace.InputModel, csharpType);
                     return csharpType;
                 }

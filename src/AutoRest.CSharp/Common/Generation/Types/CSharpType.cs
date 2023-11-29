@@ -212,8 +212,8 @@ namespace AutoRest.CSharp.Generation.Types
                 genericTypes.ToArray());
         }
 
-        internal static CSharpType FromSystemType(SourceInputModel? sourceInputModel, Type type)
-            => FromSystemType(type, Configuration.Namespace, sourceInputModel);
+        internal static CSharpType FromSystemType(BuildContext context, Type type)
+            => FromSystemType(type, Configuration.Namespace, context.SourceInputModel);
 
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {

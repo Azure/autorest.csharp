@@ -66,12 +66,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return false;
         }
 
-        public static RequestPath GetRequestPath(this InputOperation operation, MgmtOutputLibrary library, ResourceTypeSegment? hint = null)
+        public static RequestPath GetRequestPath(this InputOperation operation, ResourceTypeSegment? hint = null)
         {
             if (_operationToRequestPathCache.TryGetValue((operation, hint), out var requestPath))
                 return requestPath;
 
-            requestPath = library.GetRequestPath(operation);
+            requestPath = MgmtContext.Library.GetRequestPath(operation);
             if (hint.HasValue)
                 requestPath = requestPath.ApplyHint(hint.Value);
 
@@ -79,34 +79,34 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return requestPath;
         }
 
-        public static bool IsResourceCollectionOperation(this InputOperation operation, MgmtOutputLibrary library, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
+        public static bool IsResourceCollectionOperation(this InputOperation operation, [MaybeNullWhen(false)] out OperationSet operationSetOfResource)
         {
             operationSetOfResource = null;
             // first we need to ensure this operation at least returns a collection of something
-            if (!operation.IsListMethod(library, out var valueType))
+            if (!operation.IsListMethod(out var valueType))
                 return false;
 
             // then check if its path is a prefix of which resource's operationSet
             // if there are multiple resources that share the same prefix of request path, we choose the shortest one
-            var requestPath = operation.GetRequestPath(library);
-            operationSetOfResource = FindOperationSetOfResource(library, requestPath);
+            var requestPath = operation.GetRequestPath();
+            operationSetOfResource = FindOperationSetOfResource(requestPath);
             // if we find none, this cannot be a resource collection operation
             if (operationSetOfResource is null)
                 return false;
 
             // then check if this method returns a collection of the corresponding resource data
             // check if valueType is the current resource data type
-            var resourceData = library.GetResourceData(operationSetOfResource.RequestPath);
+            var resourceData = MgmtContext.Library.GetResourceData(operationSetOfResource.RequestPath);
             return valueType.EqualsByName(resourceData.Type);
         }
 
-        private static OperationSet? FindOperationSetOfResource(MgmtOutputLibrary library, RequestPath requestPath)
+        private static OperationSet? FindOperationSetOfResource(RequestPath requestPath)
         {
             if (Configuration.MgmtConfiguration.RequestPathToParent.TryGetValue(requestPath, out var rawPath))
-                return library.GetOperationSet(rawPath);
+                return MgmtContext.Library.GetOperationSet(rawPath);
             var candidates = new List<OperationSet>();
             // we need to iterate all resources to find if this is the parent of that
-            foreach (var operationSet in library.ResourceOperationSets)
+            foreach (var operationSet in MgmtContext.Library.ResourceOperationSets)
             {
                 var resourceRequestPath = operationSet.GetRequestPath();
                 // we compare the request with the resource request in two parts:
@@ -194,19 +194,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operation.Responses.FirstOrDefault(r => r.StatusCodes.Contains(code));
         }
 
-        internal static IEnumerable<Resource> GetResourceFromResourceType(this InputOperation operation, MgmtOutputLibrary library)
+        internal static IEnumerable<Resource> GetResourceFromResourceType(this InputOperation operation)
         {
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))
                 return cacheResult;
 
             // we expand the path here to ensure the resource types we are dealing with here are all constants (at least ensure they are constants when we are expecting to find a resource)
-            var requestPaths = operation.GetRequestPath(library).Expand();
+            var requestPaths = operation.GetRequestPath().Expand();
             var candidates = new List<Resource>();
             foreach (var path in requestPaths)
             {
                 var resourceType = path.GetResourceType();
                 // we find the resource with the same type of this operation, and under the same scope
-                var resources = library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType) && resource.RequestPath.GetScopePath().Equals(path.GetScopePath()));
+                var resources = MgmtContext.Library.ArmResources.Where(resource => resource.ResourceType.DoesMatch(resourceType) && resource.RequestPath.GetScopePath().Equals(path.GetScopePath()));
                 candidates.AddRange(resources);
             }
 

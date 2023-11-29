@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 {
     internal class MgmtSampleWriter : MgmtTestWriterBase<MgmtSampleProvider>
     {
-        public MgmtSampleWriter(MgmtSampleProvider sample, TypeFactory typeFactory) : base(sample, typeFactory)
+        public MgmtSampleWriter(MgmtSampleProvider sample) : base(sample)
         {
         }
 
@@ -297,7 +297,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
                     _writer.AppendDeclaration(declaration)
                         .AppendRaw(" = ")
-                        .AppendExampleParameterValue(_typeFactory, value)
+                        .AppendExampleParameterValue(value)
                         .LineRaw(";");
                 }
             }
@@ -478,7 +478,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
-                        .AppendExampleParameterValue(_typeFactory, parameterValue).LineRaw(";");
+                        .AppendExampleParameterValue(parameterValue).LineRaw(";");
                     result.Add(parameter.Name, declaration);
                 }
 
@@ -486,7 +486,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     var declaration = new CodeWriterVariableDeclaration(parameter.Name, parameter.Type);
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
-                        .AppendExamplePropertyBagParamValue(_typeFactory, parameter, sample.PropertyBagParamValueMapping).LineRaw(";");
+                        .AppendExamplePropertyBagParamValue(parameter, sample.PropertyBagParamValueMapping).LineRaw(";");
                     result.Add(parameter.Name, declaration);
                 }
             }
@@ -510,7 +510,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 {
                     if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var value))
                     {
-                        _writer.AppendExampleParameterValue(_typeFactory, parameter, value).AppendRaw(",");
+                        _writer.AppendExampleParameterValue(parameter, value).AppendRaw(",");
                     }
                     continue;
                 }
@@ -534,7 +534,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 if (value.Value is not null)
                 {
                     _writer.AppendDeclaration(declaration)
-                        .AppendRaw(" = ").AppendExampleParameterValue(_typeFactory, value.Value).LineRaw(";");
+                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).LineRaw(";");
                 }
                 else
                 {
@@ -543,7 +543,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(parameterValue.Name, parameterValue.Type);
                         _writer.AppendDeclaration(parameterDeclaration)
-                            .AppendRaw(" = ").AppendExampleParameterValue(_typeFactory, parameterValue).LineRaw(";");
+                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).LineRaw(";");
                     }
                     // then write the scope
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")
@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 if (value.Value is not null)
                 {
                     _writer.AppendDeclaration(declaration)
-                        .AppendRaw(" = ").AppendExampleParameterValue(_typeFactory, value.Value).LineRaw(";");
+                        .AppendRaw(" = ").AppendExampleParameterValue(value.Value).LineRaw(";");
                 }
                 else
                 {
@@ -581,7 +581,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(parameterValue.Name, parameterValue.Type);
                         _writer.AppendDeclaration(parameterDeclaration)
-                            .AppendRaw(" = ").AppendExampleParameterValue(_typeFactory, parameterValue).LineRaw(";");
+                            .AppendRaw(" = ").AppendExampleParameterValue(parameterValue).LineRaw(";");
                     }
                     // then write the scope
                     _writer.AppendDeclaration(declaration).AppendRaw(" = ")

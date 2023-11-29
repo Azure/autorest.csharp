@@ -6,8 +6,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
@@ -16,8 +14,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtReferenceType : MgmtObjectType
     {
-        public MgmtReferenceType(MgmtOutputLibrary library, InputModelType inputModelType, TypeFactory typeFactory, SourceInputModel? sourceInputModel, string? name = default, string? nameSpace = default, SerializableObjectType? defaultDerivedType = null)
-            : base(library, inputModelType, typeFactory, sourceInputModel, name, nameSpace, defaultDerivedType: defaultDerivedType)
+        public MgmtReferenceType(InputModelType inputModelType, TypeFactory typeFactory, string? name = default, string? nameSpace = default, SerializableObjectType? defaultDerivedType = null)
+            : base(inputModelType, typeFactory, name, nameSpace, defaultDerivedType: defaultDerivedType)
         {
         }
 

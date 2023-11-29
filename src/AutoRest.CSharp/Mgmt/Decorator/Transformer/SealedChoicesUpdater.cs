@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -16,10 +17,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             "None", "NotSet", "Unknown", "NotSpecified", "Unspecified", "Undefined"
         };
 
-        public static void UpdateSealChoiceTypes(CodeModel codeModel)
+        public static void UpdateSealChoiceTypes()
         {
             var wordCandidates = new List<string>(EnumValuesShouldBePrompted.Concat(Configuration.MgmtConfiguration.PromptedEnumValues));
-            foreach (var schema in codeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 if (schema is not SealedChoiceSchema choiceSchema)
                     continue;

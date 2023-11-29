@@ -20,20 +20,18 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 {
     internal abstract class MgmtTestWriterBase<TProvider> where TProvider : MgmtTestProvider
     {
-        protected internal readonly TypeFactory _typeFactory;
         protected CodeWriter _writer;
 
         protected TProvider This { get; }
 
-        protected MgmtTestWriterBase(TProvider provider, TypeFactory typeFactory) : this(new CodeWriter(), provider, typeFactory)
+        protected MgmtTestWriterBase(TProvider provider) : this(new CodeWriter(), provider)
         {
         }
 
-        protected MgmtTestWriterBase(CodeWriter writer, TProvider provider, TypeFactory typeFactory)
+        protected MgmtTestWriterBase(CodeWriter writer, TProvider provider)
         {
             _writer = writer;
             This = provider;
-            _typeFactory = typeFactory;
         }
 
         public abstract void Write();
@@ -60,7 +58,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
                         _writer.AppendDeclaration(parameterDeclaration).AppendRaw(" = ")
-                            .AppendExampleParameterValue(_typeFactory, value).LineRaw(";");
+                            .AppendExampleParameterValue(value).LineRaw(";");
                     }
                 }
             }
@@ -68,7 +66,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             foreach (var initializer in resourceIdExpressionValues)
             {
                 if (initializer.Value is not null)
-                    _writer.AppendExampleParameterValue(_typeFactory, initializer.Value).AppendRaw(",");
+                    _writer.AppendExampleParameterValue(initializer.Value).AppendRaw(",");
                 else
                 {
                     _writer.AppendRaw("$\"").AppendRaw(initializer.Scope!.ToString()!).AppendRaw("\"").AppendRaw(",");
@@ -89,7 +87,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     {
                         var parameterDeclaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
                         _writer.AppendDeclaration(parameterDeclaration).AppendRaw(" = ")
-                            .AppendExampleParameterValue(_typeFactory, value).LineRaw(";");
+                            .AppendExampleParameterValue(value).LineRaw(";");
                     }
                 }
             }
@@ -109,7 +107,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             foreach (var initializer in resourceIdExpressionValues)
             {
                 if (initializer.Value is not null)
-                    _writer.AppendExampleParameterValue(_typeFactory, initializer.Value).AppendRaw(",");
+                    _writer.AppendExampleParameterValue(initializer.Value).AppendRaw(",");
                 else
                 {
                     _writer.AppendRaw("$\"").AppendRaw(initializer.Scope!.ToString()!).AppendRaw("\"").AppendRaw(",");

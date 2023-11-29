@@ -15,16 +15,11 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
 {
     internal class MgmtPropertyBag : PropertyBag
     {
-        private readonly TypeFactory _typeFactory;
-        private readonly SourceInputModel? _sourceInputModel;
-
-        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public MgmtPropertyBag(string name, InputOperation operation, IEnumerable<Parameter> paramsToKeep)
             : base(name)
         {
             _operation = operation;
             _paramsToKeep = paramsToKeep;
-            _typeFactory = typeFactory;
-            _sourceInputModel = sourceInputModel;
         }
 
         private readonly InputOperation _operation;
@@ -63,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             {
                 IsPropertyBag = true
             };
-            return new ModelTypeProvider(propertyBagModel, defaultNamespace, _sourceInputModel, _typeFactory);
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory);
         }
 
         protected override bool EnsureShouldValidateParameter()

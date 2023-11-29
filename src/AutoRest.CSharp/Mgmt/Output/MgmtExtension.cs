@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
-using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -25,8 +24,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<InputOperation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, MgmtOutputLibrary library, SourceInputModel? sourceInputModel, RequestPath? contextualPath = null)
-            : base(armCoreType.Name, library, sourceInputModel)
+        public MgmtExtension(IEnumerable<InputOperation> allRawOperations, IEnumerable<MgmtMockableExtension> mockingExtensions, Type armCoreType, RequestPath? contextualPath = null)
+            : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
             _mockingExtensions = mockingExtensions; // this property is populated later
@@ -98,14 +97,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         operation,
-                        operation.GetRequestPath(_library),
+                        operation.GetRequestPath(),
                         ContextualPath,
                         operationName,
-                        _library,
-                        _sourceInputModel,
                         propertyBagName: ResourceName),
                     new(new MemberExpression(ExtensionParameter, "Id")),
-                    _library,
                     extensionParamToUse);
             });
         }
@@ -116,9 +112,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var operationName = base.CalculateOperationName(operation, clientResourceName);
 
-            if (operation.IsListMethod(_library, out var itemType) && itemType.TryCastResourceData(out var data))
+            if (operation.IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
             {
-                var requestPath = operation.GetRequestPath(_library);
+                var requestPath = operation.GetRequestPath();
                 // we need to find the correct resource type that links with this resource data
                 var resource = FindResourceFromResourceData(data, requestPath);
                 if (resource != null)
@@ -146,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private Resource? FindResourceFromResourceData(ResourceData data, RequestPath requestPath)
         {
             // we need to find the correct resource type that links with this resource data
-            var candidates = _library.FindResources(data);
+            var candidates = MgmtContext.Library.FindResources(data);
 
             // return null when there is no match
             if (!candidates.Any())

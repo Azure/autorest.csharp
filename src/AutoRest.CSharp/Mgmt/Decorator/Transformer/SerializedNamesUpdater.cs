@@ -9,9 +9,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
     internal static class SerializedNamesUpdater
     {
-        public static void Update(CodeModel codeModel)
+        public static void Update()
         {
-            foreach (var schema in codeModel.AllSchemas)
+            foreach (var schema in MgmtContext.CodeModel.AllSchemas)
             {
                 switch (schema)
                 {

@@ -19,13 +19,10 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     {
         private readonly IReadOnlyList<InputClient> _mockTestModel;
         private readonly MgmtTestConfiguration _mgmtTestConfiguration;
-        private readonly MgmtOutputLibrary _outputLibrary;
-
-        public MgmtTestOutputLibrary(InputNamespace inputNamespace, MgmtOutputLibrary outputLibrary)
+        public MgmtTestOutputLibrary(InputNamespace inputNamespace)
         {
             _mockTestModel = inputNamespace.Clients;
             _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
-            _outputLibrary = outputLibrary;
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;
@@ -35,7 +32,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         {
             foreach ((var owner, var cases) in MockTestCases)
             {
-                yield return new MgmtSampleProvider(owner, cases.Select(testCase => new Sample(testCase, _outputLibrary)));
+                yield return new MgmtSampleProvider(owner, cases.Select(testCase => new Sample(testCase)));
             }
         }
 
@@ -64,7 +61,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                         // the source code generator will never write them if it is not in arm core
                         if (providerForExample.Carrier is ArmClientExtension)
                             continue;
-                        var mockTestCase = new MockTestCase(operationName, providerForExample.Carrier, providerForExample.Operation, example, _outputLibrary);
+                        var mockTestCase = new MockTestCase(operationName, providerForExample.Carrier, providerForExample.Operation, example);
                         result.AddInList(mockTestCase.Owner, mockTestCase);
                     }
                 }
@@ -89,9 +86,9 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
 
             _operationNameToProviders = new Dictionary<string, List<MgmtTypeProviderAndOperation>>();
             // iterate all the resources and resource collection
-            var mgmtProviders = _outputLibrary.ArmResources.Cast<MgmtTypeProvider>()
-                .Concat(_outputLibrary.ResourceCollections)
-                .Concat(_outputLibrary.ExtensionWrapper.Extensions);
+            var mgmtProviders = MgmtContext.Library.ArmResources.Cast<MgmtTypeProvider>()
+                .Concat(MgmtContext.Library.ResourceCollections)
+                .Concat(MgmtContext.Library.ExtensionWrapper.Extensions);
             foreach (var provider in mgmtProviders)
             {
                 foreach (var clientOperation in provider.AllOperations)
@@ -110,7 +107,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         }
 
         private MgmtMockTestProvider<MgmtExtensionWrapper>? _extensionWrapperMockTest;
-        public MgmtMockTestProvider<MgmtExtensionWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionWrapper>(_outputLibrary.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
+        public MgmtMockTestProvider<MgmtExtensionWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
 
         private IEnumerable<MgmtMockTestProvider<MgmtExtension>>? _extensionMockTests;
         public IEnumerable<MgmtMockTestProvider<MgmtExtension>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<MgmtExtension>();

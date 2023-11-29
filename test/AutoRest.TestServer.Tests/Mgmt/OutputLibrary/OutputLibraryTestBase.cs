@@ -56,7 +56,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
             _inputNamespace = new CodeModelConverter(model, new SchemaUsageProvider(model)).CreateNamespace();
-            _library = new MgmtOutputLibrary(_inputNamespace, null);
+            _library = new MgmtOutputLibrary();
         }
 
         [Test]
@@ -69,7 +69,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 
             foreach (var mgmtObject in _library.Models.OfType<MgmtObjectType>())
             {
-                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject, null) == null)
+                if (ReferenceTypePropertyChooser.GetExactMatch(mgmtObject) == null)
                 {
                     ValidateModelRequiredCtorParams(mgmtObject.InputModel, mgmtObject.Type.Name);
                 }

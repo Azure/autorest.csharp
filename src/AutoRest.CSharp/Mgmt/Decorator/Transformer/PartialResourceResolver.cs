@@ -3,6 +3,7 @@
 
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
 {
@@ -11,13 +12,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
     /// </summary>
     internal static class PartialResourceResolver
     {
-        public static void Update(CodeModel codeModel)
+        public static void Update()
         {
             foreach ((var _, var schemaName) in Configuration.MgmtConfiguration.PartialResources)
             {
                 // create an empty object schema
                 var objectSchema = EmptyObjectSchema.FromName(schemaName);
-                codeModel.Schemas.Objects.Add(objectSchema);
+                MgmtContext.CodeModel.Schemas.Objects.Add(objectSchema);
             }
 
             // check if their is duplicate names

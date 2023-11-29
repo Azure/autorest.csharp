@@ -8,7 +8,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return _valueCache.TryGetValue(inputType, out result);
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace, SourceInputModel? sourceInputModel)
+        public static CSharpType? GetExactMatch(MgmtObjectType typeToReplace)
         {
             if (_valueCache.TryGetValue(typeToReplace.InputModel, out var result))
                 return result;
@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                     if (PropertyMatchDetection.IsEqual(replacementType, typeToReplace, replacementTypeProperties, typeToReplaceProperties, new Dictionary<Type, CSharpType> { { replacementType, typeToReplace.Type } }))
                     {
-                        result = CSharpType.FromSystemType(sourceInputModel, replacementType);
+                        result = CSharpType.FromSystemType(MgmtContext.Context, replacementType);
                         _valueCache.TryAdd(typeToReplace.InputModel, result);
                         return result;
                     }

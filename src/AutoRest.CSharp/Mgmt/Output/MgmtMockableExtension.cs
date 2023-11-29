@@ -8,8 +8,6 @@ using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
@@ -24,8 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private readonly IEnumerable<MgmtClientOperation> _operations;
         private readonly MgmtExtension? _extensionForChildResources;
 
-        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources, MgmtOutputLibrary library, SourceInputModel? sourceInputModel)
-            : base(resourceType.Name, library, sourceInputModel)
+        public MgmtMockableExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
+            : base(resourceType.Name)
         {
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
@@ -67,7 +65,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var (_, operations) in operationDict)
             {
-                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariable, _library)!;
+                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariable)!;
             }
         }
 

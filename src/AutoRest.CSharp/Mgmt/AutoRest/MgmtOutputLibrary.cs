@@ -26,8 +26,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 {
     internal class MgmtOutputLibrary : OutputLibrary
     {
-        private readonly SourceInputModel? _sourceInputModel;
-
         /// <summary>
         /// This is a map from resource name to a list of <see cref="OperationSet"/>
         /// considering of the extension resources, one resource name might correspond to multiple operation sets
@@ -93,11 +91,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public TypeFactory TypeFactory { get; }
 
-        public MgmtOutputLibrary(InputNamespace inputNamespace, SourceInputModel? sourceInputModel)
+        public MgmtOutputLibrary()
         {
             TypeFactory = new TypeFactory(this);
-            _input = inputNamespace;
-            _sourceInputModel = sourceInputModel;
+            CodeModelTransformer.Transform();
+
+            var codeModelConverter = new CodeModelConverter(MgmtContext.CodeModel, MgmtContext.SchemaUsageProvider);
+            _input = codeModelConverter.CreateNamespace();
 
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
@@ -276,20 +276,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     if (type is MgmtObjectType mgmtObjectType)
                     {
-                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType, _sourceInputModel);
+                        var csharpType = TypeReferenceTypeChooser.GetExactMatch(mgmtObjectType);
                         if (csharpType != null)
                         {
                             // re-construct the model with replaced csharp type (e.g. the type in Resource Manager)
                             switch (mgmtObjectType)
                             {
                                 case ResourceData resourceData:
-                                    replacedTypes.Add(new ResourceData(this, inputType, TypeFactory, _sourceInputModel, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(new ResourceData(inputType, TypeFactory, csharpType.Name, csharpType.Namespace));
                                     break;
                                 case MgmtReferenceType referenceType:
-                                    replacedTypes.Add(new MgmtReferenceType(this, inputType, TypeFactory, _sourceInputModel, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(new MgmtReferenceType(inputType, TypeFactory, csharpType.Name, csharpType.Namespace));
                                     break;
                                 default:
-                                    replacedTypes.Add(new MgmtObjectType(this, inputType, TypeFactory, _sourceInputModel, csharpType.Name, csharpType.Namespace));
+                                    replacedTypes.Add(new MgmtObjectType(inputType, TypeFactory, csharpType.Name, csharpType.Namespace));
                                     break;
                             }
                         }
@@ -354,7 +354,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     IsUnknownDiscriminatorModel = true
                 };
 
-                defaultDerivedType = new MgmtObjectType(this, unknownDerivedType, TypeFactory, _sourceInputModel);
+                defaultDerivedType = new MgmtObjectType(unknownDerivedType, TypeFactory);
                 defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                 _schemaOrNameToModels.Add(unknownDerivedType, defaultDerivedType);
             }
@@ -405,7 +405,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(AllInputTypeMap.Values.Where(ShouldIncludeModel), _sourceInputModel);
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(AllInputTypeMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
 
         private bool ShouldIncludeModel(TypeProvider model)
         {
@@ -438,7 +438,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 }
             }
 
-            return new MgmtExtensionBuilder(extensionOperations, armResourceOperations, this, _sourceInputModel);
+            return new MgmtExtensionBuilder(extensionOperations, armResourceOperations);
         }
 
         private bool ShouldGenerateChildrenForType(Type armCoreType)
@@ -473,7 +473,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
-            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, TypeFactory, _sourceInputModel), InputEnumType.IgnoreNullabilityComparer);
+            => _input.Enums.ToDictionary(e => e, e => new EnumType(e, TypeFactory, MgmtContext.Context), InputEnumType.IgnoreNullabilityComparer);
 
         public IEnumerable<TypeProvider> Models => GetModels();
 
@@ -566,7 +566,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var restClientParameters = new[] { KnownParameters.Pipeline, KnownParameters.ApplicationId }.Union(ctorParameters).ToList();
                 var operations = inputClient.Operations;
                 var clientName = string.IsNullOrEmpty(inputClient.Name) ? _input.Name : inputClient.Name;
-                var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations, clientName, this, _sourceInputModel, _renamingMap);
+                var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations, clientName, this, _renamingMap);
 
                 foreach (var operation in inputClient.Operations)
                 {
@@ -613,14 +613,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void BuildResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<InputOperation> operations, RequestPath originalResourcePath, ResourceData resourceData)
         {
-            var isSingleton = operationSet.IsSingletonResource(this);
+            var isSingleton = operationSet.IsSingletonResource();
             // we calculate the resource type of the resource
             var resourcePaths = originalResourcePath.Expand();
             foreach (var resourcePath in resourcePaths)
             {
                 var resourceType = resourcePath.GetResourceType();
-                var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData, this, _sourceInputModel);
-                var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource, this, _sourceInputModel);
+                var resource = new Resource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, resourcePath), resourceType, resourceData);
+                var collection = isSingleton ? null : new ResourceCollection(operationSet, operations, resource);
                 resource.ResourceCollection = collection;
 
                 result.Add(resourcePath, new ResourceObjectAssociation(resourceType, resourceData, resource, collection));
@@ -630,7 +630,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private void BuildPartialResource(Dictionary<RequestPath, ResourceObjectAssociation> result, string resourceDataSchemaName, OperationSet operationSet, IEnumerable<InputOperation> operations, RequestPath originalResourcePath, EmptyResourceData emptyResourceData)
         {
             var resourceType = originalResourcePath.GetResourceType();
-            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData, this, _sourceInputModel);
+            var resource = new PartialResource(operationSet, operations, GetResourceName(resourceDataSchemaName, operationSet, originalResourcePath, isPartial: true), resourceDataSchemaName, resourceType, emptyResourceData);
             result.Add(originalResourcePath, new ResourceObjectAssociation(originalResourcePath.GetResourceType(), emptyResourceData, resource, null));
         }
 
@@ -712,7 +712,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             while (pathToWalk.Count > 2)
             {
-                pathToWalk = pathToWalk.ParentRequestPath(this);
+                pathToWalk = pathToWalk.ParentRequestPath();
                 if (RawRequestPathToResourceData.TryGetValue(pathToWalk.ToString()!, out var parentData))
                 {
                     return parentData.Declaration.Name.Substring(0, parentData.Declaration.Name.Length - 4);
@@ -774,7 +774,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     continue;
                 foreach (var operation in operationSet)
                 {
-                    var parentRequestPath = operation.ParentRequestPath(_input, this);
+                    var parentRequestPath = operation.ParentRequestPath(_input);
                     if (childOperations.TryGetValue(parentRequestPath, out var list))
                         list.Add(operation);
                     else
@@ -859,10 +859,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(InputType inputType, MgmtObjectType? defaultDerivedType = null) => inputType switch
         {
-            InputEnumType enumType => new EnumType(enumType, TypeFactory, _sourceInputModel, GetNewName(inputType)),
+            InputEnumType enumType => new EnumType(enumType, TypeFactory, MgmtContext.Context, GetNewName(inputType)),
             // TODO: handle this when regen resource manager
             // inputType.Extensions != null && (inputType.Extensions.MgmtReferenceType || inputType.Extensions.MgmtPropertyReferenceType || inputType.Extensions.MgmtTypeReferenceType) ? new MgmtReferenceType(inputModel, TypeFactory)
-            InputModelType inputModel => new MgmtObjectType(this, inputModel, TypeFactory, _sourceInputModel, newName: GetNewName(inputType), defaultDerivedType: defaultDerivedType),
+            InputModelType inputModel => new MgmtObjectType(inputModel, TypeFactory, newName: GetNewName(inputType), defaultDerivedType: defaultDerivedType),
             _ => throw new NotImplementedException($"Unhandled input type {inputType.GetType()} with name {inputType.Name}")
         };
 
@@ -874,9 +874,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (inputModel.IsEmpty)
                 {
-                    return new EmptyResourceData(this, inputModel, TypeFactory, _sourceInputModel);
+                    return new EmptyResourceData(inputModel, TypeFactory);
                 }
-                return new ResourceData(this, inputModel, TypeFactory, _sourceInputModel, newName: GetNewName(inputType), defaultDerivedType: defaultDerivedType);
+                return new ResourceData(inputModel, TypeFactory, newName: GetNewName(inputType), defaultDerivedType: defaultDerivedType);
             }
             throw new NotImplementedException();
         }

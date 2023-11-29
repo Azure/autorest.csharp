@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -15,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.MgmtTest.AutoRest;
 using AutoRest.CSharp.MgmtTest.Generation.Mock;
 using AutoRest.CSharp.MgmtTest.Generation.Samples;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -30,28 +30,32 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
-            CodeModelTransformer.Transform(codeModel);
-            var codeModelConverter = new CodeModelConverter(codeModel, new SchemaUsageProvider(codeModel));
+            MgmtTestOutputLibrary? library = null;
+            CodeModelTransformer.Transform();
+            var codeModelConverter = new CodeModelConverter(codeModel, MgmtContext.SchemaUsageProvider);
             var input = codeModelConverter.CreateNamespace();
-            var outputLibrary = new MgmtOutputLibrary(input, sourceInputModel);
-            MgmtTestOutputLibrary? library = new MgmtTestOutputLibrary(input, outputLibrary);
             if (sourceInputModel == null)
             {
                 var sourceFolder = GetSourceFolder();
                 var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
                 sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
-                InitializeMgmtContext(outputLibrary);
+                InitializeMgmtContext(codeModel, sourceInputModel);
+                library = new MgmtTestOutputLibrary(input);
                 project.AddDirectory(sourceFolder);
+            }
+            else
+            {
+                library = new MgmtTestOutputLibrary(input);
             }
 
             if (Configuration.MgmtTestConfiguration.Mock)
             {
-                WriteMockTests(project, library, outputLibrary.TypeFactory);
+                WriteMockTests(project, library);
             }
 
             if (Configuration.MgmtTestConfiguration.Sample)
             {
-                WriteSamples(project, library, outputLibrary.TypeFactory);
+                WriteSamples(project, library);
             }
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
@@ -63,24 +67,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private static void InitializeMgmtContext(MgmtOutputLibrary library)
+        private static void InitializeMgmtContext(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
-            //MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
+            MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
 
             // force trigger the model initialization
-            foreach (var _ in library.ResourceTypeMap)
+            foreach (var _ in MgmtContext.Library.ResourceTypeMap)
             {
             }
         }
 
-        private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library, TypeFactory typeFactory)
+        private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
             string outputFolder = GetOutputFolder(MOCK_TEST_DEFAULT_OUTPUT_PATH);
 
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
-                var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest, typeFactory);
+                var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest);
                 collectionTestWriter.Write();
 
                 AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{collectionTest.Type.Name}.cs"), collectionTestWriter.ToString());
@@ -88,27 +92,27 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resourceTest in library.ResourceMockTests)
             {
-                var resourceTestWriter = new ResourceMockTestWriter(resourceTest, typeFactory);
+                var resourceTestWriter = new ResourceMockTestWriter(resourceTest);
                 resourceTestWriter.Write();
 
                 AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{resourceTest.Type.Name}.cs"), resourceTestWriter.ToString());
             }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
-            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests, typeFactory);
+            var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests);
             extensionWrapperTestWriter.Write();
 
             AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{extensionWrapperTest.Type.Name}.cs"), extensionWrapperTestWriter.ToString());
         }
 
-        private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library, TypeFactory typeFactory)
+        private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
             string outputFolder = GetOutputFolder(SAMPLE_DEFAULT_OUTPUT_PATH);
 
             var names = new Dictionary<string, int>();
             foreach (var sample in library.Samples)
             {
-                var sampleWriter = new MgmtSampleWriter(sample, typeFactory);
+                var sampleWriter = new MgmtSampleWriter(sample);
                 sampleWriter.Write();
 
                 var filename = GetFilename(sample.Type.Name, names);
