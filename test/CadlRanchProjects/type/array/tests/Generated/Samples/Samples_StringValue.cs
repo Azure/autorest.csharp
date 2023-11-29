@@ -21,7 +21,7 @@ namespace _Type._Array.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValue_ShortVersion()
+        public void Example_StringValue_GetStringValue_ShortVersion()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValue_ShortVersion_Async()
+        public async Task Example_StringValue_GetStringValue_ShortVersion_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValue_ShortVersion_Convenience()
+        public void Example_StringValue_GetStringValue_ShortVersion_Convenience()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValue_ShortVersion_Convenience_Async()
+        public async Task Example_StringValue_GetStringValue_ShortVersion_Convenience_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValue_AllParameters()
+        public void Example_StringValue_GetStringValue_AllParameters()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValue_AllParameters_Async()
+        public async Task Example_StringValue_GetStringValue_AllParameters_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetStringValue_AllParameters_Convenience()
+        public void Example_StringValue_GetStringValue_AllParameters_Convenience()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetStringValue_AllParameters_Convenience_Async()
+        public async Task Example_StringValue_GetStringValue_AllParameters_Convenience_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -105,7 +105,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_StringValue_Put_ShortVersion()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -120,7 +120,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_StringValue_Put_ShortVersion_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_StringValue_Put_ShortVersion_Convenience()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_StringValue_Put_ShortVersion_Convenience_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -153,7 +153,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_StringValue_Put_AllParameters()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -168,7 +168,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_StringValue_Put_AllParameters_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -183,7 +183,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_StringValue_Put_AllParameters_Convenience()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
@@ -192,7 +192,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_StringValue_Put_AllParameters_Convenience_Async()
         {
             StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 

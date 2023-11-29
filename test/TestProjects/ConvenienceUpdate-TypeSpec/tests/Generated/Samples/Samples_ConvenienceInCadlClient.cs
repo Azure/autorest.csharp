@@ -21,7 +21,7 @@ namespace ConvenienceInCadl.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UpdateConvenience_ShortVersion()
+        public void Example_ConvenienceInCadl_UpdateConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -33,7 +33,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UpdateConvenience_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_UpdateConvenience_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -45,7 +45,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UpdateConvenience_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_UpdateConvenience_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -54,7 +54,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UpdateConvenience_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_UpdateConvenience_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -63,7 +63,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UpdateConvenience_AllParameters()
+        public void Example_ConvenienceInCadl_UpdateConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -75,7 +75,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UpdateConvenience_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_UpdateConvenience_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -87,7 +87,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UpdateConvenience_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_UpdateConvenience_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -96,7 +96,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UpdateConvenience_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_UpdateConvenience_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -105,7 +105,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalBeforeRequired_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -120,7 +120,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalBeforeRequired_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -135,7 +135,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -145,7 +145,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -155,7 +155,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalBeforeRequired_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -170,7 +170,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalBeforeRequired_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -185,7 +185,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalBeforeRequired_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -195,7 +195,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalBeforeRequired_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalBeforeRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -205,7 +205,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoConvenience_ShortVersion()
+        public void Example_ConvenienceInCadl_NoConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -217,7 +217,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoConvenience_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_NoConvenience_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -229,7 +229,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoConvenience_AllParameters()
+        public void Example_ConvenienceInCadl_NoConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -241,7 +241,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoConvenience_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_NoConvenience_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -253,7 +253,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoConvenienceRequiredBody_ShortVersion()
+        public void Example_ConvenienceInCadl_NoConvenienceRequiredBody_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -268,7 +268,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoConvenienceRequiredBody_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_NoConvenienceRequiredBody_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -283,7 +283,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoConvenienceRequiredBody_AllParameters()
+        public void Example_ConvenienceInCadl_NoConvenienceRequiredBody_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -298,7 +298,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoConvenienceRequiredBody_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_NoConvenienceRequiredBody_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -313,7 +313,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoConvenienceOptionalBody_ShortVersion()
+        public void Example_ConvenienceInCadl_NoConvenienceOptionalBody_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -325,7 +325,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoConvenienceOptionalBody_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_NoConvenienceOptionalBody_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -337,7 +337,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoConvenienceOptionalBody_AllParameters()
+        public void Example_ConvenienceInCadl_NoConvenienceOptionalBody_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -352,7 +352,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoConvenienceOptionalBody_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_NoConvenienceOptionalBody_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -367,7 +367,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Protocol_ShortVersion()
+        public void Example_ConvenienceInCadl_Protocol_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -379,7 +379,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Protocol_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_Protocol_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -391,7 +391,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolValue_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_Protocol_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -400,7 +400,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolValue_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_Protocol_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -409,7 +409,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Protocol_AllParameters()
+        public void Example_ConvenienceInCadl_Protocol_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -421,7 +421,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Protocol_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_Protocol_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -433,7 +433,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolValue_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_Protocol_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -442,7 +442,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolValue_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_Protocol_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -451,7 +451,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithOptional_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -463,7 +463,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithOptional_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -475,7 +475,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithOptionalValue_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -484,7 +484,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithOptionalValue_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -493,7 +493,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithOptional_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -505,7 +505,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithOptional_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -517,7 +517,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithOptionalValue_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -526,7 +526,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithOptionalValue_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -535,7 +535,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithRequired_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -547,7 +547,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithRequired_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -559,7 +559,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithRequired_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -568,7 +568,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithRequired_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -577,7 +577,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithRequired_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -589,7 +589,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithRequired_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -601,7 +601,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceWithRequired_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -610,7 +610,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceWithRequired_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -619,7 +619,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceShouldNotGenerate_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -630,7 +630,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceShouldNotGenerate_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -641,7 +641,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceShouldNotGenerate_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -652,7 +652,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceShouldNotGenerate_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceShouldNotGenerate_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -663,7 +663,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolShouldNotGenerateConvenience_ShortVersion()
+        public void Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -674,7 +674,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolShouldNotGenerateConvenience_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -685,7 +685,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolShouldNotGenerateConvenience_AllParameters()
+        public void Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -696,7 +696,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolShouldNotGenerateConvenience_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolShouldNotGenerateConvenience_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -707,7 +707,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalQuery_ShortVersion()
+        public void Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -719,7 +719,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalQuery_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -731,7 +731,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalQueryValue_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -740,7 +740,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalQueryValue_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -749,7 +749,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalQuery_AllParameters()
+        public void Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -761,7 +761,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalQuery_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -773,7 +773,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalQueryValue_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -782,7 +782,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalQueryValue_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalQuery_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -791,7 +791,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredQuery_ShortVersion()
+        public void Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -803,7 +803,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredQuery_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -815,7 +815,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredQueryValue_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -824,7 +824,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredQueryValue_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -833,7 +833,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredQuery_AllParameters()
+        public void Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -845,7 +845,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredQuery_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -857,7 +857,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredQueryValue_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -866,7 +866,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredQueryValue_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredQuery_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -875,7 +875,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalModel_ShortVersion()
+        public void Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -887,7 +887,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalModel_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -899,7 +899,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalModel_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -908,7 +908,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalModel_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -917,7 +917,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalModel_AllParameters()
+        public void Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -932,7 +932,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalModel_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -947,7 +947,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalModel_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -957,7 +957,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalModel_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalModel_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -967,7 +967,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredModel_ShortVersion()
+        public void Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -982,7 +982,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredModel_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -997,7 +997,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredModel_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1007,7 +1007,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredModel_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1017,7 +1017,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredModel_AllParameters()
+        public void Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1032,7 +1032,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredModel_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1047,7 +1047,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolRequiredModel_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1057,7 +1057,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolRequiredModel_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolRequiredModel_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1067,7 +1067,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithOptional_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1079,7 +1079,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithOptional_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1091,7 +1091,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithOptionalValue_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1100,7 +1100,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithOptionalValue_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1109,7 +1109,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithOptional_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1121,7 +1121,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithOptional_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1133,7 +1133,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithOptionalValue_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1142,7 +1142,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithOptionalValue_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1151,7 +1151,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithOptional_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1163,7 +1163,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithOptional_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1175,7 +1175,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithOptionalValue_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1184,7 +1184,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithOptionalValue_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1193,7 +1193,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithOptional_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1205,7 +1205,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithOptional_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1217,7 +1217,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithOptionalValue_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1226,7 +1226,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithOptionalValue_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1235,7 +1235,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithRequired_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1247,7 +1247,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithRequired_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1259,7 +1259,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1268,7 +1268,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1277,7 +1277,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithRequired_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1289,7 +1289,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithRequired_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1301,7 +1301,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1310,7 +1310,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalQueryWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1319,7 +1319,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithRequired_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1331,7 +1331,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithRequired_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1343,7 +1343,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1352,7 +1352,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1361,7 +1361,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithRequired_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1373,7 +1373,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithRequired_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1385,7 +1385,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1394,7 +1394,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredQueryWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1403,7 +1403,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithOptional_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1415,7 +1415,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithOptional_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1427,7 +1427,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1436,7 +1436,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1445,7 +1445,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithOptional_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1460,7 +1460,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithOptional_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1475,7 +1475,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithOptional_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1485,7 +1485,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithOptional_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1495,7 +1495,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredModelWithOptional_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1510,7 +1510,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredModelWithOptional_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1525,7 +1525,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1535,7 +1535,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1545,7 +1545,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredModelWithOptional_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1560,7 +1560,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredModelWithOptional_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1575,7 +1575,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceRequiredModelWithOptional_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1585,7 +1585,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceRequiredModelWithOptional_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceRequiredModelWithOptional_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1595,7 +1595,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithRequired_ShortVersion()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1607,7 +1607,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithRequired_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1619,7 +1619,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1628,7 +1628,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1637,7 +1637,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithRequired_AllParameters()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1652,7 +1652,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithRequired_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1667,7 +1667,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ConvenienceOptionalModelWithRequired_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1677,7 +1677,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithRequired_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ConvenienceOptionalModelWithRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1687,7 +1687,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalBeforeRequired_ShortVersion()
+        public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1702,7 +1702,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalBeforeRequired_ShortVersion_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1717,7 +1717,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalBeforeRequired_ShortVersion_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1727,7 +1727,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalBeforeRequired_ShortVersion_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_ShortVersion_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1737,7 +1737,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalBeforeRequired_AllParameters()
+        public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1752,7 +1752,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalBeforeRequired_AllParameters_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1767,7 +1767,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ProtocolOptionalBeforeRequired_AllParameters_Convenience()
+        public void Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Convenience()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
@@ -1777,7 +1777,7 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalBeforeRequired_AllParameters_Convenience_Async()
+        public async Task Example_ConvenienceInCadl_ProtocolOptionalBeforeRequired_AllParameters_Convenience_Async()
         {
             ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 

@@ -21,7 +21,7 @@ namespace _Type._Enum.Fixed.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_ShortVersion()
+        public void Example_String_GetKnownValue_ShortVersion()
         {
             FixedClient client = new FixedClient();
 
@@ -33,7 +33,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_ShortVersion_Async()
+        public async Task Example_String_GetKnownValue_ShortVersion_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -45,7 +45,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_ShortVersion_Convenience()
+        public void Example_String_GetKnownValue_ShortVersion_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -54,7 +54,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_ShortVersion_Convenience_Async()
+        public async Task Example_String_GetKnownValue_ShortVersion_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -63,7 +63,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_AllParameters()
+        public void Example_String_GetKnownValue_AllParameters()
         {
             FixedClient client = new FixedClient();
 
@@ -75,7 +75,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_AllParameters_Async()
+        public async Task Example_String_GetKnownValue_AllParameters_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -87,7 +87,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_AllParameters_Convenience()
+        public void Example_String_GetKnownValue_AllParameters_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -96,7 +96,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_AllParameters_Convenience_Async()
+        public async Task Example_String_GetKnownValue_AllParameters_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -105,7 +105,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_ShortVersion()
+        public void Example_String_PutKnownValue_ShortVersion()
         {
             FixedClient client = new FixedClient();
 
@@ -117,7 +117,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_ShortVersion_Async()
+        public async Task Example_String_PutKnownValue_ShortVersion_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -129,7 +129,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_ShortVersion_Convenience()
+        public void Example_String_PutKnownValue_ShortVersion_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -138,7 +138,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_ShortVersion_Convenience_Async()
+        public async Task Example_String_PutKnownValue_ShortVersion_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -147,7 +147,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_AllParameters()
+        public void Example_String_PutKnownValue_AllParameters()
         {
             FixedClient client = new FixedClient();
 
@@ -159,7 +159,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_AllParameters_Async()
+        public async Task Example_String_PutKnownValue_AllParameters_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -171,7 +171,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_AllParameters_Convenience()
+        public void Example_String_PutKnownValue_AllParameters_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -180,7 +180,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_AllParameters_Convenience_Async()
+        public async Task Example_String_PutKnownValue_AllParameters_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -189,7 +189,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_ShortVersion()
+        public void Example_String_PutUnknownValue_ShortVersion()
         {
             FixedClient client = new FixedClient();
 
@@ -201,7 +201,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_ShortVersion_Async()
+        public async Task Example_String_PutUnknownValue_ShortVersion_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -213,7 +213,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_ShortVersion_Convenience()
+        public void Example_String_PutUnknownValue_ShortVersion_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -222,7 +222,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_ShortVersion_Convenience_Async()
+        public async Task Example_String_PutUnknownValue_ShortVersion_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -231,7 +231,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_AllParameters()
+        public void Example_String_PutUnknownValue_AllParameters()
         {
             FixedClient client = new FixedClient();
 
@@ -243,7 +243,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_AllParameters_Async()
+        public async Task Example_String_PutUnknownValue_AllParameters_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -255,7 +255,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_AllParameters_Convenience()
+        public void Example_String_PutUnknownValue_AllParameters_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -264,7 +264,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_AllParameters_Convenience_Async()
+        public async Task Example_String_PutUnknownValue_AllParameters_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
