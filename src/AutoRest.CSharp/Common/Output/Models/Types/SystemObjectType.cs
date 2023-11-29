@@ -5,7 +5,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -38,7 +37,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private readonly Type _type;
-        private readonly SourceInputModel? _sourceInputModel;
         private readonly IReadOnlyDictionary<string, ObjectTypeProperty> _backingProperties;
 
         private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel, IEnumerable<ObjectTypeProperty>? backingProperties) : base(defaultNamespace, sourceInputModel)

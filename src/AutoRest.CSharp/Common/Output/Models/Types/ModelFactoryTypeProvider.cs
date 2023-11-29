@@ -23,6 +23,7 @@ using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -32,16 +33,16 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
 
         // TODO: remove this intermediate state once we generate it before output types
-        private IReadOnlyList<MethodSignature>? _methods;
-        private IReadOnlyList<MethodSignature> ShouldNotBeUsedForOutPut([CallerMemberName] string caller = "")
+        private IReadOnlyList<Method>? _methods;
+        private IReadOnlyList<Method> ShouldNotBeUsedForOutPut([CallerMemberName] string caller = "")
         {
             Debug.Assert(caller == nameof(OutputMethods) || caller == nameof(SignatureType), $"This method should not be used for output. Caller: {caller}");
             return _methods ??= Models!.Select(CreateMethod).ToList();
         }
 
-        private IReadOnlyList<MethodSignature>? _outputMethods;
-        public IReadOnlyList<MethodSignature> OutputMethods
-            => _outputMethods ??= ShouldNotBeUsedForOutPut().Where(x => !SignatureType.MethodsToSkip.Contains(x)).ToList();
+        private IReadOnlyList<Method>? _outputMethods;
+        public IReadOnlyList<Method> OutputMethods
+            => _outputMethods ??= ShouldNotBeUsedForOutPut().Where(x => !SignatureType.MethodsToSkip.Contains(x.Signature)).ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -100,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private SignatureType? _signatureType;
-        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutPut(), _sourceInputModel, DefaultNamespace, DefaultName);
+        public override SignatureType SignatureType => _signatureType ??= new SignatureType(ShouldNotBeUsedForOutPut().Select(x => (MethodSignature)x.Signature).ToList(), _sourceInputModel, DefaultNamespace, DefaultName);
 
         private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
@@ -134,7 +135,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
                         // get the type of the first parameter of its ctor
                         var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = New.Instance(parentPropertyType, result.GetConversion(from, to));
+                        result = Snippets.New.Instance(parentPropertyType, result.GetConversion(from, to));
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 // write the initializers and validations
                 new ParameterValidationBlock(methodParameters, true),
-                Return(New.Instance(ctorToCall.Signature, methodArguments))
+                Return(Snippets.New.Instance(ctorToCall.Signature, methodArguments))
             };
 
             return new(signature, methodBody);

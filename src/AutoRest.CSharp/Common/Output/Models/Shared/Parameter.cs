@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var parameterName = parameterSymbol.Name;
             if (MgmtContext.TypeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
             {
-                return new Parameter(parameterName, null, parameterType);
+                return new Parameter(parameterName, null, parameterType, null, ValidationType.None, null);
             }
             else
             {

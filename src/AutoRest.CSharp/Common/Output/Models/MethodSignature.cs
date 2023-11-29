@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Microsoft.CodeAnalysis;
@@ -105,5 +105,31 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         public FormattableString GetCRef() => $"{Name}({Parameters.GetTypesFormattable()})";
+
+        private class MethodSignatureParameterAndReturnTypeEqualityComparer : IEqualityComparer<MethodSignature>
+        {
+            public bool Equals(MethodSignature? x, MethodSignature? y)
+            {
+                if (ReferenceEquals(x, y))
+                {
+                    return true;
+                }
+
+                if (x is null || y is null)
+                {
+                    return false;
+                }
+
+                var result = x.Name == x.Name
+                    && x.ReturnType.EqualsByName(y.ReturnType)
+                    && x.Parameters.SequenceEqual(y.Parameters, Parameter.TypeAndNameEqualityComparer);
+                return result;
+            }
+
+            public int GetHashCode([DisallowNull] MethodSignature obj)
+            {
+                return HashCode.Combine(obj.Name, obj.ReturnType);
+            }
+        }
     }
 }
