@@ -15,14 +15,6 @@ namespace model_flattening.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ProductUrl"/>. </summary>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
-        internal ProductUrl(string genericValue, string odataValue) : base(genericValue)
-        {
-            OdataValue = odataValue;
-        }
-
         /// <summary> URL value. </summary>
         public string OdataValue { get; }
     }

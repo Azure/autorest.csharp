@@ -17,13 +17,6 @@ namespace CognitiveSearch.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="RequestOptions"/>. </summary>
-        /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        internal RequestOptions(Guid? xMsClientRequestId)
-        {
-            XMsClientRequestId = xMsClientRequestId;
-        }
-
         /// <summary> The tracking ID sent with the request to help with debugging. </summary>
         public Guid? XMsClientRequestId { get; set; }
     }

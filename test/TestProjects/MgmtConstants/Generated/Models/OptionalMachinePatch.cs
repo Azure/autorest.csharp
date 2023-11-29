@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
-
 namespace MgmtConstants.Models
 {
     /// <summary> Describes a Virtual Machine Update. </summary>
@@ -15,16 +13,6 @@ namespace MgmtConstants.Models
         /// <summary> Initializes a new instance of <see cref="OptionalMachinePatch"/>. </summary>
         public OptionalMachinePatch()
         {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="OptionalMachinePatch"/>. </summary>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="listener"> Describes Protocol and thumbprint of Windows Remote Management listener. </param>
-        /// <param name="content"> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </param>
-        internal OptionalMachinePatch(IDictionary<string, string> tags, ModelWithRequiredConstant listener, ModelWithOptionalConstant content) : base(tags)
-        {
-            Listener = listener;
-            Content = content;
         }
 
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>

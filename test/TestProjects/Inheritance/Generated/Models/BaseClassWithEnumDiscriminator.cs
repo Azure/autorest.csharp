@@ -19,13 +19,6 @@ namespace Inheritance.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="BaseClassWithEnumDiscriminator"/>. </summary>
-        /// <param name="discriminatorProperty"></param>
-        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty)
-        {
-            DiscriminatorProperty = discriminatorProperty;
-        }
-
         /// <summary> Gets or sets the discriminator property. </summary>
         internal BaseClassWithEnumDiscriminatorEnum DiscriminatorProperty { get; set; }
     }

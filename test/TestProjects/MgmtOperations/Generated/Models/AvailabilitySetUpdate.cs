@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
-
 namespace MgmtOperations.Models
 {
     /// <summary> Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated. </summary>
@@ -15,16 +13,6 @@ namespace MgmtOperations.Models
         /// <summary> Initializes a new instance of <see cref="AvailabilitySetUpdate"/>. </summary>
         public AvailabilitySetUpdate()
         {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="AvailabilitySetUpdate"/>. </summary>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
-        /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
-        internal AvailabilitySetUpdate(IDictionary<string, string> tags, int? platformUpdateDomainCount, int? platformFaultDomainCount) : base(tags)
-        {
-            PlatformUpdateDomainCount = platformUpdateDomainCount;
-            PlatformFaultDomainCount = platformFaultDomainCount;
         }
 
         /// <summary> Update Domain count. </summary>
