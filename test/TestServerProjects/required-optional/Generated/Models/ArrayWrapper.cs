@@ -25,13 +25,6 @@ namespace required_optional.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of <see cref="ArrayWrapper"/>. </summary>
-        /// <param name="value"></param>
-        internal ArrayWrapper(IList<string> value)
-        {
-            Value = value;
-        }
-
         /// <summary> Gets the value. </summary>
         public IList<string> Value { get; }
     }

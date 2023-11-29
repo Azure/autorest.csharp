@@ -15,15 +15,6 @@ namespace ModelNamespace
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="TestModel"/>. </summary>
-        /// <param name="code"></param>
-        /// <param name="status"></param>
-        internal TestModel(string code, string status)
-        {
-            Code = code;
-            Status = status;
-        }
-
         /// <summary> Gets the code. </summary>
         public string Code { get; }
         /// <summary> Gets the status. </summary>

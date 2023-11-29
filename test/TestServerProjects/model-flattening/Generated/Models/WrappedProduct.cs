@@ -15,13 +15,6 @@ namespace model_flattening.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="WrappedProduct"/>. </summary>
-        /// <param name="value"> the product value. </param>
-        internal WrappedProduct(string value)
-        {
-            Value = value;
-        }
-
         /// <summary> the product value. </summary>
         public string Value { get; set; }
     }

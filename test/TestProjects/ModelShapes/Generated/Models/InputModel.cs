@@ -55,59 +55,6 @@ namespace ModelShapes.Models
             VectorRequiredNullable = vectorRequiredNullable;
         }
 
-        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
-        /// <param name="requiredString"></param>
-        /// <param name="requiredInt"></param>
-        /// <param name="requiredStringList"></param>
-        /// <param name="requiredIntList"></param>
-        /// <param name="nonRequiredString"></param>
-        /// <param name="nonRequiredInt"></param>
-        /// <param name="nonRequiredStringList"></param>
-        /// <param name="nonRequiredIntList"></param>
-        /// <param name="requiredNullableString"></param>
-        /// <param name="requiredNullableInt"></param>
-        /// <param name="requiredNullableStringList"></param>
-        /// <param name="requiredNullableIntList"></param>
-        /// <param name="nonRequiredNullableString"></param>
-        /// <param name="nonRequiredNullableInt"></param>
-        /// <param name="nonRequiredNullableStringList"></param>
-        /// <param name="nonRequiredNullableIntList"></param>
-        /// <param name="vector"> The vector representation of a search query. </param>
-        /// <param name="vectorReadOnly"> The vector representation of a search query. </param>
-        /// <param name="vectorReadOnlyRequired"> The vector representation of a search query. </param>
-        /// <param name="vectorRequired"> The vector representation of a search query. </param>
-        /// <param name="vectorNullable"> The vector representation of a search query. </param>
-        /// <param name="vectorReadOnlyNullable"> The vector representation of a search query. </param>
-        /// <param name="vectorReadOnlyRequiredNullable"> The vector representation of a search query. </param>
-        /// <param name="vectorRequiredNullable"> The vector representation of a search query. </param>
-        internal InputModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, ReadOnlyMemory<float> vector, ReadOnlyMemory<float> vectorReadOnly, ReadOnlyMemory<float> vectorReadOnlyRequired, ReadOnlyMemory<float> vectorRequired, ReadOnlyMemory<float>? vectorNullable, ReadOnlyMemory<float>? vectorReadOnlyNullable, ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable, ReadOnlyMemory<float>? vectorRequiredNullable)
-        {
-            RequiredString = requiredString;
-            RequiredInt = requiredInt;
-            RequiredStringList = requiredStringList;
-            RequiredIntList = requiredIntList;
-            NonRequiredString = nonRequiredString;
-            NonRequiredInt = nonRequiredInt;
-            NonRequiredStringList = nonRequiredStringList;
-            NonRequiredIntList = nonRequiredIntList;
-            RequiredNullableString = requiredNullableString;
-            RequiredNullableInt = requiredNullableInt;
-            RequiredNullableStringList = requiredNullableStringList;
-            RequiredNullableIntList = requiredNullableIntList;
-            NonRequiredNullableString = nonRequiredNullableString;
-            NonRequiredNullableInt = nonRequiredNullableInt;
-            NonRequiredNullableStringList = nonRequiredNullableStringList;
-            NonRequiredNullableIntList = nonRequiredNullableIntList;
-            Vector = vector;
-            VectorReadOnly = vectorReadOnly;
-            VectorReadOnlyRequired = vectorReadOnlyRequired;
-            VectorRequired = vectorRequired;
-            VectorNullable = vectorNullable;
-            VectorReadOnlyNullable = vectorReadOnlyNullable;
-            VectorReadOnlyRequiredNullable = vectorReadOnlyRequiredNullable;
-            VectorRequiredNullable = vectorRequiredNullable;
-        }
-
         /// <summary> Gets the required string. </summary>
         public string RequiredString { get; }
         /// <summary> Gets the required int. </summary>

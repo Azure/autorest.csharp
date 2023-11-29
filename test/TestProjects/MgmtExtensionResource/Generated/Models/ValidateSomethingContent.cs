@@ -15,13 +15,6 @@ namespace MgmtExtensionResource.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ValidateSomethingContent"/>. </summary>
-        /// <param name="something"> The something to validate. </param>
-        internal ValidateSomethingContent(string something)
-        {
-            Something = something;
-        }
-
         /// <summary> The something to validate. </summary>
         public string Something { get; set; }
     }
