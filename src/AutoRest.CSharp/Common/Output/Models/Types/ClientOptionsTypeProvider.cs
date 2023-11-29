@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -16,6 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public FormattableString Description { get; }
         public IReadOnlyList<ApiVersion>? ApiVersions { get; }
+        public IReadOnlyList<Parameter> AdditionalParameters { get; init; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
@@ -27,6 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (versions is not null)
                 ApiVersions = ConvertApiVersions(versions);
+
+            AdditionalParameters = Array.Empty<Parameter>();
         }
 
         private static ApiVersion[] ConvertApiVersions(IReadOnlyList<string> versions) =>

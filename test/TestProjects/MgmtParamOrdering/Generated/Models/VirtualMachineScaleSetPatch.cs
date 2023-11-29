@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+
 namespace MgmtParamOrdering.Models
 {
     /// <summary> Describes a Virtual Machine Scale Set. </summary>
@@ -13,6 +15,14 @@ namespace MgmtParamOrdering.Models
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         public VirtualMachineScaleSetPatch()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="sku"> The virtual machine scale set sku. </param>
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtParamOrderingSku sku) : base(tags)
+        {
+            Sku = sku;
         }
 
         /// <summary> The virtual machine scale set sku. </summary>

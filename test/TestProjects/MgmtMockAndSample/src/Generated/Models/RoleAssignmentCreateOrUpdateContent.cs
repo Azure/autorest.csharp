@@ -15,6 +15,17 @@ namespace MgmtMockAndSample.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="RoleAssignmentCreateOrUpdateContent"/>. </summary>
+        /// <param name="roleDefinitionId"> The role definition ID used in the role assignment. </param>
+        /// <param name="principalId"> The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group. </param>
+        /// <param name="canDelegate"> The delegation flag used for creating a role assignment. </param>
+        internal RoleAssignmentCreateOrUpdateContent(string roleDefinitionId, string principalId, bool? canDelegate)
+        {
+            RoleDefinitionId = roleDefinitionId;
+            PrincipalId = principalId;
+            CanDelegate = canDelegate;
+        }
+
         /// <summary> The role definition ID used in the role assignment. </summary>
         public string RoleDefinitionId { get; set; }
         /// <summary> The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group. </summary>
