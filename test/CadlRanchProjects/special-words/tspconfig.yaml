@@ -1,4 +1,3 @@
 options:
   "@azure-tools/typespec-csharp":
-    use-overloads-between-protocol-and-convenience: false
     model-namespace: false
