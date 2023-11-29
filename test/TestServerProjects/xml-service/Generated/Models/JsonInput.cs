@@ -15,6 +15,13 @@ namespace xml_service.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="JsonInput"/>. </summary>
+        /// <param name="id"></param>
+        internal JsonInput(int? id)
+        {
+            Id = id;
+        }
+
         /// <summary> Gets or sets the id. </summary>
         public int? Id { get; set; }
     }

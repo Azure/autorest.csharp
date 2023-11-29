@@ -17,6 +17,15 @@ namespace required_optional.Models
             Id = id;
         }
 
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        internal Product(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         /// <summary> Gets the id. </summary>
         public int Id { get; }
         /// <summary> Gets or sets the name. </summary>
