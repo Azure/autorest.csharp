@@ -379,7 +379,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
-
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
