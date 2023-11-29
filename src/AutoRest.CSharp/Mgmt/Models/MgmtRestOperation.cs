@@ -43,6 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Models
         /// </summary>
         public InputOperation Operation { get; }
 
+        public string OperationId => $"{RestClient.ClientPrefix}_{MethodName}";
+
         /// <summary>
         /// The name of this operation
         /// </summary>
