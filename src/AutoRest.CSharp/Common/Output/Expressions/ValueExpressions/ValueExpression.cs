@@ -9,6 +9,7 @@ using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
@@ -20,6 +21,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public static implicit operator ValueExpression(CSharpType type) => new TypeReference(type);
         public static implicit operator ValueExpression(Parameter parameter) => new ParameterReference(parameter);
         public static implicit operator ValueExpression(FieldDeclaration name) => new VariableReference(name.Type, name.Declaration);
+        public static implicit operator ValueExpression(Reference reference) => new FormattableStringToExpression($"{reference.Name:I}");
 
         public ValueExpression NullableStructValue(CSharpType candidateType) => this is not ConstantExpression && candidateType is { IsNullable: true, IsValueType: true } ? new MemberExpression(this, nameof(Nullable<int>.Value)) : this;
         public StringExpression InvokeToString() => new(Invoke(nameof(ToString)));
