@@ -16,14 +16,14 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineExtensionInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         public VirtualMachineExtensionInstanceView()
         {
             Substatuses = new ChangeTrackingList<InstanceViewStatus>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionInstanceView. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineExtensionInstanceView"/>. </summary>
         /// <param name="name">
         /// The virtual machine extension name.
         /// Serialized Name: VirtualMachineExtensionInstanceView.name

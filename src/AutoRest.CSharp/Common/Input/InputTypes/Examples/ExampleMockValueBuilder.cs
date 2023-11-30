@@ -1,12 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
@@ -15,7 +12,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
         public const string ShortVersionMockExampleKey = "ShortVersion";
         public const string MockExampleAllParameterKey = "AllParameters";
 
-        private const string EndpointMockValue = "<https://my-service.azure.com>";
+        private static readonly string EndpointMockValue = Configuration.ApiTypes.EndPointSampleValue;
 
         private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
 

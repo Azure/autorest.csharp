@@ -12,7 +12,7 @@ namespace MgmtPagination.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPaginationModelFactory
     {
-        /// <summary> Initializes a new instance of PageSizeIntegerModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeIntegerModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -22,7 +22,7 @@ namespace MgmtPagination.Models
             return new PageSizeIntegerModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeInt64ModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeInt64ModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -32,7 +32,7 @@ namespace MgmtPagination.Models
             return new PageSizeInt64ModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeInt32ModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeInt32ModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -42,7 +42,7 @@ namespace MgmtPagination.Models
             return new PageSizeInt32ModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeNumericModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeNumericModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -52,7 +52,7 @@ namespace MgmtPagination.Models
             return new PageSizeNumericModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeFloatModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeFloatModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -62,7 +62,7 @@ namespace MgmtPagination.Models
             return new PageSizeFloatModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeDoubleModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeDoubleModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -72,7 +72,7 @@ namespace MgmtPagination.Models
             return new PageSizeDoubleModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeDecimalModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeDecimalModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
@@ -82,7 +82,7 @@ namespace MgmtPagination.Models
             return new PageSizeDecimalModelData(id, name, resourceType);
         }
 
-        /// <summary> Initializes a new instance of PageSizeStringModelData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPagination.PageSizeStringModelData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>

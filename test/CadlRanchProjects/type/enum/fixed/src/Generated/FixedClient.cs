@@ -146,7 +146,8 @@ namespace _Type._Enum.Fixed
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutKnownValueAsync(BinaryData.FromObjectAsJson(body.ToSerialString()), context).ConfigureAwait(false);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            Response response = await PutKnownValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -157,7 +158,8 @@ namespace _Type._Enum.Fixed
         public virtual Response PutKnownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutKnownValue(BinaryData.FromObjectAsJson(body.ToSerialString()), context);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            Response response = PutKnownValue(content, context);
             return response;
         }
 
@@ -246,7 +248,8 @@ namespace _Type._Enum.Fixed
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutUnknownValueAsync(BinaryData.FromObjectAsJson(body.ToSerialString()), context).ConfigureAwait(false);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            Response response = await PutUnknownValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -257,7 +260,8 @@ namespace _Type._Enum.Fixed
         public virtual Response PutUnknownValue(DaysOfWeekEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutUnknownValue(BinaryData.FromObjectAsJson(body.ToSerialString()), context);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToSerialString());
+            Response response = PutUnknownValue(content, context);
             return response;
         }
 

@@ -13,7 +13,7 @@ namespace AnomalyDetector.Models
     /// <summary> Model status. </summary>
     public partial class ModelState
     {
-        /// <summary> Initializes a new instance of ModelState. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelState"/>. </summary>
         public ModelState()
         {
             EpochIds = new ChangeTrackingList<int>();
@@ -22,7 +22,7 @@ namespace AnomalyDetector.Models
             LatenciesInSeconds = new ChangeTrackingList<float>();
         }
 
-        /// <summary> Initializes a new instance of ModelState. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelState"/>. </summary>
         /// <param name="epochIds">
         /// This indicates the number of passes of the entire training dataset the
         /// algorithm has completed.

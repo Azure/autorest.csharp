@@ -14,45 +14,49 @@ using SpecialHeaders.Repeatability;
 
 namespace SpecialHeaders.Repeatability.Samples
 {
-    public class Samples_RepeatabilityClient
+    public partial class Samples_RepeatabilityClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ImmediateSuccess()
+        public void Example_Repeatability_ImmediateSuccess_ShortVersion()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = client.ImmediateSuccess();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ImmediateSuccess_Async()
+        public async Task Example_Repeatability_ImmediateSuccess_ShortVersion_Async()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ImmediateSuccess_AllParameters()
+        public void Example_Repeatability_ImmediateSuccess_AllParameters()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = client.ImmediateSuccess();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ImmediateSuccess_AllParameters_Async()
+        public async Task Example_Repeatability_ImmediateSuccess_AllParameters_Async()
         {
             RepeatabilityClient client = new RepeatabilityClient();
 
             Response response = await client.ImmediateSuccessAsync();
+
             Console.WriteLine(response.Status);
         }
     }

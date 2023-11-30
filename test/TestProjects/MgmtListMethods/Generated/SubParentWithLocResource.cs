@@ -20,13 +20,15 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a SubParentWithLoc along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="SubParentWithLocResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetSubParentWithLocResource method.
-    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" /> using the GetSubParentWithLoc method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="SubParentWithLocResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetSubParentWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource"/> using the GetSubParentWithLoc method.
     /// </summary>
     public partial class SubParentWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="SubParentWithLocResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="subParentWithLocName"> The subParentWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string subParentWithLocName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.MgmtListMethods/subParentWithLocs/{subParentWithLocName}";
@@ -42,7 +44,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "SubParentWithLocResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubParentWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal SubParentWithLocResource(ArmClient client, SubParentWithLocData data) : this(client, data.Id)

@@ -17,11 +17,11 @@ using _Type.Property.ValueTypes.Models;
 
 namespace _Type.Property.ValueTypes.Samples
 {
-    internal class Samples_String
+    public partial class Samples_String
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString()
+        public void Example_String_GetString_ShortVersion()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_Async()
+        public async Task Example_String_GetString_ShortVersion_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString_Convenience()
+        public void Example_String_GetString_ShortVersion_Convenience()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_Convenience_Async()
+        public async Task Example_String_GetString_ShortVersion_Convenience_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString_AllParameters()
+        public void Example_String_GetString_AllParameters()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_AllParameters_Async()
+        public async Task Example_String_GetString_AllParameters_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetString_AllParameters_Convenience()
+        public void Example_String_GetString_AllParameters_Convenience()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetString_AllParameters_Convenience_Async()
+        public async Task Example_String_GetString_AllParameters_Convenience_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
@@ -105,102 +105,102 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_String_Put_ShortVersion()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_String_Put_ShortVersion_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_String_Put_ShortVersion_Convenience()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
             StringProperty body = new StringProperty("<property>");
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_String_Put_ShortVersion_Convenience_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
             StringProperty body = new StringProperty("<property>");
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_String_Put_AllParameters()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_String_Put_AllParameters_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 property = "<property>",
             });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_String_Put_AllParameters_Convenience()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
             StringProperty body = new StringProperty("<property>");
             Response response = client.Put(body);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_String_Put_AllParameters_Convenience_Async()
         {
             String client = new ValueTypesClient().GetStringClient(apiVersion: "1.0.0");
 
             StringProperty body = new StringProperty("<property>");
             Response response = await client.PutAsync(body);
-            Console.WriteLine(response.Status);
         }
     }
 }

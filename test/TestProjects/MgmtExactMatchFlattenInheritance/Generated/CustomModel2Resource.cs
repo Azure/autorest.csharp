@@ -19,13 +19,16 @@ namespace MgmtExactMatchFlattenInheritance
 {
     /// <summary>
     /// A Class representing a CustomModel2 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="CustomModel2Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetCustomModel2Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetCustomModel2 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="CustomModel2Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetCustomModel2Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetCustomModel2 method.
     /// </summary>
     public partial class CustomModel2Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="CustomModel2Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="name"> The name. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/customModel2s/{name}";
@@ -41,7 +44,7 @@ namespace MgmtExactMatchFlattenInheritance
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "CustomModel2Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="CustomModel2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal CustomModel2Resource(ArmClient client, CustomModel2Data data) : this(client, data.Id)
@@ -165,7 +168,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<ArmOperation<CustomModel2Resource>> UpdateAsync(WaitUntil waitUntil, string foo = null, CancellationToken cancellationToken = default)
         {
@@ -200,7 +203,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="foo"> The CustomModel2Foo to use. </param>
+        /// <param name="foo"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual ArmOperation<CustomModel2Resource> Update(WaitUntil waitUntil, string foo = null, CancellationToken cancellationToken = default)
         {

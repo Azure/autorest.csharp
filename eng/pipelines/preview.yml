@@ -1,0 +1,80 @@
+parameters:
+- name: UseTypeSpecNext
+  displayName: Use TypeSpec "next" version
+  type: boolean
+  default: false
+- name: RunUnitTests
+  displayName: Run unit tests
+  type: boolean
+  default: true
+- name: RunGenerationChecks
+  displayName: Run code generation checks
+  type: boolean
+  default: true
+
+resources:
+  repositories:
+    - repository: sdk-repository
+      type: github
+      endpoint: Azure
+      name: Azure/azure-sdk-for-net
+      ref: refs/heads/main
+    - repository: azure-sdk-tools
+      type: github
+      endpoint: Azure
+      name: Azure/azure-sdk-tools
+      ref: refs/heads/main
+
+pool:
+  name: azsdk-pool-mms-win-2022-general
+  vmImage: windows-2022
+
+extends:
+  template: eng/pipelines/templates/stages/archetype-autorest-preview.yml@azure-sdk-tools
+  parameters:
+    RegenerationJobCount: 10
+    BuildPrereleaseVersion: true
+    UseTypeSpecNext: ${{ parameters.UseTypeSpecNext }}
+    EmitterPackageJsonPath: src/TypeSpec.Extension/Emitter.Csharp/package.json
+    PublishInternal: true
+    Packages:
+    - name: generator
+      file: autorest-csharp-*.tgz
+      type: npm
+    - name: emitter
+      file: azure-tools-typespec-csharp-*.tgz
+      type: npm
+    - name: nuget package
+      file: 'Microsoft.Azure.AutoRest.CSharp.*.nupkg'
+      type: nuget
+    SdkInitializationSteps:
+    - pwsh: |
+        $packageVersions = Get-Content "$(buildArtifactsPath)/package-versions.json" -Raw | ConvertFrom-Json
+        $generatorVersion = $packageVersions.generator
+
+        $path = './eng/Packages.Data.props'
+
+        Write-Host "Updating Autorest.CSharp to $generatorVersion in $path"
+        
+        $content = Get-Content -Raw $path
+        $newContent = $content -replace `
+            '<PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version=".*?" />',
+            "<PackageReference Update=`"Microsoft.Azure.AutoRest.CSharp`" Version=`"$generatorVersion`" PrivateAssets=`"All`" />"
+
+        $newContent | Set-Content $path -NoNewline
+      displayName: 'Update Packages.Data.props'
+      workingDirectory: $(sdkRepositoryPath)
+    TestMatrix:
+      ${{ if eq(parameters.RunUnitTests, true) }}:
+        Unit:
+          TestArguments: -UnitTests
+      ${{ if eq(parameters.RunGenerationChecks, true) }}:
+        A_B:
+          TestArguments: -GenerationChecks -Filter "^[a-b]"
+        C_L:
+          TestArguments: -GenerationChecks -Filter "^[c-l]"
+        M:
+          TestArguments: -GenerationChecks -Filter "^[m]"
+        N_Z:
+          TestArguments: -GenerationChecks -Filter "^[n-z]"
+    PublishDependsOnTest: false

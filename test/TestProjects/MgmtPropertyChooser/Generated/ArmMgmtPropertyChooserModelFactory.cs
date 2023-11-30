@@ -17,7 +17,7 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyChooserModelFactory
     {
-        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtPropertyChooser.VirtualMachineData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -51,7 +51,7 @@ namespace MgmtPropertyChooser.Models
             return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, identityWithRenamedProperty, identityWithDifferentPropertyType, identityWithNoUserIdentity, identityWithNoSystemIdentity, identityV3, zones?.ToList(), fakeResources?.ToList(), fakeSubResourceId != null ? ResourceManagerModelFactory.SubResource(fakeSubResourceId) : null, fakeWritableSubResourceId != null ? ResourceManagerModelFactory.WritableSubResource(fakeWritableSubResourceId) : null, provisioningState, licenseType, vmId, extensionsTimeBudget);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VirtualMachineExtension"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -75,7 +75,7 @@ namespace MgmtPropertyChooser.Models
             return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MgmtPropertyChooserResourceData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -90,7 +90,7 @@ namespace MgmtPropertyChooser.Models
             return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags);
         }
 
-        /// <summary> Initializes a new instance of IdentityWithRenamedProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IdentityWithRenamedProperty"/>. </summary>
         /// <param name="testPrincipalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
@@ -103,7 +103,7 @@ namespace MgmtPropertyChooser.Models
             return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities);
         }
 
-        /// <summary> Initializes a new instance of IdentityWithDifferentPropertyType. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IdentityWithDifferentPropertyType"/>. </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>

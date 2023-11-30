@@ -76,7 +76,7 @@ namespace Azure.Storage.Tables
         /// <param name="dataServiceVersion"> Specifies the data service version. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders>> QueryAsync(Enum1 dataServiceVersion, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableQueryResult, TableInternalQueryHeaders>> QueryAsync(Enum1 dataServiceVersion, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateQueryRequest(dataServiceVersion, queryOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -85,9 +85,9 @@ namespace Azure.Storage.Tables
             {
                 case 200:
                     {
-                        TableQueryResponse value = default;
+                        TableQueryResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                        value = TableQueryResult.DeserializeTableQueryResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -99,7 +99,7 @@ namespace Azure.Storage.Tables
         /// <param name="dataServiceVersion"> Specifies the data service version. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<TableQueryResponse, TableInternalQueryHeaders> Query(Enum1 dataServiceVersion, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableQueryResult, TableInternalQueryHeaders> Query(Enum1 dataServiceVersion, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateQueryRequest(dataServiceVersion, queryOptions);
             _pipeline.Send(message, cancellationToken);
@@ -108,9 +108,9 @@ namespace Azure.Storage.Tables
             {
                 case 200:
                     {
-                        TableQueryResponse value = default;
+                        TableQueryResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TableQueryResponse.DeserializeTableQueryResponse(document.RootElement);
+                        value = TableQueryResult.DeserializeTableQueryResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -147,7 +147,7 @@ namespace Azure.Storage.Tables
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tableProperties"/> is null. </exception>
-        public async Task<ResponseWithHeaders<TableResponse, TableInternalCreateHeaders>> CreateAsync(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableResult, TableInternalCreateHeaders>> CreateAsync(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -161,13 +161,13 @@ namespace Azure.Storage.Tables
             {
                 case 201:
                     {
-                        TableResponse value = default;
+                        TableResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TableResponse.DeserializeTableResponse(document.RootElement);
+                        value = TableResult.DeserializeTableResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 case 204:
-                    return ResponseWithHeaders.FromValue((TableResponse)null, headers, message.Response);
+                    return ResponseWithHeaders.FromValue((TableResult)null, headers, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -179,7 +179,7 @@ namespace Azure.Storage.Tables
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tableProperties"/> is null. </exception>
-        public ResponseWithHeaders<TableResponse, TableInternalCreateHeaders> Create(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableResult, TableInternalCreateHeaders> Create(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (tableProperties == null)
             {
@@ -193,13 +193,13 @@ namespace Azure.Storage.Tables
             {
                 case 201:
                     {
-                        TableResponse value = default;
+                        TableResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TableResponse.DeserializeTableResponse(document.RootElement);
+                        value = TableResult.DeserializeTableResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 case 204:
-                    return ResponseWithHeaders.FromValue((TableResponse)null, headers, message.Response);
+                    return ResponseWithHeaders.FromValue((TableResult)null, headers, message.Response);
                 default:
                     throw new RequestFailedException(message.Response);
             }
@@ -311,7 +311,7 @@ namespace Azure.Storage.Tables
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
-        public async Task<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesHeaders>> QueryEntitiesAsync(Enum1 dataServiceVersion, string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableEntityQueryResult, TableInternalQueryEntitiesHeaders>> QueryEntitiesAsync(Enum1 dataServiceVersion, string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -325,9 +325,9 @@ namespace Azure.Storage.Tables
             {
                 case 200:
                     {
-                        TableEntityQueryResponse value = default;
+                        TableEntityQueryResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        value = TableEntityQueryResult.DeserializeTableEntityQueryResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -342,7 +342,7 @@ namespace Azure.Storage.Tables
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
-        public ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesHeaders> QueryEntities(Enum1 dataServiceVersion, string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResult, TableInternalQueryEntitiesHeaders> QueryEntities(Enum1 dataServiceVersion, string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -356,9 +356,9 @@ namespace Azure.Storage.Tables
             {
                 case 200:
                     {
-                        TableEntityQueryResponse value = default;
+                        TableEntityQueryResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        value = TableEntityQueryResult.DeserializeTableEntityQueryResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -412,7 +412,7 @@ namespace Azure.Storage.Tables
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
-        public async Task<ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<TableEntityQueryResult, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders>> QueryEntitiesWithPartitionAndRowKeyAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -434,9 +434,9 @@ namespace Azure.Storage.Tables
             {
                 case 200:
                     {
-                        TableEntityQueryResponse value = default;
+                        TableEntityQueryResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        value = TableEntityQueryResult.DeserializeTableEntityQueryResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:
@@ -453,7 +453,7 @@ namespace Azure.Storage.Tables
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
-        public ResponseWithHeaders<TableEntityQueryResponse, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<TableEntityQueryResult, TableInternalQueryEntitiesWithPartitionAndRowKeyHeaders> QueryEntitiesWithPartitionAndRowKey(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             if (table == null)
             {
@@ -475,9 +475,9 @@ namespace Azure.Storage.Tables
             {
                 case 200:
                     {
-                        TableEntityQueryResponse value = default;
+                        TableEntityQueryResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = TableEntityQueryResponse.DeserializeTableEntityQueryResponse(document.RootElement);
+                        value = TableEntityQueryResult.DeserializeTableEntityQueryResult(document.RootElement);
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 default:

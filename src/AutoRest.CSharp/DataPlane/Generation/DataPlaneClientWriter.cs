@@ -1,26 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.Core.Pipeline;
-using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -63,8 +55,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
-                new CSharpType(typeof(Response<>), bodyType) :
-                typeof(Response);
+                new CSharpType(Configuration.ApiTypes.ResponseOfTType, bodyType) :
+                Configuration.ApiTypes.ResponseType;
 
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
@@ -115,7 +107,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
                     {
-                        writer.Append($".GetRawResponse()");
+                        writer.Append($".{Configuration.ApiTypes.GetRawResponseName}()");
                     }
 
                     writer.Line($";");
@@ -144,7 +136,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (library.Authentication.ApiKey != null)
             {
-                var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
+                var ctorParams = client.GetClientConstructorParameters(Configuration.ApiTypes.KeyCredentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {
@@ -165,8 +157,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({CredentialVariable}, \"{library.Authentication.ApiKey.Name}\"));");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
+                    writer.Line(Configuration.ApiTypes.GetHttpPipelineKeyCredentialString(PipelineField, OptionsVariable, CredentialVariable, library.Authentication.ApiKey.Name));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
                     {
@@ -216,7 +208,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}();");
-                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
+                    writer.Line($"{ClientDiagnosticsField.GetReferenceFormattable()} = new {Configuration.ApiTypes.ClientDiagnosticsType}({OptionsVariable});");
                     var scopesParam = new CodeWriterDeclaration("scopes");
                     writer.Append($"string[] {scopesParam:D} = ");
                     writer.Append($"{{ ");
@@ -227,7 +219,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.Line($"}};");
 
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
+                    writer.Line(Configuration.ApiTypes.GetHttpPipelineBearerString(PipelineField, OptionsVariable, CredentialVariable, scopesParam));
                     writer.Append($"this.RestClient = new {client.RestClient.Type}(");
                     foreach (var parameter in client.RestClient.Parameters)
                     {
@@ -274,7 +266,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Append(KnownParameters.CancellationTokenParameter)
                 .ToList();
 
-            var pipelineReference = new Reference(PipelineField, typeof(HttpPipeline));
+            var pipelineReference = new Reference(PipelineField, Configuration.ApiTypes.HttpPipelineType);
             var scopeName = pagingMethod.Diagnostics.ScopeName;
             var nextLinkName = pagingMethod.PagingResponse.NextLinkPropertyName;
             var itemName = pagingMethod.PagingResponse.ItemPropertyName;
@@ -345,7 +337,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"{parameter.Name}, ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Append($").Request, originalResponse");
+                    writer.Append($").{Configuration.ApiTypes.HttpMessageRequestName}, originalResponse");
 
                     var nextPageMethod = lroMethod.Operation.NextPageMethod;
                     if (nextPageMethod != null)
@@ -363,8 +355,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static ConstructorSignature BuildInternalConstructor(DataPlaneClient client)
         {
             var constructorParameters = new[]{KnownParameters.ClientDiagnostics, KnownParameters.Pipeline}.Union(client.RestClient.Parameters).ToArray();
-            var name = client.Declaration.Name;
-            return new ConstructorSignature(name, $"Initializes a new instance of {name}", null, MethodSignatureModifiers.Internal, constructorParameters);
+            return new ConstructorSignature(client.Type, $"Initializes a new instance of {client.Declaration.Name}", null, MethodSignatureModifiers.Internal, constructorParameters);
         }
     }
 }

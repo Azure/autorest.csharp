@@ -19,13 +19,17 @@ namespace MgmtCollectionParent
 {
     /// <summary>
     /// A Class representing an OrderResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="OrderResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetOrderResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetOrderResource method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="OrderResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetOrderResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetOrderResource method.
     /// </summary>
     public partial class OrderResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="OrderResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="orderName"> The orderName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, AzureLocation location, string orderName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EdgeOrder/locations/{location}/orders/{orderName}";
@@ -41,7 +45,7 @@ namespace MgmtCollectionParent
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "OrderResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OrderResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal OrderResource(ArmClient client, OrderResourceData data) : this(client, data.Id)

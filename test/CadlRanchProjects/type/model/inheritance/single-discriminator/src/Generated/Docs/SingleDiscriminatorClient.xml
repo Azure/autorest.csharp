@@ -85,7 +85,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutModelAsync with all parameters.
 <code><![CDATA[
@@ -93,7 +92,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutModel(Bird,CancellationToken)">
@@ -104,7 +102,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutModel(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutModel with all parameters.
 <code><![CDATA[
@@ -112,7 +109,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutModel(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutModelAsync(RequestContent,RequestContext)">
@@ -121,24 +117,26 @@ This sample shows how to call PutModelAsync.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = await client.PutModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutModelAsync with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = await client.PutModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -148,24 +146,26 @@ This sample shows how to call PutModel.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = client.PutModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutModel with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = client.PutModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -253,7 +253,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutRecursiveModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRecursiveModelAsync with all parameters.
 <code><![CDATA[
@@ -261,7 +260,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = await client.PutRecursiveModelAsync(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutRecursiveModel(Bird,CancellationToken)">
@@ -272,7 +270,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutRecursiveModel(input);
-Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRecursiveModel with all parameters.
 <code><![CDATA[
@@ -280,7 +277,6 @@ SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
 Bird input = new SeaGull(1234);
 Response response = client.PutRecursiveModel(input);
-Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PutRecursiveModelAsync(RequestContent,RequestContext)">
@@ -289,24 +285,26 @@ This sample shows how to call PutRecursiveModelAsync.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = await client.PutRecursiveModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRecursiveModelAsync with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = await client.PutRecursiveModelAsync(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -316,24 +314,26 @@ This sample shows how to call PutRecursiveModel.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = client.PutRecursiveModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRecursiveModel with all request content.
 <code><![CDATA[
 SingleDiscriminatorClient client = new SingleDiscriminatorClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     kind = "seagull",
     wingspan = 1234,
 });
 Response response = client.PutRecursiveModel(content);
+
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

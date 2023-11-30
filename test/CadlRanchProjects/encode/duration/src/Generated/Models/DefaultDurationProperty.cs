@@ -12,7 +12,7 @@ namespace Encode.Duration.Models
     /// <summary> The DefaultDurationProperty. </summary>
     public partial class DefaultDurationProperty
     {
-        /// <summary> Initializes a new instance of DefaultDurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DefaultDurationProperty"/>. </summary>
         /// <param name="value"></param>
         public DefaultDurationProperty(TimeSpan value)
         {

@@ -10,7 +10,7 @@ namespace ModelShapes.Models
     /// <summary> The ParametersModel. </summary>
     internal partial class ParametersModel
     {
-        /// <summary> Initializes a new instance of ParametersModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParametersModel"/>. </summary>
         public ParametersModel()
         {
         }

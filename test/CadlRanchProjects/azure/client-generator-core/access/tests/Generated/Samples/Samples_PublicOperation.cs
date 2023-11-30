@@ -16,11 +16,11 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 {
-    internal class Samples_PublicOperation
+    public partial class Samples_PublicOperation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoDecoratorInPublic()
+        public void Example_PublicOperation_NoDecoratorInPublic_ShortVersion()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -32,7 +32,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoDecoratorInPublic_Async()
+        public async Task Example_PublicOperation_NoDecoratorInPublic_ShortVersion_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -44,7 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoDecoratorInPublic_Convenience()
+        public void Example_PublicOperation_NoDecoratorInPublic_ShortVersion_Convenience()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -53,7 +53,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoDecoratorInPublic_Convenience_Async()
+        public async Task Example_PublicOperation_NoDecoratorInPublic_ShortVersion_Convenience_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -62,7 +62,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoDecoratorInPublic_AllParameters()
+        public void Example_PublicOperation_NoDecoratorInPublic_AllParameters()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -74,7 +74,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoDecoratorInPublic_AllParameters_Async()
+        public async Task Example_PublicOperation_NoDecoratorInPublic_AllParameters_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -86,7 +86,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_NoDecoratorInPublic_AllParameters_Convenience()
+        public void Example_PublicOperation_NoDecoratorInPublic_AllParameters_Convenience()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -95,7 +95,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_NoDecoratorInPublic_AllParameters_Convenience_Async()
+        public async Task Example_PublicOperation_NoDecoratorInPublic_AllParameters_Convenience_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -104,7 +104,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PublicDecoratorInPublic()
+        public void Example_PublicOperation_PublicDecoratorInPublic_ShortVersion()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -116,7 +116,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PublicDecoratorInPublic_Async()
+        public async Task Example_PublicOperation_PublicDecoratorInPublic_ShortVersion_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -128,7 +128,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PublicDecoratorInPublic_Convenience()
+        public void Example_PublicOperation_PublicDecoratorInPublic_ShortVersion_Convenience()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -137,7 +137,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PublicDecoratorInPublic_Convenience_Async()
+        public async Task Example_PublicOperation_PublicDecoratorInPublic_ShortVersion_Convenience_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -146,7 +146,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PublicDecoratorInPublic_AllParameters()
+        public void Example_PublicOperation_PublicDecoratorInPublic_AllParameters()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -158,7 +158,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PublicDecoratorInPublic_AllParameters_Async()
+        public async Task Example_PublicOperation_PublicDecoratorInPublic_AllParameters_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -170,7 +170,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PublicDecoratorInPublic_AllParameters_Convenience()
+        public void Example_PublicOperation_PublicDecoratorInPublic_AllParameters_Convenience()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 
@@ -179,7 +179,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PublicDecoratorInPublic_AllParameters_Convenience_Async()
+        public async Task Example_PublicOperation_PublicDecoratorInPublic_AllParameters_Convenience_Async()
         {
             PublicOperation client = new AccessClient().GetPublicOperationClient(apiVersion: "1.0.0");
 

@@ -19,13 +19,15 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a TenantParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TenantParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTenantParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TenantTestResource" /> using the GetTenantParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TenantParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTenantParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantTestResource"/> using the GetTenantParent method.
     /// </summary>
     public partial class TenantParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TenantParentResource"/> instance. </summary>
+        /// <param name="tenantTestName"> The tenantTestName. </param>
+        /// <param name="tenantParentName"> The tenantParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string tenantTestName, string tenantParentName)
         {
             var resourceId = $"/providers/Microsoft.Tenant/tenantTests/{tenantTestName}/tenantParents/{tenantParentName}";
@@ -41,7 +43,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TenantParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TenantParentResource(ArmClient client, TenantParentData data) : this(client, data.Id)

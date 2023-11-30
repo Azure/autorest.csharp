@@ -10,7 +10,7 @@ namespace constants.Models
     /// <summary> The ModelAsStringRequiredOneValueNoDefault. </summary>
     internal partial class ModelAsStringRequiredOneValueNoDefault
     {
-        /// <summary> Initializes a new instance of ModelAsStringRequiredOneValueNoDefault. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelAsStringRequiredOneValueNoDefault"/>. </summary>
         /// <param name="parameter"></param>
         internal ModelAsStringRequiredOneValueNoDefault(ModelAsStringRequiredOneValueNoDefaultEnum parameter)
         {

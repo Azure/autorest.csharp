@@ -14,85 +14,93 @@ using Projection.ProjectedName;
 
 namespace Projection.ProjectedName.Samples
 {
-    public class Samples_ProjectedNameClient
+    public partial class Samples_ProjectedNameClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation()
+        public void Example_ProjectedName_ClientName_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Operation();
+            Response response = client.ClientName();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Async()
+        public async Task Example_ProjectedName_ClientName_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.ClientNameAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
+        public void Example_ProjectedName_ClientName_AllParameters()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Operation();
+            Response response = client.ClientName();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_AllParameters_Async()
+        public async Task Example_ProjectedName_ClientName_AllParameters_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.ClientNameAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter()
+        public void Example_ProjectedName_Parameter_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Parameter("<default-name>");
+            Response response = client.Parameter("<clientName>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Parameter_Async()
+        public async Task Example_ProjectedName_Parameter_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<default-name>");
+            Response response = await client.ParameterAsync("<clientName>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter_AllParameters()
+        public void Example_ProjectedName_Parameter_AllParameters()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Parameter("<default-name>");
+            Response response = client.Parameter("<clientName>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Parameter_AllParameters_Async()
+        public async Task Example_ProjectedName_Parameter_AllParameters_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<default-name>");
+            Response response = await client.ParameterAsync("<clientName>");
+
             Console.WriteLine(response.Status);
         }
     }

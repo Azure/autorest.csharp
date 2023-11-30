@@ -10,12 +10,12 @@ namespace Inheritance.Models
     /// <summary> The SomeProperties. </summary>
     public partial class SomeProperties
     {
-        /// <summary> Initializes a new instance of SomeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="SomeProperties"/>. </summary>
         public SomeProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of SomeProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="SomeProperties"/>. </summary>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
         internal SomeProperties(string someProperty, string someOtherProperty)

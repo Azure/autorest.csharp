@@ -10,12 +10,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> The VaultIssue. </summary>
     public partial class VaultIssue
     {
-        /// <summary> Initializes a new instance of VaultIssue. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultIssue"/>. </summary>
         internal VaultIssue()
         {
         }
 
-        /// <summary> Initializes a new instance of VaultIssue. </summary>
+        /// <summary> Initializes a new instance of <see cref="VaultIssue"/>. </summary>
         /// <param name="vaultIssueType"> The type of the issue. </param>
         /// <param name="description"> The description of the issue. </param>
         /// <param name="sev"> The severity of the issue. </param>

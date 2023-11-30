@@ -14,13 +14,13 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeDecimalModelListResult. </summary>
     internal partial class PageSizeDecimalModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeDecimalModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDecimalModelListResult"/>. </summary>
         internal PageSizeDecimalModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeDecimalModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeDecimalModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeDecimalModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal PageSizeDecimalModelListResult(IReadOnlyList<PageSizeDecimalModelData> value, string nextLink)

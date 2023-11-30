@@ -17,12 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImageDisk
     {
-        /// <summary> Initializes a new instance of ImageDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         public ImageDisk()
         {
         }
 
-        /// <summary> Initializes a new instance of ImageDisk. </summary>
+        /// <summary> Initializes a new instance of <see cref="ImageDisk"/>. </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot

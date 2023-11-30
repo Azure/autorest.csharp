@@ -49,7 +49,7 @@ namespace Parameters.BodyOptionality
             _apiVersion = options.Version;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicitAsync(BodyModel,CancellationToken)']/*" />
@@ -58,11 +58,12 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RequiredExplicitAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await RequiredExplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The BodyModel to use. </param>
+        /// <param name="body"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredExplicit(BodyModel,CancellationToken)']/*" />
@@ -71,7 +72,8 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RequiredExplicit(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = RequiredExplicit(content, context);
             return response;
         }
 
@@ -153,7 +155,7 @@ namespace Parameters.BodyOptionality
             }
         }
 
-        /// <param name="bodyModel"> The BodyModel to use. </param>
+        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicitAsync(BodyModel,CancellationToken)']/*" />
@@ -162,11 +164,12 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RequiredImplicitAsync(bodyModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = bodyModel.ToRequestContent();
+            Response response = await RequiredImplicitAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="bodyModel"> The BodyModel to use. </param>
+        /// <param name="bodyModel"> The <see cref="BodyModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="bodyModel"/> is null. </exception>
         /// <include file="Docs/BodyOptionalityClient.xml" path="doc/members/member[@name='RequiredImplicit(BodyModel,CancellationToken)']/*" />
@@ -175,7 +178,8 @@ namespace Parameters.BodyOptionality
             Argument.AssertNotNull(bodyModel, nameof(bodyModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RequiredImplicit(bodyModel.ToRequestContent(), context);
+            using RequestContent content = bodyModel.ToRequestContent();
+            Response response = RequiredImplicit(content, context);
             return response;
         }
 

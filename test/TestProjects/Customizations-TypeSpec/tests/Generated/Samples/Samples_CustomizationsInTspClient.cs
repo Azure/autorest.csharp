@@ -19,15 +19,15 @@ using NUnit.Framework;
 
 namespace CustomizationsInTsp.Samples
 {
-    public class Samples_CustomizationsInTspClient
+    public partial class Samples_CustomizationsInTspClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip()
+        public void Example_CustomizationsInTsp_RoundTrip_ShortVersion()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = client.RoundTrip(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -36,11 +36,11 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_Async()
+        public async Task Example_CustomizationsInTsp_RoundTrip_ShortVersion_Async()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new object());
+            using RequestContent content = RequestContent.Create(new object());
             Response response = await client.RoundTripAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -49,7 +49,7 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip_Convenience()
+        public void Example_CustomizationsInTsp_RoundTrip_ShortVersion_Convenience()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -59,7 +59,7 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_Convenience_Async()
+        public async Task Example_CustomizationsInTsp_RoundTrip_ShortVersion_Convenience_Async()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
@@ -69,11 +69,11 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip_AllParameters()
+        public void Example_CustomizationsInTsp_RoundTrip_AllParameters()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new
@@ -99,28 +99,44 @@ namespace CustomizationsInTsp.Samples
                     propertyToMakeString = "PT1H23M45S",
                     propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
                     propertyToField = "<propertyToField>",
-                    badListName = new List<object>()
-{
+                    badListName = new object[]
+            {
 "<badListName>"
-},
+            },
                     badDictionaryName = new
                     {
                         key = "<badDictionaryName>",
                     },
-                    badListOfListName = new List<object>()
-{
-new List<object>()
+                    badListOfListName = new object[]
+            {
+new object[]
 {
 "<badListOfListName>"
 }
-},
-                    badListOfDictionaryName = new List<object>()
-{
+            },
+                    badListOfDictionaryName = new object[]
+            {
 new
 {
 key = "<badListOfDictionaryName>",
 }
-},
+            },
+                    vector = new object[]
+            {
+123.45F
+            },
+                    vectorOptional = new object[]
+            {
+123.45F
+            },
+                    vectorNullable = new object[]
+            {
+123.45F
+            },
+                    vectorOptionalNullable = new object[]
+            {
+123.45F
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -151,6 +167,14 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullableReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullableReadOnly")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -160,11 +184,11 @@ key = "<badListOfDictionaryName>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_AllParameters_Async()
+        public async Task Example_CustomizationsInTsp_RoundTrip_AllParameters_Async()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 propertyExtensibleEnum = "Monday",
                 propertyModelToMakeInternal = new
@@ -190,28 +214,44 @@ key = "<badListOfDictionaryName>",
                     propertyToMakeString = "PT1H23M45S",
                     propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
                     propertyToField = "<propertyToField>",
-                    badListName = new List<object>()
-{
+                    badListName = new object[]
+            {
 "<badListName>"
-},
+            },
                     badDictionaryName = new
                     {
                         key = "<badDictionaryName>",
                     },
-                    badListOfListName = new List<object>()
-{
-new List<object>()
+                    badListOfListName = new object[]
+            {
+new object[]
 {
 "<badListOfListName>"
 }
-},
-                    badListOfDictionaryName = new List<object>()
-{
+            },
+                    badListOfDictionaryName = new object[]
+            {
 new
 {
 key = "<badListOfDictionaryName>",
 }
-},
+            },
+                    vector = new object[]
+            {
+123.45F
+            },
+                    vectorOptional = new object[]
+            {
+123.45F
+            },
+                    vectorNullable = new object[]
+            {
+123.45F
+            },
+                    vectorOptionalNullable = new object[]
+            {
+123.45F
+            },
                 },
                 propertyEnumToRename = "1",
                 propertyEnumWithValueToRename = "1",
@@ -242,6 +282,14 @@ key = "<badListOfDictionaryName>",
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullable")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullableReadOnly")[0].ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullableReadOnly")[0].ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -251,11 +299,11 @@ key = "<badListOfDictionaryName>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_RoundTrip_AllParameters_Convenience()
+        public void Example_CustomizationsInTsp_RoundTrip_AllParameters_Convenience()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RootModel input = new RootModel()
+            RootModel input = new RootModel
             {
                 PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
                 PropertyModelToRename = new RenamedModel(1234)
@@ -263,25 +311,23 @@ key = "<badListOfDictionaryName>",
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                {
+                    ["key"] = "<badDictionaryName>"
+                }, new IList<string>[]
+            {
+new string[]{"<badListOfListName>"}
+            }, new IDictionary<string, string>[]
+            {
+new Dictionary<string, string>
 {
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
+["key"] = "<badListOfDictionaryName>"
 }
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
+            }, new float[] { 123.45F }, new float[] { 123.45F })
+                {
+                    VectorOptional = new float[] { 123.45F },
+                    VectorOptionalNullable = new float[] { 123.45F },
+                },
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -293,11 +339,11 @@ new Dictionary<string, string>()
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_RoundTrip_AllParameters_Convenience_Async()
+        public async Task Example_CustomizationsInTsp_RoundTrip_AllParameters_Convenience_Async()
         {
             CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            RootModel input = new RootModel()
+            RootModel input = new RootModel
             {
                 PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
                 PropertyModelToRename = new RenamedModel(1234)
@@ -305,25 +351,23 @@ new Dictionary<string, string>()
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
+                {
+                    ["key"] = "<badDictionaryName>"
+                }, new IList<string>[]
+            {
+new string[]{"<badListOfListName>"}
+            }, new IDictionary<string, string>[]
+            {
+new Dictionary<string, string>
 {
-"<badListName>"
-}, new Dictionary<string, string>()
-{
-    ["key"] = "<badDictionaryName>",
-}, new List<IList<string>>()
-{
-new List<string>()
-{
-"<badListOfListName>"
+["key"] = "<badListOfDictionaryName>"
 }
-}, new List<IDictionary<string, string>>()
-{
-new Dictionary<string, string>()
-{
-["key"] = "<badListOfDictionaryName>",
-}
-}),
+            }, new float[] { 123.45F }, new float[] { 123.45F })
+                {
+                    VectorOptional = new float[] { 123.45F },
+                    VectorOptionalNullable = new float[] { 123.45F },
+                },
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,

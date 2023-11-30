@@ -6,15 +6,17 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Utilities;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.AutoRest.PostProcess;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
@@ -25,8 +27,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
         private static IDictionary<GeneratedCodeWorkspace, IList<string>> _overriddenProjectFilenames = new Dictionary<GeneratedCodeWorkspace, IList<string>>();
 
+        private static bool _reportOnlyModeWarningLogged = false;
         private static void AddGeneratedFile(GeneratedCodeWorkspace project, string filename, string text)
         {
+            if (Configuration.MgmtConfiguration.MgmtDebug.ReportOnly)
+            {
+                if (!_reportOnlyModeWarningLogged)
+                {
+                    AutoRestLogger.Warning("codegen-report-only is set to true. Skip adding source code file to output.").Wait();
+                    _reportOnlyModeWarningLogged = true;
+                }
+                return;
+            }
+
             if (!_addedProjectFilenames.TryGetValue(project, out var addedFileNames))
             {
                 addedFileNames = new HashSet<string>();
@@ -65,10 +78,54 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in MgmtContext.Library.Models)
             {
-                if (ShouldSkipModelGeneration(model))
-                    continue;
-
                 var name = model.Type.Name;
+
+                if (model is MgmtObjectType mot)
+                {
+                    ModelItem mi = new ModelItem(mot.Declaration.Namespace, mot.Declaration.Name, mot.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    mi.Properties = mot.Properties.ToDictionary(p => p.Declaration.Name, p =>
+                    {
+                        if (p.SchemaProperty != null)
+                        {
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), mot.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                        }
+                        else
+                        {
+                            AutoRestLogger.Warning($"Ignore Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
+                            return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
+                        }
+                    });
+                    MgmtReport.Instance.ModelSection.Add(mi.FullName, mi);
+                }
+                else if (model is EnumType et)
+                {
+                    var schema = MgmtContext.Library.SchemaMap.First(map => map.Value == model).Key;
+                    var choices = schema switch
+                    {
+                        ChoiceSchema sc => sc.Choices,
+                        SealedChoiceSchema scs => scs.Choices,
+                        _ => throw new InvalidOperationException("Unexpected Schema type for EnumType: " + schema.GetType())
+                    };
+
+                    EnumItem mi = new EnumItem(et.Declaration.Namespace, et.Declaration.Name, schema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                    mi.Values = et.Values.ToDictionary(v => v.Declaration.Name, v =>
+                    {
+                        var found = choices.FirstOrDefault(c => c.Value == v.Value.Value?.ToString());
+                        if (found == null)
+                        {
+                            var allValues = string.Join(",", choices.Select(c => c.Value ?? "<null>"));
+                            AutoRestLogger.Warning($"Can't find matching enumvalue '{v.Value}' in '{allValues}'").Wait();
+                            return new EnumValueItem(v.Declaration.Name, "<no matching enum value found>", MgmtReport.Instance.TransformSection);
+                        }
+                        return new EnumValueItem(v.Declaration.Name, schema.GetFullSerializedName(found), MgmtReport.Instance.TransformSection);
+                    });
+                    MgmtReport.Instance.EnumSection.Add(mi.FullName, mi);
+                }
+                else
+                {
+                    AutoRestLogger.Warning("Model found which is not MgmtObjectType: " + name).Wait();
+                }
+
                 WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
@@ -85,6 +142,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = new ResourceCollectionWriter(resourceCollection);
                 writer.Write();
 
+                var ri = new ResourceItem(resourceCollection, MgmtReport.Instance.TransformSection);
+                MgmtReport.Instance.ResourceCollectionSection.Add(ri.Name, ri);
+
                 AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
             }
 
@@ -94,6 +154,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
 
                 var name = model.Type.Name;
+
+                ModelItem mi = new ModelItem(model.Declaration.Namespace, model.Declaration.Name, model.ObjectSchema.GetFullSerializedName(), MgmtReport.Instance.TransformSection);
+                mi.Properties = model.Properties.ToDictionary(p => p.Declaration.Name, p =>
+                {
+                    if (p.SchemaProperty != null)
+                    {
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), model.GetFullSerializedName(p.SchemaProperty), MgmtReport.Instance.TransformSection);
+                    }
+                    else
+                    {
+                        AutoRestLogger.Warning($"Ignore Resource Property '{mi.FullName}.{p.Declaration.Name}' without schema (i.e. AdditionalProperties)").Wait();
+                        return new PropertyItem(p.Declaration.Name, p.Declaration.Type.GetNameForReport(), "<NoPropertySchemaFound>", MgmtReport.Instance.TransformSection);
+                    }
+                });
+                MgmtReport.Instance.ModelSection.Add(mi.FullName, mi);
+
                 WriteArmModel(project, model, serializeWriter, $"{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
@@ -102,11 +178,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
+                var ri = new ResourceItem(resource, MgmtReport.Instance.TransformSection);
+                MgmtReport.Instance.ResourceSection.Add(ri.Name, ri);
+
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
             // write extension class
-            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
+            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.MockableExtensions);
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -126,7 +205,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 var writer = new OperationSourceWriter(operationSource);
                 writer.Write();
-                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
+                AddGeneratedFile(project, $"LongRunningOperation/{operationSource.Type.Name}.cs", writer.ToString());
             }
 
             foreach (var model in MgmtContext.Library.PropertyBagModels)
@@ -150,7 +229,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
+        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockableExtension> mockableExtensions)
         {
             if (isArmCore)
             {
@@ -158,7 +237,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 foreach (var extension in extensions)
                 {
                     if (!extension.IsEmpty)
+                    {
+                        MgmtReport.Instance.ExtensionSection.Add(extension.ResourceName, new ExtensionItem(extension, MgmtReport.Instance.TransformSection));
                         WriteExtensionFile(project, MgmtExtensionWriter.GetWriter(extension));
+                    }
                 }
             }
             else
@@ -168,10 +250,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     WriteExtensionFile(project, new MgmtExtensionWrapperWriter(extensionWrapper));
 
                 // and we write ExtensionClients
-                foreach (var extensionClient in extensionClients)
+                foreach (var mockableExtension in mockableExtensions)
                 {
-                    if (!extensionClient.IsEmpty)
-                        WriteExtensionFile(project, new MgmtExtensionClientWriter(extensionClient));
+                    if (!mockableExtension.IsEmpty)
+                    {
+                        MgmtReport.Instance.ExtensionSection.Add(mockableExtension.ResourceName, new ExtensionItem(mockableExtension, MgmtReport.Instance.TransformSection));
+                        WriteExtensionFile(project, MgmtMockableExtensionWriter.GetWriter(mockableExtension));
+                    }
                 }
             }
         }
@@ -182,23 +267,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());
         }
 
-        private static bool ShouldSkipModelGeneration(TypeProvider model)
-        {
-            // since MgmtReferenceType inherits from MgmtObjectType which inherits from SchemaObjectType, we definitely do not want to exclude any generation of ReferenceTypes
-            if (model is SchemaObjectType objSchema && model is not MgmtReferenceType)
-            {
-                if (TypeReferenceTypeChooser.HasMatch(objSchema.ObjectSchema))
-                    return true;
-            }
-
-            return false;
-        }
-
         private static void WriteArmModel(GeneratedCodeWorkspace project, TypeProvider model, SerializationWriter serializeWriter, string modelFileName, string serializationFileName)
         {
             var codeWriter = new CodeWriter();
 
-            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
+            var modelWriter = model switch
+            {
+                MgmtReferenceType => new ReferenceTypeWriter(),
+                ResourceData data => new ResourceDataWriter(data),
+                _ => new ModelWriter()
+            };
+
+            modelWriter.WriteModel(codeWriter, model);
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 

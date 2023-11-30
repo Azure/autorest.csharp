@@ -17,11 +17,11 @@ using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
-    internal class Samples_Duration
+    public partial class Samples_Duration
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull()
+        public void Example_Duration_GetNonNull_ShortVersion()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Async()
+        public async Task Example_Duration_GetNonNull_ShortVersion_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_Convenience()
+        public void Example_Duration_GetNonNull_ShortVersion_Convenience()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -56,7 +56,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_Convenience_Async()
+        public async Task Example_Duration_GetNonNull_ShortVersion_Convenience_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -65,7 +65,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters()
+        public void Example_Duration_GetNonNull_AllParameters()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -78,7 +78,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Async()
+        public async Task Example_Duration_GetNonNull_AllParameters_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -91,7 +91,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters_Convenience()
+        public void Example_Duration_GetNonNull_AllParameters_Convenience()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -100,7 +100,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        public async Task Example_Duration_GetNonNull_AllParameters_Convenience_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -109,7 +109,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull()
+        public void Example_Duration_GetNull_ShortVersion()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -122,7 +122,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Async()
+        public async Task Example_Duration_GetNull_ShortVersion_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -135,7 +135,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_Convenience()
+        public void Example_Duration_GetNull_ShortVersion_Convenience()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_Convenience_Async()
+        public async Task Example_Duration_GetNull_ShortVersion_Convenience_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -153,7 +153,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters()
+        public void Example_Duration_GetNull_AllParameters()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -166,7 +166,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Async()
+        public async Task Example_Duration_GetNull_AllParameters_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -179,7 +179,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters_Convenience()
+        public void Example_Duration_GetNull_AllParameters_Convenience()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -188,7 +188,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        public async Task Example_Duration_GetNull_AllParameters_Convenience_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
@@ -197,121 +197,129 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull()
+        public void Example_Duration_PatchNonNull_ShortVersion()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_Async()
+        public async Task Example_Duration_PatchNonNull_ShortVersion_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_AllParameters()
+        public void Example_Duration_PatchNonNull_AllParameters()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNonNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_AllParameters_Async()
+        public async Task Example_Duration_PatchNonNull_AllParameters_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNonNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull()
+        public void Example_Duration_PatchNull_ShortVersion()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_Async()
+        public async Task Example_Duration_PatchNull_ShortVersion_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_AllParameters()
+        public void Example_Duration_PatchNull_AllParameters()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = client.PatchNull(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_AllParameters_Async()
+        public async Task Example_Duration_PatchNull_AllParameters_Async()
         {
             Duration client = new NullableClient().GetDurationClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 requiredProperty = "<requiredProperty>",
                 nullableProperty = "PT1H23M45S",
             });
             Response response = await client.PatchNullAsync(content);
+
             Console.WriteLine(response.Status);
         }
     }

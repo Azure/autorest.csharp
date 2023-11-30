@@ -17,11 +17,11 @@ using _Type._Array;
 
 namespace _Type._Array.Samples
 {
-    internal class Samples_DatetimeValue
+    public partial class Samples_DatetimeValue
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue()
+        public void Example_DatetimeValue_GetDatetimeValue_ShortVersion()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -33,7 +33,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_Async()
+        public async Task Example_DatetimeValue_GetDatetimeValue_ShortVersion_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -45,7 +45,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue_Convenience()
+        public void Example_DatetimeValue_GetDatetimeValue_ShortVersion_Convenience()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -54,7 +54,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_Convenience_Async()
+        public async Task Example_DatetimeValue_GetDatetimeValue_ShortVersion_Convenience_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -63,7 +63,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue_AllParameters()
+        public void Example_DatetimeValue_GetDatetimeValue_AllParameters()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -75,7 +75,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_AllParameters_Async()
+        public async Task Example_DatetimeValue_GetDatetimeValue_AllParameters_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -87,7 +87,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue_AllParameters_Convenience()
+        public void Example_DatetimeValue_GetDatetimeValue_AllParameters_Convenience()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -96,7 +96,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_AllParameters_Convenience_Async()
+        public async Task Example_DatetimeValue_GetDatetimeValue_AllParameters_Convenience_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
@@ -105,110 +105,98 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put()
+        public void Example_DatetimeValue_Put_ShortVersion()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            using RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T14:57:31.2311892-04:00"
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Async()
+        public async Task Example_DatetimeValue_Put_ShortVersion_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            using RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T14:57:31.2311892-04:00"
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_Convenience()
+        public void Example_DatetimeValue_Put_ShortVersion_Convenience()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<DateTimeOffset>()
-{
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
+        public async Task Example_DatetimeValue_Put_ShortVersion_Convenience_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<DateTimeOffset>()
-{
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_DatetimeValue_Put_AllParameters()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            using RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T14:57:31.2311892-04:00"
-});
+            });
             Response response = client.Put(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_DatetimeValue_Put_AllParameters_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            RequestContent content = RequestContent.Create(new List<object>()
-{
+            using RequestContent content = RequestContent.Create(new object[]
+            {
 "2022-05-10T14:57:31.2311892-04:00"
-});
+            });
             Response response = await client.PutAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_DatetimeValue_Put_AllParameters_Convenience()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = client.Put(new List<DateTimeOffset>()
-{
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-});
-            Console.WriteLine(response.Status);
+            Response response = client.Put(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_DatetimeValue_Put_AllParameters_Convenience_Async()
         {
             DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            Response response = await client.PutAsync(new List<DateTimeOffset>()
-{
-DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00")
-});
-            Console.WriteLine(response.Status);
+            Response response = await client.PutAsync(new DateTimeOffset[] { DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00") });
         }
     }
 }

@@ -18,13 +18,13 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class DeploymentExtendedData : ResourceData
     {
-        /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExtendedData"/>. </summary>
         internal DeploymentExtendedData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentExtendedData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

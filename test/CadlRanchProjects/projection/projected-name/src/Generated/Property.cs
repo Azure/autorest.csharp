@@ -38,7 +38,7 @@ namespace Projection.ProjectedName
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace Projection.ProjectedName
             _apiVersion = apiVersion;
         }
 
-        /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
+        /// <param name="jsonProjectedNameModel"> The <see cref="JsonProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(JsonProjectedNameModel,CancellationToken)']/*" />
@@ -56,11 +56,12 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await JsonAsync(jsonProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = jsonProjectedNameModel.ToRequestContent();
+            Response response = await JsonAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="jsonProjectedNameModel"> The JsonProjectedNameModel to use. </param>
+        /// <param name="jsonProjectedNameModel"> The <see cref="JsonProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(JsonProjectedNameModel,CancellationToken)']/*" />
@@ -69,7 +70,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Json(jsonProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = jsonProjectedNameModel.ToRequestContent();
+            Response response = Json(content, context);
             return response;
         }
 
@@ -151,7 +153,7 @@ namespace Projection.ProjectedName
             }
         }
 
-        /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
+        /// <param name="clientProjectedNameModel"> The <see cref="ClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(ClientProjectedNameModel,CancellationToken)']/*" />
@@ -160,11 +162,12 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ClientAsync(clientProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = clientProjectedNameModel.ToRequestContent();
+            Response response = await ClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="clientProjectedNameModel"> The ClientProjectedNameModel to use. </param>
+        /// <param name="clientProjectedNameModel"> The <see cref="ClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(ClientProjectedNameModel,CancellationToken)']/*" />
@@ -173,7 +176,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Client(clientProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = clientProjectedNameModel.ToRequestContent();
+            Response response = Client(content, context);
             return response;
         }
 
@@ -255,7 +259,7 @@ namespace Projection.ProjectedName
             }
         }
 
-        /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
+        /// <param name="languageProjectedNameModel"> The <see cref="LanguageProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(LanguageProjectedNameModel,CancellationToken)']/*" />
@@ -264,11 +268,12 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LanguageAsync(languageProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = languageProjectedNameModel.ToRequestContent();
+            Response response = await LanguageAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="languageProjectedNameModel"> The LanguageProjectedNameModel to use. </param>
+        /// <param name="languageProjectedNameModel"> The <see cref="LanguageProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="languageProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(LanguageProjectedNameModel,CancellationToken)']/*" />
@@ -277,7 +282,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Language(languageProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = languageProjectedNameModel.ToRequestContent();
+            Response response = Language(content, context);
             return response;
         }
 
@@ -359,7 +365,7 @@ namespace Projection.ProjectedName
             }
         }
 
-        /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
+        /// <param name="jsonAndClientProjectedNameModel"> The <see cref="JsonAndClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
@@ -368,11 +374,12 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await JsonAndClientAsync(jsonAndClientProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = jsonAndClientProjectedNameModel.ToRequestContent();
+            Response response = await JsonAndClientAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="jsonAndClientProjectedNameModel"> The JsonAndClientProjectedNameModel to use. </param>
+        /// <param name="jsonAndClientProjectedNameModel"> The <see cref="JsonAndClientProjectedNameModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="jsonAndClientProjectedNameModel"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)']/*" />
@@ -381,7 +388,8 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = JsonAndClient(jsonAndClientProjectedNameModel.ToRequestContent(), context);
+            using RequestContent content = jsonAndClientProjectedNameModel.ToRequestContent();
+            Response response = JsonAndClient(content, context);
             return response;
         }
 

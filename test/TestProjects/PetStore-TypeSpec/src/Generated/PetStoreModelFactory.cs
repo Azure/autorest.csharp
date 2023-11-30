@@ -12,7 +12,7 @@ namespace PetStore.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PetStoreModelFactory
     {
-        /// <summary> Initializes a new instance of Fish. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Fish"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <returns> A new <see cref="Models.Fish"/> instance for mocking. </returns>
@@ -21,7 +21,7 @@ namespace PetStore.Models
             return new UnknownFish(kind, size);
         }
 
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Shark"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="bite"> The bite of the shark. </param>
         /// <returns> A new <see cref="Models.Shark"/> instance for mocking. </returns>
@@ -30,7 +30,7 @@ namespace PetStore.Models
             return new Shark("shark", size, bite);
         }
 
-        /// <summary> Initializes a new instance of Tuna. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.Tuna"/>. </summary>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
         /// <returns> A new <see cref="Models.Tuna"/> instance for mocking. </returns>

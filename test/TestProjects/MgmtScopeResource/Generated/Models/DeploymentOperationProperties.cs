@@ -12,12 +12,12 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment operation properties. </summary>
     public partial class DeploymentOperationProperties
     {
-        /// <summary> Initializes a new instance of DeploymentOperationProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         internal DeploymentOperationProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentOperationProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentOperationProperties"/>. </summary>
         /// <param name="provisioningOperation"> The name of the current provisioning operation. </param>
         /// <param name="provisioningState"> The state of the provisioning. </param>
         /// <param name="timestamp"> The date and time of the operation. </param>
@@ -66,7 +66,7 @@ namespace MgmtScopeResource.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -103,7 +103,7 @@ namespace MgmtScopeResource.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

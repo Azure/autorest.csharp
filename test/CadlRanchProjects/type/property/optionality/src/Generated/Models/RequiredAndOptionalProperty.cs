@@ -10,14 +10,14 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with required and optional properties. </summary>
     public partial class RequiredAndOptionalProperty
     {
-        /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/>. </summary>
         /// <param name="requiredProperty"> required int property. </param>
         public RequiredAndOptionalProperty(int requiredProperty)
         {
             RequiredProperty = requiredProperty;
         }
 
-        /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequiredAndOptionalProperty"/>. </summary>
         /// <param name="optionalProperty"> optional string property. </param>
         /// <param name="requiredProperty"> required int property. </param>
         internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty)

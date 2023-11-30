@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Identity;
@@ -15,177 +14,193 @@ using NUnit.Framework;
 
 namespace Encode.Bytes.Samples
 {
-    internal class Samples_Query
+    public partial class Samples_Query
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_Query_Default_ShortVersion()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_Query_Default_ShortVersion_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public void Example_Query_Default_AllParameters()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Default(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Async()
+        public async Task Example_Query_Default_AllParameters_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64()
+        public void Example_Query_Base64_ShortVersion()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_Async()
+        public async Task Example_Query_Base64_ShortVersion_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64_AllParameters()
+        public void Example_Query_Base64_AllParameters()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Base64(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64_AllParameters_Async()
+        public async Task Example_Query_Base64_AllParameters_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64Async(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url()
+        public void Example_Query_Base64url_ShortVersion()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_Async()
+        public async Task Example_Query_Base64url_ShortVersion_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64url_AllParameters()
+        public void Example_Query_Base64url_AllParameters()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = client.Base64url(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64url_AllParameters_Async()
+        public async Task Example_Query_Base64url_AllParameters_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
             Response response = await client.Base64urlAsync(BinaryData.FromObjectAsJson(new object()));
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray()
+        public void Example_Query_Base64urlArray_ShortVersion()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Base64urlArray(new List<BinaryData>()
-{
+            Response response = client.Base64urlArray(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_Async()
+        public async Task Example_Query_Base64urlArray_ShortVersion_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
-{
+            Response response = await client.Base64urlArrayAsync(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Base64urlArray_AllParameters()
+        public void Example_Query_Base64urlArray_AllParameters()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = client.Base64urlArray(new List<BinaryData>()
-{
+            Response response = client.Base64urlArray(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Base64urlArray_AllParameters_Async()
+        public async Task Example_Query_Base64urlArray_AllParameters_Async()
         {
             Query client = new BytesClient().GetQueryClient(apiVersion: "1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new List<BinaryData>()
-{
+            Response response = await client.Base64urlArrayAsync(new BinaryData[]
+            {
 BinaryData.FromObjectAsJson(new object())
-});
+            });
+
             Console.WriteLine(response.Status);
         }
     }

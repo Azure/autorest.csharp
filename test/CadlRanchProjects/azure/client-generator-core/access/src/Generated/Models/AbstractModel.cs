@@ -17,7 +17,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// </summary>
     internal abstract partial class AbstractModel
     {
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected AbstractModel(string name)
@@ -27,7 +27,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AbstractModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"></param>
         internal AbstractModel(string kind, string name)

@@ -13,14 +13,14 @@ namespace xml_service.Models
     /// <summary> A barrel of apples. </summary>
     public partial class AppleBarrel
     {
-        /// <summary> Initializes a new instance of AppleBarrel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AppleBarrel"/>. </summary>
         public AppleBarrel()
         {
             GoodApples = new ChangeTrackingList<string>();
             BadApples = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of AppleBarrel. </summary>
+        /// <summary> Initializes a new instance of <see cref="AppleBarrel"/>. </summary>
         /// <param name="goodApples"></param>
         /// <param name="badApples"></param>
         internal AppleBarrel(IList<string> goodApples, IList<string> badApples)

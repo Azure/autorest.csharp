@@ -20,13 +20,16 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a DiskEncryptionSet along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DiskEncryptionSetResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetDiskEncryptionSetResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetDiskEncryptionSet method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="DiskEncryptionSetResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetDiskEncryptionSetResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetDiskEncryptionSet method.
     /// </summary>
     public partial class DiskEncryptionSetResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DiskEncryptionSetResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="diskEncryptionSetName"> The diskEncryptionSetName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string diskEncryptionSetName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{diskEncryptionSetName}";
@@ -42,7 +45,7 @@ namespace MgmtMockAndSample
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "DiskEncryptionSetResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DiskEncryptionSetResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal DiskEncryptionSetResource(ArmClient client, DiskEncryptionSetData data) : this(client, data.Id)

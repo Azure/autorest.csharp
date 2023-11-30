@@ -15,7 +15,7 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model with collection bytes properties. </summary>
     public partial class CollectionsByteProperty
     {
-        /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
@@ -27,7 +27,7 @@ namespace _Type.Property.Nullable.Models
             NullableProperty = nullableProperty?.ToList();
         }
 
-        /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionsByteProperty"/>. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         internal CollectionsByteProperty(string requiredProperty, IReadOnlyList<BinaryData> nullableProperty)

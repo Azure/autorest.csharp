@@ -10,12 +10,12 @@ namespace MgmtListMethods.Models
     /// <summary> Describes the properties of a Non Resource Child. </summary>
     public partial class NonResourceChild
     {
-        /// <summary> Initializes a new instance of NonResourceChild. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceChild"/>. </summary>
         internal NonResourceChild()
         {
         }
 
-        /// <summary> Initializes a new instance of NonResourceChild. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonResourceChild"/>. </summary>
         /// <param name="name"> Name. </param>
         /// <param name="numberOfCores"> Test Desc. </param>
         internal NonResourceChild(string name, int? numberOfCores)

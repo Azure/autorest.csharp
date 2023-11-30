@@ -15,7 +15,7 @@ namespace ModelShapes.Models
     /// <summary> The InputModel. </summary>
     public partial class InputModel
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -24,8 +24,12 @@ namespace ModelShapes.Models
         /// <param name="requiredNullableInt"></param>
         /// <param name="requiredNullableStringList"></param>
         /// <param name="requiredNullableIntList"></param>
+        /// <param name="vectorReadOnlyRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorRequired"> The vector representation of a search query. </param>
+        /// <param name="vectorReadOnlyRequiredNullable"> The vector representation of a search query. </param>
+        /// <param name="vectorRequiredNullable"> The vector representation of a search query. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredStringList"/> or <paramref name="requiredIntList"/> is null. </exception>
-        public InputModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList)
+        public InputModel(string requiredString, int requiredInt, IEnumerable<string> requiredStringList, IEnumerable<int> requiredIntList, string requiredNullableString, int? requiredNullableInt, IEnumerable<string> requiredNullableStringList, IEnumerable<int> requiredNullableIntList, ReadOnlyMemory<float> vectorReadOnlyRequired, ReadOnlyMemory<float> vectorRequired, ReadOnlyMemory<float>? vectorReadOnlyRequiredNullable, ReadOnlyMemory<float>? vectorRequiredNullable)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
@@ -43,6 +47,12 @@ namespace ModelShapes.Models
             RequiredNullableIntList = requiredNullableIntList?.ToList();
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
+            Vector = ReadOnlyMemory<float>.Empty;
+            VectorReadOnly = ReadOnlyMemory<float>.Empty;
+            VectorReadOnlyRequired = vectorReadOnlyRequired;
+            VectorRequired = vectorRequired;
+            VectorReadOnlyRequiredNullable = vectorReadOnlyRequiredNullable;
+            VectorRequiredNullable = vectorRequiredNullable;
         }
 
         /// <summary> Gets the required string. </summary>
@@ -77,5 +87,21 @@ namespace ModelShapes.Models
         public IList<string> NonRequiredNullableStringList { get; set; }
         /// <summary> Gets or sets the non required nullable int list. </summary>
         public IList<int> NonRequiredNullableIntList { get; set; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float> Vector { get; set; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float> VectorReadOnly { get; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float> VectorReadOnlyRequired { get; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float> VectorRequired { get; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float>? VectorNullable { get; set; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float>? VectorReadOnlyNullable { get; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float>? VectorReadOnlyRequiredNullable { get; }
+        /// <summary> The vector representation of a search query. </summary>
+        public ReadOnlyMemory<float>? VectorRequiredNullable { get; }
     }
 }

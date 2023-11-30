@@ -10,12 +10,12 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> The Model4. </summary>
     public partial class Model4
     {
-        /// <summary> Initializes a new instance of Model4. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         internal Model4()
         {
         }
 
-        /// <summary> Initializes a new instance of Model4. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model4"/>. </summary>
         /// <param name="id"></param>
         /// <param name="j"></param>
         /// <param name="modelz"></param>

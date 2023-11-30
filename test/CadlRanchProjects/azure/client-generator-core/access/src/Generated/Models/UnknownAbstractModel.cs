@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Unknown version of AbstractModel. </summary>
     internal partial class UnknownAbstractModel : AbstractModel
     {
-        /// <summary> Initializes a new instance of UnknownAbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal UnknownAbstractModel(string name) : base(name)
@@ -21,7 +21,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary> Initializes a new instance of UnknownAbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"></param>
         internal UnknownAbstractModel(string kind, string name) : base(kind, name)

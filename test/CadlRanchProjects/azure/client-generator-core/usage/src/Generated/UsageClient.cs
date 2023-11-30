@@ -57,7 +57,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// }
         /// ```
         /// </summary>
-        /// <param name="body"> The InputModel to use. </param>
+        /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutputAsync(InputModel,CancellationToken)']/*" />
@@ -66,7 +66,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToInputOutputAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await InputToInputOutputAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -78,7 +79,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// }
         /// ```
         /// </summary>
-        /// <param name="body"> The InputModel to use. </param>
+        /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutput(InputModel,CancellationToken)']/*" />
@@ -87,7 +88,8 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToInputOutput(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = InputToInputOutput(content, context);
             return response;
         }
 

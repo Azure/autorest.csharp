@@ -14,49 +14,53 @@ using Server.Path.Single;
 
 namespace Server.Path.Single.Samples
 {
-    public class Samples_SingleClient
+    public partial class Samples_SingleClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp()
+        public void Example_Single_MyOp_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
 
             Response response = client.MyOp();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_MyOp_Async()
+        public async Task Example_Single_MyOp_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp_AllParameters()
+        public void Example_Single_MyOp_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
 
             Response response = client.MyOp();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_MyOp_AllParameters_Async()
+        public async Task Example_Single_MyOp_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
 
             Response response = await client.MyOpAsync();
+
             Console.WriteLine(response.Status);
         }
     }

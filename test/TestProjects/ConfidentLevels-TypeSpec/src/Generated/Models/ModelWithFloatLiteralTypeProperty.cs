@@ -11,9 +11,9 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> This is a model with a property of literal type of numbers. </summary>
-    internal partial class ModelWithFloatLiteralTypeProperty
+    public partial class ModelWithFloatLiteralTypeProperty
     {
-        /// <summary> Initializes a new instance of ModelWithFloatLiteralTypeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithFloatLiteralTypeProperty"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public ModelWithFloatLiteralTypeProperty(string name)
@@ -23,7 +23,7 @@ namespace ConfidentLevelsInTsp.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of ModelWithFloatLiteralTypeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithFloatLiteralTypeProperty"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="id"> The id. </param>
         internal ModelWithFloatLiteralTypeProperty(string name, ModelWithFloatLiteralTypePropertyId id)

@@ -14,165 +14,181 @@ using NUnit.Framework;
 
 namespace Encode.Datetime.Samples
 {
-    internal class Samples_ResponseHeader
+    public partial class Samples_ResponseHeader
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default()
+        public void Example_ResponseHeader_Default_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Default();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_Async()
+        public async Task Example_ResponseHeader_Default_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public void Example_ResponseHeader_Default_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Default();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Async()
+        public async Task Example_ResponseHeader_Default_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.DefaultAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339()
+        public void Example_ResponseHeader_Rfc3339_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc3339();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_Async()
+        public async Task Example_ResponseHeader_Rfc3339_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_AllParameters()
+        public void Example_ResponseHeader_Rfc3339_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc3339();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_AllParameters_Async()
+        public async Task Example_ResponseHeader_Rfc3339_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc3339Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231()
+        public void Example_ResponseHeader_Rfc7231_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc7231();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_Async()
+        public async Task Example_ResponseHeader_Rfc7231_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_AllParameters()
+        public void Example_ResponseHeader_Rfc7231_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.Rfc7231();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_AllParameters_Async()
+        public async Task Example_ResponseHeader_Rfc7231_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.Rfc7231Async();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp()
+        public void Example_ResponseHeader_UnixTimestamp_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.UnixTimestamp();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_Async()
+        public async Task Example_ResponseHeader_UnixTimestamp_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_AllParameters()
+        public void Example_ResponseHeader_UnixTimestamp_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = client.UnixTimestamp();
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_AllParameters_Async()
+        public async Task Example_ResponseHeader_UnixTimestamp_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient(apiVersion: "1.0.0");
 
             Response response = await client.UnixTimestampAsync();
+
             Console.WriteLine(response.Status);
         }
     }

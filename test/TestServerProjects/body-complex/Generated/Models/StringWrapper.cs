@@ -10,12 +10,12 @@ namespace body_complex.Models
     /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper
     {
-        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringWrapper"/>. </summary>
         public StringWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringWrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="empty"></param>
         /// <param name="nullProperty"></param>

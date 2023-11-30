@@ -13,13 +13,13 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> PrivateLinkServiceConnection resource. </summary>
     public partial class PrivateLinkServiceConnection : SubResource
     {
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkServiceConnection"/>. </summary>
         public PrivateLinkServiceConnection()
         {
             GroupIds = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
+        /// <summary> Initializes a new instance of <see cref="PrivateLinkServiceConnection"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="type"> The resource type. </param>

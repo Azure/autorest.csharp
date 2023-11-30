@@ -45,7 +45,7 @@ namespace CustomizationsInTsp
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
-        /// <param name="input"> The RootModel to use. </param>
+        /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTripAsync(RootModel,CancellationToken)']/*" />
@@ -54,12 +54,13 @@ namespace CustomizationsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RoundTripAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await RoundTripAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
-        /// <param name="input"> The RootModel to use. </param>
+        /// <param name="input"> The <see cref="RootModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/CustomizationsInTspClient.xml" path="doc/members/member[@name='RoundTrip(RootModel,CancellationToken)']/*" />
@@ -68,7 +69,8 @@ namespace CustomizationsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RoundTrip(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = RoundTrip(content, context);
             return Response.FromValue(RootModel.FromResponse(response), response);
         }
 

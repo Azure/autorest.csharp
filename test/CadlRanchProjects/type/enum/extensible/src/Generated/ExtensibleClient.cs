@@ -225,23 +225,25 @@ namespace _Type._Enum.Extensible
             }
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutKnownValueAsync(BinaryData.FromObjectAsJson(body.ToString()), context).ConfigureAwait(false);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            Response response = await PutKnownValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutKnownValue(BinaryData.FromObjectAsJson(body.ToString()), context);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            Response response = PutKnownValue(content, context);
             return response;
         }
 
@@ -323,23 +325,25 @@ namespace _Type._Enum.Extensible
             }
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutUnknownValueAsync(BinaryData.FromObjectAsJson(body.ToString()), context).ConfigureAwait(false);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            Response response = await PutUnknownValueAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutUnknownValue(BinaryData.FromObjectAsJson(body.ToString()), context);
+            using RequestContent content = BinaryData.FromObjectAsJson(body.ToString());
+            Response response = PutUnknownValue(content, context);
             return response;
         }
 

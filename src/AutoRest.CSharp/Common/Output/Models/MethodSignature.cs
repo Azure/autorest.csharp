@@ -8,8 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
@@ -105,6 +103,8 @@ namespace AutoRest.CSharp.Output.Models
                     : null
             };
         }
+
+        public FormattableString GetCRef() => $"{Name}({Parameters.GetTypesFormattable()})";
 
         private class MethodSignatureParameterAndReturnTypeEqualityComparer : IEqualityComparer<MethodSignature>
         {

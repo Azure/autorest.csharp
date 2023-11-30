@@ -13,7 +13,7 @@ namespace ConvenienceInCadl.Models
     /// <summary> A model. </summary>
     public partial class Model
     {
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         public Model(string id)

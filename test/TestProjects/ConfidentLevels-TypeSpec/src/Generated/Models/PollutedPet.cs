@@ -15,9 +15,9 @@ namespace ConfidentLevelsInTsp.Models
     /// Please note <see cref="PollutedPet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="PollutedDog"/> and <see cref="UnpollutedCat"/>.
     /// </summary>
-    internal abstract partial class PollutedPet
+    public abstract partial class PollutedPet
     {
-        /// <summary> Initializes a new instance of PollutedPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedPet"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         protected PollutedPet(string name)
@@ -27,7 +27,7 @@ namespace ConfidentLevelsInTsp.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of PollutedPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedPet"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         internal PollutedPet(string kind, string name)

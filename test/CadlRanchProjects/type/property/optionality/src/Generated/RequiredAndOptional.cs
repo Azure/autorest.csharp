@@ -38,7 +38,7 @@ namespace _Type.Property.Optionality
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal RequiredAndOptional(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -228,7 +228,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -237,12 +237,13 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAllAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutAllAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -251,7 +252,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutAll(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutAll(content, context);
             return response;
         }
 
@@ -334,7 +336,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with only required properties. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -343,12 +345,13 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRequiredOnlyAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await PutRequiredOnlyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> Put a body with only required properties. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -357,7 +360,8 @@ namespace _Type.Property.Optionality
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRequiredOnly(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = PutRequiredOnly(content, context);
             return response;
         }
 

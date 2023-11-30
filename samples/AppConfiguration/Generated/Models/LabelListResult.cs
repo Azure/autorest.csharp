@@ -13,13 +13,13 @@ namespace AppConfiguration.Models
     /// <summary> The result of a list request. </summary>
     internal partial class LabelListResult
     {
-        /// <summary> Initializes a new instance of LabelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="LabelListResult"/>. </summary>
         internal LabelListResult()
         {
             Items = new ChangeTrackingList<Label>();
         }
 
-        /// <summary> Initializes a new instance of LabelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="LabelListResult"/>. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
         internal LabelListResult(IReadOnlyList<Label> items, string nextLink)

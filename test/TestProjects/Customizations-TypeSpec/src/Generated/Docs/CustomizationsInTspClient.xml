@@ -14,7 +14,7 @@ This sample shows how to call RoundTripAsync with all parameters.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RootModel input = new RootModel()
+RootModel input = new RootModel
 {
     PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
     PropertyModelToRename = new RenamedModel(1234)
@@ -22,25 +22,23 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
     {
-        "<badListName>"
-    }, new Dictionary<string, string>()
+        ["key"] = "<badDictionaryName>"
+    }, new IList<string>[]
     {
-        ["key"] = "<badDictionaryName>",
-    }, new List<IList<string>>()
+        new string[]{"<badListOfListName>"}
+    }, new IDictionary<string, string>[]
     {
-        new List<string>()
+        new Dictionary<string, string>
         {
-            "<badListOfListName>"
+            ["key"] = "<badListOfDictionaryName>"
         }
-    }, new List<IDictionary<string, string>>()
+    }, new float[] { 123.45F }, new float[] { 123.45F })
     {
-        new Dictionary<string, string>()
-        {
-            ["key"] = "<badListOfDictionaryName>",
-        }
-    }),
+        VectorOptional = new float[] { 123.45F },
+        VectorOptionalNullable = new float[] { 123.45F },
+    },
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -63,7 +61,7 @@ This sample shows how to call RoundTrip with all parameters.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RootModel input = new RootModel()
+RootModel input = new RootModel
 {
     PropertyExtensibleEnum = ExtensibleEnumWithOperator.Monday,
     PropertyModelToRename = new RenamedModel(1234)
@@ -71,25 +69,23 @@ RootModel input = new RootModel()
         OptionalInt = 1234,
     },
     PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new List<string>()
+    PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, XmlConvert.ToTimeSpan("<propertyToMakeDuration>"), "PT1H23M45S", default, "<propertyToField>", new string[] { "<badListName>" }, new Dictionary<string, string>
     {
-        "<badListName>"
-    }, new Dictionary<string, string>()
+        ["key"] = "<badDictionaryName>"
+    }, new IList<string>[]
     {
-        ["key"] = "<badDictionaryName>",
-    }, new List<IList<string>>()
+        new string[]{"<badListOfListName>"}
+    }, new IDictionary<string, string>[]
     {
-        new List<string>()
+        new Dictionary<string, string>
         {
-            "<badListOfListName>"
+            ["key"] = "<badListOfDictionaryName>"
         }
-    }, new List<IDictionary<string, string>>()
+    }, new float[] { 123.45F }, new float[] { 123.45F })
     {
-        new Dictionary<string, string>()
-        {
-            ["key"] = "<badListOfDictionaryName>",
-        }
-    }),
+        VectorOptional = new float[] { 123.45F },
+        VectorOptionalNullable = new float[] { 123.45F },
+    },
     PropertyEnumToRename = RenamedEnum.One,
     PropertyEnumWithValueToRename = EnumWithValueToRename.One,
     PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
@@ -105,7 +101,7 @@ This sample shows how to call RoundTripAsync and parse the result.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = await client.RoundTripAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -115,7 +111,7 @@ This sample shows how to call RoundTripAsync with all request content and parse 
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     propertyExtensibleEnum = "Monday",
     propertyModelToMakeInternal = new
@@ -141,7 +137,7 @@ RequestContent content = RequestContent.Create(new
         propertyToMakeString = "PT1H23M45S",
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
-        badListName = new List<object>()
+        badListName = new object[]
         {
             "<badListName>"
         },
@@ -149,19 +145,35 @@ RequestContent content = RequestContent.Create(new
         {
             key = "<badDictionaryName>",
         },
-        badListOfListName = new List<object>()
+        badListOfListName = new object[]
         {
-            new List<object>()
+            new object[]
             {
                 "<badListOfListName>"
             }
         },
-        badListOfDictionaryName = new List<object>()
+        badListOfDictionaryName = new object[]
         {
             new
             {
                 key = "<badListOfDictionaryName>",
             }
+        },
+        vector = new object[]
+        {
+            123.45F
+        },
+        vectorOptional = new object[]
+        {
+            123.45F
+        },
+        vectorNullable = new object[]
+        {
+            123.45F
+        },
+        vectorOptionalNullable = new object[]
+        {
+            123.45F
         },
     },
     propertyEnumToRename = "1",
@@ -193,6 +205,14 @@ Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").Ge
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullable")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorReadOnly")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalReadOnly")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullableReadOnly")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullableReadOnly")[0].ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -206,7 +226,7 @@ This sample shows how to call RoundTrip and parse the result.
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new object());
+using RequestContent content = RequestContent.Create(new object());
 Response response = client.RoundTrip(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -216,7 +236,7 @@ This sample shows how to call RoundTrip with all request content and parse the r
 <code><![CDATA[
 CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-RequestContent content = RequestContent.Create(new
+using RequestContent content = RequestContent.Create(new
 {
     propertyExtensibleEnum = "Monday",
     propertyModelToMakeInternal = new
@@ -242,7 +262,7 @@ RequestContent content = RequestContent.Create(new
         propertyToMakeString = "PT1H23M45S",
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
-        badListName = new List<object>()
+        badListName = new object[]
         {
             "<badListName>"
         },
@@ -250,19 +270,35 @@ RequestContent content = RequestContent.Create(new
         {
             key = "<badDictionaryName>",
         },
-        badListOfListName = new List<object>()
+        badListOfListName = new object[]
         {
-            new List<object>()
+            new object[]
             {
                 "<badListOfListName>"
             }
         },
-        badListOfDictionaryName = new List<object>()
+        badListOfDictionaryName = new object[]
         {
             new
             {
                 key = "<badListOfDictionaryName>",
             }
+        },
+        vector = new object[]
+        {
+            123.45F
+        },
+        vectorOptional = new object[]
+        {
+            123.45F
+        },
+        vectorNullable = new object[]
+        {
+            123.45F
+        },
+        vectorOptionalNullable = new object[]
+        {
+            123.45F
         },
     },
     propertyEnumToRename = "1",
@@ -294,6 +330,14 @@ Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").Ge
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vector")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptional")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullable")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullable")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorReadOnly")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalReadOnly")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorNullableReadOnly")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("vectorOptionalNullableReadOnly")[0].ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());

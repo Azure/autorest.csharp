@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtExtensionCommonRestOperation
 {
     /// <summary>
-    /// A class representing a collection of <see cref="TypeOneResource" /> and their operations.
-    /// Each <see cref="TypeOneResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="TypeOneCollection" /> instance call the GetTypeOnes method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="TypeOneResource"/> and their operations.
+    /// Each <see cref="TypeOneResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="TypeOneCollection"/> instance call the GetTypeOnes method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class TypeOneCollection : ArmCollection, IEnumerable<TypeOneResource>, IAsyncEnumerable<TypeOneResource>
     {
@@ -224,7 +224,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="TypeOneResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -245,7 +245,7 @@ namespace MgmtExtensionCommonRestOperation
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="TypeOneResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<TypeOneResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);

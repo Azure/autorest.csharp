@@ -38,7 +38,7 @@ namespace Encode.Duration
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Property(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace Encode.Duration
             _apiVersion = apiVersion;
         }
 
-        /// <param name="body"> The DefaultDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='DefaultAsync(DefaultDurationProperty,CancellationToken)']/*" />
@@ -56,11 +56,12 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await DefaultAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The DefaultDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="DefaultDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Default(DefaultDurationProperty,CancellationToken)']/*" />
@@ -69,7 +70,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Default(content, context);
             return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
         }
 
@@ -151,7 +153,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The ISO8601DurationProperty to use. </param>
+        /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601Async(ISO8601DurationProperty,CancellationToken)']/*" />
@@ -160,11 +162,12 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Iso8601Async(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Iso8601Async(content, context).ConfigureAwait(false);
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The ISO8601DurationProperty to use. </param>
+        /// <param name="body"> The <see cref="ISO8601DurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Iso8601(ISO8601DurationProperty,CancellationToken)']/*" />
@@ -173,7 +176,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Iso8601(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Iso8601(content, context);
             return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
         }
 
@@ -255,7 +259,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The Int32SecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32SecondsAsync(Int32SecondsDurationProperty,CancellationToken)']/*" />
@@ -264,11 +268,12 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Int32SecondsAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await Int32SecondsAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The Int32SecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="Int32SecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='Int32Seconds(Int32SecondsDurationProperty,CancellationToken)']/*" />
@@ -277,7 +282,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Int32Seconds(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = Int32Seconds(content, context);
             return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
         }
 
@@ -359,7 +365,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The FloatSecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsAsync(FloatSecondsDurationProperty,CancellationToken)']/*" />
@@ -368,11 +374,12 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FloatSecondsAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await FloatSecondsAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The FloatSecondsDurationProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSeconds(FloatSecondsDurationProperty,CancellationToken)']/*" />
@@ -381,7 +388,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FloatSeconds(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = FloatSeconds(content, context);
             return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
         }
 
@@ -463,7 +471,7 @@ namespace Encode.Duration
             }
         }
 
-        /// <param name="body"> The FloatSecondsDurationArrayProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArrayAsync(FloatSecondsDurationArrayProperty,CancellationToken)']/*" />
@@ -472,11 +480,12 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FloatSecondsArrayAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = body.ToRequestContent();
+            Response response = await FloatSecondsArrayAsync(content, context).ConfigureAwait(false);
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
 
-        /// <param name="body"> The FloatSecondsDurationArrayProperty to use. </param>
+        /// <param name="body"> The <see cref="FloatSecondsDurationArrayProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Property.xml" path="doc/members/member[@name='FloatSecondsArray(FloatSecondsDurationArrayProperty,CancellationToken)']/*" />
@@ -485,7 +494,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FloatSecondsArray(body.ToRequestContent(), context);
+            using RequestContent content = body.ToRequestContent();
+            Response response = FloatSecondsArray(content, context);
             return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
         }
 

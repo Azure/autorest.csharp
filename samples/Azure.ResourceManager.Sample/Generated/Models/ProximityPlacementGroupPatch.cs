@@ -13,7 +13,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ProximityPlacementGroupPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupPatch. </summary>
+        /// <summary> Initializes a new instance of <see cref="ProximityPlacementGroupPatch"/>. </summary>
         public ProximityPlacementGroupPatch()
         {
         }

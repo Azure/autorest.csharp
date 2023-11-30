@@ -38,7 +38,7 @@ namespace Parameters.Spread
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal Model(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -56,7 +56,8 @@ namespace Parameters.Spread
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await SpreadAsRequestBodyAsync(bodyParameter.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = bodyParameter.ToRequestContent();
+            Response response = await SpreadAsRequestBodyAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,7 +70,8 @@ namespace Parameters.Spread
             Argument.AssertNotNull(bodyParameter, nameof(bodyParameter));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = SpreadAsRequestBody(bodyParameter.ToRequestContent(), context);
+            using RequestContent content = bodyParameter.ToRequestContent();
+            Response response = SpreadAsRequestBody(content, context);
             return response;
         }
 

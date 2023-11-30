@@ -20,13 +20,16 @@ namespace MgmtPropertyBag
 {
     /// <summary>
     /// A Class representing a Foo along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FooResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFooResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetFoo method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FooResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFooResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetFoo method.
     /// </summary>
     public partial class FooResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FooResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="fooName"> The fooName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string fooName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/foos/{fooName}";
@@ -42,7 +45,7 @@ namespace MgmtPropertyBag
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FooResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FooResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FooResource(ArmClient client, FooData data) : this(client, data.Id)
@@ -102,8 +105,8 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
+        /// <param name="orderby"> The <see cref="string"/> to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -139,8 +142,8 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="orderby"> The String to use. </param>
+        /// <param name="top"> The <see cref="int"/>? to use. </param>
+        /// <param name="orderby"> The <see cref="string"/> to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

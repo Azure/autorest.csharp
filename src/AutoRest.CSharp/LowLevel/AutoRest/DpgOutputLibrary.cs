@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Output.Samples;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -63,6 +63,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
         public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
+
+        private Dictionary<LowLevelClient, DpgClientSampleProvider>? _dpgClientSampleProviders;
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> DpgClientSampleProviders => _dpgClientSampleProviders ??= EnsureDpgSampleProviders();
+
+        private Dictionary<LowLevelClient, DpgClientSampleProvider> EnsureDpgSampleProviders()
+        {
+            var result = new Dictionary<LowLevelClient, DpgClientSampleProvider>();
+            foreach (var client in RestClients)
+            {
+                var sampleProvider = new DpgClientSampleProvider(Configuration.Namespace, client, _sourceInputModel);
+                if (!sampleProvider.IsEmpty)
+                    result.Add(client, sampleProvider);
+            }
+
+            return result;
+        }
+
+        public DpgClientSampleProvider? GetSampleForClient(LowLevelClient client) => DpgClientSampleProviders.TryGetValue(client, out var sample) ? sample : null;
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {

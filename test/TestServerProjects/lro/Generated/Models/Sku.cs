@@ -10,12 +10,12 @@ namespace lro.Models
     /// <summary> The Sku. </summary>
     public partial class Sku
     {
-        /// <summary> Initializes a new instance of Sku. </summary>
+        /// <summary> Initializes a new instance of <see cref="Sku"/>. </summary>
         public Sku()
         {
         }
 
-        /// <summary> Initializes a new instance of Sku. </summary>
+        /// <summary> Initializes a new instance of <see cref="Sku"/>. </summary>
         /// <param name="name"></param>
         /// <param name="id"></param>
         internal Sku(string name, string id)

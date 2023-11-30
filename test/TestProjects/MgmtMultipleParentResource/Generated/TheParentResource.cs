@@ -21,13 +21,16 @@ namespace MgmtMultipleParentResource
 {
     /// <summary>
     /// A Class representing a TheParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TheParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTheParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetTheParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TheParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTheParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetTheParent method.
     /// </summary>
     public partial class TheParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TheParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="theParentName"> The theParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string theParentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/theParents/{theParentName}";
@@ -43,7 +46,7 @@ namespace MgmtMultipleParentResource
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TheParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TheParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TheParentResource(ArmClient client, TheParentData data) : this(client, data.Id)
@@ -93,7 +96,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public virtual SubParentCollection GetSubParents()
         {
-            return GetCachedClient(Client => new SubParentCollection(Client, Id));
+            return GetCachedClient(client => new SubParentCollection(client, Id));
         }
 
         /// <summary>
@@ -112,8 +115,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubParentResource>> GetSubParentAsync(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -136,8 +139,8 @@ namespace MgmtMultipleParentResource
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceId"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="instanceId"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubParentResource> GetSubParent(string instanceId, string expand = null, CancellationToken cancellationToken = default)
         {

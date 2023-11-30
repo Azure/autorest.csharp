@@ -39,7 +39,7 @@ namespace _Type._Dictionary
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The <see cref="string"/> to use. </param>
         internal DurationValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -152,7 +152,7 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,TimeSpan},CancellationToken)']/*" />
@@ -161,11 +161,12 @@ namespace _Type._Dictionary
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(RequestContentHelper.FromDictionary(body), context).ConfigureAwait(false);
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            Response response = await PutAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='Put(IDictionary{string,TimeSpan},CancellationToken)']/*" />
@@ -174,7 +175,8 @@ namespace _Type._Dictionary
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(RequestContentHelper.FromDictionary(body), context);
+            using RequestContent content = RequestContentHelper.FromDictionary(body);
+            Response response = Put(content, context);
             return response;
         }
 

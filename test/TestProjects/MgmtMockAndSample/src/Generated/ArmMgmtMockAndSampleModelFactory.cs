@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtMockAndSampleModelFactory
     {
-        /// <summary> Initializes a new instance of VaultProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VaultProperties"/>. </summary>
         /// <param name="duration"> Time elapsed for task. </param>
         /// <param name="createOn"> The date and time when the cluster creating. </param>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Models
             return new VaultProperties(duration, createOn, tenantId, sku, accessPolicies?.ToList(), vaultUri, hsmPoolResourceId, deployments?.ToList(), enabledForDiskEncryption, enabledForTemplateDeployment, enableSoftDelete, softDeleteRetentionInDays, enableRbacAuthorization, createMode, enablePurgeProtection, networkAcls, provisioningState, privateEndpointConnections?.ToList(), publicNetworkAccess, readWriteSingleStringPropertySomething != null ? new SinglePropertyModel(readWriteSingleStringPropertySomething) : null, readOnlySomething != null ? new ReadOnlySinglePropertyModel(readOnlySomething) : null, deepSomething != null ? new ExtremelyDeepSinglePropertyModel(new SuperDeepSinglePropertyModel(new VeryDeepSinglePropertyModel(new DeepSinglePropertyModel(new SinglePropertyModel(deepSomething))))) : null);
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PrivateEndpointConnectionItem"/>. </summary>
         /// <param name="id"> Id of private endpoint connection. </param>
         /// <param name="etag"> Modified whenever there is a change in the state of private endpoint connection. </param>
         /// <param name="privateEndpointId"> Properties of the private endpoint object. </param>
@@ -63,7 +63,7 @@ namespace MgmtMockAndSample.Models
             return new PrivateEndpointConnectionItem(id, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of VaultData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.VaultData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -80,7 +80,7 @@ namespace MgmtMockAndSample.Models
             return new VaultData(id, name, resourceType, systemData, location, tags, properties, identity);
         }
 
-        /// <summary> Initializes a new instance of VaultKey. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VaultKey"/>. </summary>
         /// <param name="key"> name of the key. </param>
         /// <param name="content"> content of the key. </param>
         /// <returns> A new <see cref="Models.VaultKey"/> instance for mocking. </returns>
@@ -89,7 +89,7 @@ namespace MgmtMockAndSample.Models
             return new VaultKey(key, content);
         }
 
-        /// <summary> Initializes a new instance of VaultValidationResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VaultValidationResult"/>. </summary>
         /// <param name="issues"> The list of vaults. </param>
         /// <param name="result"> The result of the validation. </param>
         /// <returns> A new <see cref="Models.VaultValidationResult"/> instance for mocking. </returns>
@@ -100,7 +100,7 @@ namespace MgmtMockAndSample.Models
             return new VaultValidationResult(issues?.ToList(), result);
         }
 
-        /// <summary> Initializes a new instance of VaultIssue. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VaultIssue"/>. </summary>
         /// <param name="vaultIssueType"> The type of the issue. </param>
         /// <param name="description"> The description of the issue. </param>
         /// <param name="sev"> The severity of the issue. </param>
@@ -110,7 +110,7 @@ namespace MgmtMockAndSample.Models
             return new VaultIssue(vaultIssueType, description, sev);
         }
 
-        /// <summary> Initializes a new instance of VaultAccessPolicyParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.VaultAccessPolicyParameters"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -125,7 +125,7 @@ namespace MgmtMockAndSample.Models
             return new VaultAccessPolicyParameters(id, name, resourceType, systemData, location, accessPolicies != null ? new VaultAccessPolicyProperties(accessPolicies?.ToList()) : null);
         }
 
-        /// <summary> Initializes a new instance of DeletedVaultData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DeletedVaultData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -137,7 +137,7 @@ namespace MgmtMockAndSample.Models
             return new DeletedVaultData(id, name, resourceType, systemData, properties);
         }
 
-        /// <summary> Initializes a new instance of DeletedVaultProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeletedVaultProperties"/>. </summary>
         /// <param name="vaultId"> The resource id of the original vault. </param>
         /// <param name="location"> The location of the original vault. </param>
         /// <param name="deletedOn"> The deleted date. </param>
@@ -152,7 +152,7 @@ namespace MgmtMockAndSample.Models
             return new DeletedVaultProperties(vaultId, location, deletedOn, scheduledPurgeOn, tags, purgeProtectionEnabled);
         }
 
-        /// <summary> Initializes a new instance of CheckNameAvailabilityResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CheckNameAvailabilityResult"/>. </summary>
         /// <param name="nameAvailable"> A boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or is invalid and cannot be used. </param>
         /// <param name="reason"> The reason that a vault name could not be used. The Reason element is only returned if NameAvailable is false. </param>
         /// <param name="message"> An error message explaining the Reason value in more detail. </param>
@@ -162,7 +162,7 @@ namespace MgmtMockAndSample.Models
             return new CheckNameAvailabilityResult(nameAvailable, reason, message);
         }
 
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateEndpointConnectionData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.MgmtMockAndSamplePrivateEndpointConnectionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -181,7 +181,7 @@ namespace MgmtMockAndSample.Models
             return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, resourceType, systemData, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState, location, tags);
         }
 
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MgmtMockAndSamplePrivateLinkResource"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -201,7 +201,7 @@ namespace MgmtMockAndSample.Models
             return new MgmtMockAndSamplePrivateLinkResource(id, name, resourceType, systemData, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), location, tags);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.VirtualMachineExtensionImageData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -221,7 +221,7 @@ namespace MgmtMockAndSample.Models
             return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, operatingSystem, computeRole, handlerSchema, vmScaleSetEnabled, supportsMultipleExtensions, location, tags);
         }
 
-        /// <summary> Initializes a new instance of DiskEncryptionSetData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DiskEncryptionSetData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -246,7 +246,7 @@ namespace MgmtMockAndSample.Models
             return new DiskEncryptionSetData(id, name, resourceType, systemData, identity, encryptionType, activeKey, previousKeys?.ToList(), provisioningState, rotationToLatestKeyVersionEnabled, lastKeyRotationTimestamp, federatedClientId, minimumTlsVersion, location, tags);
         }
 
-        /// <summary> Initializes a new instance of ManagedHsmData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.ManagedHsmData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -263,7 +263,7 @@ namespace MgmtMockAndSample.Models
             return new ManagedHsmData(id, name, resourceType, systemData, tags, location, properties, sku);
         }
 
-        /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ManagedHsmProperties"/>. </summary>
         /// <param name="settings"> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="protectedSettings"> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="rawMessage"> The raw message content. </param>
@@ -289,7 +289,7 @@ namespace MgmtMockAndSample.Models
             return new ManagedHsmProperties(settings, protectedSettings, rawMessage, tenantId, initialAdminObjectIds?.ToList(), hsmUri, enableSoftDelete, softDeleteRetentionInDays, enablePurgeProtection, createMode, statusMessage, provisioningState, networkAcls, privateEndpointConnections?.ToList(), publicNetworkAccess, scheduledPurgeOn);
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MhsmPrivateEndpointConnectionItem"/>. </summary>
         /// <param name="privateEndpointId"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
@@ -299,7 +299,7 @@ namespace MgmtMockAndSample.Models
             return new MhsmPrivateEndpointConnectionItem(privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.MhsmPrivateEndpointConnectionData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -319,7 +319,7 @@ namespace MgmtMockAndSample.Models
             return new MhsmPrivateEndpointConnectionData(id, name, resourceType, systemData, tags, location, etag, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, privateLinkServiceConnectionState, provisioningState, sku);
         }
 
-        /// <summary> Initializes a new instance of DeletedManagedHsmData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.DeletedManagedHsmData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -331,7 +331,7 @@ namespace MgmtMockAndSample.Models
             return new DeletedManagedHsmData(id, name, resourceType, systemData, properties);
         }
 
-        /// <summary> Initializes a new instance of DeletedManagedHsmProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeletedManagedHsmProperties"/>. </summary>
         /// <param name="mhsmId"> The resource id of the original managed HSM. </param>
         /// <param name="location"> The location of the original managed HSM. </param>
         /// <param name="deletedOn"> The deleted date. </param>
@@ -346,7 +346,7 @@ namespace MgmtMockAndSample.Models
             return new DeletedManagedHsmProperties(mhsmId, location, deletedOn, scheduledPurgeOn, purgeProtectionEnabled, tags);
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MhsmPrivateLinkResource"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -367,7 +367,7 @@ namespace MgmtMockAndSample.Models
             return new MhsmPrivateLinkResource(id, name, resourceType, systemData, tags, location, groupId, requiredMembers?.ToList(), requiredZoneNames?.ToList(), sku);
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.FirewallPolicyData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -403,7 +403,7 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyData(id, name, resourceType, systemData, tags, location, etag, identity, startupProbe, readinessProbe, desiredStatusCode, ruleCollectionGroups?.ToList(), provisioningState, basePolicyId != null ? ResourceManagerModelFactory.WritableSubResource(basePolicyId) : null, firewalls?.ToList(), childPolicies?.ToList(), threatIntelWhitelist, insights, snatPrivateRanges != null ? new FirewallPolicySnat(snatPrivateRanges?.ToList()) : null, dnsSettings, intrusionDetection, transportSecurityCertificateAuthority != null ? new FirewallPolicyTransportSecurity(transportSecurityCertificateAuthority) : null, skuTier != null ? new FirewallPolicySku(skuTier) : null);
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyRuleCollectionGroupData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -423,7 +423,7 @@ namespace MgmtMockAndSample.Models
             return new FirewallPolicyRuleCollectionGroupData(id, name, etag, resourceType, priority, ruleCollections?.ToList(), provisioningState);
         }
 
-        /// <summary> Initializes a new instance of RoleAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.RoleAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -438,7 +438,7 @@ namespace MgmtMockAndSample.Models
             return new RoleAssignmentData(id, name, resourceType, systemData, scope, roleDefinitionId, principalId, canDelegate);
         }
 
-        /// <summary> Initializes a new instance of EventData. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.EventData"/>. </summary>
         /// <param name="authorization"> The sender authorization information. </param>
         /// <param name="tenantId"> the Azure tenant Id. </param>
         /// <returns> A new <see cref="Models.EventData"/> instance for mocking. </returns>
@@ -447,7 +447,7 @@ namespace MgmtMockAndSample.Models
             return new EventData(authorization, tenantId);
         }
 
-        /// <summary> Initializes a new instance of SenderAuthorization. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SenderAuthorization"/>. </summary>
         /// <param name="action"> the permissible actions. For instance: microsoft.support/supporttickets/write. </param>
         /// <param name="role"> the role of the user. For instance: Subscription Admin. </param>
         /// <param name="scope"> the scope. </param>
@@ -457,7 +457,7 @@ namespace MgmtMockAndSample.Models
             return new SenderAuthorization(action, role, scope);
         }
 
-        /// <summary> Initializes a new instance of TemplateHashResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TemplateHashResult"/>. </summary>
         /// <param name="minifiedTemplate"> The minified template string. </param>
         /// <param name="templateHash"> The template hash. </param>
         /// <returns> A new <see cref="Models.TemplateHashResult"/> instance for mocking. </returns>
@@ -466,7 +466,7 @@ namespace MgmtMockAndSample.Models
             return new TemplateHashResult(minifiedTemplate, templateHash);
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtMockAndSample.GuestConfigurationAssignmentData"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>
@@ -478,7 +478,7 @@ namespace MgmtMockAndSample.Models
             return new GuestConfigurationAssignmentData(id, name, location, resourceType, properties);
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationAssignmentProperties"/>. </summary>
         /// <param name="targetResourceId"> VM resource Id. </param>
         /// <param name="complianceStatus"> A value indicating compliance status of the machine for the assigned guest configuration. </param>
         /// <param name="lastComplianceStatusChecked"> Date and time when last compliance status was checked. </param>
@@ -494,7 +494,7 @@ namespace MgmtMockAndSample.Models
             return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType);
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationBaseResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.GuestConfigurationBaseResource"/>. </summary>
         /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
         /// <param name="name"> Name of the guest configuration assignment. </param>
         /// <param name="location"> Region where the VM is located. </param>

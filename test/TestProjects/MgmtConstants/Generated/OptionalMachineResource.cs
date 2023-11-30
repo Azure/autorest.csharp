@@ -21,13 +21,16 @@ namespace MgmtConstants
 {
     /// <summary>
     /// A Class representing an OptionalMachine along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="OptionalMachineResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetOptionalMachineResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetOptionalMachine method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="OptionalMachineResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetOptionalMachineResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetOptionalMachine method.
     /// </summary>
     public partial class OptionalMachineResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="OptionalMachineResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="name"> The name. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Constant/optionalMachines/{name}";
@@ -43,7 +46,7 @@ namespace MgmtConstants
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "OptionalMachineResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OptionalMachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal OptionalMachineResource(ArmClient client, OptionalMachineData data) : this(client, data.Id)
@@ -240,8 +243,8 @@ namespace MgmtConstants
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
+        /// <param name="optionalIntQuery"> The <see cref="IntConstant"/>? to use. </param>
+        /// <param name="optionalFloatQuery"> The <see cref="FloatConstant"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual async Task<ArmOperation<OptionalMachineResource>> UpdateAsync(WaitUntil waitUntil, OptionalMachinePatch patch, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
@@ -280,8 +283,8 @@ namespace MgmtConstants
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
-        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
+        /// <param name="optionalIntQuery"> The <see cref="IntConstant"/>? to use. </param>
+        /// <param name="optionalFloatQuery"> The <see cref="FloatConstant"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
         public virtual ArmOperation<OptionalMachineResource> Update(WaitUntil waitUntil, OptionalMachinePatch patch, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)

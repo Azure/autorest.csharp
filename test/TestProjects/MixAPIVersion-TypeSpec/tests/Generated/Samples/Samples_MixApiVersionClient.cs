@@ -16,55 +16,59 @@ using NUnit.Framework;
 
 namespace MixApiVersion.Samples
 {
-    public class Samples_MixApiVersionClient
+    public partial class Samples_MixApiVersionClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete()
+        public void Example_Pet_Delete_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Delete("<name>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_Async()
+        public async Task Example_Pet_Delete_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
+        public void Example_Pet_Delete_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = client.Delete("<name>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_AllParameters_Async()
+        public async Task Example_Pet_Delete_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
             Response response = await client.DeleteAsync("<name>");
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read()
+        public void Example_Pets_Read_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -78,7 +82,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_Async()
+        public async Task Example_Pets_Read_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -92,7 +96,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Read_AllParameters()
+        public void Example_Pets_Read_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -107,7 +111,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Read_AllParameters_Async()
+        public async Task Example_Pets_Read_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -122,12 +126,12 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create()
+        public void Example_Pets_Create_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
             });
@@ -140,12 +144,12 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_Async()
+        public async Task Example_Pets_Create_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 age = 1234,
             });
@@ -158,12 +162,12 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Create_AllParameters()
+        public void Example_Pets_Create_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 tag = "<tag>",
                 age = 1234,
@@ -178,12 +182,12 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Create_AllParameters_Async()
+        public async Task Example_Pets_Create_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-            RequestContent content = RequestContent.Create(new
+            using RequestContent content = RequestContent.Create(new
             {
                 tag = "<tag>",
                 age = 1234,
@@ -198,7 +202,7 @@ namespace MixApiVersion.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPets()
+        public void Example_Toy_GetPets_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -206,15 +210,15 @@ namespace MixApiVersion.Samples
             foreach (BinaryData item in client.GetPets(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPets_Async()
+        public async Task Example_Toy_GetPets_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -222,15 +226,15 @@ namespace MixApiVersion.Samples
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetPets_AllParameters()
+        public void Example_Toy_GetPets_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -238,15 +242,15 @@ namespace MixApiVersion.Samples
             foreach (BinaryData item in client.GetPets(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetPets_AllParameters_Async()
+        public async Task Example_Toy_GetPets_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MixApiVersionClient client = new MixApiVersionClient(endpoint);
@@ -254,9 +258,9 @@ namespace MixApiVersion.Samples
             await foreach (BinaryData item in client.GetPetsAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result[0].GetProperty("id").ToString());
-                Console.WriteLine(result[0].GetProperty("petId").ToString());
-                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("petId").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
             }
         }
     }

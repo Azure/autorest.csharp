@@ -14,13 +14,13 @@ namespace MgmtExtensionResource.Models
     /// <summary> The definition of a parameter that can be provided to the policy. </summary>
     public partial class ParameterDefinitionsValue
     {
-        /// <summary> Initializes a new instance of ParameterDefinitionsValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         public ParameterDefinitionsValue()
         {
             AllowedValues = new ChangeTrackingList<BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of ParameterDefinitionsValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterDefinitionsValue"/>. </summary>
         /// <param name="parameterType"> The data type of the parameter. </param>
         /// <param name="allowedValues"> The allowed values for the parameter. </param>
         /// <param name="defaultValue"> The default value for the parameter if no value is provided. </param>
@@ -41,7 +41,7 @@ namespace MgmtExtensionResource.Models
         /// To assign an object to the element of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -72,7 +72,7 @@ namespace MgmtExtensionResource.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

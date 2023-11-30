@@ -19,9 +19,12 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
         public static implicit operator TypedValueExpression(FieldDeclaration name) => new VariableReference(name.Type, name.Declaration);
         public static implicit operator TypedValueExpression(Parameter parameter) => new ParameterReference(parameter);
 
-        public ValueExpression NullConditional(CSharpType type) => type.IsNullable ? new NullConditionalExpression(this) : this;
+        public TypedValueExpression NullableStructValue() => this is not ConstantExpression && Type is { IsNullable: true, IsValueType: true } ? new TypedMemberExpression(this, nameof(Nullable<int>.Value), Type.WithNullable(false)) : this;
 
-        protected MemberExpression Property(string name) => new(this, name);
+        public TypedValueExpression NullConditional() => Type.IsNullable ? new TypedNullConditionalExpression(this) : this;
+
+        public virtual TypedValueExpression Property(string propertyName, CSharpType propertyType)
+            => new TypedMemberExpression(this, propertyName, propertyType);
 
         protected static ValueExpression ValidateType(TypedValueExpression typed, CSharpType type)
         {
@@ -30,7 +33,7 @@ namespace AutoRest.CSharp.Common.Output.Expressions.ValueExpressions
                 return typed.Untyped;
             }
 
-            throw new InvalidOperationException($"Expression with return type {typed.Type.ToStringForDocs()} is cast to type {type.ToStringForDocs()}");
+            throw new InvalidOperationException($"Expression with return type {typed.Type.Name} is cast to type {type.Name}");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerOneBarType. </summary>
     public partial class LayerOneBarType : LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of LayerOneBarType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBarType"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the type. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public LayerOneBarType(string parameters)
@@ -24,7 +24,7 @@ namespace MgmtSafeFlatten.Models
             Name = LayerOneTypeName.LayerOneBar;
         }
 
-        /// <summary> Initializes a new instance of LayerOneBarType. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneBarType"/>. </summary>
         /// <param name="name"></param>
         /// <param name="parameters"> Defines the parameters for the type. </param>
         internal LayerOneBarType(LayerOneTypeName name, string parameters) : base(name)

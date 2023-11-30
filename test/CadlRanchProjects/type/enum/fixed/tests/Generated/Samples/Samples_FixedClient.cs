@@ -17,11 +17,11 @@ using _Type._Enum.Fixed.Models;
 
 namespace _Type._Enum.Fixed.Samples
 {
-    public class Samples_FixedClient
+    public partial class Samples_FixedClient
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue()
+        public void Example_String_GetKnownValue_ShortVersion()
         {
             FixedClient client = new FixedClient();
 
@@ -33,7 +33,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_Async()
+        public async Task Example_String_GetKnownValue_ShortVersion_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -45,7 +45,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_Convenience()
+        public void Example_String_GetKnownValue_ShortVersion_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -54,7 +54,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_Convenience_Async()
+        public async Task Example_String_GetKnownValue_ShortVersion_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -63,7 +63,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_AllParameters()
+        public void Example_String_GetKnownValue_AllParameters()
         {
             FixedClient client = new FixedClient();
 
@@ -75,7 +75,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_AllParameters_Async()
+        public async Task Example_String_GetKnownValue_AllParameters_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -87,7 +87,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetKnownValue_AllParameters_Convenience()
+        public void Example_String_GetKnownValue_AllParameters_Convenience()
         {
             FixedClient client = new FixedClient();
 
@@ -96,7 +96,7 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetKnownValue_AllParameters_Convenience_Async()
+        public async Task Example_String_GetKnownValue_AllParameters_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
@@ -105,170 +105,170 @@ namespace _Type._Enum.Fixed.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue()
+        public void Example_String_PutKnownValue_ShortVersion()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_Async()
+        public async Task Example_String_PutKnownValue_ShortVersion_Async()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_Convenience()
+        public void Example_String_PutKnownValue_ShortVersion_Convenience()
         {
             FixedClient client = new FixedClient();
 
             Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_Convenience_Async()
+        public async Task Example_String_PutKnownValue_ShortVersion_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_AllParameters()
+        public void Example_String_PutKnownValue_AllParameters()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutKnownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_AllParameters_Async()
+        public async Task Example_String_PutKnownValue_AllParameters_Async()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutKnownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutKnownValue_AllParameters_Convenience()
+        public void Example_String_PutKnownValue_AllParameters_Convenience()
         {
             FixedClient client = new FixedClient();
 
             Response response = client.PutKnownValue(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutKnownValue_AllParameters_Convenience_Async()
+        public async Task Example_String_PutKnownValue_AllParameters_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
             Response response = await client.PutKnownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue()
+        public void Example_String_PutUnknownValue_ShortVersion()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_Async()
+        public async Task Example_String_PutUnknownValue_ShortVersion_Async()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_Convenience()
+        public void Example_String_PutUnknownValue_ShortVersion_Convenience()
         {
             FixedClient client = new FixedClient();
 
             Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_Convenience_Async()
+        public async Task Example_String_PutUnknownValue_ShortVersion_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_AllParameters()
+        public void Example_String_PutUnknownValue_AllParameters()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = client.PutUnknownValue(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_AllParameters_Async()
+        public async Task Example_String_PutUnknownValue_AllParameters_Async()
         {
             FixedClient client = new FixedClient();
 
-            RequestContent content = RequestContent.Create("Monday");
+            using RequestContent content = RequestContent.Create("Monday");
             Response response = await client.PutUnknownValueAsync(content);
+
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutUnknownValue_AllParameters_Convenience()
+        public void Example_String_PutUnknownValue_AllParameters_Convenience()
         {
             FixedClient client = new FixedClient();
 
             Response response = client.PutUnknownValue(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutUnknownValue_AllParameters_Convenience_Async()
+        public async Task Example_String_PutUnknownValue_AllParameters_Convenience_Async()
         {
             FixedClient client = new FixedClient();
 
             Response response = await client.PutUnknownValueAsync(DaysOfWeekEnum.Monday);
-            Console.WriteLine(response.Status);
         }
     }
 }

@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class ModelWithFloatLiteralTypeProperty : IUtf8JsonSerializable
+    public partial class ModelWithFloatLiteralTypeProperty : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

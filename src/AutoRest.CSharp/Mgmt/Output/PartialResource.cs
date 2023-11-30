@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -34,7 +35,7 @@ internal class PartialResource : Resource
         List<FormattableString> lines = new List<FormattableString>();
 
         lines.Add($"A class extending from the {OriginalResourceName.AddResourceSuffixToResourceName()} in {MgmtContext.DefaultNamespace} along with the instance operations that can be performed on it.");
-        lines.Add($"You can only construct {an} <see cref=\"{Type}\" /> from a <see cref=\"{typeof(ResourceIdentifier)}\" /> with a resource type of {ResourceType}.");
+        lines.Add($"You can only construct {an} {Type:C} from a {typeof(ResourceIdentifier):C} with a resource type of {ResourceType}.");
 
         return FormattableStringHelpers.Join(lines, "\r\n");
     }
@@ -45,11 +46,16 @@ internal class PartialResource : Resource
         return null;
     }
 
-    private MethodSignature? _createResourceIdentifierSignature;
-    public override MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierSignature ??= base.CreateResourceIdentifierMethodSignature with
+    protected override Method BuildCreateResourceIdentifierMethod()
     {
-        Modifiers = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static
-    };
+        var original = base.BuildCreateResourceIdentifierMethod();
+
+        return new(
+            original.Signature with
+            {
+                Modifiers = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static
+            }, original.Body!);
+    }
 
     protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
     {

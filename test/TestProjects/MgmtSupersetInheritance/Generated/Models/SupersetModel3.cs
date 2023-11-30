@@ -10,12 +10,12 @@ namespace MgmtSupersetInheritance.Models
     /// <summary> id is integer, the model is Non-Resource. </summary>
     public partial class SupersetModel3
     {
-        /// <summary> Initializes a new instance of SupersetModel3. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel3"/>. </summary>
         public SupersetModel3()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel3. </summary>
+        /// <summary> Initializes a new instance of <see cref="SupersetModel3"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="supersetModel3Type"></param>

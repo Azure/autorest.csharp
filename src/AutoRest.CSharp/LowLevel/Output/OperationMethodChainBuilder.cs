@@ -19,7 +19,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Configuration = AutoRest.CSharp.Input.Configuration;
+using Configuration = AutoRest.CSharp.Common.Input.Configuration;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -105,12 +105,12 @@ namespace AutoRest.CSharp.Output.Models
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
-            var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
+            var responseBodyType = GetReturnedResponseInputType();
 
             // samples will build below
             var samples = new List<DpgOperationSample>();
 
-            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message);
+            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples, convenienceMethodInfo.Message, GetLongRunningResultRetrievalMethod(Operation.LongRunning));
 
             BuildSamples(method, samples);
 
@@ -160,6 +160,14 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
             }
+        }
+
+        private LongRunningResultRetrievalMethod? GetLongRunningResultRetrievalMethod(OperationLongRunning? longRunning)
+        {
+            if (longRunning is { ResultPath: not null })
+                return new(_typeFactory.CreateType(longRunning.ReturnType!), longRunning.FinalResponse.BodyType!.Name, longRunning.ResultPath);
+
+            return null;
         }
 
         private ConvenienceMethodGenerationInfo ShouldGenerateConvenienceMethod()
@@ -255,16 +263,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReturnTypeChain BuildReturnTypes()
         {
-            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
-            CSharpType? responseType = null;
-            if (operationBodyTypes.Length != 0)
-            {
-                var firstBodyType = operationBodyTypes[0];
-                if (firstBodyType != null)
-                {
-                    responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(firstBodyType));
-                }
-            };
+            CSharpType? responseType = GetReturnedResponseCSharpType();
 
             if (Operation.Paging != null)
             {
@@ -311,15 +310,41 @@ namespace AutoRest.CSharp.Output.Models
             var headAsBoolean = Operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             if (headAsBoolean)
             {
-                return new ReturnTypeChain(typeof(Response<bool>), typeof(Response<bool>), null);
+                return new ReturnTypeChain(Configuration.ApiTypes.GetResponseOfT<bool>(), Configuration.ApiTypes.GetResponseOfT<bool>(), null);
             }
 
             if (responseType != null)
             {
-                return new ReturnTypeChain(new CSharpType(typeof(Response<>), responseType), typeof(Response), responseType);
+                return new ReturnTypeChain(new CSharpType(Configuration.ApiTypes.ResponseOfTType, responseType), Configuration.ApiTypes.ResponseType, responseType);
             }
 
-            return new ReturnTypeChain(typeof(Response), typeof(Response), null);
+            return new ReturnTypeChain(Configuration.ApiTypes.ResponseType, Configuration.ApiTypes.ResponseType, null);
+        }
+
+        private CSharpType? GetReturnedResponseCSharpType()
+        {
+            var inputType = GetReturnedResponseInputType();
+            if (inputType != null)
+            {
+                return TypeFactory.GetOutputType(_typeFactory.CreateType(inputType));
+            }
+            return null;
+        }
+
+        private InputType? GetReturnedResponseInputType()
+        {
+            if (Operation.LongRunning != null)
+            {
+                return Operation.LongRunning.ReturnType;
+            }
+
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct();
+            if (operationBodyTypes.Any())
+            {
+                return operationBodyTypes.First();
+            }
+
+            return null;
         }
 
         private ConvenienceMethod? BuildConvenienceMethod(bool shouldRequestContextOptional, ConvenienceMethodGenerationInfo generationInfo)
@@ -375,7 +400,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             var convenienceSignature = new MethodSignature(name, FormattableStringHelpers.FromString(_restClientMethod.Summary), FormattableStringHelpers.FromString(_restClientMethod.Description), accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, Operation.RequestMediaTypes, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }
 
         private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
@@ -385,6 +410,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var field = fields.GetFieldByParameter(parameter);
                 var inputProperty = fields.GetInputByField(field);
+                if (inputProperty.IsRequired && inputProperty.Type is InputLiteralType)
+                    continue;
                 var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
                 Constant? defaultValue = null;
                 if (!inputProperty.IsRequired)
@@ -591,7 +618,7 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            var convenienceMethodParameter = BuildParameter(inputParameter);
+            var convenienceMethodParameter = BuildParameter(inputParameter, frameworkParameterType);
             var parameterChain = inputParameter.Location == RequestLocation.None
                 ? new ParameterChain(convenienceMethodParameter, null, null)
                 : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);

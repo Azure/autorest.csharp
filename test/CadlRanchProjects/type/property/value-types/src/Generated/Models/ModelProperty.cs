@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with model properties. </summary>
     public partial class ModelProperty
     {
-        /// <summary> Initializes a new instance of ModelProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public ModelProperty(InnerModel property)

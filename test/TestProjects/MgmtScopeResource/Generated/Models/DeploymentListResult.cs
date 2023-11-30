@@ -14,13 +14,13 @@ namespace MgmtScopeResource.Models
     /// <summary> List of deployments. </summary>
     internal partial class DeploymentListResult
     {
-        /// <summary> Initializes a new instance of DeploymentListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentListResult"/>. </summary>
         internal DeploymentListResult()
         {
             Value = new ChangeTrackingList<DeploymentExtendedData>();
         }
 
-        /// <summary> Initializes a new instance of DeploymentListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentListResult"/>. </summary>
         /// <param name="value"> An array of deployments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
         internal DeploymentListResult(IReadOnlyList<DeploymentExtendedData> value, string nextLink)

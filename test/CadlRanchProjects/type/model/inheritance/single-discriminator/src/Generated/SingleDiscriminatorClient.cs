@@ -137,7 +137,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModelAsync(Bird,CancellationToken)']/*" />
@@ -146,11 +146,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutModel(Bird,CancellationToken)']/*" />
@@ -159,7 +160,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutModel(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutModel(content, context);
             return response;
         }
 
@@ -329,7 +331,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             }
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(Bird,CancellationToken)']/*" />
@@ -338,11 +340,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRecursiveModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            using RequestContent content = input.ToRequestContent();
+            Response response = await PutRecursiveModelAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
-        /// <param name="input"> The Bird to use. </param>
+        /// <param name="input"> The <see cref="Bird"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/SingleDiscriminatorClient.xml" path="doc/members/member[@name='PutRecursiveModel(Bird,CancellationToken)']/*" />
@@ -351,7 +354,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRecursiveModel(input.ToRequestContent(), context);
+            using RequestContent content = input.ToRequestContent();
+            Response response = PutRecursiveModel(content, context);
             return response;
         }
 

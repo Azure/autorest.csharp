@@ -16,7 +16,7 @@ namespace MgmtConstants.Models
     /// <summary> The List Virtual Machine operation response. </summary>
     internal partial class OptionalMachineListResult
     {
-        /// <summary> Initializes a new instance of OptionalMachineListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OptionalMachineListResult"/>. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal OptionalMachineListResult(IEnumerable<OptionalMachineData> value)
@@ -26,7 +26,7 @@ namespace MgmtConstants.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of OptionalMachineListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="OptionalMachineListResult"/>. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <param name="nextLink"> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </param>
         internal OptionalMachineListResult(IReadOnlyList<OptionalMachineData> value, string nextLink)

@@ -16,7 +16,7 @@ namespace MgmtNoTypeReplacement.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtNoTypeReplacementModelFactory
     {
-        /// <summary> Initializes a new instance of NoTypeReplacementModel1Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel1Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -28,7 +28,7 @@ namespace MgmtNoTypeReplacement.Models
             return new NoTypeReplacementModel1Data(id, name, resourceType, systemData, fooId != null ? ResourceManagerModelFactory.SubResource(fooId) : null);
         }
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel2Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -40,7 +40,7 @@ namespace MgmtNoTypeReplacement.Models
             return new NoTypeReplacementModel2Data(id, name, resourceType, systemData, fooId != null ? new NoSubResourceModel(fooId) : null);
         }
 
-        /// <summary> Initializes a new instance of NoTypeReplacementModel3Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="MgmtNoTypeReplacement.NoTypeReplacementModel3Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

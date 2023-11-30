@@ -14,7 +14,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Collection item model. </summary>
     public partial class CollectionItem
     {
-        /// <summary> Initializes a new instance of CollectionItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="CollectionItem"/>. </summary>
         /// <param name="requiredModelRecord"> Required model record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
         public CollectionItem(IDictionary<string, RecordItem> requiredModelRecord)

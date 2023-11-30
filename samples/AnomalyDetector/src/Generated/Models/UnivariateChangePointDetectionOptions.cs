@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     /// <summary> The request of change point detection. </summary>
     public partial class UnivariateChangePointDetectionOptions
     {
-        /// <summary> Initializes a new instance of UnivariateChangePointDetectionOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/>. </summary>
         /// <param name="series">
         /// Time series data points. Points should be sorted by timestamp in ascending
         /// order to match the change point detection result.
@@ -33,7 +33,7 @@ namespace AnomalyDetector.Models
             Granularity = granularity;
         }
 
-        /// <summary> Initializes a new instance of UnivariateChangePointDetectionOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/>. </summary>
         /// <param name="series">
         /// Time series data points. Points should be sorted by timestamp in ascending
         /// order to match the change point detection result.

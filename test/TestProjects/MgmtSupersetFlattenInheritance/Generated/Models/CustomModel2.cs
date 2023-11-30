@@ -10,12 +10,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Normal custom object with flatten properties from CustomModel2. Also marked as azure resource, but it's not recognized either. </summary>
     public partial class CustomModel2
     {
-        /// <summary> Initializes a new instance of CustomModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel2"/>. </summary>
         public CustomModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel2"/>. </summary>
         /// <param name="id"></param>
         /// <param name="bar"></param>
         /// <param name="idPropertiesId"></param>

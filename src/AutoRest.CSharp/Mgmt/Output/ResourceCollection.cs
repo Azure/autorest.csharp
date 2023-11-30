@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override bool CanValidateResourceType => ResourceTypes.SelectMany(p => p.Value).Distinct().Count() == 1;
 
-        public override string BranchIdVariableName => "Id";
+        public override FormattableString BranchIdVariableName => $"Id";
 
         private MgmtClientOperation? _getAllOperation;
         public MgmtClientOperation? GetAllOperation => _getAllOperation ??= EnsureGetAllOperation();
@@ -66,9 +67,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override ConstructorSignature? EnsureArmClientCtor()
         {
             return new ConstructorSignature(
-              Name: Type.Name,
+              Type,
               null,
-              Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
+              Description: $"Initializes a new instance of the {Type:C} class.",
               Modifiers: Internal,
               Parameters: _armClientCtorParameters.Concat(ExtraConstructorParameters).ToArray(),
               Initializer: new(
@@ -218,12 +219,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             var parentTypes = parents.Select(parent => parent.TypeAsResource).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
-            lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");
+            lines.Add($"A class representing a collection of {Resource.Type:C} and their operations.");
             // only append the following information when the parent of me is not myself, aka TenantResource
             if (parentDescription != null && !parents.Contains(Resource))
             {
-                lines.Add($"Each <see cref=\"{Resource.Type}\" /> in the collection will belong to the same instance of {parentDescription}.");
-                lines.Add($"To get {an} <see cref=\"{Type}\" /> instance call the Get{ResourceName.LastWordToPlural()} method from an instance of {parentDescription}.");
+                lines.Add($"Each {Resource.Type:C} in the collection will belong to the same instance of {parentDescription}.");
+                lines.Add($"To get {an} {Type:C} instance call the Get{ResourceName.LastWordToPlural()} method from an instance of {parentDescription}.");
             }
 
             return FormattableStringHelpers.Join(lines, "\r\n");
@@ -245,13 +246,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getMgmtRestOperation,
                         "Exists",
                         typeof(bool),
-                        $"Checks to see if the resource exists in azure.")));
+                        $"Checks to see if the resource exists in azure."),
+                    IdVariableName));
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         getMgmtRestOperation,
                         "GetIfExists",
                         getMgmtRestOperation.MgmtReturnType,
-                        $"Tries to get details for this resource from the service.")));
+                        $"Tries to get details for this resource from the service."),
+                    IdVariableName));
             }
 
             return result;
@@ -269,8 +272,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 yield return new FieldDeclaration(FieldModifiers, reference.Type, GetFieldName(reference).ToString());
             }
         }
-
-        public override MethodSignature CreateResourceIdentifierMethodSignature => throw new InvalidOperationException("Resource collections will never have CreateResourceIdentifier method");
 
         private IDictionary<RequestPath, ISet<ResourceTypeSegment>>? _resourceTypes;
         public IDictionary<RequestPath, ISet<ResourceTypeSegment>> ResourceTypes => _resourceTypes ??= EnsureResourceTypes();
