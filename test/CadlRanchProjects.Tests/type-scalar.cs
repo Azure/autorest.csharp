@@ -56,7 +56,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_DecimalType_ResponseBody() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimalTypeClient().ResponseBodyAsync();
-            Assert.AreEqual(0.33333, response.Value);
+            Assert.AreEqual(0.33333m, response.Value);
         });
         [Test]
         public Task Type_Scalar_DecimalType_RequestBody() => Test(async (host) =>
@@ -74,7 +74,7 @@ namespace CadlRanchProjects.Tests
         public Task Type_Scalar_Decimal128Type_ResponseBody() => Test(async (host) =>
         {
             var response = await new ScalarClient(host, null).GetDecimal128TypeClient().ResponseBodyAsync();
-            Assert.AreEqual(0.33333, response.Value);
+            Assert.AreEqual(0.33333m, response.Value);
         });
         [Test]
         public Task Type_Scalar_Decimal128Type_RequestBody() => Test(async (host) =>
