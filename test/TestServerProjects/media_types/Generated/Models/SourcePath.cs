@@ -15,13 +15,6 @@ namespace media_types.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="SourcePath"/>. </summary>
-        /// <param name="source"> File source path. </param>
-        internal SourcePath(string source)
-        {
-            Source = source;
-        }
-
         /// <summary> File source path. </summary>
         public string Source { get; set; }
     }

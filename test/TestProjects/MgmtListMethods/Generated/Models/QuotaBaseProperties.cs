@@ -15,19 +15,6 @@ namespace MgmtListMethods.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="QuotaBaseProperties"/>. </summary>
-        /// <param name="id"> Specifies the resource ID. </param>
-        /// <param name="quotaBasePropertiesType"> Specifies the resource type. </param>
-        /// <param name="limit"> The maximum permitted quota of the resource. </param>
-        /// <param name="unit"> An enum describing the unit of quota measurement. </param>
-        internal QuotaBaseProperties(string id, string quotaBasePropertiesType, long? limit, QuotaUnit? unit)
-        {
-            Id = id;
-            QuotaBasePropertiesType = quotaBasePropertiesType;
-            Limit = limit;
-            Unit = unit;
-        }
-
         /// <summary> Specifies the resource ID. </summary>
         public string Id { get; set; }
         /// <summary> Specifies the resource type. </summary>

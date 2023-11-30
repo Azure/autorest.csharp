@@ -15,13 +15,6 @@ namespace ModelWithConverterUsage.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="InputModel"/>. </summary>
-        /// <param name="inputModelProperty"> Constant string. </param>
-        internal InputModel(string inputModelProperty)
-        {
-            InputModelProperty = inputModelProperty;
-        }
-
         /// <summary> Constant string. </summary>
         public string InputModelProperty { get; set; }
     }

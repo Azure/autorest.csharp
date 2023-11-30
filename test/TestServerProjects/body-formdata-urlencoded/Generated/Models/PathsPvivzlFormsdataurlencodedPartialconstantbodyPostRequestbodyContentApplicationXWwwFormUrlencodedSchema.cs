@@ -27,17 +27,6 @@ namespace body_formdata_urlencoded.Models
             AadAccessToken = aadAccessToken;
         }
 
-        /// <summary> Initializes a new instance of <see cref="PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"/>. </summary>
-        /// <param name="grantType"> Constant part of a formdata body. </param>
-        /// <param name="service"> Indicates the name of your Azure container registry. </param>
-        /// <param name="aadAccessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
-        internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PostContentSchemaGrantType grantType, string service, string aadAccessToken)
-        {
-            GrantType = grantType;
-            Service = service;
-            AadAccessToken = aadAccessToken;
-        }
-
         /// <summary> Constant part of a formdata body. </summary>
         public PostContentSchemaGrantType GrantType { get; }
         /// <summary> Indicates the name of your Azure container registry. </summary>

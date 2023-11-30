@@ -15,13 +15,6 @@ namespace required_optional.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="StringOptionalWrapper"/>. </summary>
-        /// <param name="value"></param>
-        internal StringOptionalWrapper(string value)
-        {
-            Value = value;
-        }
-
         /// <summary> Gets or sets the value. </summary>
         public string Value { get; set; }
     }
