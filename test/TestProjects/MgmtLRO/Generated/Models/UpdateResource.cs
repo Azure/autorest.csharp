@@ -19,13 +19,6 @@ namespace MgmtLRO.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
-        /// <param name="tags"> Resource tags. </param>
-        internal UpdateResource(IDictionary<string, string> tags)
-        {
-            Tags = tags;
-        }
-
         /// <summary> Resource tags. </summary>
         public IDictionary<string, string> Tags { get; }
     }

@@ -19,13 +19,6 @@ namespace MgmtParamOrdering.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="WorkspacePatch"/>. </summary>
-        /// <param name="tags"> The resource tags for the machine learning workspace. </param>
-        internal WorkspacePatch(IDictionary<string, string> tags)
-        {
-            Tags = tags;
-        }
-
         /// <summary> The resource tags for the machine learning workspace. </summary>
         public IDictionary<string, string> Tags { get; }
     }

@@ -15,15 +15,6 @@ namespace FlattenedParameters.Models
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
-        /// <param name="required"></param>
-        /// <param name="nonRequired"></param>
-        internal Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired)
-        {
-            Required = required;
-            NonRequired = nonRequired;
-        }
-
         /// <summary> Gets or sets the required. </summary>
         public string Required { get; set; }
         /// <summary> Gets or sets the non required. </summary>

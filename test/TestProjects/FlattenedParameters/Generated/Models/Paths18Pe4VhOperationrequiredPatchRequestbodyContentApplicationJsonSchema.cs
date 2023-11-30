@@ -23,15 +23,6 @@ namespace FlattenedParameters.Models
             Required = required;
         }
 
-        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
-        /// <param name="required"></param>
-        /// <param name="nonRequired"></param>
-        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired)
-        {
-            Required = required;
-            NonRequired = nonRequired;
-        }
-
         /// <summary> Gets the required. </summary>
         public string Required { get; }
         /// <summary> Gets or sets the non required. </summary>

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
-
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -18,20 +16,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of <see cref="SshPublicKeyPatch"/>. </summary>
         public SshPublicKeyPatch()
         {
-        }
-
-        /// <summary> Initializes a new instance of <see cref="SshPublicKeyPatch"/>. </summary>
-        /// <param name="tags">
-        /// Resource tags
-        /// Serialized Name: UpdateResource.tags
-        /// </param>
-        /// <param name="publicKey">
-        /// SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
-        /// Serialized Name: SshPublicKeyUpdateResource.properties.publicKey
-        /// </param>
-        internal SshPublicKeyPatch(IDictionary<string, string> tags, string publicKey) : base(tags)
-        {
-            PublicKey = publicKey;
         }
 
         /// <summary>

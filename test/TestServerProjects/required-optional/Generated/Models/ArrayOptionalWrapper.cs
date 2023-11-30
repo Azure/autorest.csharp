@@ -19,13 +19,6 @@ namespace required_optional.Models
             Value = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of <see cref="ArrayOptionalWrapper"/>. </summary>
-        /// <param name="value"></param>
-        internal ArrayOptionalWrapper(IList<string> value)
-        {
-            Value = value;
-        }
-
         /// <summary> Gets the value. </summary>
         public IList<string> Value { get; }
     }

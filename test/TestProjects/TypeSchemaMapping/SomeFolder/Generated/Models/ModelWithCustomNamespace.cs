@@ -15,13 +15,6 @@ namespace Very.Custom.Namespace.From.Swagger
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref="ModelWithCustomNamespace"/>. </summary>
-        /// <param name="modelProperty"> . </param>
-        internal ModelWithCustomNamespace(string modelProperty)
-        {
-            ModelProperty = modelProperty;
-        }
-
         /// <summary> . </summary>
         public string ModelProperty { get; }
     }
