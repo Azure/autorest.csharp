@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The While. </summary>
+    /// <summary> The while. </summary>
     public partial class While
     {
         /// <summary> Initializes a new instance of <see cref="While"/>. </summary>

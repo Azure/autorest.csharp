@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The Exec. </summary>
+    /// <summary> The exec. </summary>
     public partial class Exec
     {
         /// <summary> Initializes a new instance of <see cref="Exec"/>. </summary>

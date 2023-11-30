@@ -16,7 +16,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false, string? NameInRequest = null)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -78,8 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation,
-                SerializationFormat: operationParameter.SerializationFormat,
-                NameInRequest: operationParameter.Name.ToVariableName());
+                SerializationFormat: operationParameter.SerializationFormat);
         }
 
         private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch

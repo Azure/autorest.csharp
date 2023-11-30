@@ -447,5 +447,107 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 ]]></code></example>
     </member>
+    <member name="BarAsync(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call BarAsync.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234);
+Response<RenamedModel> response = await client.BarAsync(renamedModel);
+]]></code>
+This sample shows how to call BarAsync with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = await client.BarAsync(renamedModel);
+]]></code></example>
+    </member>
+    <member name="Bar(RenamedModel,CancellationToken)">
+      <example>
+This sample shows how to call Bar.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234);
+Response<RenamedModel> response = client.Bar(renamedModel);
+]]></code>
+This sample shows how to call Bar with all parameters.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+RenamedModel renamedModel = new RenamedModel(1234)
+{
+    OptionalInt = 1234,
+};
+Response<RenamedModel> response = client.Bar(renamedModel);
+]]></code></example>
+    </member>
+    <member name="BarAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call BarAsync and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = await client.BarAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call BarAsync with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = await client.BarAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
+    <member name="Bar(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Bar and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+});
+Response response = client.Bar(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call Bar with all request content and parse the result.
+<code><![CDATA[
+CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    requiredInt = 1234,
+    optionalInt = 1234,
+});
+Response response = client.Bar(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("optionalInt").ToString());
+]]></code></example>
+    </member>
   </members>
 </doc>

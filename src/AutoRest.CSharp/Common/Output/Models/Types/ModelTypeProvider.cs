@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -92,16 +91,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override FormattableString CreateDescription()
         {
-            FormattableString defaultDescription = $"The {_inputModel.Name}.";
-            ObjectType? type = this;
-
-            if (type?.Type != null)
-            {
-                CSharpType outputType = type.Type;
-                defaultDescription = !string.IsNullOrEmpty(outputType.Name) ? $"The {outputType.Name}." : defaultDescription;
-            }
-
-            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : defaultDescription;
+            return _inputModel.Description != null ? (FormattableString)$"{_inputModel.Description}" : $"The {_inputModel.Name}.";
         }
 
         private ModelTypeProviderFields EnsureFields()

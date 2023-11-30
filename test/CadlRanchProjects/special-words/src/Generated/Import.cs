@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The Import. </summary>
+    /// <summary> The import. </summary>
     public partial class Import
     {
         /// <summary> Initializes a new instance of <see cref="Import"/>. </summary>

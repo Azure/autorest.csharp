@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The Continue. </summary>
+    /// <summary> The continue. </summary>
     public partial class Continue
     {
         /// <summary> Initializes a new instance of <see cref="Continue"/>. </summary>

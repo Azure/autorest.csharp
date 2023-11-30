@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The Await. </summary>
+    /// <summary> The await. </summary>
     public partial class Await
     {
         /// <summary> Initializes a new instance of <see cref="Await"/>. </summary>

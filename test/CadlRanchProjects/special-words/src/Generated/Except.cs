@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SpecialWords
 {
-    /// <summary> The Except. </summary>
+    /// <summary> The except. </summary>
     public partial class Except
     {
         /// <summary> Initializes a new instance of <see cref="Except"/>. </summary>
