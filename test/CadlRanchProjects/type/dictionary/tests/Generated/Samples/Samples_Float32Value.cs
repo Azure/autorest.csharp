@@ -21,7 +21,7 @@ namespace _Type._Dictionary.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat32Value_ShortVersion()
+        public void Example_Float32Value_GetFloat32Value_ShortVersion()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -33,7 +33,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat32Value_ShortVersion_Async()
+        public async Task Example_Float32Value_GetFloat32Value_ShortVersion_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -45,7 +45,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat32Value_ShortVersion_Convenience()
+        public void Example_Float32Value_GetFloat32Value_ShortVersion_Convenience()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -54,7 +54,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat32Value_ShortVersion_Convenience_Async()
+        public async Task Example_Float32Value_GetFloat32Value_ShortVersion_Convenience_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -63,7 +63,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat32Value_AllParameters()
+        public void Example_Float32Value_GetFloat32Value_AllParameters()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -75,7 +75,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat32Value_AllParameters_Async()
+        public async Task Example_Float32Value_GetFloat32Value_AllParameters_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -87,7 +87,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetFloat32Value_AllParameters_Convenience()
+        public void Example_Float32Value_GetFloat32Value_AllParameters_Convenience()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -96,7 +96,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetFloat32Value_AllParameters_Convenience_Async()
+        public async Task Example_Float32Value_GetFloat32Value_AllParameters_Convenience_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -105,7 +105,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Float32Value_Put_ShortVersion()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -120,7 +120,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Float32Value_Put_ShortVersion_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -135,7 +135,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Float32Value_Put_ShortVersion_Convenience()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -147,7 +147,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Float32Value_Put_ShortVersion_Convenience_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -159,7 +159,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Float32Value_Put_AllParameters()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -174,7 +174,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Float32Value_Put_AllParameters_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -189,7 +189,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Float32Value_Put_AllParameters_Convenience()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 
@@ -201,7 +201,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Float32Value_Put_AllParameters_Convenience_Async()
         {
             Float32Value client = new DictionaryClient().GetFloat32ValueClient();
 

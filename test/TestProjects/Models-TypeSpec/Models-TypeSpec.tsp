@@ -10,10 +10,10 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using TypeSpec.Versioning;
 
+@versioned(Versions)
 @service(
     {
-        title: "Models in CADL",
-        version: "0.1.0"
+        title: "Models in CADL"
     }
 )
 @server(
@@ -23,9 +23,13 @@ using TypeSpec.Versioning;
         endpoint: string,
     }
 )
-@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @doc("CADL project to test various types of models.")
 namespace ModelsTypeSpec;
+
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  "0.1.0"
+}
 
 @doc("Base model")
 model BaseModel {

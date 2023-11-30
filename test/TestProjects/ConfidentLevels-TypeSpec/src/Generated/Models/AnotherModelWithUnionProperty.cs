@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is another model with union types. </summary>
     public partial class AnotherModelWithUnionProperty
     {
-        /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="AnotherModelWithUnionProperty"/>. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
         internal AnotherModelWithUnionProperty(BinaryData unionProperty)
@@ -32,6 +33,17 @@ namespace ConfidentLevelsInTsp.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

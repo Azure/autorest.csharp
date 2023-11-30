@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> Describes an OpenAI model offering that can be used with the API. </summary>
     public partial class Model
     {
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
         /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>
         /// <param name="ownedBy"> The organization that owns the model. </param>
@@ -25,7 +25,7 @@ namespace OpenAI.Models
             OwnedBy = ownedBy;
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model"/>. </summary>
         /// <param name="id"> The model identifier, which can be referenced in the API endpoints. </param>
         /// <param name="object"> The object type, which is always "model". </param>
         /// <param name="created"> The Unix timestamp (in seconds) when the model was created. </param>

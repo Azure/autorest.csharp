@@ -20,9 +20,9 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a TenantTest along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TenantTestResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTenantTestResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TenantResource" /> using the GetTenantTest method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TenantTestResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTenantTestResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantResource"/> using the GetTenantTest method.
     /// </summary>
     public partial class TenantTestResource : ArmResource
     {
@@ -43,7 +43,7 @@ namespace MgmtListMethods
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TenantTestResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantTestResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TenantTestResource(ArmClient client, TenantTestData data) : this(client, data.Id)

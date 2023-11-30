@@ -32,17 +32,22 @@ namespace AutoRest.CSharp.Generation.Types
 
         private Type AzureResponseErrorType => typeof(ResponseError);
 
+        /// <summary>
+        /// This method will attempt to retrieve the <see cref="CSharpType"/> of the input type.
+        /// </summary>
+        /// <param name="inputType">The input type to convert.</param>
+        /// <returns>The <see cref="CSharpType"/> of the input type.</returns>
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
-            InputUnionType unionType           => new CSharpType(typeof(BinaryData), unionType.IsNullable),
-            InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
+            InputLiteralType literalType => CSharpType.FromLiteral(CreateType(literalType.LiteralValueType), literalType.Value),
+            InputUnionType unionType => new CSharpType(typeof(BinaryData), unionType.UnionItemTypes.Select(u => CreateType(u)).ToArray(), unionType.IsNullable),
+            InputListType listType => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
-            InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
+            InputEnumType enumType => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
             // TODO -- this is a temporary solution until we refactored the type replacement to use input types instead of code model schemas
             InputModelType { Namespace: "Azure.Core.Foundations", Name: "Error" } => SystemObjectType.Create(AzureResponseErrorType, AzureResponseErrorType.Namespace!, null).Type,
-            InputModelType model               => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
-            InputPrimitiveType primitiveType   => primitiveType.Kind switch
+            InputModelType model => _library.ResolveModel(model).WithNullable(inputType.IsNullable),
+            InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
                 InputTypeKind.AzureLocation => new CSharpType(typeof(AzureLocation), inputType.IsNullable),
                 InputTypeKind.BinaryData => new CSharpType(typeof(BinaryData), inputType.IsNullable),
@@ -489,7 +494,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsArray(CSharpType type)
         {
-            return type.IsFrameworkType && type.FrameworkType.IsArray;
+            return type is { IsFrameworkType: true, FrameworkType.IsArray: true };
         }
     }
 }

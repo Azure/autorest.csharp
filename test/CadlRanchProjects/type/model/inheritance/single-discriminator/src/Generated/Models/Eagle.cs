@@ -13,7 +13,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// <summary> The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances. </summary>
     public partial class Eagle : Bird
     {
-        /// <summary> Initializes a new instance of Eagle. </summary>
+        /// <summary> Initializes a new instance of <see cref="Eagle"/>. </summary>
         /// <param name="wingspan"></param>
         public Eagle(int wingspan) : base(wingspan)
         {
@@ -22,7 +22,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
             Hate = new ChangeTrackingDictionary<string, Bird>();
         }
 
-        /// <summary> Initializes a new instance of Eagle. </summary>
+        /// <summary> Initializes a new instance of <see cref="Eagle"/>. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
         /// <param name="friends"></param>

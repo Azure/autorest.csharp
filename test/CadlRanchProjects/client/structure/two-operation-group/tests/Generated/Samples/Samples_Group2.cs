@@ -18,7 +18,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two_ShortVersion()
+        public void Example_Group2_Two_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -30,7 +30,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_ShortVersion_Async()
+        public async Task Example_Group2_Two_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -42,7 +42,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Two_AllParameters()
+        public void Example_Group2_Two_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -54,7 +54,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Two_AllParameters_Async()
+        public async Task Example_Group2_Two_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -66,7 +66,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Five_ShortVersion()
+        public void Example_Group2_Five_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -78,7 +78,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Five_ShortVersion_Async()
+        public async Task Example_Group2_Five_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -90,7 +90,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Five_AllParameters()
+        public void Example_Group2_Five_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -102,7 +102,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Five_AllParameters_Async()
+        public async Task Example_Group2_Five_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -114,7 +114,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Six_ShortVersion()
+        public void Example_Group2_Six_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -126,7 +126,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Six_ShortVersion_Async()
+        public async Task Example_Group2_Six_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -138,7 +138,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Six_AllParameters()
+        public void Example_Group2_Six_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");
@@ -150,7 +150,7 @@ namespace Client.Structure.Service.TwoOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Six_AllParameters_Async()
+        public async Task Example_Group2_Six_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             Group2 client = new TwoOperationGroupClient(endpoint).GetGroup2Client("default");

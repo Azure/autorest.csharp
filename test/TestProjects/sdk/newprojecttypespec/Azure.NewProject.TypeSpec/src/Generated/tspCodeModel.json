@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "NewProjectTypeSpec",
  "Description": "This is a sample typespec project.",
- "ApiVersions": [
-  "0.1.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",

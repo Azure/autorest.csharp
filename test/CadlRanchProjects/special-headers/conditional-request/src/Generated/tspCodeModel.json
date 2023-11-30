@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "SpecialHeaders.ConditionalRequest",
  "Description": "Illustrates conditional request headers",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [

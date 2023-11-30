@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the cache expiration action for the delivery rule. </summary>
     public partial class DeliveryRuleCacheExpirationAction : DeliveryRuleAction
     {
-        /// <summary> Initializes a new instance of DeliveryRuleCacheExpirationAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCacheExpirationAction"/>. </summary>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public DeliveryRuleCacheExpirationAction(CacheExpirationActionParameters parameters)
@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             Name = DeliveryRuleActionType.CacheExpiration;
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheExpirationAction. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeliveryRuleCacheExpirationAction"/>. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>

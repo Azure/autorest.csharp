@@ -22,9 +22,9 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a Vault along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VaultResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVaultResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVault method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="VaultResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetVaultResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetVault method.
     /// </summary>
     public partial class VaultResource : ArmResource
     {
@@ -49,7 +49,7 @@ namespace MgmtMockAndSample
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "VaultResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VaultResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal VaultResource(ArmClient client, VaultData data) : this(client, data.Id)
@@ -364,7 +364,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VaultKey" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="VaultKey"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<VaultKey> GetKeysAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _vaultRestClient.CreateListKeysRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -385,7 +385,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VaultKey" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="VaultKey"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<VaultKey> GetKeys(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _vaultRestClient.CreateListKeysRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -596,7 +596,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="MgmtMockAndSamplePrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="MgmtMockAndSamplePrivateLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<MgmtMockAndSamplePrivateLinkResource> GetPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByVaultRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -617,7 +617,7 @@ namespace MgmtMockAndSample
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="MgmtMockAndSamplePrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="MgmtMockAndSamplePrivateLinkResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<MgmtMockAndSamplePrivateLinkResource> GetPrivateLinkResources(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _privateLinkResourcesRestClient.CreateListByVaultRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

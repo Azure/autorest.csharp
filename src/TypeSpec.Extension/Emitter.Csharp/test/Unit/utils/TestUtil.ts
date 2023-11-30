@@ -9,12 +9,16 @@ import {
     Namespace,
     navigateTypesInNamespace,
     Program,
-    Type
+    Type,
+    CompilerOptions
 } from "@typespec/compiler";
 import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
 import { getFormattedType, getInputType } from "../../../src/lib/model.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkContext,
+    createSdkContext
+} from "@azure-tools/typespec-client-generator-core";
 import { SdkTestLibrary } from "@azure-tools/typespec-client-generator-core/testing";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
@@ -68,9 +72,10 @@ export async function typeSpecCompile(
     ${content}
     `;
     host.addTypeSpecFile("main.tsp", fileContent);
-    await host.compile("./", {
+    const cliOptions = {
         warningAsError: false
-    });
+    } as CompilerOptions;
+    await host.compile("./", cliOptions);
     return host.program;
 }
 
@@ -120,4 +125,11 @@ export function navigateModels(
         },
         { skipSubNamespaces }
     );
+}
+
+/* We always need to pass in the emitter name now that it is required so making a helper to do this. */
+export function createNetSdkContext(
+    program: EmitContext<NetEmitterOptions>
+): SdkContext {
+    return createSdkContext(program, "@azure-tools/typespec-azure");
 }

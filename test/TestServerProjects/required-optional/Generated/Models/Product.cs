@@ -10,11 +10,20 @@ namespace required_optional.Models
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
         /// <param name="id"></param>
         public Product(int id)
         {
             Id = id;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Product"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        internal Product(int id, string name)
+        {
+            Id = id;
+            Name = name;
         }
 
         /// <summary> Gets the id. </summary>

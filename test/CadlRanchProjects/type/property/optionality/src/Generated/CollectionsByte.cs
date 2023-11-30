@@ -225,7 +225,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The CollectionsByteProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutAllAsync(CollectionsByteProperty,CancellationToken)']/*" />
@@ -240,7 +240,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The CollectionsByteProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutAll(CollectionsByteProperty,CancellationToken)']/*" />
@@ -333,7 +333,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The CollectionsByteProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutDefaultAsync(CollectionsByteProperty,CancellationToken)']/*" />
@@ -348,7 +348,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The CollectionsByteProperty to use. </param>
+        /// <param name="body"> The <see cref="CollectionsByteProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutDefault(CollectionsByteProperty,CancellationToken)']/*" />

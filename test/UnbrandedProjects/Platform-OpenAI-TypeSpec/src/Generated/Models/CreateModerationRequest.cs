@@ -3,6 +3,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Net.ClientModel.Internal;
 
 namespace OpenAI.Models
@@ -10,7 +11,7 @@ namespace OpenAI.Models
     /// <summary> The CreateModerationRequest. </summary>
     public partial class CreateModerationRequest
     {
-        /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         public CreateModerationRequest(BinaryData input)
@@ -20,7 +21,7 @@ namespace OpenAI.Models
             Input = input;
         }
 
-        /// <summary> Initializes a new instance of CreateModerationRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateModerationRequest"/>. </summary>
         /// <param name="input"> The input text to classify. </param>
         /// <param name="model">
         /// Two content moderations models are available: `text-moderation-stable` and
@@ -44,6 +45,17 @@ namespace OpenAI.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

@@ -150,8 +150,8 @@ namespace Parameters.Spread
             }
         }
 
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
@@ -169,8 +169,8 @@ namespace Parameters.Spread
             return response;
         }
 
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="name"></param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="name"/> is null. </exception>
@@ -203,8 +203,8 @@ namespace Parameters.Spread
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
@@ -247,8 +247,8 @@ namespace Parameters.Spread
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
@@ -276,8 +276,8 @@ namespace Parameters.Spread
             }
         }
 
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
         /// <param name="prop2"></param>
         /// <param name="prop3"></param>
@@ -305,8 +305,8 @@ namespace Parameters.Spread
             return response;
         }
 
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="prop1"></param>
         /// <param name="prop2"></param>
         /// <param name="prop3"></param>
@@ -349,8 +349,8 @@ namespace Parameters.Spread
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>
@@ -393,8 +393,8 @@ namespace Parameters.Spread
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The <see cref="string"/> to use. </param>
+        /// <param name="xMsTestHeader"> The <see cref="string"/> to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>

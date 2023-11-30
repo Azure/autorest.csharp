@@ -13,7 +13,7 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training field. </summary>
     public partial class FormFieldsReport
     {
-        /// <summary> Initializes a new instance of FormFieldsReport. </summary>
+        /// <summary> Initializes a new instance of <see cref="FormFieldsReport"/>. </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>

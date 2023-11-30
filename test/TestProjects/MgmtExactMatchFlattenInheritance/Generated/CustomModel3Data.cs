@@ -15,12 +15,12 @@ namespace MgmtExactMatchFlattenInheritance
     /// </summary>
     public partial class CustomModel3Data : AzureResourceFlattenModel7
     {
-        /// <summary> Initializes a new instance of CustomModel3Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel3Data"/>. </summary>
         public CustomModel3Data()
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel3Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="CustomModel3Data"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>

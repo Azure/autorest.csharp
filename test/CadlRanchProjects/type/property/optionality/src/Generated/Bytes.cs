@@ -225,7 +225,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='PutAllAsync(BytesProperty,CancellationToken)']/*" />
@@ -240,7 +240,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='PutAll(BytesProperty,CancellationToken)']/*" />
@@ -333,7 +333,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='PutDefaultAsync(BytesProperty,CancellationToken)']/*" />
@@ -348,7 +348,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with default properties. </summary>
-        /// <param name="body"> The BytesProperty to use. </param>
+        /// <param name="body"> The <see cref="BytesProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='PutDefault(BytesProperty,CancellationToken)']/*" />

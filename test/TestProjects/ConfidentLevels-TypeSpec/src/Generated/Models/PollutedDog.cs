@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The dog with a union type. </summary>
     public partial class PollutedDog : PollutedPet
     {
-        /// <summary> Initializes a new instance of PollutedDog. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
@@ -29,7 +30,7 @@ namespace ConfidentLevelsInTsp.Models
             Color = color;
         }
 
-        /// <summary> Initializes a new instance of PollutedDog. </summary>
+        /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
@@ -51,6 +52,17 @@ namespace ConfidentLevelsInTsp.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="int"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

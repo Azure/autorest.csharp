@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "ConvenienceInCadl",
  "Description": "Typespec project to test various types of convenience methods.",
- "ApiVersions": [
-  "0.1.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

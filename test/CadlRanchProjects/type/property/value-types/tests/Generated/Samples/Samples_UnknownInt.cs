@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownInt_ShortVersion()
+        public void Example_UnknownInt_GetUnknownInt_ShortVersion()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownInt_ShortVersion_Async()
+        public async Task Example_UnknownInt_GetUnknownInt_ShortVersion_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownInt_ShortVersion_Convenience()
+        public void Example_UnknownInt_GetUnknownInt_ShortVersion_Convenience()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownInt_ShortVersion_Convenience_Async()
+        public async Task Example_UnknownInt_GetUnknownInt_ShortVersion_Convenience_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownInt_AllParameters()
+        public void Example_UnknownInt_GetUnknownInt_AllParameters()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownInt_AllParameters_Async()
+        public async Task Example_UnknownInt_GetUnknownInt_AllParameters_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownInt_AllParameters_Convenience()
+        public void Example_UnknownInt_GetUnknownInt_AllParameters_Convenience()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownInt_AllParameters_Convenience_Async()
+        public async Task Example_UnknownInt_GetUnknownInt_AllParameters_Convenience_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_UnknownInt_Put_ShortVersion()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -120,7 +120,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_UnknownInt_Put_ShortVersion_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_UnknownInt_Put_ShortVersion_Convenience()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_UnknownInt_Put_ShortVersion_Convenience_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_UnknownInt_Put_AllParameters()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_UnknownInt_Put_AllParameters_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_UnknownInt_Put_AllParameters_Convenience()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 
@@ -195,7 +195,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_UnknownInt_Put_AllParameters_Convenience_Async()
         {
             UnknownInt client = new ValueTypesClient().GetUnknownIntClient();
 

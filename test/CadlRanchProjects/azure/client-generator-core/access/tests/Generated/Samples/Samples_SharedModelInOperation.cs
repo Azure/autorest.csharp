@@ -20,7 +20,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_ShortVersion()
+        public void Example_SharedModelInOperation_Public_ShortVersion()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -32,7 +32,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_ShortVersion_Async()
+        public async Task Example_SharedModelInOperation_Public_ShortVersion_Async()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -44,7 +44,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_ShortVersion_Convenience()
+        public void Example_SharedModelInOperation_Public_ShortVersion_Convenience()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -53,7 +53,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_ShortVersion_Convenience_Async()
+        public async Task Example_SharedModelInOperation_Public_ShortVersion_Convenience_Async()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -62,7 +62,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters()
+        public void Example_SharedModelInOperation_Public_AllParameters()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -74,7 +74,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_AllParameters_Async()
+        public async Task Example_SharedModelInOperation_Public_AllParameters_Async()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -86,7 +86,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Public_AllParameters_Convenience()
+        public void Example_SharedModelInOperation_Public_AllParameters_Convenience()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 
@@ -95,7 +95,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Public_AllParameters_Convenience_Async()
+        public async Task Example_SharedModelInOperation_Public_AllParameters_Convenience_Async()
         {
             SharedModelInOperation client = new AccessClient().GetSharedModelInOperationClient();
 

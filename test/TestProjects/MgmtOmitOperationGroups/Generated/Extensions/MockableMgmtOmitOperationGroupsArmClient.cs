@@ -37,11 +37,11 @@ namespace MgmtOmitOperationGroups.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="Model2Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="Model2Resource.CreateResourceIdentifier" /> to create a <see cref="Model2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="Model2Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="Model2Resource.CreateResourceIdentifier" /> to create a <see cref="Model2Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="Model2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="Model2Resource"/> object. </returns>
         public virtual Model2Resource GetModel2Resource(ResourceIdentifier id)
         {
             Model2Resource.ValidateResourceId(id);

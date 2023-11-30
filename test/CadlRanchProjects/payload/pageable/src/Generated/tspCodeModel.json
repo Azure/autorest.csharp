@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Payload.Pageable",
  "Description": "Test describing pageable.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

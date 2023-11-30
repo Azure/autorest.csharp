@@ -1,9 +1,7 @@
 {
  "$id": "1",
  "Name": "ParametersCadl",
- "ApiVersions": [
-  "2022-05-15-preview"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

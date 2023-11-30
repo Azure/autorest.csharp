@@ -69,7 +69,7 @@ namespace ApiVersionInTsp
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
-        /// <param name="resultId"> The Guid to use. </param>
+        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks>
         /// For asynchronous inference, get multivariate anomaly detection result based on
@@ -84,7 +84,7 @@ namespace ApiVersionInTsp
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
-        /// <param name="resultId"> The Guid to use. </param>
+        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks>
         /// For asynchronous inference, get multivariate anomaly detection result based on
@@ -113,7 +113,7 @@ namespace ApiVersionInTsp
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="resultId"> The Guid to use. </param>
+        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -149,7 +149,7 @@ namespace ApiVersionInTsp
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="resultId"> The Guid to use. </param>
+        /// <param name="resultId"> The <see cref="Guid"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

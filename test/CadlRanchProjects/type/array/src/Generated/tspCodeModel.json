@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Type.Array",
  "Description": "Illustrates various of dictionaries.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

@@ -50,6 +50,13 @@ namespace _Type.Property.Optionality
         private Duration _cachedDuration;
         private CollectionsByte _cachedCollectionsByte;
         private CollectionsModel _cachedCollectionsModel;
+        private StringLiteral _cachedStringLiteral;
+        private IntLiteral _cachedIntLiteral;
+        private FloatLiteral _cachedFloatLiteral;
+        private BooleanLiteral _cachedBooleanLiteral;
+        private UnionStringLiteral _cachedUnionStringLiteral;
+        private UnionIntLiteral _cachedUnionIntLiteral;
+        private UnionFloatLiteral _cachedUnionFloatLiteral;
         private RequiredAndOptional _cachedRequiredAndOptional;
 
         /// <summary> Initializes a new instance of String. </summary>
@@ -86,6 +93,48 @@ namespace _Type.Property.Optionality
         public virtual CollectionsModel GetCollectionsModelClient()
         {
             return Volatile.Read(ref _cachedCollectionsModel) ?? Interlocked.CompareExchange(ref _cachedCollectionsModel, new CollectionsModel(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedCollectionsModel;
+        }
+
+        /// <summary> Initializes a new instance of StringLiteral. </summary>
+        public virtual StringLiteral GetStringLiteralClient()
+        {
+            return Volatile.Read(ref _cachedStringLiteral) ?? Interlocked.CompareExchange(ref _cachedStringLiteral, new StringLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedStringLiteral;
+        }
+
+        /// <summary> Initializes a new instance of IntLiteral. </summary>
+        public virtual IntLiteral GetIntLiteralClient()
+        {
+            return Volatile.Read(ref _cachedIntLiteral) ?? Interlocked.CompareExchange(ref _cachedIntLiteral, new IntLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedIntLiteral;
+        }
+
+        /// <summary> Initializes a new instance of FloatLiteral. </summary>
+        public virtual FloatLiteral GetFloatLiteralClient()
+        {
+            return Volatile.Read(ref _cachedFloatLiteral) ?? Interlocked.CompareExchange(ref _cachedFloatLiteral, new FloatLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedFloatLiteral;
+        }
+
+        /// <summary> Initializes a new instance of BooleanLiteral. </summary>
+        public virtual BooleanLiteral GetBooleanLiteralClient()
+        {
+            return Volatile.Read(ref _cachedBooleanLiteral) ?? Interlocked.CompareExchange(ref _cachedBooleanLiteral, new BooleanLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedBooleanLiteral;
+        }
+
+        /// <summary> Initializes a new instance of UnionStringLiteral. </summary>
+        public virtual UnionStringLiteral GetUnionStringLiteralClient()
+        {
+            return Volatile.Read(ref _cachedUnionStringLiteral) ?? Interlocked.CompareExchange(ref _cachedUnionStringLiteral, new UnionStringLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionStringLiteral;
+        }
+
+        /// <summary> Initializes a new instance of UnionIntLiteral. </summary>
+        public virtual UnionIntLiteral GetUnionIntLiteralClient()
+        {
+            return Volatile.Read(ref _cachedUnionIntLiteral) ?? Interlocked.CompareExchange(ref _cachedUnionIntLiteral, new UnionIntLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionIntLiteral;
+        }
+
+        /// <summary> Initializes a new instance of UnionFloatLiteral. </summary>
+        public virtual UnionFloatLiteral GetUnionFloatLiteralClient()
+        {
+            return Volatile.Read(ref _cachedUnionFloatLiteral) ?? Interlocked.CompareExchange(ref _cachedUnionFloatLiteral, new UnionFloatLiteral(ClientDiagnostics, _pipeline, _endpoint), null) ?? _cachedUnionFloatLiteral;
         }
 
         /// <summary> Initializes a new instance of RequiredAndOptional. </summary>

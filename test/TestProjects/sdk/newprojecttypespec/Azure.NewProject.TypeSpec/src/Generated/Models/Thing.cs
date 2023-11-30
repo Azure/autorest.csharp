@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
@@ -13,7 +14,7 @@ namespace Azure.NewProject.TypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
@@ -29,7 +30,7 @@ namespace Azure.NewProject.TypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
         }
 
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredLiteralString"> required literal string. </param>
@@ -67,6 +68,20 @@ namespace Azure.NewProject.TypeSpec.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="int"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

@@ -21,9 +21,9 @@ using Azure.ResourceManager.Resources;
 namespace MgmtSingletonResource
 {
     /// <summary>
-    /// A class representing a collection of <see cref="ParentResource" /> and their operations.
-    /// Each <see cref="ParentResource" /> in the collection will belong to the same instance of <see cref="ResourceGroupResource" />.
-    /// To get a <see cref="ParentResourceCollection" /> instance call the GetParentResources method from an instance of <see cref="ResourceGroupResource" />.
+    /// A class representing a collection of <see cref="ParentResource"/> and their operations.
+    /// Each <see cref="ParentResource"/> in the collection will belong to the same instance of <see cref="ResourceGroupResource"/>.
+    /// To get a <see cref="ParentResourceCollection"/> instance call the GetParentResources method from an instance of <see cref="ResourceGroupResource"/>.
     /// </summary>
     public partial class ParentResourceCollection : ArmCollection, IEnumerable<ParentResource>, IAsyncEnumerable<ParentResource>
     {
@@ -67,8 +67,8 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="parentName"> The String to use. </param>
-        /// <param name="data"> The ParentResource to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="ParentResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="data"/> is null. </exception>
@@ -107,8 +107,8 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="parentName"> The String to use. </param>
-        /// <param name="data"> The ParentResource to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
+        /// <param name="data"> The <see cref="ParentResourceData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> or <paramref name="data"/> is null. </exception>
@@ -147,7 +147,7 @@ namespace MgmtSingletonResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
@@ -184,7 +184,7 @@ namespace MgmtSingletonResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
@@ -222,7 +222,7 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<ParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -243,7 +243,7 @@ namespace MgmtSingletonResource
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ParentResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<ParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
@@ -263,7 +263,7 @@ namespace MgmtSingletonResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
@@ -298,7 +298,7 @@ namespace MgmtSingletonResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
@@ -333,7 +333,7 @@ namespace MgmtSingletonResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
@@ -370,7 +370,7 @@ namespace MgmtSingletonResource
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parentName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>

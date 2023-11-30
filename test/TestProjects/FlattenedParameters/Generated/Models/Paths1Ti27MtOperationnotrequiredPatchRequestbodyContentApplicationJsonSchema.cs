@@ -10,9 +10,18 @@ namespace FlattenedParameters.Models
     /// <summary> The Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
+        /// <param name="required"></param>
+        /// <param name="nonRequired"></param>
+        internal Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired)
+        {
+            Required = required;
+            NonRequired = nonRequired;
         }
 
         /// <summary> Gets or sets the required. </summary>

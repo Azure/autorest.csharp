@@ -10,7 +10,7 @@ namespace OpenAI.Models
     /// <summary> The CreateImageEditRequest. </summary>
     public partial class CreateImageEditRequest
     {
-        /// <summary> Initializes a new instance of CreateImageEditRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="image">
         /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not
@@ -26,7 +26,7 @@ namespace OpenAI.Models
             Image = image;
         }
 
-        /// <summary> Initializes a new instance of CreateImageEditRequest. </summary>
+        /// <summary> Initializes a new instance of <see cref="CreateImageEditRequest"/>. </summary>
         /// <param name="prompt"> A text description of the desired image(s). The maximum length is 1000 characters. </param>
         /// <param name="image">
         /// The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not

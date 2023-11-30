@@ -22,7 +22,7 @@ namespace _Type._Dictionary.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModelValue_ShortVersion()
+        public void Example_RecursiveModelValue_GetRecursiveModelValue_ShortVersion()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -34,7 +34,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModelValue_ShortVersion_Async()
+        public async Task Example_RecursiveModelValue_GetRecursiveModelValue_ShortVersion_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -46,7 +46,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModelValue_ShortVersion_Convenience()
+        public void Example_RecursiveModelValue_GetRecursiveModelValue_ShortVersion_Convenience()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -55,7 +55,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModelValue_ShortVersion_Convenience_Async()
+        public async Task Example_RecursiveModelValue_GetRecursiveModelValue_ShortVersion_Convenience_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -64,7 +64,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModelValue_AllParameters()
+        public void Example_RecursiveModelValue_GetRecursiveModelValue_AllParameters()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -77,7 +77,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModelValue_AllParameters_Async()
+        public async Task Example_RecursiveModelValue_GetRecursiveModelValue_AllParameters_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -90,7 +90,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModelValue_AllParameters_Convenience()
+        public void Example_RecursiveModelValue_GetRecursiveModelValue_AllParameters_Convenience()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -99,7 +99,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModelValue_AllParameters_Convenience_Async()
+        public async Task Example_RecursiveModelValue_GetRecursiveModelValue_AllParameters_Convenience_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -108,7 +108,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_RecursiveModelValue_Put_ShortVersion()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -126,7 +126,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_RecursiveModelValue_Put_ShortVersion_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -144,7 +144,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_RecursiveModelValue_Put_ShortVersion_Convenience()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -156,7 +156,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_RecursiveModelValue_Put_ShortVersion_Convenience_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -168,7 +168,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_RecursiveModelValue_Put_AllParameters()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -187,7 +187,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_RecursiveModelValue_Put_AllParameters_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -206,7 +206,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_RecursiveModelValue_Put_AllParameters_Convenience()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 
@@ -224,7 +224,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_RecursiveModelValue_Put_AllParameters_Convenience_Async()
         {
             RecursiveModelValue client = new DictionaryClient().GetRecursiveModelValueClient();
 

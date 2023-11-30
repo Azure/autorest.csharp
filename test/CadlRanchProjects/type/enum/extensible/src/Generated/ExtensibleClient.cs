@@ -223,7 +223,7 @@ namespace _Type._Enum.Extensible
             }
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
@@ -234,7 +234,7 @@ namespace _Type._Enum.Extensible
             return response;
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutKnownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
@@ -323,7 +323,7 @@ namespace _Type._Enum.Extensible
             }
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
@@ -334,7 +334,7 @@ namespace _Type._Enum.Extensible
             return response;
         }
 
-        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="body"> The <see cref="DaysOfWeekExtensibleEnum"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(DaysOfWeekExtensibleEnum,CancellationToken)']/*" />
         public virtual Response PutUnknownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)

@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Parameters.CollectionFormat",
  "Description": "Test for collectionFormat.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [

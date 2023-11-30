@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBoolean_ShortVersion()
+        public void Example_Boolean_GetBoolean_ShortVersion()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBoolean_ShortVersion_Async()
+        public async Task Example_Boolean_GetBoolean_ShortVersion_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBoolean_ShortVersion_Convenience()
+        public void Example_Boolean_GetBoolean_ShortVersion_Convenience()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBoolean_ShortVersion_Convenience_Async()
+        public async Task Example_Boolean_GetBoolean_ShortVersion_Convenience_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBoolean_AllParameters()
+        public void Example_Boolean_GetBoolean_AllParameters()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBoolean_AllParameters_Async()
+        public async Task Example_Boolean_GetBoolean_AllParameters_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBoolean_AllParameters_Convenience()
+        public void Example_Boolean_GetBoolean_AllParameters_Convenience()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBoolean_AllParameters_Convenience_Async()
+        public async Task Example_Boolean_GetBoolean_AllParameters_Convenience_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Boolean_Put_ShortVersion()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -120,7 +120,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Boolean_Put_ShortVersion_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Boolean_Put_ShortVersion_Convenience()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Boolean_Put_ShortVersion_Convenience_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Boolean_Put_AllParameters()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Boolean_Put_AllParameters_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Boolean_Put_AllParameters_Convenience()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 
@@ -195,7 +195,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Boolean_Put_AllParameters_Convenience_Async()
         {
             Boolean client = new ValueTypesClient().GetBooleanClient();
 

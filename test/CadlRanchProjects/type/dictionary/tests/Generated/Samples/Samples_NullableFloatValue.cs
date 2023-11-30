@@ -21,7 +21,7 @@ namespace _Type._Dictionary.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullableFloatValue_ShortVersion()
+        public void Example_NullableFloatValue_GetNullableFloatValue_ShortVersion()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -33,7 +33,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullableFloatValue_ShortVersion_Async()
+        public async Task Example_NullableFloatValue_GetNullableFloatValue_ShortVersion_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -45,7 +45,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullableFloatValue_ShortVersion_Convenience()
+        public void Example_NullableFloatValue_GetNullableFloatValue_ShortVersion_Convenience()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -54,7 +54,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullableFloatValue_ShortVersion_Convenience_Async()
+        public async Task Example_NullableFloatValue_GetNullableFloatValue_ShortVersion_Convenience_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -63,7 +63,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullableFloatValue_AllParameters()
+        public void Example_NullableFloatValue_GetNullableFloatValue_AllParameters()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -75,7 +75,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullableFloatValue_AllParameters_Async()
+        public async Task Example_NullableFloatValue_GetNullableFloatValue_AllParameters_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -87,7 +87,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNullableFloatValue_AllParameters_Convenience()
+        public void Example_NullableFloatValue_GetNullableFloatValue_AllParameters_Convenience()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -96,7 +96,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNullableFloatValue_AllParameters_Convenience_Async()
+        public async Task Example_NullableFloatValue_GetNullableFloatValue_AllParameters_Convenience_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -105,7 +105,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_NullableFloatValue_Put_ShortVersion()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -120,7 +120,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_NullableFloatValue_Put_ShortVersion_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -135,7 +135,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_NullableFloatValue_Put_ShortVersion_Convenience()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -147,7 +147,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_NullableFloatValue_Put_ShortVersion_Convenience_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -159,7 +159,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_NullableFloatValue_Put_AllParameters()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -174,7 +174,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_NullableFloatValue_Put_AllParameters_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -189,7 +189,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_NullableFloatValue_Put_AllParameters_Convenience()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 
@@ -201,7 +201,7 @@ namespace _Type._Dictionary.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_NullableFloatValue_Put_AllParameters_Convenience_Async()
         {
             NullableFloatValue client = new DictionaryClient().GetNullableFloatValueClient();
 

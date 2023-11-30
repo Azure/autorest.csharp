@@ -12,7 +12,7 @@ namespace Encode.Duration.Models
     /// <summary> The Int32SecondsDurationProperty. </summary>
     public partial class Int32SecondsDurationProperty
     {
-        /// <summary> Initializes a new instance of Int32SecondsDurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="Int32SecondsDurationProperty"/>. </summary>
         /// <param name="value"></param>
         public Int32SecondsDurationProperty(TimeSpan value)
         {

@@ -36,8 +36,6 @@ namespace AutoRest.CSharp.Common.Input
 
         public override Type ClientOptionsType => typeof(ClientOptions);
 
-        public override Type ArgumentType => typeof(Argument);
-
         public override Type RequestContextType => typeof(RequestContext);
 
         public override Type ChangeTrackingListType => typeof(ChangeTrackingList<>);

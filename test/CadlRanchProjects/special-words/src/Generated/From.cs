@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The from. </summary>
     public partial class From
     {
-        /// <summary> Initializes a new instance of From. </summary>
+        /// <summary> Initializes a new instance of <see cref="From"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public From(string name)

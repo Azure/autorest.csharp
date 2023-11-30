@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Encode.Bytes",
  "Description": "Test for encode decorator on bytes.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

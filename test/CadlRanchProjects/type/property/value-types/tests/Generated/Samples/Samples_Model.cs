@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_ShortVersion()
+        public void Example_Model_GetModel_ShortVersion()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_ShortVersion_Async()
+        public async Task Example_Model_GetModel_ShortVersion_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_ShortVersion_Convenience()
+        public void Example_Model_GetModel_ShortVersion_Convenience()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_ShortVersion_Convenience_Async()
+        public async Task Example_Model_GetModel_ShortVersion_Convenience_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters()
+        public void Example_Model_GetModel_AllParameters()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_AllParameters_Async()
+        public async Task Example_Model_GetModel_AllParameters_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters_Convenience()
+        public void Example_Model_GetModel_AllParameters_Convenience()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_AllParameters_Convenience_Async()
+        public async Task Example_Model_GetModel_AllParameters_Convenience_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Model_Put_ShortVersion()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Model_Put_ShortVersion_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -141,7 +141,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Model_Put_ShortVersion_Convenience()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -151,7 +151,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Model_Put_ShortVersion_Convenience_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Model_Put_AllParameters()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -179,7 +179,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Model_Put_AllParameters_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Model_Put_AllParameters_Convenience()
         {
             Model client = new ValueTypesClient().GetModelClient();
 
@@ -207,7 +207,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Model_Put_AllParameters_Convenience_Async()
         {
             Model client = new ValueTypesClient().GetModelClient();
 

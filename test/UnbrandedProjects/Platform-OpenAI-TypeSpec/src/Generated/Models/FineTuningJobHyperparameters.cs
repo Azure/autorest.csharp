@@ -9,12 +9,12 @@ namespace OpenAI.Models
     /// <summary> The FineTuningJobHyperparameters. </summary>
     public partial class FineTuningJobHyperparameters
     {
-        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobHyperparameters"/>. </summary>
         internal FineTuningJobHyperparameters()
         {
         }
 
-        /// <summary> Initializes a new instance of FineTuningJobHyperparameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="FineTuningJobHyperparameters"/>. </summary>
         /// <param name="nEpochs">
         /// The number of epochs to train the model for. An epoch refers to one full cycle through the
         /// training dataset.
@@ -40,6 +40,17 @@ namespace OpenAI.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description>"auto"</description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="long"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

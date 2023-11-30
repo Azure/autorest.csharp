@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Authentication.ApiKey",
  "Description": "Illustrates clients generated with ApiKey authentication.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

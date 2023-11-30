@@ -90,7 +90,7 @@ namespace MgmtScopeResource.Mocking
         }
 
         /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
-        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
+        /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource"/> object. </returns>
         public virtual VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus()
         {
             return new VMInsightsOnboardingStatusResource(Client, Id.AppendProviderResource("Microsoft.Insights", "vmInsightsOnboardingStatuses", "default"));

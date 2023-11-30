@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -49,6 +50,15 @@ namespace AutoRest.CSharp.Generation.Writers
                                 writer.Line($"_ => throw new {typeof(NotSupportedException)}()");
                             }
                         }
+
+                        writer.Line();
+                    }
+
+                    foreach (var parameter in clientOptions.AdditionalParameters)
+                    {
+                        writer.WriteXmlDocumentationSummary(parameter.Description);
+                        writer.Line($"public {parameter.Type} {parameter.Name.ToCleanName()} {{ get; set; }}");
+                        writer.Line();
                     }
                 }
             }

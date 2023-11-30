@@ -10,14 +10,14 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
     /// <summary> Cobra model. </summary>
     public partial class Cobra : Snake
     {
-        /// <summary> Initializes a new instance of Cobra. </summary>
+        /// <summary> Initializes a new instance of <see cref="Cobra"/>. </summary>
         /// <param name="length"> Length of the snake. </param>
         public Cobra(int length) : base(length)
         {
             Kind = SnakeKind.Cobra;
         }
 
-        /// <summary> Initializes a new instance of Cobra. </summary>
+        /// <summary> Initializes a new instance of <see cref="Cobra"/>. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="length"> Length of the snake. </param>
         internal Cobra(SnakeKind kind, int length) : base(kind, length)

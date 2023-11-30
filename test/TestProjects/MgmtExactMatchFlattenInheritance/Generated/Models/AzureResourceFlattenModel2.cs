@@ -14,13 +14,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> This model is x-ms-azure-resource, has flatten properties, and reference type properties are split in flatten properties and its own properties. </summary>
     public partial class AzureResourceFlattenModel2 : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel2"/>. </summary>
         /// <param name="location"> The location. </param>
         public AzureResourceFlattenModel2(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="AzureResourceFlattenModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

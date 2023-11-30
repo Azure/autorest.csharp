@@ -12,7 +12,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Model factory for models. </summary>
     public static partial class SpecsAzureClientGeneratorCoreAccessModelFactory
     {
-        /// <summary> Initializes a new instance of NoDecoratorModelInPublic. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.NoDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.NoDecoratorModelInPublic"/> instance for mocking. </returns>
@@ -26,7 +26,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new NoDecoratorModelInPublic(name);
         }
 
-        /// <summary> Initializes a new instance of PublicDecoratorModelInPublic. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInPublic"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.PublicDecoratorModelInPublic"/> instance for mocking. </returns>
@@ -40,7 +40,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new PublicDecoratorModelInPublic(name);
         }
 
-        /// <summary> Initializes a new instance of PublicDecoratorModelInInternal. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.PublicDecoratorModelInInternal"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.PublicDecoratorModelInInternal"/> instance for mocking. </returns>
@@ -54,7 +54,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
             return new PublicDecoratorModelInInternal(name);
         }
 
-        /// <summary> Initializes a new instance of SharedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SharedModel"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>

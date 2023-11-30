@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsString_ShortVersion()
+        public void Example_CollectionsString_GetCollectionsString_ShortVersion()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsString_ShortVersion_Async()
+        public async Task Example_CollectionsString_GetCollectionsString_ShortVersion_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsString_ShortVersion_Convenience()
+        public void Example_CollectionsString_GetCollectionsString_ShortVersion_Convenience()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsString_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsString_GetCollectionsString_ShortVersion_Convenience_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsString_AllParameters()
+        public void Example_CollectionsString_GetCollectionsString_AllParameters()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsString_AllParameters_Async()
+        public async Task Example_CollectionsString_GetCollectionsString_AllParameters_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsString_AllParameters_Convenience()
+        public void Example_CollectionsString_GetCollectionsString_AllParameters_Convenience()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsString_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsString_GetCollectionsString_AllParameters_Convenience_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_CollectionsString_Put_ShortVersion()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_CollectionsString_Put_ShortVersion_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -141,7 +141,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_CollectionsString_Put_ShortVersion_Convenience()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -151,7 +151,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsString_Put_ShortVersion_Convenience_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_CollectionsString_Put_AllParameters()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -179,7 +179,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_CollectionsString_Put_AllParameters_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_CollectionsString_Put_AllParameters_Convenience()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 
@@ -207,7 +207,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsString_Put_AllParameters_Convenience_Async()
         {
             CollectionsString client = new ValueTypesClient().GetCollectionsStringClient();
 

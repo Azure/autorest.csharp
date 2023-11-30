@@ -21,7 +21,7 @@ namespace _Type.Property.Nullable.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_ShortVersion()
+        public void Example_Datetime_GetNonNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -34,7 +34,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_ShortVersion_Async()
+        public async Task Example_Datetime_GetNonNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -47,7 +47,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_ShortVersion_Convenience()
+        public void Example_Datetime_GetNonNull_ShortVersion_Convenience()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -56,7 +56,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_ShortVersion_Convenience_Async()
+        public async Task Example_Datetime_GetNonNull_ShortVersion_Convenience_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -65,7 +65,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters()
+        public void Example_Datetime_GetNonNull_AllParameters()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -78,7 +78,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Async()
+        public async Task Example_Datetime_GetNonNull_AllParameters_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -91,7 +91,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNonNull_AllParameters_Convenience()
+        public void Example_Datetime_GetNonNull_AllParameters_Convenience()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -100,7 +100,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNonNull_AllParameters_Convenience_Async()
+        public async Task Example_Datetime_GetNonNull_AllParameters_Convenience_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -109,7 +109,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_ShortVersion()
+        public void Example_Datetime_GetNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -122,7 +122,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_ShortVersion_Async()
+        public async Task Example_Datetime_GetNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_ShortVersion_Convenience()
+        public void Example_Datetime_GetNull_ShortVersion_Convenience()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_ShortVersion_Convenience_Async()
+        public async Task Example_Datetime_GetNull_ShortVersion_Convenience_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -153,7 +153,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters()
+        public void Example_Datetime_GetNull_AllParameters()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -166,7 +166,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Async()
+        public async Task Example_Datetime_GetNull_AllParameters_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -179,7 +179,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetNull_AllParameters_Convenience()
+        public void Example_Datetime_GetNull_AllParameters_Convenience()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -188,7 +188,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetNull_AllParameters_Convenience_Async()
+        public async Task Example_Datetime_GetNull_AllParameters_Convenience_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -197,7 +197,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_ShortVersion()
+        public void Example_Datetime_PatchNonNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -213,7 +213,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_ShortVersion_Async()
+        public async Task Example_Datetime_PatchNonNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -229,7 +229,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNonNull_AllParameters()
+        public void Example_Datetime_PatchNonNull_AllParameters()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -245,7 +245,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNonNull_AllParameters_Async()
+        public async Task Example_Datetime_PatchNonNull_AllParameters_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -261,7 +261,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_ShortVersion()
+        public void Example_Datetime_PatchNull_ShortVersion()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -277,7 +277,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_ShortVersion_Async()
+        public async Task Example_Datetime_PatchNull_ShortVersion_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -293,7 +293,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PatchNull_AllParameters()
+        public void Example_Datetime_PatchNull_AllParameters()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 
@@ -309,7 +309,7 @@ namespace _Type.Property.Nullable.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PatchNull_AllParameters_Async()
+        public async Task Example_Datetime_PatchNull_AllParameters_Async()
         {
             Datetime client = new NullableClient().GetDatetimeClient();
 

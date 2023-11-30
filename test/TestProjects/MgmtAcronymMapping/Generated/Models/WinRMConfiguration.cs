@@ -16,13 +16,13 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class WinRMConfiguration
     {
-        /// <summary> Initializes a new instance of WinRMConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         public WinRMConfiguration()
         {
             Listeners = new ChangeTrackingList<WinRMListener>();
         }
 
-        /// <summary> Initializes a new instance of WinRMConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMConfiguration"/>. </summary>
         /// <param name="listeners">
         /// The list of Windows Remote Management listeners
         /// Serialized Name: WinRMConfiguration.listeners

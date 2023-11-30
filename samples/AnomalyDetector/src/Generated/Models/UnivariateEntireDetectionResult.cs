@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     /// <summary> The response of entire anomaly detection. </summary>
     public partial class UnivariateEntireDetectionResult
     {
-        /// <summary> Initializes a new instance of UnivariateEntireDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnivariateEntireDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.
@@ -76,7 +76,7 @@ namespace AnomalyDetector.Models
             Severity = new ChangeTrackingList<float>();
         }
 
-        /// <summary> Initializes a new instance of UnivariateEntireDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnivariateEntireDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.

@@ -225,7 +225,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -240,7 +240,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with all properties present. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -333,7 +333,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with only required properties. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequiredAndOptionalProperty,CancellationToken)']/*" />
@@ -348,7 +348,7 @@ namespace _Type.Property.Optionality
         }
 
         /// <summary> Put a body with only required properties. </summary>
-        /// <param name="body"> The RequiredAndOptionalProperty to use. </param>
+        /// <param name="body"> The <see cref="RequiredAndOptionalProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)']/*" />

@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "_Specs_.Azure.ClientGenerator.Core.Usage",
  "Description": "Test for internal decorator.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

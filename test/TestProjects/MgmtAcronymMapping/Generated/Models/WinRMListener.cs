@@ -15,12 +15,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class WinRMListener
     {
-        /// <summary> Initializes a new instance of WinRMListener. </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMListener"/>. </summary>
         public WinRMListener()
         {
         }
 
-        /// <summary> Initializes a new instance of WinRMListener. </summary>
+        /// <summary> Initializes a new instance of <see cref="WinRMListener"/>. </summary>
         /// <param name="protocol">
         /// Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**
         /// Serialized Name: WinRMListener.protocol

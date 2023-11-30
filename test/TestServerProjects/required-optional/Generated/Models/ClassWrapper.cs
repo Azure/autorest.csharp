@@ -13,7 +13,7 @@ namespace required_optional.Models
     /// <summary> The ClassWrapper. </summary>
     public partial class ClassWrapper
     {
-        /// <summary> Initializes a new instance of ClassWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="ClassWrapper"/>. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ClassWrapper(Product value)

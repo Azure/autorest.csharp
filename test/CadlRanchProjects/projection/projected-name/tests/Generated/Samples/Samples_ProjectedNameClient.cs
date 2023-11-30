@@ -18,7 +18,7 @@ namespace Projection.ProjectedName.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ClientName_ShortVersion()
+        public void Example_ProjectedName_ClientName_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -29,7 +29,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ClientName_ShortVersion_Async()
+        public async Task Example_ProjectedName_ClientName_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -40,7 +40,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ClientName_AllParameters()
+        public void Example_ProjectedName_ClientName_AllParameters()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -51,7 +51,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ClientName_AllParameters_Async()
+        public async Task Example_ProjectedName_ClientName_AllParameters_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -62,7 +62,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter_ShortVersion()
+        public void Example_ProjectedName_Parameter_ShortVersion()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -73,7 +73,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Parameter_ShortVersion_Async()
+        public async Task Example_ProjectedName_Parameter_ShortVersion_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -84,7 +84,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter_AllParameters()
+        public void Example_ProjectedName_Parameter_AllParameters()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
@@ -95,7 +95,7 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Parameter_AllParameters_Async()
+        public async Task Example_ProjectedName_Parameter_AllParameters_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 

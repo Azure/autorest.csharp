@@ -13,7 +13,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model with union types. </summary>
     public partial class ModelWithUnionProperty
     {
-        /// <summary> Initializes a new instance of ModelWithUnionProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithUnionProperty"/>. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
         public ModelWithUnionProperty(BinaryData unionProperty)
@@ -32,6 +32,17 @@ namespace ConfidentLevelsInTsp.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="int"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

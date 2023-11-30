@@ -1,9 +1,7 @@
 {
  "$id": "1",
  "Name": "ClientAndOperationGroup",
- "ApiVersions": [
-  "2015-06-18"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [

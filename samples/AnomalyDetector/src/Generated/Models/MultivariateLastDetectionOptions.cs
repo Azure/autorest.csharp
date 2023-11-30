@@ -15,7 +15,7 @@ namespace AnomalyDetector.Models
     /// <summary> Request of last detection. </summary>
     public partial class MultivariateLastDetectionOptions
     {
-        /// <summary> Initializes a new instance of MultivariateLastDetectionOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/>. </summary>
         /// <param name="variables">
         /// This contains the inference data, including the name, timestamps(ISO 8601) and
         /// values of variables.
@@ -34,7 +34,7 @@ namespace AnomalyDetector.Models
             TopContributorCount = topContributorCount;
         }
 
-        /// <summary> Initializes a new instance of MultivariateLastDetectionOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/>. </summary>
         /// <param name="variables">
         /// This contains the inference data, including the name, timestamps(ISO 8601) and
         /// values of variables.

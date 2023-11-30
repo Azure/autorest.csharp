@@ -37,11 +37,11 @@ namespace MgmtExtensionResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubSingletonResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubSingletonResource.CreateResourceIdentifier" /> to create a <see cref="SubSingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubSingletonResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubSingletonResource.CreateResourceIdentifier" /> to create a <see cref="SubSingletonResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubSingletonResource"/> object. </returns>
         public virtual SubSingletonResource GetSubSingletonResource(ResourceIdentifier id)
         {
             SubSingletonResource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtExtensionResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="SubscriptionPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubscriptionPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="SubscriptionPolicyDefinitionResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubscriptionPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinitionResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource"/> object. </returns>
         public virtual SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(ResourceIdentifier id)
         {
             SubscriptionPolicyDefinitionResource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtExtensionResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="BuiltInPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="BuiltInPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="BuiltInPolicyDefinitionResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BuiltInPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinitionResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource"/> object. </returns>
         public virtual BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(ResourceIdentifier id)
         {
             BuiltInPolicyDefinitionResource.ValidateResourceId(id);
@@ -73,11 +73,11 @@ namespace MgmtExtensionResource.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="ManagementGroupPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ManagementGroupPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="ManagementGroupPolicyDefinitionResource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ManagementGroupPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinitionResource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
+        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource"/> object. </returns>
         public virtual ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(ResourceIdentifier id)
         {
             ManagementGroupPolicyDefinitionResource.ValidateResourceId(id);

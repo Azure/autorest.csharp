@@ -12,7 +12,7 @@ namespace OpenAI.Models
     /// <summary> The ListPaginatedFineTuningJobsResponse. </summary>
     public partial class ListPaginatedFineTuningJobsResponse
     {
-        /// <summary> Initializes a new instance of ListPaginatedFineTuningJobsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <param name="hasMore"></param>
@@ -27,7 +27,7 @@ namespace OpenAI.Models
             HasMore = hasMore;
         }
 
-        /// <summary> Initializes a new instance of ListPaginatedFineTuningJobsResponse. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListPaginatedFineTuningJobsResponse"/>. </summary>
         /// <param name="object"></param>
         /// <param name="data"></param>
         /// <param name="hasMore"></param>

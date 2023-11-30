@@ -22,7 +22,7 @@ namespace _Type._Array.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_ShortVersion()
+        public void Example_DurationValue_GetDurationValue_ShortVersion()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -34,7 +34,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_ShortVersion_Async()
+        public async Task Example_DurationValue_GetDurationValue_ShortVersion_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -46,7 +46,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_ShortVersion_Convenience()
+        public void Example_DurationValue_GetDurationValue_ShortVersion_Convenience()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -55,7 +55,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_ShortVersion_Convenience_Async()
+        public async Task Example_DurationValue_GetDurationValue_ShortVersion_Convenience_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -64,7 +64,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_AllParameters()
+        public void Example_DurationValue_GetDurationValue_AllParameters()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -76,7 +76,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_AllParameters_Async()
+        public async Task Example_DurationValue_GetDurationValue_AllParameters_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -88,7 +88,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_AllParameters_Convenience()
+        public void Example_DurationValue_GetDurationValue_AllParameters_Convenience()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -97,7 +97,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_AllParameters_Convenience_Async()
+        public async Task Example_DurationValue_GetDurationValue_AllParameters_Convenience_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -106,7 +106,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_DurationValue_Put_ShortVersion()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -121,7 +121,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_DurationValue_Put_ShortVersion_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -136,7 +136,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_DurationValue_Put_ShortVersion_Convenience()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -145,7 +145,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_DurationValue_Put_ShortVersion_Convenience_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -154,7 +154,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_DurationValue_Put_AllParameters()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -169,7 +169,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_DurationValue_Put_AllParameters_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -184,7 +184,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_DurationValue_Put_AllParameters_Convenience()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 
@@ -193,7 +193,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_DurationValue_Put_AllParameters_Convenience_Async()
         {
             DurationValue client = new ArrayClient().GetDurationValueClient();
 

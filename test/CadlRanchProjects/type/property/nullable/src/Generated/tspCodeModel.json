@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Type.Property.Nullable",
  "Description": "Illustrates models with nullable properties.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

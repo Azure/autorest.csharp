@@ -14,13 +14,13 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeInt64ModelListResult. </summary>
     internal partial class PageSizeInt64ModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeInt64ModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeInt64ModelListResult"/>. </summary>
         internal PageSizeInt64ModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeInt64ModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeInt64ModelListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="PageSizeInt64ModelListResult"/>. </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
         internal PageSizeInt64ModelListResult(IReadOnlyList<PageSizeInt64ModelData> value, string nextLink)

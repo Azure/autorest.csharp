@@ -14,12 +14,12 @@ namespace ModelsTypeSpec.Models
     /// </summary>
     public abstract partial class OutputBaseModelWithDiscriminator
     {
-        /// <summary> Initializes a new instance of OutputBaseModelWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
         protected OutputBaseModelWithDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of OutputBaseModelWithDiscriminator. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutputBaseModelWithDiscriminator"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         internal OutputBaseModelWithDiscriminator(string kind)
         {

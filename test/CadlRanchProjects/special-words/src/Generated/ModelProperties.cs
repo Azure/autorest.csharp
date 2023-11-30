@@ -43,7 +43,7 @@ namespace SpecialWords
             _endpoint = endpoint;
         }
 
-        /// <param name="body"> The SameAsModel to use. </param>
+        /// <param name="body"> The <see cref="SpecialWords.SameAsModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModelAsync(SameAsModel,CancellationToken)']/*" />
@@ -57,7 +57,7 @@ namespace SpecialWords
             return response;
         }
 
-        /// <param name="body"> The SameAsModel to use. </param>
+        /// <param name="body"> The <see cref="SpecialWords.SameAsModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelProperties.xml" path="doc/members/member[@name='SameAsModel(SameAsModel,CancellationToken)']/*" />
@@ -81,7 +81,7 @@ namespace SpecialWords
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SameAsModelAsync(SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SameAsModelAsync(SpecialWords.SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -120,7 +120,7 @@ namespace SpecialWords
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SameAsModel(SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SameAsModel(SpecialWords.SameAsModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

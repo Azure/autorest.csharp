@@ -15,13 +15,13 @@ namespace MgmtScopeResource.Models
     /// <summary> A marketplace resource. </summary>
     public partial class Marketplace : ResourceData
     {
-        /// <summary> Initializes a new instance of Marketplace. </summary>
+        /// <summary> Initializes a new instance of <see cref="Marketplace"/>. </summary>
         internal Marketplace()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of Marketplace. </summary>
+        /// <summary> Initializes a new instance of <see cref="Marketplace"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

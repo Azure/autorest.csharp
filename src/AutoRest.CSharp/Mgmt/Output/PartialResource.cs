@@ -35,7 +35,7 @@ internal class PartialResource : Resource
         List<FormattableString> lines = new List<FormattableString>();
 
         lines.Add($"A class extending from the {OriginalResourceName.AddResourceSuffixToResourceName()} in {MgmtContext.DefaultNamespace} along with the instance operations that can be performed on it.");
-        lines.Add($"You can only construct {an} <see cref=\"{Type}\" /> from a <see cref=\"{typeof(ResourceIdentifier)}\" /> with a resource type of {ResourceType}.");
+        lines.Add($"You can only construct {an} {Type:C} from a {typeof(ResourceIdentifier):C} with a resource type of {ResourceType}.");
 
         return FormattableStringHelpers.Join(lines, "\r\n");
     }

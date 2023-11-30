@@ -54,7 +54,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -86,7 +86,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -118,7 +118,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -150,7 +150,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationISO8601 to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -182,7 +182,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The Array to use. </param>
+        /// <param name="duration"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -217,7 +217,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The Array to use. </param>
+        /// <param name="duration"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="duration"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -252,7 +252,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSeconds to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -284,7 +284,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSeconds to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -316,7 +316,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSecondsFloat to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -348,7 +348,7 @@ namespace Encode.Duration
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="duration"> The DurationSecondsFloat to use. </param>
+        /// <param name="duration"> The <see cref="TimeSpan"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>

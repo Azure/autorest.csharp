@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AdditionalUnattendContent
     {
-        /// <summary> Initializes a new instance of AdditionalUnattendContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         public AdditionalUnattendContent()
         {
         }
 
-        /// <summary> Initializes a new instance of AdditionalUnattendContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="AdditionalUnattendContent"/>. </summary>
         /// <param name="passName">
         /// The pass name. Currently, the only allowable value is OobeSystem.
         /// Serialized Name: AdditionalUnattendContent.passName

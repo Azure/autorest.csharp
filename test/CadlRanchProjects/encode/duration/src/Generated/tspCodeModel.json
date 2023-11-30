@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Encode.Duration",
  "Description": "Test for encode decorator on duration.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

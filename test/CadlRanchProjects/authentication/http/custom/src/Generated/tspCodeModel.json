@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Authentication.Http.Custom",
  "Description": "Illustrates clients generated with generic HTTP auth.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

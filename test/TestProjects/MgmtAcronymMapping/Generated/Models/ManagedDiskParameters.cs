@@ -16,12 +16,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class ManagedDiskParameters : SubResource
     {
-        /// <summary> Initializes a new instance of ManagedDiskParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedDiskParameters"/>. </summary>
         public ManagedDiskParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of ManagedDiskParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedDiskParameters"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

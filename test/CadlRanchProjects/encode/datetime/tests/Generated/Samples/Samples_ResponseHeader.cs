@@ -18,7 +18,7 @@ namespace Encode.Datetime.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_ShortVersion()
+        public void Example_ResponseHeader_Default_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -29,7 +29,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_ShortVersion_Async()
+        public async Task Example_ResponseHeader_Default_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -40,7 +40,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public void Example_ResponseHeader_Default_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -51,7 +51,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Async()
+        public async Task Example_ResponseHeader_Default_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -62,7 +62,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_ShortVersion()
+        public void Example_ResponseHeader_Rfc3339_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -73,7 +73,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_ShortVersion_Async()
+        public async Task Example_ResponseHeader_Rfc3339_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -84,7 +84,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_AllParameters()
+        public void Example_ResponseHeader_Rfc3339_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -95,7 +95,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_AllParameters_Async()
+        public async Task Example_ResponseHeader_Rfc3339_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -106,7 +106,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_ShortVersion()
+        public void Example_ResponseHeader_Rfc7231_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -117,7 +117,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_ShortVersion_Async()
+        public async Task Example_ResponseHeader_Rfc7231_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -128,7 +128,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_AllParameters()
+        public void Example_ResponseHeader_Rfc7231_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -139,7 +139,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_AllParameters_Async()
+        public async Task Example_ResponseHeader_Rfc7231_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -150,7 +150,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_ShortVersion()
+        public void Example_ResponseHeader_UnixTimestamp_ShortVersion()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -161,7 +161,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_ShortVersion_Async()
+        public async Task Example_ResponseHeader_UnixTimestamp_ShortVersion_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -172,7 +172,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_AllParameters()
+        public void Example_ResponseHeader_UnixTimestamp_AllParameters()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 
@@ -183,7 +183,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_AllParameters_Async()
+        public async Task Example_ResponseHeader_UnixTimestamp_AllParameters_Async()
         {
             ResponseHeader client = new DatetimeClient().GetResponseHeaderClient();
 

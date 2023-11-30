@@ -13,7 +13,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model without union types. </summary>
     public partial class UsualModel
     {
-        /// <summary> Initializes a new instance of UsualModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UsualModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -25,7 +25,7 @@ namespace ConfidentLevelsInTsp.Models
             Age = age;
         }
 
-        /// <summary> Initializes a new instance of UsualModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UsualModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <param name="size"> The size. </param>

@@ -13,12 +13,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> Resource with flatten properties (contains id). Since the id comes from flattened properties, this should not be counted as a resource. </summary>
     public partial class ResourceModel2 : ResourceData
     {
-        /// <summary> Initializes a new instance of ResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel2"/>. </summary>
         public ResourceModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceModel2. </summary>
+        /// <summary> Initializes a new instance of <see cref="ResourceModel2"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

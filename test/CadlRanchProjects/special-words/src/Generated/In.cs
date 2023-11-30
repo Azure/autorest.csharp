@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The in. </summary>
     public partial class In
     {
-        /// <summary> Initializes a new instance of In. </summary>
+        /// <summary> Initializes a new instance of <see cref="In"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public In(string name)

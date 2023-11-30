@@ -19,7 +19,7 @@ namespace ClientAndOperationGroup.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Zero_ShortVersion()
+        public void Example_ClientAndOperationGroup_Zero_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -32,7 +32,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Zero_ShortVersion_Async()
+        public async Task Example_ClientAndOperationGroup_Zero_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -45,7 +45,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Zero_AllParameters()
+        public void Example_ClientAndOperationGroup_Zero_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -58,7 +58,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Zero_AllParameters_Async()
+        public async Task Example_ClientAndOperationGroup_Zero_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -71,7 +71,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_One_ShortVersion()
+        public void Example_Alpha_One_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -84,7 +84,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_ShortVersion_Async()
+        public async Task Example_Alpha_One_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -97,7 +97,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_One_AllParameters()
+        public void Example_Alpha_One_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
@@ -110,7 +110,7 @@ namespace ClientAndOperationGroup.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_One_AllParameters_Async()
+        public async Task Example_Alpha_One_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);

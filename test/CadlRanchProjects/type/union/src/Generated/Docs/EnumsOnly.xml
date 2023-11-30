@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetEnumsOnlyAsync(CancellationToken)">
+      <example>
+This sample shows how to call GetEnumsOnlyAsync.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response<object> response = await client.GetEnumsOnlyAsync();
+]]></code>
+This sample shows how to call GetEnumsOnlyAsync with all parameters.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response<object> response = await client.GetEnumsOnlyAsync();
+]]></code></example>
+    </member>
+    <member name="GetEnumsOnly(CancellationToken)">
+      <example>
+This sample shows how to call GetEnumsOnly.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response<object> response = client.GetEnumsOnly();
+]]></code>
+This sample shows how to call GetEnumsOnly with all parameters.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response<object> response = client.GetEnumsOnly();
+]]></code></example>
+    </member>
+    <member name="GetEnumsOnlyAsync(RequestContext)">
+      <example>
+This sample shows how to call GetEnumsOnlyAsync and parse the result.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = await client.GetEnumsOnlyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
+]]></code>
+This sample shows how to call GetEnumsOnlyAsync with all parameters and parse the result.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = await client.GetEnumsOnlyAsync(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
+]]></code></example>
+    </member>
+    <member name="GetEnumsOnly(RequestContext)">
+      <example>
+This sample shows how to call GetEnumsOnly and parse the result.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = client.GetEnumsOnly(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
+]]></code>
+This sample shows how to call GetEnumsOnly with all parameters and parse the result.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = client.GetEnumsOnly(null);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("prop").GetProperty("lr").ToString());
+Console.WriteLine(result.GetProperty("prop").GetProperty("ud").ToString());
+]]></code></example>
+    </member>
+    <member name="SendAsync(SendRequestProp,CancellationToken)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = await client.SendAsync(SendRequestProp.A);
+]]></code>
+This sample shows how to call SendAsync with all parameters.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = await client.SendAsync(SendRequestProp.A);
+]]></code></example>
+    </member>
+    <member name="Send(SendRequestProp,CancellationToken)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = client.Send(SendRequestProp.A);
+]]></code>
+This sample shows how to call Send with all parameters.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+Response response = client.Send(SendRequestProp.A);
+]]></code></example>
+    </member>
+    <member name="SendAsync(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call SendAsync.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = await client.SendAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SendAsync with all request content.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = await client.SendAsync(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+    <member name="Send(RequestContent,RequestContext)">
+      <example>
+This sample shows how to call Send.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = client.Send(content);
+
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call Send with all request content.
+<code><![CDATA[
+EnumsOnly client = new UnionClient().GetEnumsOnlyClient();
+
+using RequestContent content = RequestContent.Create(new
+{
+    prop = "a",
+});
+Response response = client.Send(content);
+
+Console.WriteLine(response.Status);
+]]></code></example>
+    </member>
+  </members>
+</doc>

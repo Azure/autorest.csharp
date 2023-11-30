@@ -13,10 +13,17 @@ namespace FlattenedParameters.Models
     /// <summary> The PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         public PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema()
         {
             Items = new ChangeTrackingList<string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
+        /// <param name="items"></param>
+        internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items)
+        {
+            Items = items;
         }
 
         /// <summary> Gets the items. </summary>

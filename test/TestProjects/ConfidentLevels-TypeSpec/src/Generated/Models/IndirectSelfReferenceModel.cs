@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,7 +14,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Indirect self reference model. </summary>
     public partial class IndirectSelfReferenceModel
     {
-        /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="something"/> or <paramref name="unionProperty"/> is null. </exception>
@@ -26,7 +27,7 @@ namespace ConfidentLevelsInTsp.Models
             UnionProperty = unionProperty;
         }
 
-        /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="IndirectSelfReferenceModel"/>. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="reference"> Reference back. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
@@ -50,6 +51,17 @@ namespace ConfidentLevelsInTsp.Models
         /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
+        /// <remarks>
+        /// Supported types:
+        /// <list type="bullet">
+        /// <item>
+        /// <description><see cref="string"/></description>
+        /// </item>
+        /// <item>
+        /// <description><see cref="IList{T}"/> where <c>T</c> is of type <see cref="int"/></description>
+        /// </item>
+        /// </list>
+        /// </remarks>
         /// Examples:
         /// <list type="bullet">
         /// <item>

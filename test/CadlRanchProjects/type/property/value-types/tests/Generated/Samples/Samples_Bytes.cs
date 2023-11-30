@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_ShortVersion()
+        public void Example_Bytes_GetByte_ShortVersion()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_ShortVersion_Async()
+        public async Task Example_Bytes_GetByte_ShortVersion_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_ShortVersion_Convenience()
+        public void Example_Bytes_GetByte_ShortVersion_Convenience()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_ShortVersion_Convenience_Async()
+        public async Task Example_Bytes_GetByte_ShortVersion_Convenience_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_AllParameters()
+        public void Example_Bytes_GetByte_AllParameters()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_AllParameters_Async()
+        public async Task Example_Bytes_GetByte_AllParameters_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetByte_AllParameters_Convenience()
+        public void Example_Bytes_GetByte_AllParameters_Convenience()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetByte_AllParameters_Convenience_Async()
+        public async Task Example_Bytes_GetByte_AllParameters_Convenience_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Bytes_Put_ShortVersion()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -120,7 +120,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Bytes_Put_ShortVersion_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Bytes_Put_ShortVersion_Convenience()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Bytes_Put_ShortVersion_Convenience_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Bytes_Put_AllParameters()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Bytes_Put_AllParameters_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Bytes_Put_AllParameters_Convenience()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 
@@ -195,7 +195,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Bytes_Put_AllParameters_Convenience_Async()
         {
             Bytes client = new ValueTypesClient().GetBytesClient();
 

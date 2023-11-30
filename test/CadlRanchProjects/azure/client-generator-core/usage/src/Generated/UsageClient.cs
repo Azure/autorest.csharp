@@ -55,7 +55,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// }
         /// ```
         /// </summary>
-        /// <param name="body"> The InputModel to use. </param>
+        /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutputAsync(InputModel,CancellationToken)']/*" />
@@ -77,7 +77,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// }
         /// ```
         /// </summary>
-        /// <param name="body"> The InputModel to use. </param>
+        /// <param name="body"> The <see cref="InputModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutput(InputModel,CancellationToken)']/*" />

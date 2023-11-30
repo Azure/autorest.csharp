@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -96,14 +97,6 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public string ToStringForDocs()
-        {
-            var builder = new StringBuilder(Name);
-            builder.Append("(");
-            var paramList = Parameters.Select(p => p.Type.ToStringForDocs());
-            builder.Append(string.Join(",", paramList));
-            builder.Append(")");
-            return builder.ToString();
-        }
+        public FormattableString GetCRef() => $"{Name}({Parameters.GetTypesFormattable()})";
     }
 }

@@ -21,7 +21,7 @@ namespace _Type._Array.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue_ShortVersion()
+        public void Example_BooleanValue_GetBooleanValue_ShortVersion()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -33,7 +33,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_ShortVersion_Async()
+        public async Task Example_BooleanValue_GetBooleanValue_ShortVersion_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -45,7 +45,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue_ShortVersion_Convenience()
+        public void Example_BooleanValue_GetBooleanValue_ShortVersion_Convenience()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -54,7 +54,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_ShortVersion_Convenience_Async()
+        public async Task Example_BooleanValue_GetBooleanValue_ShortVersion_Convenience_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -63,7 +63,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue_AllParameters()
+        public void Example_BooleanValue_GetBooleanValue_AllParameters()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -75,7 +75,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_AllParameters_Async()
+        public async Task Example_BooleanValue_GetBooleanValue_AllParameters_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -87,7 +87,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetBooleanValue_AllParameters_Convenience()
+        public void Example_BooleanValue_GetBooleanValue_AllParameters_Convenience()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -96,7 +96,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetBooleanValue_AllParameters_Convenience_Async()
+        public async Task Example_BooleanValue_GetBooleanValue_AllParameters_Convenience_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -105,7 +105,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_BooleanValue_Put_ShortVersion()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -120,7 +120,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_BooleanValue_Put_ShortVersion_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -135,7 +135,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_BooleanValue_Put_ShortVersion_Convenience()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -144,7 +144,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_BooleanValue_Put_ShortVersion_Convenience_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -153,7 +153,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_BooleanValue_Put_AllParameters()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -168,7 +168,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_BooleanValue_Put_AllParameters_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -183,7 +183,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_BooleanValue_Put_AllParameters_Convenience()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 
@@ -192,7 +192,7 @@ true
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_BooleanValue_Put_AllParameters_Convenience_Async()
         {
             BooleanValue client = new ArrayClient().GetBooleanValueClient();
 

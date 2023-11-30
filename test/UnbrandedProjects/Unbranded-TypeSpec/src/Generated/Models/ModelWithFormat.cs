@@ -10,7 +10,7 @@ namespace UnbrandedTypeSpec.Models
     /// <summary> The ModelWithFormat. </summary>
     public partial class ModelWithFormat
     {
-        /// <summary> Initializes a new instance of ModelWithFormat. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithFormat"/>. </summary>
         /// <param name="sourceUrl"> url format. </param>
         /// <param name="guid"> uuid format. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sourceUrl"/> is null. </exception>

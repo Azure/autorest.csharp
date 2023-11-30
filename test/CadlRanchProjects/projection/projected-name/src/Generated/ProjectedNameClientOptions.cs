@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace Projection.ProjectedName
@@ -13,25 +12,5 @@ namespace Projection.ProjectedName
     /// <summary> Client options for ProjectedNameClient. </summary>
     public partial class ProjectedNameClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "1.0.0". </summary>
-            V1_0_0 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of ProjectedNameClientOptions. </summary>
-        public ProjectedNameClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V1_0_0 => "1.0.0",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

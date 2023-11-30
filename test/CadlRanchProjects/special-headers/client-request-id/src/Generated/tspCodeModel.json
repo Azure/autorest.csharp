@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "SpecialHeaders.ClientRequestId",
  "Description": "Azure client request id header configurations.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [

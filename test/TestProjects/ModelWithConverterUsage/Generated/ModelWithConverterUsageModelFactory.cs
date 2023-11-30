@@ -10,7 +10,7 @@ namespace ModelWithConverterUsage.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelWithConverterUsageModelFactory
     {
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.OutputModel"/>. </summary>
         /// <param name="outputModelProperty"> Constant string. </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
         public static OutputModel OutputModel(string outputModelProperty = null)

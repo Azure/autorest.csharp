@@ -448,7 +448,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -470,7 +470,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response PutComplicated(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -509,7 +509,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public async Task<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
@@ -536,7 +536,7 @@ namespace body_complex
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
-        /// <param name="complexBody"> The Salmon to use. </param>
+        /// <param name="complexBody"> The <see cref="Salmon"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public Response<Salmon> PutMissingDiscriminator(Salmon complexBody, CancellationToken cancellationToken = default)

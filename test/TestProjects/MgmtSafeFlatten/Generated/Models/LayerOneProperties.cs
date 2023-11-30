@@ -10,9 +10,16 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerOneProperties. </summary>
     internal partial class LayerOneProperties
     {
-        /// <summary> Initializes a new instance of LayerOneProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="LayerOneProperties"/>. </summary>
         internal LayerOneProperties()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LayerOneProperties"/>. </summary>
+        /// <param name="uniqueId"> The id of layer one. </param>
+        internal LayerOneProperties(string uniqueId)
+        {
+            UniqueId = uniqueId;
         }
 
         /// <summary> The id of layer one. </summary>

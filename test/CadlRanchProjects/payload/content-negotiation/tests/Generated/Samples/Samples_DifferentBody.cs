@@ -20,7 +20,7 @@ namespace Payload.ContentNegotiation.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsPng_ShortVersion()
+        public void Example_DifferentBody_GetAvatarAsPng_ShortVersion()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -32,7 +32,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsPng_ShortVersion_Async()
+        public async Task Example_DifferentBody_GetAvatarAsPng_ShortVersion_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -44,7 +44,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsPng_ShortVersion_Convenience()
+        public void Example_DifferentBody_GetAvatarAsPng_ShortVersion_Convenience()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -53,7 +53,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsPng_ShortVersion_Convenience_Async()
+        public async Task Example_DifferentBody_GetAvatarAsPng_ShortVersion_Convenience_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -62,7 +62,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsPng_AllParameters()
+        public void Example_DifferentBody_GetAvatarAsPng_AllParameters()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -74,7 +74,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsPng_AllParameters_Async()
+        public async Task Example_DifferentBody_GetAvatarAsPng_AllParameters_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -86,7 +86,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsPng_AllParameters_Convenience()
+        public void Example_DifferentBody_GetAvatarAsPng_AllParameters_Convenience()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -95,7 +95,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsPng_AllParameters_Convenience_Async()
+        public async Task Example_DifferentBody_GetAvatarAsPng_AllParameters_Convenience_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -104,7 +104,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsJson_ShortVersion()
+        public void Example_DifferentBody_GetAvatarAsJson_ShortVersion()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -116,7 +116,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsJson_ShortVersion_Async()
+        public async Task Example_DifferentBody_GetAvatarAsJson_ShortVersion_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -128,7 +128,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsJson_ShortVersion_Convenience()
+        public void Example_DifferentBody_GetAvatarAsJson_ShortVersion_Convenience()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -137,7 +137,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsJson_ShortVersion_Convenience_Async()
+        public async Task Example_DifferentBody_GetAvatarAsJson_ShortVersion_Convenience_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -146,7 +146,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsJson_AllParameters()
+        public void Example_DifferentBody_GetAvatarAsJson_AllParameters()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -158,7 +158,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsJson_AllParameters_Async()
+        public async Task Example_DifferentBody_GetAvatarAsJson_AllParameters_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -170,7 +170,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAvatarAsJson_AllParameters_Convenience()
+        public void Example_DifferentBody_GetAvatarAsJson_AllParameters_Convenience()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 
@@ -179,7 +179,7 @@ namespace Payload.ContentNegotiation.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAvatarAsJson_AllParameters_Convenience_Async()
+        public async Task Example_DifferentBody_GetAvatarAsJson_AllParameters_Convenience_Async()
         {
             DifferentBody client = new ContentNegotiationClient().GetDifferentBodyClient();
 

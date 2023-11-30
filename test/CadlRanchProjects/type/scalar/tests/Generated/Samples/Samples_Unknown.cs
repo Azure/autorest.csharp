@@ -20,7 +20,7 @@ namespace _Type.Scalar.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknown_ShortVersion()
+        public void Example_Unknown_GetUnknown_ShortVersion()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -32,7 +32,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknown_ShortVersion_Async()
+        public async Task Example_Unknown_GetUnknown_ShortVersion_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -44,7 +44,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknown_ShortVersion_Convenience()
+        public void Example_Unknown_GetUnknown_ShortVersion_Convenience()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -53,7 +53,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknown_ShortVersion_Convenience_Async()
+        public async Task Example_Unknown_GetUnknown_ShortVersion_Convenience_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -62,7 +62,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknown_AllParameters()
+        public void Example_Unknown_GetUnknown_AllParameters()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -74,7 +74,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknown_AllParameters_Async()
+        public async Task Example_Unknown_GetUnknown_AllParameters_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -86,7 +86,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknown_AllParameters_Convenience()
+        public void Example_Unknown_GetUnknown_AllParameters_Convenience()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -95,7 +95,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknown_AllParameters_Convenience_Async()
+        public async Task Example_Unknown_GetUnknown_AllParameters_Convenience_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -104,7 +104,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Unknown_Put_ShortVersion()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -116,7 +116,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Unknown_Put_ShortVersion_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -128,7 +128,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Unknown_Put_ShortVersion_Convenience()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -137,7 +137,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Unknown_Put_ShortVersion_Convenience_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -146,7 +146,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Unknown_Put_AllParameters()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -158,7 +158,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Unknown_Put_AllParameters_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Unknown_Put_AllParameters_Convenience()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 
@@ -179,7 +179,7 @@ namespace _Type.Scalar.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Unknown_Put_AllParameters_Convenience_Async()
         {
             Unknown client = new ScalarClient().GetUnknownClient();
 

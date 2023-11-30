@@ -27,8 +27,15 @@ namespace ServiceVersionOverride_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
+        /// <summary> Initializes a new instance of ServiceVersionOverrideClient for mocking. </summary>
+        protected ServiceVersionOverrideClient()
+        {
+        }
+
         /// <summary> Initializes a new instance of ServiceVersionOverrideClient. </summary>
-        public ServiceVersionOverrideClient() : this(new Uri(""), new ServiceVersionOverrideClientOptions())
+        /// <param name="endpoint"> server parameter. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ServiceVersionOverrideClient(Uri endpoint) : this(endpoint, new ServiceVersionOverrideClientOptions())
         {
         }
 
@@ -57,7 +64,7 @@ namespace ServiceVersionOverride_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: "2.0". </param>
+        /// <param name="notApiVersionEnum"> The <see cref="string"/> to use. Allowed values: "2.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -91,7 +98,7 @@ namespace ServiceVersionOverride_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="notApiVersionEnum"> The ApiVersion to use. Allowed values: "2.0". </param>
+        /// <param name="notApiVersionEnum"> The <see cref="string"/> to use. Allowed values: "2.0". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

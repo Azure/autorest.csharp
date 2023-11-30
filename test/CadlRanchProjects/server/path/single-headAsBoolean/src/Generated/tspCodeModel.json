@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Server.Path.Single",
  "Description": "Illustrates server with a single path parameter @server",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [

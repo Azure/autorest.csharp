@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Encode.Datetime",
  "Description": "Test for encode decorator on datetime.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

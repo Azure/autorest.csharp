@@ -12,9 +12,18 @@ namespace MgmtParamOrdering.Models
     /// <summary> The LocationFormatObject. </summary>
     internal partial class LocationFormatObject
     {
-        /// <summary> Initializes a new instance of LocationFormatObject. </summary>
+        /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
         internal LocationFormatObject()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="LocationFormatObject"/>. </summary>
+        /// <param name="stringLocation"> This location should be a string. </param>
+        /// <param name="objectLocation"> This location should be an AzureLocation. </param>
+        internal LocationFormatObject(string stringLocation, AzureLocation? objectLocation)
+        {
+            StringLocation = stringLocation;
+            ObjectLocation = objectLocation;
         }
 
         /// <summary> This location should be a string. </summary>

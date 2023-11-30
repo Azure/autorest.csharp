@@ -16,13 +16,13 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class WindowsConfiguration
     {
-        /// <summary> Initializes a new instance of WindowsConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="WindowsConfiguration"/>. </summary>
         public WindowsConfiguration()
         {
             AdditionalUnattendContent = new ChangeTrackingList<AdditionalUnattendContent>();
         }
 
-        /// <summary> Initializes a new instance of WindowsConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="WindowsConfiguration"/>. </summary>
         /// <param name="provisionVmAgent">
         /// Indicates whether virtual machine agent should be provisioned on the virtual machine. &lt;br&gt;&lt;br&gt; When this property is not specified in the request body, default behavior is to set it to true.  This will ensure that VM Agent is installed on the VM so that extensions can be added to the VM later.
         /// Serialized Name: WindowsConfiguration.provisionVMAgent

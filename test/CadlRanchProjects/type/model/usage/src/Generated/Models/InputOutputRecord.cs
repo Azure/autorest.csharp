@@ -13,7 +13,7 @@ namespace _Type.Model.Usage.Models
     /// <summary> Record used both as operation parameter and return type. </summary>
     public partial class InputOutputRecord
     {
-        /// <summary> Initializes a new instance of InputOutputRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="InputOutputRecord"/>. </summary>
         /// <param name="requiredProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
         public InputOutputRecord(string requiredProp)

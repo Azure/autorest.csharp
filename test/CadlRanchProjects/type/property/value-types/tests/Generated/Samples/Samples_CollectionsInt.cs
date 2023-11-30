@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_ShortVersion()
+        public void Example_CollectionsInt_GetCollectionsInt_ShortVersion()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_ShortVersion_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_ShortVersion_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_ShortVersion_Convenience()
+        public void Example_CollectionsInt_GetCollectionsInt_ShortVersion_Convenience()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_ShortVersion_Convenience_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_AllParameters()
+        public void Example_CollectionsInt_GetCollectionsInt_AllParameters()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_AllParameters_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_AllParameters_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollectionsInt_AllParameters_Convenience()
+        public void Example_CollectionsInt_GetCollectionsInt_AllParameters_Convenience()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollectionsInt_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsInt_GetCollectionsInt_AllParameters_Convenience_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_CollectionsInt_Put_ShortVersion()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -123,7 +123,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_CollectionsInt_Put_ShortVersion_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -141,7 +141,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_CollectionsInt_Put_ShortVersion_Convenience()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -151,7 +151,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_CollectionsInt_Put_ShortVersion_Convenience_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_CollectionsInt_Put_AllParameters()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -179,7 +179,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_CollectionsInt_Put_AllParameters_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -197,7 +197,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_CollectionsInt_Put_AllParameters_Convenience()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 
@@ -207,7 +207,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_CollectionsInt_Put_AllParameters_Convenience_Async()
         {
             CollectionsInt client = new ValueTypesClient().GetCollectionsIntClient();
 

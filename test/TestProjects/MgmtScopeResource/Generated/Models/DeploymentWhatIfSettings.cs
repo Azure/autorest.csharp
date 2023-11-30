@@ -10,9 +10,16 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment What-If operation settings. </summary>
     internal partial class DeploymentWhatIfSettings
     {
-        /// <summary> Initializes a new instance of DeploymentWhatIfSettings. </summary>
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfSettings"/>. </summary>
         public DeploymentWhatIfSettings()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfSettings"/>. </summary>
+        /// <param name="resultFormat"> The format of the What-If results. </param>
+        internal DeploymentWhatIfSettings(WhatIfResultFormat? resultFormat)
+        {
+            ResultFormat = resultFormat;
         }
 
         /// <summary> The format of the What-If results. </summary>

@@ -163,7 +163,7 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,BinaryData},CancellationToken)']/*" />
@@ -177,7 +177,7 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The <see cref="IDictionary{TKey,TValue}"/> where <c>TKey</c> is of type <see cref="string"/>, where <c>TValue</c> is of type <see cref="BinaryData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='Put(IDictionary{string,BinaryData},CancellationToken)']/*" />

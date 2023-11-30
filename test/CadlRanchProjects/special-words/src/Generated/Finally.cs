@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The finally. </summary>
     public partial class Finally
     {
-        /// <summary> Initializes a new instance of Finally. </summary>
+        /// <summary> Initializes a new instance of <see cref="Finally"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Finally(string name)

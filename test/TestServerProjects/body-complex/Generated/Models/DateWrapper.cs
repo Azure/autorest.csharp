@@ -12,12 +12,12 @@ namespace body_complex.Models
     /// <summary> The DateWrapper. </summary>
     public partial class DateWrapper
     {
-        /// <summary> Initializes a new instance of DateWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="DateWrapper"/>. </summary>
         public DateWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of DateWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="DateWrapper"/>. </summary>
         /// <param name="field"></param>
         /// <param name="leap"></param>
         internal DateWrapper(DateTimeOffset? field, DateTimeOffset? leap)

@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownArray_ShortVersion()
+        public void Example_UnknownArray_GetUnknownArray_ShortVersion()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownArray_ShortVersion_Async()
+        public async Task Example_UnknownArray_GetUnknownArray_ShortVersion_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownArray_ShortVersion_Convenience()
+        public void Example_UnknownArray_GetUnknownArray_ShortVersion_Convenience()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownArray_ShortVersion_Convenience_Async()
+        public async Task Example_UnknownArray_GetUnknownArray_ShortVersion_Convenience_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownArray_AllParameters()
+        public void Example_UnknownArray_GetUnknownArray_AllParameters()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownArray_AllParameters_Async()
+        public async Task Example_UnknownArray_GetUnknownArray_AllParameters_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownArray_AllParameters_Convenience()
+        public void Example_UnknownArray_GetUnknownArray_AllParameters_Convenience()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownArray_AllParameters_Convenience_Async()
+        public async Task Example_UnknownArray_GetUnknownArray_AllParameters_Convenience_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_UnknownArray_Put_ShortVersion()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -120,7 +120,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_UnknownArray_Put_ShortVersion_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_UnknownArray_Put_ShortVersion_Convenience()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_UnknownArray_Put_ShortVersion_Convenience_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_UnknownArray_Put_AllParameters()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_UnknownArray_Put_AllParameters_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_UnknownArray_Put_AllParameters_Convenience()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 
@@ -195,7 +195,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_UnknownArray_Put_AllParameters_Convenience_Async()
         {
             UnknownArray client = new ValueTypesClient().GetUnknownArrayClient();
 

@@ -34,14 +34,14 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> Initializes a new instance of ConfidentLevelsInTspClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConfidentLevelsInTspClient(Uri endpoint) : this(endpoint, new ConfidentLevelsInTspClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of ConfidentLevelsInTspClient. </summary>
-        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="endpoint"> The <see cref="Uri"/> to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public ConfidentLevelsInTspClient(Uri endpoint, ConfidentLevelsInTspClientOptions options)
@@ -55,7 +55,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types in request body. </summary>
-        /// <param name="body"> The ModelWithUnionProperty to use. </param>
+        /// <param name="body"> The <see cref="ModelWithUnionProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInRequestPropertyAsync(ModelWithUnionProperty,CancellationToken)']/*" />
@@ -70,7 +70,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types in request body. </summary>
-        /// <param name="body"> The ModelWithUnionProperty to use. </param>
+        /// <param name="body"> The <see cref="ModelWithUnionProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInRequestProperty(ModelWithUnionProperty,CancellationToken)']/*" />
@@ -163,7 +163,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types as response body. </summary>
-        /// <param name="body"> The UsualModel to use. </param>
+        /// <param name="body"> The <see cref="UsualModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInResponsePropertyAsync(UsualModel,CancellationToken)']/*" />
@@ -178,7 +178,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types as response body. </summary>
-        /// <param name="body"> The UsualModel to use. </param>
+        /// <param name="body"> The <see cref="UsualModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionInResponseProperty(UsualModel,CancellationToken)']/*" />
@@ -271,7 +271,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types and self reference in request body. </summary>
-        /// <param name="input"> The NonConfidentModelWithSelfReference to use. </param>
+        /// <param name="input"> The <see cref="NonConfidentModelWithSelfReference"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithSelfReferenceAsync(NonConfidentModelWithSelfReference,CancellationToken)']/*" />
@@ -286,7 +286,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types and self reference in request body. </summary>
-        /// <param name="input"> The NonConfidentModelWithSelfReference to use. </param>
+        /// <param name="input"> The <see cref="NonConfidentModelWithSelfReference"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithSelfReference(NonConfidentModelWithSelfReference,CancellationToken)']/*" />
@@ -379,7 +379,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types and indirect self reference in request body. </summary>
-        /// <param name="input"> The NonConfidentModelWithIndirectSelfReference to use. </param>
+        /// <param name="input"> The <see cref="NonConfidentModelWithIndirectSelfReference"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithInderictAsync(NonConfidentModelWithIndirectSelfReference,CancellationToken)']/*" />
@@ -394,7 +394,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with union types and indirect self reference in request body. </summary>
-        /// <param name="input"> The NonConfidentModelWithIndirectSelfReference to use. </param>
+        /// <param name="input"> The <see cref="NonConfidentModelWithIndirectSelfReference"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnionWithInderict(NonConfidentModelWithIndirectSelfReference,CancellationToken)']/*" />
@@ -487,7 +487,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with a property of literal type of numbers in request body. </summary>
-        /// <param name="input"> The ModelWithIntegerLiteralTypeProperty to use. </param>
+        /// <param name="input"> The <see cref="ModelWithIntegerLiteralTypeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfIntegerAsync(ModelWithIntegerLiteralTypeProperty,CancellationToken)']/*" />
@@ -502,7 +502,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with a property of literal type of numbers in request body. </summary>
-        /// <param name="input"> The ModelWithIntegerLiteralTypeProperty to use. </param>
+        /// <param name="input"> The <see cref="ModelWithIntegerLiteralTypeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfInteger(ModelWithIntegerLiteralTypeProperty,CancellationToken)']/*" />
@@ -595,7 +595,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with a property of literal type of numbers in request body. </summary>
-        /// <param name="input"> The ModelWithFloatLiteralTypeProperty to use. </param>
+        /// <param name="input"> The <see cref="ModelWithFloatLiteralTypeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfFloatAsync(ModelWithFloatLiteralTypeProperty,CancellationToken)']/*" />
@@ -610,7 +610,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with a property of literal type of numbers in request body. </summary>
-        /// <param name="input"> The ModelWithFloatLiteralTypeProperty to use. </param>
+        /// <param name="input"> The <see cref="ModelWithFloatLiteralTypeProperty"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='LiteralOfFloat(ModelWithFloatLiteralTypeProperty,CancellationToken)']/*" />
@@ -703,7 +703,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with discriminator in request body, this operation should be confident. </summary>
-        /// <param name="input"> The Pet to use. </param>
+        /// <param name="input"> The <see cref="Pet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='ConfidentOperationWithDiscriminatorAsync(Pet,CancellationToken)']/*" />
@@ -718,7 +718,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a model with discriminator in request body, this operation should be confident. </summary>
-        /// <param name="input"> The Pet to use. </param>
+        /// <param name="input"> The <see cref="Pet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='ConfidentOperationWithDiscriminator(Pet,CancellationToken)']/*" />
@@ -811,7 +811,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it. </summary>
-        /// <param name="input"> The PollutedPet to use. </param>
+        /// <param name="input"> The <see cref="PollutedPet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedBaseMethodAsync(PollutedPet,CancellationToken)']/*" />
@@ -826,7 +826,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it. </summary>
-        /// <param name="input"> The PollutedPet to use. </param>
+        /// <param name="input"> The <see cref="PollutedPet"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedBaseMethod(PollutedPet,CancellationToken)']/*" />
@@ -919,7 +919,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses the model with a union type directly therefore this operation is not confident. </summary>
-        /// <param name="input"> The PollutedDog to use. </param>
+        /// <param name="input"> The <see cref="PollutedDog"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedDerivedMethodAsync(PollutedDog,CancellationToken)']/*" />
@@ -934,7 +934,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses the model with a union type directly therefore this operation is not confident. </summary>
-        /// <param name="input"> The PollutedDog to use. </param>
+        /// <param name="input"> The <see cref="PollutedDog"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='PollutedDerivedMethod(PollutedDog,CancellationToken)']/*" />
@@ -1027,7 +1027,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well. </summary>
-        /// <param name="input"> The UnpollutedCat to use. </param>
+        /// <param name="input"> The <see cref="UnpollutedCat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnpollutedDerivedMethodAsync(UnpollutedCat,CancellationToken)']/*" />
@@ -1042,7 +1042,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well. </summary>
-        /// <param name="input"> The UnpollutedCat to use. </param>
+        /// <param name="input"> The <see cref="UnpollutedCat"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UnpollutedDerivedMethod(UnpollutedCat,CancellationToken)']/*" />
@@ -1135,7 +1135,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation with nothing special. </summary>
-        /// <param name="input"> The DerivedModel to use. </param>
+        /// <param name="input"> The <see cref="DerivedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelAsync(DerivedModel,CancellationToken)']/*" />
@@ -1150,7 +1150,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation with nothing special. </summary>
-        /// <param name="input"> The DerivedModel to use. </param>
+        /// <param name="input"> The <see cref="DerivedModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModel(DerivedModel,CancellationToken)']/*" />
@@ -1243,7 +1243,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a derived model with unions. </summary>
-        /// <param name="input"> The DerivedModelWithUnion to use. </param>
+        /// <param name="input"> The <see cref="DerivedModelWithUnion"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)']/*" />
@@ -1258,7 +1258,7 @@ namespace ConfidentLevelsInTsp
         }
 
         /// <summary> This is an operation that uses a derived model with unions. </summary>
-        /// <param name="input"> The DerivedModelWithUnion to use. </param>
+        /// <param name="input"> The <see cref="DerivedModelWithUnion"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)']/*" />

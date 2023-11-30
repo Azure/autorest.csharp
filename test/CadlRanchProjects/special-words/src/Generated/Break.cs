@@ -13,7 +13,7 @@ namespace SpecialWords
     /// <summary> The break. </summary>
     public partial class Break
     {
-        /// <summary> Initializes a new instance of Break. </summary>
+        /// <summary> Initializes a new instance of <see cref="Break"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Break(string name)

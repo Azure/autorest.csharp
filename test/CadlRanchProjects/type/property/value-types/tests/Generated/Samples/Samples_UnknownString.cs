@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_ShortVersion()
+        public void Example_UnknownString_GetUnknownString_ShortVersion()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_ShortVersion_Async()
+        public async Task Example_UnknownString_GetUnknownString_ShortVersion_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_ShortVersion_Convenience()
+        public void Example_UnknownString_GetUnknownString_ShortVersion_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_ShortVersion_Convenience_Async()
+        public async Task Example_UnknownString_GetUnknownString_ShortVersion_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_AllParameters()
+        public void Example_UnknownString_GetUnknownString_AllParameters()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_AllParameters_Async()
+        public async Task Example_UnknownString_GetUnknownString_AllParameters_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownString_AllParameters_Convenience()
+        public void Example_UnknownString_GetUnknownString_AllParameters_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownString_AllParameters_Convenience_Async()
+        public async Task Example_UnknownString_GetUnknownString_AllParameters_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_UnknownString_Put_ShortVersion()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -120,7 +120,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_UnknownString_Put_ShortVersion_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_UnknownString_Put_ShortVersion_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_UnknownString_Put_ShortVersion_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_UnknownString_Put_AllParameters()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_UnknownString_Put_AllParameters_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_UnknownString_Put_AllParameters_Convenience()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 
@@ -195,7 +195,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_UnknownString_Put_AllParameters_Convenience_Async()
         {
             UnknownString client = new ValueTypesClient().GetUnknownStringClient();
 

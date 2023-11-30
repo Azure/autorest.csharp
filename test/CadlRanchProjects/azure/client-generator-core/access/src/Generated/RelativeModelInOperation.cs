@@ -57,7 +57,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// }
         /// ```
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual async Task<Response<OuterModel>> OperationAsync(string name, CancellationToken cancellationToken = default)
@@ -82,7 +82,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// }
         /// ```
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal virtual Response<OuterModel> Operation(string name, CancellationToken cancellationToken = default)
@@ -119,7 +119,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -167,7 +167,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -200,7 +200,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// }
         /// ```
         /// </summary>
-        /// <param name="kind"> The String to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         internal virtual async Task<Response<AbstractModel>> DiscriminatorAsync(string kind, CancellationToken cancellationToken = default)
@@ -222,7 +222,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// }
         /// ```
         /// </summary>
-        /// <param name="kind"> The String to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         internal virtual Response<AbstractModel> Discriminator(string kind, CancellationToken cancellationToken = default)
@@ -256,7 +256,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The String to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -301,7 +301,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="kind"> The String to use. </param>
+        /// <param name="kind"> The <see cref="string"/> to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

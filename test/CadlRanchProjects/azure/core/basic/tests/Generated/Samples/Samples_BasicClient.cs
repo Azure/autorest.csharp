@@ -22,7 +22,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdate_ShortVersion()
+        public void Example_User_CreateOrUpdate_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -40,7 +40,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_ShortVersion_Async()
+        public async Task Example_User_CreateOrUpdate_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -58,7 +58,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrUpdate_AllParameters()
+        public void Example_User_CreateOrUpdate_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -87,7 +87,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_AllParameters_Async()
+        public async Task Example_User_CreateOrUpdate_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -116,7 +116,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_ShortVersion()
+        public void Example_User_CreateOrReplace_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -134,7 +134,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_ShortVersion_Async()
+        public async Task Example_User_CreateOrReplace_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -152,7 +152,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_ShortVersion_Convenience()
+        public void Example_User_CreateOrReplace_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -162,7 +162,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_ShortVersion_Convenience_Async()
+        public async Task Example_User_CreateOrReplace_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -172,7 +172,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_AllParameters()
+        public void Example_User_CreateOrReplace_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -201,7 +201,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_AllParameters_Async()
+        public async Task Example_User_CreateOrReplace_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -230,7 +230,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateOrReplace_AllParameters_Convenience()
+        public void Example_User_CreateOrReplace_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -243,7 +243,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_AllParameters_Convenience_Async()
+        public async Task Example_User_CreateOrReplace_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -256,7 +256,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_ShortVersion()
+        public void Example_User_GetUser_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -270,7 +270,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_ShortVersion_Async()
+        public async Task Example_User_GetUser_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -284,7 +284,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_ShortVersion_Convenience()
+        public void Example_User_GetUser_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -293,7 +293,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_ShortVersion_Convenience_Async()
+        public async Task Example_User_GetUser_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -302,7 +302,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_AllParameters()
+        public void Example_User_GetUser_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -319,7 +319,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_AllParameters_Async()
+        public async Task Example_User_GetUser_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -336,7 +336,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUser_AllParameters_Convenience()
+        public void Example_User_GetUser_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -345,7 +345,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_AllParameters_Convenience_Async()
+        public async Task Example_User_GetUser_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -354,7 +354,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_ShortVersion()
+        public void Example_User_Delete_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -365,7 +365,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_ShortVersion_Async()
+        public async Task Example_User_Delete_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -376,7 +376,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
+        public void Example_User_Delete_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -387,7 +387,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Delete_AllParameters_Async()
+        public async Task Example_User_Delete_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -398,7 +398,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_ShortVersion()
+        public void Example_Basic_Export_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -412,7 +412,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_ShortVersion_Async()
+        public async Task Example_Basic_Export_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -426,7 +426,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_ShortVersion_Convenience()
+        public void Example_Basic_Export_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -435,7 +435,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_ShortVersion_Convenience_Async()
+        public async Task Example_Basic_Export_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -444,7 +444,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters()
+        public void Example_Basic_Export_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -461,7 +461,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_AllParameters_Async()
+        public async Task Example_Basic_Export_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -478,7 +478,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Export_AllParameters_Convenience()
+        public void Example_Basic_Export_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -487,7 +487,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_AllParameters_Convenience_Async()
+        public async Task Example_Basic_Export_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -496,7 +496,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_ShortVersion()
+        public void Example_User_GetUsers_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -511,7 +511,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_ShortVersion_Async()
+        public async Task Example_User_GetUsers_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -526,7 +526,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_ShortVersion_Convenience()
+        public void Example_User_GetUsers_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -537,7 +537,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_ShortVersion_Convenience_Async()
+        public async Task Example_User_GetUsers_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -548,7 +548,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_AllParameters()
+        public void Example_User_GetUsers_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -566,7 +566,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_AllParameters_Async()
+        public async Task Example_User_GetUsers_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -584,7 +584,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_AllParameters_Convenience()
+        public void Example_User_GetUsers_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -595,7 +595,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_AllParameters_Convenience_Async()
+        public async Task Example_User_GetUsers_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -606,7 +606,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_ShortVersion()
+        public void Example_Basic_GetWithPage_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -621,7 +621,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_ShortVersion_Async()
+        public async Task Example_Basic_GetWithPage_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -636,7 +636,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_ShortVersion_Convenience()
+        public void Example_Basic_GetWithPage_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -647,7 +647,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_ShortVersion_Convenience_Async()
+        public async Task Example_Basic_GetWithPage_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -658,7 +658,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_AllParameters()
+        public void Example_Basic_GetWithPage_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -676,7 +676,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_AllParameters_Async()
+        public async Task Example_Basic_GetWithPage_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -694,7 +694,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_AllParameters_Convenience()
+        public void Example_Basic_GetWithPage_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -705,7 +705,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_AllParameters_Convenience_Async()
+        public async Task Example_Basic_GetWithPage_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -716,7 +716,137 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_ShortVersion()
+        public void Example_Basic_GetWithParameters_ShortVersion()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                inputName = "<inputName>",
+            });
+            foreach (BinaryData item in client.GetWithParameters(content))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_GetWithParameters_ShortVersion_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                inputName = "<inputName>",
+            });
+            await foreach (BinaryData item in client.GetWithParametersAsync(content))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_GetWithParameters_ShortVersion_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+            foreach (User item in client.GetWithParameters(bodyInput))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_GetWithParameters_ShortVersion_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+            await foreach (User item in client.GetWithParametersAsync(bodyInput))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_GetWithParameters_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                inputName = "<inputName>",
+            });
+            foreach (BinaryData item in client.GetWithParameters(content, another: "First"))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_GetWithParameters_AllParameters_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            using RequestContent content = RequestContent.Create(new
+            {
+                inputName = "<inputName>",
+            });
+            await foreach (BinaryData item in client.GetWithParametersAsync(content, another: "First"))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result.GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_GetWithParameters_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+            foreach (User item in client.GetWithParameters(bodyInput, another: ListItemInputExtensibleEnum.First))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Basic_GetWithParameters_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            ListItemInputBody bodyInput = new ListItemInputBody("<inputName>");
+            await foreach (User item in client.GetWithParametersAsync(bodyInput, another: ListItemInputExtensibleEnum.First))
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Basic_GetWithCustomPageModel_ShortVersion()
         {
             BasicClient client = new BasicClient();
 
@@ -731,7 +861,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_ShortVersion_Async()
+        public async Task Example_Basic_GetWithCustomPageModel_ShortVersion_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -746,7 +876,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_ShortVersion_Convenience()
+        public void Example_Basic_GetWithCustomPageModel_ShortVersion_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -757,7 +887,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_ShortVersion_Convenience_Async()
+        public async Task Example_Basic_GetWithCustomPageModel_ShortVersion_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -768,7 +898,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_AllParameters()
+        public void Example_Basic_GetWithCustomPageModel_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -786,7 +916,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_AllParameters_Async()
+        public async Task Example_Basic_GetWithCustomPageModel_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
@@ -804,7 +934,7 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_AllParameters_Convenience()
+        public void Example_Basic_GetWithCustomPageModel_AllParameters_Convenience()
         {
             BasicClient client = new BasicClient();
 
@@ -815,11 +945,203 @@ detail = "<detail>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_AllParameters_Convenience_Async()
+        public async Task Example_Basic_GetWithCustomPageModel_AllParameters_Convenience_Async()
         {
             BasicClient client = new BasicClient();
 
             await foreach (User item in client.GetWithCustomPageModelAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetFirstItems(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (BinaryData item in client.GetFirstItemsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (FirstItem item in client.GetFirstItems())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetFirstItems_ShortVersion_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (FirstItem item in client.GetFirstItemsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetFirstItems_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetFirstItems(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetFirstItems_AllParameters_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (BinaryData item in client.GetFirstItemsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("id").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetFirstItems_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (FirstItem item in client.GetFirstItems())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetFirstItems_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (FirstItem item in client.GetFirstItemsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetSecondItems(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (BinaryData item in client.GetSecondItemsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (SecondItem item in client.GetSecondItems())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetSecondItems_ShortVersion_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (SecondItem item in client.GetSecondItemsAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetSecondItems_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetSecondItems(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetSecondItems_AllParameters_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (BinaryData item in client.GetSecondItemsAsync(null))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result.GetProperty("name").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TwoModelsAsPageItem_GetSecondItems_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (SecondItem item in client.GetSecondItems())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TwoModelsAsPageItem_GetSecondItems_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (SecondItem item in client.GetSecondItemsAsync())
             {
             }
         }

@@ -21,7 +21,7 @@ namespace _Type.Property.Optionality.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_ShortVersion()
+        public void Example_String_GetAll_ShortVersion()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_ShortVersion_Async()
+        public async Task Example_String_GetAll_ShortVersion_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_ShortVersion_Convenience()
+        public void Example_String_GetAll_ShortVersion_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_ShortVersion_Convenience_Async()
+        public async Task Example_String_GetAll_ShortVersion_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters()
+        public void Example_String_GetAll_AllParameters()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_AllParameters_Async()
+        public async Task Example_String_GetAll_AllParameters_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetAll_AllParameters_Convenience()
+        public void Example_String_GetAll_AllParameters_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetAll_AllParameters_Convenience_Async()
+        public async Task Example_String_GetAll_AllParameters_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_ShortVersion()
+        public void Example_String_GetDefault_ShortVersion()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -117,7 +117,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_ShortVersion_Async()
+        public async Task Example_String_GetDefault_ShortVersion_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -129,7 +129,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_ShortVersion_Convenience()
+        public void Example_String_GetDefault_ShortVersion_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -138,7 +138,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_ShortVersion_Convenience_Async()
+        public async Task Example_String_GetDefault_ShortVersion_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -147,7 +147,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_AllParameters()
+        public void Example_String_GetDefault_AllParameters()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -159,7 +159,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_AllParameters_Async()
+        public async Task Example_String_GetDefault_AllParameters_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -171,7 +171,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDefault_AllParameters_Convenience()
+        public void Example_String_GetDefault_AllParameters_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -180,7 +180,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDefault_AllParameters_Convenience_Async()
+        public async Task Example_String_GetDefault_AllParameters_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -189,7 +189,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_ShortVersion()
+        public void Example_String_PutAll_ShortVersion()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -201,7 +201,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_ShortVersion_Async()
+        public async Task Example_String_PutAll_ShortVersion_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -213,7 +213,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_ShortVersion_Convenience()
+        public void Example_String_PutAll_ShortVersion_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -223,7 +223,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_ShortVersion_Convenience_Async()
+        public async Task Example_String_PutAll_ShortVersion_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -233,7 +233,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters()
+        public void Example_String_PutAll_AllParameters()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -248,7 +248,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_AllParameters_Async()
+        public async Task Example_String_PutAll_AllParameters_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -263,7 +263,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutAll_AllParameters_Convenience()
+        public void Example_String_PutAll_AllParameters_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -276,7 +276,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutAll_AllParameters_Convenience_Async()
+        public async Task Example_String_PutAll_AllParameters_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -289,7 +289,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_ShortVersion()
+        public void Example_String_PutDefault_ShortVersion()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -301,7 +301,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_ShortVersion_Async()
+        public async Task Example_String_PutDefault_ShortVersion_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -313,7 +313,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_ShortVersion_Convenience()
+        public void Example_String_PutDefault_ShortVersion_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -323,7 +323,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_ShortVersion_Convenience_Async()
+        public async Task Example_String_PutDefault_ShortVersion_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -333,7 +333,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_AllParameters()
+        public void Example_String_PutDefault_AllParameters()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -348,7 +348,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_AllParameters_Async()
+        public async Task Example_String_PutDefault_AllParameters_Async()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -363,7 +363,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_PutDefault_AllParameters_Convenience()
+        public void Example_String_PutDefault_AllParameters_Convenience()
         {
             String client = new OptionalClient().GetStringClient();
 
@@ -376,7 +376,7 @@ namespace _Type.Property.Optionality.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutDefault_AllParameters_Convenience_Async()
+        public async Task Example_String_PutDefault_AllParameters_Convenience_Async()
         {
             String client = new OptionalClient().GetStringClient();
 

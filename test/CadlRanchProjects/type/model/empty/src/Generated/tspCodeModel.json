@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Type.Model.Empty",
  "Description": "Illustrates usage of empty model used in operation's parameters and responses.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [
   {

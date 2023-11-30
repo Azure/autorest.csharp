@@ -82,7 +82,10 @@ export function createModelForService(
 ): CodeModel {
     const emitterOptions = resolveOptions(context);
     const program = context.program;
-    const sdkContext = createSdkContext(context);
+    const sdkContext = createSdkContext(
+        context,
+        "@azure-tools/typespec-csharp"
+    );
     const serviceNamespaceType = service.type;
 
     const apiVersions: Set<string> | undefined = new Set<string>();
@@ -190,30 +193,32 @@ export function createModelForService(
                         format: { service: service.type.name },
                         target: NoTarget
                     });
+                    break;
                 }
-
-                const apiVersionInOperation = op.Parameters[apiVersionIndex];
-                if (!apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersionInOperation.DefaultValue =
-                        apiVersionParam!.DefaultValue;
-                }
-                /**
-                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                 * Three checkpoints:
-                 * the parameter is query parameter,
-                 * it is client parameter
-                 * it does not has default value, or the default value is included in the global service apiVersion.
-                 */
-                if (
-                    apiVersions.has(
-                        apiVersionInOperation.DefaultValue?.Value
-                    ) &&
-                    apiVersionInOperation.Kind ===
-                        InputOperationParameterKind.Client &&
-                    apiVersionInOperation.Location === apiVersionParam!.Location
-                ) {
-                    op.Parameters[apiVersionIndex] = apiVersionParam!;
-                }
+                else {
+                    const apiVersionInOperation = op.Parameters[apiVersionIndex];
+                    if (!apiVersionInOperation.DefaultValue?.Value) {
+                        apiVersionInOperation.DefaultValue =
+                            apiVersionParam.DefaultValue;
+                    }
+                    /**
+                     * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                     * Three checkpoints:
+                     * the parameter is query parameter,
+                     * it is client parameter
+                     * it does not has default value, or the default value is included in the global service apiVersion.
+                     */
+                    if (
+                        apiVersions.has(
+                            apiVersionInOperation.DefaultValue?.Value
+                        ) &&
+                        apiVersionInOperation.Kind ===
+                            InputOperationParameterKind.Client &&
+                        apiVersionInOperation.Location === apiVersionParam.Location
+                    ) {
+                        op.Parameters[apiVersionIndex] = apiVersionParam;
+                    }
+                }                
             }
         }
     }

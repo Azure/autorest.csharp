@@ -150,7 +150,7 @@ namespace _Type._Array
             }
         }
 
-        /// <param name="body"> The Array to use. </param>
+        /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="InnerModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{InnerModel},CancellationToken)']/*" />
@@ -164,7 +164,7 @@ namespace _Type._Array
             return response;
         }
 
-        /// <param name="body"> The Array to use. </param>
+        /// <param name="body"> The <see cref="IEnumerable{T}"/> where <c>T</c> is of type <see cref="InnerModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='Put(IEnumerable{InnerModel},CancellationToken)']/*" />

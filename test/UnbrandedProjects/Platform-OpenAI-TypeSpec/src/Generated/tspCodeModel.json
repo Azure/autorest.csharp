@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "OpenAI",
  "Description": "The OpenAI REST API. Please see https://platform.openai.com/docs/api-reference for more details.",
- "ApiVersions": [
-  "2.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",

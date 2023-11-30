@@ -37,11 +37,11 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AzureResourceFlattenModel1Resource.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AzureResourceFlattenModel1Resource.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource"/> object. </returns>
         public virtual AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(ResourceIdentifier id)
         {
             AzureResourceFlattenModel1Resource.ValidateResourceId(id);
@@ -49,11 +49,11 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="CustomModel2Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="CustomModel2Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="CustomModel2Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel2Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel2Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="CustomModel2Resource"/> object. </returns>
         public virtual CustomModel2Resource GetCustomModel2Resource(ResourceIdentifier id)
         {
             CustomModel2Resource.ValidateResourceId(id);
@@ -61,11 +61,11 @@ namespace MgmtExactMatchFlattenInheritance.Mocking
         }
 
         /// <summary>
-        /// Gets an object representing a <see cref="CustomModel3Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="CustomModel3Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets an object representing a <see cref="CustomModel3Resource"/> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel3Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel3Resource"/> <see cref="ResourceIdentifier"/> from its components.
         /// </summary>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
+        /// <returns> Returns a <see cref="CustomModel3Resource"/> object. </returns>
         public virtual CustomModel3Resource GetCustomModel3Resource(ResourceIdentifier id)
         {
             CustomModel3Resource.ValidateResourceId(id);

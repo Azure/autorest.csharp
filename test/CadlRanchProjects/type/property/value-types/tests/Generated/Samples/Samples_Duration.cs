@@ -22,7 +22,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration_ShortVersion()
+        public void Example_Duration_GetDuration_ShortVersion()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -34,7 +34,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_ShortVersion_Async()
+        public async Task Example_Duration_GetDuration_ShortVersion_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -46,7 +46,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration_ShortVersion_Convenience()
+        public void Example_Duration_GetDuration_ShortVersion_Convenience()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -55,7 +55,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_ShortVersion_Convenience_Async()
+        public async Task Example_Duration_GetDuration_ShortVersion_Convenience_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -64,7 +64,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration_AllParameters()
+        public void Example_Duration_GetDuration_AllParameters()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -76,7 +76,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_AllParameters_Async()
+        public async Task Example_Duration_GetDuration_AllParameters_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -88,7 +88,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuration_AllParameters_Convenience()
+        public void Example_Duration_GetDuration_AllParameters_Convenience()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -97,7 +97,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuration_AllParameters_Convenience_Async()
+        public async Task Example_Duration_GetDuration_AllParameters_Convenience_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -106,7 +106,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Duration_Put_ShortVersion()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -121,7 +121,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Duration_Put_ShortVersion_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -136,7 +136,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Duration_Put_ShortVersion_Convenience()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -146,7 +146,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Duration_Put_ShortVersion_Convenience_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -156,7 +156,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Duration_Put_AllParameters()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -171,7 +171,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Duration_Put_AllParameters_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -186,7 +186,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Duration_Put_AllParameters_Convenience()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 
@@ -196,7 +196,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Duration_Put_AllParameters_Convenience_Async()
         {
             Duration client = new ValueTypesClient().GetDurationClient();
 

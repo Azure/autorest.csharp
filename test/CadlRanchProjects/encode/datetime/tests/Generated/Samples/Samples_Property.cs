@@ -21,7 +21,7 @@ namespace Encode.Datetime.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_ShortVersion()
+        public void Example_Property_Default_ShortVersion()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -37,7 +37,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_ShortVersion_Async()
+        public async Task Example_Property_Default_ShortVersion_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -53,7 +53,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_ShortVersion_Convenience()
+        public void Example_Property_Default_ShortVersion_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -63,7 +63,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_ShortVersion_Convenience_Async()
+        public async Task Example_Property_Default_ShortVersion_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -73,7 +73,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public void Example_Property_Default_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -89,7 +89,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Async()
+        public async Task Example_Property_Default_AllParameters_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -105,7 +105,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters_Convenience()
+        public void Example_Property_Default_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -115,7 +115,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Convenience_Async()
+        public async Task Example_Property_Default_AllParameters_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -125,7 +125,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_ShortVersion()
+        public void Example_Property_Rfc3339_ShortVersion()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -141,7 +141,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_ShortVersion_Async()
+        public async Task Example_Property_Rfc3339_ShortVersion_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -157,7 +157,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_ShortVersion_Convenience()
+        public void Example_Property_Rfc3339_ShortVersion_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -167,7 +167,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_ShortVersion_Convenience_Async()
+        public async Task Example_Property_Rfc3339_ShortVersion_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -177,7 +177,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_AllParameters()
+        public void Example_Property_Rfc3339_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -193,7 +193,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_AllParameters_Async()
+        public async Task Example_Property_Rfc3339_AllParameters_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -209,7 +209,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc3339_AllParameters_Convenience()
+        public void Example_Property_Rfc3339_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -219,7 +219,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc3339_AllParameters_Convenience_Async()
+        public async Task Example_Property_Rfc3339_AllParameters_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -229,7 +229,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_ShortVersion()
+        public void Example_Property_Rfc7231_ShortVersion()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -245,7 +245,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_ShortVersion_Async()
+        public async Task Example_Property_Rfc7231_ShortVersion_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -261,7 +261,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_ShortVersion_Convenience()
+        public void Example_Property_Rfc7231_ShortVersion_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -271,7 +271,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_ShortVersion_Convenience_Async()
+        public async Task Example_Property_Rfc7231_ShortVersion_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -281,7 +281,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_AllParameters()
+        public void Example_Property_Rfc7231_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -297,7 +297,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_AllParameters_Async()
+        public async Task Example_Property_Rfc7231_AllParameters_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -313,7 +313,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Rfc7231_AllParameters_Convenience()
+        public void Example_Property_Rfc7231_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -323,7 +323,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Rfc7231_AllParameters_Convenience_Async()
+        public async Task Example_Property_Rfc7231_AllParameters_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -333,7 +333,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_ShortVersion()
+        public void Example_Property_UnixTimestamp_ShortVersion()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -349,7 +349,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_ShortVersion_Async()
+        public async Task Example_Property_UnixTimestamp_ShortVersion_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -365,7 +365,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_ShortVersion_Convenience()
+        public void Example_Property_UnixTimestamp_ShortVersion_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -375,7 +375,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_ShortVersion_Convenience_Async()
+        public async Task Example_Property_UnixTimestamp_ShortVersion_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -385,7 +385,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_AllParameters()
+        public void Example_Property_UnixTimestamp_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -401,7 +401,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_AllParameters_Async()
+        public async Task Example_Property_UnixTimestamp_AllParameters_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -417,7 +417,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestamp_AllParameters_Convenience()
+        public void Example_Property_UnixTimestamp_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -427,7 +427,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestamp_AllParameters_Convenience_Async()
+        public async Task Example_Property_UnixTimestamp_AllParameters_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -437,7 +437,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray_ShortVersion()
+        public void Example_Property_UnixTimestampArray_ShortVersion()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -456,7 +456,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_ShortVersion_Async()
+        public async Task Example_Property_UnixTimestampArray_ShortVersion_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -475,7 +475,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray_ShortVersion_Convenience()
+        public void Example_Property_UnixTimestampArray_ShortVersion_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -485,7 +485,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_ShortVersion_Convenience_Async()
+        public async Task Example_Property_UnixTimestampArray_ShortVersion_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -495,7 +495,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray_AllParameters()
+        public void Example_Property_UnixTimestampArray_AllParameters()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -514,7 +514,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_AllParameters_Async()
+        public async Task Example_Property_UnixTimestampArray_AllParameters_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -533,7 +533,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_UnixTimestampArray_AllParameters_Convenience()
+        public void Example_Property_UnixTimestampArray_AllParameters_Convenience()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 
@@ -543,7 +543,7 @@ namespace Encode.Datetime.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_UnixTimestampArray_AllParameters_Convenience_Async()
+        public async Task Example_Property_UnixTimestampArray_AllParameters_Convenience_Async()
         {
             Property client = new DatetimeClient().GetPropertyClient();
 

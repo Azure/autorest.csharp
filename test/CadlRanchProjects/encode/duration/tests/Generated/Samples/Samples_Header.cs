@@ -19,7 +19,7 @@ namespace Encode.Duration.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_ShortVersion()
+        public void Example_Header_Default_ShortVersion()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -30,7 +30,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_ShortVersion_Async()
+        public async Task Example_Header_Default_ShortVersion_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -41,7 +41,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Default_AllParameters()
+        public void Example_Header_Default_AllParameters()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -52,7 +52,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Default_AllParameters_Async()
+        public async Task Example_Header_Default_AllParameters_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -63,7 +63,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601_ShortVersion()
+        public void Example_Header_Iso8601_ShortVersion()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -74,7 +74,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601_ShortVersion_Async()
+        public async Task Example_Header_Iso8601_ShortVersion_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -85,7 +85,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601_AllParameters()
+        public void Example_Header_Iso8601_AllParameters()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -96,7 +96,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601_AllParameters_Async()
+        public async Task Example_Header_Iso8601_AllParameters_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -107,7 +107,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601Array_ShortVersion()
+        public void Example_Header_Iso8601Array_ShortVersion()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -118,7 +118,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601Array_ShortVersion_Async()
+        public async Task Example_Header_Iso8601Array_ShortVersion_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -129,7 +129,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Iso8601Array_AllParameters()
+        public void Example_Header_Iso8601Array_AllParameters()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -140,7 +140,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Iso8601Array_AllParameters_Async()
+        public async Task Example_Header_Iso8601Array_AllParameters_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -151,7 +151,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds_ShortVersion()
+        public void Example_Header_Int32Seconds_ShortVersion()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -162,7 +162,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32Seconds_ShortVersion_Async()
+        public async Task Example_Header_Int32Seconds_ShortVersion_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -173,7 +173,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Int32Seconds_AllParameters()
+        public void Example_Header_Int32Seconds_AllParameters()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -184,7 +184,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Int32Seconds_AllParameters_Async()
+        public async Task Example_Header_Int32Seconds_AllParameters_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -195,7 +195,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds_ShortVersion()
+        public void Example_Header_FloatSeconds_ShortVersion()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -206,7 +206,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSeconds_ShortVersion_Async()
+        public async Task Example_Header_FloatSeconds_ShortVersion_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -217,7 +217,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_FloatSeconds_AllParameters()
+        public void Example_Header_FloatSeconds_AllParameters()
         {
             Header client = new DurationClient().GetHeaderClient();
 
@@ -228,7 +228,7 @@ namespace Encode.Duration.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_FloatSeconds_AllParameters_Async()
+        public async Task Example_Header_FloatSeconds_AllParameters_Async()
         {
             Header client = new DurationClient().GetHeaderClient();
 

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.Core;
 
 namespace ClientAndOperationGroup
@@ -13,25 +12,5 @@ namespace ClientAndOperationGroup
     /// <summary> Client options for ClientAndOperationGroupClient. </summary>
     public partial class ClientAndOperationGroupClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2015_06_18;
-
-        /// <summary> The version of the service to use. </summary>
-        public enum ServiceVersion
-        {
-            /// <summary> Service version "2015-06-18". </summary>
-            V2015_06_18 = 1,
-        }
-
-        internal string Version { get; }
-
-        /// <summary> Initializes new instance of ClientAndOperationGroupClientOptions. </summary>
-        public ClientAndOperationGroupClientOptions(ServiceVersion version = LatestVersion)
-        {
-            Version = version switch
-            {
-                ServiceVersion.V2015_06_18 => "2015-06-18",
-                _ => throw new NotSupportedException()
-            };
-        }
     }
 }

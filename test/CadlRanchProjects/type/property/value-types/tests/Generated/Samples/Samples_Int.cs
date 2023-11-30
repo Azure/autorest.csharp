@@ -21,7 +21,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt_ShortVersion()
+        public void Example_Int_GetInt_ShortVersion()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -33,7 +33,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_ShortVersion_Async()
+        public async Task Example_Int_GetInt_ShortVersion_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -45,7 +45,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt_ShortVersion_Convenience()
+        public void Example_Int_GetInt_ShortVersion_Convenience()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_ShortVersion_Convenience_Async()
+        public async Task Example_Int_GetInt_ShortVersion_Convenience_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -63,7 +63,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt_AllParameters()
+        public void Example_Int_GetInt_AllParameters()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -75,7 +75,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_AllParameters_Async()
+        public async Task Example_Int_GetInt_AllParameters_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -87,7 +87,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetInt_AllParameters_Convenience()
+        public void Example_Int_GetInt_AllParameters_Convenience()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -96,7 +96,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetInt_AllParameters_Convenience_Async()
+        public async Task Example_Int_GetInt_AllParameters_Convenience_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -105,7 +105,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_Int_Put_ShortVersion()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -120,7 +120,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_Int_Put_ShortVersion_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -135,7 +135,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_Int_Put_ShortVersion_Convenience()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -145,7 +145,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_Int_Put_ShortVersion_Convenience_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_Int_Put_AllParameters()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -170,7 +170,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_Int_Put_AllParameters_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -185,7 +185,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_Int_Put_AllParameters_Convenience()
         {
             Int client = new ValueTypesClient().GetIntClient();
 
@@ -195,7 +195,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_Int_Put_AllParameters_Convenience_Async()
         {
             Int client = new ValueTypesClient().GetIntClient();
 

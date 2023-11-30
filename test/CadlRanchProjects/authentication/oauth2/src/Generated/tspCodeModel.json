@@ -2,9 +2,7 @@
  "$id": "1",
  "Name": "Authentication.OAuth2",
  "Description": "Illustrates clients generated with OAuth2 authentication.",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",

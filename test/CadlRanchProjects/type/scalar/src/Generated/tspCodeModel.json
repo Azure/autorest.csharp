@@ -1,9 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Scalar",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [],
  "Models": [],
  "Clients": [

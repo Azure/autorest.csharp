@@ -13,12 +13,12 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineHealthStatus
     {
-        /// <summary> Initializes a new instance of VirtualMachineHealthStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineHealthStatus"/>. </summary>
         internal VirtualMachineHealthStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineHealthStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineHealthStatus"/>. </summary>
         /// <param name="status">
         /// The health status information for the VM.
         /// Serialized Name: VirtualMachineHealthStatus.status

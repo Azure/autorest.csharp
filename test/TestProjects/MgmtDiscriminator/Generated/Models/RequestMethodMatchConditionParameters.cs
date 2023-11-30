@@ -13,7 +13,7 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for RequestMethod match conditions. </summary>
     public partial class RequestMethodMatchConditionParameters
     {
-        /// <summary> Initializes a new instance of RequestMethodMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestMethodMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         public RequestMethodMatchConditionParameters(RequestMethodMatchConditionParametersTypeName typeName, RequestMethodOperator @operator)
@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             MatchValues = new ChangeTrackingList<RequestMethodMatchConditionParametersMatchValuesItem>();
         }
 
-        /// <summary> Initializes a new instance of RequestMethodMatchConditionParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestMethodMatchConditionParameters"/>. </summary>
         /// <param name="typeName"></param>
         /// <param name="operator"> Describes operator to be matched. </param>
         /// <param name="negateCondition"> Describes if this is negate condition or not. </param>

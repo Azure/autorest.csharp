@@ -13,7 +13,7 @@ namespace FlattenedParameters.Models
     /// <summary> The Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
         /// <param name="required"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required)
@@ -21,6 +21,15 @@ namespace FlattenedParameters.Models
             Argument.AssertNotNull(required, nameof(required));
 
             Required = required;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema"/>. </summary>
+        /// <param name="required"></param>
+        /// <param name="nonRequired"></param>
+        internal Paths18Pe4VhOperationrequiredPatchRequestbodyContentApplicationJsonSchema(string required, string nonRequired)
+        {
+            Required = required;
+            NonRequired = nonRequired;
         }
 
         /// <summary> Gets the required. </summary>

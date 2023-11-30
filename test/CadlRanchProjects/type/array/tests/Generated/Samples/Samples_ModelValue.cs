@@ -22,7 +22,7 @@ namespace _Type._Array.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue_ShortVersion()
+        public void Example_ModelValue_GetModelValue_ShortVersion()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -34,7 +34,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_ShortVersion_Async()
+        public async Task Example_ModelValue_GetModelValue_ShortVersion_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -46,7 +46,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue_ShortVersion_Convenience()
+        public void Example_ModelValue_GetModelValue_ShortVersion_Convenience()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -55,7 +55,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_ShortVersion_Convenience_Async()
+        public async Task Example_ModelValue_GetModelValue_ShortVersion_Convenience_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -64,7 +64,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue_AllParameters()
+        public void Example_ModelValue_GetModelValue_AllParameters()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -77,7 +77,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_AllParameters_Async()
+        public async Task Example_ModelValue_GetModelValue_AllParameters_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -90,7 +90,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetModelValue_AllParameters_Convenience()
+        public void Example_ModelValue_GetModelValue_AllParameters_Convenience()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -99,7 +99,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_AllParameters_Convenience_Async()
+        public async Task Example_ModelValue_GetModelValue_AllParameters_Convenience_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -108,7 +108,7 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_ModelValue_Put_ShortVersion()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -126,7 +126,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_ModelValue_Put_ShortVersion_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -144,7 +144,7 @@ property = "<property>",
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_ModelValue_Put_ShortVersion_Convenience()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -156,7 +156,7 @@ new InnerModel("<property>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_ModelValue_Put_ShortVersion_Convenience_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -168,7 +168,7 @@ new InnerModel("<property>")
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_ModelValue_Put_AllParameters()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -190,7 +190,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_ModelValue_Put_AllParameters_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -212,7 +212,7 @@ null
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_ModelValue_Put_AllParameters_Convenience()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 
@@ -227,7 +227,7 @@ Children = {default},
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_ModelValue_Put_AllParameters_Convenience_Async()
         {
             ModelValue client = new ArrayClient().GetModelValueClient();
 

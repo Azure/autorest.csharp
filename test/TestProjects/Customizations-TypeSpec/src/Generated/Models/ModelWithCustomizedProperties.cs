@@ -16,7 +16,7 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties
     {
-        /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/>. </summary>
         /// <param name="propertyToMakeInternal"> Public property made internal. </param>
         /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
         /// <param name="propertyToMakeFloat"> Property with type changed to float (original type: int). </param>
@@ -58,7 +58,7 @@ namespace CustomizationsInTsp.Models
             VectorReadOnly = ReadOnlyMemory<float>.Empty;
         }
 
-        /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelWithCustomizedProperties"/>. </summary>
         /// <param name="propertyToMakeInternal"> Public property made internal. </param>
         /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
         /// <param name="propertyToMakeFloat"> Property with type changed to float (original type: int). </param>

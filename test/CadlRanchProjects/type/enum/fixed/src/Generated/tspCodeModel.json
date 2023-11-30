@@ -1,9 +1,7 @@
 {
  "$id": "1",
  "Name": "Type.Enum.Fixed",
- "ApiVersions": [
-  "1.0.0"
- ],
+ "ApiVersions": [],
  "Enums": [
   {
    "$id": "2",
