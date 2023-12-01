@@ -24,6 +24,45 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
+        /// <summary> Initializes a new instance of <see cref="AvailabilitySetPatch"/>. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        /// <param name="sku">
+        /// Sku of the availability set
+        /// Serialized Name: AvailabilitySetUpdate.sku
+        /// </param>
+        /// <param name="platformUpdateDomainCount">
+        /// Update Domain count.
+        /// Serialized Name: AvailabilitySetUpdate.properties.platformUpdateDomainCount
+        /// </param>
+        /// <param name="platformFaultDomainCount">
+        /// Fault Domain count.
+        /// Serialized Name: AvailabilitySetUpdate.properties.platformFaultDomainCount
+        /// </param>
+        /// <param name="virtualMachines">
+        /// A list of references to all virtual machines in the availability set.
+        /// Serialized Name: AvailabilitySetUpdate.properties.virtualMachines
+        /// </param>
+        /// <param name="proximityPlacementGroup">
+        /// Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
+        /// Serialized Name: AvailabilitySetUpdate.properties.proximityPlacementGroup
+        /// </param>
+        /// <param name="statuses">
+        /// The resource status information.
+        /// Serialized Name: AvailabilitySetUpdate.properties.statuses
+        /// </param>
+        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags)
+        {
+            Sku = sku;
+            PlatformUpdateDomainCount = platformUpdateDomainCount;
+            PlatformFaultDomainCount = platformFaultDomainCount;
+            VirtualMachines = virtualMachines;
+            ProximityPlacementGroup = proximityPlacementGroup;
+            Statuses = statuses;
+        }
+
         /// <summary>
         /// Sku of the availability set
         /// Serialized Name: AvailabilitySetUpdate.sku
