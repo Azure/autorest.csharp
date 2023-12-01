@@ -146,6 +146,10 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float32;
         case "float64":
             return InputTypeKind.Float64;
+        case "decimal":
+            return InputTypeKind.Decimal;
+        case "decimal128":
+            return InputTypeKind.Decimal128;
         case "uri":
         case "url":
             return InputTypeKind.Uri;
