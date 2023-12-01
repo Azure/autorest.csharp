@@ -11,12 +11,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     public static partial class TypeModelInheritanceSingleDiscriminatorModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.Dinosaur"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.Dinosaur"/> instance for mocking. </returns>
-        public static Dinosaur Dinosaur(string kind = null, int size = default)
+        public static Dinosaur Dinosaur(int size = default)
         {
-            return new UnknownDinosaur(kind, size);
+            return new UnknownDinosaur(kind: null, size);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.TRex"/>. </summary>
@@ -24,7 +23,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <returns> A new <see cref="Models.TRex"/> instance for mocking. </returns>
         public static TRex TRex(int size = default)
         {
-            return new TRex("t-rex", size);
+            return new TRex(kind: null, size);
         }
     }
 }

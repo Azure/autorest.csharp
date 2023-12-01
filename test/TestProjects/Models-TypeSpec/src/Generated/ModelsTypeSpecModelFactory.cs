@@ -154,12 +154,11 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SingleBase"/>. </summary>
-        /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
-        public static SingleBase SingleBase(string kind = null, int size = default)
+        public static SingleBase SingleBase(int size = default)
         {
-            return new UnknownSingleBase(kind, size);
+            return new UnknownSingleBase(kind: null, size);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FirstDerivedOutputModel"/>. </summary>
@@ -167,7 +166,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
         public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
         {
-            return new FirstDerivedOutputModel("first", first);
+            return new FirstDerivedOutputModel(kind: null, first);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SecondDerivedOutputModel"/>. </summary>
@@ -175,7 +174,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
         public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
         {
-            return new SecondDerivedOutputModel("second", second);
+            return new SecondDerivedOutputModel(kind: null, second);
         }
     }
 }

@@ -14,12 +14,11 @@ namespace body_complex.Models
     public static partial class BodyComplexModelFactory
     {
         /// <summary> Initializes a new instance of <see cref="Models.DotFish"/>. </summary>
-        /// <param name="fishType"></param>
         /// <param name="species"></param>
         /// <returns> A new <see cref="Models.DotFish"/> instance for mocking. </returns>
-        public static DotFish DotFish(string fishType = null, string species = null)
+        public static DotFish DotFish(string species = null)
         {
-            return new UnknownDotFish(fishType, species);
+            return new UnknownDotFish(fishType: null, species);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DotFishMarket"/>. </summary>
@@ -49,7 +48,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.DotSalmon"/> instance for mocking. </returns>
         public static DotSalmon DotSalmon(string species = null, string location = null, bool? iswild = null)
         {
-            return new DotSalmon("DotSalmon", species, location, iswild);
+            return new DotSalmon(fishType: null, species, location, iswild);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ReadonlyObj"/>. </summary>
@@ -62,13 +61,12 @@ namespace body_complex.Models
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MyBaseType"/>. </summary>
-        /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
         /// <returns> A new <see cref="Models.MyBaseType"/> instance for mocking. </returns>
-        public static MyBaseType MyBaseType(string kind = "Unknown", string propB1 = null, string propBH1 = null)
+        public static MyBaseType MyBaseType(string propB1 = null, string propBH1 = null)
         {
-            return new UnknownMyBaseType(kind, propB1, propBH1);
+            return new UnknownMyBaseType(kind: default, propB1, propBH1);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MyDerivedType"/>. </summary>
@@ -78,7 +76,7 @@ namespace body_complex.Models
         /// <returns> A new <see cref="Models.MyDerivedType"/> instance for mocking. </returns>
         public static MyDerivedType MyDerivedType(string propB1 = null, string propBH1 = null, string propD1 = null)
         {
-            return new MyDerivedType(MyKind.Kind1, propB1, propBH1, propD1);
+            return new MyDerivedType(kind: default, propB1, propBH1, propD1);
         }
     }
 }

@@ -12,6 +12,14 @@ namespace TypeSchemaMapping.Models
     /// <summary> Model factory for models. </summary>
     internal static partial class MainModelFactory
     {
+        /// <summary> Initializes a new instance of <see cref="Models.PublicModelWithInternalProperty"/>. </summary>
+        /// <param name="publicProperty"></param>
+        /// <returns> A new <see cref="Models.PublicModelWithInternalProperty"/> instance for mocking. </returns>
+        public static PublicModelWithInternalProperty PublicModelWithInternalProperty(string publicProperty = null)
+        {
+            return new PublicModelWithInternalProperty(stringPropertyJson: default, publicProperty);
+        }
+
         /// <summary> Initializes a new instance of <see cref="Models.ModelWithGuidProperty"/>. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>
