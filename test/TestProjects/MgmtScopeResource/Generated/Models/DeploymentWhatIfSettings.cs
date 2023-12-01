@@ -15,6 +15,13 @@ namespace MgmtScopeResource.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="DeploymentWhatIfSettings"/>. </summary>
+        /// <param name="resultFormat"> The format of the What-If results. </param>
+        internal DeploymentWhatIfSettings(WhatIfResultFormat? resultFormat)
+        {
+            ResultFormat = resultFormat;
+        }
+
         /// <summary> The format of the What-If results. </summary>
         public WhatIfResultFormat? ResultFormat { get; set; }
     }
