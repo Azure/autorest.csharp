@@ -180,6 +180,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (property.FlattenedProperty != null)
                     property = property.FlattenedProperty;
 
+                // for the parameter corresponding to non-public property, we just add default or null
+                if (property.Declaration.Accessibility != "public")
+                {
+                    methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, property.Declaration.Type.IsValueType ? Default : Null));
+                    continue;
+                }
+
                 var parameterName = property.Declaration.Name.ToVariableName();
                 var inputType = property.Declaration.Type;
                 Constant? overriddenDefaultValue = null;
@@ -263,12 +270,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
-            // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
-            if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
-            {
-                return false;
-            }
-
             if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
             {
                 return false;
