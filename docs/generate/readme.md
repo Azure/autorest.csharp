@@ -8,6 +8,6 @@ Most of the information you'll need to generate a C# client can be found in the 
 
 <!-- LINKS -->
 [general]: https://github.com/Azure/autorest/tree/master/docs/generate/readme.md
-[generate_with_sdk_repo]: https://github.com/Azure/autorest.csharp#use-in-azure-sdk-net-repo
-[generate_without_sdk_repo]: https://github.com/Azure/autorest.csharp#use-outside-of-the-azure-sdk-net-repo
+[generate_with_sdk_repo]: https://github.com/Azure/autorest.csharp#use-in-azure-sdk-for-net-repo
+[generate_without_sdk_repo]: https://github.com/Azure/autorest.csharp#use-outside-of-the-azure-sdk-for-net-repo
 [customizations]: https://github.com/Azure/autorest.csharp#customizing-the-generated-code
