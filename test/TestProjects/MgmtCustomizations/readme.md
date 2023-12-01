@@ -12,6 +12,7 @@ namespace: MgmtCustomizations
 model-namespace: false
 public-clients: false
 head-as-boolean: false
+baseline-contract-folder: ../../BaselineContract/MgmtCustomizations
 
 rename-mapping:
   Pet.dateOfBirth: -|date-time

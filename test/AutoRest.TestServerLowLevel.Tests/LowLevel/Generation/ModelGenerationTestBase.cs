@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
@@ -67,7 +66,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 branded: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                baselineContractFolder: null,
+                baselineContractVersion: null);
         }
 
 

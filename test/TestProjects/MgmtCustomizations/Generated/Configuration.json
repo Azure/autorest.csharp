@@ -11,5 +11,6 @@
   "skip-csproj-packagereference": true,
   "RenameMapping": {
     "Pet.dateOfBirth": "-|date-time"
-  }
+  },
+  "baseline-contract-folder": "../../BaselineContract/MgmtCustomizations"
 }

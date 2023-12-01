@@ -108,7 +108,9 @@ namespace NamedTypeSymbolExtensionsTests
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null,
                 branded: true,
-                generateTestProject: true);
+                generateTestProject: true,
+                baselineContractFolder: null,
+                baselineContractVersion: null);
         }
 
         [Test]

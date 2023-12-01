@@ -54,6 +54,8 @@ namespace AutoRest.CSharp.Common.Input
             public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
             public const string Branded = "branded";
             public const string GenerateTestProject = "generateTestProject";
+            public const string BaselineContractFolder = "baseline-contract-folder";
+            public const string BaselineContractVersion = "baseline-contract-version";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -97,7 +99,9 @@ namespace AutoRest.CSharp.Common.Input
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration,
             bool branded,
-            bool generateTestProject)
+            bool generateTestProject,
+            string? baselineContractFolder,
+            string? baselineContractVersion)
         {
             _outputFolder = outputFolder;
             _namespace = ns;
@@ -158,6 +162,8 @@ namespace AutoRest.CSharp.Common.Input
             _methodsToKeepClientDefaultValue = methodsToKeepClientDefaultValue ?? Array.Empty<string>();
             _apiTypes = branded ? new AzureApiTypes() : new SystemApiTypes();
             GenerateTestProject = generateTestProject;
+            BaselineContractFolder = baselineContractFolder;
+            BaselineContractVersion = baselineContractVersion;
         }
 
         internal static (string AbsoluteProjectFolder, string RelativeProjectFolder) ParseProjectFolders(string outputFolder, string projectFolder)
@@ -213,6 +219,8 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         public static bool GenerateTestProject { get; private set; }
+        public static string? BaselineContractFolder { get; private set; }
+        public static string? BaselineContractVersion { get; private set; }
 
         private static ApiTypes? _apiTypes;
         public static ApiTypes ApiTypes => _apiTypes ?? new AzureApiTypes();
@@ -330,7 +338,9 @@ namespace AutoRest.CSharp.Common.Input
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest),
                 branded: GetOptionBoolValue(autoRest, Options.Branded),
-                generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject)
+                generateTestProject: GetOptionBoolValue(autoRest, Options.GenerateTestProject),
+                baselineContractFolder: autoRest.GetValue<string?>(Options.BaselineContractFolder).GetAwaiter().GetResult(),
+                baselineContractVersion: autoRest.GetValue<string?>(Options.BaselineContractVersion).GetAwaiter().GetResult()
             );
         }
 
@@ -489,7 +499,9 @@ namespace AutoRest.CSharp.Common.Input
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root),
                 ReadOption(root, Options.Branded),
-                ReadOption(root, Options.GenerateTestProject)
+                ReadOption(root, Options.GenerateTestProject),
+                ReadStringOption(root, Options.BaselineContractFolder),
+                ReadStringOption(root, Options.BaselineContractVersion)
             );
         }
 
@@ -551,6 +563,8 @@ namespace AutoRest.CSharp.Common.Input
             }
             WriteIfNotDefault(writer, Options.Branded, ApiTypes is AzureApiTypes);
             WriteIfNotDefault(writer, Options.GenerateTestProject, GenerateTestProject);
+            WriteIfNotDefault(writer, Options.BaselineContractFolder, BaselineContractFolder);
+            WriteIfNotDefault(writer, Options.BaselineContractVersion, BaselineContractVersion);
 
             writer.WriteEndObject();
         }

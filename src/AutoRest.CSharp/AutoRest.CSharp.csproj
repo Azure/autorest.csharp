@@ -29,6 +29,7 @@
     <!-- Any stable version of System.Memory should work here. -->
     <PackageReference Include="System.Memory" />
     <PackageReference Include="System.Net.ClientModel" />
+    <PackageReference Include="NuGet.Configuration" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

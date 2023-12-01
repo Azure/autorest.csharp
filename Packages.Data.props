@@ -39,5 +39,6 @@
     <PackageReference Update="System.Text.Json" Version="4.7.2" />
     <PackageReference Update="YamlDotNet" Version="11.2.1" />
     <PackageReference Update="System.Memory" Version="4.5.4" />
+    <PackageReference Update="NuGet.Configuration" Version="6.8.0" />
   </ItemGroup>
 </Project>

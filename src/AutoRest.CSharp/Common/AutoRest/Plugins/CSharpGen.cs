@@ -13,6 +13,8 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using NuGet.Configuration;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -24,11 +26,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration();
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            //// TODO: get previous contract path from configuration
-            //var previousContractPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "PreviousContract", Configuration.Namespace));
-            var previousContractDllPath = @"C:\netstandard2.0\MgmtCustomizations.dll";
-            var sourceInputModel = File.Exists(previousContractDllPath)
-                ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: await GeneratedCodeWorkspace.CreatePreviousContractFromDll(previousContractDllPath).GetCompilationAsync())
+
+            var baselineContract = await LoadBaselineContract();
+            var sourceInputModel = baselineContract is not null
+                ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: baselineContract)
                 : new SourceInputModel(await project.GetCompilationAsync());
 
             if (Configuration.Generation1ConvenienceClient)
@@ -56,6 +57,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await LowLevelTarget.ExecuteAsync(project, new CodeModelConverter().CreateNamespace(codeModel, new SchemaUsageProvider(codeModel)), sourceInputModel, false);
             }
             return project;
+        }
+
+        private async Task<CSharpCompilation?> LoadBaselineContract()
+        {
+            string fullPath;
+            var baselineContractPath = Configuration.BaselineContractFolder;
+            var baselineVersion = Configuration.BaselineContractVersion;
+            if (baselineContractPath is not null)
+            {
+                fullPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, baselineContractPath));
+                return await GeneratedCodeWorkspace.CreateExistingCodeProject(fullPath).GetCompilationAsync();
+            }
+            else if (baselineVersion is not null)
+            {
+                var nugetPackagePath = SettingsUtility.GetGlobalPackagesFolder(new NullSettings());
+                fullPath = Path.Combine(nugetPackagePath, Configuration.Namespace.ToLowerInvariant(), baselineVersion, "lib", "netstandard2.0", $"{Configuration.Namespace}.dll");
+                if (File.Exists(fullPath))
+                {
+                    return await GeneratedCodeWorkspace.CreatePreviousContractFromDll(fullPath).GetCompilationAsync();
+                }
+            }
+
+            return null;
         }
 
         private void GenerateMgmtReport(GeneratedCodeWorkspace project)
