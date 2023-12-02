@@ -37,11 +37,12 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of <see cref="Models.PetActionError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
+        /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <returns> A new <see cref="Models.PetActionError"/> instance for mocking. </returns>
-        public static PetActionError PetActionError(string actionResponse = null, string errorMessage = null)
+        public static PetActionError PetActionError(string actionResponse = null, string errorType = null, string errorMessage = null)
         {
-            return new PetActionError(actionResponse, errorType: null, errorMessage);
+            return new PetActionError(actionResponse, errorType, errorMessage);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetSadError"/>. </summary>
@@ -51,7 +52,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetSadError"/> instance for mocking. </returns>
         public static PetSadError PetSadError(string actionResponse = null, string errorMessage = null, string reason = null)
         {
-            return new PetSadError(actionResponse, errorType: null, errorMessage, reason);
+            return new PetSadError(actionResponse, "PetSadError", errorMessage, reason);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.PetHungryOrThirstyError"/>. </summary>
@@ -62,7 +63,7 @@ namespace xms_error_responses.Models
         /// <returns> A new <see cref="Models.PetHungryOrThirstyError"/> instance for mocking. </returns>
         public static PetHungryOrThirstyError PetHungryOrThirstyError(string actionResponse = null, string errorMessage = null, string reason = null, string hungryOrThirsty = null)
         {
-            return new PetHungryOrThirstyError(actionResponse, errorType: null, errorMessage, reason, hungryOrThirsty);
+            return new PetHungryOrThirstyError(actionResponse, "PetHungryOrThirstyError", errorMessage, reason, hungryOrThirsty);
         }
     }
 }
