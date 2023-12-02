@@ -15,6 +15,13 @@ namespace model_flattening.Models
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref="GenericUrl"/>. </summary>
+        /// <param name="genericValue"> Generic URL value. </param>
+        internal GenericUrl(string genericValue)
+        {
+            GenericValue = genericValue;
+        }
+
         /// <summary> Generic URL value. </summary>
         public string GenericValue { get; }
     }
