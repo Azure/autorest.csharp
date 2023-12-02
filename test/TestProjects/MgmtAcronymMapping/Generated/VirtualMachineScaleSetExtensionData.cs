@@ -30,7 +30,6 @@ namespace MgmtAcronymMapping
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name">
         /// The name of the extension.
         /// Serialized Name: VirtualMachineScaleSetExtension.name
@@ -79,7 +78,7 @@ namespace MgmtAcronymMapping
         /// Collection of extension names after which this extension needs to be provisioned.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.provisionAfterExtensions
         /// </param>
-        internal VirtualMachineScaleSetExtensionData(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id, serializedAdditionalRawData)
+        internal VirtualMachineScaleSetExtensionData(string id, string name, string resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
         {
             Name = name;
             ResourceType = resourceType;

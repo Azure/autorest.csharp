@@ -33,18 +33,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of <see cref="PollutedDog"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
-        internal PollutedDog(string kind, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string woof, BinaryData color) : base(kind, name, serializedAdditionalRawData)
+        internal PollutedDog(string kind, string name, string woof, BinaryData color) : base(kind, name)
         {
             Woof = woof;
             Color = color;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="PollutedDog"/> for deserialization. </summary>
-        internal PollutedDog()
-        {
         }
 
         /// <summary> Woof. </summary>

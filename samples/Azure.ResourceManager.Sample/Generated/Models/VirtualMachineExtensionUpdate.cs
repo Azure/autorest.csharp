@@ -26,7 +26,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="forceUpdateTag">
         /// How the extension handler should be forced to update even if the extension configuration has not changed.
         /// Serialized Name: VirtualMachineExtensionUpdate.properties.forceUpdateTag
@@ -59,7 +58,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
         /// Serialized Name: VirtualMachineExtensionUpdate.properties.protectedSettings
         /// </param>
-        internal VirtualMachineExtensionUpdate(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings) : base(tags, serializedAdditionalRawData)
+        internal VirtualMachineExtensionUpdate(IDictionary<string, string> tags, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings) : base(tags)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;

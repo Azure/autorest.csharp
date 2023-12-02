@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -30,7 +29,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku">
         /// Sku of the availability set
         /// Serialized Name: AvailabilitySetUpdate.sku
@@ -55,7 +53,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: AvailabilitySetUpdate.properties.statuses
         /// </param>
-        internal AvailabilitySetPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags, serializedAdditionalRawData)
+        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;

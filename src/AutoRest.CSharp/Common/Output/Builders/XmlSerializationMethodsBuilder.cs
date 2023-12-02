@@ -5,12 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -31,20 +33,32 @@ namespace AutoRest.CSharp.Common.Output.Builders
             var xmlWriter = new XmlWriterExpression(KnownParameters.Serializations.XmlWriter);
             var nameHint = (ValueExpression)KnownParameters.Serializations.NameHint;
             var options = new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.Options);
-            yield return new Method
-            (
-                new MethodSignature(serialization.WriteXmlMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
-                WriteObject(serialization, xmlWriter, nameHint, options).ToArray()
-            );
+            if (Configuration.UseModelReaderWriter)
+            {
+                yield return new Method
+                (
+                    new MethodSignature(serialization.WriteXmlMethodName, null, null, MethodSignatureModifiers.Private, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint, KnownParameters.Serializations.Options }),
+                    WriteObject(serialization, xmlWriter, nameHint, options).ToArray()
+                );
 
-            yield return new Method
-            (
-                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
-                This.Invoke(serialization.WriteXmlMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
-            );
+                yield return new Method
+                (
+                    new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
+                    This.Invoke(serialization.WriteXmlMethodName, new[] { xmlWriter, nameHint, ModelReaderWriterOptionsExpression.Wire })
+                );
+            }
+            else
+            {
+                yield return new Method
+                (
+                    new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[] { KnownParameters.Serializations.XmlWriter, KnownParameters.Serializations.NameHint }, ExplicitInterface: typeof(IXmlSerializable)),
+                    WriteObject(serialization, xmlWriter, nameHint, null).ToArray()
+                );
+            }
         }
 
-        private static IEnumerable<MethodBodyStatement> WriteObject(XmlObjectSerialization objectSerialization, XmlWriterExpression xmlWriter, ValueExpression nameHint, ModelReaderWriterOptionsExpression options)
+        // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
+        private static IEnumerable<MethodBodyStatement> WriteObject(XmlObjectSerialization objectSerialization, XmlWriterExpression xmlWriter, ValueExpression nameHint, ModelReaderWriterOptionsExpression? options)
         {
             yield return xmlWriter.WriteStartElement(NullCoalescing(nameHint, Literal(objectSerialization.Name)));
 
@@ -52,7 +66,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return Serializations.WrapInCheckNotWire(
                     serialization,
-                    options.Format,
+                    options?.Format,
                     InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, new[]
                     {
                         xmlWriter.WriteStartAttribute(serialization.SerializedName),
@@ -65,7 +79,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return Serializations.WrapInCheckNotWire(
                     serialization,
-                    options.Format,
+                    options?.Format,
                     InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ValueSerialization, serialization.Value))));
             }
 
@@ -73,7 +87,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return Serializations.WrapInCheckNotWire(
                     serialization,
-                    options.Format,
+                    options?.Format,
                     InvokeOptional.WrapInIsDefined(serialization, WrapInNullCheck(serialization, SerializeExpression(xmlWriter, serialization.ArraySerialization, serialization.Value))));
             }
 
@@ -81,7 +95,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 yield return Serializations.WrapInCheckNotWire(
                     contentSerialization,
-                    options.Format,
+                    options?.Format,
                     SerializeValueExpression(xmlWriter, contentSerialization.ValueSerialization, contentSerialization.Value));
             }
 
@@ -187,15 +201,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            return new Method
-            (
-                new MethodSignature($"Deserialize{declaration.Name}", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { KnownParameters.Serializations.XElement, KnownParameters.Serializations.OptionalOptions }),
-                BuildDeserializeBody(new XElementExpression(KnownParameters.Serializations.XElement), serialization).ToArray()
-            );
+            var methodName = $"Deserialize{declaration.Name}";
+            var signature = Configuration.UseModelReaderWriter ?
+                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { KnownParameters.Serializations.XElement, KnownParameters.Serializations.OptionalOptions }) :
+                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[] { KnownParameters.Serializations.XElement });
+
+            return Configuration.UseModelReaderWriter ?
+                new Method(signature, BuildDeserializeBody(serialization, new XElementExpression(KnownParameters.Serializations.XElement), new ModelReaderWriterOptionsExpression(KnownParameters.Serializations.OptionalOptions)).ToArray()) :
+                new Method(signature, BuildDeserializeBody(serialization, new XElementExpression(KnownParameters.Serializations.XElement), null).ToArray());
         }
 
-        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(XElementExpression element, XmlObjectSerialization objectSerialization)
+        // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
+        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(XmlObjectSerialization objectSerialization, XElementExpression element, ModelReaderWriterOptionsExpression? options)
         {
+            if (options != null)
+            {
+                yield return AssignIfNull(options, ModelReaderWriterOptionsExpression.Wire);
+                yield return EmptyLine;
+            }
+
             var propertyVariables = new Dictionary<XmlPropertySerialization, VariableReference>();
 
             CollectProperties(propertyVariables, objectSerialization);

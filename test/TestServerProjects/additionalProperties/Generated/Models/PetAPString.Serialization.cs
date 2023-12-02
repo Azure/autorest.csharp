@@ -5,27 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPString : IUtf8JsonSerializable, IJsonModel<PetAPString>
+    public partial class PetAPString : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPString>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<PetAPString>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPString>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PetAPString)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -33,11 +22,6 @@ namespace additionalProperties.Models
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Status))
-            {
-                writer.WritePropertyName("status"u8);
-                writer.WriteBooleanValue(Status.Value);
             }
             foreach (var item in AdditionalProperties)
             {
@@ -47,22 +31,8 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        PetAPString IJsonModel<PetAPString>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static PetAPString DeserializePetAPString(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPString>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PetAPString)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePetAPString(document.RootElement, options);
-        }
-
-        internal static PetAPString DeserializePetAPString(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -98,36 +68,5 @@ namespace additionalProperties.Models
             additionalProperties = additionalPropertiesDictionary;
             return new PetAPString(id, name.Value, Optional.ToNullable(status), additionalProperties);
         }
-
-        BinaryData IPersistableModel<PetAPString>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPString>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PetAPString)} does not support '{options.Format}' format.");
-            }
-        }
-
-        PetAPString IPersistableModel<PetAPString>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPString>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePetAPString(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PetAPString)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PetAPString>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

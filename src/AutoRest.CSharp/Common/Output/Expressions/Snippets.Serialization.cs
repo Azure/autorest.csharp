@@ -21,8 +21,23 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static StringExpression JsonFormat = Literal("J");
             public static StringExpression XmlFormat = Literal("X");
 
-            public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression format, MethodBodyStatement statement)
+            // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
+            public static MethodBodyStatement WrapInCheckNotWire(PropertySerialization serialization, ValueExpression? format, MethodBodyStatement statement)
             {
+                // if format is null, indicating the model reader writer is not enabled
+                if (format == null)
+                {
+                    // when the model reader writer is not enabled, we just omit the serialization when it should not be included.
+                    if (serialization.ShouldExcludeInWireSerialization)
+                    {
+                        return EmptyStatement;
+                    }
+                    else
+                    {
+                        return statement;
+                    }
+                }
+
                 if (!serialization.ShouldExcludeInWireSerialization)
                     return statement;
 
@@ -62,14 +77,17 @@ namespace AutoRest.CSharp.Common.Output.Models
                 };
             }
 
-            public static MethodBodyStatement ValidateJsonFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            public static MethodBodyStatement ValidateJsonFormat(ModelReaderWriterOptionsExpression? options, CSharpType iModelTInterface)
                 => ValidateFormat(options, JsonFormat, iModelTInterface).ToArray();
 
-            public static MethodBodyStatement ValidateXmlFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface)
+            public static MethodBodyStatement ValidateXmlFormat(ModelReaderWriterOptionsExpression? options, CSharpType iModelTInterface)
                 => ValidateFormat(options, XmlFormat, iModelTInterface).ToArray();
 
-            private static IEnumerable<MethodBodyStatement> ValidateFormat(ModelReaderWriterOptionsExpression options, ValueExpression formatValue, CSharpType iModelTInterface)
+            // TODO -- make the options parameter non-nullable again when we remove the `UseModelReaderWriter` flag.
+            private static IEnumerable<MethodBodyStatement> ValidateFormat(ModelReaderWriterOptionsExpression? options, ValueExpression formatValue, CSharpType iModelTInterface)
             {
+                if (options == null)
+                    yield break; // if options expression is null, we skip outputting the following statements
                 /*
                     var format = options.Format == "W" ? GetFormatFromOptions(options) : options.Format;
                     if (format != <formatValue>)
@@ -83,6 +101,8 @@ namespace AutoRest.CSharp.Common.Output.Models
                 {
                     ThrowValidationFailException(format, iModelTInterface.Arguments[0])
                 };
+
+                yield return EmptyLine; // always outputs an empty line here because we will always have other statements after this
             }
 
             public static MethodBodyStatement GetConcreteFormat(ModelReaderWriterOptionsExpression options, CSharpType iModelTInterface, out TypedValueExpression format)

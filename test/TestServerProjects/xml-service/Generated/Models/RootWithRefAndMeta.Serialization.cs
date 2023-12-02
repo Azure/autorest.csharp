@@ -5,19 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndMeta : IXmlSerializable, IPersistableModel<RootWithRefAndMeta>
+    public partial class RootWithRefAndMeta : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "RootWithRefAndMeta");
             if (Optional.IsDefined(RefToModel))
@@ -33,9 +29,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
-
-        internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element, ModelReaderWriterOptions options = null)
+        internal static RootWithRefAndMeta DeserializeRootWithRefAndMeta(XElement element)
         {
             ComplexTypeWithMeta refToModel = default;
             string something = default;
@@ -47,48 +41,7 @@ namespace xml_service.Models
             {
                 something = (string)somethingElement;
             }
-            return new RootWithRefAndMeta(refToModel, something, serializedAdditionalRawData: null);
+            return new RootWithRefAndMeta(refToModel, something);
         }
-
-        BinaryData IPersistableModel<RootWithRefAndMeta>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RootWithRefAndMeta>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(RootWithRefAndMeta)} does not support '{options.Format}' format.");
-            }
-        }
-
-        RootWithRefAndMeta IPersistableModel<RootWithRefAndMeta>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<RootWithRefAndMeta>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeRootWithRefAndMeta(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(RootWithRefAndMeta)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<RootWithRefAndMeta>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

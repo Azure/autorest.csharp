@@ -231,7 +231,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<UnpatchableResource> GetAllAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace MgmtOperations
         public virtual Pageable<UnpatchableResource> GetAll(string expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _unpatchableResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new UnpatchableResource(Client, UnpatchableResourceData.DeserializeUnpatchableResourceData(e)), _unpatchableResourceClientDiagnostics, Pipeline, "UnpatchableResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

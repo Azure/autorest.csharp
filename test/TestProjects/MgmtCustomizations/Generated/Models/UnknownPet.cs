@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 
 namespace MgmtCustomizations.Models
 {
@@ -21,8 +20,7 @@ namespace MgmtCustomizations.Models
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
         /// <param name="dateOfBirth"> Pet date of birth. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownPet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(kind, name, size, dateOfBirth, serializedAdditionalRawData)
+        internal UnknownPet(PetKind kind, string name, int size, DateTimeOffset? dateOfBirth) : base(kind, name, size, dateOfBirth)
         {
             Kind = kind;
         }

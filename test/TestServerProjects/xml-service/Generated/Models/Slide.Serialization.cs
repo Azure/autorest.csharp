@@ -5,20 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class Slide : IXmlSerializable, IPersistableModel<Slide>
+    public partial class Slide : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "slide");
             if (Optional.IsDefined(Type))
@@ -45,9 +41,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
-
-        internal static Slide DeserializeSlide(XElement element, ModelReaderWriterOptions options = null)
+        internal static Slide DeserializeSlide(XElement element)
         {
             string type = default;
             string title = default;
@@ -66,48 +60,7 @@ namespace xml_service.Models
                 array.Add((string)e);
             }
             items = array;
-            return new Slide(type, title, items, serializedAdditionalRawData: null);
+            return new Slide(type, title, items);
         }
-
-        BinaryData IPersistableModel<Slide>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Slide>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Slide)} does not support '{options.Format}' format.");
-            }
-        }
-
-        Slide IPersistableModel<Slide>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Slide>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeSlide(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Slide)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Slide>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

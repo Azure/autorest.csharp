@@ -2,27 +2,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
 using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class CreateTranscriptionRequest : IUtf8JsonWriteable, IJsonModel<CreateTranscriptionRequest>
+    public partial class CreateTranscriptionRequest : IUtf8JsonWriteable
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<CreateTranscriptionRequest>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<CreateTranscriptionRequest>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateTranscriptionRequest>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(CreateTranscriptionRequest)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("file"u8);
             writer.WriteBase64StringValue(File.ToArray(), "D");
@@ -48,138 +37,7 @@ namespace OpenAI.Models
                 writer.WritePropertyName("language"u8);
                 writer.WriteStringValue(Language);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
-        }
-
-        CreateTranscriptionRequest IJsonModel<CreateTranscriptionRequest>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateTranscriptionRequest>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(CreateTranscriptionRequest)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeCreateTranscriptionRequest(document.RootElement, options);
-        }
-
-        internal static CreateTranscriptionRequest DeserializeCreateTranscriptionRequest(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            BinaryData file = default;
-            CreateTranscriptionRequestModel model = default;
-            OptionalProperty<string> prompt = default;
-            OptionalProperty<CreateTranscriptionRequestResponseFormat> responseFormat = default;
-            OptionalProperty<double> temperature = default;
-            OptionalProperty<string> language = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("file"u8))
-                {
-                    file = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
-                    continue;
-                }
-                if (property.NameEquals("model"u8))
-                {
-                    model = new CreateTranscriptionRequestModel(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("prompt"u8))
-                {
-                    prompt = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("response_format"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    responseFormat = new CreateTranscriptionRequestResponseFormat(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("temperature"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    temperature = property.Value.GetDouble();
-                    continue;
-                }
-                if (property.NameEquals("language"u8))
-                {
-                    language = property.Value.GetString();
-                    continue;
-                }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
-            }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new CreateTranscriptionRequest(file, model, prompt.Value, OptionalProperty.ToNullable(responseFormat), OptionalProperty.ToNullable(temperature), language.Value, serializedAdditionalRawData);
-        }
-
-        BinaryData IPersistableModel<CreateTranscriptionRequest>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateTranscriptionRequest>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(CreateTranscriptionRequest)} does not support '{options.Format}' format.");
-            }
-        }
-
-        CreateTranscriptionRequest IPersistableModel<CreateTranscriptionRequest>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<CreateTranscriptionRequest>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeCreateTranscriptionRequest(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(CreateTranscriptionRequest)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<CreateTranscriptionRequest>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
-
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The result to deserialize the model from. </param>
-        internal static CreateTranscriptionRequest FromResponse(PipelineResponse response)
-        {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCreateTranscriptionRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestBody. </summary>

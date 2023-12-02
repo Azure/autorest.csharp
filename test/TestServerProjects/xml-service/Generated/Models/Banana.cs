@@ -6,45 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 
 namespace xml_service.Models
 {
     /// <summary> A banana. </summary>
     public partial class Banana
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="Banana"/>. </summary>
         public Banana()
         {
@@ -54,13 +21,11 @@ namespace xml_service.Models
         /// <param name="name"></param>
         /// <param name="flavor"></param>
         /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal Banana(string name, string flavor, DateTimeOffset? expiration, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal Banana(string name, string flavor, DateTimeOffset? expiration)
         {
             Name = name;
             Flavor = flavor;
             Expiration = expiration;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

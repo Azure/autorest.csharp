@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Azure.Core;
@@ -15,18 +13,10 @@ using Azure.Core;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(SystemDataContentConverter))]
-    public partial class SystemDataContent : IUtf8JsonSerializable, IJsonModel<SystemDataContent>
+    public partial class SystemDataContent : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SystemDataContent>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<SystemDataContent>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SystemDataContent>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SystemDataContent)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(CreatedBy))
             {
@@ -61,22 +51,8 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        SystemDataContent IJsonModel<SystemDataContent>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static SystemDataContent DeserializeSystemDataContent(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SystemDataContent>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SystemDataContent)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSystemDataContent(document.RootElement, options);
-        }
-
-        internal static SystemDataContent DeserializeSystemDataContent(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -138,37 +114,6 @@ namespace Azure.ResourceManager.Fake.Models
             }
             return new SystemDataContent(createdBy.Value, Optional.ToNullable(createdByType), Optional.ToNullable(createdAt), lastModifiedBy.Value, Optional.ToNullable(lastModifiedByType), Optional.ToNullable(lastModifiedAt));
         }
-
-        BinaryData IPersistableModel<SystemDataContent>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SystemDataContent>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SystemDataContent)} does not support '{options.Format}' format.");
-            }
-        }
-
-        SystemDataContent IPersistableModel<SystemDataContent>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SystemDataContent>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSystemDataContent(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SystemDataContent)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SystemDataContent>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         internal partial class SystemDataContentConverter : JsonConverter<SystemDataContent>
         {

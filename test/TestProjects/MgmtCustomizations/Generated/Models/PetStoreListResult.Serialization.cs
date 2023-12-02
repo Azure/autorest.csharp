@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -15,70 +12,15 @@ using MgmtCustomizations;
 
 namespace MgmtCustomizations.Models
 {
-    internal partial class PetStoreListResult : IUtf8JsonSerializable, IJsonModel<PetStoreListResult>
+    internal partial class PetStoreListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetStoreListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<PetStoreListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static PetStoreListResult DeserializePetStoreListResult(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PetStoreListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PetStoreListResult)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Value))
-            {
-                writer.WritePropertyName("value"u8);
-                writer.WriteStartArray();
-                foreach (var item in Value)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        PetStoreListResult IJsonModel<PetStoreListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetStoreListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PetStoreListResult)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePetStoreListResult(document.RootElement, options);
-        }
-
-        internal static PetStoreListResult DeserializePetStoreListResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IReadOnlyList<PetStoreData>> value = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -95,44 +37,8 @@ namespace MgmtCustomizations.Models
                     value = array;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new PetStoreListResult(Optional.ToList(value), serializedAdditionalRawData);
+            return new PetStoreListResult(Optional.ToList(value));
         }
-
-        BinaryData IPersistableModel<PetStoreListResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetStoreListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PetStoreListResult)} does not support '{options.Format}' format.");
-            }
-        }
-
-        PetStoreListResult IPersistableModel<PetStoreListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetStoreListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePetStoreListResult(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PetStoreListResult)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PetStoreListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

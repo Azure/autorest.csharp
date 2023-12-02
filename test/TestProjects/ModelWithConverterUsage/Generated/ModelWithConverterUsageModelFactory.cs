@@ -15,7 +15,7 @@ namespace ModelWithConverterUsage.Models
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
         public static OutputModel OutputModel(string outputModelProperty = null)
         {
-            return new OutputModel(outputModelProperty, serializedAdditionalRawData: null);
+            return new OutputModel(outputModelProperty);
         }
     }
 }

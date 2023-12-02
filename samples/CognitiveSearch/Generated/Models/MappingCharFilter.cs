@@ -31,17 +31,11 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="MappingCharFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the char filter. </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="mappings"> A list of mappings of the following format: "a=&gt;b" (all occurrences of the character "a" will be replaced with character "b"). </param>
-        internal MappingCharFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> mappings) : base(odataType, name, serializedAdditionalRawData)
+        internal MappingCharFilter(string odataType, string name, IList<string> mappings) : base(odataType, name)
         {
             Mappings = mappings;
             OdataType = odataType ?? "#Microsoft.Azure.Search.MappingCharFilter";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="MappingCharFilter"/> for deserialization. </summary>
-        internal MappingCharFilter()
-        {
         }
 
         /// <summary> A list of mappings of the following format: "a=&gt;b" (all occurrences of the character "a" will be replaced with character "b"). </summary>

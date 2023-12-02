@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace body_complex.Models
@@ -32,19 +31,13 @@ namespace body_complex.Models
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cookiecuttershark"/>, <see cref="Goblinshark"/>, <see cref="Salmon"/>, <see cref="Sawshark"/>, <see cref="Shark"/> and <see cref="SmartSalmon"/>.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
-        internal Salmon(string fishtype, string species, float length, IList<Fish> siblings, IDictionary<string, BinaryData> serializedAdditionalRawData, string location, bool? iswild) : base(fishtype, species, length, siblings, serializedAdditionalRawData)
+        internal Salmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild) : base(fishtype, species, length, siblings)
         {
             Location = location;
             Iswild = iswild;
             Fishtype = fishtype ?? "salmon";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Salmon"/> for deserialization. </summary>
-        internal Salmon()
-        {
         }
 
         /// <summary> Gets or sets the location. </summary>

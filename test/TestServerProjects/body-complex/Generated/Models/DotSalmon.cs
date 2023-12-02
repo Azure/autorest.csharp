@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace body_complex.Models
 {
     /// <summary> The DotSalmon. </summary>
@@ -22,10 +19,9 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="DotSalmon"/>. </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
-        internal DotSalmon(string fishType, string species, IDictionary<string, BinaryData> serializedAdditionalRawData, string location, bool? iswild) : base(fishType, species, serializedAdditionalRawData)
+        internal DotSalmon(string fishType, string species, string location, bool? iswild) : base(fishType, species)
         {
             Location = location;
             Iswild = iswild;

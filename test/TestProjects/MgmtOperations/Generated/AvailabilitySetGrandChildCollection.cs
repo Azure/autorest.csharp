@@ -227,7 +227,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<AvailabilitySetGrandChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtOperations
         public virtual Pageable<AvailabilitySetGrandChildResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

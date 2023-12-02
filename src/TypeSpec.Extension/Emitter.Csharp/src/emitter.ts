@@ -162,7 +162,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 generateTestProject:
                     options["generateTestProject"] === true
                         ? undefined
-                        : options["generateTestProject"]
+                        : options["generateTestProject"],
+                "use-model-reader-writer": options["use-model-reader-writer"]
             } as Configuration;
 
             await program.host.writeFile(

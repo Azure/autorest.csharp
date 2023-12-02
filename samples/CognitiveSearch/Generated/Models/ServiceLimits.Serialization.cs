@@ -5,110 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceLimits : IUtf8JsonSerializable, IJsonModel<ServiceLimits>
+    public partial class ServiceLimits
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ServiceLimits>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<ServiceLimits>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ServiceLimits DeserializeServiceLimits(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ServiceLimits)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            if (Optional.IsDefined(MaxFieldsPerIndex))
-            {
-                if (MaxFieldsPerIndex != null)
-                {
-                    writer.WritePropertyName("maxFieldsPerIndex"u8);
-                    writer.WriteNumberValue(MaxFieldsPerIndex.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxFieldsPerIndex");
-                }
-            }
-            if (Optional.IsDefined(MaxFieldNestingDepthPerIndex))
-            {
-                if (MaxFieldNestingDepthPerIndex != null)
-                {
-                    writer.WritePropertyName("maxFieldNestingDepthPerIndex"u8);
-                    writer.WriteNumberValue(MaxFieldNestingDepthPerIndex.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxFieldNestingDepthPerIndex");
-                }
-            }
-            if (Optional.IsDefined(MaxComplexCollectionFieldsPerIndex))
-            {
-                if (MaxComplexCollectionFieldsPerIndex != null)
-                {
-                    writer.WritePropertyName("maxComplexCollectionFieldsPerIndex"u8);
-                    writer.WriteNumberValue(MaxComplexCollectionFieldsPerIndex.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxComplexCollectionFieldsPerIndex");
-                }
-            }
-            if (Optional.IsDefined(MaxComplexObjectsInCollectionsPerDocument))
-            {
-                if (MaxComplexObjectsInCollectionsPerDocument != null)
-                {
-                    writer.WritePropertyName("maxComplexObjectsInCollectionsPerDocument"u8);
-                    writer.WriteNumberValue(MaxComplexObjectsInCollectionsPerDocument.Value);
-                }
-                else
-                {
-                    writer.WriteNull("maxComplexObjectsInCollectionsPerDocument");
-                }
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        ServiceLimits IJsonModel<ServiceLimits>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ServiceLimits)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeServiceLimits(document.RootElement, options);
-        }
-
-        internal static ServiceLimits DeserializeServiceLimits(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -117,8 +22,6 @@ namespace CognitiveSearch.Models
             Optional<int?> maxFieldNestingDepthPerIndex = default;
             Optional<int?> maxComplexCollectionFieldsPerIndex = default;
             Optional<int?> maxComplexObjectsInCollectionsPerDocument = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxFieldsPerIndex"u8))
@@ -161,44 +64,8 @@ namespace CognitiveSearch.Models
                     maxComplexObjectsInCollectionsPerDocument = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ServiceLimits(Optional.ToNullable(maxFieldsPerIndex), Optional.ToNullable(maxFieldNestingDepthPerIndex), Optional.ToNullable(maxComplexCollectionFieldsPerIndex), Optional.ToNullable(maxComplexObjectsInCollectionsPerDocument), serializedAdditionalRawData);
+            return new ServiceLimits(Optional.ToNullable(maxFieldsPerIndex), Optional.ToNullable(maxFieldNestingDepthPerIndex), Optional.ToNullable(maxComplexCollectionFieldsPerIndex), Optional.ToNullable(maxComplexObjectsInCollectionsPerDocument));
         }
-
-        BinaryData IPersistableModel<ServiceLimits>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ServiceLimits)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ServiceLimits IPersistableModel<ServiceLimits>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ServiceLimits>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeServiceLimits(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ServiceLimits)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ServiceLimits>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

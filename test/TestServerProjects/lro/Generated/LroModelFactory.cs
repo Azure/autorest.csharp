@@ -25,7 +25,7 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Product(id, type, tags, location, name, serializedAdditionalRawData: null, provisioningState, provisioningStateValues);
+            return new Product(id, type, tags, location, name, provisioningState, provisioningStateValues);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Resource"/>. </summary>
@@ -39,7 +39,7 @@ namespace lro.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, type, tags, location, name, serializedAdditionalRawData: null);
+            return new Resource(id, type, tags, location, name);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubProduct"/>. </summary>
@@ -49,7 +49,7 @@ namespace lro.Models
         /// <returns> A new <see cref="Models.SubProduct"/> instance for mocking. </returns>
         public static SubProduct SubProduct(string id = null, string provisioningState = null, SubProductPropertiesProvisioningStateValues? provisioningStateValues = null)
         {
-            return new SubProduct(id, serializedAdditionalRawData: null, provisioningState, provisioningStateValues);
+            return new SubProduct(id, provisioningState, provisioningStateValues);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SubResource"/>. </summary>
@@ -57,7 +57,7 @@ namespace lro.Models
         /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
         public static SubResource SubResource(string id = null)
         {
-            return new SubResource(id, serializedAdditionalRawData: null);
+            return new SubResource(id);
         }
     }
 }

@@ -5,26 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Text.Json;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Skill : IUtf8JsonSerializable, IJsonModel<Skill>
+    public partial class Skill : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Skill>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<Skill>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Skill>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(Skill)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
@@ -57,40 +46,11 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        Skill IJsonModel<Skill>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static Skill DeserializeSkill(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Skill>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(Skill)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSkill(document.RootElement, options);
-        }
-
-        internal static Skill DeserializeSkill(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -115,36 +75,5 @@ namespace CognitiveSearch.Models
             }
             return UnknownSkill.DeserializeUnknownSkill(element);
         }
-
-        BinaryData IPersistableModel<Skill>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Skill>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Skill)} does not support '{options.Format}' format.");
-            }
-        }
-
-        Skill IPersistableModel<Skill>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Skill>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSkill(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Skill)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Skill>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

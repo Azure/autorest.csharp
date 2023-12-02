@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace xms_error_responses.Models
 {
     /// <summary>
@@ -24,10 +21,9 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of <see cref="PetActionError"/>. </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
-        internal PetActionError(string actionResponse, IDictionary<string, BinaryData> serializedAdditionalRawData, string errorType, string errorMessage) : base(actionResponse, serializedAdditionalRawData)
+        internal PetActionError(string actionResponse, string errorType, string errorMessage) : base(actionResponse)
         {
             ErrorType = errorType;
             ErrorMessage = errorMessage;

@@ -4,45 +4,12 @@
 
 using System;
 using System.ClientModel.Internal;
-using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateFineTuningJobRequest. </summary>
     public partial class CreateFineTuningJobRequest
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/>. </summary>
         /// <param name="trainingFile">
         /// The ID of an uploaded file that contains training data.
@@ -65,7 +32,6 @@ namespace OpenAI.Models
 
             TrainingFile = trainingFile;
             Model = model;
-            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/>. </summary>
@@ -102,20 +68,13 @@ namespace OpenAI.Models
         /// For example, a `suffix` of "custom-model-name" would produce a model name like
         /// `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateFineTuningJobRequest(string trainingFile, string validationFile, CreateFineTuningJobRequestModel model, CreateHyperparameters hyperparameters, string suffix, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateFineTuningJobRequest(string trainingFile, string validationFile, CreateFineTuningJobRequestModel model, CreateHyperparameters hyperparameters, string suffix)
         {
             TrainingFile = trainingFile;
             ValidationFile = validationFile;
             Model = model;
             Hyperparameters = hyperparameters;
             Suffix = suffix;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="CreateFineTuningJobRequest"/> for deserialization. </summary>
-        internal CreateFineTuningJobRequest()
-        {
         }
 
         /// <summary>

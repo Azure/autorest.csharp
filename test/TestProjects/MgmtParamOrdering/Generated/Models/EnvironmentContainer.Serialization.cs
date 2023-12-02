@@ -5,27 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class EnvironmentContainer : IUtf8JsonSerializable, IJsonModel<EnvironmentContainer>
+    public partial class EnvironmentContainer : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EnvironmentContainer>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<EnvironmentContainer>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<EnvironmentContainer>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(EnvironmentContainer)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Description))
             {
@@ -54,40 +43,11 @@ namespace MgmtParamOrdering.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        EnvironmentContainer IJsonModel<EnvironmentContainer>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static EnvironmentContainer DeserializeEnvironmentContainer(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<EnvironmentContainer>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(EnvironmentContainer)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeEnvironmentContainer(document.RootElement, options);
-        }
-
-        internal static EnvironmentContainer DeserializeEnvironmentContainer(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -95,8 +55,6 @@ namespace MgmtParamOrdering.Models
             Optional<string> description = default;
             Optional<IDictionary<string, string>> properties = default;
             Optional<IDictionary<string, string>> tags = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("description"u8))
@@ -132,44 +90,8 @@ namespace MgmtParamOrdering.Models
                     tags = dictionary;
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new EnvironmentContainer(description.Value, Optional.ToDictionary(properties), Optional.ToDictionary(tags), serializedAdditionalRawData);
+            return new EnvironmentContainer(description.Value, Optional.ToDictionary(properties), Optional.ToDictionary(tags));
         }
-
-        BinaryData IPersistableModel<EnvironmentContainer>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<EnvironmentContainer>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(EnvironmentContainer)} does not support '{options.Format}' format.");
-            }
-        }
-
-        EnvironmentContainer IPersistableModel<EnvironmentContainer>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<EnvironmentContainer>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeEnvironmentContainer(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(EnvironmentContainer)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<EnvironmentContainer>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

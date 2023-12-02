@@ -5,55 +5,14 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 using System.Xml.Linq;
-using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class ListContainersResponse : IXmlSerializable, IPersistableModel<ListContainersResponse>
+    public partial class ListContainersResponse
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
-        {
-            writer.WriteStartElement(nameHint ?? "EnumerationResults");
-            writer.WriteStartAttribute("ServiceEndpoint");
-            writer.WriteValue(ServiceEndpoint);
-            writer.WriteEndAttribute();
-            writer.WriteStartElement("Prefix");
-            writer.WriteValue(Prefix);
-            writer.WriteEndElement();
-            if (Optional.IsDefined(Marker))
-            {
-                writer.WriteStartElement("Marker");
-                writer.WriteValue(Marker);
-                writer.WriteEndElement();
-            }
-            writer.WriteStartElement("MaxResults");
-            writer.WriteValue(MaxResults);
-            writer.WriteEndElement();
-            writer.WriteStartElement("NextMarker");
-            writer.WriteValue(NextMarker);
-            writer.WriteEndElement();
-            if (Optional.IsCollectionDefined(Containers))
-            {
-                writer.WriteStartElement("Containers");
-                foreach (var item in Containers)
-                {
-                    writer.WriteObjectValue(item, "Container");
-                }
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
-
-        internal static ListContainersResponse DeserializeListContainersResponse(XElement element, ModelReaderWriterOptions options = null)
+        internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
         {
             string serviceEndpoint = default;
             string prefix = default;
@@ -90,48 +49,7 @@ namespace xml_service.Models
                 }
                 containers = array;
             }
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker, serializedAdditionalRawData: null);
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker);
         }
-
-        BinaryData IPersistableModel<ListContainersResponse>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ListContainersResponse>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ListContainersResponse)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ListContainersResponse IPersistableModel<ListContainersResponse>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ListContainersResponse>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeListContainersResponse(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ListContainersResponse)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ListContainersResponse>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

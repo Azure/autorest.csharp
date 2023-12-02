@@ -64,7 +64,7 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         public virtual AsyncPageable<TypeOneResource> GetTypeOnesAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TypeOneCommonRestClient.CreateListTypeOnesBySubscriptionRequest(Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), TypeOneCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeOnes", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), TypeOneCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeOnes", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         public virtual Pageable<TypeOneResource> GetTypeOnes(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TypeOneCommonRestClient.CreateListTypeOnesBySubscriptionRequest(Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), TypeOneCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeOnes", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), TypeOneCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeOnes", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         public virtual AsyncPageable<TypeTwoResource> GetTypeTwosAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TypeTwoCommonRestClient.CreateListTypeTwosBySubscriptionRequest(Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), TypeTwoCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeTwos", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), TypeTwoCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeTwos", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         public virtual Pageable<TypeTwoResource> GetTypeTwos(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => TypeTwoCommonRestClient.CreateListTypeTwosBySubscriptionRequest(Id.SubscriptionId);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), TypeTwoCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeTwos", "value", null, cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeTwoResource(Client, TypeTwoData.DeserializeTypeTwoData(e)), TypeTwoCommonClientDiagnostics, Pipeline, "MockableMgmtExtensionCommonRestOperationSubscriptionResource.GetTypeTwos", "value", null, cancellationToken);
         }
     }
 }

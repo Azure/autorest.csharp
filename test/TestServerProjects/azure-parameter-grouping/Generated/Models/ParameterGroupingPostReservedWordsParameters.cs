@@ -5,46 +5,11 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostReservedWordsParameters
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         public ParameterGroupingPostReservedWordsParameters()
         {
@@ -53,12 +18,10 @@ namespace azure_parameter_grouping.Models
         /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         /// <param name="from"> 'from' is a reserved word. Pass in 'bob' to pass. </param>
         /// <param name="accept"> 'accept' is a reserved word. Pass in 'yes' to pass. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept)
         {
             From = @from;
             Accept = accept;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> 'from' is a reserved word. Pass in 'bob' to pass. </summary>

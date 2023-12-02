@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace CognitiveSearch.Models
 {
     /// <summary> Legacy similarity algorithm which uses the Lucene TFIDFSimilarity implementation of TF-IDF. This variation of TF-IDF introduces static document length normalization as well as coordinating factors that penalize documents that only partially match the searched queries. </summary>
@@ -21,8 +18,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of <see cref="ClassicSimilarity"/>. </summary>
         /// <param name="odataType"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ClassicSimilarity(string odataType, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(odataType, serializedAdditionalRawData)
+        internal ClassicSimilarity(string odataType) : base(odataType)
         {
             OdataType = odataType ?? "#Microsoft.Azure.Search.ClassicSimilarity";
         }

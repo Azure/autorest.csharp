@@ -5,80 +5,21 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class ResourceRange : IUtf8JsonSerializable, IJsonModel<ResourceRange>
+    public partial class ResourceRange
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ResourceRange>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<ResourceRange>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static ResourceRange DeserializeResourceRange(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceRange>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ResourceRange)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Min))
-            {
-                writer.WritePropertyName("min"u8);
-                writer.WriteNumberValue(Min.Value);
-            }
-            if (Optional.IsDefined(Max))
-            {
-                writer.WritePropertyName("max"u8);
-                writer.WriteNumberValue(Max.Value);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        ResourceRange IJsonModel<ResourceRange>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceRange>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ResourceRange)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeResourceRange(document.RootElement, options);
-        }
-
-        internal static ResourceRange DeserializeResourceRange(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<int> min = default;
             Optional<int> max = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("min"u8))
@@ -99,44 +40,8 @@ namespace MgmtHierarchicalNonResource.Models
                     max = property.Value.GetInt32();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ResourceRange(Optional.ToNullable(min), Optional.ToNullable(max), serializedAdditionalRawData);
+            return new ResourceRange(Optional.ToNullable(min), Optional.ToNullable(max));
         }
-
-        BinaryData IPersistableModel<ResourceRange>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceRange>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ResourceRange)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ResourceRange IPersistableModel<ResourceRange>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ResourceRange>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeResourceRange(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ResourceRange)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ResourceRange>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

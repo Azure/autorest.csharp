@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -28,7 +27,6 @@ namespace MgmtAcronymMapping.Models
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sourceVirtualMachine">
         /// The source virtual machine from which Image is created.
         /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
@@ -45,7 +43,7 @@ namespace MgmtAcronymMapping.Models
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: ImageUpdate.properties.hyperVGeneration
         /// </param>
-        internal ImagePatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration) : base(tags, serializedAdditionalRawData)
+        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationType? hyperVGeneration) : base(tags)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;

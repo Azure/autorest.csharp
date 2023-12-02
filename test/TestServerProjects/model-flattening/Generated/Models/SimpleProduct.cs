@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace model_flattening.Models
@@ -25,22 +24,16 @@ namespace model_flattening.Models
         /// <summary> Initializes a new instance of <see cref="SimpleProduct"/>. </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        internal SimpleProduct(string productId, string description, IDictionary<string, BinaryData> serializedAdditionalRawData, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue) : base(productId, description, serializedAdditionalRawData)
+        internal SimpleProduct(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue) : base(productId, description)
         {
             MaxProductDisplayName = maxProductDisplayName;
             Capacity = capacity;
             GenericValue = genericValue;
             OdataValue = odataValue;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="SimpleProduct"/> for deserialization. </summary>
-        internal SimpleProduct()
-        {
         }
 
         /// <summary> Display name of product. </summary>

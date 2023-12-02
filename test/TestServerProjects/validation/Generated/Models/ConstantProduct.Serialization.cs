@@ -5,74 +5,31 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace validation.Models
 {
-    public partial class ConstantProduct : IUtf8JsonSerializable, IJsonModel<ConstantProduct>
+    public partial class ConstantProduct : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ConstantProduct>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<ConstantProduct>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ConstantProduct>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ConstantProduct)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("constProperty"u8);
             writer.WriteStringValue(ConstProperty.ToString());
             writer.WritePropertyName("constProperty2"u8);
             writer.WriteStringValue(ConstProperty2.ToString());
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        ConstantProduct IJsonModel<ConstantProduct>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ConstantProduct>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ConstantProduct)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeConstantProduct(document.RootElement, options);
-        }
-
-        internal static ConstantProduct DeserializeConstantProduct(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             ConstantProductConstProperty constProperty = default;
             ConstantProductConstProperty2 constProperty2 = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("constProperty"u8))
@@ -85,44 +42,8 @@ namespace validation.Models
                     constProperty2 = new ConstantProductConstProperty2(property.Value.GetString());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ConstantProduct(constProperty, constProperty2, serializedAdditionalRawData);
+            return new ConstantProduct(constProperty, constProperty2);
         }
-
-        BinaryData IPersistableModel<ConstantProduct>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ConstantProduct>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ConstantProduct)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ConstantProduct IPersistableModel<ConstantProduct>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ConstantProduct>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeConstantProduct(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ConstantProduct)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ConstantProduct>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

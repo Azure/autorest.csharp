@@ -15,38 +15,6 @@ namespace AnomalyDetector.Models
     /// <summary> The request of change point detection. </summary>
     public partial class UnivariateChangePointDetectionOptions
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/>. </summary>
         /// <param name="series">
         /// Time series data points. Points should be sorted by timestamp in ascending
@@ -63,7 +31,6 @@ namespace AnomalyDetector.Models
 
             Series = series.ToList();
             Granularity = granularity;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/>. </summary>
@@ -93,8 +60,7 @@ namespace AnomalyDetector.Models
         /// value is, the larger the trend error will be which means less change point will
         /// be accepted.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnivariateChangePointDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity granularity, int? customInterval, int? period, int? stableTrendWindow, float? threshold, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UnivariateChangePointDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity granularity, int? customInterval, int? period, int? stableTrendWindow, float? threshold)
         {
             Series = series;
             Granularity = granularity;
@@ -102,12 +68,6 @@ namespace AnomalyDetector.Models
             Period = period;
             StableTrendWindow = stableTrendWindow;
             Threshold = threshold;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionOptions"/> for deserialization. </summary>
-        internal UnivariateChangePointDetectionOptions()
-        {
         }
 
         /// <summary>

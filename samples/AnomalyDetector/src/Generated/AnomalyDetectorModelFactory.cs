@@ -14,15 +14,6 @@ namespace AnomalyDetector.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AnomalyDetectorModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.TimeSeriesPoint"/>. </summary>
-        /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
-        /// <param name="value"> The measurement of that point, should be float. </param>
-        /// <returns> A new <see cref="Models.TimeSeriesPoint"/> instance for mocking. </returns>
-        public static TimeSeriesPoint TimeSeriesPoint(DateTimeOffset? timestamp = null, float value = default)
-        {
-            return new TimeSeriesPoint(timestamp, value, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateEntireDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
@@ -79,7 +70,7 @@ namespace AnomalyDetector.Models
             isPositiveAnomaly ??= new List<bool>();
             severity ??= new List<float>();
 
-            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList(), serializedAdditionalRawData: null);
+            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateLastDetectionResult"/>. </summary>
@@ -120,42 +111,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.UnivariateLastDetectionResult"/> instance for mocking. </returns>
         public static UnivariateLastDetectionResult UnivariateLastDetectionResult(int period = default, int suggestedWindow = default, float expectedValue = default, float upperMargin = default, float lowerMargin = default, bool isAnomaly = default, bool isNegativeAnomaly = default, bool isPositiveAnomaly = default, float? severity = null)
         {
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionOptions"/>. </summary>
-        /// <param name="series">
-        /// Time series data points. Points should be sorted by timestamp in ascending
-        /// order to match the change point detection result.
-        /// </param>
-        /// <param name="granularity">
-        /// Can only be one of yearly, monthly, weekly, daily, hourly, minutely or
-        /// secondly. Granularity is used for verify whether input series is valid.
-        /// </param>
-        /// <param name="customInterval">
-        /// Custom Interval is used to set non-standard time interval, for example, if the
-        /// series is 5 minutes, request can be set as {"granularity":"minutely",
-        /// "customInterval":5}.
-        /// </param>
-        /// <param name="period">
-        /// Optional argument, periodic value of a time series. If the value is null or
-        /// does not present, the API will determine the period automatically.
-        /// </param>
-        /// <param name="stableTrendWindow">
-        /// Optional argument, advanced model parameter, a default stableTrendWindow will
-        /// be used in detection.
-        /// </param>
-        /// <param name="threshold">
-        /// Optional argument, advanced model parameter, between 0.0-1.0, the lower the
-        /// value is, the larger the trend error will be which means less change point will
-        /// be accepted.
-        /// </param>
-        /// <returns> A new <see cref="Models.UnivariateChangePointDetectionOptions"/> instance for mocking. </returns>
-        public static UnivariateChangePointDetectionOptions UnivariateChangePointDetectionOptions(IEnumerable<TimeSeriesPoint> series = null, TimeGranularity granularity = default, int? customInterval = null, int? period = null, int? stableTrendWindow = null, float? threshold = null)
-        {
-            series ??= new List<TimeSeriesPoint>();
-
-            return new UnivariateChangePointDetectionOptions(series?.ToList(), granularity, customInterval, period, stableTrendWindow, threshold, serializedAdditionalRawData: null);
+            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionResult"/>. </summary>
@@ -175,7 +131,7 @@ namespace AnomalyDetector.Models
             isChangePoint ??= new List<bool>();
             confidenceScores ??= new List<float>();
 
-            return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList(), serializedAdditionalRawData: null);
+            return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MultivariateDetectionResult"/>. </summary>
@@ -187,7 +143,7 @@ namespace AnomalyDetector.Models
         {
             results ??= new List<AnomalyState>();
 
-            return new MultivariateDetectionResult(resultId, summary, results?.ToList(), serializedAdditionalRawData: null);
+            return new MultivariateDetectionResult(resultId, summary, results?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MultivariateBatchDetectionResultSummary"/>. </summary>
@@ -204,7 +160,7 @@ namespace AnomalyDetector.Models
             errors ??= new List<ErrorResponse>();
             variableStates ??= new List<VariableState>();
 
-            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, serializedAdditionalRawData: null);
+            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyState"/>. </summary>
@@ -216,7 +172,7 @@ namespace AnomalyDetector.Models
         {
             errors ??= new List<ErrorResponse>();
 
-            return new AnomalyState(timestamp, value, errors?.ToList(), serializedAdditionalRawData: null);
+            return new AnomalyState(timestamp, value, errors?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyValue"/>. </summary>
@@ -235,7 +191,7 @@ namespace AnomalyDetector.Models
         {
             interpretation ??= new List<AnomalyInterpretation>();
 
-            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList(), serializedAdditionalRawData: null);
+            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyInterpretation"/>. </summary>
@@ -248,7 +204,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.AnomalyInterpretation"/> instance for mocking. </returns>
         public static AnomalyInterpretation AnomalyInterpretation(string variable = null, float? contributionScore = null, CorrelationChanges correlationChanges = null)
         {
-            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, serializedAdditionalRawData: null);
+            return new AnomalyInterpretation(variable, contributionScore, correlationChanges);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.CorrelationChanges"/>. </summary>
@@ -258,7 +214,7 @@ namespace AnomalyDetector.Models
         {
             changedVariables ??= new List<string>();
 
-            return new CorrelationChanges(changedVariables?.ToList(), serializedAdditionalRawData: null);
+            return new CorrelationChanges(changedVariables?.ToList());
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ModelInfo"/>. </summary>
@@ -296,7 +252,7 @@ namespace AnomalyDetector.Models
         {
             errors ??= new List<ErrorResponse>();
 
-            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo, serializedAdditionalRawData: null);
+            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.AnomalyDetectionModel"/>. </summary>
@@ -310,7 +266,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.AnomalyDetectionModel"/> instance for mocking. </returns>
         public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
         {
-            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, serializedAdditionalRawData: null);
+            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.MultivariateLastDetectionResult"/>. </summary>
@@ -322,7 +278,7 @@ namespace AnomalyDetector.Models
             variableStates ??= new List<VariableState>();
             results ??= new List<AnomalyState>();
 
-            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList(), serializedAdditionalRawData: null);
+            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList());
         }
     }
 }

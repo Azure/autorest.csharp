@@ -5,71 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class WorkspaceInfo : IUtf8JsonSerializable, IJsonModel<WorkspaceInfo>
+    public partial class WorkspaceInfo
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<WorkspaceInfo>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<WorkspaceInfo>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceInfo>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(WorkspaceInfo)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            writer.WritePropertyName("id"u8);
-            writer.WriteStringValue(Id);
-            writer.WritePropertyName("location"u8);
-            writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties"u8);
-            writer.WriteStartObject();
-            writer.WritePropertyName("customerId"u8);
-            writer.WriteStringValue(CustomerId);
-            writer.WriteEndObject();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        WorkspaceInfo IJsonModel<WorkspaceInfo>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceInfo>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(WorkspaceInfo)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeWorkspaceInfo(document.RootElement, options);
-        }
-
-        internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -77,8 +21,6 @@ namespace MgmtScopeResource.Models
             string id = default;
             string location = default;
             string customerId = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -108,44 +50,8 @@ namespace MgmtScopeResource.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new WorkspaceInfo(id, location, customerId, serializedAdditionalRawData);
+            return new WorkspaceInfo(id, location, customerId);
         }
-
-        BinaryData IPersistableModel<WorkspaceInfo>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceInfo>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(WorkspaceInfo)} does not support '{options.Format}' format.");
-            }
-        }
-
-        WorkspaceInfo IPersistableModel<WorkspaceInfo>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<WorkspaceInfo>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeWorkspaceInfo(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(WorkspaceInfo)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<WorkspaceInfo>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

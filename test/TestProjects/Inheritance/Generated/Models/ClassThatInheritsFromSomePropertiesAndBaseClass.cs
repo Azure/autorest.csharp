@@ -22,7 +22,6 @@ namespace Inheritance.Models
         /// <summary> Initializes a new instance of <see cref="ClassThatInheritsFromSomePropertiesAndBaseClass"/>. </summary>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>
@@ -35,7 +34,7 @@ namespace Inheritance.Models
         /// <param name="dfeDateTime"> Any object. </param>
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
-        internal ClassThatInheritsFromSomePropertiesAndBaseClass(string someProperty, string someOtherProperty, IDictionary<string, BinaryData> serializedAdditionalRawData, string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri) : base(someProperty, someOtherProperty, serializedAdditionalRawData)
+        internal ClassThatInheritsFromSomePropertiesAndBaseClass(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri) : base(someProperty, someOtherProperty)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;

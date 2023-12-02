@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Common.Decorator
@@ -48,6 +49,15 @@ namespace AutoRest.CSharp.Common.Decorator
             var actualBaseSchema = isBasePoly ? schema : schema.Parents?.All.FirstOrDefault(parent => parent is ObjectSchema objectParent && objectParent.IsBasePolySchema()) as ObjectSchema;
             if (actualBaseSchema is null)
                 throw new InvalidOperationException($"Found a child poly {schema.Language.Default.Name} that we weren't able to determine its base poly from {string.Join(',', schema.Parents?.Immediate.Select(p => p.Name) ?? Array.Empty<string>())}");
+
+            //Since the unknown type is used for deserialization only we don't need to create if its an input only model
+            // TODO -- remove this condition completely when remove the UseModelReaderWriter flag
+            var hasXCsharpUsageOutput = !actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase);
+            if (!Configuration.UseModelReaderWriter && !actualBaseSchema.Usage.Contains(SchemaContext.Output) &&
+                !actualBaseSchema.Usage.Contains(SchemaContext.Exception) &&
+                (!hasXCsharpUsageOutput.HasValue ||
+                hasXCsharpUsageOutput.Value))
+                return;
 
             ObjectSchema? defaultDerivedSchema = null;
 

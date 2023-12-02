@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -15,18 +13,10 @@ using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
-    public partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : IUtf8JsonSerializable, IJsonModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>
+    public partial class ClassThatInheritsFromBaseClassAndRedefinesAProperty : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ClassThatInheritsFromBaseClassAndRedefinesAProperty)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(BaseClassProperty))
             {
@@ -88,40 +78,11 @@ namespace Inheritance.Models
                 writer.WritePropertyName("DfeUri"u8);
                 JsonSerializer.Serialize(writer, DfeUri);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        ClassThatInheritsFromBaseClassAndRedefinesAProperty IJsonModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static ClassThatInheritsFromBaseClassAndRedefinesAProperty DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(ClassThatInheritsFromBaseClassAndRedefinesAProperty)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(document.RootElement, options);
-        }
-
-        internal static ClassThatInheritsFromBaseClassAndRedefinesAProperty DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -138,8 +99,6 @@ namespace Inheritance.Models
             Optional<DataFactoryElement<DateTimeOffset>> dfeDateTime = default;
             Optional<DataFactoryElement<TimeSpan>> dfeDuration = default;
             Optional<DataFactoryElement<Uri>> dfeUri = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"u8))
@@ -246,44 +205,8 @@ namespace Inheritance.Models
                     dfeUri = JsonSerializer.Deserialize<DataFactoryElement<Uri>>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new ClassThatInheritsFromBaseClassAndRedefinesAProperty(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, serializedAdditionalRawData);
+            return new ClassThatInheritsFromBaseClassAndRedefinesAProperty(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
         }
-
-        BinaryData IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ClassThatInheritsFromBaseClassAndRedefinesAProperty)} does not support '{options.Format}' format.");
-            }
-        }
-
-        ClassThatInheritsFromBaseClassAndRedefinesAProperty IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeClassThatInheritsFromBaseClassAndRedefinesAProperty(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(ClassThatInheritsFromBaseClassAndRedefinesAProperty)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<ClassThatInheritsFromBaseClassAndRedefinesAProperty>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

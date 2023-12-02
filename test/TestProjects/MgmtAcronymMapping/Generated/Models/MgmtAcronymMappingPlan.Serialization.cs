@@ -5,27 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace MgmtAcronymMapping.Models
 {
-    public partial class MgmtAcronymMappingPlan : IUtf8JsonSerializable, IJsonModel<MgmtAcronymMappingPlan>
+    public partial class MgmtAcronymMappingPlan : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<MgmtAcronymMappingPlan>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<MgmtAcronymMappingPlan>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtAcronymMappingPlan>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -47,40 +35,11 @@ namespace MgmtAcronymMapping.Models
                 writer.WritePropertyName("promotionCode"u8);
                 writer.WriteStringValue(PromotionCode);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        MgmtAcronymMappingPlan IJsonModel<MgmtAcronymMappingPlan>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static MgmtAcronymMappingPlan DeserializeMgmtAcronymMappingPlan(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtAcronymMappingPlan>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeMgmtAcronymMappingPlan(document.RootElement, options);
-        }
-
-        internal static MgmtAcronymMappingPlan DeserializeMgmtAcronymMappingPlan(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -89,8 +48,6 @@ namespace MgmtAcronymMapping.Models
             Optional<string> publisher = default;
             Optional<string> product = default;
             Optional<string> promotionCode = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -113,44 +70,8 @@ namespace MgmtAcronymMapping.Models
                     promotionCode = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new MgmtAcronymMappingPlan(name.Value, publisher.Value, product.Value, promotionCode.Value, serializedAdditionalRawData);
+            return new MgmtAcronymMappingPlan(name.Value, publisher.Value, product.Value, promotionCode.Value);
         }
-
-        BinaryData IPersistableModel<MgmtAcronymMappingPlan>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtAcronymMappingPlan>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{options.Format}' format.");
-            }
-        }
-
-        MgmtAcronymMappingPlan IPersistableModel<MgmtAcronymMappingPlan>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<MgmtAcronymMappingPlan>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeMgmtAcronymMappingPlan(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(MgmtAcronymMappingPlan)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<MgmtAcronymMappingPlan>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+
 namespace _Type.Model.Usage.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -12,10 +14,16 @@ namespace _Type.Model.Usage.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.OutputRecord"/>. </summary>
         /// <param name="requiredProp"></param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
         /// <returns> A new <see cref="Models.OutputRecord"/> instance for mocking. </returns>
         public static OutputRecord OutputRecord(string requiredProp = null)
         {
-            return new OutputRecord(requiredProp, serializedAdditionalRawData: null);
+            if (requiredProp == null)
+            {
+                throw new ArgumentNullException(nameof(requiredProp));
+            }
+
+            return new OutputRecord(requiredProp);
         }
     }
 }

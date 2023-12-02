@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -27,13 +26,12 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="routes"> Collection of routes contained within a route table. </param>
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
         /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
-        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, string etag, IList<Route> routes, IReadOnlyList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState) : base(id, name, type, location, tags, serializedAdditionalRawData)
+        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<Route> routes, IReadOnlyList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
         {
             Etag = etag;
             Routes = routes;

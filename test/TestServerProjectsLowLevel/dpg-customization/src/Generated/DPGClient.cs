@@ -220,7 +220,7 @@ namespace dpg_customization_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace dpg_customization_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagesRequest(mode, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagesNextPageRequest(nextLink, mode, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DPGClient.GetPages", "values", "nextLink", context);
         }
 
         /// <summary>

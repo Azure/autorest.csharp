@@ -28,17 +28,11 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="StopAnalyzer"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the analyzer. </param>
         /// <param name="name"> The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="stopwords"> A list of stopwords. </param>
-        internal StopAnalyzer(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, IList<string> stopwords) : base(odataType, name, serializedAdditionalRawData)
+        internal StopAnalyzer(string odataType, string name, IList<string> stopwords) : base(odataType, name)
         {
             Stopwords = stopwords;
             OdataType = odataType ?? "#Microsoft.Azure.Search.StopAnalyzer";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="StopAnalyzer"/> for deserialization. </summary>
-        internal StopAnalyzer()
-        {
         }
 
         /// <summary> A list of stopwords. </summary>

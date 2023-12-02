@@ -97,7 +97,7 @@ namespace Payload.Pageable
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPageablesRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPageablesNextPageRequest(nextLink, maxpagesize, context);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Payload.Pageable
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPageablesRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPageablesNextPageRequest(nextLink, maxpagesize, context);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PageableClient.GetPageables", "value", "nextLink", context);
         }
 
         internal HttpMessage CreateGetPageablesRequest(int? maxpagesize, RequestContext context)

@@ -5,27 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace body_complex.Models
 {
-    public partial class SmartSalmon : IUtf8JsonSerializable, IJsonModel<SmartSalmon>
+    public partial class SmartSalmon : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<SmartSalmon>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<SmartSalmon>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(CollegeDegree))
             {
@@ -69,22 +58,8 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        SmartSalmon IJsonModel<SmartSalmon>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeSmartSalmon(document.RootElement, options);
-        }
-
-        internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -153,36 +128,5 @@ namespace body_complex.Models
             additionalProperties = additionalPropertiesDictionary;
             return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
         }
-
-        BinaryData IPersistableModel<SmartSalmon>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{options.Format}' format.");
-            }
-        }
-
-        SmartSalmon IPersistableModel<SmartSalmon>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<SmartSalmon>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeSmartSalmon(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(SmartSalmon)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<SmartSalmon>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

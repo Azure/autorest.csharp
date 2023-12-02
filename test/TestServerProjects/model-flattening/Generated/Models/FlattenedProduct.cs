@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace model_flattening.Models
@@ -24,12 +23,11 @@ namespace model_flattening.Models
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="location"> Resource Location. </param>
         /// <param name="name"> Resource Name. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="pName"></param>
         /// <param name="typePropertiesType"></param>
         /// <param name="provisioningStateValues"></param>
         /// <param name="provisioningState"></param>
-        internal FlattenedProduct(string id, string type, IDictionary<string, string> tags, string location, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState) : base(id, type, tags, location, name, serializedAdditionalRawData)
+        internal FlattenedProduct(string id, string type, IDictionary<string, string> tags, string location, string name, string pName, string typePropertiesType, FlattenedProductPropertiesProvisioningStateValues? provisioningStateValues, string provisioningState) : base(id, type, tags, location, name)
         {
             PName = pName;
             TypePropertiesType = typePropertiesType;

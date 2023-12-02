@@ -5,102 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class Endpoints : IUtf8JsonSerializable, IJsonModel<Endpoints>
+    public partial class Endpoints
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<Endpoints>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<Endpoints>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static Endpoints DeserializeEndpoints(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<Endpoints>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(Endpoints)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            if (options.Format != "W" && Optional.IsDefined(Blob))
-            {
-                writer.WritePropertyName("blob"u8);
-                writer.WriteStringValue(Blob);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Queue))
-            {
-                writer.WritePropertyName("queue"u8);
-                writer.WriteStringValue(Queue);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Table))
-            {
-                writer.WritePropertyName("table"u8);
-                writer.WriteStringValue(Table);
-            }
-            if (options.Format != "W" && Optional.IsDefined(File))
-            {
-                writer.WritePropertyName("file"u8);
-                writer.WriteStringValue(File);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Web))
-            {
-                writer.WritePropertyName("web"u8);
-                writer.WriteStringValue(Web);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Dfs))
-            {
-                writer.WritePropertyName("dfs"u8);
-                writer.WriteStringValue(Dfs);
-            }
-            if (Optional.IsDefined(MicrosoftEndpoints))
-            {
-                writer.WritePropertyName("microsoftEndpoints"u8);
-                writer.WriteObjectValue(MicrosoftEndpoints);
-            }
-            if (Optional.IsDefined(InternetEndpoints))
-            {
-                writer.WritePropertyName("internetEndpoints"u8);
-                writer.WriteObjectValue(InternetEndpoints);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        Endpoints IJsonModel<Endpoints>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Endpoints>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(Endpoints)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeEndpoints(document.RootElement, options);
-        }
-
-        internal static Endpoints DeserializeEndpoints(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -113,8 +26,6 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<string> dfs = default;
             Optional<StorageAccountMicrosoftEndpoints> microsoftEndpoints = default;
             Optional<StorageAccountInternetEndpoints> internetEndpoints = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"u8))
@@ -165,44 +76,8 @@ namespace Azure.ResourceManager.Storage.Models
                     internetEndpoints = StorageAccountInternetEndpoints.DeserializeStorageAccountInternetEndpoints(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new Endpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value, microsoftEndpoints.Value, internetEndpoints.Value, serializedAdditionalRawData);
+            return new Endpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value, microsoftEndpoints.Value, internetEndpoints.Value);
         }
-
-        BinaryData IPersistableModel<Endpoints>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Endpoints>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Endpoints)} does not support '{options.Format}' format.");
-            }
-        }
-
-        Endpoints IPersistableModel<Endpoints>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Endpoints>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeEndpoints(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Endpoints)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Endpoints>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace multiple_inheritance.Models
@@ -24,20 +23,17 @@ namespace multiple_inheritance.Models
 
         /// <summary> Initializes a new instance of <see cref="Cat"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="likesMilk"></param>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
-        internal Cat(string name, IDictionary<string, BinaryData> serializedAdditionalRawData, bool? likesMilk, bool? meows, bool? hisses) : base(name, serializedAdditionalRawData)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        internal Cat(string name, bool? likesMilk, bool? meows, bool? hisses) : base(name)
         {
+            Argument.AssertNotNull(name, nameof(name));
+
             LikesMilk = likesMilk;
             Meows = meows;
             Hisses = hisses;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Cat"/> for deserialization. </summary>
-        internal Cat()
-        {
         }
 
         /// <summary> Gets or sets the likes milk. </summary>

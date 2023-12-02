@@ -5,46 +5,11 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace paging.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class PagingGetMultiplePagesLroOptions
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesLroOptions"/>. </summary>
         public PagingGetMultiplePagesLroOptions()
         {
@@ -53,12 +18,10 @@ namespace paging.Models
         /// <summary> Initializes a new instance of <see cref="PagingGetMultiplePagesLroOptions"/>. </summary>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal PagingGetMultiplePagesLroOptions(int? maxresults, int? timeout, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal PagingGetMultiplePagesLroOptions(int? maxresults, int? timeout)
         {
             Maxresults = maxresults;
             Timeout = timeout;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
         }
 
         /// <summary> Sets the maximum number of items to return in the response. </summary>

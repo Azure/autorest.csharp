@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace multiple_inheritance.Models
@@ -24,16 +23,13 @@ namespace multiple_inheritance.Models
 
         /// <summary> Initializes a new instance of <see cref="Horse"/>. </summary>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="isAShowHorse"></param>
-        internal Horse(string name, IDictionary<string, BinaryData> serializedAdditionalRawData, bool? isAShowHorse) : base(name, serializedAdditionalRawData)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        internal Horse(string name, bool? isAShowHorse) : base(name)
         {
-            IsAShowHorse = isAShowHorse;
-        }
+            Argument.AssertNotNull(name, nameof(name));
 
-        /// <summary> Initializes a new instance of <see cref="Horse"/> for deserialization. </summary>
-        internal Horse()
-        {
+            IsAShowHorse = isAShowHorse;
         }
 
         /// <summary> Gets or sets the is a show horse. </summary>

@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace MgmtAcronymMapping.Models
 {
     /// <summary>
@@ -26,12 +23,11 @@ namespace MgmtAcronymMapping.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="primary">
         /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
         /// Serialized Name: NetworkInterfaceReference.properties.primary
         /// </param>
-        internal NetworkInterfaceReference(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, bool? primary) : base(id, serializedAdditionalRawData)
+        internal NetworkInterfaceReference(string id, bool? primary) : base(id)
         {
             Primary = primary;
         }

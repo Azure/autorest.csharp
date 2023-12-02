@@ -16,7 +16,7 @@ namespace subscriptionId_apiVersion.Models
         /// <returns> A new <see cref="Models.SampleResourceGroup"/> instance for mocking. </returns>
         public static SampleResourceGroup SampleResourceGroup(string name = null, string location = null)
         {
-            return new SampleResourceGroup(name, location, serializedAdditionalRawData: null);
+            return new SampleResourceGroup(name, location);
         }
     }
 }

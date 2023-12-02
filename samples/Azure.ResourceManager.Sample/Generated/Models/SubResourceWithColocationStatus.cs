@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -26,12 +23,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource Id
         /// Serialized Name: SubResource.id
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="colocationStatus">
         /// Describes colocation status of a resource in the Proximity Placement Group.
         /// Serialized Name: SubResourceWithColocationStatus.colocationStatus
         /// </param>
-        internal SubResourceWithColocationStatus(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, InstanceViewStatus colocationStatus) : base(id, serializedAdditionalRawData)
+        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus) : base(id)
         {
             ColocationStatus = colocationStatus;
         }

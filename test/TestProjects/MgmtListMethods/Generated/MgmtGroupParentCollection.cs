@@ -229,7 +229,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGroupParentRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtGroupParentRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new MgmtGroupParentResource(Client, MgmtGroupParentData.DeserializeMgmtGroupParentData(e)), _mgmtGroupParentClientDiagnostics, Pipeline, "MgmtGroupParentCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new MgmtGroupParentResource(Client, MgmtGroupParentData.DeserializeMgmtGroupParentData(e)), _mgmtGroupParentClientDiagnostics, Pipeline, "MgmtGroupParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtGroupParentRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtGroupParentRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new MgmtGroupParentResource(Client, MgmtGroupParentData.DeserializeMgmtGroupParentData(e)), _mgmtGroupParentClientDiagnostics, Pipeline, "MgmtGroupParentCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new MgmtGroupParentResource(Client, MgmtGroupParentData.DeserializeMgmtGroupParentData(e)), _mgmtGroupParentClientDiagnostics, Pipeline, "MgmtGroupParentCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

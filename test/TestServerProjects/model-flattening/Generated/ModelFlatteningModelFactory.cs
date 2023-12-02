@@ -23,7 +23,7 @@ namespace model_flattening.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, type, tags, location, name, serializedAdditionalRawData: null);
+            return new Resource(id, type, tags, location, name);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FlattenedProduct"/>. </summary>
@@ -41,7 +41,7 @@ namespace model_flattening.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FlattenedProduct(id, type, tags, location, name, serializedAdditionalRawData: null, pName, typePropertiesType, provisioningStateValues, provisioningState);
+            return new FlattenedProduct(id, type, tags, location, name, pName, typePropertiesType, provisioningStateValues, provisioningState);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProductWrapper"/>. </summary>
@@ -49,22 +49,7 @@ namespace model_flattening.Models
         /// <returns> A new <see cref="Models.ProductWrapper"/> instance for mocking. </returns>
         public static ProductWrapper ProductWrapper(string value = null)
         {
-            return new ProductWrapper(value, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.FlattenParameterGroup"/>. </summary>
-        /// <param name="name"> Product name with value 'groupproduct'. </param>
-        /// <param name="simpleBodyProduct"> Simple body product to put. </param>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
-        /// <returns> A new <see cref="Models.FlattenParameterGroup"/> instance for mocking. </returns>
-        public static FlattenParameterGroup FlattenParameterGroup(string name = null, SimpleProduct simpleBodyProduct = null, string productId = null, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null)
-        {
-            return new FlattenParameterGroup(name, simpleBodyProduct, productId, description, maxProductDisplayName, capacity, genericValue, odataValue, serializedAdditionalRawData: null);
+            return new ProductWrapper(value);
         }
     }
 }

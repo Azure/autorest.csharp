@@ -5,27 +5,15 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class EncryptionServices : IUtf8JsonSerializable, IJsonModel<EncryptionServices>
+    public partial class EncryptionServices : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<EncryptionServices>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<EncryptionServices>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<EncryptionServices>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(EncryptionServices)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Blob))
             {
@@ -47,40 +35,11 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("queue"u8);
                 writer.WriteObjectValue(Queue);
             }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        EncryptionServices IJsonModel<EncryptionServices>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static EncryptionServices DeserializeEncryptionServices(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<EncryptionServices>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(EncryptionServices)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeEncryptionServices(document.RootElement, options);
-        }
-
-        internal static EncryptionServices DeserializeEncryptionServices(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -89,8 +48,6 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<EncryptionService> file = default;
             Optional<EncryptionService> table = default;
             Optional<EncryptionService> queue = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("blob"u8))
@@ -129,44 +86,8 @@ namespace Azure.ResourceManager.Storage.Models
                     queue = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value, serializedAdditionalRawData);
+            return new EncryptionServices(blob.Value, file.Value, table.Value, queue.Value);
         }
-
-        BinaryData IPersistableModel<EncryptionServices>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<EncryptionServices>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(EncryptionServices)} does not support '{options.Format}' format.");
-            }
-        }
-
-        EncryptionServices IPersistableModel<EncryptionServices>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<EncryptionServices>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeEncryptionServices(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(EncryptionServices)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<EncryptionServices>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

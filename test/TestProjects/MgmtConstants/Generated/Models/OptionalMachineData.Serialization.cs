@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -16,18 +13,10 @@ using MgmtConstants.Models;
 
 namespace MgmtConstants
 {
-    public partial class OptionalMachineData : IUtf8JsonSerializable, IJsonModel<OptionalMachineData>
+    public partial class OptionalMachineData : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachineData>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<OptionalMachineData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(OptionalMachineData)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -42,26 +31,6 @@ namespace MgmtConstants
             }
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
-            {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Listener))
@@ -75,40 +44,11 @@ namespace MgmtConstants
                 writer.WriteObjectValue(Content);
             }
             writer.WriteEndObject();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        OptionalMachineData IJsonModel<OptionalMachineData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(OptionalMachineData)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeOptionalMachineData(document.RootElement, options);
-        }
-
-        internal static OptionalMachineData DeserializeOptionalMachineData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -121,8 +61,6 @@ namespace MgmtConstants
             Optional<SystemData> systemData = default;
             Optional<ModelWithRequiredConstant> listener = default;
             Optional<ModelWithOptionalConstant> content = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -198,44 +136,8 @@ namespace MgmtConstants
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OptionalMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, listener.Value, content.Value, serializedAdditionalRawData);
+            return new OptionalMachineData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, listener.Value, content.Value);
         }
-
-        BinaryData IPersistableModel<OptionalMachineData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(OptionalMachineData)} does not support '{options.Format}' format.");
-            }
-        }
-
-        OptionalMachineData IPersistableModel<OptionalMachineData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeOptionalMachineData(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(OptionalMachineData)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<OptionalMachineData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

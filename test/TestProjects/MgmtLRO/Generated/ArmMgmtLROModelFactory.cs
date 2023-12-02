@@ -30,7 +30,7 @@ namespace MgmtLRO.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new FakeData(id, name, resourceType, systemData, tags, location, properties, serializedAdditionalRawData: null);
+            return new FakeData(id, name, resourceType, systemData, tags, location, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.FakePostResult"/>. </summary>
@@ -38,7 +38,7 @@ namespace MgmtLRO.Models
         /// <returns> A new <see cref="Models.FakePostResult"/> instance for mocking. </returns>
         public static FakePostResult FakePostResult(string fakePostResultBar = null)
         {
-            return new FakePostResult(fakePostResultBar != null ? new FakePostResultProperties(fakePostResultBar, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new FakePostResult(fakePostResultBar != null ? new FakePostResultProperties(fakePostResultBar) : null);
         }
 
         /// <summary> Initializes a new instance of <see cref="MgmtLRO.BarData"/>. </summary>
@@ -54,7 +54,7 @@ namespace MgmtLRO.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new BarData(id, name, resourceType, systemData, tags, location, barBuzz != null ? new BarProperties(barBuzz, serializedAdditionalRawData: null) : null, serializedAdditionalRawData: null);
+            return new BarData(id, name, resourceType, systemData, tags, location, barBuzz != null ? new BarProperties(barBuzz) : null);
         }
     }
 }

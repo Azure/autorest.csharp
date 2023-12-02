@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -14,38 +13,6 @@ namespace additionalProperties.Models
     /// <summary> The PetAPInProperties. </summary>
     public partial class PetAPInProperties
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/>. </summary>
         /// <param name="id"></param>
         public PetAPInProperties(int id)
@@ -59,19 +26,12 @@ namespace additionalProperties.Models
         /// <param name="name"></param>
         /// <param name="status"></param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal PetAPInProperties(int id, string name, bool? status, IDictionary<string, float> additionalProperties, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal PetAPInProperties(int id, string name, bool? status, IDictionary<string, float> additionalProperties)
         {
             Id = id;
             Name = name;
             Status = status;
             AdditionalProperties = additionalProperties;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="PetAPInProperties"/> for deserialization. </summary>
-        internal PetAPInProperties()
-        {
         }
 
         /// <summary> Gets or sets the id. </summary>

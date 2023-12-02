@@ -3,7 +3,6 @@
 #nullable disable
 
 using System;
-using System.ClientModel;
 using System.ClientModel.Internal;
 using System.ClientModel.Primitives;
 using System.Collections.Generic;
@@ -11,121 +10,10 @@ using System.Text.Json;
 
 namespace OpenAI.Models
 {
-    public partial class FineTuningJob : IUtf8JsonWriteable, IJsonModel<FineTuningJob>
+    public partial class FineTuningJob
     {
-        void IUtf8JsonWriteable.Write(Utf8JsonWriter writer) => ((IJsonModel<FineTuningJob>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<FineTuningJob>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static FineTuningJob DeserializeFineTuningJob(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<FineTuningJob>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(FineTuningJob)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            writer.WritePropertyName("id"u8);
-            writer.WriteStringValue(Id);
-            writer.WritePropertyName("object"u8);
-            writer.WriteStringValue(Object.ToString());
-            writer.WritePropertyName("created_at"u8);
-            writer.WriteNumberValue(CreatedAt, "U");
-            if (FinishedAt != null)
-            {
-                writer.WritePropertyName("finished_at"u8);
-                writer.WriteStringValue(FinishedAt.Value, "O");
-            }
-            else
-            {
-                writer.WriteNull("finished_at");
-            }
-            writer.WritePropertyName("model"u8);
-            writer.WriteStringValue(Model);
-            if (FineTunedModel != null)
-            {
-                writer.WritePropertyName("fine_tuned_model"u8);
-                writer.WriteStringValue(FineTunedModel);
-            }
-            else
-            {
-                writer.WriteNull("fine_tuned_model");
-            }
-            writer.WritePropertyName("organization_id"u8);
-            writer.WriteStringValue(OrganizationId);
-            writer.WritePropertyName("status"u8);
-            writer.WriteStringValue(Status.ToString());
-            writer.WritePropertyName("hyperparameters"u8);
-            writer.WriteObjectValue(Hyperparameters);
-            writer.WritePropertyName("training_file"u8);
-            writer.WriteStringValue(TrainingFile);
-            if (ValidationFile != null)
-            {
-                writer.WritePropertyName("validation_file"u8);
-                writer.WriteStringValue(ValidationFile);
-            }
-            else
-            {
-                writer.WriteNull("validation_file");
-            }
-            writer.WritePropertyName("result_files"u8);
-            writer.WriteStartArray();
-            foreach (var item in ResultFiles)
-            {
-                writer.WriteStringValue(item);
-            }
-            writer.WriteEndArray();
-            if (TrainedTokens != null)
-            {
-                writer.WritePropertyName("trained_tokens"u8);
-                writer.WriteNumberValue(TrainedTokens.Value);
-            }
-            else
-            {
-                writer.WriteNull("trained_tokens");
-            }
-            if (Error != null)
-            {
-                writer.WritePropertyName("error"u8);
-                writer.WriteObjectValue(Error);
-            }
-            else
-            {
-                writer.WriteNull("error");
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        FineTuningJob IJsonModel<FineTuningJob>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FineTuningJob>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(FineTuningJob)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFineTuningJob(document.RootElement, options);
-        }
-
-        internal static FineTuningJob DeserializeFineTuningJob(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -144,8 +32,6 @@ namespace OpenAI.Models
             IReadOnlyList<string> resultFiles = default;
             long? trainedTokens = default;
             FineTuningJobError error = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -248,45 +134,9 @@ namespace OpenAI.Models
                     error = FineTuningJobError.DeserializeFineTuningJobError(property.Value);
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles, trainedTokens, error, serializedAdditionalRawData);
+            return new FineTuningJob(id, @object, createdAt, finishedAt, model, fineTunedModel, organizationId, status, hyperparameters, trainingFile, validationFile, resultFiles, trainedTokens, error);
         }
-
-        BinaryData IPersistableModel<FineTuningJob>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FineTuningJob>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(FineTuningJob)} does not support '{options.Format}' format.");
-            }
-        }
-
-        FineTuningJob IPersistableModel<FineTuningJob>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<FineTuningJob>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeFineTuningJob(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(FineTuningJob)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<FineTuningJob>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The result to deserialize the model from. </param>
@@ -294,14 +144,6 @@ namespace OpenAI.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeFineTuningJob(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestBody. </summary>
-        internal virtual RequestBody ToRequestBody()
-        {
-            var content = new Utf8JsonRequestBody();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

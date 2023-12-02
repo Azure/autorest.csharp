@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -15,73 +12,16 @@ using MgmtConstants;
 
 namespace MgmtConstants.Models
 {
-    internal partial class OptionalMachineListResult : IUtf8JsonSerializable, IJsonModel<OptionalMachineListResult>
+    internal partial class OptionalMachineListResult
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<OptionalMachineListResult>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<OptionalMachineListResult>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(OptionalMachineListResult)} does not support '{format}' format.");
-            }
-
-            writer.WriteStartObject();
-            writer.WritePropertyName("value"u8);
-            writer.WriteStartArray();
-            foreach (var item in Value)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
-            if (Optional.IsDefined(NextLink))
-            {
-                writer.WritePropertyName("nextLink"u8);
-                writer.WriteStringValue(NextLink);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
-            writer.WriteEndObject();
-        }
-
-        OptionalMachineListResult IJsonModel<OptionalMachineListResult>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineListResult>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(OptionalMachineListResult)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeOptionalMachineListResult(document.RootElement, options);
-        }
-
-        internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IReadOnlyList<OptionalMachineData> value = default;
             Optional<string> nextLink = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"u8))
@@ -99,44 +39,8 @@ namespace MgmtConstants.Models
                     nextLink = property.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new OptionalMachineListResult(value, nextLink.Value, serializedAdditionalRawData);
+            return new OptionalMachineListResult(value, nextLink.Value);
         }
-
-        BinaryData IPersistableModel<OptionalMachineListResult>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(OptionalMachineListResult)} does not support '{options.Format}' format.");
-            }
-        }
-
-        OptionalMachineListResult IPersistableModel<OptionalMachineListResult>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<OptionalMachineListResult>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeOptionalMachineListResult(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(OptionalMachineListResult)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<OptionalMachineListResult>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

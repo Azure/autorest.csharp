@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 
 namespace MgmtParamOrdering.Models
@@ -20,9 +19,8 @@ namespace MgmtParamOrdering.Models
 
         /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetPatch"/>. </summary>
         /// <param name="tags"> Resource tags. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="sku"> The virtual machine scale set sku. </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, IDictionary<string, BinaryData> serializedAdditionalRawData, MgmtParamOrderingSku sku) : base(tags, serializedAdditionalRawData)
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtParamOrderingSku sku) : base(tags)
         {
             Sku = sku;
         }

@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using MgmtExactMatchFlattenInheritance.Models;
 
 namespace MgmtExactMatchFlattenInheritance
@@ -26,9 +24,8 @@ namespace MgmtExactMatchFlattenInheritance
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="foo"></param>
-        internal CustomModel3Data(string id, string name, string resourceType, IDictionary<string, BinaryData> serializedAdditionalRawData, string foo) : base(id, name, resourceType, serializedAdditionalRawData)
+        internal CustomModel3Data(string id, string name, string resourceType, string foo) : base(id, name, resourceType)
         {
             Foo = foo;
         }

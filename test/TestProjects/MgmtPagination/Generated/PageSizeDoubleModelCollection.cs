@@ -225,7 +225,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDoubleModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeDoubleModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeDoubleModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeDoubleModelResource(Client, PageSizeDoubleModelData.DeserializePageSizeDoubleModelData(e)), _pageSizeDoubleModelClientDiagnostics, Pipeline, "PageSizeDoubleModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

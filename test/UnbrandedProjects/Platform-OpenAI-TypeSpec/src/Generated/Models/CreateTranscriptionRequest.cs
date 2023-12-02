@@ -4,45 +4,12 @@
 
 using System;
 using System.ClientModel.Internal;
-using System.Collections.Generic;
 
 namespace OpenAI.Models
 {
     /// <summary> The CreateTranscriptionRequest. </summary>
     public partial class CreateTranscriptionRequest
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
         /// <param name="file">
         /// The audio file object (not file name) to transcribe, in one of these formats: flac, mp3, mp4,
@@ -56,7 +23,6 @@ namespace OpenAI.Models
 
             File = file;
             Model = model;
-            _serializedAdditionalRawData = new OptionalDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/>. </summary>
@@ -84,8 +50,7 @@ namespace OpenAI.Models
         /// [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) format will improve accuracy
         /// and latency.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal CreateTranscriptionRequest(BinaryData file, CreateTranscriptionRequestModel model, string prompt, CreateTranscriptionRequestResponseFormat? responseFormat, double? temperature, string language, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal CreateTranscriptionRequest(BinaryData file, CreateTranscriptionRequestModel model, string prompt, CreateTranscriptionRequestResponseFormat? responseFormat, double? temperature, string language)
         {
             File = file;
             Model = model;
@@ -93,12 +58,6 @@ namespace OpenAI.Models
             ResponseFormat = responseFormat;
             Temperature = temperature;
             Language = language;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="CreateTranscriptionRequest"/> for deserialization. </summary>
-        internal CreateTranscriptionRequest()
-        {
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace custom_baseUrl_paging.Models
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
         public static Product Product(ProductProperties properties = null)
         {
-            return new Product(properties, serializedAdditionalRawData: null);
+            return new Product(properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ProductProperties"/>. </summary>
@@ -24,7 +24,7 @@ namespace custom_baseUrl_paging.Models
         /// <returns> A new <see cref="Models.ProductProperties"/> instance for mocking. </returns>
         public static ProductProperties ProductProperties(int? id = null, string name = null)
         {
-            return new ProductProperties(id, name, serializedAdditionalRawData: null);
+            return new ProductProperties(id, name);
         }
     }
 }

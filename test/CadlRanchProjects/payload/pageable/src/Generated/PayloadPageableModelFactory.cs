@@ -16,10 +16,16 @@ namespace Payload.Pageable.Models
     {
         /// <summary> Initializes a new instance of <see cref="Models.User"/>. </summary>
         /// <param name="name"> User name. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(string name = null)
         {
-            return new User(name, serializedAdditionalRawData: null);
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            return new User(name);
         }
     }
 }

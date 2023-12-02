@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
@@ -14,38 +13,6 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Blob index tag based filtering for blob objects. </summary>
     public partial class TagFilter
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="TagFilter"/>. </summary>
         /// <param name="name"> This is the filter tag name, it can have 1 - 128 characters. </param>
         /// <param name="op"> This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported. </param>
@@ -60,24 +27,6 @@ namespace Azure.ResourceManager.Storage.Models
             Name = name;
             Op = op;
             Value = value;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="TagFilter"/>. </summary>
-        /// <param name="name"> This is the filter tag name, it can have 1 - 128 characters. </param>
-        /// <param name="op"> This is the comparison operator which is used for object comparison and filtering. Only == (equality operator) is currently supported. </param>
-        /// <param name="value"> This is the filter tag value field used for tag based filtering, it can have 0 - 256 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal TagFilter(string name, string op, string value, IDictionary<string, BinaryData> serializedAdditionalRawData)
-        {
-            Name = name;
-            Op = op;
-            Value = value;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="TagFilter"/> for deserialization. </summary>
-        internal TagFilter()
-        {
         }
 
         /// <summary> This is the filter tag name, it can have 1 - 128 characters. </summary>

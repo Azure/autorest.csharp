@@ -16,7 +16,7 @@ namespace body_string.Models
         /// <returns> A new <see cref="Models.RefColorConstant"/> instance for mocking. </returns>
         public static RefColorConstant RefColorConstant(ColorConstant colorConstant = default, string field1 = null)
         {
-            return new RefColorConstant(colorConstant, field1, serializedAdditionalRawData: null);
+            return new RefColorConstant(colorConstant, field1);
         }
     }
 }

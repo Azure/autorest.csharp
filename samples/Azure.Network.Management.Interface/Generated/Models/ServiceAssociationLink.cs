@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -22,7 +21,6 @@ namespace Azure.Network.Management.Interface.Models
 
         /// <summary> Initializes a new instance of <see cref="ServiceAssociationLink"/>. </summary>
         /// <param name="id"> Resource ID. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="type"> Resource type. </param>
@@ -31,7 +29,7 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the service association link resource. </param>
         /// <param name="allowDelete"> If true, the resource can be deleted. </param>
         /// <param name="locations"> A list of locations. </param>
-        internal ServiceAssociationLink(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations) : base(id, serializedAdditionalRawData)
+        internal ServiceAssociationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations) : base(id)
         {
             Name = name;
             Etag = etag;

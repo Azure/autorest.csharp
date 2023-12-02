@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace xms_error_responses.Models
 {
     /// <summary> The Pet. </summary>
@@ -20,9 +17,8 @@ namespace xms_error_responses.Models
 
         /// <summary> Initializes a new instance of <see cref="Pet"/>. </summary>
         /// <param name="aniType"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="name"> Gets the Pet by id. </param>
-        internal Pet(string aniType, IDictionary<string, BinaryData> serializedAdditionalRawData, string name) : base(aniType, serializedAdditionalRawData)
+        internal Pet(string aniType, string name) : base(aniType)
         {
             Name = name;
         }

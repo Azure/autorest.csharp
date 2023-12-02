@@ -15,38 +15,6 @@ namespace AnomalyDetector.Models
     /// <summary> Request of last detection. </summary>
     public partial class MultivariateLastDetectionOptions
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/>. </summary>
         /// <param name="variables">
         /// This contains the inference data, including the name, timestamps(ISO 8601) and
@@ -64,7 +32,6 @@ namespace AnomalyDetector.Models
 
             Variables = variables.ToList();
             TopContributorCount = topContributorCount;
-            _serializedAdditionalRawData = new ChangeTrackingDictionary<string, BinaryData>();
         }
 
         /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/>. </summary>
@@ -77,17 +44,10 @@ namespace AnomalyDetector.Models
         /// variables for one anomalous timestamp in the response. The default number is
         /// 10.
         /// </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount)
         {
             Variables = variables;
             TopContributorCount = topContributorCount;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="MultivariateLastDetectionOptions"/> for deserialization. </summary>
-        internal MultivariateLastDetectionOptions()
-        {
         }
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="MgmtCustomizations.PetStoreData"/> instance for mocking. </returns>
         public static PetStoreData PetStoreData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PetStoreProperties properties = null)
         {
-            return new PetStoreData(id, name, resourceType, systemData, properties, serializedAdditionalRawData: null);
+            return new PetStoreData(id, name, resourceType, systemData, properties);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Pet"/>. </summary>
@@ -39,7 +39,7 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string name = null, int size = default, DateTimeOffset? dateOfBirth = null)
         {
-            return new UnknownPet(default, name, size, dateOfBirth, serializedAdditionalRawData: null);
+            return new UnknownPet(default, name, size, dateOfBirth);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Cat"/>. </summary>
@@ -53,7 +53,7 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, name, size, dateOfBirth, serializedAdditionalRawData: null, meow);
+            return new Cat(PetKind.Cat, name, size, dateOfBirth, meow);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.Dog"/>. </summary>
@@ -67,7 +67,7 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
         public static Dog Dog(string name = null, int size = default, DateTimeOffset? dateOfBirth = null, string bark = null)
         {
-            return new Dog(PetKind.Dog, name, size, dateOfBirth, serializedAdditionalRawData: null, bark);
+            return new Dog(PetKind.Dog, name, size, dateOfBirth, bark);
         }
     }
 }

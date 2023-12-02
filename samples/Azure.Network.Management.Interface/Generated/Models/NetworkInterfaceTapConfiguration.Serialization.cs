@@ -5,42 +5,20 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class NetworkInterfaceTapConfiguration : IUtf8JsonSerializable, IJsonModel<NetworkInterfaceTapConfiguration>
+    public partial class NetworkInterfaceTapConfiguration : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<NetworkInterfaceTapConfiguration>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<NetworkInterfaceTapConfiguration>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceTapConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Etag))
-            {
-                writer.WritePropertyName("etag"u8);
-                writer.WriteStringValue(Etag);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(Type);
             }
             if (Optional.IsDefined(Id))
             {
@@ -54,46 +32,12 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("virtualNetworkTap"u8);
                 writer.WriteObjectValue(VirtualNetworkTap);
             }
-            if (options.Format != "W" && Optional.IsDefined(ProvisioningState))
-            {
-                writer.WritePropertyName("provisioningState"u8);
-                writer.WriteStringValue(ProvisioningState.Value.ToString());
-            }
             writer.WriteEndObject();
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        NetworkInterfaceTapConfiguration IJsonModel<NetworkInterfaceTapConfiguration>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static NetworkInterfaceTapConfiguration DeserializeNetworkInterfaceTapConfiguration(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceTapConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeNetworkInterfaceTapConfiguration(document.RootElement, options);
-        }
-
-        internal static NetworkInterfaceTapConfiguration DeserializeNetworkInterfaceTapConfiguration(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -104,8 +48,6 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> id = default;
             Optional<VirtualNetworkTap> virtualNetworkTap = default;
             Optional<ProvisioningState> provisioningState = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -158,44 +100,8 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new NetworkInterfaceTapConfiguration(id.Value, serializedAdditionalRawData, name.Value, etag.Value, type.Value, virtualNetworkTap.Value, Optional.ToNullable(provisioningState));
+            return new NetworkInterfaceTapConfiguration(id.Value, name.Value, etag.Value, type.Value, virtualNetworkTap.Value, Optional.ToNullable(provisioningState));
         }
-
-        BinaryData IPersistableModel<NetworkInterfaceTapConfiguration>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceTapConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{options.Format}' format.");
-            }
-        }
-
-        NetworkInterfaceTapConfiguration IPersistableModel<NetworkInterfaceTapConfiguration>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<NetworkInterfaceTapConfiguration>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeNetworkInterfaceTapConfiguration(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(NetworkInterfaceTapConfiguration)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<NetworkInterfaceTapConfiguration>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

@@ -29,16 +29,26 @@ namespace AuthoringTypeSpec.Models
         {
             warnings ??= new List<JobWarning>();
 
-            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, serializedAdditionalRawData: null);
+            return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.JobWarning"/>. </summary>
         /// <param name="code"> The warning code. </param>
         /// <param name="message"> The warning message. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         /// <returns> A new <see cref="Models.JobWarning"/> instance for mocking. </returns>
         public static JobWarning JobWarning(string code = null, string message = null)
         {
-            return new JobWarning(code, message, serializedAdditionalRawData: null);
+            if (code == null)
+            {
+                throw new ArgumentNullException(nameof(code));
+            }
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            return new JobWarning(code, message);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.SwapDeploymentsJob"/>. </summary>
@@ -55,7 +65,7 @@ namespace AuthoringTypeSpec.Models
         {
             warnings ??= new List<JobWarning>();
 
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id, serializedAdditionalRawData: null);
+            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id);
         }
     }
 }

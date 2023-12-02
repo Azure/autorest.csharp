@@ -402,7 +402,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             // add an extra empty ctor if we do not have a ctor with no parameters
             var accessibility = IsStruct ? MethodSignatureModifiers.Public : MethodSignatureModifiers.Internal;
-            if (InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
+            if (Configuration.UseModelReaderWriter && InitializationConstructor.Signature.Parameters.Count > 0 && SerializationConstructor.Signature.Parameters.Count > 0)
                 yield return new(
                     new ConstructorSignature(Type, null, $"Initializes a new instance of {Type:C} for deserialization.", accessibility, Array.Empty<Parameter>()),
                     Array.Empty<ObjectPropertyInitializer>(),
@@ -454,10 +454,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
+        protected override bool EnsureIncludeSerializer()
+        {
+            // TODO -- this should always return true when use model reader writer is enabled.
+            return Configuration.UseModelReaderWriter || _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
+        }
+
+        protected override bool EnsureIncludeDeserializer()
+        {
+            // TODO -- this should always return true when use model reader writer is enabled.
+            return Configuration.UseModelReaderWriter || _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
+        }
+
         protected override IEnumerable<Method> BuildMethods()
         {
-            yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
-            yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
+            if (IncludeDeserializer)
+                yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
+            if (IncludeSerializer)
+                yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

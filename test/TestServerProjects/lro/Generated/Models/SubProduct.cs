@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace lro.Models
 {
     /// <summary> The SubProduct. </summary>
@@ -20,10 +17,9 @@ namespace lro.Models
 
         /// <summary> Initializes a new instance of <see cref="SubProduct"/>. </summary>
         /// <param name="id"> Sub Resource Id. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
-        internal SubProduct(string id, IDictionary<string, BinaryData> serializedAdditionalRawData, string provisioningState, SubProductPropertiesProvisioningStateValues? provisioningStateValues) : base(id, serializedAdditionalRawData)
+        internal SubProduct(string id, string provisioningState, SubProductPropertiesProvisioningStateValues? provisioningStateValues) : base(id)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

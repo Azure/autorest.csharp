@@ -29,16 +29,10 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="unionProperty"> The union property. </param>
-        internal DerivedModelWithUnion(string name, double? size, IDictionary<string, BinaryData> serializedAdditionalRawData, BinaryData unionProperty) : base(name, size, serializedAdditionalRawData)
+        internal DerivedModelWithUnion(string name, double? size, BinaryData unionProperty) : base(name, size)
         {
             UnionProperty = unionProperty;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="DerivedModelWithUnion"/> for deserialization. </summary>
-        internal DerivedModelWithUnion()
-        {
         }
 
         /// <summary>

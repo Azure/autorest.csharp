@@ -5,11 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -18,41 +13,15 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
-    public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModel<XmlInstanceData>, IXmlSerializable, IPersistableModel<XmlInstanceData>
+    public partial class XmlInstanceData : IUtf8JsonSerializable, IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "XmlInstance");
-            if (options.Format != "W")
-            {
-                writer.WriteStartElement("id");
-                writer.WriteValue(Id);
-                writer.WriteEndElement();
-            }
-            if (options.Format != "W")
-            {
-                writer.WriteStartElement("name");
-                writer.WriteValue(Name);
-                writer.WriteEndElement();
-            }
-            if (options.Format != "W")
-            {
-                writer.WriteStartElement("type");
-                writer.WriteValue(ResourceType);
-                writer.WriteEndElement();
-            }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
-            {
-                writer.WriteStartElement("systemData");
-                writer.WriteValue(SystemData);
-                writer.WriteEndElement();
-            }
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
-
-        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element, ModelReaderWriterOptions options = null)
+        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element)
         {
             ResourceIdentifier id = default;
             string name = default;
@@ -74,74 +43,17 @@ namespace MgmtXmlDeserialization
             {
                 systemData = null;
             }
-            return new XmlInstanceData(id, name, resourceType, systemData, serializedAdditionalRawData: null);
+            return new XmlInstanceData(id, name, resourceType, systemData);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<XmlInstanceData>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<XmlInstanceData>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("id"u8);
-                writer.WriteStringValue(Id);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W")
-            {
-                writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ResourceType);
-            }
-            if (options.Format != "W" && Optional.IsDefined(SystemData))
-            {
-                writer.WritePropertyName("systemData"u8);
-                JsonSerializer.Serialize(writer, SystemData);
-            }
-            if (options.Format != "W" && _serializedAdditionalRawData != null)
-            {
-                foreach (var item in _serializedAdditionalRawData)
-                {
-                    writer.WritePropertyName(item.Key);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    using (JsonDocument document = JsonDocument.Parse(item.Value))
-                    {
-                        JsonSerializer.Serialize(writer, document.RootElement);
-                    }
-#endif
-                }
-            }
             writer.WriteEndObject();
         }
 
-        XmlInstanceData IJsonModel<XmlInstanceData>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeXmlInstanceData(document.RootElement, options);
-        }
-
-        internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -150,8 +62,6 @@ namespace MgmtXmlDeserialization
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
-            IDictionary<string, BinaryData> serializedAdditionalRawData = default;
-            Dictionary<string, BinaryData> additionalPropertiesDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -178,61 +88,8 @@ namespace MgmtXmlDeserialization
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (options.Format != "W")
-                {
-                    additionalPropertiesDictionary.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
-                }
             }
-            serializedAdditionalRawData = additionalPropertiesDictionary;
-            return new XmlInstanceData(id, name, type, systemData.Value, serializedAdditionalRawData);
+            return new XmlInstanceData(id, name, type, systemData.Value);
         }
-
-        BinaryData IPersistableModel<XmlInstanceData>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
-            }
-        }
-
-        XmlInstanceData IPersistableModel<XmlInstanceData>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<XmlInstanceData>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializeXmlInstanceData(document.RootElement, options);
-                    }
-                case "X":
-                    return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(XmlInstanceData)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<XmlInstanceData>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

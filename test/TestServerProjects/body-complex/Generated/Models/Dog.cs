@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace body_complex.Models
 {
     /// <summary> The Dog. </summary>
@@ -21,9 +18,8 @@ namespace body_complex.Models
         /// <summary> Initializes a new instance of <see cref="Dog"/>. </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="food"></param>
-        internal Dog(int? id, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, string food) : base(id, name, serializedAdditionalRawData)
+        internal Dog(int? id, string name, string food) : base(id, name)
         {
             Food = food;
         }

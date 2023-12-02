@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownScoringFunction. </summary>
@@ -18,15 +15,9 @@ namespace CognitiveSearch.Models
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to "Linear". </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UnknownScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, IDictionary<string, BinaryData> serializedAdditionalRawData) : base(type, fieldName, boost, interpolation, serializedAdditionalRawData)
+        internal UnknownScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation) : base(type, fieldName, boost, interpolation)
         {
             Type = type ?? "Unknown";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="UnknownScoringFunction"/> for deserialization. </summary>
-        internal UnknownScoringFunction()
-        {
         }
     }
 }

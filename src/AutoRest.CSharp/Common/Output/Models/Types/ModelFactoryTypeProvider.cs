@@ -269,7 +269,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool RequiresModelFactory(SerializableObjectType model)
         {
-            if (model.Declaration.Accessibility != "public")
+            if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer)
             {
                 return false;
             }

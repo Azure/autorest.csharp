@@ -5,20 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
-using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 
 namespace xml_service.Models
 {
-    public partial class AppleBarrel : IXmlSerializable, IPersistableModel<AppleBarrel>
+    public partial class AppleBarrel : IXmlSerializable
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
         {
             writer.WriteStartElement(nameHint ?? "AppleBarrel");
             if (Optional.IsCollectionDefined(GoodApples))
@@ -46,9 +42,7 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
-
-        internal static AppleBarrel DeserializeAppleBarrel(XElement element, ModelReaderWriterOptions options = null)
+        internal static AppleBarrel DeserializeAppleBarrel(XElement element)
         {
             IList<string> goodApples = default;
             IList<string> badApples = default;
@@ -70,48 +64,7 @@ namespace xml_service.Models
                 }
                 badApples = array;
             }
-            return new AppleBarrel(goodApples, badApples, serializedAdditionalRawData: null);
+            return new AppleBarrel(goodApples, badApples);
         }
-
-        BinaryData IPersistableModel<AppleBarrel>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AppleBarrel>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(AppleBarrel)} does not support '{options.Format}' format.");
-            }
-        }
-
-        AppleBarrel IPersistableModel<AppleBarrel>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<AppleBarrel>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeAppleBarrel(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(AppleBarrel)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<AppleBarrel>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }

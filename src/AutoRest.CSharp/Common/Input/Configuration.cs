@@ -54,6 +54,8 @@ namespace AutoRest.CSharp.Common.Input
             public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
             public const string Branded = "branded";
             public const string GenerateTestProject = "generateTestProject";
+            // TODO - this configuration only exists here because we would like a rolling update for all libraries for this feature since it changes so many files.
+            public const string UseModelReaderWriter = "use-model-reader-writer";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -82,6 +84,7 @@ namespace AutoRest.CSharp.Common.Input
             bool publicDiscriminatorProperty,
             bool deserializeNullCollectionAsNullValue,
             bool useCoreDataFactoryReplacements,
+            bool useModelReaderWriter,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             bool useOverloadsBetweenProtocolAndConvenience,
@@ -119,6 +122,7 @@ namespace AutoRest.CSharp.Common.Input
             KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
             ShouldTreatBase64AsBinaryData = !azureArm && !generation1ConvenienceClient ? shouldTreatBase64AsBinaryData : false;
             UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
+            UseModelReaderWriter = useModelReaderWriter;
             projectFolder ??= ProjectFolderDefault;
             (_absoluteProjectFolder, _relativeProjectFolder) = ParseProjectFolders(outputFolder, projectFolder);
 
@@ -222,6 +226,8 @@ namespace AutoRest.CSharp.Common.Input
 
         public static bool UseCoreDataFactoryReplacements { get; private set; }
 
+        public static bool UseModelReaderWriter { get; private set; }
+
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static string? ExistingProjectFolder { get; private set; }
@@ -319,6 +325,7 @@ namespace AutoRest.CSharp.Common.Input
                 useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
                 useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
+                useModelReaderWriter: GetOptionBoolValue(autoRest, Options.UseModelReaderWriter),
                 projectFolder: GetProjectFolderOption(autoRest),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -403,6 +410,8 @@ namespace AutoRest.CSharp.Common.Input
                     return true;
                 case Options.GenerateTestProject:
                     return true;
+                case Options.UseModelReaderWriter:
+                    return false;
                 default:
                     return null;
             }
@@ -474,6 +483,7 @@ namespace AutoRest.CSharp.Common.Input
                 ReadOption(root, Options.PublicDiscriminatorProperty),
                 ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
                 ReadOption(root, Options.UseCoreDataFactoryReplacements),
+                ReadOption(root, Options.UseModelReaderWriter),
                 oldModelFactoryEntries,
                 ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
                 ReadOption(root, Options.UseOverloadsBetweenProtocolAndConvenience),
@@ -535,6 +545,7 @@ namespace AutoRest.CSharp.Common.Input
             WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, UseOverloadsBetweenProtocolAndConvenience);
             WriteIfNotDefault(writer, Options.ProjectFolder, RelativeProjectFolder);
             WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, UseCoreDataFactoryReplacements);
+            WriteIfNotDefault(writer, Options.UseModelReaderWriter, UseModelReaderWriter);
             writer.WriteNonEmptyArray(Options.ProtocolMethodList, ProtocolMethodList);
             writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, SuppressAbstractBaseClasses);
             writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, ModelsToTreatEmptyStringAsNull.ToList());

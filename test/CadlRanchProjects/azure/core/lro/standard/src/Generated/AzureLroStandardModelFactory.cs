@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure;
 
 namespace _Azure.Lro.Standard.Models
@@ -18,16 +19,26 @@ namespace _Azure.Lro.Standard.Models
         /// <returns> A new <see cref="Models.User"/> instance for mocking. </returns>
         public static User User(string name = null, string role = null)
         {
-            return new User(name, role, serializedAdditionalRawData: null);
+            return new User(name, role);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.ExportedUser"/>. </summary>
         /// <param name="name"> The name of user. </param>
         /// <param name="resourceUri"> The exported URI. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="resourceUri"/> is null. </exception>
         /// <returns> A new <see cref="Models.ExportedUser"/> instance for mocking. </returns>
         public static ExportedUser ExportedUser(string name = null, string resourceUri = null)
         {
-            return new ExportedUser(name, resourceUri, serializedAdditionalRawData: null);
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+            if (resourceUri == null)
+            {
+                throw new ArgumentNullException(nameof(resourceUri));
+            }
+
+            return new ExportedUser(name, resourceUri);
         }
     }
 }

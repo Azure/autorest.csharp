@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -27,21 +26,15 @@ namespace CognitiveSearch.Models
         /// <summary> Initializes a new instance of <see cref="EdgeNGramTokenFilter"/>. </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         /// <param name="minGram"> The minimum n-gram length. Default is 1. Must be less than the value of maxGram. </param>
         /// <param name="maxGram"> The maximum n-gram length. Default is 2. </param>
         /// <param name="side"> Specifies which side of the input the n-gram should be generated from. Default is "front". </param>
-        internal EdgeNGramTokenFilter(string odataType, string name, IDictionary<string, BinaryData> serializedAdditionalRawData, int? minGram, int? maxGram, EdgeNGramTokenFilterSide? side) : base(odataType, name, serializedAdditionalRawData)
+        internal EdgeNGramTokenFilter(string odataType, string name, int? minGram, int? maxGram, EdgeNGramTokenFilterSide? side) : base(odataType, name)
         {
             MinGram = minGram;
             MaxGram = maxGram;
             Side = side;
             OdataType = odataType ?? "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
-        }
-
-        /// <summary> Initializes a new instance of <see cref="EdgeNGramTokenFilter"/> for deserialization. </summary>
-        internal EdgeNGramTokenFilter()
-        {
         }
 
         /// <summary> The minimum n-gram length. Default is 1. Must be less than the value of maxGram. </summary>

@@ -228,7 +228,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

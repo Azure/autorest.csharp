@@ -5,27 +5,16 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPInPropertiesWithAPString : IUtf8JsonSerializable, IJsonModel<PetAPInPropertiesWithAPString>
+    public partial class PetAPInPropertiesWithAPString : IUtf8JsonSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModel<PetAPInPropertiesWithAPString>)this).Write(writer, new ModelReaderWriterOptions("W"));
-
-        void IJsonModel<PetAPInPropertiesWithAPString>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPInPropertiesWithAPString>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{format}' format.");
-            }
-
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -33,11 +22,6 @@ namespace additionalProperties.Models
             {
                 writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
-            }
-            if (options.Format != "W" && Optional.IsDefined(Status))
-            {
-                writer.WritePropertyName("status"u8);
-                writer.WriteBooleanValue(Status.Value);
             }
             writer.WritePropertyName("@odata.location"u8);
             writer.WriteStringValue(OdataLocation);
@@ -60,22 +44,8 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        PetAPInPropertiesWithAPString IJsonModel<PetAPInPropertiesWithAPString>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
+        internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPInPropertiesWithAPString>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
-            {
-                throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{format}' format.");
-            }
-
-            using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializePetAPInPropertiesWithAPString(document.RootElement, options);
-        }
-
-        internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element, ModelReaderWriterOptions options = null)
-        {
-            options ??= new ModelReaderWriterOptions("W");
-
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -132,36 +102,5 @@ namespace additionalProperties.Models
             moreAdditionalProperties = additionalPropertiesDictionary;
             return new PetAPInPropertiesWithAPString(id, name.Value, Optional.ToNullable(status), odataLocation, Optional.ToDictionary(additionalProperties), moreAdditionalProperties);
         }
-
-        BinaryData IPersistableModel<PetAPInPropertiesWithAPString>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPInPropertiesWithAPString>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    return ModelReaderWriter.Write(this, options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{options.Format}' format.");
-            }
-        }
-
-        PetAPInPropertiesWithAPString IPersistableModel<PetAPInPropertiesWithAPString>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<PetAPInPropertiesWithAPString>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "J":
-                    {
-                        using JsonDocument document = JsonDocument.Parse(data);
-                        return DeserializePetAPInPropertiesWithAPString(document.RootElement, options);
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(PetAPInPropertiesWithAPString)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<PetAPInPropertiesWithAPString>.GetFormatFromOptions(ModelReaderWriterOptions options) => "J";
     }
 }

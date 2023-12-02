@@ -35,6 +35,8 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(XElement element, ModelReaderWriterOptions options = null)
         {
+            options ??= new ModelReaderWriterOptions("W");
+
             string modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {

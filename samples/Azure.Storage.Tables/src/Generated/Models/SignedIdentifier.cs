@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
@@ -14,38 +13,6 @@ namespace Azure.Storage.Tables.Models
     /// <summary> signed identifier. </summary>
     public partial class SignedIdentifier
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
         /// <param name="id"> a unique id. </param>
         /// <param name="accessPolicy"> The access policy. </param>
@@ -57,22 +24,6 @@ namespace Azure.Storage.Tables.Models
 
             Id = id;
             AccessPolicy = accessPolicy;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/>. </summary>
-        /// <param name="id"> a unique id. </param>
-        /// <param name="accessPolicy"> The access policy. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal SignedIdentifier(string id, AccessPolicy accessPolicy, IDictionary<string, BinaryData> serializedAdditionalRawData)
-        {
-            Id = id;
-            AccessPolicy = accessPolicy;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="SignedIdentifier"/> for deserialization. </summary>
-        internal SignedIdentifier()
-        {
         }
 
         /// <summary> a unique id. </summary>

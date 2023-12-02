@@ -225,7 +225,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeIntegerModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeIntegerModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtPagination
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _pageSizeIntegerModelRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _pageSizeIntegerModelRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, pageSizeHint);
-            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink", cancellationToken);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PageSizeIntegerModelResource(Client, PageSizeIntegerModelData.DeserializePageSizeIntegerModelData(e)), _pageSizeIntegerModelClientDiagnostics, Pipeline, "PageSizeIntegerModelCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

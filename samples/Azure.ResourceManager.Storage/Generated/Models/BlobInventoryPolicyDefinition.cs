@@ -15,38 +15,6 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> An object that defines the blob inventory rule. </summary>
     public partial class BlobInventoryPolicyDefinition
     {
-        /// <summary>
-        /// Keeps track of any properties unknown to the library.
-        /// <para>
-        /// To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
-        /// </para>
-        /// <para>
-        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
-        /// </para>
-        /// <para>
-        /// Examples:
-        /// <list type="bullet">
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson("foo")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("\"foo\"")</term>
-        /// <description>Creates a payload of "foo".</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromObjectAsJson(new { key = "value" })</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// <item>
-        /// <term>BinaryData.FromString("{\"key\": \"value\"}")</term>
-        /// <description>Creates a payload of { "key": "value" }.</description>
-        /// </item>
-        /// </list>
-        /// </para>
-        /// </summary>
-        private IDictionary<string, BinaryData> _serializedAdditionalRawData;
-
         /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/>. </summary>
         /// <param name="format"> This is a required field, it specifies the format for the inventory files. </param>
         /// <param name="schedule"> This is a required field. This field is used to schedule an inventory formation. </param>
@@ -69,20 +37,13 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="schedule"> This is a required field. This field is used to schedule an inventory formation. </param>
         /// <param name="objectType"> This is a required field. This field specifies the scope of the inventory created either at the blob or container level. </param>
         /// <param name="schemaFields"> This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value 'Name' is always required. The valid values for this field for the 'Blob' definition.objectType include 'Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime'. The valid values for 'Container' definition.objectType include 'Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold'. Schema field values 'Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl' are valid only for Hns enabled accounts.'Tags' field is only valid for non Hns accounts. </param>
-        /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal BlobInventoryPolicyDefinition(BlobInventoryPolicyFilter filters, Format format, Schedule schedule, ObjectType objectType, IList<string> schemaFields, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal BlobInventoryPolicyDefinition(BlobInventoryPolicyFilter filters, Format format, Schedule schedule, ObjectType objectType, IList<string> schemaFields)
         {
             Filters = filters;
             Format = format;
             Schedule = schedule;
             ObjectType = objectType;
             SchemaFields = schemaFields;
-            _serializedAdditionalRawData = serializedAdditionalRawData;
-        }
-
-        /// <summary> Initializes a new instance of <see cref="BlobInventoryPolicyDefinition"/> for deserialization. </summary>
-        internal BlobInventoryPolicyDefinition()
-        {
         }
 
         /// <summary> An object that defines the filter set. </summary>

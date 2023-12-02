@@ -6,98 +6,24 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class ConfidentLevelsInTspModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.UsualModel"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="age"> The age. </param>
-        /// <param name="size"> The size. </param>
-        /// <returns> A new <see cref="Models.UsualModel"/> instance for mocking. </returns>
-        public static UsualModel UsualModel(string name = null, int age = default, double? size = null)
-        {
-            return new UsualModel(name, age, size, serializedAdditionalRawData: null);
-        }
-
         /// <summary> Initializes a new instance of <see cref="Models.AnotherModelWithUnionProperty"/>. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
         /// <returns> A new <see cref="Models.AnotherModelWithUnionProperty"/> instance for mocking. </returns>
         public static AnotherModelWithUnionProperty AnotherModelWithUnionProperty(BinaryData unionProperty = null)
         {
-            return new AnotherModelWithUnionProperty(unionProperty, serializedAdditionalRawData: null);
-        }
+            if (unionProperty == null)
+            {
+                throw new ArgumentNullException(nameof(unionProperty));
+            }
 
-        /// <summary> Initializes a new instance of <see cref="Models.NonConfidentModelWithIndirectSelfReference"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="reference"> The self reference. </param>
-        /// <returns> A new <see cref="Models.NonConfidentModelWithIndirectSelfReference"/> instance for mocking. </returns>
-        public static NonConfidentModelWithIndirectSelfReference NonConfidentModelWithIndirectSelfReference(string name = null, IEnumerable<IndirectSelfReferenceModel> reference = null)
-        {
-            reference ??= new List<IndirectSelfReferenceModel>();
-
-            return new NonConfidentModelWithIndirectSelfReference(name, reference?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.IndirectSelfReferenceModel"/>. </summary>
-        /// <param name="something"> Something not important. </param>
-        /// <param name="reference"> Reference back. </param>
-        /// <param name="unionProperty"> The non-confident part. </param>
-        /// <returns> A new <see cref="Models.IndirectSelfReferenceModel"/> instance for mocking. </returns>
-        public static IndirectSelfReferenceModel IndirectSelfReferenceModel(string something = null, NonConfidentModelWithSelfReference reference = null, BinaryData unionProperty = null)
-        {
-            return new IndirectSelfReferenceModel(something, reference, unionProperty, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ModelWithIntegerLiteralTypeProperty"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="id"> The id. </param>
-        /// <returns> A new <see cref="Models.ModelWithIntegerLiteralTypeProperty"/> instance for mocking. </returns>
-        public static ModelWithIntegerLiteralTypeProperty ModelWithIntegerLiteralTypeProperty(string name = null, ModelWithIntegerLiteralTypePropertyId id = default)
-        {
-            return new ModelWithIntegerLiteralTypeProperty(name, id, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.ModelWithFloatLiteralTypeProperty"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="id"> The id. </param>
-        /// <returns> A new <see cref="Models.ModelWithFloatLiteralTypeProperty"/> instance for mocking. </returns>
-        public static ModelWithFloatLiteralTypeProperty ModelWithFloatLiteralTypeProperty(string name = null, ModelWithFloatLiteralTypePropertyId id = default)
-        {
-            return new ModelWithFloatLiteralTypeProperty(name, id, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.BaseModel"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="size"> The size. </param>
-        /// <returns> A new <see cref="Models.BaseModel"/> instance for mocking. </returns>
-        public static BaseModel BaseModel(string name = null, double? size = null)
-        {
-            return new BaseModel(name, size, serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DerivedModel"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="size"> The size. </param>
-        /// <param name="age"> The age. </param>
-        /// <returns> A new <see cref="Models.DerivedModel"/> instance for mocking. </returns>
-        public static DerivedModel DerivedModel(string name = null, double? size = null, int? age = null)
-        {
-            return new DerivedModel(name, size, serializedAdditionalRawData: null, age);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.DerivedModelWithUnion"/>. </summary>
-        /// <param name="name"> The name. </param>
-        /// <param name="size"> The size. </param>
-        /// <param name="unionProperty"> The union property. </param>
-        /// <returns> A new <see cref="Models.DerivedModelWithUnion"/> instance for mocking. </returns>
-        public static DerivedModelWithUnion DerivedModelWithUnion(string name = null, double? size = null, BinaryData unionProperty = null)
-        {
-            return new DerivedModelWithUnion(name, size, serializedAdditionalRawData: null, unionProperty);
+            return new AnotherModelWithUnionProperty(unionProperty);
         }
     }
 }

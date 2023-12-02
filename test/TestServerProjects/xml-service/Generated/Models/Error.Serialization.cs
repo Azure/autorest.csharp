@@ -5,39 +5,13 @@
 
 #nullable disable
 
-using System;
-using System.ClientModel;
-using System.ClientModel.Primitives;
-using System.IO;
-using System.Xml;
 using System.Xml.Linq;
-using Azure.Core;
 
 namespace xml_service.Models
 {
-    internal partial class Error : IXmlSerializable, IPersistableModel<Error>
+    internal partial class Error
     {
-        private void WriteInternal(XmlWriter writer, string nameHint, ModelReaderWriterOptions options)
-        {
-            writer.WriteStartElement(nameHint ?? "Error");
-            if (Optional.IsDefined(Status))
-            {
-                writer.WriteStartElement("status");
-                writer.WriteValue(Status.Value);
-                writer.WriteEndElement();
-            }
-            if (Optional.IsDefined(Message))
-            {
-                writer.WriteStartElement("message");
-                writer.WriteValue(Message);
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-        }
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => WriteInternal(writer, nameHint, new ModelReaderWriterOptions("W"));
-
-        internal static Error DeserializeError(XElement element, ModelReaderWriterOptions options = null)
+        internal static Error DeserializeError(XElement element)
         {
             int? status = default;
             string message = default;
@@ -49,48 +23,7 @@ namespace xml_service.Models
             {
                 message = (string)messageElement;
             }
-            return new Error(status, message, serializedAdditionalRawData: null);
+            return new Error(status, message);
         }
-
-        BinaryData IPersistableModel<Error>.Write(ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Error>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    {
-                        using MemoryStream stream = new MemoryStream();
-                        using XmlWriter writer = XmlWriter.Create(stream);
-                        WriteInternal(writer, null, options);
-                        writer.Flush();
-                        if (stream.Position > int.MaxValue)
-                        {
-                            return BinaryData.FromStream(stream);
-                        }
-                        else
-                        {
-                            return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
-                        }
-                    }
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Error)} does not support '{options.Format}' format.");
-            }
-        }
-
-        Error IPersistableModel<Error>.Create(BinaryData data, ModelReaderWriterOptions options)
-        {
-            var format = options.Format == "W" ? ((IPersistableModel<Error>)this).GetFormatFromOptions(options) : options.Format;
-
-            switch (format)
-            {
-                case "X":
-                    return DeserializeError(XElement.Load(data.ToStream()), options);
-                default:
-                    throw new InvalidOperationException($"The model {nameof(Error)} does not support '{options.Format}' format.");
-            }
-        }
-
-        string IPersistableModel<Error>.GetFormatFromOptions(ModelReaderWriterOptions options) => "X";
     }
 }
