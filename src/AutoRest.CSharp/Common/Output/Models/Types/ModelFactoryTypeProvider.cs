@@ -26,26 +26,38 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelFactoryTypeProvider : TypeProvider
     {
+        private static readonly HashSet<MethodInfo> ExistingModelFactoryMethods = new HashSet<MethodInfo>();
+
+        static ModelFactoryTypeProvider()
+        {
+            foreach (var method in typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public))
+            {
+                ExistingModelFactoryMethods.Add(method);
+            }
+            foreach (var method in typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public))
+            {
+                ExistingModelFactoryMethods.Add(method);
+            }
+        }
+
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IEnumerable<Method>? _methods;
-        public IEnumerable<Method> Methods => _methods ??= Models.Select(CreateMethod);
-
-        public IEnumerable<SerializableObjectType> Models { get; }
+        public IReadOnlyList<Method> Methods { get; }
 
         public FormattableString Description => $"Model factory for models.";
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
+        private readonly IEnumerable<SerializableObjectType> _models;
+
         private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
-            Models = objectTypes;
+            _models = objectTypes;
+            Methods = _models.Select(CreateMethod).ToArray();
 
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
-            ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
-            ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
         public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
@@ -86,9 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return Configuration.Namespace;
         }
 
-        public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
-
-        private ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
+        private static ValueExpression BuildPropertyAssignmentExpression(Parameter parameter, ObjectTypeProperty property)
         {
             ValueExpression p = parameter;
             var propertyStack = property.BuildHierarchyStack();
@@ -154,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private Method CreateMethod(SerializableObjectType model)
+        private static Method CreateMethod(SerializableObjectType model)
         {
             var ctor = model.SerializationConstructor;
             var ctorToCall = ctor;
@@ -181,7 +191,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     property = property.FlattenedProperty;
 
                 // for the parameter corresponding to non-public property, we just add default or null
-                if (property.Declaration.Accessibility != "public")
+                if (property.Declaration.Accessibility != "public" && property != model.Discriminator?.Property)
                 {
                     methodArguments.Add(new PositionalParameterReference(ctorParameter.Name, property.Declaration.Type.IsValueType ? Default : Null));
                     continue;
