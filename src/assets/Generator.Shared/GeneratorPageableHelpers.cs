@@ -16,7 +16,6 @@ namespace Autorest.CSharp.Core
 {
     internal static class GeneratorPageableHelpers
     {
-
         public static AsyncPageable<T> CreateAsyncPageable<T>(
             Func<int?, HttpMessage>? createFirstPageRequest,
             Func<int?, string, HttpMessage>? createNextPageRequest,
