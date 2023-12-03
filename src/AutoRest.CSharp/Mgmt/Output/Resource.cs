@@ -4,10 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
@@ -135,7 +134,52 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
         {
+            // the resource data private field
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
+
+            // the resource type public field
+            yield return new FieldDeclaration(
+                $"Gets the resource type for the operations",
+                FieldModifiers.Public | FieldModifiers.Static | FieldModifiers.ReadOnly,
+                typeof(ResourceType),
+                "ResourceType",
+                Literal(ResourceType.ToString()));
+        }
+
+        private IReadOnlyList<PropertyDeclaration>? _properties;
+        public IReadOnlyList<PropertyDeclaration> Properties => _properties ??= BuildProperties().ToArray();
+
+        protected virtual IEnumerable<PropertyDeclaration> BuildProperties()
+        {
+            // HasData property
+            var hasDataProperty = new PropertyDeclaration(
+                description: $"Gets whether or not the current instance has data.",
+                modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                propertyType: typeof(bool),
+                name: "HasData",
+                propertyBody: new AutoPropertyBody(false));
+
+            yield return hasDataProperty;
+
+            var dataProperty = new PropertyDeclaration(
+                description: $"Gets the data representing this Feature.",
+                modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
+                propertyType: ResourceData.Type,
+                name: "Data",
+                propertyBody: new MethodPropertyBody(new MethodBodyStatement[]
+                {
+                    new IfStatement(Not(new BoolExpression(new VariableReference(hasDataProperty.PropertyType, hasDataProperty.Declaration))), AddBraces: false)
+                    {
+                        Throw(Snippets.New.Instance(typeof(InvalidOperationException), Literal("The current instance does not have data, you must call Get first.")))
+                    },
+                    Return(new MemberExpression(null, DataFieldName))
+                }),
+                exceptions: new Dictionary<CSharpType, FormattableString>()
+                {
+                    [typeof(InvalidOperationException)] = $"Throws if there is no data loaded in the current instance."
+                });
+
+            yield return dataProperty;
         }
 
         public Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData)

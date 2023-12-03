@@ -40,6 +40,9 @@ namespace MgmtDiscriminator
         private readonly DeliveryRulesRestOperations _deliveryRuleRestClient;
         private readonly DeliveryRuleData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Cdn/deliveryRules";
+
         /// <summary> Initializes a new instance of the <see cref="DeliveryRuleResource"/> class for mocking. </summary>
         protected DeliveryRuleResource()
         {
@@ -66,9 +69,6 @@ namespace MgmtDiscriminator
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Cdn/deliveryRules";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
