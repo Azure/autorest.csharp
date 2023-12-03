@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
+using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -40,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var ctor = armClientCtor with
                 {
                     Parameters = new[] { KnownParameters.ArmClient },
-                    Initializer = new(false, new FormattableString[] { $"{KnownParameters.ArmClient.Name:I}", $"{typeof(ResourceIdentifier)}.{nameof(ResourceIdentifier.Root)}" })
+                    Initializer = new(false, new ValueExpression[] { KnownParameters.ArmClient, ResourceIdentifierExpression.Root })
                 };
 
                 using (_writer.WriteMethodDeclaration(ctor))
