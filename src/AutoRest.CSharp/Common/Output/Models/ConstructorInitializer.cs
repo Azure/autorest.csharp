@@ -9,7 +9,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConstructorInitializer(bool IsBase, ValueExpression[] Arguments)
+    internal record ConstructorInitializer(bool IsBase, IReadOnlyList<ValueExpression> Arguments)
     {
         public ConstructorInitializer(bool isBase, IEnumerable<Parameter> arguments) : this(isBase, arguments.Select(p => (ValueExpression)p).ToArray()) { }
 
