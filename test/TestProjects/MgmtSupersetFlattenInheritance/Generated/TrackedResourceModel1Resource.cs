@@ -40,6 +40,9 @@ namespace MgmtSupersetFlattenInheritance
         private readonly TrackedResourceModel1SRestOperations _trackedResourceModel1RestClient;
         private readonly TrackedResourceModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/trackedResourceModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="TrackedResourceModel1Resource"/> class for mocking. </summary>
         protected TrackedResourceModel1Resource()
         {
@@ -66,9 +69,6 @@ namespace MgmtSupersetFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/trackedResourceModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

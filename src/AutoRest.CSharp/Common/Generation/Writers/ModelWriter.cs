@@ -139,7 +139,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.AppendRaw("}");
             if (property.InitializationValue != null)
             {
-                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
+                writer.AppendRaw(" = ");
+                writer.WriteValueExpression(property.InitializationValue);
+                writer.Line($";");
             }
 
             writer.Line();
