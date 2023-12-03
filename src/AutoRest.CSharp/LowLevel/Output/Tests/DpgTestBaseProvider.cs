@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                         IsBase: true,
                         Arguments: new FormattableString[] { $"{IsAsyncParameter.Name:I}" })
                     ),
-                    MethodBodyStatement.Empty);
+                    EmptyStatement);
         }
 
         protected override IEnumerable<Method> BuildMethods()

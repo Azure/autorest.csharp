@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
 using NUnit.Framework;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.LowLevel.Output.Tests
 {
@@ -47,7 +48,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
                     IsBase: true,
                     Arguments: new FormattableString[] { $"{IsAsyncParameter.Name:I}" })
                 ),
-                MethodBodyStatement.Empty);
+                EmptyStatement);
         }
 
         protected override IEnumerable<Method> BuildMethods()
@@ -78,7 +79,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Tests
 
         private static readonly CSharpAttribute[] _attributes = new[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Please remove the Ignore attribute to let the test method run") };
 
-        protected override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
+        public override MethodBodyStatement BuildGetClientStatement(DpgOperationSample sample, IReadOnlyList<MethodSignatureBase> methodsToCall, List<MethodBodyStatement> variableDeclarations, out VariableReference clientVar)
         {
             // change the first method in methodToCall to the factory method of that client
             var firstMethod = methodsToCall[0];
