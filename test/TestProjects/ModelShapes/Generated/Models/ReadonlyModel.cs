@@ -10,12 +10,12 @@ namespace ModelShapes.Models
     /// <summary> The ReadonlyModel. </summary>
     public partial class ReadonlyModel
     {
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadonlyModel"/>. </summary>
         internal ReadonlyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="ReadonlyModel"/>. </summary>
         /// <param name="name"></param>
         internal ReadonlyModel(string name)
         {

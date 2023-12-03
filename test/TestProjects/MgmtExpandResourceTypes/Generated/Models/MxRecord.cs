@@ -10,12 +10,12 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> An MX record. </summary>
     public partial class MxRecord
     {
-        /// <summary> Initializes a new instance of MxRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="MxRecord"/>. </summary>
         public MxRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of MxRecord. </summary>
+        /// <summary> Initializes a new instance of <see cref="MxRecord"/>. </summary>
         /// <param name="preference"> The preference value for this MX record. </param>
         /// <param name="exchange"> The domain name of the mail host for this MX record. </param>
         internal MxRecord(int? preference, string exchange)

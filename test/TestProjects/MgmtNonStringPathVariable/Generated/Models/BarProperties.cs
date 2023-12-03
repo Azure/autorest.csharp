@@ -12,12 +12,12 @@ namespace MgmtNonStringPathVariable.Models
     /// <summary> The instance view of a resource. </summary>
     internal partial class BarProperties
     {
-        /// <summary> Initializes a new instance of BarProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarProperties"/>. </summary>
         public BarProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of BarProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarProperties"/>. </summary>
         /// <param name="buzz"> Update Domain count. </param>
         internal BarProperties(Guid? buzz)
         {

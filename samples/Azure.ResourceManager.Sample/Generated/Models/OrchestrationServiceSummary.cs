@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class OrchestrationServiceSummary
     {
-        /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         internal OrchestrationServiceSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="OrchestrationServiceSummary"/>. </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceName

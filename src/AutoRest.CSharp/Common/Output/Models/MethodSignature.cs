@@ -4,10 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -96,5 +96,7 @@ namespace AutoRest.CSharp.Output.Models
                     : null
             };
         }
+
+        public FormattableString GetCRef() => $"{Name}({Parameters.GetTypesFormattable()})";
     }
 }

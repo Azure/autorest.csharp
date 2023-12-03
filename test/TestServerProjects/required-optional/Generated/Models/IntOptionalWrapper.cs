@@ -10,9 +10,16 @@ namespace required_optional.Models
     /// <summary> The IntOptionalWrapper. </summary>
     public partial class IntOptionalWrapper
     {
-        /// <summary> Initializes a new instance of IntOptionalWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntOptionalWrapper"/>. </summary>
         public IntOptionalWrapper()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="IntOptionalWrapper"/>. </summary>
+        /// <param name="value"></param>
+        internal IntOptionalWrapper(int? value)
+        {
+            Value = value;
         }
 
         /// <summary> Gets or sets the value. </summary>

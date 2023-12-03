@@ -74,7 +74,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         const tspNamespace = root.Name; // this is the top-level namespace defined in the typespec file, which is actually always different from the namespace of the SDK
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
-            const generatedFolder = resolvePath(outputFolder, "Generated");
+            const generatedFolder = outputFolder.endsWith("src")
+                ? resolvePath(outputFolder, "Generated")
+                : resolvePath(outputFolder, "src", "Generated");
 
             //resolve shared folders based on generator path override
             const resolvedSharedFolders: string[] = [];
@@ -152,7 +154,16 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "head-as-boolean": options["head-as-boolean"],
                 "deserialize-null-collection-as-null-value":
                     options["deserialize-null-collection-as-null-value"],
-                "generate-tests": options["generate-tests"]
+                "generate-tests": options["generate-tests"],
+                //only emit these if they are not the default values
+                branded:
+                    options["branded"] === true
+                        ? undefined
+                        : options["branded"],
+                generateTestProject:
+                    options["generateTestProject"] === true
+                        ? undefined
+                        : options["generateTestProject"]
             } as Configuration;
 
             await program.host.writeFile(

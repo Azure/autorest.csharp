@@ -16,7 +16,7 @@ namespace body_formdata.Models
     /// <summary> The Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
     {
-        /// <summary> Initializes a new instance of Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/>. </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IEnumerable<Stream> fileContent)
@@ -24,6 +24,13 @@ namespace body_formdata.Models
             Argument.AssertNotNull(fileContent, nameof(fileContent));
 
             FileContent = fileContent.ToList();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema"/>. </summary>
+        /// <param name="fileContent"> Files to upload. </param>
+        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent)
+        {
+            FileContent = fileContent;
         }
 
         /// <summary> Files to upload. </summary>

@@ -15,7 +15,7 @@ namespace AuthoringTypeSpec.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AuthoringTypeSpecModelFactory
     {
-        /// <summary> Initializes a new instance of DeploymentJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.DeploymentJob"/>. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="createdDateTime"> The creation date time of the job. </param>
         /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>
@@ -32,7 +32,7 @@ namespace AuthoringTypeSpec.Models
             return new DeploymentJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings?.ToList(), errors, id);
         }
 
-        /// <summary> Initializes a new instance of JobWarning. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.JobWarning"/>. </summary>
         /// <param name="code"> The warning code. </param>
         /// <param name="message"> The warning message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
@@ -51,7 +51,7 @@ namespace AuthoringTypeSpec.Models
             return new JobWarning(code, message);
         }
 
-        /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SwapDeploymentsJob"/>. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="createdDateTime"> The creation date time of the job. </param>
         /// <param name="lastUpdatedDateTime"> The the last date time the job was updated. </param>

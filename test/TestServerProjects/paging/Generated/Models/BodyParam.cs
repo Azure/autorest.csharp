@@ -10,9 +10,16 @@ namespace paging.Models
     /// <summary> The BodyParam. </summary>
     public partial class BodyParam
     {
-        /// <summary> Initializes a new instance of BodyParam. </summary>
+        /// <summary> Initializes a new instance of <see cref="BodyParam"/>. </summary>
         public BodyParam()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="BodyParam"/>. </summary>
+        /// <param name="name"></param>
+        internal BodyParam(string name)
+        {
+            Name = name;
         }
 
         /// <summary> Gets or sets the name. </summary>

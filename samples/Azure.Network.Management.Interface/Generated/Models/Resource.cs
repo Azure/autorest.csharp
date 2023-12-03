@@ -13,13 +13,13 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Common resource representation. </summary>
     public partial class Resource
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         public Resource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of <see cref="Resource"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>

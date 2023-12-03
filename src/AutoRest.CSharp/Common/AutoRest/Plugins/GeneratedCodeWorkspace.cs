@@ -7,11 +7,12 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.ClientModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
-using AutoRest.CSharp.Input;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
@@ -38,6 +39,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Response).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Result).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ArmResource).Assembly.Location),
             };
 
@@ -57,11 +59,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private Project _project;
         private Dictionary<string, XmlDocumentFile> _xmlDocFiles { get; }
+        private Dictionary<string, string> _plainFiles { get; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
             _xmlDocFiles = new();
+            _plainFiles = new();
         }
 
         /// <summary>
@@ -96,6 +100,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public void AddGeneratedDocFile(string name, XmlDocumentFile xmlDocument)
         {
             _xmlDocFiles.Add(name, xmlDocument);
+        }
+
+        public void AddPlainFiles(string name, string content)
+        {
+            _plainFiles.Add(name, content);
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -139,6 +148,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var content = await XmlFormatter.FormatAsync(xmlWriter, testDocument);
                     yield return (docName, content);
                 }
+            }
+
+            foreach (var (file, content) in _plainFiles)
+            {
+                yield return (file, content);
             }
         }
 

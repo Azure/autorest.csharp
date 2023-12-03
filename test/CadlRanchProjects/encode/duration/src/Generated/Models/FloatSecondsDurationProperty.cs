@@ -12,7 +12,7 @@ namespace Encode.Duration.Models
     /// <summary> The FloatSecondsDurationProperty. </summary>
     public partial class FloatSecondsDurationProperty
     {
-        /// <summary> Initializes a new instance of FloatSecondsDurationProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="FloatSecondsDurationProperty"/>. </summary>
         /// <param name="value"></param>
         public FloatSecondsDurationProperty(TimeSpan value)
         {

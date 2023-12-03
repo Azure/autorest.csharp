@@ -12,9 +12,9 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The model that contains self reference. </summary>
-    internal partial class NonConfidentModelWithIndirectSelfReference
+    public partial class NonConfidentModelWithIndirectSelfReference
     {
-        /// <summary> Initializes a new instance of NonConfidentModelWithIndirectSelfReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithIndirectSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public NonConfidentModelWithIndirectSelfReference(string name)
@@ -25,7 +25,7 @@ namespace ConfidentLevelsInTsp.Models
             Reference = new ChangeTrackingList<IndirectSelfReferenceModel>();
         }
 
-        /// <summary> Initializes a new instance of NonConfidentModelWithIndirectSelfReference. </summary>
+        /// <summary> Initializes a new instance of <see cref="NonConfidentModelWithIndirectSelfReference"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="reference"> The self reference. </param>
         internal NonConfidentModelWithIndirectSelfReference(string name, IList<IndirectSelfReferenceModel> reference)

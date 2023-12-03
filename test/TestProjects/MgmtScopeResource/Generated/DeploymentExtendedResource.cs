@@ -23,13 +23,15 @@ namespace MgmtScopeResource
 {
     /// <summary>
     /// A Class representing a DeploymentExtended along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="DeploymentExtendedResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetDeploymentExtendedResource method.
-    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource" />, <see cref="ResourceGroupResource" />, <see cref="ManagementGroupResource" /> or <see cref="TenantResource" /> using the GetDeploymentExtended method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="DeploymentExtendedResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetDeploymentExtendedResource method.
+    /// Otherwise you can get one from its parent resource <see cref="SubscriptionResource"/>, <see cref="ResourceGroupResource"/>, <see cref="ManagementGroupResource"/> or <see cref="TenantResource"/> using the GetDeploymentExtended method.
     /// </summary>
     public partial class DeploymentExtendedResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="DeploymentExtendedResource"/> instance. </summary>
+        /// <param name="scope"> The scope. </param>
+        /// <param name="deploymentName"> The deploymentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string scope, string deploymentName)
         {
             var resourceId = $"{scope}/providers/Microsoft.Resources/deployments/{deploymentName}";
@@ -42,12 +44,15 @@ namespace MgmtScopeResource
         private readonly DeploymentRestOperations _deploymentOperationsRestClient;
         private readonly DeploymentExtendedData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Resources/deployments";
+
         /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedResource"/> class for mocking. </summary>
         protected DeploymentExtendedResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "DeploymentExtendedResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DeploymentExtendedResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal DeploymentExtendedResource(ArmClient client, DeploymentExtendedData data) : this(client, data.Id)
@@ -70,9 +75,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Resources/deployments";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -770,7 +772,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="DeploymentOperation"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<DeploymentOperation> GetAtScopeDeploymentOperationsAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);
@@ -793,7 +795,7 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeploymentOperation" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="DeploymentOperation"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<DeploymentOperation> GetAtScopeDeploymentOperations(int? top = null, CancellationToken cancellationToken = default)
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentOperationsRestClient.CreateListAtScopeRequest(Id.Parent, Id.Name, top);

@@ -21,13 +21,16 @@ namespace MgmtAcronymMapping
 {
     /// <summary>
     /// A Class representing an Image along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="ImageResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetImageResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetImage method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="ImageResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetImageResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetImage method.
     /// </summary>
     public partial class ImageResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ImageResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="imageName"> The imageName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string imageName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/images/{imageName}";
@@ -38,12 +41,15 @@ namespace MgmtAcronymMapping
         private readonly ImagesRestOperations _imageRestClient;
         private readonly ImageData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/images";
+
         /// <summary> Initializes a new instance of the <see cref="ImageResource"/> class for mocking. </summary>
         protected ImageResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ImageResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ImageResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ImageResource(ArmClient client, ImageData data) : this(client, data.Id)
@@ -64,9 +70,6 @@ namespace MgmtAcronymMapping
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/images";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class VirtualMachineScaleSetIPConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPConfiguration"/>. </summary>
         /// <param name="name">
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.name
@@ -37,7 +37,7 @@ namespace MgmtAcronymMapping.Models
             LoadBalancerInboundNatPools = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPConfiguration"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id

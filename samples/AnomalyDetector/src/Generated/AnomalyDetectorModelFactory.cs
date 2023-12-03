@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AnomalyDetectorModelFactory
     {
-        /// <summary> Initializes a new instance of UnivariateEntireDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UnivariateEntireDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.
@@ -73,7 +73,7 @@ namespace AnomalyDetector.Models
             return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList());
         }
 
-        /// <summary> Initializes a new instance of UnivariateLastDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UnivariateLastDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.
@@ -114,7 +114,7 @@ namespace AnomalyDetector.Models
             return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity);
         }
 
-        /// <summary> Initializes a new instance of UnivariateChangePointDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.UnivariateChangePointDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.
@@ -134,7 +134,7 @@ namespace AnomalyDetector.Models
             return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList());
         }
 
-        /// <summary> Initializes a new instance of MultivariateDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MultivariateDetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         /// <param name="summary"> Multivariate anomaly detection status. </param>
         /// <param name="results"> Detection result for each timestamp. </param>
@@ -146,7 +146,7 @@ namespace AnomalyDetector.Models
             return new MultivariateDetectionResult(resultId, summary, results?.ToList());
         }
 
-        /// <summary> Initializes a new instance of MultivariateBatchDetectionResultSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MultivariateBatchDetectionResultSummary"/>. </summary>
         /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="errors"> Error message when detection is failed. </param>
         /// <param name="variableStates"> Variable Status. </param>
@@ -163,7 +163,7 @@ namespace AnomalyDetector.Models
             return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo);
         }
 
-        /// <summary> Initializes a new instance of AnomalyState. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyState"/>. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         /// <param name="value"> The detailed value of this anomalous timestamp. </param>
         /// <param name="errors"> Error message for the current timestamp. </param>
@@ -175,7 +175,7 @@ namespace AnomalyDetector.Models
             return new AnomalyState(timestamp, value, errors?.ToList());
         }
 
-        /// <summary> Initializes a new instance of AnomalyValue. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyValue"/>. </summary>
         /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
         /// <param name="severity">
         /// Indicates the significance of the anomaly. The higher the severity, the more
@@ -194,7 +194,7 @@ namespace AnomalyDetector.Models
             return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList());
         }
 
-        /// <summary> Initializes a new instance of AnomalyInterpretation. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyInterpretation"/>. </summary>
         /// <param name="variable"> Variable. </param>
         /// <param name="contributionScore">
         /// This score shows the percentage contributing to the anomalous timestamp. A
@@ -207,7 +207,7 @@ namespace AnomalyDetector.Models
             return new AnomalyInterpretation(variable, contributionScore, correlationChanges);
         }
 
-        /// <summary> Initializes a new instance of CorrelationChanges. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.CorrelationChanges"/>. </summary>
         /// <param name="changedVariables"> The correlated variables that have correlation changes under an anomaly. </param>
         /// <returns> A new <see cref="Models.CorrelationChanges"/> instance for mocking. </returns>
         public static CorrelationChanges CorrelationChanges(IEnumerable<string> changedVariables = null)
@@ -217,7 +217,7 @@ namespace AnomalyDetector.Models
             return new CorrelationChanges(changedVariables?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ModelInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ModelInfo"/>. </summary>
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
@@ -255,7 +255,7 @@ namespace AnomalyDetector.Models
             return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo);
         }
 
-        /// <summary> Initializes a new instance of AnomalyDetectionModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AnomalyDetectionModel"/>. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
         /// <param name="lastUpdatedTime"> Date and time (UTC) when the model was last updated. </param>
@@ -269,7 +269,7 @@ namespace AnomalyDetector.Models
             return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo);
         }
 
-        /// <summary> Initializes a new instance of MultivariateLastDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.MultivariateLastDetectionResult"/>. </summary>
         /// <param name="variableStates"> Variable Status. </param>
         /// <param name="results"> Anomaly status and information. </param>
         /// <returns> A new <see cref="Models.MultivariateLastDetectionResult"/> instance for mocking. </returns>

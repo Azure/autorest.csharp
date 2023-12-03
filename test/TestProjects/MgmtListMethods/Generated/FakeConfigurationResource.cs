@@ -19,13 +19,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a FakeConfiguration along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeConfigurationResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeConfigurationResource method.
-    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeConfiguration method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeConfigurationResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeConfigurationResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource"/> using the GetFakeConfiguration method.
     /// </summary>
     public partial class FakeConfigurationResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeConfigurationResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="fakeName"> The fakeName. </param>
+        /// <param name="configurationName"> The configurationName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string configurationName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/configurations/{configurationName}";
@@ -36,12 +39,15 @@ namespace MgmtListMethods
         private readonly ConfigurationsRestOperations _fakeConfigurationConfigurationsRestClient;
         private readonly FakeConfigurationData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/configurations";
+
         /// <summary> Initializes a new instance of the <see cref="FakeConfigurationResource"/> class for mocking. </summary>
         protected FakeConfigurationResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeConfigurationResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeConfigurationResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeConfigurationResource(ArmClient client, FakeConfigurationData data) : this(client, data.Id)
@@ -62,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/configurations";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

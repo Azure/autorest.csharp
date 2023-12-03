@@ -13,10 +13,17 @@ namespace MgmtParent.Models
     /// <summary> The Update Resource model definition. </summary>
     public partial class UpdateResource
     {
-        /// <summary> Initializes a new instance of UpdateResource. </summary>
+        /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
         public UpdateResource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UpdateResource"/>. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        internal UpdateResource(IDictionary<string, string> tags)
+        {
+            Tags = tags;
         }
 
         /// <summary> Resource tags. </summary>

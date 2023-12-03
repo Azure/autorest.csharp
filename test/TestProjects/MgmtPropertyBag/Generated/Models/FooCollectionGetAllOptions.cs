@@ -12,16 +12,16 @@ namespace MgmtPropertyBag.Models
     /// <summary> The FooCollectionGetAllOptions. </summary>
     public partial class FooCollectionGetAllOptions
     {
-        /// <summary> Initializes a new instance of FooCollectionGetAllOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="FooCollectionGetAllOptions"/>. </summary>
         public FooCollectionGetAllOptions()
         {
         }
 
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
-        /// <summary> The Integer to use. The default value is 10. </summary>
+        /// <summary> The top. </summary>
         public int? Top { get; set; }
-        /// <summary> The String to use. </summary>
+        /// <summary> The orderby. </summary>
         public string Orderby { get; set; }
         /// <summary> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </summary>
         public ETag? IfMatch { get; set; }

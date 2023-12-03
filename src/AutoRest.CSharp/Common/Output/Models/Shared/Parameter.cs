@@ -16,7 +16,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
+    internal record Parameter(string Name, FormattableString? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsEndpoint = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
@@ -68,12 +68,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
+                CreateDescription(operationParameter, inputType, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
                 initializer,
                 IsApiVersionParameter: operationParameter.IsApiVersion,
+                IsEndpoint: operationParameter.IsEndpoint,
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation,
@@ -82,7 +83,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch
         {
-            { NameInRequest: var nameInRequest } when RequestHeader.ClientRequestIdHeaders.Contains(nameInRequest) => Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string))),
+            { NameInRequest: var nameInRequest } when RequestHeader.ClientRequestIdHeaders.Contains(nameInRequest) => Constant.FromExpression($"message.{Configuration.ApiTypes.HttpMessageRequestName}.ClientRequestId", new CSharpType(typeof(string))),
             { NameInRequest: var nameInRequest } when RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(nameInRequest) => new Constant("true", new CSharpType(typeof(string))),
             { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),
             { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) =>
@@ -97,7 +98,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static FormattableString CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
             FormattableString description = string.IsNullOrWhiteSpace(operationParameter.Description)
-                ? (FormattableString)$"The {operationParameter.Type.Name} to use."
+                ? (FormattableString)$"The {type:C} to use."
                 : $"{BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description)}";
             if (defaultValue != null)
             {
@@ -161,12 +162,13 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(requestParameter, type, keepClientDefaultValue ? null : clientDefaultValue),
+                CreateDescription(requestParameter, inputType, keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
                 initializer,
                 IsApiVersionParameter: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                IsEndpoint: IsEndpointParameter(requestParameter),
                 IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);
@@ -192,7 +194,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static FormattableString CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
             FormattableString description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
-                (FormattableString)$"The {requestParameter.Schema.Name} to use." :
+                (FormattableString)$"The {type:C} to use." :
                 $"{BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description)}";
             if (defaultValue != null)
             {
@@ -232,7 +234,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         {
             if (parameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
             {
-                return Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string)));
+                return Constant.FromExpression($"message.{Configuration.ApiTypes.HttpMessageRequestName}.ClientRequestId", new CSharpType(typeof(string)));
             }
             if (parameter.In == HttpParameterIn.Header && RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
             {

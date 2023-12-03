@@ -10,9 +10,18 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostReservedWordsParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostReservedWordsParameters. </summary>
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
         public ParameterGroupingPostReservedWordsParameters()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ParameterGroupingPostReservedWordsParameters"/>. </summary>
+        /// <param name="from"> 'from' is a reserved word. Pass in 'bob' to pass. </param>
+        /// <param name="accept"> 'accept' is a reserved word. Pass in 'yes' to pass. </param>
+        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept)
+        {
+            From = @from;
+            Accept = accept;
         }
 
         /// <summary> 'from' is a reserved word. Pass in 'bob' to pass. </summary>

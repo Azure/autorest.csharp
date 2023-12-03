@@ -13,14 +13,14 @@ namespace AnomalyDetector.Models
     /// <summary> The response of change point detection. </summary>
     public partial class UnivariateChangePointDetectionResult
     {
-        /// <summary> Initializes a new instance of UnivariateChangePointDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionResult"/>. </summary>
         internal UnivariateChangePointDetectionResult()
         {
             IsChangePoint = new ChangeTrackingList<bool>();
             ConfidenceScores = new ChangeTrackingList<float>();
         }
 
-        /// <summary> Initializes a new instance of UnivariateChangePointDetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnivariateChangePointDetectionResult"/>. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
         /// found.

@@ -1505,7 +1505,7 @@
       },
       {
        "$id": "182",
-       "Name": "NotFriend",
+       "Name": "Friend",
        "NameInRequest": "NotFriend",
        "Description": "this is not a friendly model but with a friendly name",
        "Type": {

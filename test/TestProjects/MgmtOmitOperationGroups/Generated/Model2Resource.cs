@@ -20,13 +20,16 @@ namespace MgmtOmitOperationGroups
 {
     /// <summary>
     /// A Class representing a Model2 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="Model2Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetModel2Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetModel2 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="Model2Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetModel2Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetModel2 method.
     /// </summary>
     public partial class Model2Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="Model2Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="model2SName"> The model2SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string model2SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/model2s/{model2SName}";
@@ -39,12 +42,15 @@ namespace MgmtOmitOperationGroups
         private readonly Model4SRestOperations _model4sRestClient;
         private readonly Model2Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/model2s";
+
         /// <summary> Initializes a new instance of the <see cref="Model2Resource"/> class for mocking. </summary>
         protected Model2Resource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "Model2Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="Model2Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal Model2Resource(ArmClient client, Model2Data data) : this(client, data.Id)
@@ -67,9 +73,6 @@ namespace MgmtOmitOperationGroups
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/model2s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -167,7 +170,7 @@ namespace MgmtOmitOperationGroups
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The Model2 to use. </param>
+        /// <param name="data"> The <see cref="Model2Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<Model2Resource>> UpdateAsync(WaitUntil waitUntil, Model2Data data, CancellationToken cancellationToken = default)
@@ -204,7 +207,7 @@ namespace MgmtOmitOperationGroups
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The Model2 to use. </param>
+        /// <param name="data"> The <see cref="Model2Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<Model2Resource> Update(WaitUntil waitUntil, Model2Data data, CancellationToken cancellationToken = default)

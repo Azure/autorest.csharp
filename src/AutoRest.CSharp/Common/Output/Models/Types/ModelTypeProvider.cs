@@ -11,7 +11,6 @@ using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -31,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private TypeFactory _typeFactory;
         private SourceInputModel? _sourceInputModel;
         private InputModelType[]? _derivedTypes;
-        private ObjectType? _defaultDerivedType;
+        private SerializableObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -47,31 +46,18 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, SerializableObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
             _sourceInputModel = sourceInputModel;
-            DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround only to solve the anonymous model names, in other cases, the name is unchanged.
+            DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             IsAccessibilityOverridden = inputModel.Accessibility != null;
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
-        }
-
-        // TODO -- this is only a workaround. We introduce this method only to solve the issue on model names when the model is anonymous where we take the id of the model as its name, and it is digits.
-        // For full solution, we should use the `ToCleanName` method which does (almost) the same when the name is digits, and it does more when the name contains other invalid identifier characters
-        // We did not use the `ToCleanName` method here because it will change the leading character captilized. Defer the decision of that to this issue: https://github.com/Azure/autorest.csharp/issues/3669
-        private static string GetValidIdentifier(string name)
-        {
-            if (char.IsDigit(name[0]))
-            {
-                return $"_{name}";
-            }
-
-            return name;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -80,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parent = GetBaseObjectType();
             if (parent is ModelTypeProvider parentModelType)
             {
-                if (parentModelType.Methods.Any(m => m.Signature.Name == "FromResponse"))
+                if (parentModelType.Methods.Any(m => m.Signature.Name == Configuration.ApiTypes.FromResponseName))
                     signatures |= MethodSignatureModifiers.New;
             }
             return signatures;
@@ -111,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ModelTypeProviderFields EnsureFields()
         {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
+            return new ModelTypeProviderFields(_inputModel, Type, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -119,7 +105,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true, CreatePublicConstructorParameter);
 
-            FormattableString summary = $"Initializes a new instance of {Declaration.Name}";
             var accessibility = _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                 ? MethodSignatureModifiers.Public
                 : MethodSignatureModifiers.Internal;
@@ -131,7 +116,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                summary,
+                $"Initializes a new instance of {Type:C}",
                 null,
                 accessibility,
                 fullParameterList,
@@ -147,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return new ConstructorSignature(
                 Type,
-                $"Initializes a new instance of {Declaration.Name}",
+                $"Initializes a new instance of {Type:C}",
                 null,
                 MethodSignatureModifiers.Internal,
                 fullParameterList,
@@ -160,16 +145,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var property in objType.Properties)
                 {
-                    if (property.InputModelProperty is not {} inputModelProperty)
+                    if (property.InputModelProperty is not { } inputModelProperty)
                         continue;
 
                     var declaredName = property.Declaration.Name;
                     var serializedName = inputModelProperty.SerializedName;
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, property.Declaration.Type, false, property.SerializationFormat);
 
+                    var memberValueExpression = new TypedMemberExpression(null, declaredName, property.Declaration.Type);
+                    TypedMemberExpression? enumerableExpression = null;
+                    if (TypeFactory.IsReadOnlyMemory(property.Declaration.Type))
+                    {
+                        enumerableExpression = property.Declaration.Type.IsNullable
+                            ? new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(Nullable<ReadOnlyMemory<object>>.Value)}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType))
+                            : new TypedMemberExpression(null, $"{property.Declaration.Name}.{nameof(ReadOnlyMemory<object>.Span)}", typeof(ReadOnlySpan<>).MakeGenericType(property.Declaration.Type.Arguments[0].FrameworkType));
+                    }
+
                     yield return new JsonPropertySerialization(
                         declaredName.ToVariableName(),
-                        new TypedMemberExpression(null, declaredName, property.Declaration.Type),
+                        memberValueExpression,
                         serializedName,
                         property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                         valueSerialization,
@@ -177,7 +171,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         ShouldSkipSerialization(property, inputModelProperty),
                         false,
                         customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);;
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook,
+                        enumerableExpression: enumerableExpression);
+                    ;
                 }
             }
         }
@@ -294,7 +290,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                     {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        if (TypeFactory.IsReadOnlyMemory(propertyType))
+                        {
+                            initializationValue = propertyType.IsNullable ? null : Constant.FromExpression($"{propertyType}.{nameof(ReadOnlyMemory<object>.Empty)}", propertyType);
+                        }
+                        else
+                        {
+                            initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                        }
                     }
                 }
 
@@ -318,7 +321,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var field in Fields)
-                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field), this);
+                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -365,9 +368,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<Method> BuildMethods()
         {
             if (EnsureIncludeDeserializer())
-                yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
+                yield return Snippets.Extensible.Model.BuildFromOperationResponseMethod(this, GetFromResponseModifiers());
             if (EnsureIncludeSerializer())
-                yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+                yield return Snippets.Extensible.Model.BuildConversionToRequestBodyMethod(GetToRequestContentModifiers());
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
@@ -434,6 +437,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        internal ModelTypeProvider ReplaceProperty(InputModelProperty property, InputType inputType)
+        {
+            var result = new ModelTypeProvider(
+                _inputModel.ReplaceProperty(property, inputType),
+                DefaultNamespace,
+                _sourceInputModel,
+                _typeFactory,
+                _derivedTypes,
+                _defaultDerivedType);
+            return result;
+        }
+
+        internal InputModelProperty? GetProperty(InputModelType key)
+        {
+            return _inputModel.GetProperty(key);
         }
     }
 }

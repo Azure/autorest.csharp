@@ -10,7 +10,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a boolean property. </summary>
     public partial class BooleanProperty
     {
-        /// <summary> Initializes a new instance of BooleanProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="BooleanProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         public BooleanProperty(bool property)
         {

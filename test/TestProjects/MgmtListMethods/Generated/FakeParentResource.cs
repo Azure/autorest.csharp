@@ -19,13 +19,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a FakeParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource"/> using the GetFakeParent method.
     /// </summary>
     public partial class FakeParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="fakeName"> The fakeName. </param>
+        /// <param name="fakeParentName"> The fakeParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string fakeParentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParents/{fakeParentName}";
@@ -36,12 +39,15 @@ namespace MgmtListMethods
         private readonly FakeParentsRestOperations _fakeParentRestClient;
         private readonly FakeParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParents";
+
         /// <summary> Initializes a new instance of the <see cref="FakeParentResource"/> class for mocking. </summary>
         protected FakeParentResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeParentResource(ArmClient client, FakeParentData data) : this(client, data.Id)
@@ -62,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

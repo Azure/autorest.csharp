@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
             else
             {
                 projectPath = options.ProjectPath!;
+                if (!projectPath!.EndsWith("src", StringComparison.Ordinal))
+                    projectPath = Path.Combine(projectPath, "src");
                 outputPath = Path.Combine(projectPath, "Generated");
             }
             generatedTestOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated");
@@ -49,8 +51,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(rootNamespace);
                 if (options.IsNewProject)
                 {
+                    bool needAzureKeyAuth = rootNamespace.Auth?.ApiKey != null;
                     // TODO - add support for DataFactoryElement lookup
-                    await new NewProjectScaffolding().Execute();
+                    await new NewProjectScaffolding(needAzureKeyAuth).Execute();
                 }
             }
             else if (File.Exists(codeModelInputPath))
@@ -60,7 +63,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 workspace = await new CSharpGen().ExecuteAsync(codeModel);
                 if (options.IsNewProject)
                 {
-                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)), Configuration.ToCSharpProjConfiguration());
+                    bool needAzureKeyAuth = codeModel.Security.Schemes.OfType<SecurityScheme>().Where(schema => schema is KeySecurityScheme).Count() > 0;
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)), needAzureKeyAuth, Configuration.ToCSharpProjConfiguration());
                 }
             }
             else

@@ -20,13 +20,16 @@ namespace MgmtExactMatchFlattenInheritance
 {
     /// <summary>
     /// A Class representing an AzureResourceFlattenModel1 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AzureResourceFlattenModel1Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAzureResourceFlattenModel1Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetAzureResourceFlattenModel1 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AzureResourceFlattenModel1Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAzureResourceFlattenModel1Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetAzureResourceFlattenModel1 method.
     /// </summary>
     public partial class AzureResourceFlattenModel1Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AzureResourceFlattenModel1Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="name"> The name. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1s/{name}";
@@ -37,12 +40,15 @@ namespace MgmtExactMatchFlattenInheritance
         private readonly AzureResourceFlattenModel1SRestOperations _azureResourceFlattenModel1RestClient;
         private readonly AzureResourceFlattenModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Resource"/> class for mocking. </summary>
         protected AzureResourceFlattenModel1Resource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel1Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AzureResourceFlattenModel1Resource(ArmClient client, AzureResourceFlattenModel1Data data) : this(client, data.Id)
@@ -63,9 +69,6 @@ namespace MgmtExactMatchFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -166,7 +169,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The AzureResourceFlattenModel1 to use. </param>
+        /// <param name="data"> The <see cref="AzureResourceFlattenModel1Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<AzureResourceFlattenModel1Resource>> UpdateAsync(WaitUntil waitUntil, AzureResourceFlattenModel1Data data, CancellationToken cancellationToken = default)
@@ -204,7 +207,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The AzureResourceFlattenModel1 to use. </param>
+        /// <param name="data"> The <see cref="AzureResourceFlattenModel1Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<AzureResourceFlattenModel1Resource> Update(WaitUntil waitUntil, AzureResourceFlattenModel1Data data, CancellationToken cancellationToken = default)

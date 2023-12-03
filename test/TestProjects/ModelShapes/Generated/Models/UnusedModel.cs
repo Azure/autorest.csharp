@@ -10,9 +10,16 @@ namespace ModelShapes.Models
     /// <summary> The UnusedModel. </summary>
     internal partial class UnusedModel
     {
-        /// <summary> Initializes a new instance of UnusedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnusedModel"/>. </summary>
         internal UnusedModel()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="UnusedModel"/>. </summary>
+        /// <param name="unusedString"></param>
+        internal UnusedModel(string unusedString)
+        {
+            UnusedString = unusedString;
         }
 
         /// <summary> Gets the unused string. </summary>

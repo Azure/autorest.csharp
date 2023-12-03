@@ -21,13 +21,16 @@ namespace MgmtPropertyChooser
 {
     /// <summary>
     /// A Class representing a VirtualMachine along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VirtualMachineResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVirtualMachineResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetVirtualMachine method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="VirtualMachineResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetVirtualMachineResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetVirtualMachine method.
     /// </summary>
     public partial class VirtualMachineResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VirtualMachineResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="vmName"> The vmName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string vmName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}";
@@ -38,12 +41,15 @@ namespace MgmtPropertyChooser
         private readonly VirtualMachinesRestOperations _virtualMachineRestClient;
         private readonly VirtualMachineData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineResource"/> class for mocking. </summary>
         protected VirtualMachineResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal VirtualMachineResource(ArmClient client, VirtualMachineData data) : this(client, data.Id)
@@ -64,9 +70,6 @@ namespace MgmtPropertyChooser
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

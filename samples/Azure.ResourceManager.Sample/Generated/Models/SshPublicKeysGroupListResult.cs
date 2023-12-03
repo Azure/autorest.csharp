@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class SshPublicKeysGroupListResult
     {
-        /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeysGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of SSH public keys
         /// Serialized Name: SshPublicKeysGroupListResult.value
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshPublicKeysGroupListResult"/>. </summary>
         /// <param name="value">
         /// The list of SSH public keys
         /// Serialized Name: SshPublicKeysGroupListResult.value

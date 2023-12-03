@@ -13,7 +13,7 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a property unknown, and the data is an array. </summary>
     public partial class UnknownArrayProperty
     {
-        /// <summary> Initializes a new instance of UnknownArrayProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownArrayProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
         public UnknownArrayProperty(BinaryData property)
@@ -29,7 +29,7 @@ namespace _Type.Property.ValueTypes.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

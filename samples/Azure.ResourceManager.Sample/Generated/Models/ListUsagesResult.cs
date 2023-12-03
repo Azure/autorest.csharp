@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ListUsagesResult
     {
-        /// <summary> Initializes a new instance of ListUsagesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/>. </summary>
         /// <param name="value">
         /// The list of compute resource usages.
         /// Serialized Name: ListUsagesResult.value
@@ -31,7 +31,7 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListUsagesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="ListUsagesResult"/>. </summary>
         /// <param name="value">
         /// The list of compute resource usages.
         /// Serialized Name: ListUsagesResult.value

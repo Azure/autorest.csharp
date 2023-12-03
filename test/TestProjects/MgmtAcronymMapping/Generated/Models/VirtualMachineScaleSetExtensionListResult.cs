@@ -19,7 +19,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetExtensionListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionListResult"/>. </summary>
         /// <param name="value">
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
@@ -32,7 +32,7 @@ namespace MgmtAcronymMapping.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetExtensionListResult"/>. </summary>
         /// <param name="value">
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value

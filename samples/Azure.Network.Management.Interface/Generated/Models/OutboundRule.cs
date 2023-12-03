@@ -13,13 +13,13 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Outbound rule of the load balancer. </summary>
     public partial class OutboundRule : SubResource
     {
-        /// <summary> Initializes a new instance of OutboundRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutboundRule"/>. </summary>
         public OutboundRule()
         {
             FrontendIPConfigurations = new ChangeTrackingList<SubResource>();
         }
 
-        /// <summary> Initializes a new instance of OutboundRule. </summary>
+        /// <summary> Initializes a new instance of <see cref="OutboundRule"/>. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>

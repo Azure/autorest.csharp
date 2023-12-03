@@ -10,9 +10,16 @@ namespace required_optional.Models
     /// <summary> The StringOptionalWrapper. </summary>
     public partial class StringOptionalWrapper
     {
-        /// <summary> Initializes a new instance of StringOptionalWrapper. </summary>
+        /// <summary> Initializes a new instance of <see cref="StringOptionalWrapper"/>. </summary>
         public StringOptionalWrapper()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="StringOptionalWrapper"/>. </summary>
+        /// <param name="value"></param>
+        internal StringOptionalWrapper(string value)
+        {
+            Value = value;
         }
 
         /// <summary> Gets or sets the value. </summary>

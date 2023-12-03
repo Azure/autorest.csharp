@@ -10,9 +10,16 @@ namespace constants.Models
     /// <summary> The NoModelAsStringNoRequiredTwoValueDefault. </summary>
     internal partial class NoModelAsStringNoRequiredTwoValueDefault
     {
-        /// <summary> Initializes a new instance of NoModelAsStringNoRequiredTwoValueDefault. </summary>
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringNoRequiredTwoValueDefault"/>. </summary>
         internal NoModelAsStringNoRequiredTwoValueDefault()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="NoModelAsStringNoRequiredTwoValueDefault"/>. </summary>
+        /// <param name="parameter"></param>
+        internal NoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultEnum? parameter)
+        {
+            Parameter = parameter;
         }
 
         /// <summary> Gets the parameter. </summary>

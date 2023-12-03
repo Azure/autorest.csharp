@@ -13,12 +13,12 @@ namespace MgmtResourceName
     /// <summary> A class representing the Network data model. </summary>
     public partial class NetworkData : ResourceData
     {
-        /// <summary> Initializes a new instance of NetworkData. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkData"/>. </summary>
         public NetworkData()
         {
         }
 
-        /// <summary> Initializes a new instance of NetworkData. </summary>
+        /// <summary> Initializes a new instance of <see cref="NetworkData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

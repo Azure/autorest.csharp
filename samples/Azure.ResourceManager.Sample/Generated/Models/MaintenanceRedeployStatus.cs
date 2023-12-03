@@ -15,12 +15,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class MaintenanceRedeployStatus
     {
-        /// <summary> Initializes a new instance of MaintenanceRedeployStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         internal MaintenanceRedeployStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of MaintenanceRedeployStatus. </summary>
+        /// <summary> Initializes a new instance of <see cref="MaintenanceRedeployStatus"/>. </summary>
         /// <param name="isCustomerInitiatedMaintenanceAllowed">
         /// True, if customer is allowed to perform Maintenance.
         /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed

@@ -21,13 +21,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a FakeParentWithAncestorWithNonResChWithLoc along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentWithAncestorWithNonResChWithLocResource method.
-    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParentWithAncestorWithNonResChWithLoc method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeParentWithAncestorWithNonResChWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource"/> using the GetFakeParentWithAncestorWithNonResChWithLoc method.
     /// </summary>
     public partial class FakeParentWithAncestorWithNonResChWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="fakeName"> The fakeName. </param>
+        /// <param name="fakeParentWithAncestorWithNonResChWithLocName"> The fakeParentWithAncestorWithNonResChWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string fakeParentWithAncestorWithNonResChWithLocName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithNonResChWithLocs/{fakeParentWithAncestorWithNonResChWithLocName}";
@@ -38,12 +41,15 @@ namespace MgmtListMethods
         private readonly FakeParentWithAncestorWithNonResChWithLocsRestOperations _fakeParentWithAncestorWithNonResChWithLocRestClient;
         private readonly FakeParentWithAncestorWithNonResChWithLocData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs";
+
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> class for mocking. </summary>
         protected FakeParentWithAncestorWithNonResChWithLocResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeParentWithAncestorWithNonResChWithLocResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithNonResChWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeParentWithAncestorWithNonResChWithLocResource(ArmClient client, FakeParentWithAncestorWithNonResChWithLocData data) : this(client, data.Id)
@@ -64,9 +70,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithAncestorWithNonResChWithLocs";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -243,7 +246,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorWithNonResChWithLocRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name);
@@ -264,7 +267,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithAncestorWithNonResChWithLocRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.Parent.Name, Id.Name);

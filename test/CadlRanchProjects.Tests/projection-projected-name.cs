@@ -47,7 +47,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Projection_ProjectedName_operation() => Test(async (host) =>
         {
-            Response response = await new ProjectedNameClient(host, null).OperationAsync();
+            Response response = await new ProjectedNameClient(host, null).ClientNameAsync();
             Assert.AreEqual(204, response.Status);
         });
 
@@ -55,6 +55,18 @@ namespace CadlRanchProjects.Tests
         public Task Projection_ProjectedName_parameter() => Test(async (host) =>
         {
             Response response = await new ProjectedNameClient(host, null).ParameterAsync("true");
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Projection_ProjectedName_Model_client() => Test(async (host) =>
+        {
+            Response response = await new ProjectedNameClient(host, null).GetModelClient().ClientAsync(new ClientModel(true));
+            Assert.AreEqual(204, response.Status);
+        });
+        [Test]
+        public Task Projection_ProjectedName_Model_language() => Test(async (host) =>
+        {
+            Response response = await new ProjectedNameClient(host, null).GetModelClient().LanguageAsync(new CSModel(true));
             Assert.AreEqual(204, response.Status);
         });
     }

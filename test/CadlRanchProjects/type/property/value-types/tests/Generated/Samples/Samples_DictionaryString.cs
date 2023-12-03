@@ -22,7 +22,7 @@ namespace _Type.Property.ValueTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString_ShortVersion()
+        public void Example_DictionaryString_GetDictionaryString_ShortVersion()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -34,7 +34,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_ShortVersion_Async()
+        public async Task Example_DictionaryString_GetDictionaryString_ShortVersion_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -46,7 +46,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString_ShortVersion_Convenience()
+        public void Example_DictionaryString_GetDictionaryString_ShortVersion_Convenience()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -55,7 +55,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_ShortVersion_Convenience_Async()
+        public async Task Example_DictionaryString_GetDictionaryString_ShortVersion_Convenience_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -64,7 +64,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString_AllParameters()
+        public void Example_DictionaryString_GetDictionaryString_AllParameters()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -76,7 +76,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_AllParameters_Async()
+        public async Task Example_DictionaryString_GetDictionaryString_AllParameters_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -88,7 +88,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_GetDictionaryString_AllParameters_Convenience()
+        public void Example_DictionaryString_GetDictionaryString_AllParameters_Convenience()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -97,7 +97,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDictionaryString_AllParameters_Convenience_Async()
+        public async Task Example_DictionaryString_GetDictionaryString_AllParameters_Convenience_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -106,7 +106,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion()
+        public void Example_DictionaryString_Put_ShortVersion()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Async()
+        public async Task Example_DictionaryString_Put_ShortVersion_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -142,7 +142,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_ShortVersion_Convenience()
+        public void Example_DictionaryString_Put_ShortVersion_Convenience()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -155,7 +155,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_ShortVersion_Convenience_Async()
+        public async Task Example_DictionaryString_Put_ShortVersion_Convenience_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -168,7 +168,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
+        public void Example_DictionaryString_Put_AllParameters()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -186,7 +186,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Async()
+        public async Task Example_DictionaryString_Put_AllParameters_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -204,7 +204,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters_Convenience()
+        public void Example_DictionaryString_Put_AllParameters_Convenience()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 
@@ -217,7 +217,7 @@ namespace _Type.Property.ValueTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_AllParameters_Convenience_Async()
+        public async Task Example_DictionaryString_Put_AllParameters_Convenience_Async()
         {
             DictionaryString client = new ValueTypesClient().GetDictionaryStringClient(apiVersion: "1.0.0");
 

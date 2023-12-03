@@ -10,7 +10,7 @@ namespace TypeSchemaMapping.Models
     /// <summary> The UnknownAbstractModel. </summary>
     internal partial class UnknownAbstractModel : AbstractModel
     {
-        /// <summary> Initializes a new instance of UnknownAbstractModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownAbstractModel"/>. </summary>
         /// <param name="discriminatorProperty"></param>
         internal UnknownAbstractModel(string discriminatorProperty) : base(discriminatorProperty)
         {

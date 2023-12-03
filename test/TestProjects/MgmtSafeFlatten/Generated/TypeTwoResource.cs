@@ -20,13 +20,16 @@ namespace MgmtSafeFlatten
 {
     /// <summary>
     /// A Class representing a TypeTwo along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="TypeTwoResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetTypeTwoResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetTypeTwo method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="TypeTwoResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetTypeTwoResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetTypeTwo method.
     /// </summary>
     public partial class TypeTwoResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="TypeTwoResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="typeTwoName"> The typeTwoName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string typeTwoName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}";
@@ -37,12 +40,15 @@ namespace MgmtSafeFlatten
         private readonly CommonRestOperations _typeTwoCommonRestClient;
         private readonly TypeTwoData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.TypeTwo/typeTwos";
+
         /// <summary> Initializes a new instance of the <see cref="TypeTwoResource"/> class for mocking. </summary>
         protected TypeTwoResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "TypeTwoResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TypeTwoResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal TypeTwoResource(ArmClient client, TypeTwoData data) : this(client, data.Id)
@@ -63,9 +69,6 @@ namespace MgmtSafeFlatten
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.TypeTwo/typeTwos";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

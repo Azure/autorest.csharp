@@ -12,12 +12,12 @@ namespace _Type.Property.Optionality.Models
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
         public DatetimeProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="DatetimeProperty"/>. </summary>
         /// <param name="property"> Property. </param>
         internal DatetimeProperty(DateTimeOffset? property)
         {

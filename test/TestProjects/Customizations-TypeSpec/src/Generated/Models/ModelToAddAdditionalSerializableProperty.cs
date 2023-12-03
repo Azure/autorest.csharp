@@ -10,14 +10,14 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model to add additional serializable property. </summary>
     public partial class ModelToAddAdditionalSerializableProperty
     {
-        /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToAddAdditionalSerializableProperty(int requiredInt)
         {
             RequiredInt = requiredInt;
         }
 
-        /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
+        /// <summary> Initializes a new instance of <see cref="ModelToAddAdditionalSerializableProperty"/>. </summary>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
         /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>

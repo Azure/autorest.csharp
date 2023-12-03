@@ -19,13 +19,16 @@ namespace MgmtSupersetFlattenInheritance
 {
     /// <summary>
     /// A Class representing a ResourceModel1 along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResourceModel1Resource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetResourceModel1Resource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetResourceModel1 method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ResourceModel1Resource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetResourceModel1Resource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetResourceModel1 method.
     /// </summary>
     public partial class ResourceModel1Resource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResourceModel1Resource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="resourceModel1SName"> The resourceModel1SName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resourceModel1SName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/resourceModel1s/{resourceModel1SName}";
@@ -36,12 +39,15 @@ namespace MgmtSupersetFlattenInheritance
         private readonly ResourceModel1SRestOperations _resourceModel1RestClient;
         private readonly ResourceModel1Data _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/resourceModel1s";
+
         /// <summary> Initializes a new instance of the <see cref="ResourceModel1Resource"/> class for mocking. </summary>
         protected ResourceModel1Resource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ResourceModel1Resource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceModel1Resource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ResourceModel1Resource(ArmClient client, ResourceModel1Data data) : this(client, data.Id)
@@ -62,9 +68,6 @@ namespace MgmtSupersetFlattenInheritance
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/resourceModel1s";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -162,7 +165,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ResourceModel1 to use. </param>
+        /// <param name="data"> The <see cref="ResourceModel1Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<ResourceModel1Resource>> UpdateAsync(WaitUntil waitUntil, ResourceModel1Data data, CancellationToken cancellationToken = default)
@@ -199,7 +202,7 @@ namespace MgmtSupersetFlattenInheritance
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The ResourceModel1 to use. </param>
+        /// <param name="data"> The <see cref="ResourceModel1Data"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<ResourceModel1Resource> Update(WaitUntil waitUntil, ResourceModel1Data data, CancellationToken cancellationToken = default)

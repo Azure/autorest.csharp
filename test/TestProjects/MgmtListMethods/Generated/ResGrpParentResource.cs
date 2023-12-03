@@ -20,13 +20,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a ResGrpParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResGrpParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetResGrpParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetResGrpParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ResGrpParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetResGrpParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetResGrpParent method.
     /// </summary>
     public partial class ResGrpParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="resGrpParentName"> The resGrpParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParents/{resGrpParentName}";
@@ -37,12 +40,15 @@ namespace MgmtListMethods
         private readonly ResGrpParentsRestOperations _resGrpParentRestClient;
         private readonly ResGrpParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/resGrpParents";
+
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentResource"/> class for mocking. </summary>
         protected ResGrpParentResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ResGrpParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResGrpParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ResGrpParentResource(ArmClient client, ResGrpParentData data) : this(client, data.Id)
@@ -63,9 +69,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/resGrpParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

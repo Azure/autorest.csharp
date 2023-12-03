@@ -14,7 +14,7 @@ namespace xml_service.Models
     /// <summary> An Azure Storage blob. </summary>
     public partial class Blob
     {
-        /// <summary> Initializes a new instance of Blob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>
@@ -33,7 +33,7 @@ namespace xml_service.Models
             Metadata = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of Blob. </summary>
+        /// <summary> Initializes a new instance of <see cref="Blob"/>. </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>

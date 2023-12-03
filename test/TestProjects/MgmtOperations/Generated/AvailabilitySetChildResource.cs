@@ -19,13 +19,17 @@ namespace MgmtOperations
 {
     /// <summary>
     /// A Class representing an AvailabilitySetChild along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AvailabilitySetChildResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAvailabilitySetChildResource method.
-    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetResource" /> using the GetAvailabilitySetChild method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AvailabilitySetChildResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAvailabilitySetChildResource method.
+    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetResource"/> using the GetAvailabilitySetChild method.
     /// </summary>
     public partial class AvailabilitySetChildResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AvailabilitySetChildResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="availabilitySetName"> The availabilitySetName. </param>
+        /// <param name="availabilitySetChildName"> The availabilitySetChildName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}";
@@ -36,12 +40,15 @@ namespace MgmtOperations
         private readonly AvailabilitySetChildRestOperations _availabilitySetChildavailabilitySetChildRestClient;
         private readonly AvailabilitySetChildData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChildren";
+
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildResource"/> class for mocking. </summary>
         protected AvailabilitySetChildResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetChildResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AvailabilitySetChildResource(ArmClient client, AvailabilitySetChildData data) : this(client, data.Id)
@@ -62,9 +69,6 @@ namespace MgmtOperations
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChildren";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -91,7 +95,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetGrandChildResources and their operations over a AvailabilitySetGrandChildResource. </returns>
         public virtual AvailabilitySetGrandChildCollection GetAvailabilitySetGrandChildren()
         {
-            return GetCachedClient(Client => new AvailabilitySetGrandChildCollection(Client, Id));
+            return GetCachedClient(client => new AvailabilitySetGrandChildCollection(client, Id));
         }
 
         /// <summary>
@@ -109,8 +113,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AvailabilitySetGrandChildResource>> GetAvailabilitySetGrandChildAsync(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {
@@ -132,8 +136,8 @@ namespace MgmtOperations
         /// </summary>
         /// <param name="availabilitySetGrandChildName"> The name of the availability set grand child. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetGrandChildName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetGrandChildName"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<AvailabilitySetGrandChildResource> GetAvailabilitySetGrandChild(string availabilitySetGrandChildName, CancellationToken cancellationToken = default)
         {

@@ -12,52 +12,57 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtDiscriminator.Mocking;
 
 namespace MgmtDiscriminator
 {
     /// <summary> A class to add extension methods to MgmtDiscriminator. </summary>
     public static partial class MgmtDiscriminatorExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MockableMgmtDiscriminatorArmClient GetMockableMgmtDiscriminatorArmClient(ArmClient client)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
+            return client.GetCachedClient(client0 => new MockableMgmtDiscriminatorArmClient(client0));
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static MockableMgmtDiscriminatorResourceGroupResource GetMockableMgmtDiscriminatorResourceGroupResource(ArmResource resource)
         {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtDiscriminatorResourceGroupResource(client, resource.Id));
         }
-        #region DeliveryRuleResource
+
         /// <summary>
         /// Gets an object representing a <see cref="DeliveryRuleResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorArmClient.GetDeliveryRuleResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="DeliveryRuleResource"/> object. </returns>
         public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DeliveryRuleResource.ValidateResourceId(id);
-                return new DeliveryRuleResource(client, id);
-            }
-            );
-        }
-        #endregion
+            Argument.AssertNotNull(client, nameof(client));
 
-        /// <summary> Gets a collection of DeliveryRuleResources in the ResourceGroupResource. </summary>
+            return GetMockableMgmtDiscriminatorArmClient(client).GetDeliveryRuleResource(id);
+        }
+
+        /// <summary>
+        /// Gets a collection of DeliveryRuleResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.GetDeliveryRules()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDeliveryRules();
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRules();
         }
 
         /// <summary>
@@ -72,16 +77,22 @@ namespace MgmtDiscriminator
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.GetDeliveryRuleAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRuleAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -96,16 +107,22 @@ namespace MgmtDiscriminator
         /// <description>DeliveryRules_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtDiscriminatorResourceGroupResource.GetDeliveryRule(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDeliveryRules().Get(name, cancellationToken);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtDiscriminatorResourceGroupResource(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
         }
     }
 }

@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of SubResourceReadOnly. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         public SubResourceReadOnly()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceReadOnly. </summary>
+        /// <summary> Initializes a new instance of <see cref="SubResourceReadOnly"/>. </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id

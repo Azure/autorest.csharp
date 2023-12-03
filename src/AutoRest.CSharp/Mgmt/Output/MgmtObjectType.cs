@@ -3,12 +3,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Report;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
@@ -132,7 +133,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
-                        objectTypeProperty.ValueType.Arguments[i] = match ?? argType;
+                        if (match != null)
+                        {
+                            string fullSerializedName = this.GetFullSerializedName(objectTypeProperty, i);
+                            MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                                new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
+                                fullSerializedName,
+                                "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
+                            objectTypeProperty.ValueType.Arguments[i] = match;
+                        }
                     }
                 }
                 return objectTypeProperty;
@@ -146,6 +155,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                     if (match != null)
                     {
                         propertyType = ReferenceTypePropertyChooser.GetObjectTypeProperty(objectTypeProperty, match);
+                        string fullSerializedName = this.GetFullSerializedName(objectTypeProperty);
+                        MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                            new TransformItem(TransformTypeName.ReplacePropertyType, fullSerializedName),
+                           fullSerializedName,
+                            "ReplacePropertyType", typeToReplace.Declaration.FullName, $"{match.Namespace}.{match.Name}");
                     }
                 }
                 return propertyType;
@@ -231,6 +245,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var match = InheritanceChooser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
+                    string fullSerializedName = this.GetFullSerializedName();
+                    MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                        new TransformItem(TransformTypeName.ReplaceBaseType, fullSerializedName),
+                        fullSerializedName,
+                        "ReplaceBaseTypeByExactMatch", inheritedType?.GetNameForReport() ?? "<no base type>", match.GetNameForReport());
                     inheritedType = match;
                 }
             }
@@ -238,7 +257,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             // try superset match because our superset match is checking the proper superset
             var supersetBaseType = InheritanceChooser.GetSupersetMatch(this, MyProperties);
             if (supersetBaseType != null)
+            {
+                string fullSerializedName = this.GetFullSerializedName();
+                MgmtReport.Instance.TransformSection.AddTransformLogForApplyChange(
+                    new TransformItem(TransformTypeName.ReplaceBaseType, fullSerializedName),
+                    fullSerializedName,
+                    "ReplaceBaseTypeBySupersetMatch", inheritedType?.GetNameForReport() ?? "<no base type>", supersetBaseType.GetNameForReport());
                 inheritedType = supersetBaseType;
+            }
 
             return inheritedType;
         }
@@ -265,6 +291,40 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override FormattableString CreateDescription()
         {
             return $"{ObjectSchema.CreateDescription()}";
+        }
+
+        internal string GetFullSerializedName()
+        {
+            return this.ObjectSchema.GetFullSerializedName();
+        }
+
+        internal string GetFullSerializedName(Property property)
+        {
+            var parentSchema = this.GetCombinedSchemas().FirstOrDefault(s => s.Properties.Contains(property));
+            if (parentSchema == null)
+            {
+                throw new InvalidOperationException($"Can't find parent object schema for property schema: '{this.Declaration.Name}.{property.CSharpName()}'");
+            }
+            else
+            {
+                return parentSchema.GetFullSerializedName(property);
+            }
+        }
+
+        internal string GetFullSerializedName(ObjectTypeProperty otProperty)
+        {
+            if (otProperty.SchemaProperty != null)
+                return this.GetFullSerializedName(otProperty.SchemaProperty);
+            else
+                return $"{this.GetFullSerializedName()}.{otProperty.Declaration.Name}";
+        }
+
+        internal string GetFullSerializedName(ObjectTypeProperty otProperty, int argumentIndex)
+        {
+            if (otProperty.ValueType.Arguments == null || otProperty.ValueType.Arguments.Length <= argumentIndex)
+                throw new ArgumentException("argumentIndex out of range");
+            var argType = otProperty.ValueType.Arguments[argumentIndex];
+            return $"{this.GetFullSerializedName(otProperty)}.Arguments[{argumentIndex}-{argType.Namespace}.{argType.Name}]";
         }
     }
 }

@@ -15,12 +15,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AvailablePatchSummary
     {
-        /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         internal AvailablePatchSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="AvailablePatchSummary"/>. </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status

@@ -22,13 +22,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a ResGrpParentWithNonResCh along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResGrpParentWithNonResChResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetResGrpParentWithNonResChResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetResGrpParentWithNonResCh method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ResGrpParentWithNonResChResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetResGrpParentWithNonResChResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetResGrpParentWithNonResCh method.
     /// </summary>
     public partial class ResGrpParentWithNonResChResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResGrpParentWithNonResChResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="resGrpParentWithNonResChName"> The resGrpParentWithNonResChName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string resGrpParentWithNonResChName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MgmtListMethods/resGrpParentWithNonResChes/{resGrpParentWithNonResChName}";
@@ -39,12 +42,15 @@ namespace MgmtListMethods
         private readonly ResGrpParentWithNonResChesRestOperations _resGrpParentWithNonResChRestClient;
         private readonly ResGrpParentWithNonResChData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/resGrpParentWithNonResChes";
+
         /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithNonResChResource"/> class for mocking. </summary>
         protected ResGrpParentWithNonResChResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ResGrpParentWithNonResChResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResGrpParentWithNonResChResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ResGrpParentWithNonResChResource(ArmClient client, ResGrpParentWithNonResChData data) : this(client, data.Id)
@@ -65,9 +71,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MgmtListMethods/resGrpParentWithNonResChes";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -244,7 +247,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<NonResourceChild> GetNonResourceChildAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
@@ -265,7 +268,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="NonResourceChild"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<NonResourceChild> GetNonResourceChild(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _resGrpParentWithNonResChRestClient.CreateListNonResourceChildRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);

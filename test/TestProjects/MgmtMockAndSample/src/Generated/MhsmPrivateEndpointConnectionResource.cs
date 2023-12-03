@@ -19,13 +19,17 @@ namespace MgmtMockAndSample
 {
     /// <summary>
     /// A Class representing a MhsmPrivateEndpointConnection along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="MhsmPrivateEndpointConnectionResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetMhsmPrivateEndpointConnectionResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ManagedHsmResource" /> using the GetMhsmPrivateEndpointConnection method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="MhsmPrivateEndpointConnectionResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetMhsmPrivateEndpointConnectionResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ManagedHsmResource"/> using the GetMhsmPrivateEndpointConnection method.
     /// </summary>
     public partial class MhsmPrivateEndpointConnectionResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="MhsmPrivateEndpointConnectionResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="privateEndpointConnectionName"> The privateEndpointConnectionName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name, string privateEndpointConnectionName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/privateEndpointConnections/{privateEndpointConnectionName}";
@@ -36,12 +40,15 @@ namespace MgmtMockAndSample
         private readonly MhsmPrivateEndpointConnectionsRestOperations _mhsmPrivateEndpointConnectionMHSMPrivateEndpointConnectionsRestClient;
         private readonly MhsmPrivateEndpointConnectionData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/managedHSMs/privateEndpointConnections";
+
         /// <summary> Initializes a new instance of the <see cref="MhsmPrivateEndpointConnectionResource"/> class for mocking. </summary>
         protected MhsmPrivateEndpointConnectionResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "MhsmPrivateEndpointConnectionResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MhsmPrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal MhsmPrivateEndpointConnectionResource(ArmClient client, MhsmPrivateEndpointConnectionData data) : this(client, data.Id)
@@ -62,9 +69,6 @@ namespace MgmtMockAndSample
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.KeyVault/managedHSMs/privateEndpointConnections";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

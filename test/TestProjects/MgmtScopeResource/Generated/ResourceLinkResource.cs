@@ -19,13 +19,14 @@ namespace MgmtScopeResource
 {
     /// <summary>
     /// A Class representing a ResourceLink along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ResourceLinkResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetResourceLinkResource method.
-    /// Otherwise you can get one from its parent resource <see cref="TenantResource" /> using the GetResourceLink method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ResourceLinkResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetResourceLinkResource method.
+    /// Otherwise you can get one from its parent resource <see cref="TenantResource"/> using the GetResourceLink method.
     /// </summary>
     public partial class ResourceLinkResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ResourceLinkResource"/> instance. </summary>
+        /// <param name="linkId"> The linkId. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string linkId)
         {
             var resourceId = $"{linkId}";
@@ -36,12 +37,15 @@ namespace MgmtScopeResource
         private readonly ResourceLinksRestOperations _resourceLinkRestClient;
         private readonly ResourceLinkData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Resources/links";
+
         /// <summary> Initializes a new instance of the <see cref="ResourceLinkResource"/> class for mocking. </summary>
         protected ResourceLinkResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ResourceLinkResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceLinkResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ResourceLinkResource(ArmClient client, ResourceLinkData data) : this(client, data.Id)
@@ -62,9 +66,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Resources/links";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

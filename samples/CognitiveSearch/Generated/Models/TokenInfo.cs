@@ -13,7 +13,7 @@ namespace CognitiveSearch.Models
     /// <summary> Information about a token returned by an analyzer. </summary>
     public partial class TokenInfo
     {
-        /// <summary> Initializes a new instance of TokenInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="TokenInfo"/>. </summary>
         /// <param name="token"> The token returned by the analyzer. </param>
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>

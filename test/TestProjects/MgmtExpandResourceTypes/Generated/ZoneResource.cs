@@ -22,13 +22,16 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A Class representing a Zone along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ZoneResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetZoneResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetZone method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ZoneResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetZoneResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetZone method.
     /// </summary>
     public partial class ZoneResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ZoneResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="zoneName"> The zoneName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}";
@@ -41,12 +44,15 @@ namespace MgmtExpandResourceTypes
         private readonly RecordSetsRestOperations _recordSetsRestClient;
         private readonly ZoneData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones";
+
         /// <summary> Initializes a new instance of the <see cref="ZoneResource"/> class for mocking. </summary>
         protected ZoneResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ZoneResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ZoneResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ZoneResource(ArmClient client, ZoneData data) : this(client, data.Id)
@@ -69,9 +75,6 @@ namespace MgmtExpandResourceTypes
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -98,7 +101,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAResources and their operations over a RecordSetAResource. </returns>
         public virtual RecordSetACollection GetRecordSetAs()
         {
-            return GetCachedClient(Client => new RecordSetACollection(Client, Id));
+            return GetCachedClient(client => new RecordSetACollection(client, Id));
         }
 
         /// <summary>
@@ -149,7 +152,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetAaaaResources and their operations over a RecordSetAaaaResource. </returns>
         public virtual RecordSetAaaaCollection GetRecordSetAaaas()
         {
-            return GetCachedClient(Client => new RecordSetAaaaCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetAaaaCollection(client, Id));
         }
 
         /// <summary>
@@ -200,7 +203,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetCaaResources and their operations over a RecordSetCaaResource. </returns>
         public virtual RecordSetCaaCollection GetRecordSetCaas()
         {
-            return GetCachedClient(Client => new RecordSetCaaCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetCaaCollection(client, Id));
         }
 
         /// <summary>
@@ -251,7 +254,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetCNameResources and their operations over a RecordSetCNameResource. </returns>
         public virtual RecordSetCNameCollection GetRecordSetCNames()
         {
-            return GetCachedClient(Client => new RecordSetCNameCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetCNameCollection(client, Id));
         }
 
         /// <summary>
@@ -302,7 +305,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetMxResources and their operations over a RecordSetMxResource. </returns>
         public virtual RecordSetMxCollection GetRecordSetMxes()
         {
-            return GetCachedClient(Client => new RecordSetMxCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetMxCollection(client, Id));
         }
 
         /// <summary>
@@ -353,7 +356,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetNsResources and their operations over a RecordSetNsResource. </returns>
         public virtual RecordSetNsCollection GetAllRecordSetNs()
         {
-            return GetCachedClient(Client => new RecordSetNsCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetNsCollection(client, Id));
         }
 
         /// <summary>
@@ -404,7 +407,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetPtrResources and their operations over a RecordSetPtrResource. </returns>
         public virtual RecordSetPtrCollection GetRecordSetPtrs()
         {
-            return GetCachedClient(Client => new RecordSetPtrCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetPtrCollection(client, Id));
         }
 
         /// <summary>
@@ -455,7 +458,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetSoaResources and their operations over a RecordSetSoaResource. </returns>
         public virtual RecordSetSoaCollection GetRecordSetSoas()
         {
-            return GetCachedClient(Client => new RecordSetSoaCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetSoaCollection(client, Id));
         }
 
         /// <summary>
@@ -506,7 +509,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetSrvResources and their operations over a RecordSetSrvResource. </returns>
         public virtual RecordSetSrvCollection GetRecordSetSrvs()
         {
-            return GetCachedClient(Client => new RecordSetSrvCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetSrvCollection(client, Id));
         }
 
         /// <summary>
@@ -557,7 +560,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of RecordSetTxtResources and their operations over a RecordSetTxtResource. </returns>
         public virtual RecordSetTxtCollection GetRecordSetTxts()
         {
-            return GetCachedClient(Client => new RecordSetTxtCollection(Client, Id));
+            return GetCachedClient(client => new RecordSetTxtCollection(client, Id));
         }
 
         /// <summary>
@@ -824,7 +827,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetData> GetRecordSetsAsync(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
@@ -848,7 +851,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordsetnamesuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetData> GetRecordSets(int? top = null, string recordsetnamesuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordsetnamesuffix);
@@ -872,7 +875,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<RecordSetData> GetAllRecordSetsAsync(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);
@@ -896,7 +899,7 @@ namespace MgmtExpandResourceTypes
         /// <param name="top"> The maximum number of record sets to return. If not specified, returns up to 100 record sets. </param>
         /// <param name="recordSetNameSuffix"> The suffix label of the record set name that has to be used to filter the record set enumerations. If this parameter is specified, Enumeration will return only records that end with .&lt;recordSetNameSuffix&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="RecordSetData" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="RecordSetData"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<RecordSetData> GetAllRecordSets(int? top = null, string recordSetNameSuffix = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetsRestClient.CreateListAllByDnsZoneRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, top, recordSetNameSuffix);

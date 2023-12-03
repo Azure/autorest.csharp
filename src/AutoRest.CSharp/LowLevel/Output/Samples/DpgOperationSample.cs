@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
@@ -44,6 +43,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool IsAllParametersUsed { get; }
         public string ExampleKey { get; }
         public bool IsConvenienceSample { get; }
+        public string? ResourceName => _inputOperationExample.Operation.ResourceName;
+        public string InputOperationName => _inputOperationExample.Operation.Name;
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
@@ -96,7 +97,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     if (parameter.IsOptionalInSignature)
                         continue;
 
-                    parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Snippets.Default : Snippets.Null;
+                    parameterExpression = parameter.Type.IsValueType && !parameter.Type.IsNullable ? Default.CastTo(parameter.Type) : Null.CastTo(parameter.Type);
                 }
                 if (IsInlineParameter(parameter))
                 {
@@ -133,9 +134,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 if (exampleValue == null)
                 {
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
-                    if (parameter.DefaultValue == null)
+                    if (!parameter.IsOptionalInSignature)
                     {
-                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                     }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
@@ -166,7 +167,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // then we return all the parameters on this operation
             var parameters = IsAllParametersUsed ?
                 _operationMethodSignature.Parameters :
-                _operationMethodSignature.Parameters.Where(p => p.DefaultValue == null);
+                _operationMethodSignature.Parameters.Where(p => !p.IsOptionalInSignature);
             foreach (var parameter in parameters)
                 yield return parameter;
         }
@@ -201,7 +202,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (parameter == KnownParameters.RequestContextRequired)
             {
                 // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                 return true;
             }
 
@@ -222,14 +223,14 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (IsSameParameter(parameter, KnownParameters.RequestConditionsParameter) || IsSameParameter(parameter, KnownParameters.MatchConditionsParameter))
             {
                 // temporarily just return null value
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, Null.CastTo(parameter.Type)));
                 return true;
             }
 
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(typeof(AzureKeyCredential), Literal("<key>"))));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, New.Instance(Configuration.ApiTypes.KeyCredentialType, Configuration.ApiTypes.GetKeySampleExpression(_client.TopLevelClient.Type.Name))));
                 return true;
             }
 

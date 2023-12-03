@@ -7,17 +7,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Expressions.KnownValueExpressions.Azure;
 using AutoRest.CSharp.Common.Output.Expressions.Statements;
 using AutoRest.CSharp.Common.Output.Expressions.ValueExpressions;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -63,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         _writer.Line();
                         using (_writer.WriteMethodDeclaration(_opSource.ArmClientCtor))
                         {
-                            _writer.Line($"{_opSource.ArmClientField.Name} = {MgmtTypeProvider.ArmClientParameter.Name};");
+                            _writer.Line($"{_opSource.ArmClientField.Name} = {KnownParameters.ArmClient.Name};");
                         }
                     }
 
@@ -85,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             _writer.Line($"return data;");
                             _writer.Line();
                             _writer.Append($"var newId = {resourceType}.CreateResourceIdentifier(");
-                            var createIdMethod = resource.CreateResourceIdentifierMethodSignature;
+                            var createIdMethod = resource.CreateResourceIdentifierMethod.Signature;
                             foreach (var param in createIdMethod.Parameters)
                             {
                                 _writer.Line();
@@ -126,30 +127,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateResult()
         {
-            var responseVariable = new VariableReference(typeof(Response), "response");
-            using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
+            var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
+            using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable), false).AsStatement());
+                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, false).AsStatement());
             }
         }
 
         private void WriteCreateResultAsync()
         {
-            var responseVariable = new VariableReference(typeof(Response), "response");
-            using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
+            var responseVariable = new VariableReference(Configuration.ApiTypes.ResponseType, $"{Configuration.ApiTypes.ResponseParameterName}");
+            using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({Configuration.ApiTypes.ResponseType} {responseVariable.Declaration:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable), true).AsStatement());
+                _writer.WriteMethodBodyStatement(BuildCreateResultBody(new ResponseExpression(responseVariable).ContentStream, true).AsStatement());
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(ResponseExpression response, bool async)
+        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(StreamExpression stream, bool async)
         {
             if (_opSource.IsReturningResource)
             {
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                yield return UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document);
+                yield return UsingVar("document", JsonDocumentExpression.Parse(stream, async), out var document);
 
                 var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
@@ -164,11 +165,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     yield return Assign(new MemberExpression(dataVariable, "Id"), new MemberExpression(_opSource.ArmClientField, "Id"));
                 }
-                yield return Return(New.Instance(_opSource.Resource.Type, _opSource.ArmClientField, dataVariable));
+                yield return Return(New.Instance(_opSource.Resource.Type, (ValueExpression)_opSource.ArmClientField, dataVariable));
             }
             else
             {
-                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, response, _opSource.ReturnType.Equals(typeof(BinaryData)));
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, stream, _opSource.ReturnType.Equals(typeof(BinaryData)));
             }
         }
     }

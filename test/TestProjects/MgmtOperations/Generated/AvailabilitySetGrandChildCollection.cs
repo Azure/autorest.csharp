@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtOperations
 {
     /// <summary>
-    /// A class representing a collection of <see cref="AvailabilitySetGrandChildResource" /> and their operations.
-    /// Each <see cref="AvailabilitySetGrandChildResource" /> in the collection will belong to the same instance of <see cref="AvailabilitySetChildResource" />.
-    /// To get an <see cref="AvailabilitySetGrandChildCollection" /> instance call the GetAvailabilitySetGrandChildren method from an instance of <see cref="AvailabilitySetChildResource" />.
+    /// A class representing a collection of <see cref="AvailabilitySetGrandChildResource"/> and their operations.
+    /// Each <see cref="AvailabilitySetGrandChildResource"/> in the collection will belong to the same instance of <see cref="AvailabilitySetChildResource"/>.
+    /// To get an <see cref="AvailabilitySetGrandChildCollection"/> instance call the GetAvailabilitySetGrandChildren method from an instance of <see cref="AvailabilitySetChildResource"/>.
     /// </summary>
     public partial class AvailabilitySetGrandChildCollection : ArmCollection, IEnumerable<AvailabilitySetGrandChildResource>, IAsyncEnumerable<AvailabilitySetGrandChildResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtOperations
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AvailabilitySetGrandChildResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="AvailabilitySetGrandChildResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<AvailabilitySetGrandChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
@@ -244,7 +244,7 @@ namespace MgmtOperations
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AvailabilitySetGrandChildResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="AvailabilitySetGrandChildResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<AvailabilitySetGrandChildResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);

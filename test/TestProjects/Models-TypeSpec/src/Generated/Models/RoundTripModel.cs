@@ -15,7 +15,7 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used both as input and output. </summary>
     public partial class RoundTripModel : BaseModel
     {
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredNullableInt"> Required nullable int. </param>
@@ -72,7 +72,7 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableStringList = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="nonRequiredString"> Optional string. </param>
@@ -221,7 +221,7 @@ namespace ModelsTypeSpec.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -252,7 +252,7 @@ namespace ModelsTypeSpec.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

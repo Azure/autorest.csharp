@@ -13,13 +13,13 @@ namespace AppConfiguration.Models
     /// <summary> The result of a list request. </summary>
     internal partial class KeyListResult
     {
-        /// <summary> Initializes a new instance of KeyListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyListResult"/>. </summary>
         internal KeyListResult()
         {
             Items = new ChangeTrackingList<Key>();
         }
 
-        /// <summary> Initializes a new instance of KeyListResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="KeyListResult"/>. </summary>
         /// <param name="items"> The collection value. </param>
         /// <param name="nextLink"> The URI that can be used to request the next set of paged results. </param>
         internal KeyListResult(IReadOnlyList<Key> items, string nextLink)

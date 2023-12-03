@@ -13,7 +13,7 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Unknown version of Pet. </summary>
     internal partial class UnknownPet : Pet
     {
-        /// <summary> Initializes a new instance of UnknownPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal UnknownPet(string name) : base(name)
@@ -21,7 +21,7 @@ namespace ConfidentLevelsInTsp.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary> Initializes a new instance of UnknownPet. </summary>
+        /// <summary> Initializes a new instance of <see cref="UnknownPet"/>. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         internal UnknownPet(string kind, string name) : base(kind, name)

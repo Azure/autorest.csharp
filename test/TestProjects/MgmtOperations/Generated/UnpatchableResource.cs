@@ -21,13 +21,16 @@ namespace MgmtOperations
 {
     /// <summary>
     /// A Class representing an UnpatchableResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="UnpatchableResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetUnpatchableResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetUnpatchableResource method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="UnpatchableResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetUnpatchableResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetUnpatchableResource method.
     /// </summary>
     public partial class UnpatchableResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="UnpatchableResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="name"> The name. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/unpatchableResources/{name}";
@@ -38,12 +41,15 @@ namespace MgmtOperations
         private readonly UnpatchableResourcesRestOperations _unpatchableResourceRestClient;
         private readonly UnpatchableResourceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/unpatchableResources";
+
         /// <summary> Initializes a new instance of the <see cref="UnpatchableResource"/> class for mocking. </summary>
         protected UnpatchableResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "UnpatchableResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="UnpatchableResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal UnpatchableResource(ArmClient client, UnpatchableResourceData data) : this(client, data.Id)
@@ -64,9 +70,6 @@ namespace MgmtOperations
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/unpatchableResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

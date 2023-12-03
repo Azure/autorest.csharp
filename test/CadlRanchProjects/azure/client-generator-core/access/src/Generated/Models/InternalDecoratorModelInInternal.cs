@@ -13,7 +13,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Models
     /// <summary> Used in an internal operation, should be generated but not exported. </summary>
     internal partial class InternalDecoratorModelInInternal
     {
-        /// <summary> Initializes a new instance of InternalDecoratorModelInInternal. </summary>
+        /// <summary> Initializes a new instance of <see cref="InternalDecoratorModelInInternal"/>. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal InternalDecoratorModelInInternal(string name)

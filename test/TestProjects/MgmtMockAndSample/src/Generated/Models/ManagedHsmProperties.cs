@@ -14,14 +14,14 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the managed HSM Pool. </summary>
     public partial class ManagedHsmProperties
     {
-        /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmProperties"/>. </summary>
         public ManagedHsmProperties()
         {
             InitialAdminObjectIds = new ChangeTrackingList<string>();
             PrivateEndpointConnections = new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>();
         }
 
-        /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
+        /// <summary> Initializes a new instance of <see cref="ManagedHsmProperties"/>. </summary>
         /// <param name="settings"> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="protectedSettings"> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="rawMessage"> The raw message content. </param>
@@ -64,7 +64,7 @@ namespace MgmtMockAndSample.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
@@ -95,7 +95,7 @@ namespace MgmtMockAndSample.Models
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:

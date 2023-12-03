@@ -10,12 +10,12 @@ namespace MgmtDiscriminator.Models
     /// <summary> The BaseModel. </summary>
     public partial class BaseModel
     {
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         public BaseModel()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="BaseModel"/>. </summary>
         /// <param name="optionalString"></param>
         internal BaseModel(string optionalString)
         {

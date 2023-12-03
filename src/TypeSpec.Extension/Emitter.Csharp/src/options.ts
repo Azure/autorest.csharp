@@ -32,6 +32,8 @@ export type NetEmitterOptions = {
     "package-dir"?: string;
     "head-as-boolean"?: boolean;
     "generate-tests"?: boolean;
+    branded?: boolean;
+    generateTestProject?: boolean;
 } & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -104,7 +106,9 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         "package-dir": { type: "string", nullable: true },
         "head-as-boolean": { type: "boolean", nullable: true },
-        "generate-tests": { type: "boolean", nullable: true }
+        "generate-tests": { type: "boolean", nullable: true },
+        branded: { type: "boolean", nullable: true, default: true },
+        generateTestProject: { type: "boolean", nullable: true, default: true }
     },
     required: []
 };
@@ -126,7 +130,9 @@ const defaultOptions = {
     "additional-intrinsic-types-to-treat-empty-string-as-null": [],
     "methods-to-keep-client-default-value": undefined,
     "deserialize-null-collection-as-null-value": undefined,
-    logLevel: LoggerLevel.INFO
+    logLevel: LoggerLevel.INFO,
+    branded: true,
+    generateTestProject: true
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {

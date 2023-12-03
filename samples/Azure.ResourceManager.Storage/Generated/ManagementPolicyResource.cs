@@ -19,13 +19,17 @@ namespace Azure.ResourceManager.Storage
 {
     /// <summary>
     /// A Class representing a ManagementPolicy along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="ManagementPolicyResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetManagementPolicyResource method.
-    /// Otherwise you can get one from its parent resource <see cref="StorageAccountResource" /> using the GetManagementPolicy method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="ManagementPolicyResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetManagementPolicyResource method.
+    /// Otherwise you can get one from its parent resource <see cref="StorageAccountResource"/> using the GetManagementPolicy method.
     /// </summary>
     public partial class ManagementPolicyResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="ManagementPolicyResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="accountName"> The accountName. </param>
+        /// <param name="managementPolicyName"> The managementPolicyName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/managementPolicies/{managementPolicyName}";
@@ -36,12 +40,15 @@ namespace Azure.ResourceManager.Storage
         private readonly ManagementPoliciesRestOperations _managementPolicyRestClient;
         private readonly ManagementPolicyData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/managementPolicies";
+
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyResource"/> class for mocking. </summary>
         protected ManagementPolicyResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "ManagementPolicyResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagementPolicyResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal ManagementPolicyResource(ArmClient client, ManagementPolicyData data) : this(client, data.Id)
@@ -62,9 +69,6 @@ namespace Azure.ResourceManager.Storage
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/managementPolicies";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

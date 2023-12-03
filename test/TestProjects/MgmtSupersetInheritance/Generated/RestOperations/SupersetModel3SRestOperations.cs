@@ -61,10 +61,10 @@ namespace MgmtSupersetInheritance
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="supersetModel3SName"> The <see cref="string"/> to use. </param>
+        /// <param name="supersetModel3"> The <see cref="SupersetModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -91,10 +91,10 @@ namespace MgmtSupersetInheritance
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="supersetModel3SName"> The <see cref="string"/> to use. </param>
+        /// <param name="supersetModel3"> The <see cref="SupersetModel3"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -141,9 +141,9 @@ namespace MgmtSupersetInheritance
             return message;
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="supersetModel3SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -169,9 +169,9 @@ namespace MgmtSupersetInheritance
             }
         }
 
-        /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
+        /// <param name="subscriptionId"> The <see cref="string"/> to use. </param>
+        /// <param name="resourceGroupName"> The <see cref="string"/> to use. </param>
+        /// <param name="supersetModel3SName"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>

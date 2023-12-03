@@ -20,13 +20,15 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a MgmtGroupParent along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="MgmtGroupParentResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetMgmtGroupParentResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ManagementGroupResource" /> using the GetMgmtGroupParent method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="MgmtGroupParentResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetMgmtGroupParentResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ManagementGroupResource"/> using the GetMgmtGroupParent method.
     /// </summary>
     public partial class MgmtGroupParentResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="MgmtGroupParentResource"/> instance. </summary>
+        /// <param name="groupId"> The groupId. </param>
+        /// <param name="mgmtGroupParentName"> The mgmtGroupParentName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string groupId, string mgmtGroupParentName)
         {
             var resourceId = $"/providers/Microsoft.Management/managementGroups/{groupId}/mgmtGroupParents/{mgmtGroupParentName}";
@@ -37,12 +39,15 @@ namespace MgmtListMethods
         private readonly MgmtGroupParentsRestOperations _mgmtGroupParentRestClient;
         private readonly MgmtGroupParentData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGroupParents";
+
         /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentResource"/> class for mocking. </summary>
         protected MgmtGroupParentResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "MgmtGroupParentResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtGroupParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal MgmtGroupParentResource(ArmClient client, MgmtGroupParentData data) : this(client, data.Id)
@@ -63,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Management/managementGroups/mgmtGroupParents";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

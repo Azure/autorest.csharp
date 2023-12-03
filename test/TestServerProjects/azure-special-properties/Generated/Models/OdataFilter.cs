@@ -10,9 +10,18 @@ namespace azure_special_properties.Models
     /// <summary> The OdataFilter. </summary>
     internal partial class OdataFilter
     {
-        /// <summary> Initializes a new instance of OdataFilter. </summary>
+        /// <summary> Initializes a new instance of <see cref="OdataFilter"/>. </summary>
         internal OdataFilter()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OdataFilter"/>. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        internal OdataFilter(int? id, string name)
+        {
+            Id = id;
+            Name = name;
         }
 
         /// <summary> Gets the id. </summary>

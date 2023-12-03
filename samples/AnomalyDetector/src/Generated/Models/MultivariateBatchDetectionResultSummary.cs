@@ -14,7 +14,7 @@ namespace AnomalyDetector.Models
     /// <summary> Multivariate anomaly detection status. </summary>
     public partial class MultivariateBatchDetectionResultSummary
     {
-        /// <summary> Initializes a new instance of MultivariateBatchDetectionResultSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionResultSummary"/>. </summary>
         /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="setupInfo">
         /// Detection request for batch inference. This is an asynchronous inference which
@@ -31,7 +31,7 @@ namespace AnomalyDetector.Models
             SetupInfo = setupInfo;
         }
 
-        /// <summary> Initializes a new instance of MultivariateBatchDetectionResultSummary. </summary>
+        /// <summary> Initializes a new instance of <see cref="MultivariateBatchDetectionResultSummary"/>. </summary>
         /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="errors"> Error message when detection is failed. </param>
         /// <param name="variableStates"> Variable Status. </param>

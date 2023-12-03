@@ -10,9 +10,18 @@ namespace azure_parameter_grouping.Models
     /// <summary> Parameter group. </summary>
     public partial class Grouper
     {
-        /// <summary> Initializes a new instance of Grouper. </summary>
+        /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
         public Grouper()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Grouper"/>. </summary>
+        /// <param name="groupedConstant"> A grouped parameter that is a constant. </param>
+        /// <param name="groupedParameter"> Optional parameter part of a parameter grouping. </param>
+        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter)
+        {
+            GroupedConstant = groupedConstant;
+            GroupedParameter = groupedParameter;
         }
 
         /// <summary> A grouped parameter that is a constant. </summary>

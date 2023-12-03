@@ -19,13 +19,16 @@ namespace MgmtResourceName
 {
     /// <summary>
     /// A Class representing a Network along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="NetworkResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetNetworkResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetNetwork method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="NetworkResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetNetworkResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetNetwork method.
     /// </summary>
     public partial class NetworkResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="NetworkResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="networkResourceName"> The networkResourceName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string networkResourceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/networkResources/{networkResourceName}";
@@ -36,12 +39,15 @@ namespace MgmtResourceName
         private readonly NetworkResourcesRestOperations _networkNetworkResourcesRestClient;
         private readonly NetworkData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/networkResources";
+
         /// <summary> Initializes a new instance of the <see cref="NetworkResource"/> class for mocking. </summary>
         protected NetworkResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "NetworkResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="NetworkResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal NetworkResource(ArmClient client, NetworkData data) : this(client, data.Id)
@@ -62,9 +68,6 @@ namespace MgmtResourceName
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/networkResources";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -162,7 +165,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The Network to use. </param>
+        /// <param name="data"> The <see cref="NetworkData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual async Task<ArmOperation<NetworkResource>> UpdateAsync(WaitUntil waitUntil, NetworkData data, CancellationToken cancellationToken = default)
@@ -199,7 +202,7 @@ namespace MgmtResourceName
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="data"> The Network to use. </param>
+        /// <param name="data"> The <see cref="NetworkData"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="data"/> is null. </exception>
         public virtual ArmOperation<NetworkResource> Update(WaitUntil waitUntil, NetworkData data, CancellationToken cancellationToken = default)

@@ -11,9 +11,9 @@ using Azure.Core;
 namespace ConfidentLevelsInTsp.Models
 {
     /// <summary> The derived model. </summary>
-    internal partial class DerivedModel : BaseModel
+    public partial class DerivedModel : BaseModel
     {
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public DerivedModel(string name) : base(name)
@@ -21,7 +21,7 @@ namespace ConfidentLevelsInTsp.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of <see cref="DerivedModel"/>. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
         /// <param name="age"> The age. </param>

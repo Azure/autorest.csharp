@@ -20,7 +20,7 @@ namespace MultipleMediaTypes.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneBinaryBodyTwoContentTypes_ShortVersion()
+        public void Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -33,7 +33,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneBinaryBodyTwoContentTypes_ShortVersion_Async()
+        public async Task Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -46,7 +46,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneBinaryBodyTwoContentTypes_ShortVersion_Convenience()
+        public void Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -56,7 +56,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneBinaryBodyTwoContentTypes_ShortVersion_Convenience_Async()
+        public async Task Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -66,7 +66,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneBinaryBodyTwoContentTypes_AllParameters()
+        public void Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -79,7 +79,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneBinaryBodyTwoContentTypes_AllParameters_Async()
+        public async Task Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -92,7 +92,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneBinaryBodyTwoContentTypes_AllParameters_Convenience()
+        public void Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -102,7 +102,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneBinaryBodyTwoContentTypes_AllParameters_Convenience_Async()
+        public async Task Example_MultipleMediaTypes_OneBinaryBodyTwoContentTypes_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -112,7 +112,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneStringBodyThreeContentTypes_ShortVersion()
+        public void Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -125,7 +125,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneStringBodyThreeContentTypes_ShortVersion_Async()
+        public async Task Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -138,7 +138,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneStringBodyThreeContentTypes_ShortVersion_Convenience()
+        public void Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -148,7 +148,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneStringBodyThreeContentTypes_ShortVersion_Convenience_Async()
+        public async Task Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -158,7 +158,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneStringBodyThreeContentTypes_AllParameters()
+        public void Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -171,7 +171,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneStringBodyThreeContentTypes_AllParameters_Async()
+        public async Task Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -184,7 +184,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneStringBodyThreeContentTypes_AllParameters_Convenience()
+        public void Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -194,7 +194,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneStringBodyThreeContentTypes_AllParameters_Convenience_Async()
+        public async Task Example_MultipleMediaTypes_OneStringBodyThreeContentTypes_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -204,7 +204,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneModelBodyOneContentType_ShortVersion()
+        public void Example_MultipleMediaTypes_OneModelBodyOneContentType_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -220,7 +220,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneModelBodyOneContentType_ShortVersion_Async()
+        public async Task Example_MultipleMediaTypes_OneModelBodyOneContentType_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -236,7 +236,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneModelBodyOneContentType_ShortVersion_Convenience()
+        public void Example_MultipleMediaTypes_OneModelBodyOneContentType_ShortVersion_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -247,7 +247,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneModelBodyOneContentType_ShortVersion_Convenience_Async()
+        public async Task Example_MultipleMediaTypes_OneModelBodyOneContentType_ShortVersion_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -258,7 +258,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneModelBodyOneContentType_AllParameters()
+        public void Example_MultipleMediaTypes_OneModelBodyOneContentType_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -274,7 +274,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneModelBodyOneContentType_AllParameters_Async()
+        public async Task Example_MultipleMediaTypes_OneModelBodyOneContentType_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -290,7 +290,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OneModelBodyOneContentType_AllParameters_Convenience()
+        public void Example_MultipleMediaTypes_OneModelBodyOneContentType_AllParameters_Convenience()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);
@@ -301,7 +301,7 @@ namespace MultipleMediaTypes.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OneModelBodyOneContentType_AllParameters_Convenience_Async()
+        public async Task Example_MultipleMediaTypes_OneModelBodyOneContentType_AllParameters_Convenience_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             MultipleMediaTypesClient client = new MultipleMediaTypesClient(endpoint);

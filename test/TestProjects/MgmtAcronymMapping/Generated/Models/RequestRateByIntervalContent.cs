@@ -16,7 +16,7 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     public partial class RequestRateByIntervalContent : LogAnalyticsInputBase
     {
-        /// <summary> Initializes a new instance of RequestRateByIntervalContent. </summary>
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -38,6 +38,40 @@ namespace MgmtAcronymMapping.Models
         {
             Argument.AssertNotNull(blobContainerSasUri, nameof(blobContainerSasUri));
 
+            IntervalLength = intervalLength;
+        }
+
+        /// <summary> Initializes a new instance of <see cref="RequestRateByIntervalContent"/>. </summary>
+        /// <param name="blobContainerSasUri">
+        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
+        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
+        /// </param>
+        /// <param name="fromTime">
+        /// From time of the query
+        /// Serialized Name: LogAnalyticsInputBase.fromTime
+        /// </param>
+        /// <param name="toTime">
+        /// To time of the query
+        /// Serialized Name: LogAnalyticsInputBase.toTime
+        /// </param>
+        /// <param name="groupByThrottlePolicy">
+        /// Group query result by Throttle Policy applied.
+        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
+        /// </param>
+        /// <param name="groupByOperationName">
+        /// Group query result by Operation Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
+        /// </param>
+        /// <param name="groupByResourceName">
+        /// Group query result by Resource Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
+        /// </param>
+        /// <param name="intervalLength">
+        /// Interval value in minutes used to create LogAnalytics call rate logs.
+        /// Serialized Name: RequestRateByIntervalInput.intervalLength
+        /// </param>
+        internal RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, IntervalInMin intervalLength) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName)
+        {
             IntervalLength = intervalLength;
         }
 

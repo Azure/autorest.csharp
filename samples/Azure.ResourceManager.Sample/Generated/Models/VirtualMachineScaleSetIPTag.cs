@@ -13,12 +13,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetIPTag
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPTag"/>. </summary>
         public VirtualMachineScaleSetIPTag()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
+        /// <summary> Initializes a new instance of <see cref="VirtualMachineScaleSetIPTag"/>. </summary>
         /// <param name="ipTagType">
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType

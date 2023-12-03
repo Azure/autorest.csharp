@@ -10,9 +10,18 @@ namespace lro.Models
     /// <summary> The OperationResultError. </summary>
     internal partial class OperationResultError
     {
-        /// <summary> Initializes a new instance of OperationResultError. </summary>
+        /// <summary> Initializes a new instance of <see cref="OperationResultError"/>. </summary>
         internal OperationResultError()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="OperationResultError"/>. </summary>
+        /// <param name="code"> The error code for an operation failure. </param>
+        /// <param name="message"> The detailed arror message. </param>
+        internal OperationResultError(int? code, string message)
+        {
+            Code = code;
+            Message = message;
         }
 
         /// <summary> The error code for an operation failure. </summary>

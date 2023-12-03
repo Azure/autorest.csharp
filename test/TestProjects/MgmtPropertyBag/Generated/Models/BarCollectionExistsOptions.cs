@@ -14,7 +14,7 @@ namespace MgmtPropertyBag.Models
     /// <summary> The BarCollectionExistsOptions. </summary>
     public partial class BarCollectionExistsOptions
     {
-        /// <summary> Initializes a new instance of BarCollectionExistsOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="BarCollectionExistsOptions"/>. </summary>
         /// <param name="barName"> The bar name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         public BarCollectionExistsOptions(string barName)
@@ -31,7 +31,7 @@ namespace MgmtPropertyBag.Models
         public string IfMatch { get; set; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
-        /// <summary> The Integer to use. </summary>
+        /// <summary> The top. </summary>
         public int? Top { get; set; }
         /// <summary> Optional. Number of records to skip. </summary>
         public int? Skip { get; set; }

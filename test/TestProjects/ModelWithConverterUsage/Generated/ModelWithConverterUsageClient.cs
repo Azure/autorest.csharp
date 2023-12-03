@@ -30,15 +30,15 @@ namespace ModelWithConverterUsage
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal ModelWithConverterUsageClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="endpoint"/> is null. </exception>
+        internal ModelWithConverterUsageClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint)
         {
             RestClient = new ModelWithConverterUsageRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        /// <param name="value"> The ModelClass to use. </param>
+        /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelClass>> OperationModelAsync(ModelClass value, CancellationToken cancellationToken = default)
         {
@@ -55,7 +55,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="value"> The ModelClass to use. </param>
+        /// <param name="value"> The <see cref="ModelClass"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelClass> OperationModel(ModelClass value, CancellationToken cancellationToken = default)
         {
@@ -72,7 +72,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<ModelStruct>> OperationStructAsync(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {
@@ -89,7 +89,7 @@ namespace ModelWithConverterUsage
             }
         }
 
-        /// <param name="body"> The ModelStruct to use. </param>
+        /// <param name="body"> The <see cref="ModelStruct"/>? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<ModelStruct> OperationStruct(ModelStruct? body = null, CancellationToken cancellationToken = default)
         {

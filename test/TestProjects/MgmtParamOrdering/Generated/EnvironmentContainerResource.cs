@@ -19,13 +19,17 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A Class representing an EnvironmentContainerResource along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="EnvironmentContainerResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetEnvironmentContainerResource method.
-    /// Otherwise you can get one from its parent resource <see cref="WorkspaceResource" /> using the GetEnvironmentContainerResource method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="EnvironmentContainerResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetEnvironmentContainerResource method.
+    /// Otherwise you can get one from its parent resource <see cref="WorkspaceResource"/> using the GetEnvironmentContainerResource method.
     /// </summary>
     public partial class EnvironmentContainerResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="EnvironmentContainerResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="workspaceName"> The workspaceName. </param>
+        /// <param name="name"> The name. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string workspaceName, string name)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}";
@@ -36,12 +40,15 @@ namespace MgmtParamOrdering
         private readonly EnvironmentContainersRestOperations _environmentContainerResourceEnvironmentContainersRestClient;
         private readonly EnvironmentContainerResourceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MachineLearningServices/workspaces/environments";
+
         /// <summary> Initializes a new instance of the <see cref="EnvironmentContainerResource"/> class for mocking. </summary>
         protected EnvironmentContainerResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "EnvironmentContainerResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="EnvironmentContainerResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal EnvironmentContainerResource(ArmClient client, EnvironmentContainerResourceData data) : this(client, data.Id)
@@ -62,9 +69,6 @@ namespace MgmtParamOrdering
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MachineLearningServices/workspaces/environments";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

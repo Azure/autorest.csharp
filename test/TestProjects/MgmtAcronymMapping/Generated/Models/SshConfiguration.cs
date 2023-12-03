@@ -16,13 +16,13 @@ namespace MgmtAcronymMapping.Models
     /// </summary>
     internal partial class SshConfiguration
     {
-        /// <summary> Initializes a new instance of SshConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshConfiguration"/>. </summary>
         public SshConfiguration()
         {
             PublicKeys = new ChangeTrackingList<SshPublicKeyInfo>();
         }
 
-        /// <summary> Initializes a new instance of SshConfiguration. </summary>
+        /// <summary> Initializes a new instance of <see cref="SshConfiguration"/>. </summary>
         /// <param name="publicKeys">
         /// The list of SSH public keys used to authenticate with linux based VMs.
         /// Serialized Name: SshConfiguration.publicKeys

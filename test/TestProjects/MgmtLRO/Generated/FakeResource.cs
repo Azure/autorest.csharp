@@ -21,13 +21,16 @@ namespace MgmtLRO
 {
     /// <summary>
     /// A Class representing a Fake along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetFake method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetFake method.
     /// </summary>
     public partial class FakeResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="fakeName"> The fakeName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string fakeName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}";
@@ -38,12 +41,15 @@ namespace MgmtLRO
         private readonly FakesRestOperations _fakeRestClient;
         private readonly FakeData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes";
+
         /// <summary> Initializes a new instance of the <see cref="FakeResource"/> class for mocking. </summary>
         protected FakeResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeResource(ArmClient client, FakeData data) : this(client, data.Id)
@@ -64,9 +70,6 @@ namespace MgmtLRO
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

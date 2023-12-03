@@ -54,7 +54,7 @@ namespace AdditionalPropertiesEx
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public async Task<Response> WriteOnlyAsync(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
@@ -76,7 +76,7 @@ namespace AdditionalPropertiesEx
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModel to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModel"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="createParameters"/> is null. </exception>
         public Response WriteOnly(InputAdditionalPropertiesModel createParameters, CancellationToken cancellationToken = default)
@@ -168,7 +168,7 @@ namespace AdditionalPropertiesEx
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModelStruct"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> WriteOnlyStructAsync(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {
@@ -184,7 +184,7 @@ namespace AdditionalPropertiesEx
         }
 
         /// <summary> Create a Pet which contains more properties than what is defined. </summary>
-        /// <param name="createParameters"> The InputAdditionalPropertiesModelStruct to use. </param>
+        /// <param name="createParameters"> The <see cref="InputAdditionalPropertiesModelStruct"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response WriteOnlyStruct(InputAdditionalPropertiesModelStruct createParameters, CancellationToken cancellationToken = default)
         {

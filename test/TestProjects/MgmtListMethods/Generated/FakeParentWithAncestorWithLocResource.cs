@@ -19,13 +19,16 @@ namespace MgmtListMethods
 {
     /// <summary>
     /// A Class representing a FakeParentWithAncestorWithLoc along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="FakeParentWithAncestorWithLocResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetFakeParentWithAncestorWithLocResource method.
-    /// Otherwise you can get one from its parent resource <see cref="FakeResource" /> using the GetFakeParentWithAncestorWithLoc method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="FakeParentWithAncestorWithLocResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetFakeParentWithAncestorWithLocResource method.
+    /// Otherwise you can get one from its parent resource <see cref="FakeResource"/> using the GetFakeParentWithAncestorWithLoc method.
     /// </summary>
     public partial class FakeParentWithAncestorWithLocResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="FakeParentWithAncestorWithLocResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="fakeName"> The fakeName. </param>
+        /// <param name="fakeParentWithAncestorWithLocName"> The fakeParentWithAncestorWithLocName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string fakeName, string fakeParentWithAncestorWithLocName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakes/{fakeName}/fakeParentWithAncestorWithLocs/{fakeParentWithAncestorWithLocName}";
@@ -36,12 +39,15 @@ namespace MgmtListMethods
         private readonly FakeParentWithAncestorWithLocsRestOperations _fakeParentWithAncestorWithLocRestClient;
         private readonly FakeParentWithAncestorWithLocData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs";
+
         /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithLocResource"/> class for mocking. </summary>
         protected FakeParentWithAncestorWithLocResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "FakeParentWithAncestorWithLocResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FakeParentWithAncestorWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal FakeParentWithAncestorWithLocResource(ArmClient client, FakeParentWithAncestorWithLocData data) : this(client, data.Id)
@@ -62,9 +68,6 @@ namespace MgmtListMethods
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Fake/fakes/fakeParentWithAncestorWithLocs";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

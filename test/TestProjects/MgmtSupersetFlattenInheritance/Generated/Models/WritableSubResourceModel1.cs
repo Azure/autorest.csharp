@@ -10,12 +10,12 @@ namespace MgmtSupersetFlattenInheritance.Models
     /// <summary> WritableSubResource WITHOUT flatten properties. </summary>
     public partial class WritableSubResourceModel1
     {
-        /// <summary> Initializes a new instance of WritableSubResourceModel1. </summary>
+        /// <summary> Initializes a new instance of <see cref="WritableSubResourceModel1"/>. </summary>
         public WritableSubResourceModel1()
         {
         }
 
-        /// <summary> Initializes a new instance of WritableSubResourceModel1. </summary>
+        /// <summary> Initializes a new instance of <see cref="WritableSubResourceModel1"/>. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
         internal WritableSubResourceModel1(string id, string foo)

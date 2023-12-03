@@ -14,7 +14,7 @@ namespace CognitiveSearch.Models
     /// <summary> Model factory for models. </summary>
     public static partial class CognitiveSearchModelFactory
     {
-        /// <summary> Initializes a new instance of SearchDocumentsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SearchDocumentsResult"/>. </summary>
         /// <param name="count"> The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can't return all the requested documents in a single Search response. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="facets"> The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions. </param>
@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
             return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results?.ToList(), nextLink);
         }
 
-        /// <summary> Initializes a new instance of FacetResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.FacetResult"/>. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.FacetResult"/> instance for mocking. </returns>
@@ -41,7 +41,7 @@ namespace CognitiveSearch.Models
             return new FacetResult(count, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of SearchResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SearchResult"/>. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
             return new SearchResult(score, highlights, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of SuggestDocumentsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SuggestDocumentsResult"/>. </summary>
         /// <param name="results"> The sequence of results returned by the query. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request. </param>
         /// <returns> A new <see cref="Models.SuggestDocumentsResult"/> instance for mocking. </returns>
@@ -65,7 +65,7 @@ namespace CognitiveSearch.Models
             return new SuggestDocumentsResult(results?.ToList(), coverage);
         }
 
-        /// <summary> Initializes a new instance of SuggestResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SuggestResult"/>. </summary>
         /// <param name="text"> The text of the suggestion result. </param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SuggestResult"/> instance for mocking. </returns>
@@ -76,7 +76,7 @@ namespace CognitiveSearch.Models
             return new SuggestResult(text, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of IndexDocumentsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IndexDocumentsResult"/>. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
         /// <returns> A new <see cref="Models.IndexDocumentsResult"/> instance for mocking. </returns>
         public static IndexDocumentsResult IndexDocumentsResult(IEnumerable<IndexingResult> results = null)
@@ -86,7 +86,7 @@ namespace CognitiveSearch.Models
             return new IndexDocumentsResult(results?.ToList());
         }
 
-        /// <summary> Initializes a new instance of IndexingResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IndexingResult"/>. </summary>
         /// <param name="key"> The key of a document that was in the indexing request. </param>
         /// <param name="errorMessage"> The error message explaining why the indexing operation failed for the document identified by the key; null if indexing succeeded. </param>
         /// <param name="succeeded"> A value indicating whether the indexing operation succeeded for the document identified by the key. </param>
@@ -97,7 +97,7 @@ namespace CognitiveSearch.Models
             return new IndexingResult(key, errorMessage, succeeded, statusCode);
         }
 
-        /// <summary> Initializes a new instance of AutocompleteResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AutocompleteResult"/>. </summary>
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
         /// <returns> A new <see cref="Models.AutocompleteResult"/> instance for mocking. </returns>
@@ -108,7 +108,7 @@ namespace CognitiveSearch.Models
             return new AutocompleteResult(coverage, results?.ToList());
         }
 
-        /// <summary> Initializes a new instance of AutocompleteItem. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AutocompleteItem"/>. </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="queryPlusText"/> is null. </exception>
@@ -127,7 +127,7 @@ namespace CognitiveSearch.Models
             return new AutocompleteItem(text, queryPlusText);
         }
 
-        /// <summary> Initializes a new instance of ListDataSourcesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ListDataSourcesResult"/>. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
         /// <returns> A new <see cref="Models.ListDataSourcesResult"/> instance for mocking. </returns>
         public static ListDataSourcesResult ListDataSourcesResult(IEnumerable<DataSource> dataSources = null)
@@ -137,7 +137,7 @@ namespace CognitiveSearch.Models
             return new ListDataSourcesResult(dataSources?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ListIndexersResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ListIndexersResult"/>. </summary>
         /// <param name="indexers"> The indexers in the Search service. </param>
         /// <returns> A new <see cref="Models.ListIndexersResult"/> instance for mocking. </returns>
         public static ListIndexersResult ListIndexersResult(IEnumerable<Indexer> indexers = null)
@@ -147,7 +147,7 @@ namespace CognitiveSearch.Models
             return new ListIndexersResult(indexers?.ToList());
         }
 
-        /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IndexerExecutionInfo"/>. </summary>
         /// <param name="status"> Overall indexer status. </param>
         /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
@@ -160,7 +160,7 @@ namespace CognitiveSearch.Models
             return new IndexerExecutionInfo(status, lastResult, executionHistory?.ToList(), limits);
         }
 
-        /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IndexerExecutionResult"/>. </summary>
         /// <param name="status"> The outcome of this indexer execution. </param>
         /// <param name="errorMessage"> The error message indicating the top-level error, if any. </param>
         /// <param name="startTime"> The start time of this indexer execution. </param>
@@ -180,7 +180,7 @@ namespace CognitiveSearch.Models
             return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors?.ToList(), warnings?.ToList(), itemCount, failedItemCount, initialTrackingState, finalTrackingState);
         }
 
-        /// <summary> Initializes a new instance of ItemError. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ItemError"/>. </summary>
         /// <param name="key"> The key of the item for which indexing failed. </param>
         /// <param name="errorMessage"> The message describing the error that occurred while processing the item. </param>
         /// <param name="statusCode"> The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy. </param>
@@ -193,7 +193,7 @@ namespace CognitiveSearch.Models
             return new ItemError(key, errorMessage, statusCode, name, details, documentationLink);
         }
 
-        /// <summary> Initializes a new instance of ItemWarning. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ItemWarning"/>. </summary>
         /// <param name="key"> The key of the item which generated a warning. </param>
         /// <param name="message"> The message describing the warning that occurred while processing the item. </param>
         /// <param name="name"> The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available. </param>
@@ -205,7 +205,7 @@ namespace CognitiveSearch.Models
             return new ItemWarning(key, message, name, details, documentationLink);
         }
 
-        /// <summary> Initializes a new instance of IndexerLimits. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.IndexerLimits"/>. </summary>
         /// <param name="maxRunTime"> The maximum duration that the indexer is permitted to run for one execution. </param>
         /// <param name="maxDocumentExtractionSize"> The maximum size of a document, in bytes, which will be considered valid for indexing. </param>
         /// <param name="maxDocumentContentCharactersToExtract"> The maximum number of characters that will be extracted from a document picked up for indexing. </param>
@@ -215,7 +215,7 @@ namespace CognitiveSearch.Models
             return new IndexerLimits(maxRunTime, maxDocumentExtractionSize, maxDocumentContentCharactersToExtract);
         }
 
-        /// <summary> Initializes a new instance of ListSkillsetsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ListSkillsetsResult"/>. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         /// <returns> A new <see cref="Models.ListSkillsetsResult"/> instance for mocking. </returns>
         public static ListSkillsetsResult ListSkillsetsResult(IEnumerable<Skillset> skillsets = null)
@@ -225,7 +225,7 @@ namespace CognitiveSearch.Models
             return new ListSkillsetsResult(skillsets?.ToList());
         }
 
-        /// <summary> Initializes a new instance of SynonymMap. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.SynonymMap"/>. </summary>
         /// <param name="name"> The name of the synonym map. </param>
         /// <param name="format"> The format of the synonym map. Only the 'solr' format is currently supported. </param>
         /// <param name="synonyms"> A series of synonym rules in the specified synonym map format. The rules must be separated by newlines. </param>
@@ -237,7 +237,7 @@ namespace CognitiveSearch.Models
             return new SynonymMap(name, format, synonyms, encryptionKey, eTag);
         }
 
-        /// <summary> Initializes a new instance of ListSynonymMapsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ListSynonymMapsResult"/>. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
         /// <returns> A new <see cref="Models.ListSynonymMapsResult"/> instance for mocking. </returns>
         public static ListSynonymMapsResult ListSynonymMapsResult(IEnumerable<SynonymMap> synonymMaps = null)
@@ -247,7 +247,7 @@ namespace CognitiveSearch.Models
             return new ListSynonymMapsResult(synonymMaps?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ListIndexesResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ListIndexesResult"/>. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         /// <returns> A new <see cref="Models.ListIndexesResult"/> instance for mocking. </returns>
         public static ListIndexesResult ListIndexesResult(IEnumerable<Index> indexes = null)
@@ -257,7 +257,7 @@ namespace CognitiveSearch.Models
             return new ListIndexesResult(indexes?.ToList());
         }
 
-        /// <summary> Initializes a new instance of GetIndexStatisticsResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.GetIndexStatisticsResult"/>. </summary>
         /// <param name="documentCount"> The number of documents in the index. </param>
         /// <param name="storageSize"> The amount of storage in bytes consumed by the index. </param>
         /// <returns> A new <see cref="Models.GetIndexStatisticsResult"/> instance for mocking. </returns>
@@ -266,7 +266,7 @@ namespace CognitiveSearch.Models
             return new GetIndexStatisticsResult(documentCount, storageSize);
         }
 
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.AnalyzeResult"/>. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         /// <returns> A new <see cref="Models.AnalyzeResult"/> instance for mocking. </returns>
         public static AnalyzeResult AnalyzeResult(IEnumerable<TokenInfo> tokens = null)
@@ -276,7 +276,7 @@ namespace CognitiveSearch.Models
             return new AnalyzeResult(tokens?.ToList());
         }
 
-        /// <summary> Initializes a new instance of TokenInfo. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.TokenInfo"/>. </summary>
         /// <param name="token"> The token returned by the analyzer. </param>
         /// <param name="startOffset"> The index of the first character of the token in the input text. </param>
         /// <param name="endOffset"> The index of the last character of the token in the input text. </param>
@@ -293,7 +293,7 @@ namespace CognitiveSearch.Models
             return new TokenInfo(token, startOffset, endOffset, position);
         }
 
-        /// <summary> Initializes a new instance of ServiceStatistics. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ServiceStatistics"/>. </summary>
         /// <param name="counters"> Service level resource counters. </param>
         /// <param name="limits"> Service level general limits. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="counters"/> or <paramref name="limits"/> is null. </exception>
@@ -312,7 +312,7 @@ namespace CognitiveSearch.Models
             return new ServiceStatistics(counters, limits);
         }
 
-        /// <summary> Initializes a new instance of ServiceCounters. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ServiceCounters"/>. </summary>
         /// <param name="documentCounter"> Total number of documents across all indexes in the service. </param>
         /// <param name="indexCounter"> Total number of indexes. </param>
         /// <param name="indexerCounter"> Total number of indexers. </param>
@@ -356,7 +356,7 @@ namespace CognitiveSearch.Models
             return new ServiceCounters(documentCounter, indexCounter, indexerCounter, dataSourceCounter, storageSizeCounter, synonymMapCounter, skillsetCounter);
         }
 
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ResourceCounter"/>. </summary>
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
         /// <returns> A new <see cref="Models.ResourceCounter"/> instance for mocking. </returns>
@@ -365,7 +365,7 @@ namespace CognitiveSearch.Models
             return new ResourceCounter(usage, quota);
         }
 
-        /// <summary> Initializes a new instance of ServiceLimits. </summary>
+        /// <summary> Initializes a new instance of <see cref="Models.ServiceLimits"/>. </summary>
         /// <param name="maxFieldsPerIndex"> The maximum allowed fields per index. </param>
         /// <param name="maxFieldNestingDepthPerIndex"> The maximum depth which you can nest sub-fields in an index, including the top-level complex field. For example, a/b/c has a nesting depth of 3. </param>
         /// <param name="maxComplexCollectionFieldsPerIndex"> The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index. </param>

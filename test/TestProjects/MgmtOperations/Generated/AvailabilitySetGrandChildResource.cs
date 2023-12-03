@@ -19,13 +19,18 @@ namespace MgmtOperations
 {
     /// <summary>
     /// A Class representing an AvailabilitySetGrandChild along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AvailabilitySetGrandChildResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAvailabilitySetGrandChildResource method.
-    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetChildResource" /> using the GetAvailabilitySetGrandChild method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AvailabilitySetGrandChildResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAvailabilitySetGrandChildResource method.
+    /// Otherwise you can get one from its parent resource <see cref="AvailabilitySetChildResource"/> using the GetAvailabilitySetGrandChild method.
     /// </summary>
     public partial class AvailabilitySetGrandChildResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AvailabilitySetGrandChildResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="availabilitySetName"> The availabilitySetName. </param>
+        /// <param name="availabilitySetChildName"> The availabilitySetChildName. </param>
+        /// <param name="availabilitySetGrandChildName"> The availabilitySetGrandChildName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string availabilitySetName, string availabilitySetChildName, string availabilitySetGrandChildName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChildren/{availabilitySetChildName}/availabilitySetGrandChildren/{availabilitySetGrandChildName}";
@@ -36,12 +41,15 @@ namespace MgmtOperations
         private readonly AvailabilitySetGrandChildRestOperations _availabilitySetGrandChildavailabilitySetGrandChildRestClient;
         private readonly AvailabilitySetGrandChildData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChildren/availabilitySetGrandChildren";
+
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildResource"/> class for mocking. </summary>
         protected AvailabilitySetGrandChildResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AvailabilitySetGrandChildResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetGrandChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AvailabilitySetGrandChildResource(ArmClient client, AvailabilitySetGrandChildData data) : this(client, data.Id)
@@ -62,9 +70,6 @@ namespace MgmtOperations
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChildren/availabilitySetGrandChildren";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

@@ -21,13 +21,16 @@ namespace MgmtParamOrdering
 {
     /// <summary>
     /// A Class representing a Workspace along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="WorkspaceResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetWorkspaceResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource" /> using the GetWorkspace method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="WorkspaceResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetWorkspaceResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ResourceGroupResource"/> using the GetWorkspace method.
     /// </summary>
     public partial class WorkspaceResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="WorkspaceResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="workspaceName"> The workspaceName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string workspaceName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}";
@@ -38,12 +41,15 @@ namespace MgmtParamOrdering
         private readonly WorkspacesRestOperations _workspaceRestClient;
         private readonly WorkspaceData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.MachineLearningServices/workspaces";
+
         /// <summary> Initializes a new instance of the <see cref="WorkspaceResource"/> class for mocking. </summary>
         protected WorkspaceResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "WorkspaceResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="WorkspaceResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal WorkspaceResource(ArmClient client, WorkspaceData data) : this(client, data.Id)
@@ -64,9 +70,6 @@ namespace MgmtParamOrdering
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.MachineLearningServices/workspaces";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }
@@ -93,7 +96,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of EnvironmentContainerResources and their operations over a EnvironmentContainerResource. </returns>
         public virtual EnvironmentContainerResourceCollection GetEnvironmentContainerResources()
         {
-            return GetCachedClient(Client => new EnvironmentContainerResourceCollection(Client, Id));
+            return GetCachedClient(client => new EnvironmentContainerResourceCollection(client, Id));
         }
 
         /// <summary>
@@ -111,8 +114,8 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<EnvironmentContainerResource>> GetEnvironmentContainerResourceAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -134,8 +137,8 @@ namespace MgmtParamOrdering
         /// </summary>
         /// <param name="name"> Container name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         [ForwardsClientCalls]
         public virtual Response<EnvironmentContainerResource> GetEnvironmentContainerResource(string name, CancellationToken cancellationToken = default)
         {

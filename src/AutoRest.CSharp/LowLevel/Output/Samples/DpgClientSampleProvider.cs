@@ -18,7 +18,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using NUnit.Framework;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -74,9 +73,13 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
 
         protected override string GetMethodName(DpgOperationSample sample, bool isAsync)
         {
-            var builder = new StringBuilder("Example_").Append(sample.OperationMethodSignature.Name);
+            var builder = new StringBuilder("Example_");
 
-            builder.Append('_').Append(sample.ExampleKey);
+            if (sample.ResourceName is not null)
+                builder.Append(sample.ResourceName).Append("_");
+
+            builder.Append(sample.InputOperationName)
+                .Append('_').Append(sample.ExampleKey);
 
             if (sample.IsConvenienceSample)
             {
@@ -97,7 +100,7 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
         {
             if (sample.IsResponseStream)
             {
-                return BuildResponseForStream(sample, resultVar);
+                return BuildResponseForStream(resultVar);
             }
             else
             {
@@ -105,12 +108,12 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             }
         }
 
-        private IEnumerable<MethodBodyStatement> BuildResponseForStream(DpgOperationSample sample, VariableReference resultVar)
+        private IEnumerable<MethodBodyStatement> BuildResponseForStream(VariableReference resultVar)
         {
-            var contentStreamExpression = new StreamExpression(resultVar.Property("ContentStream"));
+            var contentStreamExpression = new StreamExpression(resultVar.Property(Configuration.ApiTypes.ContentStreamName));
             yield return new IfStatement(NotEqual(contentStreamExpression, Null))
             {
-                UsingDeclare("outFileStream", new StreamExpression(new TypeReference(typeof(File)).InvokeStatic(nameof(File.OpenWrite), Literal("<filepath>"))), out var streamVariable),
+                UsingDeclare("outFileStream", InvokeFileOpenWrite("<filepath>"), out var streamVariable),
                 contentStreamExpression.CopyTo(streamVariable)
             };
         }
@@ -125,17 +128,17 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
             var responseType = responseVar.Type;
             if (responseType.EqualsIgnoreNullable(typeof(BinaryData)))
                 streamVar = responseVar.Invoke(nameof(BinaryData.ToStream));
-            else if (responseType.EqualsIgnoreNullable(typeof(Response)))
-                streamVar = responseVar.Property(nameof(Response.ContentStream));
+            else if (responseType.EqualsIgnoreNullable(Configuration.ApiTypes.ResponseType))
+                streamVar = responseVar.Property(Configuration.ApiTypes.ContentStreamName);
             else if (TypeFactory.IsResponseOfT(responseType))
-                streamVar = responseVar.Invoke(nameof(Response<object>.GetRawResponse));
+                streamVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
             else
                 yield break;
 
             if (sample.ResultType != null)
             {
-                var resultVar = new VariableReference(typeof(JsonElement), "result");
-                yield return Declare(resultVar, new TypeReference(typeof(JsonDocument)).InvokeStatic(nameof(JsonDocument.Parse), streamVar).Property(nameof(JsonDocument.RootElement)));
+                var resultVar = new VariableReference(typeof(JsonElement), Configuration.ApiTypes.JsonElementVariableName);
+                yield return Declare(resultVar, JsonDocumentExpression.Parse(new StreamExpression(streamVar)).RootElement);
 
                 var responseParsingStatements = new List<MethodBodyStatement>();
                 BuildResponseParseStatements(sample.IsAllParametersUsed, sample.ResultType, resultVar, responseParsingStatements, new HashSet<InputType>());
@@ -147,9 +150,9 @@ namespace AutoRest.CSharp.LowLevel.Output.Samples
                 // if there is not a schema for us to show, just print status code
                 ValueExpression statusVar = responseVar;
                 if (TypeFactory.IsResponseOfT(responseType))
-                    statusVar = responseVar.Invoke(nameof(Response<object>.GetRawResponse));
+                    statusVar = responseVar.Invoke(Configuration.ApiTypes.GetRawResponseName);
                 if (TypeFactory.IsResponseOfT(responseType) || TypeFactory.IsResponse(responseType))
-                    yield return InvokeConsoleWriteLine(statusVar.Property(nameof(Response.Status)));
+                    yield return InvokeConsoleWriteLine(statusVar.Property(Configuration.ApiTypes.StatusName));
             }
         }
 

@@ -18,7 +18,7 @@ namespace Server.Path.Single.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp_ShortVersion()
+        public void Example_Single_MyOp_ShortVersion()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
@@ -30,7 +30,7 @@ namespace Server.Path.Single.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_MyOp_ShortVersion_Async()
+        public async Task Example_Single_MyOp_ShortVersion_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
@@ -42,7 +42,7 @@ namespace Server.Path.Single.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_MyOp_AllParameters()
+        public void Example_Single_MyOp_AllParameters()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);
@@ -54,7 +54,7 @@ namespace Server.Path.Single.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_MyOp_AllParameters_Async()
+        public async Task Example_Single_MyOp_AllParameters_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             SingleClient client = new SingleClient(endpoint);

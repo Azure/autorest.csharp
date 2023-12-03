@@ -12,7 +12,7 @@ namespace ApiVersionInTsp.Models
     /// <summary> Detection results for the given resultId. </summary>
     public partial class DetectionResult
     {
-        /// <summary> Initializes a new instance of DetectionResult. </summary>
+        /// <summary> Initializes a new instance of <see cref="DetectionResult"/>. </summary>
         /// <param name="resultId"> Result identifier, which is used to fetch the results of an inference call. </param>
         internal DetectionResult(Guid resultId)
         {

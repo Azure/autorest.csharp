@@ -18,13 +18,14 @@ namespace MgmtScopeResource
 {
     /// <summary>
     /// A Class representing a VMInsightsOnboardingStatus along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="VMInsightsOnboardingStatusResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetVMInsightsOnboardingStatusResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ArmResource" /> using the GetVMInsightsOnboardingStatus method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="VMInsightsOnboardingStatusResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetVMInsightsOnboardingStatusResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ArmResource"/> using the GetVMInsightsOnboardingStatus method.
     /// </summary>
     public partial class VMInsightsOnboardingStatusResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="VMInsightsOnboardingStatusResource"/> instance. </summary>
+        /// <param name="resourceUri"> The resourceUri. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string resourceUri)
         {
             var resourceId = $"{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default";
@@ -35,12 +36,15 @@ namespace MgmtScopeResource
         private readonly VMInsightsRestOperations _vmInsightsOnboardingStatusVMInsightsRestClient;
         private readonly VMInsightsOnboardingStatusData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Insights/vmInsightsOnboardingStatuses";
+
         /// <summary> Initializes a new instance of the <see cref="VMInsightsOnboardingStatusResource"/> class for mocking. </summary>
         protected VMInsightsOnboardingStatusResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "VMInsightsOnboardingStatusResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VMInsightsOnboardingStatusResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal VMInsightsOnboardingStatusResource(ArmClient client, VMInsightsOnboardingStatusData data) : this(client, data.Id)
@@ -61,9 +65,6 @@ namespace MgmtScopeResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Insights/vmInsightsOnboardingStatuses";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

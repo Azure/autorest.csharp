@@ -24,11 +24,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private const string ProjectNamespace = "MgmtReferenceTypes.Models";
         private IEnumerable<Type>? _referenceTypes;
         private IEnumerable<Type>? _projectTypes;
-        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(MgmtReferenceTypesResourceData)).GetTypes().Where(
+        private IEnumerable<Type> ReferenceTypes => _referenceTypes ??= Assembly.GetAssembly(typeof(MgmtReferenceTypesResourceDataContent)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ReferenceNamespace &&
             !t.IsEnum);
-        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(MgmtReferenceTypesResourceData)).GetTypes().Where(
+        private IEnumerable<Type> ProjectTypes => _projectTypes ??= Assembly.GetAssembly(typeof(MgmtReferenceTypesResourceDataContent)).GetTypes().Where(
             t => t.IsPublic &&
             t.Namespace == ProjectNamespace &&
             !t.IsEnum);
@@ -52,7 +52,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(MgmtReferenceTypesResourceData), ReferenceNamespace)]
+        [TestCase(typeof(MgmtReferenceTypesResourceDataContent), ReferenceNamespace)]
         [TestCase(typeof(TrackedResource), ReferenceNamespace)]
         [TestCase(typeof(MgmtReferenceTypesSku), ReferenceNamespace)]
         [TestCase(typeof(MgmtReferenceTypesSkuTier), ReferenceNamespace)]
@@ -69,7 +69,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.AreEqual(expectedNamespace, typeToTest.Namespace);
         }
 
-        [TestCase(typeof(MgmtReferenceTypesResourceData), typeof(ReferenceTypeAttribute))]
+        [TestCase(typeof(MgmtReferenceTypesResourceDataContent), typeof(ReferenceTypeAttribute))]
         [TestCase(typeof(TrackedResource), typeof(ReferenceTypeAttribute))]
         [TestCase(typeof(MgmtReferenceTypesSku), typeof(PropertyReferenceTypeAttribute))]
         [TestCase(typeof(PrivateLinkResourceData), typeof(TypeReferenceTypeAttribute))]

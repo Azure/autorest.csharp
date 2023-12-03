@@ -20,9 +20,9 @@ using Azure.ResourceManager;
 namespace MgmtListMethods
 {
     /// <summary>
-    /// A class representing a collection of <see cref="FakeParentWithNonResChResource" /> and their operations.
-    /// Each <see cref="FakeParentWithNonResChResource" /> in the collection will belong to the same instance of <see cref="FakeResource" />.
-    /// To get a <see cref="FakeParentWithNonResChCollection" /> instance call the GetFakeParentWithNonResChes method from an instance of <see cref="FakeResource" />.
+    /// A class representing a collection of <see cref="FakeParentWithNonResChResource"/> and their operations.
+    /// Each <see cref="FakeParentWithNonResChResource"/> in the collection will belong to the same instance of <see cref="FakeResource"/>.
+    /// To get a <see cref="FakeParentWithNonResChCollection"/> instance call the GetFakeParentWithNonResChes method from an instance of <see cref="FakeResource"/>.
     /// </summary>
     public partial class FakeParentWithNonResChCollection : ArmCollection, IEnumerable<FakeParentWithNonResChResource>, IAsyncEnumerable<FakeParentWithNonResChResource>
     {
@@ -223,7 +223,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FakeParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="FakeParentWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<FakeParentWithNonResChResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithNonResChRestClient.CreateListTestRequest(Id.SubscriptionId, Id.Name);
@@ -245,7 +245,7 @@ namespace MgmtListMethods
         /// </list>
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FakeParentWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="FakeParentWithNonResChResource"/> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<FakeParentWithNonResChResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeParentWithNonResChRestClient.CreateListTestRequest(Id.SubscriptionId, Id.Name);

@@ -19,13 +19,17 @@ namespace MgmtExpandResourceTypes
 {
     /// <summary>
     /// A Class representing a RecordSetMx along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct a <see cref="RecordSetMxResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetRecordSetMxResource method.
-    /// Otherwise you can get one from its parent resource <see cref="ZoneResource" /> using the GetRecordSetMx method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct a <see cref="RecordSetMxResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetRecordSetMxResource method.
+    /// Otherwise you can get one from its parent resource <see cref="ZoneResource"/> using the GetRecordSetMx method.
     /// </summary>
     public partial class RecordSetMxResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="RecordSetMxResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="zoneName"> The zoneName. </param>
+        /// <param name="relativeRecordSetName"> The relativeRecordSetName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string zoneName, string relativeRecordSetName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnsZones/{zoneName}/MX/{relativeRecordSetName}";
@@ -36,12 +40,15 @@ namespace MgmtExpandResourceTypes
         private readonly RecordSetsRestOperations _recordSetMxRecordSetsRestClient;
         private readonly RecordSetData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/MX";
+
         /// <summary> Initializes a new instance of the <see cref="RecordSetMxResource"/> class for mocking. </summary>
         protected RecordSetMxResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "RecordSetMxResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="RecordSetMxResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal RecordSetMxResource(ArmClient client, RecordSetData data) : this(client, data.Id)
@@ -62,9 +69,6 @@ namespace MgmtExpandResourceTypes
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Network/dnsZones/MX";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

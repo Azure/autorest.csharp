@@ -20,13 +20,17 @@ namespace MgmtMultipleParentResource
 {
     /// <summary>
     /// A Class representing an AnotherParentChild along with the instance operations that can be performed on it.
-    /// If you have a <see cref="ResourceIdentifier" /> you can construct an <see cref="AnotherParentChildResource" />
-    /// from an instance of <see cref="ArmClient" /> using the GetAnotherParentChildResource method.
-    /// Otherwise you can get one from its parent resource <see cref="AnotherParentResource" /> using the GetAnotherParentChild method.
+    /// If you have a <see cref="ResourceIdentifier"/> you can construct an <see cref="AnotherParentChildResource"/>
+    /// from an instance of <see cref="ArmClient"/> using the GetAnotherParentChildResource method.
+    /// Otherwise you can get one from its parent resource <see cref="AnotherParentResource"/> using the GetAnotherParentChild method.
     /// </summary>
     public partial class AnotherParentChildResource : ArmResource
     {
         /// <summary> Generate the resource identifier of a <see cref="AnotherParentChildResource"/> instance. </summary>
+        /// <param name="subscriptionId"> The subscriptionId. </param>
+        /// <param name="resourceGroupName"> The resourceGroupName. </param>
+        /// <param name="anotherName"> The anotherName. </param>
+        /// <param name="childName"> The childName. </param>
         public static ResourceIdentifier CreateResourceIdentifier(string subscriptionId, string resourceGroupName, string anotherName, string childName)
         {
             var resourceId = $"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/anotherParents/{anotherName}/children/{childName}";
@@ -37,12 +41,15 @@ namespace MgmtMultipleParentResource
         private readonly AnotherChildrenRestOperations _anotherParentChildAnotherChildrenRestClient;
         private readonly ChildBodyData _data;
 
+        /// <summary> Gets the resource type for the operations. </summary>
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents/children";
+
         /// <summary> Initializes a new instance of the <see cref="AnotherParentChildResource"/> class for mocking. </summary>
         protected AnotherParentChildResource()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref = "AnotherParentChildResource"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AnotherParentChildResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
         internal AnotherParentChildResource(ArmClient client, ChildBodyData data) : this(client, data.Id)
@@ -63,9 +70,6 @@ namespace MgmtMultipleParentResource
 			ValidateResourceId(Id);
 #endif
         }
-
-        /// <summary> Gets the resource type for the operations. </summary>
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/anotherParents/children";
 
         /// <summary> Gets whether or not the current instance has data. </summary>
         public virtual bool HasData { get; }

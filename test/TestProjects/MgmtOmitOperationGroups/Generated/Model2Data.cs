@@ -14,12 +14,12 @@ namespace MgmtOmitOperationGroups
     /// <summary> A class representing the Model2 data model. </summary>
     public partial class Model2Data : ResourceData
     {
-        /// <summary> Initializes a new instance of Model2Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         public Model2Data()
         {
         }
 
-        /// <summary> Initializes a new instance of Model2Data. </summary>
+        /// <summary> Initializes a new instance of <see cref="Model2Data"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>

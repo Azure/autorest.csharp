@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -108,7 +107,9 @@ namespace NamedTypeSymbolExtensionsTests
                 shouldTreatBase64AsBinaryData: true,
                 methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
-                mgmtTestConfiguration: null);
+                mgmtTestConfiguration: null,
+                branded: true,
+                generateTestProject: true);
         }
 
         [Test]

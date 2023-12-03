@@ -3,10 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -17,8 +20,10 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class FormattableStringHelpers
     {
+        public static FormattableString Empty => $"";
+
         public static FormattableString? FromString(string? s) =>
-            s is null ? null : s.Length == 0 ? $"" : (FormattableString)$"{s}";
+            s is null ? null : s.Length == 0 ? Empty : $"{s}";
 
         public static bool IsNullOrEmpty(this FormattableString? fs) =>
             fs is null || string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
@@ -27,13 +32,10 @@ namespace AutoRest.CSharp.Generation.Writers
             string.IsNullOrEmpty(fs.Format) && fs.ArgumentCount == 0;
 
         public static FormattableString Join(this ICollection<FormattableString> fss, string separator, string? lastSeparator = null)
-            => fss.Count switch
-            {
-                0 => $"",
-                1 => fss.First(),
-                _ when lastSeparator is not null => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")).ReplaceLast(separator, lastSeparator), fss.ToArray<object>()),
-                _ => FormattableStringFactory.Create(string.Join(separator, Enumerable.Range(0, fss.Count).Select(i => $"{{{i}}}")), fss.ToArray<object>())
-            };
+            => fss.Count == 1 ? fss.First() : Join(fss, fss.Count, static fs => fs, separator, lastSeparator, null);
+
+        public static FormattableString GetClientTypesFormattable(this IReadOnlyList<LowLevelClient> clients)
+            => Join(clients, clients.Count, static c => c.Type, ", ", null, 'C');
 
         public static FormattableString GetLiteralsFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetLiteralsFormattable(parameters.Select(p => p.Name), parameters.Count);
@@ -48,12 +50,13 @@ namespace AutoRest.CSharp.Generation.Writers
             => GetLiteralsFormattable(literals, literals.Count);
 
         public static FormattableString GetLiteralsFormattable(this IEnumerable<string> literals, int count)
-            => count switch
-            {
-                0 => $"",
-                1 => $"{literals.First():L}",
-                _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'L'), literals.ToArray<object>())
-            };
+            => Join(literals, count, static l => l, ", ", null, 'L');
+
+        public static FormattableString GetTypesFormattable(this IReadOnlyCollection<Parameter> parameters)
+            => GetTypesFormattable(parameters, parameters.Count);
+
+        public static FormattableString GetTypesFormattable(this IEnumerable<Parameter> parameters, int count)
+            => Join(parameters, count, static p => p.Type, ",", null, null);
 
         public static FormattableString GetIdentifiersFormattable(this IReadOnlyCollection<Parameter> parameters)
             => GetIdentifiersFormattable(parameters.Select(p => p.Name), parameters.Count);
@@ -65,15 +68,15 @@ namespace AutoRest.CSharp.Generation.Writers
             => GetIdentifiersFormattable(identifiers, identifiers.Count);
 
         public static FormattableString GetIdentifiersFormattable(this IEnumerable<string> identifiers, int count)
-            => count switch
-            {
-                0 => $"",
-                1 => $"{identifiers.First():I}",
-                _ => FormattableStringFactory.Create(GetNamesForMethodCallFormat(count, 'I'), identifiers.ToArray<object>())
-            };
+            => Join(identifiers, count, static i => i, ", ", null, 'I');
 
         public static FormattableString? GetParameterInitializer(this CSharpType parameterType, Constant? defaultValue)
         {
+            if (parameterType.IsValueType)
+            {
+                return null;
+            }
+
             if (TypeFactory.IsCollectionType(parameterType) && (defaultValue == null || TypeFactory.IsCollectionType(defaultValue.Value.Type)))
             {
                 defaultValue = Constant.NewInstanceOf(TypeFactory.GetImplementationType(parameterType).WithNullable(false));
@@ -89,9 +92,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return conversion == null ? constantFormattable : $"{constantFormattable}{conversion}";
         }
 
-        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
+        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType, string? contentType)
         {
-            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType))
             {
                 switch (parameter.Type)
                 {
@@ -108,6 +111,9 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
                         }
+                    // TODO: Currently only BinaryData is considered, other types are still in discussion
+                    case { IsFrameworkType: true } when contentType != null && IsContentTypeBinary(contentType) && parameter.RequestLocation == RequestLocation.Body:
+                        return $"{parameter.Name:I}";
                     case { IsFrameworkType: true }:
                         return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromObject)}({parameter.Name})";
                 }
@@ -127,19 +133,46 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{parameter.Name:I}{conversionMethod}";
         }
 
+        // TODO: This is a temporary solution. We will move this part to some common place.
+        private static bool IsContentTypeBinary(string contentType)
+        {
+            var typeSubs = contentType.Split('/');
+            if (typeSubs.Length != 2)
+            {
+                throw new NotSupportedException($"Content type {contentType} is not supported.");
+            }
+
+            var type = typeSubs[0];
+            var subType = typeSubs[1];
+            if (type == "audio" || type == "image" || type == "video" || subType == "octet-stream")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
+                { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(int)) => ".ToSerialInt32()",
+                { IsFrameworkType: false, Implementation: EnumType } when toType.EqualsIgnoreNullable(typeof(float)) => ".ToSerialSingle()",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(Configuration.ApiTypes.RequestContentType) => $".{Configuration.ApiTypes.ToRequestContentName}()",
                 _ => null
             };
 
         public static FormattableString GetReferenceOrConstantFormattable(this ReferenceOrConstant value)
             => value.IsConstant ? value.Constant.GetConstantFormattable() : value.Reference.GetReferenceFormattable();
 
-        public static FormattableString GetConstantFormattable(this Constant constant)
+        public static FormattableString GetReferenceFormattable(this Reference reference)
+        {
+            var parts = reference.Name.Split(".").ToArray<object>();
+            return Join(parts, parts.Length, static s => s, ".", null, 'I');
+        }
+
+        public static FormattableString GetConstantFormattable(this Constant constant, bool writeAsString = false)
         {
             if (constant.Value == null)
             {
@@ -191,31 +224,79 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{((ResourceType)constant.Value).ToString():L}";
             }
 
+            if (frameworkType == typeof(bool) && writeAsString)
+            {
+                return $"\"{constant.Value!.ToString()!.ToLower()}\"";
+            }
+
             return $"{constant.Value:L}";
         }
 
-        public static FormattableString GetReferenceFormattable(this Reference reference)
+        private static FormattableString Join<T>(IEnumerable<T> source, int count, Func<T, object> converter, string separator, string? lastSeparator, char? format)
+            => count switch {
+                0 => Empty,
+                1 => FormattableStringFactory.Create(format is not null ? $"{{0:{format}}}" : "{0}", converter(source.First())),
+                _ => FormattableStringFactory.Create(CreateFormatWithSeparator(separator, lastSeparator, format, count), source.Select(converter).ToArray())
+            };
+
+        private static string CreateFormatWithSeparator(string separator, string? lastSeparator, char? format, int count)
         {
-            var parts = reference.Name.Split(".");
-            var sb = new StringBuilder("{0:I}");
-            for (int i = 1; i < parts.Length; i++)
+            const int offset = 48; // (int)'0' is 48
+            if (count > 100)
             {
-                sb.Append(".").Append($"{{{i}:I}}");
+                var s = string.Join(separator, Enumerable.Range(0, count).Select(i => $"{{{i}}}"));
+                return lastSeparator is null ? s : s.ReplaceLast(separator, lastSeparator);
             }
 
-            return FormattableStringFactory.Create(sb.ToString(), parts.Cast<object>().ToArray());
-        }
+            Debug.Assert(count > 1);
 
-        private static string GetNamesForMethodCallFormat(int parametersCount, char format)
-        {
-            var sb = new StringBuilder(5 * parametersCount + 2 * (parametersCount - 1));
-            sb.Append("{0:").Append(format).Append('}');
-            for (var i = 1; i < parametersCount; i++)
+            lastSeparator ??= separator;
+
+            var placeholderLength = format.HasValue ? 5 : 3;
+            var length = count < 10
+                ? count * placeholderLength
+                : (count - 10) * (placeholderLength + 1) + 10 * placeholderLength;
+
+            length += separator.Length * (count - 2) + lastSeparator.Length;
+
+            return string.Create(length, (separator, lastSeparator, format, count), static (span, state) =>
             {
-                sb.Append(", {").Append(i).Append(':').Append(format).Append('}');
-            }
+                var (separator, lastSeparator, format, count) = state;
+                for (int i = 0; i < count; i++)
+                {
+                    span[0] = '{';
+                    if (i < 10)
+                    {
+                        span[1] = (char)(i + offset);
+                        span = span[2..];
+                    }
+                    else
+                    {
+                        span[1] = (char)(i / 10 + offset);
+                        span[2] = (char)(i % 10 + offset);
+                        span = span[3..];
+                    }
 
-            return sb.ToString();
+                    if (format is not null)
+                    {
+                        span[0] = ':';
+                        span[1] = format.Value;
+                        span = span[2..];
+                    }
+
+                    span[0] = '}';
+                    span = span[1..];
+
+                    if (i < count - 1)
+                    {
+                        var separatorToUse = i < count - 2 ? separator : lastSeparator;
+                        separatorToUse.CopyTo(span);
+                        span = span[separatorToUse.Length..];
+                    }
+                }
+
+                Debug.Assert(span.IsEmpty);
+            });
         }
     }
 }

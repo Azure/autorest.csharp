@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtMockAndSample.Mocking;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
@@ -19,312 +20,47 @@ namespace MgmtMockAndSample
     /// <summary> A class to add extension methods to MgmtMockAndSample. </summary>
     public static partial class MgmtMockAndSampleExtensions
     {
-        private static ArmResourceExtensionClient GetArmResourceExtensionClient(ArmResource resource)
+        private static MockableMgmtMockAndSampleArmClient GetMockableMgmtMockAndSampleArmClient(ArmClient client)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new ArmResourceExtensionClient(client, resource.Id);
-            });
+            return client.GetCachedClient(client0 => new MockableMgmtMockAndSampleArmClient(client0));
         }
 
-        private static ArmResourceExtensionClient GetArmResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static MockableMgmtMockAndSampleArmResource GetMockableMgmtMockAndSampleArmResource(ArmResource resource)
         {
-            return client.GetResourceClient(() =>
-            {
-                return new ArmResourceExtensionClient(client, scope);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtMockAndSampleArmResource(client, resource.Id));
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MockableMgmtMockAndSampleResourceGroupResource GetMockableMgmtMockAndSampleResourceGroupResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtMockAndSampleResourceGroupResource(client, resource.Id));
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static MockableMgmtMockAndSampleSubscriptionResource GetMockableMgmtMockAndSampleSubscriptionResource(ArmResource resource)
         {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtMockAndSampleSubscriptionResource(client, resource.Id));
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MockableMgmtMockAndSampleTenantResource GetMockableMgmtMockAndSampleTenantResource(ArmResource resource)
         {
-            return resource.GetCachedClient(client =>
-            {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
+            return resource.GetCachedClient(client => new MockableMgmtMockAndSampleTenantResource(client, resource.Id));
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new TenantResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new TenantResourceExtensionClient(client, scope);
-            });
-        }
-        #region VaultResource
         /// <summary>
-        /// Gets an object representing a <see cref="VaultResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VaultResource.CreateResourceIdentifier" /> to create a <see cref="VaultResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets a collection of RoleAssignmentResources in the ArmClient.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetRoleAssignments(ResourceIdentifier)"/> instead.</description>
+        /// </item>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VaultResource" /> object. </returns>
-        public static VaultResource GetVaultResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                VaultResource.ValidateResourceId(id);
-                return new VaultResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region DeletedVaultResource
-        /// <summary>
-        /// Gets an object representing a <see cref="DeletedVaultResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DeletedVaultResource.CreateResourceIdentifier" /> to create a <see cref="DeletedVaultResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedVaultResource" /> object. </returns>
-        public static DeletedVaultResource GetDeletedVaultResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                DeletedVaultResource.ValidateResourceId(id);
-                return new DeletedVaultResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region MgmtMockAndSamplePrivateEndpointConnectionResource
-        /// <summary>
-        /// Gets an object representing a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> object. </returns>
-        public static MgmtMockAndSamplePrivateEndpointConnectionResource GetMgmtMockAndSamplePrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                MgmtMockAndSamplePrivateEndpointConnectionResource.ValidateResourceId(id);
-                return new MgmtMockAndSamplePrivateEndpointConnectionResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region VirtualMachineExtensionImageResource
-        /// <summary>
-        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
-        public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineExtensionImageResource.ValidateResourceId(id);
-                return new VirtualMachineExtensionImageResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region DiskEncryptionSetResource
-        /// <summary>
-        /// Gets an object representing a <see cref="DiskEncryptionSetResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DiskEncryptionSetResource.CreateResourceIdentifier" /> to create a <see cref="DiskEncryptionSetResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DiskEncryptionSetResource" /> object. </returns>
-        public static DiskEncryptionSetResource GetDiskEncryptionSetResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                DiskEncryptionSetResource.ValidateResourceId(id);
-                return new DiskEncryptionSetResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region ManagedHsmResource
-        /// <summary>
-        /// Gets an object representing a <see cref="ManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="ManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagedHsmResource" /> object. </returns>
-        public static ManagedHsmResource GetManagedHsmResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                ManagedHsmResource.ValidateResourceId(id);
-                return new ManagedHsmResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region DeletedManagedHsmResource
-        /// <summary>
-        /// Gets an object representing a <see cref="DeletedManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="DeletedManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="DeletedManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="DeletedManagedHsmResource" /> object. </returns>
-        public static DeletedManagedHsmResource GetDeletedManagedHsmResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                DeletedManagedHsmResource.ValidateResourceId(id);
-                return new DeletedManagedHsmResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region MhsmPrivateEndpointConnectionResource
-        /// <summary>
-        /// Gets an object representing a <see cref="MhsmPrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MhsmPrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="MhsmPrivateEndpointConnectionResource" /> object. </returns>
-        public static MhsmPrivateEndpointConnectionResource GetMhsmPrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                MhsmPrivateEndpointConnectionResource.ValidateResourceId(id);
-                return new MhsmPrivateEndpointConnectionResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region FirewallPolicyResource
-        /// <summary>
-        /// Gets an object representing a <see cref="FirewallPolicyResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FirewallPolicyResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FirewallPolicyResource" /> object. </returns>
-        public static FirewallPolicyResource GetFirewallPolicyResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                FirewallPolicyResource.ValidateResourceId(id);
-                return new FirewallPolicyResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region FirewallPolicyRuleCollectionGroupResource
-        /// <summary>
-        /// Gets an object representing a <see cref="FirewallPolicyRuleCollectionGroupResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyRuleCollectionGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FirewallPolicyRuleCollectionGroupResource" /> object. </returns>
-        public static FirewallPolicyRuleCollectionGroupResource GetFirewallPolicyRuleCollectionGroupResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                FirewallPolicyRuleCollectionGroupResource.ValidateResourceId(id);
-                return new FirewallPolicyRuleCollectionGroupResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region RoleAssignmentResource
-        /// <summary>
-        /// Gets an object representing a <see cref="RoleAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="RoleAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="RoleAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="RoleAssignmentResource" /> object. </returns>
-        public static RoleAssignmentResource GetRoleAssignmentResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                RoleAssignmentResource.ValidateResourceId(id);
-                return new RoleAssignmentResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region GuestConfigurationAssignmentResource
-        /// <summary>
-        /// Gets an object representing a <see cref="GuestConfigurationAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="GuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="GuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
-        public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                GuestConfigurationAssignmentResource.ValidateResourceId(id);
-                return new GuestConfigurationAssignmentResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
-        public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
-        {
-            return GetArmResourceExtensionClient(armResource).GetRoleAssignments();
-        }
-
-        /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public static RoleAssignmentCollection GetRoleAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetArmResourceExtensionClient(client, scope).GetRoleAssignments();
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetRoleAssignments(scope);
         }
 
         /// <summary>
@@ -339,41 +75,23 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// </list>
-        /// </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
-        {
-            return await armResource.GetRoleAssignments().GetAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get the specified role assignment.
-        /// <list type="bullet">
         /// <item>
-        /// <term>Request Path</term>
-        /// <description>/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}</description>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetRoleAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
         /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>RoleAssignments_Get</description>
-        /// </item>
-        /// </list>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="roleAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await client.GetRoleAssignments(scope).GetAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(client, nameof(client));
+
+            return await GetMockableMgmtMockAndSampleArmClient(client).GetRoleAssignmentAsync(scope, roleAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -388,54 +106,41 @@ namespace MgmtMockAndSample
         /// <description>RoleAssignments_Get</description>
         /// </item>
         /// </list>
-        /// </summary>
-        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
-        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
-        {
-            return armResource.GetRoleAssignments().Get(roleAssignmentName, cancellationToken);
-        }
-
-        /// <summary>
-        /// Get the specified role assignment.
-        /// <list type="bullet">
         /// <item>
-        /// <term>Request Path</term>
-        /// <description>/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}</description>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetRoleAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
         /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>RoleAssignments_Get</description>
-        /// </item>
-        /// </list>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="roleAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmClient client, ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            return client.GetRoleAssignments(scope).Get(roleAssignmentName, cancellationToken);
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetRoleAssignment(scope, roleAssignmentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
+        /// <summary>
+        /// Gets a collection of GuestConfigurationAssignmentResources in the ArmClient.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetGuestConfigurationAssignments(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
-            return GetArmResourceExtensionClient(client, scope).GetGuestConfigurationAssignments();
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetGuestConfigurationAssignments(scope);
         }
 
         /// <summary>
@@ -450,21 +155,23 @@ namespace MgmtMockAndSample
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetGuestConfigurationAssignmentAsync(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
-            return await client.GetGuestConfigurationAssignments(scope).GetAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(client, nameof(client));
+
+            return await GetMockableMgmtMockAndSampleArmClient(client).GetGuestConfigurationAssignmentAsync(scope, guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -479,29 +186,345 @@ namespace MgmtMockAndSample
         /// <description>GuestConfigurationAssignments_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetGuestConfigurationAssignment(ResourceIdentifier,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
         /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> or <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
-            return client.GetGuestConfigurationAssignments(scope).Get(guestConfigurationAssignmentName, cancellationToken);
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetGuestConfigurationAssignment(scope, guestConfigurationAssignmentName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VaultResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets an object representing a <see cref="VaultResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VaultResource.CreateResourceIdentifier" /> to create a <see cref="VaultResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetVaultResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="VaultResource"/> object. </returns>
+        public static VaultResource GetVaultResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetVaultResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="DeletedVaultResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeletedVaultResource.CreateResourceIdentifier" /> to create a <see cref="DeletedVaultResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetDeletedVaultResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="DeletedVaultResource"/> object. </returns>
+        public static DeletedVaultResource GetDeletedVaultResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetDeletedVaultResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetMgmtMockAndSamplePrivateEndpointConnectionResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource"/> object. </returns>
+        public static MgmtMockAndSamplePrivateEndpointConnectionResource GetMgmtMockAndSamplePrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetMgmtMockAndSamplePrivateEndpointConnectionResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetVirtualMachineExtensionImageResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource"/> object. </returns>
+        public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetVirtualMachineExtensionImageResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="DiskEncryptionSetResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DiskEncryptionSetResource.CreateResourceIdentifier" /> to create a <see cref="DiskEncryptionSetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetDiskEncryptionSetResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="DiskEncryptionSetResource"/> object. </returns>
+        public static DiskEncryptionSetResource GetDiskEncryptionSetResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetDiskEncryptionSetResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="ManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="ManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetManagedHsmResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="ManagedHsmResource"/> object. </returns>
+        public static ManagedHsmResource GetManagedHsmResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetManagedHsmResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="DeletedManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DeletedManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="DeletedManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetDeletedManagedHsmResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="DeletedManagedHsmResource"/> object. </returns>
+        public static DeletedManagedHsmResource GetDeletedManagedHsmResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetDeletedManagedHsmResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="MhsmPrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MhsmPrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetMhsmPrivateEndpointConnectionResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="MhsmPrivateEndpointConnectionResource"/> object. </returns>
+        public static MhsmPrivateEndpointConnectionResource GetMhsmPrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetMhsmPrivateEndpointConnectionResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="FirewallPolicyResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FirewallPolicyResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetFirewallPolicyResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="FirewallPolicyResource"/> object. </returns>
+        public static FirewallPolicyResource GetFirewallPolicyResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetFirewallPolicyResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="FirewallPolicyRuleCollectionGroupResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyRuleCollectionGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetFirewallPolicyRuleCollectionGroupResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="FirewallPolicyRuleCollectionGroupResource"/> object. </returns>
+        public static FirewallPolicyRuleCollectionGroupResource GetFirewallPolicyRuleCollectionGroupResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetFirewallPolicyRuleCollectionGroupResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="RoleAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="RoleAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="RoleAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetRoleAssignmentResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="RoleAssignmentResource"/> object. </returns>
+        public static RoleAssignmentResource GetRoleAssignmentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetRoleAssignmentResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing a <see cref="GuestConfigurationAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="GuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="GuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmClient.GetGuestConfigurationAssignmentResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource"/> object. </returns>
+        public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableMgmtMockAndSampleArmClient(client).GetGuestConfigurationAssignmentResource(id);
+        }
+
+        /// <summary>
+        /// Gets a collection of RoleAssignmentResources in the ArmResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmResource.GetRoleAssignments()"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> is null. </exception>
+        /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
+        public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
+        {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
+            return GetMockableMgmtMockAndSampleArmResource(armResource).GetRoleAssignments();
+        }
+
+        /// <summary>
+        /// Get the specified role assignment.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RoleAssignments_Get</description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmResource.GetRoleAssignmentAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> or <paramref name="roleAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
+            return await GetMockableMgmtMockAndSampleArmResource(armResource).GetRoleAssignmentAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get the specified role assignment.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>RoleAssignments_Get</description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleArmResource.GetRoleAssignment(string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
+        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="armResource"/> or <paramref name="roleAssignmentName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(armResource, nameof(armResource));
+
+            return GetMockableMgmtMockAndSampleArmResource(armResource).GetRoleAssignment(roleAssignmentName, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a collection of VaultResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetVaults()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of VaultResources and their operations over a VaultResource. </returns>
         public static VaultCollection GetVaults(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVaults();
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetVaults();
         }
 
         /// <summary>
@@ -516,16 +539,22 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetVaultAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<VaultResource>> GetVaultAsync(this ResourceGroupResource resourceGroupResource, string vaultName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetVaults().GetAsync(vaultName, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetVaultAsync(vaultName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -540,24 +569,39 @@ namespace MgmtMockAndSample
         /// <description>Vaults_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetVault(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<VaultResource> GetVault(this ResourceGroupResource resourceGroupResource, string vaultName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetVaults().Get(vaultName, cancellationToken);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetVault(vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DiskEncryptionSetResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of DiskEncryptionSetResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetDiskEncryptionSets()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of DiskEncryptionSetResources and their operations over a DiskEncryptionSetResource. </returns>
         public static DiskEncryptionSetCollection GetDiskEncryptionSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDiskEncryptionSets();
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetDiskEncryptionSets();
         }
 
         /// <summary>
@@ -572,16 +616,22 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetDiskEncryptionSetAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="diskEncryptionSetName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="diskEncryptionSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="diskEncryptionSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DiskEncryptionSetResource>> GetDiskEncryptionSetAsync(this ResourceGroupResource resourceGroupResource, string diskEncryptionSetName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDiskEncryptionSets().GetAsync(diskEncryptionSetName, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetDiskEncryptionSetAsync(diskEncryptionSetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -596,24 +646,39 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetDiskEncryptionSet(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="diskEncryptionSetName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="diskEncryptionSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="diskEncryptionSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<DiskEncryptionSetResource> GetDiskEncryptionSet(this ResourceGroupResource resourceGroupResource, string diskEncryptionSetName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDiskEncryptionSets().Get(diskEncryptionSetName, cancellationToken);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetDiskEncryptionSet(diskEncryptionSetName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of ManagedHsmResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of ManagedHsmResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetManagedHsms()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of ManagedHsmResources and their operations over a ManagedHsmResource. </returns>
         public static ManagedHsmCollection GetManagedHsms(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetManagedHsms();
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetManagedHsms();
         }
 
         /// <summary>
@@ -628,16 +693,22 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetManagedHsmAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<ManagedHsmResource>> GetManagedHsmAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetManagedHsms().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetManagedHsmAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -652,24 +723,39 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetManagedHsm(string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="name"> The name of the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<ManagedHsmResource> GetManagedHsm(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetManagedHsms().Get(name, cancellationToken);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetManagedHsm(name, cancellationToken);
         }
 
-        /// <summary> Gets a collection of FirewallPolicyResources in the ResourceGroupResource. </summary>
+        /// <summary>
+        /// Gets a collection of FirewallPolicyResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetFirewallPolicies()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
         /// <returns> An object representing collection of FirewallPolicyResources and their operations over a FirewallPolicyResource. </returns>
         public static FirewallPolicyCollection GetFirewallPolicies(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFirewallPolicies();
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetFirewallPolicies();
         }
 
         /// <summary>
@@ -684,17 +770,23 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicies_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetFirewallPolicyAsync(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="firewallPolicyName"> The name of the Firewall Policy. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="firewallPolicyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="firewallPolicyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="firewallPolicyName"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<FirewallPolicyResource>> GetFirewallPolicyAsync(this ResourceGroupResource resourceGroupResource, string firewallPolicyName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetFirewallPolicies().GetAsync(firewallPolicyName, expand, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetFirewallPolicyAsync(firewallPolicyName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -709,25 +801,40 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicies_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleResourceGroupResource.GetFirewallPolicy(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <param name="firewallPolicyName"> The name of the Firewall Policy. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="firewallPolicyName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="firewallPolicyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="firewallPolicyName"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<FirewallPolicyResource> GetFirewallPolicy(this ResourceGroupResource resourceGroupResource, string firewallPolicyName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetFirewallPolicies().Get(firewallPolicyName, expand, cancellationToken);
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableMgmtMockAndSampleResourceGroupResource(resourceGroupResource).GetFirewallPolicy(firewallPolicyName, expand, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedVaultResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of DeletedVaultResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedVaults()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> An object representing collection of DeletedVaultResources and their operations over a DeletedVaultResource. </returns>
         public static DeletedVaultCollection GetDeletedVaults(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedVaults();
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedVaults();
         }
 
         /// <summary>
@@ -742,17 +849,23 @@ namespace MgmtMockAndSample
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedVaultAsync(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeletedVaultResource>> GetDeletedVaultAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string vaultName, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetDeletedVaults().GetAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return await GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedVaultAsync(location, vaultName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -767,31 +880,43 @@ namespace MgmtMockAndSample
         /// <description>Vaults_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedVault(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="vaultName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<DeletedVaultResource> GetDeletedVault(this SubscriptionResource subscriptionResource, AzureLocation location, string vaultName, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetDeletedVaults().Get(location, vaultName, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedVault(location, vaultName, cancellationToken);
         }
 
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetVirtualMachineExtensionImages(AzureLocation,string)"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="publisherName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/> is null. </exception>
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
         public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
         /// <summary>
@@ -806,19 +931,25 @@ namespace MgmtMockAndSample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetVirtualMachineExtensionImageAsync(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The String to use. </param>
-        /// <param name="type"> The String to use. </param>
-        /// <param name="version"> The String to use. </param>
+        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The <see cref="string"/> to use. </param>
+        /// <param name="version"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineExtensionImageResource>> GetVirtualMachineExtensionImageAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName).GetAsync(type, version, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return await GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImageAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -833,27 +964,42 @@ namespace MgmtMockAndSample
         /// <description>VirtualMachineExtensionImages_Get</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetVirtualMachineExtensionImage(AzureLocation,string,string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The String to use. </param>
-        /// <param name="type"> The String to use. </param>
-        /// <param name="version"> The String to use. </param>
+        /// <param name="publisherName"> The <see cref="string"/> to use. </param>
+        /// <param name="type"> The <see cref="string"/> to use. </param>
+        /// <param name="version"> The <see cref="string"/> to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/>, <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<VirtualMachineExtensionImageResource> GetVirtualMachineExtensionImage(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName).Get(type, version, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetVirtualMachineExtensionImage(location, publisherName, type, version, cancellationToken);
         }
 
-        /// <summary> Gets a collection of DeletedManagedHsmResources in the SubscriptionResource. </summary>
+        /// <summary>
+        /// Gets a collection of DeletedManagedHsmResources in the SubscriptionResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedManagedHsms()"/> instead.</description>
+        /// </item>
+        /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
         /// <returns> An object representing collection of DeletedManagedHsmResources and their operations over a DeletedManagedHsmResource. </returns>
         public static DeletedManagedHsmCollection GetDeletedManagedHsms(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedManagedHsms();
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedManagedHsms();
         }
 
         /// <summary>
@@ -868,17 +1014,23 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedManagedHsmAsync(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public static async Task<Response<DeletedManagedHsmResource>> GetDeletedManagedHsmAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string name, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetDeletedManagedHsms().GetAsync(location, name, cancellationToken).ConfigureAwait(false);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return await GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedManagedHsmAsync(location, name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -893,17 +1045,23 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_GetDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedManagedHsm(AzureLocation,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public static Response<DeletedManagedHsmResource> GetDeletedManagedHsm(this SubscriptionResource subscriptionResource, AzureLocation location, string name, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetDeletedManagedHsms().Get(location, name, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedManagedHsm(location, name, cancellationToken);
         }
 
         /// <summary>
@@ -918,14 +1076,21 @@ namespace MgmtMockAndSample
         /// <description>Vaults_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetVaults(int?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="VaultResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VaultResource> GetVaultsAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVaultsAsync(top, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetVaultsAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -940,14 +1105,21 @@ namespace MgmtMockAndSample
         /// <description>Vaults_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetVaults(int?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="VaultResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VaultResource> GetVaults(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVaults(top, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetVaults(top, cancellationToken);
         }
 
         /// <summary>
@@ -962,13 +1134,20 @@ namespace MgmtMockAndSample
         /// <description>Vaults_ListDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedVaults(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedVaultResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="DeletedVaultResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DeletedVaultResource> GetDeletedVaultsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedVaultsAsync(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedVaultsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -983,13 +1162,20 @@ namespace MgmtMockAndSample
         /// <description>Vaults_ListDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedVaults(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedVaultResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="DeletedVaultResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DeletedVaultResource> GetDeletedVaults(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedVaults(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedVaults(cancellationToken);
         }
 
         /// <summary>
@@ -1004,16 +1190,20 @@ namespace MgmtMockAndSample
         /// <description>Vaults_CheckNameAvailability</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.CheckNameAvailabilityVault(VaultCheckNameAvailabilityContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="content"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="content"/> is null. </exception>
         public static async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).CheckNameAvailabilityVaultAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).CheckNameAvailabilityVaultAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1028,16 +1218,20 @@ namespace MgmtMockAndSample
         /// <description>Vaults_CheckNameAvailability</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.CheckNameAvailabilityVault(VaultCheckNameAvailabilityContent,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="content"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> or <paramref name="content"/> is null. </exception>
         public static Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).CheckNameAvailabilityVault(content, cancellationToken);
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).CheckNameAvailabilityVault(content, cancellationToken);
         }
 
         /// <summary>
@@ -1052,13 +1246,20 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDiskEncryptionSets(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="DiskEncryptionSetResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DiskEncryptionSetResource> GetDiskEncryptionSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDiskEncryptionSetsAsync(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDiskEncryptionSetsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1073,13 +1274,20 @@ namespace MgmtMockAndSample
         /// <description>DiskEncryptionSets_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDiskEncryptionSets(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="DiskEncryptionSetResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DiskEncryptionSetResource> GetDiskEncryptionSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDiskEncryptionSets(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDiskEncryptionSets(cancellationToken);
         }
 
         /// <summary>
@@ -1094,14 +1302,21 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetManagedHsms(int?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="ManagedHsmResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ManagedHsmResource> GetManagedHsmsAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetManagedHsmsAsync(top, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetManagedHsmsAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -1116,14 +1331,21 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_ListBySubscription</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetManagedHsms(int?,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="top"> Maximum number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="ManagedHsmResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ManagedHsmResource> GetManagedHsms(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetManagedHsms(top, cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetManagedHsms(top, cancellationToken);
         }
 
         /// <summary>
@@ -1138,13 +1360,20 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_ListDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedManagedHsms(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="DeletedManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="DeletedManagedHsmResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DeletedManagedHsmResource> GetDeletedManagedHsmsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedManagedHsmsAsync(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedManagedHsmsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1159,13 +1388,20 @@ namespace MgmtMockAndSample
         /// <description>ManagedHsms_ListDeleted</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetDeletedManagedHsms(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="DeletedManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="DeletedManagedHsmResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DeletedManagedHsmResource> GetDeletedManagedHsms(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedManagedHsms(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetDeletedManagedHsms(cancellationToken);
         }
 
         /// <summary>
@@ -1180,13 +1416,20 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicies_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetFirewallPolicies(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FirewallPolicyResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="FirewallPolicyResource"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FirewallPolicyResource> GetFirewallPoliciesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFirewallPoliciesAsync(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetFirewallPoliciesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1201,13 +1444,20 @@ namespace MgmtMockAndSample
         /// <description>FirewallPolicies_ListAll</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleSubscriptionResource.GetFirewallPolicies(CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FirewallPolicyResource" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="FirewallPolicyResource"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FirewallPolicyResource> GetFirewallPolicies(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFirewallPolicies(cancellationToken);
+            Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
+
+            return GetMockableMgmtMockAndSampleSubscriptionResource(subscriptionResource).GetFirewallPolicies(cancellationToken);
         }
 
         /// <summary>
@@ -1222,15 +1472,22 @@ namespace MgmtMockAndSample
         /// <description>TenantActivityLogs_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.GetTenantActivityLogs(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="filter"> Reduces the set of data collected. &lt;br&gt;The **$filter** is very restricted and allows only the following patterns.&lt;br&gt;- List events for a resource group: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation' and resourceGroupName eq '&lt;ResourceGroupName&gt;'.&lt;br&gt;- List events for resource: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation' and resourceUri eq '&lt;ResourceURI&gt;'.&lt;br&gt;- List events for a subscription: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation'.&lt;br&gt;- List events for a resource provider: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation' and resourceProvider eq '&lt;ResourceProviderName&gt;'.&lt;br&gt;- List events for a correlation Id: api-version=2014-04-01&amp;$filter=eventTimestamp ge '2014-07-16T04:36:37.6407898Z' and eventTimestamp le '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and correlationId eq '&lt;CorrelationID&gt;'.&lt;br&gt;**NOTE**: No other syntax is allowed. </param>
         /// <param name="select"> Used to fetch events with only the given properties.&lt;br&gt;The **$select** argument is a comma separated list of property names to be returned. Possible values are: *authorization*, *claims*, *correlationId*, *description*, *eventDataId*, *eventName*, *eventTimestamp*, *httpRequest*, *level*, *operationId*, *operationName*, *properties*, *resourceGroupName*, *resourceProviderName*, *resourceId*, *status*, *submissionTimestamp*, *subStatus*, *subscriptionId*. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="EventData" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="EventData"/> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<EventData> GetTenantActivityLogsAsync(this TenantResource tenantResource, string filter = null, string select = null, CancellationToken cancellationToken = default)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetTenantActivityLogsAsync(filter, select, cancellationToken);
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
+            return GetMockableMgmtMockAndSampleTenantResource(tenantResource).GetTenantActivityLogsAsync(filter, select, cancellationToken);
         }
 
         /// <summary>
@@ -1245,15 +1502,22 @@ namespace MgmtMockAndSample
         /// <description>TenantActivityLogs_List</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.GetTenantActivityLogs(string,string,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="filter"> Reduces the set of data collected. &lt;br&gt;The **$filter** is very restricted and allows only the following patterns.&lt;br&gt;- List events for a resource group: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation' and resourceGroupName eq '&lt;ResourceGroupName&gt;'.&lt;br&gt;- List events for resource: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation' and resourceUri eq '&lt;ResourceURI&gt;'.&lt;br&gt;- List events for a subscription: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation'.&lt;br&gt;- List events for a resource provider: $filter=eventTimestamp ge '&lt;Start Time&gt;' and eventTimestamp le '&lt;End Time&gt;' and eventChannels eq 'Admin, Operation' and resourceProvider eq '&lt;ResourceProviderName&gt;'.&lt;br&gt;- List events for a correlation Id: api-version=2014-04-01&amp;$filter=eventTimestamp ge '2014-07-16T04:36:37.6407898Z' and eventTimestamp le '2014-07-20T04:36:37.6407898Z' and eventChannels eq 'Admin, Operation' and correlationId eq '&lt;CorrelationID&gt;'.&lt;br&gt;**NOTE**: No other syntax is allowed. </param>
         /// <param name="select"> Used to fetch events with only the given properties.&lt;br&gt;The **$select** argument is a comma separated list of property names to be returned. Possible values are: *authorization*, *claims*, *correlationId*, *description*, *eventDataId*, *eventName*, *eventTimestamp*, *httpRequest*, *level*, *operationId*, *operationName*, *properties*, *resourceGroupName*, *resourceProviderName*, *resourceId*, *status*, *submissionTimestamp*, *subStatus*, *subscriptionId*. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="EventData" /> that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="EventData"/> that may take multiple service requests to iterate over. </returns>
         public static Pageable<EventData> GetTenantActivityLogs(this TenantResource tenantResource, string filter = null, string select = null, CancellationToken cancellationToken = default)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetTenantActivityLogs(filter, select, cancellationToken);
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
+
+            return GetMockableMgmtMockAndSampleTenantResource(tenantResource).GetTenantActivityLogs(filter, select, cancellationToken);
         }
 
         /// <summary>
@@ -1268,16 +1532,20 @@ namespace MgmtMockAndSample
         /// <description>Deployments_CalculateTemplateHash</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
         public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
 
-            return await GetTenantResourceExtensionClient(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetMockableMgmtMockAndSampleTenantResource(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1292,16 +1560,20 @@ namespace MgmtMockAndSample
         /// <description>Deployments_CalculateTemplateHash</description>
         /// </item>
         /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableMgmtMockAndSampleTenantResource.CalculateTemplateHashDeployment(BinaryData,CancellationToken)"/> instead.</description>
+        /// </item>
         /// </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="tenantResource"/> or <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
+            Argument.AssertNotNull(tenantResource, nameof(tenantResource));
 
-            return GetTenantResourceExtensionClient(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetMockableMgmtMockAndSampleTenantResource(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
 }

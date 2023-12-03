@@ -10,9 +10,18 @@ namespace paging.Models
     /// <summary> Parameter group. </summary>
     public partial class PagingGetOdataMultiplePagesOptions
     {
-        /// <summary> Initializes a new instance of PagingGetOdataMultiplePagesOptions. </summary>
+        /// <summary> Initializes a new instance of <see cref="PagingGetOdataMultiplePagesOptions"/>. </summary>
         public PagingGetOdataMultiplePagesOptions()
         {
+        }
+
+        /// <summary> Initializes a new instance of <see cref="PagingGetOdataMultiplePagesOptions"/>. </summary>
+        /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
+        /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
+        internal PagingGetOdataMultiplePagesOptions(int? maxresults, int? timeout)
+        {
+            Maxresults = maxresults;
+            Timeout = timeout;
         }
 
         /// <summary> Sets the maximum number of items to return in the response. </summary>

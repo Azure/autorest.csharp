@@ -19,7 +19,7 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class FakePolicyAssignmentData : ResourceData
     {
-        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         public FakePolicyAssignmentData()
         {
             NotScopes = new ChangeTrackingList<string>();
@@ -27,7 +27,7 @@ namespace MgmtScopeResource
             NonComplianceMessages = new ChangeTrackingList<NonComplianceMessage>();
         }
 
-        /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>
+        /// <summary> Initializes a new instance of <see cref="FakePolicyAssignmentData"/>. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -80,7 +80,7 @@ namespace MgmtScopeResource
         /// To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, System.Text.Json.JsonSerializerOptions?)"/>.
         /// </para>
         /// <para>
-        /// To assign an already formated json string to this property use <see cref="BinaryData.FromString(string)"/>.
+        /// To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>.
         /// </para>
         /// <para>
         /// Examples:
